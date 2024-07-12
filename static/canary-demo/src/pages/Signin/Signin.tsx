@@ -8,7 +8,6 @@ const SignIn: React.FC = () => {
   return (
     <div className="flex bg-black items-center justify-center min-h-screen ">
       <div class="text-center lg:min-w-[340px] pb-32 ">
-        {/* <InputCanary type="email" name="email" /> */}
         <img src={logo} alt="Logo" className="mx-auto  w-24 h-24" /> {/* Adjust the classes as needed */}
         <h1 className="font-semibold font-cal-sans text-3xl  text-gradient leading-[40.5px] tracking-[0.01em] text-white text-center">
           Sign in to Gitness
