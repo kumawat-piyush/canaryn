@@ -1,0 +1,4 @@
+@import '../../node_modules/@harnessio/canary/dist/index.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
