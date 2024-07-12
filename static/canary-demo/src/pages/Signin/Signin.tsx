@@ -1,16 +1,10 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { routes } from '../../RouteDefinitions'
 import { Input, Form, Label, Button } from '@harnessio/canary'
 import logo from '../../assets/images/logo.png'
 
 const SignIn: React.FC = () => {
-  const navigate = useNavigate()
-
-  const handleSignUpClick = () => {
-    navigate(routes.toSignUp())
-  }
   return (
     <div className="flex bg-black items-center justify-center min-h-screen ">
       <div class="text-center lg:min-w-[340px] pb-32 ">
@@ -24,7 +18,7 @@ const SignIn: React.FC = () => {
             <Label className="font-light font-inter text-13px  text-white ">Email</Label>
             <Input
               placeholder={'Enter your username'}
-              className="border border-white border-opacity-30 bg-white bg-opacity-10"
+              className="border text-white text-opacity-40 border-white border-opacity-30 bg-white bg-opacity-10"
               type="email"
               name="email"
             />
@@ -33,7 +27,7 @@ const SignIn: React.FC = () => {
             <Label className=" font-light font-inter text-13px text-white ">Password</Label>
             <Input
               placeholder={'Enter the password'}
-              className="border border-white border-opacity-30 bg-white bg-opacity-10"
+              className="border text-white text-opacity-40 border-white border-opacity-30 bg-white bg-opacity-10"
               type="password"
               name="password"
             />

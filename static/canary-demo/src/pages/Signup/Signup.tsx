@@ -1,19 +1,12 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { routes } from '../../RouteDefinitions'
 import { Input, Form, Label, Button } from '@harnessio/canary'
 import logo from '../../assets/images/logo.png'
 const SignUp: React.FC = () => {
-  const navigate = useNavigate()
-
-  const handleSignUpClick = () => {
-    navigate(routes.toSignUp())
-  }
   return (
     <div className="flex bg-black items-center justify-center min-h-screen ">
       <div class="text-center lg:min-w-[340px] pb-8 ">
-        {/* <InputCanary type="email" name="email" /> */}
         <img src={logo} alt="Logo" className="mx-auto  w-24 h-24" /> {/* Adjust the classes as needed */}
         <h1 className="font-semibold font-cal-sans text-3xl  text-gradient leading-[40.5px] tracking-[0.01em] text-white text-center">
           Sign up to Gitness
@@ -23,7 +16,7 @@ const SignUp: React.FC = () => {
             <Label className="font-light font-inter text-13px  text-white ">User ID</Label>
             <Input
               placeholder={'Enter your ID here'}
-              className="border border-white border-opacity-30 bg-white bg-opacity-10"
+              className="border text-white text-opacity-40  border-white border-opacity-30 bg-white bg-opacity-10"
               type="email"
               name="email"
             />
@@ -32,7 +25,7 @@ const SignUp: React.FC = () => {
             <Label className="font-light font-inter text-13px  text-white ">Email</Label>
             <Input
               placeholder={'Enter your username'}
-              className="border border-white border-opacity-30 bg-white bg-opacity-10"
+              className="border text-white text-opacity-40  border-white border-opacity-30 bg-white bg-opacity-10"
               type="email"
               name="email"
             />
@@ -41,7 +34,7 @@ const SignUp: React.FC = () => {
             <Label className=" font-light font-inter text-13px text-white ">Password</Label>
             <Input
               placeholder={'6+ characters'}
-              className="border border-white border-opacity-30 bg-white bg-opacity-10"
+              className="border text-white text-opacity-40  border-white border-opacity-30 bg-white bg-opacity-10"
               type="password"
               name="password"
             />
@@ -50,7 +43,7 @@ const SignUp: React.FC = () => {
             <Label className=" font-light font-inter text-13px text-white ">Password</Label>
             <Input
               placeholder={'Confirm  password'}
-              className="border border-white border-opacity-30 bg-white bg-opacity-10"
+              className="border text-white text-opacity-40  border-white border-opacity-30 bg-white bg-opacity-10"
               type="password"
               name="confirmPassword"
             />
