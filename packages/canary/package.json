@@ -15,7 +15,6 @@
     "build-storybook": "storybook build"
   },
   "module": "./dist/index.js",
-  "main": "dist/index.js",
   "files": [
     "dist",
     "tailwind.config.js",
