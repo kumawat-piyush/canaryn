@@ -88,6 +88,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@harnessio/svg-icon": "workspace:*",
+    "@harnessio/svg-icon-react": "workspace:*",
     "@harnessio/icons-noir": "workspace:*",
     "@chromatic-com/storybook": "^1.6.1",
     "@storybook/addon-essentials": "^8.2.4",
