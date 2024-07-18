@@ -27,7 +27,8 @@
       "import": "./dist/index.js"
     },
     "./tailwind.config": "./tailwind.config.js",
-    "./styles": "./dist/styles.css"
+    "./styles": "./dist/styles.css",
+    "./themes": "./src/styles.css"
   },
   "style": "./dist/styles.css",
   "sideEffects": false,
