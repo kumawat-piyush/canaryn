@@ -20,7 +20,7 @@ export default defineConfig({
     alias: {
       '@/lib': path.resolve(__dirname, 'src', 'lib'),
       '@/components': path.resolve(__dirname, 'src', 'components'),
-      '@harnessio/svg-icon': path.resolve(__dirname, 'node_modules', '@harnessio', 'svg-icon')
+      '@harnessio/': path.resolve(__dirname, 'node_modules', '@harnessio')
     }
   },
   build: {
