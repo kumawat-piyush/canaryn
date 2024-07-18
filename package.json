@@ -7,7 +7,7 @@
     "lint": "pnpm -r lint",
     "fmt": "pnpm -r fmt",
     "publish:all": "pnpm publish -r --access public",
-    "build-storybook": "pnpm --filter canary build-storybook",
+    "build-storybook": "pnpm --filter storybook build-storybook",
     "dev": "pnpm --filter canary dev",
     "preinstall": "npx only-allow pnpm"
   },
