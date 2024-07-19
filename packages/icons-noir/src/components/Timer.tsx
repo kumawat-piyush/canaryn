@@ -7,7 +7,7 @@ const name = 'timer/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9 2h6m-3 8v4m0 8a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9 2h6m-3 8v4m0 8a8 8 0 1 0 0-16 8 8 0 0 0 0 16"/></svg>`
 )
 
 export function Timer(props: IconProps) {

@@ -7,7 +7,7 @@ const name = 'magic-wand/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m3 21 10-10m5-5-2.5 2.5"/><path stroke="currentColor" stroke-linejoin="round" d="m9.5 2 .945 2.555L13 5.5l-2.555.945L9.5 9l-.945-2.555L6 5.5l2.555-.945L9.5 2Zm9.5 8 .54 1.46L21 12l-1.46.54L19 14l-.54-1.46L17 12l1.46-.54L19 10Z"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m3 21 10-10m5-5-2.5 2.5"/><path stroke="currentColor" stroke-linejoin="round" d="m9.5 2 .945 2.555L13 5.5l-2.555.945L9.5 9l-.945-2.555L6 5.5l2.555-.945zm9.5 8 .54 1.46L21 12l-1.46.54L19 14l-.54-1.46L17 12l1.46-.54z"/></svg>`
 )
 
 export function MagicWand(props: IconProps) {

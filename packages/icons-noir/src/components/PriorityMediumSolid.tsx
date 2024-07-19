@@ -7,7 +7,7 @@ const name = 'priority-medium-solid/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" viewBox="0 0 24 24"><g clip-path="url(#a)"><path fill="currentColor" fill-rule="evenodd" d="M11.045.893a1.35 1.35 0 0 1 1.91 0l10.151 10.152a1.35 1.35 0 0 1 0 1.91l-10.151 10.15a1.35 1.35 0 0 1-1.91 0L.894 12.956a1.35 1.35 0 0 1 0-1.91L11.045.893ZM5.25 12a.75.75 0 0 1 .75-.75h4a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75Zm8.75-.75a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5h-4Z" clip-rule="evenodd"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h24v24H0z"/></clipPath></defs></svg>`
+  `<svg width="24" height="24" fill="none" viewBox="0 0 24 24"><g clip-path="url(#a)"><path fill="currentColor" fill-rule="evenodd" d="M11.045.893a1.35 1.35 0 0 1 1.91 0l10.151 10.152a1.35 1.35 0 0 1 0 1.91l-10.151 10.15a1.35 1.35 0 0 1-1.91 0L.894 12.956a1.35 1.35 0 0 1 0-1.91zM5.25 12a.75.75 0 0 1 .75-.75h4a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75m8.75-.75a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5z" clip-rule="evenodd"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h24v24H0z"/></clipPath></defs></svg>`
 )
 
 export function PriorityMediumSolid(props: IconProps) {

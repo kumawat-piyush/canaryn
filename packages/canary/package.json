@@ -4,13 +4,12 @@
   "version": "0.0.2",
   "type": "module",
   "scripts": {
-    "dev": "pnpm storybook",
-    "build": "vite build && pnpm build:css",
+    "dev": "npm run storybook",
+    "build": "vite build && npm run build:css",
     "build:css": "npx tailwindcss -i ./src/styles.css -o ./dist/styles.css",
     "lint": "eslint .",
     "shadcn:update": "npx shadcn-ui@latest add -a -o -y",
-    "preinstall": "npx only-allow pnpm",
-    "prepublishOnly": "pnpm build",
+    "prepublishOnly": "npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

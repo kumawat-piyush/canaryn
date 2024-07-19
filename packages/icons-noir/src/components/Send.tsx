@@ -7,7 +7,7 @@ const name = 'send/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M22 12 3 20l3.563-8L3 4l19 8ZM6.5 12H22"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M22 12 3 20l3.563-8L3 4zM6.5 12H22"/></svg>`
 )
 
 export function Send(props: IconProps) {

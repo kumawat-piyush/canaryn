@@ -7,7 +7,7 @@ const name = 'alarm/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M17 13h-5V8M5 3.5 7 2m12 1.5L17 2"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M12 22a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M17 13h-5V8M5 3.5 7 2m12 1.5L17 2"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M12 22a9 9 0 1 0 0-18 9 9 0 0 0 0 18"/></svg>`
 )
 
 export function Alarm(props: IconProps) {

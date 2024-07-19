@@ -7,7 +7,7 @@ const name = 'union-horiz-alt/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M8 19A7 7 0 1 0 8 5a7 7 0 0 0 0 14Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M16 19a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M8 19A7 7 0 1 0 8 5a7 7 0 0 0 0 14"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M16 19a7 7 0 1 0 0-14 7 7 0 0 0 0 14"/></svg>`
 )
 
 export function UnionHorizAlt(props: IconProps) {

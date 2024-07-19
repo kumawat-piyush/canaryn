@@ -7,7 +7,7 @@ const name = 'elevator/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m9-17.4v16.8a.6.6 0 0 1-.6.6H3.6a.6.6 0 0 1-.6-.6V3.6a.6.6 0 0 1 .6-.6h16.8a.6.6 0 0 1 .6.6Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m6 12 1.5-2L9 12m6 0 1.5 2 1.5-2"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m9-17.4v16.8a.6.6 0 0 1-.6.6H3.6a.6.6 0 0 1-.6-.6V3.6a.6.6 0 0 1 .6-.6h16.8a.6.6 0 0 1 .6.6"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m6 12 1.5-2L9 12m6 0 1.5 2 1.5-2"/></svg>`
 )
 
 export function Elevator(props: IconProps) {

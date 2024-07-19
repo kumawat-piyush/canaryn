@@ -1,9 +1,12 @@
-pnpm install
-pnpm deps
+#pnpm install
+# pnpm deps
 
-cd packages/svg-icon; pnpm build
-cd ../svg-icon-react; pnpm build
-cd ../icons-noir; pnpm build
-cd ../canary; pnpm build
+set -e
 
-cd ../../apps/storybook; pnpm build; pnpm build-storybook
+cd packages/svg-icon-cli; npm install
+cd ../svg-icon; npm install && npm run build
+cd ../svg-icon-react; npm install && npm run build
+cd ../icons-noir; npm install && npm run build
+cd ../canary; npm install && npm run build
+
+cd ../../apps/storybook; npm install && npm run build && npm run build-storybook

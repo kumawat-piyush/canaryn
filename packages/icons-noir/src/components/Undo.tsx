@@ -7,7 +7,7 @@ const name = 'undo/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M4.5 8H15s0 0 0 0 5 0 5 4.706C20 18 15 18 15 18H6.286"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M7.5 11.5 4 8l3.5-3.5"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M4.5 8H15q0 0 0 0s5 0 5 4.706C20 18 15 18 15 18H6.286"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M7.5 11.5 4 8l3.5-3.5"/></svg>`
 )
 
 export function Undo(props: IconProps) {

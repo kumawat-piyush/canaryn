@@ -4,10 +4,9 @@
   "type": "module",
   "scripts": {
     "clean": "clean-dist",
-    "build": "pnpm run lint && tsc && esbuild src/*.{ts,tsx} --allow-overwrite --minify --outdir=dist --format=esm",
+    "build": "tsc && esbuild src/*.{ts,tsx} --allow-overwrite --minify --outdir=dist --format=esm",
     "lint": "eslint .",
-    "preinstall": "npx only-allow pnpm",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "npm run build"
   },
   "module": "./dist/index.js",
   "main": "./dist/index.js",

@@ -14,27 +14,35 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
-      - name: Install dependencies
-        run: |
-          pnpm install    
-          pnpm deps
+      # - name: Install dependencies
+      #   run: |
+      #     pnpm install    
+      #     pnpm deps
 
       - name: Build packages
         run: |
+          cd packages/svg-icon-cli
+          npm install
+
           cd packages/svg-icon
-          pnpm build
+          npm install
+          npm run build
 
           cd ../svg-icon-react
-          pnpm build
+          npm install
+          npm run build
 
           cd ../icons-noir
-          pnpm build
+          npm install
+          npm run build
 
           cd ../canary
-          pnpm build
+          npm install
+          npm run build
 
       - name: Build StoryBook
         run: |
           cd apps/storybook
-          pnpm build
-          pnpm build-storybook
+          npm install
+          npm run build
+          npm run build-storybook

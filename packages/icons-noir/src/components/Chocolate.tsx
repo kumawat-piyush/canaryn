@@ -7,7 +7,7 @@ const name = 'chocolate/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M19 6.5c-3 0-4.5-.5-4.5-3.5H5v18h14V6.5Zm0 8.5H5m0-6h14m-7 12V3"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M19 6.5c-3 0-4.5-.5-4.5-3.5H5v18h14zm0 8.5H5m0-6h14m-7 12V3"/></svg>`
 )
 
 export function Chocolate(props: IconProps) {

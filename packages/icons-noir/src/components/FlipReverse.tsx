@@ -7,7 +7,7 @@ const name = 'flip-reverse/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9.5 12v2m-3.75-2-.938 2m2.813 6H9.5v-2m-5.625 2H2l.938-2M7.625 8 9.5 4v4m5 12H22L14.5 4v16Z"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9.5 12v2m-3.75-2-.937 2m2.812 6H9.5v-2m-5.625 2H2l.938-2M7.625 8 9.5 4v4m5 12H22L14.5 4z"/></svg>`
 )
 
 export function FlipReverse(props: IconProps) {
