@@ -24,7 +24,7 @@ jobs:
           cd packages/svg-icon-cli
           npm install
 
-          cd packages/svg-icon
+          cd ../svg-icon
           npm install
           npm run build
 
