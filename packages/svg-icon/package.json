@@ -33,7 +33,7 @@
   "homepage": "https://github.com/harness/canary",
   "devDependencies": {
     "@eslint/js": "^9.6.0",
-    "@harnessio/svg-icon-cli": "workspace:*",
+    "@harnessio/svg-icon-cli": "file:../svg-icon-cli",
     "esbuild": "^0.23.0",
     "eslint": "^9.6.0",
     "globals": "^15.8.0",

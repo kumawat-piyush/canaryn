@@ -41,10 +41,10 @@
   },
   "homepage": "https://github.com/harness/canary",
   "dependencies": {
-    "@harnessio/canary": "workspace:*",
+    "@harnessio/canary": "file:../../packages/svg-icon-cli",
     "@harnessio/svg-icon": "file:../../packages/svg-icon",
     "@harnessio/svg-icon-react": "file:../../packages/svg-icon-react",
-    "@harnessio/icons-noir": "workspace:*",
+    "@harnessio/icons-noir": "file:../../packages/icons-noir",
     "@hookform/resolvers": "^3.6.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",

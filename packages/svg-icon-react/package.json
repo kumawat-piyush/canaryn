@@ -32,10 +32,10 @@
   },
   "homepage": "https://github.com/harness/canary",
   "dependencies": {
-    "@harnessio/svg-icon": "workspace:*"
+    "@harnessio/svg-icon": "file:../svg-icon"
   },
   "devDependencies": {
-    "@harnessio/svg-icon-cli": "workspace:*",
+    "@harnessio/svg-icon-cli": "file:../svg-icon-cli",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "esbuild": "^0.23.0",
