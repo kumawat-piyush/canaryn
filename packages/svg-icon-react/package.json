@@ -30,7 +30,7 @@
     "url": "https://github.com/harness/canary/issues"
   },
   "homepage": "https://github.com/harness/canary",
-  "dependencies": {
+  "peerDependencies": {
     "@harnessio/svg-icon": "file:../svg-icon"
   },
   "devDependencies": {
