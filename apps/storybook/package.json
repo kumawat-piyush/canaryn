@@ -42,8 +42,8 @@
   "homepage": "https://github.com/harness/canary",
   "dependencies": {
     "@harnessio/canary": "workspace:*",
-    "@harnessio/svg-icon": "workspace:*",
-    "@harnessio/svg-icon-react": "workspace:*",
+    "@harnessio/svg-icon": "file:../../packages/svg-icon",
+    "@harnessio/svg-icon-react": "file:../../packages/svg-icon-react",
     "@harnessio/icons-noir": "workspace:*",
     "@hookform/resolvers": "^3.6.0",
     "@radix-ui/react-accordion": "^1.2.0",
