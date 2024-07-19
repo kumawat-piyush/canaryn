@@ -35,6 +35,6 @@ jobs:
 
       - name: Build StoryBook
         run: |
-          cd ../../apps/storybook
+          cd apps/storybook
           pnpm build
           pnpm build-storybook
