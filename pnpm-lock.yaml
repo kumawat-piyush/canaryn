@@ -84,8 +84,8 @@ importers:
   apps/storybook:
     dependencies:
       '@harnessio/canary':
-        specifier: file:../../packages/svg-icon-cli
-        version: link:../../packages/svg-icon-cli
+        specifier: file:../../packages/canary
+        version: link:../../packages/canary
       '@harnessio/icons-noir':
         specifier: file:../../packages/icons-noir
         version: link:../../packages/icons-noir

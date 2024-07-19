@@ -2,7 +2,7 @@ pnpm install
 pnpm deps
 
 cd packages/svg-icon; pnpm build
-cd ../svg-icon-svg; pnpm build
+cd ../svg-icon-react; pnpm build
 cd ../icons-noir; pnpm build
 cd ../canary; pnpm build
 
