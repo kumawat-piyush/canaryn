@@ -14,6 +14,10 @@ export default defineConfig({
       {
         find: /@harnessio\/svg-icon/,
         replacement: path.resolve(__dirname, 'node_modules', '@harnessio', 'svg-icon')
+      },
+      {
+        find: /@harnessio\/svg-icon-react/,
+        replacement: path.resolve(__dirname, 'node_modules', '@harnessio', 'svg-icon-react')
       }
     ]
   }
