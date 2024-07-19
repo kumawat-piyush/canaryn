@@ -1,5 +1,1 @@
-@import '@harnessio/canary/themes';
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import '../node_modules/@harnessio/canary/src/styles.css';
