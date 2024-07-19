@@ -84,10 +84,10 @@ importers:
   apps/storybook:
     dependencies:
       '@harnessio/canary':
-        specifier: workspace:*
-        version: link:../../packages/canary
+        specifier: file:../../packages/svg-icon-cli
+        version: link:../../packages/svg-icon-cli
       '@harnessio/icons-noir':
-        specifier: workspace:*
+        specifier: file:../../packages/icons-noir
         version: link:../../packages/icons-noir
       '@harnessio/svg-icon':
         specifier: file:../../packages/svg-icon
@@ -573,7 +573,7 @@ importers:
         specifier: ^9.6.0
         version: 9.6.0
       '@harnessio/svg-icon-cli':
-        specifier: workspace:*
+        specifier: file:../svg-icon-cli
         version: link:../svg-icon-cli
       esbuild:
         specifier: ^0.23.0
