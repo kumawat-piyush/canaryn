@@ -13,11 +13,11 @@ export default defineConfig({
     alias: [
       {
         find: /@harnessio\/svg-icon/,
-        replacement: path.resolve(__dirname, 'node_modules', '@harnessio', 'svg-icon')
+        replacement: path.resolve('..', '..', 'packages', 'svg-icon')
       },
       {
         find: /@harnessio\/svg-icon-react/,
-        replacement: path.resolve(__dirname, 'node_modules', '@harnessio', 'svg-icon-react')
+        replacement: path.resolve('..', '..', 'packages', 'svg-icon-react')
       }
     ]
   }
