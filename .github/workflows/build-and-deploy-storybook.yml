@@ -40,10 +40,21 @@ jobs:
       - name: Build StoryBook
         run: |
           cd apps/storybook
+
+          npm remove @harnessio/canary @harnessio/icons-noir
+          npm add @harnessio/canary @harnessio/icons-noir @harnessio/svg-icon @harnessio/svg-icon-react
+
+          cat package.json
           npm install
+
           npm run build
           ls -la node_modules/@harnessio
-          cp -r ../../packages/svg-icon-react ./node_modules/@harnessio
-          cp -r ../../packages/svg-icon ./node_modules/@harnessio
+
+          cp -rf ../../packages/svg-icon/dist ./node_modules/@harnessio/svg-icon/dist
+          cp -rf ../../packages/svg-icon-react/dist ./node_modules/@harnessio/svg-icon-react/dist
+          cp -rf ../../packages/icons-noir/dist ./node_modules/@harnessio/icons-noir/dist
+          cp -rf ../../packages/canary/dist ./node_modules/@harnessio/canary/dist
+
           ls -la node_modules/@harnessio
+
           npm run build-storybook
