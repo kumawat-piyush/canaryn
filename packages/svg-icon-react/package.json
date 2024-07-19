@@ -9,7 +9,6 @@
     "prepublishOnly": "npm run build"
   },
   "module": "./dist/index.js",
-  "main": "./dist/index.js",
   "files": [
     "dist"
   ],
