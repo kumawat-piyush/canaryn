@@ -43,4 +43,7 @@ jobs:
           npm install
           npm run build
           ls -la node_modules/@harnessio
+          cp -r ../../packages/svg-icon-react ./node_modules/@harnessio
+          cp -r ../../packages/svg-icon ./node_modules/@harnessio
+          ls -la node_modules/@harnessio
           npm run build-storybook
