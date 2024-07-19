@@ -11,12 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
       # - name: Install dependencies
       #   run: |
-      #     pnpm install    
+      #     pnpm install
       #     pnpm deps
 
       - name: Build packages
@@ -45,4 +42,5 @@ jobs:
           cd apps/storybook
           npm install
           npm run build
+          ls -la node_modules/@harnessio
           npm run build-storybook
