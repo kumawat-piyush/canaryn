@@ -8,9 +8,10 @@
     "lint": "eslint .",
     "prepublishOnly": "npm run build"
   },
-  "module": "./dist/index.js",
+  "module": "./src/index.ts",
   "main": "./dist/index.js",
   "files": [
+    "src",
     "dist"
   ],
   "types": "./dist/index.d.ts",
