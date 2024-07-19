@@ -19,8 +19,22 @@ jobs:
           pnpm install    
           pnpm deps
 
-      - name: Build
-        run: pnpm build
+      - name: Build packages
+        run: |
+          cd packages/svg-icon
+          pnpm build
+
+          cd ../svg-icon-react
+          pnpm build
+
+          cd ../icons-noir
+          pnpm build
+
+          cd ../canary
+          pnpm build
 
       - name: Build StoryBook
-        run: pnpm build-storybook
+        run: |
+          cd ../../apps/storybook
+          pnpm build
+          pnpm build-storybook
