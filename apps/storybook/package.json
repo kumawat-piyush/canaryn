@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/harness/canary",
   "dependencies": {
-    "@harnessio/canary": "file:../../packages/svg-icon-cli",
+    "@harnessio/canary": "file:../../packages/canary",
     "@harnessio/svg-icon": "file:../../packages/svg-icon",
     "@harnessio/svg-icon-react": "file:../../packages/svg-icon-react",
     "@harnessio/icons-noir": "file:../../packages/icons-noir",
