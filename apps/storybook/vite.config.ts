@@ -9,16 +9,16 @@ export default defineConfig({
     sourcemap: true,
     copyPublicDir: false
   },
-  resolve: {
-    alias: [
-      {
-        find: /@harnessio\/svg-icon/,
-        replacement: path.resolve(__dirname, 'node_modules', 'packages', 'svg-icon')
-      },
-      {
-        find: /@harnessio\/svg-icon-react/,
-        replacement: path.resolve(__dirname, 'node_modules', 'packages', 'svg-icon-react')
-      }
-    ]
-  }
+  // resolve: {
+  //   alias: [
+  //     {
+  //       find: /@harnessio\/svg-icon/,
+  //       replacement: path.resolve(__dirname, 'node_modules', 'packages', 'svg-icon')
+  //     },
+  //     {
+  //       find: /@harnessio\/svg-icon-react/,
+  //       replacement: path.resolve(__dirname, 'node_modules', 'packages', 'svg-icon-react')
+  //     }
+  //   ]
+  // }
 })
