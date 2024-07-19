@@ -29,7 +29,8 @@
   },
   "homepage": "https://github.com/harness/canary",
   "peerDependencies": {
-    "@harnessio/svg-icon": "file:../svg-icon"
+    "@harnessio/svg-icon": "file:../svg-icon",
+    "react": "^18.3.1"
   },
   "devDependencies": {
     "@harnessio/svg-icon-cli": "file:../svg-icon-cli",
