@@ -14,11 +14,7 @@
     "dist"
   ],
   "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js"
-    }
-  },
+  "exports":  "./dist/index.js",
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -28,6 +24,9 @@
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/harness/canary/issues"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "homepage": "https://github.com/harness/canary",
   "peerDependencies": {
