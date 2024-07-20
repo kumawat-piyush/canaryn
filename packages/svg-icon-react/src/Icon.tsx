@@ -1,4 +1,3 @@
-import React from 'react'
 import type { FC, PropsWithChildren, ElementType } from 'react'
 import type { TagProps } from '@harnessio/svg-icon'
 import { useEffect, useContext, createContext, memo } from 'react'
