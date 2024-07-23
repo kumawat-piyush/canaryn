@@ -4,7 +4,7 @@ Welcome to the Harness Canary monorepo! This repository contains multiple projec
 
 # Repository Structure
 
-- [packages](./packages/): Contains projects for Harness next generation Unified UI projects. They are published as npm packages.
+- [packages](./packages/): Contains projects for Harness next generation Unified UI projects. They are published as npm packages. 
 - [apps](./apps/): Contains deployable/executable standalone applications.
 
 # Projects
