@@ -1,54 +1,43 @@
-// vite.config.js
-const path = require('path')
 import { defineConfig } from 'vite'
-const _ = require('lodash')
-const pkg = require('./package.json')
-const globals = require('./globals.json')
+import react from '@vitejs/plugin-react-swc'
 import dts from 'vite-plugin-dts'
+import path, { resolve } from 'path'
 
-const external = Object.keys(pkg.peerDependencies)
-
-external.forEach(dep => {
-  if (!_.has(globals, dep)) {
-    console.log(`Entry for "${dep}" not found in globals.json`)
-    process.exit(1)
-  }
-})
-
+// https://vitejs.dev/config/
 export default defineConfig({
+  plugins: [
+    react(),
+    dts({
+      outDir: 'dist',
+      tsconfigPath: './tsconfig.json',
+      beforeWriteFile: (filePath, content) => ({
+        filePath: filePath.replace('src/', ''),
+        content
+      })
+    })
+  ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src')
+    }
+  },
   build: {
+    sourcemap: true,
+    copyPublicDir: false,
     lib: {
-      // Could also be a dictionary or array of multiple entry points
-      entry: path.resolve(__dirname, 'src/index.ts'),
-      name: 'Unified Pipeline',
-      // the proper extensions will be added
-      fileName: '@harnessio/unified-pipeline'
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'unified-pipeline',
+      fileName: 'index',
+      formats: ['es']
     },
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library, such as dev dependencies from package.json
-      external,
+      external: ['react', 'react-dom'],
       output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
-        globals: _.pick(globals, external)
-      },
-      onwarn(warning, warn) {
-        if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
-          return
+        globals: {
+          react: 'react',
+          'react-dom': 'ReactDOM'
         }
-        warn(warning)
       }
     }
-  },
-  css: {
-    modules: {
-      scopeBehaviour: 'local',
-      generateScopedName: (name, filename, _css) => {
-        const basename = path.basename(filename).replace(/\.module\.scss?.*/, '')
-        return `${basename}--${name}`
-      }
-    }
-  },
-  plugins: [dts()]
+  }
 })
