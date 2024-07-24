@@ -7,10 +7,10 @@
     "webpack": "NODE_ENV=development webpack serve",
     "clean": "rm -rf dist",
     "build": "npm run clean;vite build",
+    "publish": "npm publish -r --access public",
     "watch": "webpack --watch",
     "typed-scss": "typed-scss-modules src --watch"
   },
-  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/harness/canary/tree/main/packages/unified-pipeline"

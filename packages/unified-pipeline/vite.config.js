@@ -19,7 +19,7 @@ export default defineConfig({
   build: {
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: path.resolve(__dirname, 'src'),
+      entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'Unified Pipeline',
       // the proper extensions will be added
       fileName: '@harnessio/unified-pipeline'
