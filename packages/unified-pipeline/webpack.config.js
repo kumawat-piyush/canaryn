@@ -1,21 +1,33 @@
-const prod = process.env.NODE_ENV === "production";
+const prod = process.env.NODE_ENV === 'production'
 
-const path = require("path");
+const path = require('path')
 
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const webpack = require("webpack");
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const CONTEXT = process.cwd();
+const CONTEXT = process.cwd()
 
 module.exports = {
-  mode: prod ? "production" : "development",
-  entry: "./src/bootstrap.tsx",
+  mode: prod ? 'production' : 'development',
+  entry: './src/bootstrap.tsx',
   context: CONTEXT,
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
-    publicPath: "/"
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/'
+  },
+  /* "optimization" does not work yet, need to fix
+  optimization: {
+    minimize: prod,
+    splitChunks: {
+      chunks: 'all' 
+    },
+    runtimeChunk: 'single'
+  },
+  */
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM'
   },
   module: {
     rules: [
@@ -23,13 +35,13 @@ module.exports = {
         test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
         resolve: {
-          extensions: [".ts", ".tsx", ".js", ".json"]
+          extensions: ['.ts', '.tsx', '.js', '.json']
         },
-        use: "ts-loader"
+        use: 'ts-loader'
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.module\.scss$/,
@@ -37,24 +49,24 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               importLoaders: 1,
               modules: {
-                mode: "local",
-                localIdentName: "[name]_[local]",
-                exportLocalsConvention: "camelCaseOnly"
+                mode: 'local',
+                localIdentName: '[name]_[local]',
+                exportLocalsConvention: 'camelCaseOnly'
               }
             }
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sassOptions: {
-                includePaths: [path.join(CONTEXT, "src")]
+                includePaths: [path.join(CONTEXT, 'src')]
               },
               sourceMap: false,
-              implementation: require("sass")
+              implementation: require('sass')
             }
           }
         ]
@@ -65,26 +77,26 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               importLoaders: 1,
               modules: false
             }
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sassOptions: {
-                includePaths: [path.join(CONTEXT, "src")]
+                includePaths: [path.join(CONTEXT, 'src')]
               },
-              implementation: require("sass")
+              implementation: require('sass')
             }
           }
         ]
       },
       {
         test: /\.(jpg|jpeg|png|svg|gif|webp)$/,
-        type: "asset",
+        type: 'asset',
         parser: {
           dataUrlCondition: {
             maxSize: 2 * 1024 // 2kb
@@ -93,11 +105,11 @@ module.exports = {
       },
       {
         test: /\.yaml$/,
-        use: "yaml-loader"
+        use: 'yaml-loader'
       }
     ]
   },
-  devtool: prod ? undefined : "cheap-module-source-map",
+  devtool: prod ? undefined : 'cheap-module-source-map',
   devServer: {
     hot: true,
     historyApiFallback: true,
@@ -107,10 +119,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      publicPath: "/",
-      template: "index.html",
-      filename: "index.html"
+      publicPath: '/',
+      template: 'index.html',
+      filename: 'index.html'
     }),
     new MiniCssExtractPlugin()
   ]
-};
+}
