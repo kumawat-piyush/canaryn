@@ -5,7 +5,7 @@ import moment from 'moment'
 import { NavArrowRight, NavArrowDown, Circle, CheckCircleSolid, XmarkCircleSolid } from '@harnessio/icons-noir'
 import React, { createContext, forwardRef, useCallback, useContext, useEffect, useState } from 'react'
 
-export enum Status {
+enum Status {
   QUEUED,
   IN_PROGRESS,
   SUCCESS,
@@ -227,8 +227,8 @@ const Folder = forwardRef<HTMLDivElement, FolderProps & React.HTMLAttributes<HTM
           disabled={!isSelectable}
           onClick={() => handleExpand(value)}>
           {expendedItems?.includes(value)
-            ? (openIcon ?? <NavArrowDown className="h-4 w-4" size="12" />)
-            : (closeIcon ?? <NavArrowRight className="h-4 w-4" size="12" />)}
+            ? openIcon ?? <NavArrowDown className="h-4 w-4" size="12" />
+            : closeIcon ?? <NavArrowRight className="h-4 w-4" size="12" />}
           <div className="flex items-baseline justify-between w-full mr-1">
             <div className="flex items-baseline">
               <div className="flex self-center mr-1">{getStatusIcon(status)}</div>
@@ -356,4 +356,4 @@ const CollapseButton = forwardRef<
 
 CollapseButton.displayName = 'CollapseButton'
 
-export { Tree, Folder, File, CollapseButton, type TreeViewElement }
+export { Status, Tree, Folder, File, CollapseButton, type TreeViewElement }
