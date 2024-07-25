@@ -274,7 +274,7 @@ const File = forwardRef<
   (
     {
       value,
-      // className,
+      className,
       // handleSelect,
       isSelectable = true,
       // isSelect,
