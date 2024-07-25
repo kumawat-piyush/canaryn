@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "npm-run-all -p build:watch build:css -- --watch",
-    "build": "vite build && pnpm build:css",
+    "build": "pnpm build:css && vite build",
     "build:watch": "vite build --watch --emptyOutDir=false",
     "build:css": "npx tailwindcss -i ./src/styles.css -o ./dist/styles.css",
     "lint": "eslint ./src",
@@ -107,5 +107,8 @@
     "tailwindcss": "^3.4.4",
     "vite": "^5.3.1",
     "vite-plugin-dts": "^3.9.1"
+  },
+  "peerDependencies": {
+    "@harnessio/icons-noir": "workspace:*"
   }
 }
