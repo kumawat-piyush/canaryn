@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "npm-run-all -p build:watch build:css -- --watch",
-    "build": "pnpm build:css && vite build",
+    "build": "vite build && pnpm build:css",
     "build:watch": "vite build --watch --emptyOutDir=false",
     "build:css": "npx tailwindcss -i ./src/styles.css -o ./dist/styles.css",
     "lint": "eslint ./src",
