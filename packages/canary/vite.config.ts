@@ -1,17 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import dts from 'vite-plugin-dts'
-import { uniq } from 'lodash-es'
 import path, { resolve } from 'path'
 import svgr from 'vite-plugin-svgr'
-const pkg = require('./package.json')
 
-// All deps are external except radix-ui
-const external = uniq(
-  Object.keys(pkg.dependencies || [])
-    .concat(Object.keys(pkg.devDependencies || []))
-    .concat(Object.keys(pkg.peerDependencies || []))
-).filter((pkgName: string) => !pkgName.startsWith('@radix-ui'))
+const external = ['react', 'react-dom', 'lodash-es', 'moment', '@harnessio/icons-noir']
 
 // https://vitejs.dev/config/
 export default defineConfig({
