@@ -6,11 +6,12 @@ import path, { resolve } from 'path'
 import svgr from 'vite-plugin-svgr'
 const pkg = require('./package.json')
 
+// All deps are external except radix-ui
 const external = uniq(
   Object.keys(pkg.dependencies || [])
     .concat(Object.keys(pkg.devDependencies || []))
     .concat(Object.keys(pkg.peerDependencies || []))
-)
+).filter((pkgName: string) => !pkgName.startsWith('@radix-ui'))
 
 // https://vitejs.dev/config/
 export default defineConfig({
