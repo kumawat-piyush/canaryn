@@ -1,5 +1,5 @@
+import React, { useState } from 'react'
 import { YamlEditorContextProvider, YamlEditor } from '@harnessio/yaml-editor'
-
 import { stageApproval } from './configurations/pipeline/stage-approval'
 import { inlineActionExample } from './configurations/inline-actions/inline-actions-def'
 import unifiedSchema from './configurations/schema/unified.json'
@@ -18,6 +18,8 @@ function App() {
     element?.classList.toggle('harness-dark')
   }
 
+  const [yamlValue, setYamlValue] = useState(stageApproval)
+
   return (
     <div className="bg-black height-100 h-screen flex flex-col">
       <button className="bg-gray-400" onClick={toggleTheme}>
@@ -27,8 +29,10 @@ function App() {
       <YamlEditorContextProvider>
         <div style={{ display: 'flex', height: '500px' }}>
           <YamlEditor
-            onChange={console.log}
-            value={stageApproval}
+            onChange={value => {
+              setYamlValue(value ?? '')
+            }}
+            value={yamlValue}
             schemaConfig={{
               schema: unifiedSchema,
               uri: 'https://raw.githubusercontent.com/bradrydzewski/spec/master/dist/schema.json'

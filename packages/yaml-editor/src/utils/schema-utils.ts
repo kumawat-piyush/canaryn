@@ -1,22 +1,27 @@
 import { Uri } from 'monaco-editor'
 import { configureMonacoYaml, MonacoYaml } from 'monaco-yaml'
 
-// TODO: temporary holds handle (used to dispose)
+// TODO: temporary holds handle (used to update/dispose)
 let prevSchema: MonacoYaml
 
 export function addSchema(schemaConfig: any, monaco: any) {
-  if (prevSchema) prevSchema.dispose()
-  prevSchema = applySchema(monaco, [schemaConfig])
+  applySchema(monaco, [schemaConfig])
 }
 
 function applySchema(monaco: any, schemas: any) {
-  return configureMonacoYaml(monaco as any, {
+  const config = {
     hover: true,
     completion: true,
     enableSchemaRequest: false,
     validate: true,
     schemas: schemas
-  })
+  }
+
+  if (prevSchema) {
+    prevSchema.update(config)
+  } else {
+    prevSchema = configureMonacoYaml(monaco as any, config)
+  }
 }
 
 export const schemaIdToUrl = (id: string): string => {

@@ -44,7 +44,7 @@ export function YamlEditor(props: YamlEditorProps): JSX.Element {
     }
   }, [monaco])
 
-  useSchema({ monacoRef, schemaConfig, instanceId })
+  useSchema({ monaco, schemaConfig, instanceId })
 
   // useCodeLenses({ monacoRef, inlineActions });
 

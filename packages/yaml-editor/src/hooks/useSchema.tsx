@@ -4,24 +4,24 @@ import * as monaco from 'monaco-editor'
 import { addSchema, schemaIdToUrl } from '../utils/schema-utils'
 
 export type UseSchema = (arg: {
-  monacoRef: RefObject<typeof monaco | undefined>
+  monaco: typeof monaco | null | undefined
   schemaConfig?: { schema: any; uri: string }
   instanceId: string
 }) => void
 
 export const useSchema: UseSchema = (props): void => {
-  const { monacoRef, schemaConfig, instanceId } = props
+  const { monaco, schemaConfig, instanceId } = props
 
   useEffect(() => {
-    if (!monacoRef.current || !schemaConfig?.schema) return
-
-    addSchema(
-      {
-        // If YAML file is opened matching this glob
-        fileMatch: [schemaIdToUrl(instanceId.toString())],
-        ...schemaConfig
-      },
-      monacoRef.current
-    )
-  }, [monacoRef, schemaConfig, instanceId])
+    if (monaco && schemaConfig?.schema) {
+      addSchema(
+        {
+          // If YAML file is opened matching this glob
+          fileMatch: [schemaIdToUrl(instanceId.toString())],
+          ...schemaConfig
+        },
+        monaco
+      )
+    }
+  }, [monaco, schemaConfig?.schema, instanceId])
 }
