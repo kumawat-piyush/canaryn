@@ -152,10 +152,6 @@ export const IconOnly: StoryObj<SplitButtonProps> = {
   }
 }
 
-// CanaryOutletFactory.registerOutlet(CanaryOutletName.BUTTON_SPINNER, (props: SplitButtonProps) => {
-//   return <Refresh className={`${props.children ? 'mr-2 ' : ''}animate-spin`} />
-// })
-
 export const Loading: StoryObj<SplitButtonProps> = {
   args: {
     menu,
