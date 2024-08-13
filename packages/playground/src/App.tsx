@@ -1,4 +1,4 @@
-import { ModeToggle } from './components/mode-toggle'
+import React from 'react'
 import { ThemeProvider } from './components/theme-provider'
 import { LoginForm } from './pages/Login'
 import '@harnessio/canary/styles'
@@ -8,7 +8,6 @@ export default function App() {
     <ThemeProvider defaultTheme="dark">
       <main>
         <LoginForm />
-        <ModeToggle />
       </main>
     </ThemeProvider>
   )
