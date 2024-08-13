@@ -1,0 +1,31 @@
+@import url('./themes/harness-open-source.css');
+@import url('./themes/harness-theme.css');
+@import url('./themes/ui-core.css');
+
+@layer themes {
+  :root {
+    --background: var(--figma___background-primary);
+    --foreground: var(--figma___text-primary);
+    --card: var(--figma___background-cards-and-rows-default);
+    --card-foreground: var(--figma___text-primary);
+    --popover: var(--figma___dropdown-background);
+    --popover-foreground: var(--figma___text-primary);
+    --primary: var(--figma___primary-color-primary-accent-8);
+    --primary-foreground: var(--figma___text-primary);
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: var(--figma___text-secondary);
+    --secondary-background: 240 5% 6%;
+    --tertiary: 240 5% 12%;
+    --tertiary-foreground: var(--figma___text-tertiary);
+    --tertiary-background: 240 6% 60%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+}

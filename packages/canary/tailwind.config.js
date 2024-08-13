@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const figmaColors = require('./src/style-tokens/colors')
+
 module.exports = {
   darkMode: ['class'],
   content: ['./src/**/*.{ts,tsx}'],
@@ -13,6 +15,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        ...figmaColors,
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

@@ -1,3 +1,5 @@
+@import "./style-tokens/themes-root.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -30,7 +32,7 @@
 }
 
 @layer themes {
-  :root {
+  .light {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --secondary-background: 0 0% 100%;
@@ -133,6 +135,7 @@
 }
 
 @layer utilities {
+
   /* TODO Check this – should not be necessary when the custom color has been defined in tailwind config already */
   .text-tertiary-background {
     color: hsl(var(--tertiary-background));
@@ -143,6 +146,7 @@
 .title-primary {
   @apply text-neutral-300 text-3xl leading-relaxed;
 }
+
 .text-radial-gradient {
   @apply bg-gradient-radial from-[#CA9AF4]/70 to-[#CA9AF4]/0 bg-clip-text text-white/70;
 }
@@ -163,9 +167,11 @@
 .card-auth {
   @apply border-none w-[362px];
 }
+
 .card-auth-header {
   @apply p-0 space-x-0 space-y-0;
 }
+
 .card-auth-content {
   @apply py-6 w-full;
 }
@@ -174,6 +180,7 @@
 .text-form-error {
   @apply font-light text-red-500 text-xs mt-2;
 }
+
 .form-input {
   @apply font-light text-sm w-full mt-1 border-white/10 bg-white/5 rounded-[4px];
   @apply placeholder:text-white/50 !important;
@@ -183,16 +190,20 @@
 .navbar-company-avatar {
   @apply w-5 h-5;
 }
+
 .navbar-item svg {
   @apply w-3 h-3 ease-in-out duration-150 truncate;
 }
+
 .navbar-item.active svg,
 .navbar-item:hover svg {
   @apply brightness-200 contrast-200;
 }
+
 .navbar-item p {
   @apply ease-in-out duration-150 truncate;
 }
+
 .navbar-item.active p,
 .navbar-item:hover p {
   @apply text-primary;
@@ -202,6 +213,7 @@
 [data-state='open'] .nav-company-badge-chevron {
   @apply transition-transform transform rotate-180;
 }
+
 .nav-company-badge-chevron {
   @apply transition-transform transform rotate-0;
 }
@@ -210,9 +222,11 @@
 .entity-list-action {
   @apply text-tertiary-background font-light text-xs outline-none select-none focus:ring-0 focus:outline-none;
 }
+
 [data-state='open'] .entity-list-action-chevron {
   @apply transition-transform transform rotate-180;
 }
+
 .entity-list-action-chevron {
   @apply transition-transform transform rotate-0 text-tertiary-background group-hover:text-primary;
 }
