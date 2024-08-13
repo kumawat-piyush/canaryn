@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+import figmaColors from "./src/style-tokens/colors"
+import figmaDimensions from "./src/style-tokens/dimensions"
+
 // eslint-disable-next-line no-undef
 module.exports = {
   darkMode: ['class'],
@@ -16,7 +19,11 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', 'sans-serif']
       },
+      spacing: {
+        ...figmaDimensions
+      },
       colors: {
+        ...figmaColors,
         border: 'hsl(var(--border))',
         'border-background': 'hsl(var(--border-background))',
         input: 'hsl(var(--input))',
@@ -81,7 +88,8 @@ module.exports = {
         }
       },
       borderRadius: {
-        DEFAULT: 'var(--radius)'
+        DEFAULT: 'var(--radius)',
+        ...figmaDimensions
       },
       border: {
         DEFAULT: '1px'
