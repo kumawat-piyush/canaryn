@@ -8,7 +8,7 @@ import '@harnessio/canary/styles'
 
 import { LoginForm } from './pages/Login'
 import RootLayout from './RootLayout'
-import RepoListPage from './pages/repo-list-page/RepoListPage'
+import RepoListPage from './pages/repo-list-page'
 import PipelineListPage from './pages/pipeline-list-page'
 
 const router = createBrowserRouter([
