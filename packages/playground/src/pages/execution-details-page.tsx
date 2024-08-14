@@ -1,11 +1,6 @@
 import React from 'react'
-import ExecutionTree from '../components/execution-tree'
+import ExecutionDetails from '../components/execution-details'
 
-export default function ExecutionDetails() {
-  return (
-    <div>
-      Execution Details
-      <ExecutionTree />
-    </div>
-  )
+export default function ExecutionDetailsPage() {
+  return <ExecutionDetails />
 }

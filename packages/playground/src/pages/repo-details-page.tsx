@@ -1,5 +1,8 @@
 import React from 'react'
+import RepoDetails from '../components/repo-details'
 
-export default function RepoDetails() {
-    return <div>Repo Details</div>
+const RepoDetailsPage: React.FC = () => {
+  return <RepoDetails />
 }
+
+export default RepoDetailsPage
