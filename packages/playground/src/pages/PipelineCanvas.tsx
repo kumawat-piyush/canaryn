@@ -1,5 +1,5 @@
 import React from 'react'
-import { StudioMixed } from '../../../../packages/unified-pipeline/src/pages/studio/Studio'
+import { PipelineStudio, getNodesFromPipelineYaml } from '@harnessio/unified-pipeline'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@harnessio/canary'
 
 export const PipelineCanvas: React.FC = () => {
@@ -11,7 +11,12 @@ export const PipelineCanvas: React.FC = () => {
       </TabsList>
       <TabsContent value="1">
         <div style={{ width: '100vw', height: '100vh' }}>
-          <StudioMixed />
+          <PipelineStudio
+            nodes={getNodesFromPipelineYaml({})}
+            onAddNode={() => {}}
+            onDeleteNode={() => {}}
+            onSelectNode={() => {}}
+          />
         </div>
       </TabsContent>
       <TabsContent value="2">YAML view</TabsContent>

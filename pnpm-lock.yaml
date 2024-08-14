@@ -11,91 +11,6 @@ importers:
 
   .: {}
 
-  apps/playground:
-    dependencies:
-      '@harnessio/canary':
-        specifier: workspace:*
-        version: link:../../packages/canary
-      '@harnessio/icons-noir':
-        specifier: workspace:*
-        version: link:../../packages/icons-noir
-      '@harnessio/svg-icon':
-        specifier: workspace:*
-        version: link:../../packages/svg-icon
-      '@harnessio/svg-icon-react':
-        specifier: workspace:*
-        version: link:../../packages/svg-icon-react
-      '@rollup/plugin-yaml':
-        specifier: ^4.1.2
-        version: 4.1.2(rollup@4.18.0)
-      '@uiw/react-markdown-preview':
-        specifier: ^4.1.15
-        version: 4.1.15(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      caret-xy:
-        specifier: ^2.0.3
-        version: 2.0.3
-      lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
-      lucide-react:
-        specifier: ^0.407.0
-        version: 0.407.0(react@18.3.1)
-      match-sorter:
-        specifier: ^6.3.1
-        version: 6.3.1
-      prettier:
-        specifier: ^3.0.3
-        version: 3.0.3
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
-      react-keywords:
-        specifier: ^1.0.0
-        version: 1.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      yaml-loader:
-        specifier: ^0.8.1
-        version: 0.8.1
-    devDependencies:
-      '@types/lodash-es':
-        specifier: ^4.17.9
-        version: 4.17.9
-      '@types/react':
-        specifier: 18.3.3
-        version: 18.3.3
-      '@types/react-dom':
-        specifier: ^18.2.7
-        version: 18.3.0
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^6.5.0
-        version: 6.5.0(@typescript-eslint/parser@6.5.0(eslint@8.57.0)(typescript@5.5.3))(eslint@8.57.0)(typescript@5.5.3)
-      '@typescript-eslint/parser':
-        specifier: ^6.5.0
-        version: 6.5.0(eslint@8.57.0)(typescript@5.5.3)
-      '@vitejs/plugin-react':
-        specifier: ^4.0.4
-        version: 4.0.4(vite@4.4.9(@types/node@22.2.0)(sass@1.77.8)(terser@5.31.3))
-      eslint:
-        specifier: ^8.48.0
-        version: 8.57.0
-      eslint-plugin-react-hooks:
-        specifier: ^4.6.0
-        version: 4.6.2(eslint@8.57.0)
-      eslint-plugin-react-refresh:
-        specifier: ^0.4.3
-        version: 0.4.7(eslint@8.57.0)
-      tailwindcss:
-        specifier: ^3.4.4
-        version: 3.4.4(ts-node@10.9.2(@types/node@22.2.0)(typescript@5.5.3))
-      typescript:
-        specifier: ^5.2.2
-        version: 5.5.3
-      vite:
-        specifier: ^4.4.9
-        version: 4.4.9(@types/node@22.2.0)(sass@1.77.8)(terser@5.31.3)
-
   apps/storybook:
     dependencies:
       '@harnessio/canary':
@@ -617,6 +532,9 @@ importers:
       '@harnessio/svg-icon-react':
         specifier: workspace:*
         version: link:../svg-icon-react
+      '@harnessio/unified-pipeline':
+        specifier: workspace:*
+        version: link:../unified-pipeline
       '@rollup/plugin-yaml':
         specifier: ^4.1.2
         version: 4.1.2(rollup@4.18.0)
@@ -647,9 +565,6 @@ importers:
       react-keywords:
         specifier: ^1.0.0
         version: 1.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-router-dom:
-        specifier: ^6.26.0
-        version: 6.26.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       yaml-loader:
         specifier: ^0.8.1
         version: 0.8.1
@@ -672,6 +587,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.0.4
         version: 4.0.4(vite@4.4.9(@types/node@22.2.0)(sass@1.77.8)(terser@5.31.3))
+      '@vitejs/plugin-react-swc':
+        specifier: ^3.5.0
+        version: 3.7.0(@swc/helpers@0.5.2)(vite@4.4.9(@types/node@22.2.0)(sass@1.77.8)(terser@5.31.3))
       eslint:
         specifier: ^8.48.0
         version: 8.57.0
@@ -681,6 +599,9 @@ importers:
       eslint-plugin-react-refresh:
         specifier: ^0.4.3
         version: 0.4.7(eslint@8.57.0)
+      react-router-dom:
+        specifier: ^6.26.0
+        version: 6.26.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwindcss:
         specifier: ^3.4.4
         version: 3.4.4(ts-node@10.9.2(@types/node@22.2.0)(typescript@5.5.3))
@@ -690,6 +611,9 @@ importers:
       vite:
         specifier: ^4.4.9
         version: 4.4.9(@types/node@22.2.0)(sass@1.77.8)(terser@5.31.3)
+      vite-plugin-dts:
+        specifier: ^3.9.1
+        version: 3.9.1(@types/node@22.2.0)(rollup@4.18.0)(typescript@5.5.3)(vite@4.4.9(@types/node@22.2.0)(sass@1.77.8)(terser@5.31.3))
 
   packages/svg-icon:
     devDependencies:
@@ -4015,9 +3939,6 @@ packages:
 
   '@types/lodash-es@4.17.12':
     resolution: {integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==}
-
-  '@types/lodash-es@4.17.9':
-    resolution: {integrity: sha512-ZTcmhiI3NNU7dEvWLZJkzG6ao49zOIjEgIE0RgV7wbPxU0f2xT3VSAHw2gmst8swH6V0YkLRGp4qPlX/6I90MQ==}
 
   '@types/lodash@4.14.197':
     resolution: {integrity: sha512-BMVOiWs0uNxHVlHBgzTIqJYmj+PgCo4euloGF+5m4okL3rEYzM2EEv78mw8zWSMM57dM7kVIgJ2QDvwHSoCI5g==}
@@ -7602,11 +7523,6 @@ packages:
   prettier@2.8.8:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
-    hasBin: true
-
-  prettier@3.0.3:
-    resolution: {integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==}
-    engines: {node: '>=14'}
     hasBin: true
 
   prettier@3.3.3:
@@ -12535,10 +12451,6 @@ snapshots:
     dependencies:
       '@types/lodash': 4.14.197
 
-  '@types/lodash-es@4.17.9':
-    dependencies:
-      '@types/lodash': 4.14.197
-
   '@types/lodash@4.14.197': {}
 
   '@types/mdast@3.0.12':
@@ -12878,6 +12790,13 @@ snapshots:
       - supports-color
 
   '@ungap/structured-clone@1.2.0': {}
+
+  '@vitejs/plugin-react-swc@3.7.0(@swc/helpers@0.5.2)(vite@4.4.9(@types/node@22.2.0)(sass@1.77.8)(terser@5.31.3))':
+    dependencies:
+      '@swc/core': 1.6.5(@swc/helpers@0.5.2)
+      vite: 4.4.9(@types/node@22.2.0)(sass@1.77.8)(terser@5.31.3)
+    transitivePeerDependencies:
+      - '@swc/helpers'
 
   '@vitejs/plugin-react-swc@3.7.0(@swc/helpers@0.5.2)(vite@5.3.1(@types/node@20.14.9)(sass@1.77.8)(terser@5.31.3))':
     dependencies:
@@ -16870,8 +16789,6 @@ snapshots:
 
   prettier@2.8.8: {}
 
-  prettier@3.0.3: {}
-
   prettier@3.3.3: {}
 
   pretty-error@4.0.0:
@@ -18355,6 +18272,23 @@ snapshots:
       vue-tsc: 1.8.27(typescript@5.5.3)
     optionalDependencies:
       vite: 5.3.1(@types/node@20.14.9)(sass@1.77.8)(terser@5.31.3)
+    transitivePeerDependencies:
+      - '@types/node'
+      - rollup
+      - supports-color
+
+  vite-plugin-dts@3.9.1(@types/node@22.2.0)(rollup@4.18.0)(typescript@5.5.3)(vite@4.4.9(@types/node@22.2.0)(sass@1.77.8)(terser@5.31.3)):
+    dependencies:
+      '@microsoft/api-extractor': 7.43.0(@types/node@22.2.0)
+      '@rollup/pluginutils': 5.1.0(rollup@4.18.0)
+      '@vue/language-core': 1.8.27(typescript@5.5.3)
+      debug: 4.3.4
+      kolorist: 1.8.0
+      magic-string: 0.30.10
+      typescript: 5.5.3
+      vue-tsc: 1.8.27(typescript@5.5.3)
+    optionalDependencies:
+      vite: 4.4.9(@types/node@22.2.0)(sass@1.77.8)(terser@5.31.3)
     transitivePeerDependencies:
       - '@types/node'
       - rollup

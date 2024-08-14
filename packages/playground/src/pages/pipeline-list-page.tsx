@@ -4,7 +4,9 @@ import PipelineList from '../components/pipeline-list/pipeline-list'
 const pipelines = []
 
 export default function PipelineListPage() {
-    return <div>
-        <PipelineList pipelines={pipelines} />
+  return (
+    <div>
+      <PipelineList />
     </div>
+  )
 }
