@@ -4,6 +4,7 @@
   "description": "Harness Unified Pipeline Playground",
   "scripts": {
     "dev": "vite",
+    "predev": "pnpm build:css",
     "build:css": "npx tailwindcss -i ./src/styles.css -o ./public/styles.css",
     "preinstall": "npx only-allow pnpm",
     "build": "vite build",

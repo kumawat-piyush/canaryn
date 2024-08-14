@@ -1,7 +1,7 @@
 import React from 'react'
-import '@harnessio/canary/styles'
-import { ThemeProvider } from './components/theme-provider'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
+import { ThemeProvider } from './components/theme-provider'
 import RootLayout from './layouts/RootLayout'
 import RepoLayout from './layouts/RepoLayout'
 import PipelineLayout from './layouts/PipelineLayout'

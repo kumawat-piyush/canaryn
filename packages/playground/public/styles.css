@@ -579,8 +579,8 @@ body {
   position: absolute;
 }
 
-.grid {
-  display: grid;
+.flex {
+  display: flex;
 }
 
 .h-\[1\.2rem\] {
@@ -597,14 +597,6 @@ body {
 
 .w-\[395px\] {
   width: 395px;
-}
-
-.w-full {
-  width: 100%;
-}
-
-.max-w-sm {
-  max-width: 24rem;
 }
 
 .rotate-0 {
@@ -629,14 +621,6 @@ body {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.gap-2 {
-  gap: 0.5rem;
-}
-
-.gap-4 {
-  gap: 1rem;
-}
-
 .overflow-hidden {
   overflow: hidden;
 }
@@ -653,9 +637,8 @@ body {
   padding: 0.5rem;
 }
 
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
+.text-destructive {
+  color: hsl(var(--destructive));
 }
 
 .outline {
@@ -684,6 +667,32 @@ body {
 
 /* TODO Check this – should not be necessary when the custom color has been defined in tailwind config already */
 
+:root {
+  /* PP Figma shades */
+  --black: 210 10% 3%;
+  --grey-6: 210 8% 6%;
+  --grey-8: 210 7% 8%;
+  --grey-10: 210 6% 10%;
+  --grey-12: 210 6% 12%;
+  --grey-15: 210 6% 15%;
+  --grey-20: 210 6% 20%;
+  --grey-30: 210 6% 30%;
+  --grey-40: 210 6% 40%;
+  --grey-50: 210 6% 50%;
+  --grey-60: 210 6% 60%;
+  --grey-70: 210 6% 70%;
+  --grey-80: 210 6% 80%;
+  --grey-90: 210 6% 90%;
+  --grey-94: 210 6% 94%;
+  --grey-98: 210 6% 98%;
+  --white: 0 0% 100%;
+  /* PP Figma secondary colors */
+  --mint: 175 60% 65%;
+  --blue: 216 80% 65%;
+  --orange: 35 75% 55%;
+  --purple: 275 60% 75%;
+}
+
 @layer themes {
   :root {
     --background: 0 0% 100%;
@@ -710,6 +719,24 @@ body {
     --input: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
     --radius: 0.5rem;
+    /* PP Figma light mode shades */
+    --shade-0: var(--white);
+    --shade-6: var(--grey-98);
+    --shade-8: var(--grey-94);
+    --shade-10: var(--grey-90);
+    --shade-12: var(--grey-80);
+    --shade-15: var(--grey-70);
+    --shade-20: var(--grey-60);
+    --shade-30: var(--grey-50);
+    --shade-40: var(--grey-40);
+    --shade-50: var(--grey-30);
+    --shade-60: var(--grey-20);
+    --shade-70: var(--grey-15);
+    --shade-80: var(--grey-12);
+    --shade-90: var(--grey-10);
+    --shade-94: var(--grey-8);
+    --shade-98: var(--grey-6);
+    --shade-100: var(--black);
   }
 
   .dark {
@@ -736,6 +763,24 @@ body {
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
+    /* PP Figma dark mode shades */
+    --shade-0: var(--black);
+    --shade-6: var(--grey-6);
+    --shade-8: var(--grey-8);
+    --shade-10: var(--grey-10);
+    --shade-12: var(--grey-12);
+    --shade-15: var(--grey-15);
+    --shade-20: var(--grey-20);
+    --shade-30: var(--grey-30);
+    --shade-40: var(--grey-40);
+    --shade-50: var(--grey-50);
+    --shade-60: var(--grey-60);
+    --shade-70: var(--grey-70);
+    --shade-80: var(--grey-80);
+    --shade-90: var(--grey-90);
+    --shade-94: var(--grey-94);
+    --shade-98: var(--grey-98);
+    --shade-100: var(--white);
   }
 }
 
@@ -756,7 +801,7 @@ body {
   --tw-gradient-to: rgb(202 154 244 / 0) var(--tw-gradient-to-position);
   -webkit-background-clip: text;
           background-clip: text;
-  color: rgb(255 255 255 / 0.7);
+  color: hsl(var(--white) / 0.7);
 }
 
 .section-title {
@@ -823,19 +868,19 @@ body {
   margin-top: 0.25rem;
   width: 100%;
   border-radius: 4px;
-  border-color: rgb(255 255 255 / 0.1);
-  background-color: rgb(255 255 255 / 0.05);
+  border-color: hsl(var(--white) / 0.1);
+  background-color: hsl(var(--white) / 0.05);
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 300;
 }
 
 .form-input::-moz-placeholder {
-  color: rgb(255 255 255 / 0.5) !important;
+  color: hsl(var(--white) / 0.5) !important;
 }
 
 .form-input::placeholder {
-  color: rgb(255 255 255 / 0.5) !important;
+  color: hsl(var(--white) / 0.5) !important;
 }
 
 /* Navbar utilities */
