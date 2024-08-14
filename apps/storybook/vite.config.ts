@@ -7,7 +7,7 @@ import ViteYaml from '@modyfi/vite-plugin-yaml'
 export default defineConfig({
   plugins: [react(), svgr(), ViteYaml()],
   build: {
-    sourcemap: true,
+    sourcemap: false,
     copyPublicDir: false
   }
 })

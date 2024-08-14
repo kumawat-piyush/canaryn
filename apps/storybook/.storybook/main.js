@@ -1,9 +1,7 @@
 /** @type { import('@storybook/react-vite').StorybookConfig } */
 const config = {
   stories: [
-    '../src/**/*.mdx',
-    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
-    '../../../packages/unified-pipeline/src/**/*.stories.@(js|jsx|mjs|ts|tsx)'
+    '../src/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   ],
   addons: [
     '@storybook/addon-onboarding',
@@ -22,7 +20,7 @@ const config = {
     config.css = {
       preprocessorOptions: {
         scss: {
-          additionalData: `@import "../../../packages/unified-pipeline/src/App.module.scss";`
+          // additionalData: `@import "../../../packages/unified-pipeline/src/App.module.scss";`
         }
       }
     }
