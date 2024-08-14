@@ -1,5 +1,5 @@
 import React from 'react'
-import PipelineList from '../components/pipeline-list/pipeline-list'
+import PipelineList from '../components/pipeline-list'
 
 const pipelines = []
 
