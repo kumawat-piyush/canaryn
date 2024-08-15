@@ -165,8 +165,7 @@ const CanvasInternal = (props: CanvasProps) => {
         minZoom={0.5}
         maxZoom={1}
         /* https://github.com/xyflow/xyflow/discussions/2827 */
-        nodeOrigin={[0.5, 0.5]}
-        className={css.canvas}>
+        nodeOrigin={[0.5, 0.5]}>
         <Controls>
           {process.env.NODE_ENV !== 'production' && (
             <>

@@ -1,15 +1,5 @@
-.main {
-  height: 100%;
-  width: 100%;
-}
-
-.canvas {
-  height: inherit;
-  width: inherit;
-}
-
 .canvasContainer {
-  background-image: url("../../assets/images/bg.png");
+  background-image: url('../../assets/images/bg.png');
   background-size: auto; /* Adjust as needed */
   background-repeat: repeat;
   background-position: center center;

@@ -768,6 +768,10 @@ body {
   margin-left: 0.25rem;
 }
 
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
 .ml-auto {
   margin-left: auto;
 }
@@ -788,6 +792,18 @@ body {
   margin-top: 0.375rem;
 }
 
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.mt-11 {
+  margin-top: 2.75rem;
+}
+
+.mt-12 {
+  margin-top: 3rem;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -796,8 +812,32 @@ body {
   margin-top: 6rem;
 }
 
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
 .mt-4 {
   margin-top: 1rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.mt-7 {
+  margin-top: 1.75rem;
+}
+
+.mt-8 {
+  margin-top: 2rem;
+}
+
+.mt-9 {
+  margin-top: 2.25rem;
 }
 
 .mt-auto {
@@ -1023,6 +1063,10 @@ body {
   min-width: var(--radix-select-trigger-width);
 }
 
+.max-w-96 {
+  max-width: 24rem;
+}
+
 .max-w-lg {
   max-width: 32rem;
 }
@@ -1162,6 +1206,10 @@ body {
   align-items: baseline;
 }
 
+.items-stretch {
+  align-items: stretch;
+}
+
 .justify-start {
   justify-content: flex-start;
 }
@@ -1250,8 +1298,34 @@ body {
   overflow-x: hidden;
 }
 
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-ellipsis {
+  text-overflow: ellipsis;
+}
+
 .whitespace-nowrap {
   white-space: nowrap;
+}
+
+.text-wrap {
+  text-wrap: wrap;
+}
+
+.text-nowrap {
+  text-wrap: nowrap;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
 }
 
 .break-words {
@@ -1565,6 +1639,10 @@ body {
   padding-bottom: 1rem;
 }
 
+.pb-px {
+  padding-bottom: 1px;
+}
+
 .pl-2 {
   padding-left: 0.5rem;
 }
@@ -1621,8 +1699,52 @@ body {
   text-align: center;
 }
 
+.text-right {
+  text-align: right;
+}
+
 .align-middle {
   vertical-align: middle;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+
+.text-7xl {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+
+.text-8xl {
+  font-size: 6rem;
+  line-height: 1;
+}
+
+.text-9xl {
+  font-size: 8rem;
+  line-height: 1;
 }
 
 .text-\[0\.8rem\] {
@@ -1631,6 +1753,11 @@ body {
 
 .text-\[12px\] {
   font-size: 12px;
+}
+
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 .text-lg {
@@ -1643,8 +1770,17 @@ body {
   line-height: 1.25rem;
 }
 
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
 .text-xs {
   font-size: 13px;
+}
+
+.font-bold {
+  font-weight: 700;
 }
 
 .font-light {
@@ -1960,11 +2096,15 @@ body {
   /* PP Figma secondary colors */
   --mint: 175 60% 65%;
   --blue: 216 80% 65%;
-  --orange: 35 75% 55%;
+  --orange: 35 75% 55% 0.9;
   --purple: 275 60% 75%;
+  --green: 150, 75%, 65%, 0.7;
+  --red: 0, 80%, 65%, 0.7;
 }
 
 @layer themes {
+  /* TODO: replace hsl with variables for theming */
+
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -1990,68 +2130,36 @@ body {
     --input: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
     --radius: 0.5rem;
-    /* PP Figma light mode shades */
-    --shade-0: var(--white);
-    --shade-6: var(--grey-98);
-    --shade-8: var(--grey-94);
-    --shade-10: var(--grey-90);
-    --shade-12: var(--grey-80);
-    --shade-15: var(--grey-70);
-    --shade-20: var(--grey-60);
-    --shade-30: var(--grey-50);
-    --shade-40: var(--grey-40);
-    --shade-50: var(--grey-30);
-    --shade-60: var(--grey-20);
-    --shade-70: var(--grey-15);
-    --shade-80: var(--grey-12);
-    --shade-90: var(--grey-10);
-    --shade-94: var(--grey-8);
-    --shade-98: var(--grey-6);
-    --shade-100: var(--black);
   }
 
   .dark {
-    --background: 240 14% 3%;
-    --foreground: 0 0% 98%;
-    --secondary-background: 240 5% 6%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --tertiary: 240 5% 12%;
-    --tertiary-foreground: 0 0% 98%;
-    --tertiary-background: 240 6% 60%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    /* PP Figma dark mode shades */
-    --shade-0: var(--black);
-    --shade-6: var(--grey-6);
-    --shade-8: var(--grey-8);
-    --shade-10: var(--grey-10);
-    --shade-12: var(--grey-12);
-    --shade-15: var(--grey-15);
-    --shade-20: var(--grey-20);
-    --shade-30: var(--grey-30);
-    --shade-40: var(--grey-40);
-    --shade-50: var(--grey-50);
-    --shade-60: var(--grey-60);
-    --shade-70: var(--grey-70);
-    --shade-80: var(--grey-80);
-    --shade-90: var(--grey-90);
-    --shade-94: var(--grey-94);
-    --shade-98: var(--grey-98);
-    --shade-100: var(--white);
+    --background: var(--grey-10);
+    --foreground: var(--grey-94);
+    --secondary-background: var(--grey-6);
+    --card: var(--grey-10);
+    --card-foreground: var(--white);
+    --popover: var(--grey-10);
+    --popover-foreground: var(--white);
+    --primary: var(--white);
+    --primary-foreground: var(--grey-10);
+    --secondary: var(--grey-15);
+    --secondary-foreground: var(--white);
+    --tertiary: var(--grey-12);
+    --tertiary-foreground: var(--white);
+    --tertiary-background: var(--grey-60);
+    --muted: var(--grey-15);
+    --muted-foreground: var(--grey-60);
+    --accent: var(--grey-15);
+    --accent-foreground: var(--white);
+    --destructive: var(--red);
+    --destructive-foreground: var(--white);
+    --border: var(--grey-15);
+    --input: var(--grey-15);
+    --ring: var(--grey-80);
+    --success: var(--green);
+    --error: var(--red);
+    --warning: var(--orange);
+    --ai: var(--purple);
   }
 }
 
@@ -2706,10 +2814,6 @@ body {
   border-color: hsl(var(--primary));
 }
 
-.data-\[state\=active\]\:border-shade-60[data-state=active] {
-  border-color: hsl(var(--shade-60));
-}
-
 .data-\[active\]\:bg-accent\/50[data-active] {
   background-color: hsl(var(--accent) / 0.5);
 }
@@ -3136,6 +3240,12 @@ body {
   }
 }
 
+@media (min-width: 1024px) {
+  .lg\:hidden {
+    display: none;
+  }
+}
+
 .rtl\:right-1:where([dir="rtl"], [dir="rtl"] *) {
   right: 0.25rem;
 }
@@ -3204,6 +3314,18 @@ body {
 .\[\&\>\[role\=checkbox\]\]\:translate-y-\[2px\]>[role=checkbox] {
   --tw-translate-y: 2px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.\[\&\>div\:last-child\]\:border-0>div:last-child {
+  border-width: 0px;
+}
+
+.\[\&\>em\]\:not-italic>em {
+  font-style: normal;
+}
+
+.\[\&\>em\]\:text-primary>em {
+  color: hsl(var(--primary));
 }
 
 .\[\&\>span\]\:line-clamp-1>span {
@@ -3467,24 +3589,14 @@ body {
   opacity:1
 }
 
-._main_wv2j0_1{
-  height:100%;
-  width:100%
-}
-
-._canvas_wv2j0_6{
-  height:inherit;
-  width:inherit
-}
-
-._canvasContainer_wv2j0_11{
+._canvasContainer_18u4q_1{
   background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQQAAAEECAYAAADOCEoKAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAF6SURBVHgB7d25DYBAFEPBL2rZhP4LBBHinEPWjOT4leAZAAAAAAAAAAAAAACAH1trP67Nw3R0dN7vbAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAnYcbHZ3ejucmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgOThRkent+O5CQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACB5uNHR6e14bgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABIHm50dHo7npsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkocbHZ3ejucmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgOThRkent+O5CQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACB5uNHR6e14bgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABIHm50dHo7npsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkocbHZ3ejucmAAAAAAAAAAAAAAAA4BMn1h8fpFK96pEAAAAASUVORK5CYII=);
   background-size:auto;
   background-repeat:repeat;
   background-position:center center
 }
 
-._edge_wv2j0_18>path{
+._edge_18u4q_8>path{
   stroke:#6d6b75
 }
 
