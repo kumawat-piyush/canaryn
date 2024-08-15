@@ -29,7 +29,7 @@ const RepoLayout: React.FC = () => {
           </NavLink>
         </div>
       </header>
-      <main style={{ padding: '20px' }}>
+      <main className='pt-10 pb-3'>
         <Outlet />
       </main>
     </div>
