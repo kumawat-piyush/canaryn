@@ -146,7 +146,7 @@ const CanvasInternal = (props: CanvasProps) => {
   )
 
   return (
-    <div className={cx(css.main, css.canvasContainer)} onMouseMove={handleMouseMove}>
+    <div className={cx(css.canvasContainer, 'w-full h-full')} onMouseMove={handleMouseMove}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
