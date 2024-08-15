@@ -16,7 +16,7 @@ import ReactFlow, {
 } from 'reactflow'
 import { Circle, Minus } from 'iconoir-react'
 import { defaultEdgeMarkerOptions } from './nodes-edges-defaults'
-import { EdgeTypes, NodeTypes } from './types'
+import { NodeTypes } from './types'
 import { CanvasEntity, useCanvasStore } from '../../framework/CanvasStore/CanvasStoreContext'
 import useFlowStore from '../../framework/FlowStore/FlowStore'
 import { performElkLayout, elkOptions } from './utils/ElkLayout'
@@ -151,7 +151,6 @@ const CanvasInternal = (props: CanvasProps) => {
         nodes={nodes}
         edges={edges}
         nodeTypes={NodeTypes}
-        edgeTypes={EdgeTypes}
         onEdgeClick={onEdgeClick}
         onNodeClick={onNodeClick}
         onNodesChange={onNodesChange}

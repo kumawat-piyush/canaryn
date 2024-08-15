@@ -3456,35 +3456,6 @@ body {
   border-bottom-width: 1px;
 }
 
-._main_15c7c_1{
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:1;
-  width:20px;
-  height:20px;
-  border:1px solid rgba(48,48,54,.6);
-  background-color:#1d1d20
-}
-
-._zIndex1_15c7c_15{
-  z-index:1
-}
-
-._zIndex2_15c7c_20{
-  z-index:2
-}
-
-._icon_15c7c_24:hover{
-  cursor:pointer
-}
-
-._diagnose_15c7c_28{
-  color:red;
-  font-size:8px
-}
-
 ._main_skfty_1{
   border:1px rgba(48,48,54,.6);
   background:#1d1d20;
