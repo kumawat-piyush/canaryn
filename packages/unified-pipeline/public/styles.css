@@ -4048,6 +4048,10 @@ video {
   resize: both;
 }
 
+.border {
+  border-width: 1px;
+}
+
 .capitalize {
   text-transform: capitalize;
 }
