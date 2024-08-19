@@ -12,7 +12,6 @@ import StageNode from './elements/Nodes/StageNode/StageNode'
 import GroupNode from './elements/Nodes/GroupNode/GroupNode'
 import RootNode from './elements/Nodes/RootNode/RootNode'
 import PlusNode from './elements/Nodes/PlusNode/PlusNode'
-import StopNode from './elements/Nodes/StopNode/StopNode'
 
 export enum EdgeType {
   SMOOTHSTEP = 'smoothstep',
@@ -30,8 +29,7 @@ export enum NodeType {
   PLUS = 'plus',
   STAGE = 'stage',
   ROOT = 'root',
-  ATOMIC = 'atomic',
-  STOP = 'stop'
+  ATOMIC = 'atomic'
 }
 
 export const GROUPABLE_NODE_TYPES = [NodeType.STAGE, NodeType.ATOMIC]
@@ -43,8 +41,7 @@ export const NodeTypes = {
   [NodeType.PLUS]: PlusNode,
   [NodeType.STAGE]: StageNode,
   [NodeType.ROOT]: RootNode,
-  [NodeType.ATOMIC]: AtomicNode,
-  [NodeType.STOP]: StopNode
+  [NodeType.ATOMIC]: AtomicNode
 }
 
 export enum PositionType {
