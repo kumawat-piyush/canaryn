@@ -16,7 +16,7 @@ import ReactFlow, {
 } from 'reactflow'
 import { Circle, Minus } from '@harnessio/icons-noir'
 import { defaultEdgeMarkerOptions } from './nodes-edges-defaults'
-import { EdgeTypes, NodeTypes } from './types'
+import { NodeTypes } from './types'
 import { CanvasEntity, useCanvasStore } from '../../framework/CanvasStore/CanvasStoreContext'
 import useFlowStore from '../../framework/FlowStore/FlowStore'
 import { performElkLayout, elkOptions } from './utils/ElkLayout'
@@ -146,12 +146,11 @@ const CanvasInternal = (props: CanvasProps) => {
   )
 
   return (
-    <div className={cx(css.main, css.canvasContainer)} onMouseMove={handleMouseMove}>
+    <div className={cx(css.canvasContainer, 'w-full h-full')} onMouseMove={handleMouseMove}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
         nodeTypes={NodeTypes}
-        edgeTypes={EdgeTypes}
         onEdgeClick={onEdgeClick}
         onNodeClick={onNodeClick}
         onNodesChange={onNodesChange}
@@ -165,8 +164,7 @@ const CanvasInternal = (props: CanvasProps) => {
         minZoom={0.5}
         maxZoom={1}
         /* https://github.com/xyflow/xyflow/discussions/2827 */
-        nodeOrigin={[0.5, 0.5]}
-        className={css.canvas}>
+        nodeOrigin={[0.5, 0.5]}>
         <Controls>
           {process.env.NODE_ENV !== 'production' && (
             <>

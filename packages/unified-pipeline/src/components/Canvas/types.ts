@@ -6,7 +6,6 @@
  */
 import type { Position, Node as ReactFlowNode } from 'reactflow'
 import type { PipelineEntity } from '../../components/PipelineConfigPanel/types'
-import PlusEdge from './elements/Edges/PlusEdge/PlusEdge'
 import AtomicNode from './elements/Nodes/AtomicNode/AtomicNode'
 import StageNode from './elements/Nodes/StageNode/StageNode'
 import GroupNode from './elements/Nodes/GroupNode/GroupNode'
@@ -18,10 +17,6 @@ export enum EdgeType {
   PLUS = 'plus',
   DEFAULT = 'default',
   CUSTOM = 'custom'
-}
-
-export const EdgeTypes = {
-  [EdgeType.PLUS]: PlusEdge
 }
 
 export enum NodeType {

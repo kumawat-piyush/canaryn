@@ -101,6 +101,7 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
           {/* <img src={cardBg} className={css.glow} width="192" height="132" alt="" /> */}
           <div
             className={cx(
+              'border',
               css.main,
               /* gradient */
               css.gradientBorder,
@@ -121,6 +122,7 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
       ) : (
         <div
           className={cx(
+            'border',
             css.main,
             /* gradient */
             css.gradientBorder,
