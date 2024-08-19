@@ -83,9 +83,7 @@ const StageNodeInternal: React.FC<NodeProps<GroupNodeProps>> = props => {
   }, [isExpanded, nodes, edges, nodeId, childNodes, readonly])
 
   const shouldUpdateChildNode = (parentNodeId: string, childNode: Node) => {
-    return (
-      isParentOfNode(parentNodeId, childNode) && [NodeType.ATOMIC, NodeType.ANCHOR].includes(childNode.type as NodeType)
-    )
+    return isParentOfNode(parentNodeId, childNode) && [NodeType.ATOMIC].includes(childNode.type as NodeType)
   }
 
   const orientation = useMemo(

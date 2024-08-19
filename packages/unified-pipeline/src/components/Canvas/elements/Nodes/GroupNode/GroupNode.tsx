@@ -90,8 +90,7 @@ export default function GroupNode(props: NodeProps<GroupNodeProps>) {
   /* Required to control recursive collapse and expand */
   const shouldUpdateChildNode = (parentNodeId: string, childNode: Node) => {
     return (
-      isParentOfNode(parentNodeId, childNode) &&
-      [NodeType.STAGE, NodeType.ATOMIC, NodeType.ANCHOR].includes(childNode.type as NodeType)
+      isParentOfNode(parentNodeId, childNode) && [NodeType.STAGE, NodeType.ATOMIC].includes(childNode.type as NodeType)
     )
   }
 
