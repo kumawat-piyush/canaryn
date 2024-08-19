@@ -112,7 +112,7 @@ export const createEdgesForChildren = ({
     const firstChildNodeToConnect = sequentialNodes[0]
     const lastChildNodeToConnect = sequentialNodes[sequentialNodes.length - 1]
     /**
-     * Connect anchor nodes to the auto-layoutable parent
+     * Connect nodes to the auto-layoutable parent
      * When a group contains *only* sequential nodes
      */
     if (firstChildNodeToConnect && lastChildNodeToConnect && parentNode) {
