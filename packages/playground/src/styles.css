@@ -1,2 +1,4 @@
 @import '@harnessio/canary/src/styles.css';
+/* Temporarily, need to include both the tailwind generated css and from css modules. Shall remove css modules once migration to tailwind is complete. */
 @import '@harnessio/unified-pipeline/dist/style.css';
+@import '@harnessio/unified-pipeline/src/styles.css';

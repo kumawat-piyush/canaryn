@@ -78,12 +78,11 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
       <Handle type="target" position={Position.Left} isConnectable={isConnectable} />
       {status === Status.QUEUED ? (
         <div>
-          {/* <img src={cardBg} className={css.glow} width="192" height="132" alt="" /> */}
           <div
             className={cx(
               'border',
               /* gradient */
-              css.gradientBorder,
+              'p-px rounded-md',
               css.gradientBorderGlow
             )}>
             <div
@@ -102,30 +101,29 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
         <div
           className={cx(
             'border',
-            /* gradient */
-            css.gradientBorder,
-            { [css.gradientBorderGray]: status === Status.DONE },
-            'border bg-[rgba(29,29,32,1)] border-[rgba(48,48,54,0.6)] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.3)]'
+            'p-px rounded-md',
+            'border bg-[rgba(29,29,32,1)] border-[rgba(48,48,54,0.6)] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.3)]',
+            { ['gradient-border-gray']: status === Status.DONE }
           )}>
           <div
             style={{
               width,
               height
             }}
-            className={css.contentLayer}>
+            className="p-2.5 rounded-md">
             {icon}
             <div className={css.marginTop}></div>
             <div className="flex align-baseline">
               <Text className="text-[11px] text-[rgba(255,255,255,1)] font-normal leading-4">{name}</Text>
             </div>
             {enableDiagnostics?.Node && (
-              <span className={css.diagnose}>{getNodeDiagnostics({ xPos, yPos, zIndex })}</span>
+              <span className="text-tiny text-red">{getNodeDiagnostics({ xPos, yPos, zIndex })}</span>
             )}
           </div>
         </div>
       )}
       <Handle type="source" position={Position.Right} isConnectable={isConnectable}>
-        <Plus className={cx(css.icon, css.plus, { [css.show]: showPlus })} />
+        <Plus className={cx('hover:cursor-pointer', css.plus, { [css.show]: showPlus })} />
       </Handle>
     </div>
   )

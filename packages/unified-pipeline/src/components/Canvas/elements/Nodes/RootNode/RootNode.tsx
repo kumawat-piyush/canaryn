@@ -13,7 +13,7 @@ export default function RootNode({ data, xPos, yPos, zIndex }: NodeProps<RootNod
   return (
     <>
       <div className="w-10 h-10 rounded-full flex justify-center items-center bg-[rgba(29,29,32)]/[1.0]">
-        <PlaySolid color="green" className="cursor-pointer" />
+        <PlaySolid color="green" className="hover:cursor-pointer" />
       </div>
       <Handle position={sourcePosition} type="source" />
       {enableDiagnostics?.Node && (
