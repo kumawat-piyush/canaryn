@@ -6,7 +6,6 @@ export declare const gradientBorderGlow: string
 export declare const gradientBorderGray: string
 export declare const icon: string
 export declare const label: string
-export declare const main: string
 export declare const marginTop: string
 export declare const plus: string
 export declare const show: string

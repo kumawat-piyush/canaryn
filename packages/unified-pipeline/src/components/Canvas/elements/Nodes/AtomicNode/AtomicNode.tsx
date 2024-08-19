@@ -32,28 +32,8 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
   const { enableDiagnostics } = useCanvasStore()
   const [width] = useState<number>(STEP_NODE_WIDTH)
   const [height] = useState<number>(STEP_NODE_HEIGHT)
-  /* To simulate transitions */
-  // const [status, setStatus] = useState(Status.QUEUED)
-  // const runTransitions = true
-  const [status, setStatus] = useState(Status.DONE)
-  const runTransitions = false
+  const [status] = useState(Status.DONE)
   const [showPlus, setShowPlus] = useState<boolean>(false)
-
-  useEffect(() => {
-    if (runTransitions) {
-      let interval1 = 0,
-        interval2 = 0
-      interval1 = window.setInterval(
-        () => {
-          clearInterval(interval1)
-          setStatus(Status.IN_PROGRESS)
-          interval2 = window.setInterval(() => setStatus(Status.DONE), Math.floor(Math.random() * 4000) + 2000)
-        },
-        Math.floor(Math.random() * 4000) + 2000
-      )
-      return () => clearInterval(interval2)
-    }
-  }, [])
 
   const handleNodeDelete = useCallback(
     (nodeId: string) => {
@@ -102,7 +82,6 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
           <div
             className={cx(
               'border',
-              css.main,
               /* gradient */
               css.gradientBorder,
               css.gradientBorderGlow
@@ -123,10 +102,10 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
         <div
           className={cx(
             'border',
-            css.main,
             /* gradient */
             css.gradientBorder,
-            { [css.gradientBorderGray]: status === Status.DONE }
+            { [css.gradientBorderGray]: status === Status.DONE },
+            'border bg-[rgba(29,29,32,1)] border-[rgba(48,48,54,0.6)] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.3)]'
           )}>
           <div
             style={{
