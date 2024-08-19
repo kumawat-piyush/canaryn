@@ -6,11 +6,6 @@
 .gradientBorderGlow .contentLayer {
   background: #131316;
 }
-
-.gradientBorderGray .contentLayer {
-  background: radial-gradient(88.57% 100% at 14.29% 0%, rgba(255, 255, 255, 0.04) 10.62%, rgba(255, 255, 255, 0) 75.86%),
-    #1d1d20;
-}
 /* gradient */
 
 .skeletonLine {
@@ -40,10 +35,6 @@
   background: linear-gradient(135deg, rgba(36, 36, 41, 0.4) -10.42%, #242429 30.82%, rgba(36, 36, 41, 0.5) 100%);
 }
 
-.marginTop {
-  margin-top: 10px;
-}
-
 .plus {
   border-radius: 50%;
   /*figma */
@@ -55,9 +46,4 @@
   transform: translateX(-8px) translateY(-8px);
   cursor: pointer;
   opacity: 0;
-}
-
-.show {
-  transition: opacity 0.2s ease-in-out;
-  opacity: 1;
 }

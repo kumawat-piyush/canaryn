@@ -110,12 +110,9 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
               width,
               height
             }}
-            className="p-2.5 rounded-md">
+            className={'content-layer p-2.5 rounded-md'}>
             {icon}
-            <div className={css.marginTop}></div>
-            <div className="flex align-baseline">
-              <Text className="text-[11px] text-[rgba(255,255,255,1)] font-normal leading-4">{name}</Text>
-            </div>
+            <Text className="text-[11px] text-[rgba(255,255,255,1)] font-normal leading-4">{name}</Text>
             {enableDiagnostics?.Node && (
               <span className="text-tiny text-red">{getNodeDiagnostics({ xPos, yPos, zIndex })}</span>
             )}
@@ -123,7 +120,11 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
         </div>
       )}
       <Handle type="source" position={Position.Right} isConnectable={isConnectable}>
-        <Plus className={cx('hover:cursor-pointer', css.plus, { [css.show]: showPlus })} />
+        <Plus
+          className={cx('hover:cursor-pointer', css.plus, {
+            ['transition-opacity duration-200 ease-in-out opacity-100']: showPlus
+          })}
+        />
       </Handle>
     </div>
   )

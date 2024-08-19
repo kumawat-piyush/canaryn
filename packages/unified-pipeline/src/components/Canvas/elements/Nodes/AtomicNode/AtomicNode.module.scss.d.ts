@@ -1,9 +1,6 @@
 export declare const contentLayer: string
 export declare const gradientBorderGlow: string
-export declare const gradientBorderGray: string
-export declare const marginTop: string
 export declare const plus: string
-export declare const show: string
 export declare const skeletonIcon: string
 export declare const skeletonLine: string
 export declare const skeletonLine1: string
