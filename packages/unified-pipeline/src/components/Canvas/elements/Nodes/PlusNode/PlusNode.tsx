@@ -7,8 +7,6 @@ import { DEFAULT_NODE_LOCATION } from '../../../utils/LROrientation/Constants'
 import { useCanvasStore } from '../../../../../framework/CanvasStore/CanvasStoreContext'
 import { getNodeDiagnostics } from '../../../../../components/Canvas/utils/NodeUtils'
 
-import css from './PlusNode.module.scss'
-
 export interface PlusNodeProps extends DefaultNodeProps {}
 
 export default function PlusNode({ data, xPos, yPos, zIndex }: NodeProps<PlusNodeProps>) {
@@ -41,10 +39,17 @@ export default function PlusNode({ data, xPos, yPos, zIndex }: NodeProps<PlusNod
   return (
     <>
       <Handle position={targetPosition} type="target" />
-      <div className={css.main}>
-        <Plus className={css.icon} />
+      <div
+        className="w-5 h-5 rounded-full flex justify-center items-center border border-[rgb(48,48,54)]/[0.6] bg-[rgb(29,29,32)]/[1.0]"
+        style={{
+          borderColor: 'rgba(48,48,54,0.6)',
+          background: 'rgba(29,29,32, 1.0)'
+        }}>
+        <Plus className="cursor-pointer" />
       </div>
-      {enableDiagnostics?.Node && <span className={css.diagnose}>{getNodeDiagnostics({ xPos, yPos, zIndex })}</span>}
+      {enableDiagnostics?.Node && (
+        <span className="text-red text-sm">{getNodeDiagnostics({ xPos, yPos, zIndex })}</span>
+      )}
     </>
   )
 }
