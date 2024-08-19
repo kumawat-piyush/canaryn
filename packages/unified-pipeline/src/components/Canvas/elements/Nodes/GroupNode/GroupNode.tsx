@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import cx from 'classnames'
 import { Handle, Position, type NodeProps, Node, useReactFlow } from 'reactflow'
 import { set } from 'lodash-es'
-import { Computer, Plus } from 'iconoir-react'
+import { Computer, Plus } from '@harnessio/icons-noir'
 import useFlowStore from '../../../../../framework/FlowStore/FlowStore'
 import {
   DefaultNodeProps,
@@ -245,7 +245,6 @@ export default function GroupNode(props: NodeProps<GroupNodeProps>) {
           /> */}
         </div>
         <Plus
-          onClick={() => addChildNode()}
           className={cx(css.plus, css.hover, {
             [css.show]: showPlusNode && !readonly && isExpanded && orientation === GroupOrientation.TB
           })}

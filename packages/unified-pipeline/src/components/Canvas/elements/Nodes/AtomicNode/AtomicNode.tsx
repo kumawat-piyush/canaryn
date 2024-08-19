@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import cx from 'classnames'
 import type { NodeProps } from 'reactflow'
 import { Handle, Position, useReactFlow, Node } from 'reactflow'
-import { Plus, Computer } from 'iconoir-react'
+import { Plus, Computer } from '@harnessio/icons-noir'
 import {
   PositionType,
   type DefaultNodeProps,
@@ -154,7 +154,7 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
         </div>
       )}
       <Handle type="source" position={Position.Right} isConnectable={isConnectable}>
-        <Plus className={cx(css.icon, css.plus, { [css.show]: showPlus })} onClick={() => addChildNode()} />
+        <Plus className={cx(css.icon, css.plus, { [css.show]: showPlus })} />
       </Handle>
     </div>
   )

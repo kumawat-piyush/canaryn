@@ -1,6 +1,6 @@
 import React from 'react'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { PlaySolid } from 'iconoir-react'
+import { PlaySolid } from '@harnessio/icons-noir'
 import { DefaultNodeProps, ExpandNodeProps } from '../../../types'
 import { useCanvasStore } from '../../../../../framework/CanvasStore/CanvasStoreContext'
 import { getNodeDiagnostics } from '../../../../../components/Canvas/utils/NodeUtils'

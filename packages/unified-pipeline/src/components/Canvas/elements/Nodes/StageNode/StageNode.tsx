@@ -2,7 +2,7 @@ import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import cx from 'classnames'
 import { Handle, NodeProps, Position, Node } from 'reactflow'
 import { set } from 'lodash-es'
-import { Plus } from 'iconoir-react'
+import { Plus } from '@harnessio/icons-noir'
 import { DefaultNodeProps, GroupOrientation, NodeType, PositionType } from '../../../types'
 import {
   getChildNodes,
@@ -244,9 +244,7 @@ const StageNodeInternal: React.FC<NodeProps<GroupNodeProps>> = props => {
             + Add your first step
           </div>
         )}
-        {expanded && orientation === GroupOrientation.TB && (
-          <Plus onClick={() => {}} className={cx(css.icon, css.plus)} />
-        )}
+        {expanded && orientation === GroupOrientation.TB && <Plus className={cx(css.icon, css.plus)} />}
       </div>
       {/**
        * @TODO Add support for orientation

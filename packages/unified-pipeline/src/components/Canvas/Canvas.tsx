@@ -14,7 +14,7 @@ import ReactFlow, {
   ControlButton,
   useReactFlow
 } from 'reactflow'
-import { Circle, Minus } from 'iconoir-react'
+import { Circle, Minus } from '@harnessio/icons-noir'
 import { defaultEdgeMarkerOptions } from './nodes-edges-defaults'
 import { EdgeTypes, NodeTypes } from './types'
 import { CanvasEntity, useCanvasStore } from '../../framework/CanvasStore/CanvasStoreContext'
