@@ -14,8 +14,6 @@ import {
   PositionType
 } from '../../../types'
 import Expand from '../../../../../icons/Expand'
-// import Hamburger from '../../../../../icons/Hamburger'
-// import { Menubar } from '../../../../../../../canary/src/components/menubar'
 import {
   getChildNodes,
   getNodeById,
@@ -233,16 +231,6 @@ export default function GroupNode(props: NodeProps<GroupNodeProps>) {
               {memberNodeCount > 0 && <span className={css.count}>&nbsp;({memberNodeCount})</span>}
             </div>
           </div>
-          {/* <Menubar
-            trigger={<Hamburger color="white" />}
-            options={[
-              {
-                label: 'Delete',
-                onClick: () => {}
-              }
-            ]}
-            className={css.hover}
-          /> */}
         </div>
         <Plus
           className={cx(css.plus, css.hover, {

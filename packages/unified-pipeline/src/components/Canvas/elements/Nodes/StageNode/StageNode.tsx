@@ -17,8 +17,6 @@ import {
 } from '../../../utils/NodeUtils'
 import { dedupeEdges, createEdgesForChildren, mergeEdges } from '../../../../../components/Canvas/utils/EdgeUtils'
 import Expand from '../../../../../icons/Expand'
-import Hamburger from '../../../../../icons/Hamburger'
-// import { Menubar } from '../../../../../../../canary/src/components/menubar'
 import { performLayout } from '../../../../../components/Canvas/utils/LayoutUtils'
 import { useCanvasStore } from '../../../../../framework/CanvasStore/CanvasStoreContext'
 import useFlowStore from '../../../../../framework/FlowStore/FlowStore'
@@ -227,17 +225,6 @@ const StageNodeInternal: React.FC<NodeProps<GroupNodeProps>> = props => {
               {memberCount > 0 && <span className={css.count}>&nbsp;({memberCount})</span>}
             </div>
           </div>
-          {/* <Menubar
-            trigger={<Hamburger color="white" />}
-            options={[
-              {
-                label: 'Delete',
-                onClick: () => handleNodeDelete(nodeId)
-              }
-            ]}
-            className={css.hover}
-          /> */}
-          <Hamburger onClick={() => handleNodeDelete(nodeId)} />
         </div>
         {memberCount === 0 && (
           <div className={css.addStep} onClick={() => {}}>

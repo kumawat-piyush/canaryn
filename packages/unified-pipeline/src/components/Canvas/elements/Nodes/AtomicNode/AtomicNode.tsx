@@ -3,6 +3,7 @@ import cx from 'classnames'
 import type { NodeProps } from 'reactflow'
 import { Handle, Position, useReactFlow, Node } from 'reactflow'
 import { Plus, Computer } from '@harnessio/icons-noir'
+import { Text } from '@harnessio/canary'
 import {
   PositionType,
   type DefaultNodeProps,
@@ -12,7 +13,6 @@ import {
 } from '../../../types'
 import { fetchNodeConnections, getNodeDiagnostics } from '../../../utils/NodeUtils'
 import { useCanvasStore } from '../../../../../framework/CanvasStore/CanvasStoreContext'
-import Hamburger from '../../../../../icons/Hamburger'
 import { STEP_NODE_HEIGHT, STEP_NODE_WIDTH } from '../../../utils/LROrientation/Constants'
 import { Status } from '../../../../../utils/Constants'
 // import cardBg from '../../../../../assets/images/card-glow.svg'
@@ -113,20 +113,10 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
               height
             }}
             className={css.contentLayer}>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              {icon}
-              <Hamburger
-                onClick={event => {
-                  event.preventDefault()
-                  event.stopPropagation()
-                  handleNodeDelete(id)
-                }}
-                className={css.icon}
-              />
-            </div>
+            {icon}
             <div className={css.marginTop}></div>
-            <div style={{ display: 'flex', alignItems: 'baseline' }}>
-              <span className={css.label}>{name}</span>
+            <div className="flex align-baseline">
+              <Text className="text-[11px] text-[rgba(255,255,255,1)] font-normal leading-4">{name}</Text>
             </div>
             {enableDiagnostics?.Node && (
               <span className={css.diagnose}>{getNodeDiagnostics({ xPos, yPos, zIndex })}</span>
