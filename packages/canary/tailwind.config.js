@@ -12,6 +12,9 @@ module.exports = {
       }
     },
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif']
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -59,16 +62,16 @@ module.exports = {
           DEFAULT: 'hsl(var(--black))'
         },
         success: {
-          DEFAULT: 'hsl(var(--success))',
+          DEFAULT: 'hsl(var(--success))'
         },
         error: {
-          DEFAULT: 'hsl(var(--error))',
+          DEFAULT: 'hsl(var(--error))'
         },
         warning: {
-          DEFAULT: 'hsl(var(--warning))',
+          DEFAULT: 'hsl(var(--warning))'
         },
         ai: {
-          DEFAULT: 'hsl(var(--ai))',
+          DEFAULT: 'hsl(var(--ai))'
         }
       },
       borderRadius: {
