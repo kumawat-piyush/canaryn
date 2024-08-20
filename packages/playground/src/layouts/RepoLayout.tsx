@@ -33,7 +33,7 @@ const RepoLayout: React.FC = () => {
           </NavLayout>
         </div>
       </header>
-      <main className="">
+      <main style={{ padding: '20px' }}>
         <Outlet />
       </main>
     </div>

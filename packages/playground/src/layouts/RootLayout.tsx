@@ -11,7 +11,7 @@ const RootLayout: React.FC = () => {
   return (
     <div className="bg-background flex">
       {showNavbar && (
-        <nav className="h-screen p-5 md:min-w-56">
+        <nav style={{ height: '100vh' }} className="bg-black w-[220px] p-5">
           <ul>
             <li>
               <NavLink to="/repos" style={({ isActive }) => ({ color: isActive ? 'green' : 'inherit' })}>
@@ -53,4 +53,5 @@ const RootLayout: React.FC = () => {
     </div>
   )
 }
+
 export default RootLayout
