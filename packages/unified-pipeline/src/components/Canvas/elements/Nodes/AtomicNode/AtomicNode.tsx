@@ -30,7 +30,7 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
   const { enableDiagnostics } = useCanvasStore()
   const [width] = useState<number>(STEP_NODE_WIDTH)
   const [height] = useState<number>(STEP_NODE_HEIGHT)
-  const [status] = useState(Status.QUEUED)
+  const [status] = useState(Status.DONE)
   const [showPlus, setShowPlus] = useState<boolean>(false)
 
   const handleNodeDelete = useCallback(
@@ -99,7 +99,7 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
             'border',
             'p-px rounded-md',
             'border bg-[rgba(29,29,32,1)] border-[rgba(48,48,54,0.6)] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.3)]',
-            { ['gradient-border-gray']: status === Status.DONE }
+            { 'gradient-border-gray': status === Status.DONE }
           )}>
           <div
             style={{
@@ -116,15 +116,17 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
         </div>
       )}
       <Handle type="source" position={Position.Right} isConnectable={isConnectable}>
-        <Plus
-          className={cx(
-            'hover:cursor-pointer',
-            'rounded-full w-5 h-5 opacity-0 border border-[rgba(48,48,54,0.6)] bg-[rgba(29,29,32,1)] text-[rgba(228,228,231,1)] transform -translate-x-2 -translate-y-2',
-            {
-              ['transition-opacity duration-200 ease-in-out opacity-100']: showPlus
-            }
-          )}
-        />
+        {status !== Status.QUEUED && (
+          <Plus
+            className={cx(
+              'hover:cursor-pointer',
+              'rounded-full w-5 h-5 opacity-0 border border-[rgba(48,48,54,0.6)] bg-[rgba(29,29,32,1)] text-[rgba(228,228,231,1)] transform -translate-x-2 -translate-y-2',
+              {
+                'transition-opacity duration-200 ease-in-out opacity-100': showPlus
+              }
+            )}
+          />
+        )}
       </Handle>
     </div>
   )

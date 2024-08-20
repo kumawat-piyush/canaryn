@@ -22,8 +22,6 @@ import { useCanvasStore } from '../../../../../framework/CanvasStore/CanvasStore
 import useFlowStore from '../../../../../framework/FlowStore/FlowStore'
 import { GroupNodeProps } from '../GroupNode/GroupNode'
 
-import css from '../GroupNode/GroupNode.module.scss'
-
 const StageNode = memo((props: NodeProps<GroupNodeProps>) => <StageNodeInternal {...props} />)
 
 const StageNodeInternal: React.FC<NodeProps<GroupNodeProps>> = props => {
@@ -208,9 +206,13 @@ const StageNodeInternal: React.FC<NodeProps<GroupNodeProps>> = props => {
                 height
               }
         }
-        className={cx(css.main, { [css.collapsed]: !isExpanded }, { [css.zeroState]: showZeroState })}>
-        <div className={css.tools}>
-          <div className={css.header}>
+        className={cx(
+          'flex flex-col items-center justify-between text-xs font-medium leading-3 box-border text-left p-2.5 rounded-lg bg-[rgba(15,16,17,1)] border border-[rgba(48,51,54,1)] border-dashed',
+          { 'justify-center': !isExpanded },
+          { 'w-[337px] h-[77px]': showZeroState }
+        )}>
+        <div className="flex items-center justify-between w-full px-2.5 box-border">
+          <div className="flex items-center">
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <Expand
                 onClick={(event: any) => {
@@ -218,27 +220,31 @@ const StageNodeInternal: React.FC<NodeProps<GroupNodeProps>> = props => {
                   event.stopPropagation()
                   handleNodeExpandCollapse()
                 }}
-                className={cx(css.icon, css.hover)}
+                className={'w-6 h-6 rounded-[4px] hover:cursor-pointer  bg-[rgba(147,147,159,0.1)]'}
               />
               &nbsp;
-              <span className={css.label}>{name}</span>
-              {memberCount > 0 && <span className={css.count}>&nbsp;({memberCount})</span>}
+              <span className="text-[rgba(174,174,183,1)] text-xs text-nowrap">{name}</span>
+              {memberCount > 0 && <span className="text-xs text-[rgba(147,147,159,1)]">&nbsp;({memberCount})</span>}
             </div>
           </div>
         </div>
         {memberCount === 0 && (
-          <div className={css.addStep} onClick={() => {}}>
+          <div className="text-[rgba(147,147,159,1)]" onClick={() => {}}>
             + Add your first step
           </div>
         )}
-        {expanded && orientation === GroupOrientation.TB && <Plus className={cx(css.icon, css.plus)} />}
+        {expanded && orientation === GroupOrientation.TB && (
+          <Plus className={cx('w-6 h-6 rounded-[4px] bg-[rgba(147,147,159,0.1)]')} />
+        )}
       </div>
       {/**
        * @TODO Add support for orientation
        */}
       <Handle position={Position.Right} type="target" id={`${nodeId}_internal_target`} />
       <Handle position={Position.Right} type="source" id={`${nodeId}_source`} />
-      {enableDiagnostics?.Node && <span className={css.diagnose}>{getNodeDiagnostics({ xPos, yPos, zIndex })}</span>}
+      {enableDiagnostics?.Node && (
+        <span className="text-red text-sm">{getNodeDiagnostics({ xPos, yPos, zIndex })}</span>
+      )}
     </>
   )
 }

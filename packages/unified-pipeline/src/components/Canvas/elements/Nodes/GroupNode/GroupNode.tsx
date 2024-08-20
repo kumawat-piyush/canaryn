@@ -30,8 +30,6 @@ import { useCanvasStore } from '../../../../../framework/CanvasStore/CanvasStore
 import { DEFAULT_NODE_LOCATION } from '../../../../../components/Canvas/utils/LROrientation/Constants'
 import { getIdFromName } from '../../../../../utils/StringUtils'
 
-import css from './GroupNode.module.scss'
-
 export interface GroupNodeProps extends DefaultNodeProps, ExpandNodeProps, DeleteNodeProps, GroupNodesProps {}
 
 export default function GroupNode(props: NodeProps<GroupNodeProps>) {
@@ -214,9 +212,12 @@ export default function GroupNode(props: NodeProps<GroupNodeProps>) {
           width,
           height
         }}
-        className={cx(css.main, { [css.collapsed]: !isExpanded })}>
-        <div className={css.tools}>
-          <div className={css.header}>
+        className={cx(
+          'flex flex-col items-center justify-between text-xs font-medium leading-3 box-border text-left p-2.5 rounded-lg bg-[rgba(15,16,17,1)] border border-[rgba(48,51,54,1)] border-dashed',
+          { 'justify-center': !isExpanded }
+        )}>
+        <div className="flex items-center justify-between w-full px-2.5 box-border">
+          <div className="flex items-center">
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <Expand
                 onClick={(event: any) => {
@@ -224,18 +225,24 @@ export default function GroupNode(props: NodeProps<GroupNodeProps>) {
                   event.stopPropagation()
                   handleNodeExpandCollapse()
                 }}
-                className={cx(css.icon, css.hover)}
+                className={'w-6 h-6 rounded-[4px] hover:cursor-pointer  bg-[rgba(147,147,159,0.1)]'}
               />
               &nbsp;
-              <span className={css.label}>{name}</span>
-              {memberNodeCount > 0 && <span className={css.count}>&nbsp;({memberNodeCount})</span>}
+              <span className="text-[rgba(174,174,183,1)] text-xs text-nowrap">{name}</span>
+              {memberNodeCount > 0 && (
+                <span className="text-xs text-[rgba(147,147,159,1)]">&nbsp;({memberNodeCount})</span>
+              )}
             </div>
           </div>
         </div>
         <Plus
-          className={cx(css.plus, css.hover, {
-            [css.show]: showPlusNode && !readonly && isExpanded && orientation === GroupOrientation.TB
-          })}
+          className={cx(
+            'rounded-full w-6 h-6 opacity-0 border border-[rgba(48,48,54,0.6)] bg-[rgba(29,29,32,1)] text-[rgba(228,228,231,1)] translate-y-6 hover:cursor-pointer',
+            {
+              'transition-opacity duration-200 ease-in-out opacity-100':
+                showPlusNode && !readonly && isExpanded && orientation === GroupOrientation.TB
+            }
+          )}
         />
       </div>
       {/**
@@ -243,7 +250,9 @@ export default function GroupNode(props: NodeProps<GroupNodeProps>) {
        */}
       <Handle position={Position.Right} type="target" id={`${nodeId}_internal_target`} />
       <Handle position={Position.Right} type="source" id={`${nodeId}_source`} />
-      {enableDiagnostics?.Node && <span className={css.diagnose}>{getNodeDiagnostics({ xPos, yPos, zIndex })}</span>}
+      {enableDiagnostics?.Node && (
+        <span className="text-red text-sm">{getNodeDiagnostics({ xPos, yPos, zIndex })}</span>
+      )}
     </div>
   )
 }
