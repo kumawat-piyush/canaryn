@@ -1,5 +1,5 @@
 // RootLayout.tsx
-import { Navbar, Icon, NavbarProjectChooser } from '@harnessio/canary'
+import { Navbar, Icon, NavbarProjectChooser, NavbarUser } from '@harnessio/canary'
 import React from 'react'
 import { Outlet, NavLink, useLocation } from 'react-router-dom'
 
@@ -120,7 +120,7 @@ const RootLayout: React.FC = () => {
             </Navbar.AccordionGroup>
           </Navbar.Content>
           <Navbar.Footer>
-            <p>Footer</p>
+            <NavbarUser.Root />
           </Navbar.Footer>
         </Navbar.Root>
       )}

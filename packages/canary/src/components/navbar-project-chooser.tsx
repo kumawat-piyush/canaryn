@@ -1,5 +1,6 @@
 import React from 'react'
-import { Icon, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@harnessio/canary'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './dropdown-menu'
+import { Icon } from './icon'
 
 interface ProjectProps {
   projects: [
