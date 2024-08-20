@@ -1,41 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PullRequestSideBar from './pull-request-side-bar'
-import { EnumPullReqReviewDecision, processReviewDecision } from './utils'
-
-const mockReviewers = [
-  {
-    created: 1711754093953,
-    updated: 1711754093953,
-    type: 'self_assigned',
-    latest_review_id: 111,
-    review_decision: 'changereq' as EnumPullReqReviewDecision,
-    sha: '73b10cca5b9f5121822f31b81346954e5f1dce99',
-    reviewer: {
-      id: 5,
-      uid: 'default',
-      display_name: 'default',
-      email: 'default@harness.io',
-      type: 'user',
-      created: 1700943243392,
-      updated: 1700943243392
-    },
-    added_by: {
-      id: 5,
-      uid: 'default',
-      display_name: 'default',
-      email: 'default@harness.io',
-      type: 'user',
-      created: 1700943243392,
-      updated: 1700943243392
-    }
-  }
-]
+import { processReviewDecision, useActivityFilters } from './utils'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@harnessio/canary'
+import { mockReviewers } from './mocks/mockReviewer'
 
 export default function PullRequestConversation() {
+  const activityFilters = useActivityFilters()
+  const [activityFilter, setActivityFilter] = useState<{ label: string; value: string }>(activityFilters[0])
   return (
     <div>
       <div className="grid grid-cols-[70%_30%]">
-        <div className=" border mt-1 border-gray rounded-md">test</div>
+        <div className=" border mt-1 border-ring rounded-md">test</div>
         <PullRequestSideBar
           // repoMetadata={undefined}
           pullRequestMetadata={undefined}
@@ -47,9 +22,20 @@ export default function PullRequestConversation() {
         />
       </div>
       <div className="grid grid-cols-[70%_30%]">
-        <div className={'mt-2 pt-4 flex flew-row space-x-2 justify-between'}>
+        <div className={'mt-2 py-2 flex flew-row space-x-2 pt-4 justify-between border-b-2 border-b-ring'}>
           <div className="">Overview</div>
-          <div className="">Show Everything</div>
+          <Select defaultValue={activityFilter.value}>
+            <SelectTrigger className="w-fit border-none px-1 text-white text-xs focus:ring-[0px]">
+              <SelectValue placeholder="Select..." />
+            </SelectTrigger>
+            <SelectContent>
+              {activityFilters.map(filter => (
+                <SelectItem key={filter.value} value={filter.value} onClick={() => setActivityFilter(filter)}>
+                  {filter.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
     </div>
