@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import cx from 'classnames'
 import {
   Message,
   GitPullRequest,
@@ -211,7 +212,11 @@ export default function PullRequestList() {
       <div className="bg-background border-b border">
         <div className="flex p-3">
           <div
-            className={`flex justify-center text-center ${headerFilter === 'open' ? 'text-white' : 'text-[#93939F]'}`}
+            className={cx(
+              'flex justify-center text-center',
+              { 'text-white': headerFilter === 'open' },
+              { 'text-[#93939F]': headerFilter !== 'open' }
+            )}
             onClick={() => setHeaderFilter('open')}>
             <span className="pt-1.5">
               <GitPullRequest color={headerFilter === 'open' ? '#FFFFFF' : '#93939F'} />
@@ -224,7 +229,11 @@ export default function PullRequestList() {
             </span>
           </div>
           <div
-            className={`pl-2 flex justify-center text-center ${headerFilter === 'closed' ? 'text-white' : 'text-[#93939F]'}`}
+            className={cx(
+              'pl-2 flex justify-center text-center',
+              { 'text-white': headerFilter === 'closed' },
+              { 'text-[#93939F]': headerFilter !== 'closed' }
+            )}
             onClick={() => setHeaderFilter('closed')}>
             <span className="pt-1.5">
               <Check color={headerFilter === 'closed' ? '#FFFFFF' : '#93939F'} />

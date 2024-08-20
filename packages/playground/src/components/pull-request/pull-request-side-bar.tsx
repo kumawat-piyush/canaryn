@@ -1,4 +1,5 @@
 import React from 'react'
+import cx from 'classnames'
 import {
   Plus,
   CheckCircleSolid,
@@ -65,9 +66,9 @@ const PullRequestSideBar = (props: PullRequestSideBarProps) => {
                 return (
                   <div key={reviewer.reviewer.id} className="flex items-center space-x-2 mr-1">
                     <Avatar
-                      className={`w-6 h-6 rounded-full ${
-                        updatedReviewDecision !== PullReqReviewDecision.changeReq ? '                      p-0' : ''
-                      }`}>
+                      className={cx('w-6 h-6 rounded-full', {
+                        'p-0': updatedReviewDecision !== PullReqReviewDecision.changeReq
+                      })}>
                       <AvatarFallback>
                         <span className="text-sm"> {getInitials(reviewer.reviewer.display_name)}</span>
                       </AvatarFallback>

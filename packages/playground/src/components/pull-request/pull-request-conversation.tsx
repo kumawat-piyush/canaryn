@@ -10,7 +10,7 @@ export default function PullRequestConversation() {
   return (
     <div>
       <div className="grid grid-cols-[70%_30%]">
-        <div className=" border mt-1 border-ring rounded-md">test</div>
+        <div className=" border mt-1 border-border rounded-md">test</div>
         <PullRequestSideBar
           // repoMetadata={undefined}
           pullRequestMetadata={undefined}
@@ -22,7 +22,7 @@ export default function PullRequestConversation() {
         />
       </div>
       <div className="grid grid-cols-[70%_30%]">
-        <div className={'mt-2 py-2 flex flew-row space-x-2 pt-4 justify-between border-b-2 border-b-ring'}>
+        <div className={'mt-2 py-2 flex flew-row space-x-2 pt-4 justify-between border-b border-b-border'}>
           <div className="">Overview</div>
           <Select defaultValue={activityFilter.value}>
             <SelectTrigger className="w-fit border-none px-1 text-white text-xs focus:ring-[0px]">
