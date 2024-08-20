@@ -6,8 +6,6 @@ import { Plus } from '@harnessio/icons-noir'
 import type { NodeType } from '../../../types'
 import { useCanvasStore } from '../../../../../framework/CanvasStore/CanvasStoreContext'
 
-import css from './PlusEdge.module.scss'
-
 export interface PlusEdgeProps {
   sourceNode: Node
   targetNode: Node
@@ -93,11 +91,16 @@ export default function PlusEdge(props: EdgeProps<PlusEdgeProps>) {
                 transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
                 pointerEvents: 'all'
               }}
-              className={cx(css.main, css.zIndex1, {
-                [css.zIndex2]: data?.zIndex === 2
-              })}>
-              {enableDiagnostics?.Edge && <span className={css.diagnose}>{edgeId}</span>}
-              <Plus color="white" className={css.icon} />
+              /* https://github.com/xyflow/xyflow/discussions/3498#discussioncomment-7263647 */
+              className={cx(
+                'w-5 h-5 border border-[rgba(48,48,54,0.6)] bg-[rgba(29,29,32,1)] flex items-center justify-center rounded-full',
+                'z-[1]',
+                {
+                  'z-[2]': data?.zIndex === 2
+                }
+              )}>
+              {enableDiagnostics?.Edge && <span className="text-red text-xs">{edgeId}</span>}
+              <Plus color="white" className="hover:cursor-pointer" />
             </div>
           </EdgeLabelRenderer>
         }
