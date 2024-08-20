@@ -25,7 +25,6 @@ import { partitionNodesForLayout } from './utils/NodeUtils'
 import CircleOverlay, { Position } from '../../components/CircleOverlay/CircleOverlay'
 
 import 'reactflow/dist/style.css'
-import css from './Canvas.module.scss'
 
 const ANIMATION_DURATION = 500
 
@@ -146,7 +145,7 @@ const CanvasInternal = (props: CanvasProps) => {
   )
 
   return (
-    <div className={cx(css.canvasContainer, 'w-full h-full')} onMouseMove={handleMouseMove}>
+    <div className="w-full h-full canvas-container" onMouseMove={handleMouseMove}>
       <ReactFlow
         nodes={nodes}
         edges={edges}

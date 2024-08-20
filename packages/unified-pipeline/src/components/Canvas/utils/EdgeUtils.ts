@@ -5,8 +5,6 @@ import { getChildNodes, getLayoutableNodes, partitionNodesByParallelism } from '
 import type { PlusEdgeProps } from '../elements/Edges/PlusEdge/PlusEdge'
 import { GROUP_NODE_VERTICAL_ALIGNMENT_MARGIN } from './LROrientation/Constants'
 
-import css from '../Canvas.module.scss'
-
 /* node to parent edge */
 export const linkChildNodeToParent = ({
   childNode,
@@ -42,7 +40,7 @@ export const linkChildNodeToParent = ({
     },
     /* https://github.com/xyflow/xyflow/discussions/3498#discussioncomment-7263647 */
     zIndex,
-    className: css.edge
+    className: 'edge'
   }
 }
 
@@ -81,7 +79,7 @@ export const linkParentNodeToChild = ({
     },
     /* https://github.com/xyflow/xyflow/discussions/3498#discussioncomment-7263647 */
     zIndex,
-    className: css.edge
+    className: 'edge'
   }
 }
 
@@ -254,7 +252,7 @@ const createEdgeForNodes = ({
     },
     type: EdgeType.SMOOTHSTEP,
     zIndex,
-    className: css.edge
+    className: 'edge'
   }
 }
 
