@@ -20,4 +20,15 @@
         #1d1d20;
     }
   }
+
+  .gradient-border-glow {
+    @apply bg-transparent; /* Base background if needed */
+    background-image: linear-gradient(0deg, rgba(48, 48, 54, 0.6), rgba(48, 48, 54, 0.6)),
+      linear-gradient(108.08deg, #b1cbff 0%, rgba(177, 203, 255, 0.2) 30%, rgba(177, 203, 255, 0.2) 80%, #b1cbff 100%);
+
+    .gradient-border-glow .content-layer {
+      @apply bg-transparent; /* Base background if needed */
+      background-color: #131316;
+    }
+  }
 }
