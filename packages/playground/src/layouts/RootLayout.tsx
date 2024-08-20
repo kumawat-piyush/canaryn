@@ -69,13 +69,6 @@ const RootLayout: React.FC = () => {
     }
   ]
 
-  // const secondaryMenuItems = [
-  //   {
-  //     text: 'System Administration',
-  //     icon: <SystemAdministrationIcon />
-  //   }
-  // ]
-
   const sampleProjectList = [
     {
       title: 'Playground',
