@@ -417,6 +417,9 @@ importers:
       react-hook-form:
         specifier: ^7.52.0
         version: 7.52.0(react@18.3.1)
+      react-jsx-match:
+        specifier: ^1.1.5
+        version: 1.1.10
       react-resizable-panels:
         specifier: ^2.0.19
         version: 2.0.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -569,6 +572,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
+      react-jsx-match:
+        specifier: ^1.1.5
+        version: 1.1.10
       react-keywords:
         specifier: ^1.0.0
         version: 1.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -612,9 +618,6 @@ importers:
       globals:
         specifier: ^15.8.0
         version: 15.8.0
-      moment:
-        specifier: ^2.30.1
-        version: 2.30.1
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
@@ -7747,6 +7750,9 @@ packages:
 
   react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+
+  react-jsx-match@1.1.10:
+    resolution: {integrity: sha512-umuLhuFZoUuuVDLYfH+VONq8y+6B4polJw/suX8T5VERetZFYPzIXtkmNqVLtqosgroUjiaO03ThPRVMjDPsnA==}
 
   react-keywords@1.0.0:
     resolution: {integrity: sha512-UVrRZP9/QKph4QULhKHKr048STYc/7c/6jbepPEx4hJkTnepIIGKkp3707G6oDKwlX7rIcyjBoHYxnG49dWC0w==}
@@ -17129,6 +17135,8 @@ snapshots:
   react-is@18.1.0: {}
 
   react-is@18.2.0: {}
+
+  react-jsx-match@1.1.10: {}
 
   react-keywords@1.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
