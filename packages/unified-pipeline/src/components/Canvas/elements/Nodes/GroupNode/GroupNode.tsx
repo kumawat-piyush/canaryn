@@ -237,7 +237,7 @@ export default function GroupNode(props: NodeProps<GroupNodeProps>) {
         </div>
         <Plus
           className={cx(
-            'rounded-full w-6 h-6 opacity-0 border border-[rgba(48,48,54,0.6)] bg-[rgba(29,29,32,1)] text-[rgba(228,228,231,1)] translate-y-6 hover:cursor-pointer',
+            'rounded-full w-6 h-6 opacity-0 border border-[rgba(48,48,54,0.6)] bg-studio-1 text-[rgba(228,228,231,1)] translate-y-6 hover:cursor-pointer',
             {
               'transition-opacity duration-200 ease-in-out opacity-100':
                 showPlusNode && !readonly && isExpanded && orientation === GroupOrientation.TB

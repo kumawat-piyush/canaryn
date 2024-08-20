@@ -118,7 +118,7 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
           <Plus
             className={cx(
               'hover:cursor-pointer',
-              'rounded-full w-5 h-5 opacity-0 border border-[rgba(48,48,54,0.6)] bg-[rgba(29,29,32,1)] text-[rgba(228,228,231,1)] transform -translate-x-2 -translate-y-2',
+              'rounded-full w-5 h-5 opacity-0 border border-[rgba(48,48,54,0.6)] bg-studio-1 text-[rgba(228,228,231,1)] transform -translate-x-2 -translate-y-2',
               {
                 'transition-opacity duration-200 ease-in-out opacity-100': showPlus
               }
