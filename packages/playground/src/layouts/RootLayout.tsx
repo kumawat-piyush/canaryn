@@ -40,7 +40,7 @@ const RootLayout: React.FC = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/sign up" style={({ isActive }) => ({ color: isActive ? 'green' : 'inherit' })}>
+              <NavLink to="/signup" style={({ isActive }) => ({ color: isActive ? 'green' : 'inherit' })}>
                 Sign up
               </NavLink>
             </li>
