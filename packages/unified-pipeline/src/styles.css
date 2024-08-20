@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --studio-1: rgba(29, 29, 32);
+}
+
 @layer utilities {
   .gradient-border-gray {
     @apply bg-transparent; /* Base background if needed */
