@@ -85,7 +85,7 @@ const RootLayout: React.FC = () => {
   ]
 
   return (
-    <div className="bg-background flex">
+    <div className="bg-background grid grid-cols-[220px_minmax(900px,_1fr)]">
       {showNavbar && (
         <Navbar.Root>
           <Navbar.Header>
