@@ -49,6 +49,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
     --primary: 240 5.9% 10%;
+    --primary-background: 240 5.9% 10%;
     --primary-foreground: 0 0% 98%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
@@ -68,7 +69,7 @@
   }
 
   .dark {
-    --background: var(--grey-10);
+    --background: var(--grey-6);
     --foreground: var(--grey-94);
     --secondary-background: var(--grey-6);
     --card: var(--grey-10);
@@ -76,6 +77,7 @@
     --popover: var(--grey-10);
     --popover-foreground: var(--white);
     --primary: var(--white);
+    --primary-background: var(--black);
     --primary-foreground: var(--grey-10);
     --secondary: var(--grey-15);
     --secondary-foreground: var(--white);
