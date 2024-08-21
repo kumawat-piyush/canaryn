@@ -1,6 +1,7 @@
 // RootLayout.tsx
 import React from 'react'
-import { Outlet, NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
+import MainLayout from './MainLayout'
 
 const RootLayout: React.FC = () => {
   const location = useLocation()
@@ -40,18 +41,19 @@ const RootLayout: React.FC = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/sign up" style={({ isActive }) => ({ color: isActive ? 'green' : 'inherit' })}>
+              <NavLink to="/signup" style={({ isActive }) => ({ color: isActive ? 'green' : 'inherit' })}>
                 Sign up
               </NavLink>
             </li>
           </ul>
         </nav>
       )}
-      <main className="h-screen w-4/5 pt-0 flex-grow">
-        <Outlet />
-      </main>
+      <MainLayout />
     </div>
   )
 }
 
 export default RootLayout
+
+//since I would like refactor it, so I would like to see how joe did in the nav tabs
+//
