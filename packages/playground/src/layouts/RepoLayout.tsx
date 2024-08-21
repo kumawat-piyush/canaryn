@@ -24,7 +24,7 @@ const RepoLayout: React.FC = () => {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/">Repository {repoId}</BreadcrumbLink>
+                <BreadcrumbLink href="/">{repoId}</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="font-thin">&nbsp;/&nbsp;</BreadcrumbSeparator>
               <BreadcrumbPage>
@@ -57,6 +57,7 @@ const RepoLayout: React.FC = () => {
         </TabsList>
       </Tabs>
       <main className="p-8">
+        <p>Repositories</p>
         <Outlet />
       </main>
     </div>

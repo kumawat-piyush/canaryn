@@ -47,7 +47,7 @@ interface ListFieldProps extends Omit<React.ComponentProps<'div'>, 'title'>, Var
 }
 
 const List = ({ className, children, ...props }: ListProps) => (
-  <div className={cn('w-full [&>div:last-child]:border-0 border rounded-md w-full', className)} {...props}>
+  <div className={cn('w-full [&>div:last-child]:border-0 border rounded-md', className)} {...props}>
     {children}
   </div>
 )
@@ -73,7 +73,7 @@ const ListField = ({ className, title, description, label, right, ...props }: Li
     {title && (
       <div
         className={cn(
-          'font-normal text-primary [&>em]:text-primary [&>em]:not-italic',
+          'font-normal text-primary [&>em]:font-medium [&>em]:text-primary [&>em]:not-italic',
           label && 'text-tertiary-background',
           className
         )}>
