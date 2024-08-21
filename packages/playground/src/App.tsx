@@ -28,6 +28,14 @@ import PullRequestCommitsPage from './pages/pull-request-commits-page'
 
 const router = createBrowserRouter([
   {
+    path: '/signup',
+    element: <SignUpPage />
+  },
+  {
+    path: '/signin',
+    element: <SignInPage />
+  },
+  {
     path: '/',
     element: <RootLayout />,
     children: [
@@ -35,14 +43,6 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <HomePage />
-      },
-      {
-        path: 'signup',
-        element: <SignUpPage />
-      },
-      {
-        path: 'signin',
-        element: <SignInPage />
       },
       // REPOS
       {
