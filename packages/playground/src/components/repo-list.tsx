@@ -52,7 +52,9 @@ export default function RepoList({ ...props }: PageProps) {
   return (
     // TODO: get layout componentized, this wrapper div is just for quick presentation!
     <div className="px-16 py-16 max-w-[1200px] min-w-[770px] mx-auto">
-      <Text size={6}>{pageTitle}</Text>
+      <Text size={5} weight={'medium'}>
+        {pageTitle}
+      </Text>
       <Spacer size={6} />
       {repos && repos.length > 0 && (
         <StackedList.Root>

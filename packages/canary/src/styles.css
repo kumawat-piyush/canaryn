@@ -43,7 +43,6 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
-    --secondary-background: 0 0% 100%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
@@ -53,6 +52,7 @@
     --primary-foreground: 0 0% 98%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
+    --secondary-background: 0 0% 100%;
     --tertiary: 240 4.8% 95.9%;
     --tertiary-foreground: 240 5.9% 10%;
     --tertiary-background: 240 6% 60%;
@@ -71,7 +71,6 @@
   .dark {
     --background: var(--grey-6);
     --foreground: var(--grey-94);
-    --secondary-background: var(--grey-6);
     --card: var(--grey-10);
     --card-foreground: var(--white);
     --popover: var(--grey-10);
@@ -81,6 +80,7 @@
     --primary-foreground: var(--grey-10);
     --secondary: var(--grey-15);
     --secondary-foreground: var(--white);
+    --secondary-background: var(--grey-6);
     --tertiary: var(--grey-12);
     --tertiary-foreground: var(--white);
     --tertiary-background: var(--grey-60);
