@@ -213,7 +213,7 @@ export default function GroupNode(props: NodeProps<GroupNodeProps>) {
           height
         }}
         className={cx(
-          'flex flex-col items-center justify-between text-xs font-medium leading-3 box-border text-left p-2.5 rounded-lg bg-[rgba(15,16,17,1)] border border-[rgba(48,51,54,1)] border-dashed',
+          'flex flex-col items-center justify-between text-xs font-medium leading-3 box-border text-left p-2.5 rounded-lg bg-studio-6 border border-studio-5 border-dashed',
           { 'justify-center': !isExpanded }
         )}>
         <div className="flex items-center justify-between w-full box-border">
@@ -228,14 +228,14 @@ export default function GroupNode(props: NodeProps<GroupNodeProps>) {
                 className={'w-6 h-6 rounded-[4px] hover:cursor-pointer bg-studio-2/10'}
               />
               &nbsp;
-              <span className="text-[rgba(174,174,183,1)] text-xs text-nowrap">{name}</span>
+              <span className="text-studio-8 text-xs text-nowrap">{name}</span>
               {memberNodeCount > 0 && <span className="text-xs text-studio-2">&nbsp;({memberNodeCount})</span>}
             </div>
           </div>
         </div>
         <Plus
           className={cx(
-            'rounded-full w-6 h-6 opacity-0 border border-[rgba(48,48,54,0.6)] bg-studio-1 text-[rgba(228,228,231,1)] translate-y-6 hover:cursor-pointer',
+            'rounded-full w-6 h-6 opacity-0 border border-studio-4/[0.6] bg-studio-1 text-studio-7 translate-y-6 hover:cursor-pointer',
             {
               'transition-opacity duration-200 ease-in-out opacity-100':
                 showPlusNode && !readonly && isExpanded && orientation === GroupOrientation.TB

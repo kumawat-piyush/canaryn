@@ -69,7 +69,7 @@ const Icon: React.FC<ExecutionStatusProps> = props => {
     case ExecutionState.SUCCESS:
       return <CheckCircleSolid color="#63E9A6" size="16px" className="mt-0.5" />
     case ExecutionState.RUNNING:
-      return <Refresh color="studio-3" size="16" className="animate-spin" />
+      return <Refresh color="rgba(226,155,54,1)" size="16" className="animate-spin" />
     default:
       return <></>
   }
