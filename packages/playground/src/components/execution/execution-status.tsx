@@ -31,12 +31,12 @@ const Badge: React.FC<ExecutionStatusProps & BadgeProps> = props => {
           <span className="text-white">Running</span>
         </div>
       ) : (
-        <div className="flex gap-1 items-center border-solid border border-[rgba(226,155,54,1)]/[0.12] px-1 py-0.5 rounded-md bg-studio-3/10">
+        <div className="flex gap-1 items-center border-solid border border-studio-3/[0.12] px-1 py-0.5 rounded-md bg-studio-3/10">
           <div className="flex gap-1 items-center">
             <Refresh color="rgba(226,155,54,1)" size="16" className="animate-spin" />
-            <span className="text-[rgba(226,155,54,1)]">Running</span>
+            <span className="text-studio-3">Running</span>
           </div>
-          {duration && <span className="text-[rgba(226,155,54,1)]">{formatDuration(duration)}</span>}
+          {duration && <span className="text-studio-3">{formatDuration(duration)}</span>}
         </div>
       )
     case ExecutionState.ERROR:
@@ -69,7 +69,7 @@ const Icon: React.FC<ExecutionStatusProps> = props => {
     case ExecutionState.SUCCESS:
       return <CheckCircleSolid color="#63E9A6" size="16px" className="mt-0.5" />
     case ExecutionState.RUNNING:
-      return <Refresh color="rgba(226,155,54,1)" size="16" className="animate-spin" />
+      return <Refresh color="studio-3" size="16" className="animate-spin" />
     default:
       return <></>
   }
