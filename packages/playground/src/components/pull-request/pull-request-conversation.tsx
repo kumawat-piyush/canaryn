@@ -22,7 +22,7 @@ export default function PullRequestConversation() {
         />
       </div>
       <div className="grid grid-cols-[70%_30%]">
-        <div className={'mt-2 py-2 flex flew-row space-x-2 pt-4 justify-between border-b border-b-border'}>
+        <div className={'mt-2 py-2 flex  space-x-2 pt-4 justify-between border-b border-b-border'}>
           <div className="">Overview</div>
           <Select defaultValue={activityFilter.value}>
             <SelectTrigger className="w-fit border-none px-1 text-white text-xs focus:ring-[0px]">
