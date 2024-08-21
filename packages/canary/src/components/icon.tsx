@@ -11,6 +11,9 @@ import ChaosEngineering from '../icons/chaos-engineering-icon.svg'
 import Environment from '../icons/environment-icon.svg'
 import Secrets from '../icons/secrets-icon.svg'
 import Connectors from '../icons/connectors-icon.svg'
+import Star from '../icons/star-icon.svg'
+import Pull from '../icons/pull-icon.svg'
+// import Fork from '../icons/fork.svg'
 
 const IconNameMap = {
   'chevron-down': ChevronDown,
@@ -24,7 +27,10 @@ const IconNameMap = {
   'chaos-engineering': ChaosEngineering,
   environment: Environment,
   secrets: Secrets,
-  connectors: Connectors
+  connectors: Connectors,
+  star: Star,
+  pull: Pull
+  // fork: Fork
 } satisfies Record<string, React.FunctionComponent<React.SVGProps<SVGSVGElement>>>
 
 export interface IconProps {

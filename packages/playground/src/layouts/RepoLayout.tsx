@@ -57,7 +57,6 @@ const RepoLayout: React.FC = () => {
         </TabsList>
       </Tabs>
       <main className="p-8">
-        <p>Repositories</p>
         <Outlet />
       </main>
     </div>
