@@ -216,7 +216,7 @@ export default function GroupNode(props: NodeProps<GroupNodeProps>) {
           'flex flex-col items-center justify-between text-xs font-medium leading-3 box-border text-left p-2.5 rounded-lg bg-[rgba(15,16,17,1)] border border-[rgba(48,51,54,1)] border-dashed',
           { 'justify-center': !isExpanded }
         )}>
-        <div className="flex items-center justify-between w-full px-2.5 box-border">
+        <div className="flex items-center justify-between w-full box-border">
           <div className="flex items-center">
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <Expand
@@ -225,11 +225,11 @@ export default function GroupNode(props: NodeProps<GroupNodeProps>) {
                   event.stopPropagation()
                   handleNodeExpandCollapse()
                 }}
-                className={'w-6 h-6 rounded-[4px] hover:cursor-pointer bg-studio-secondary/10'}
+                className={'w-6 h-6 rounded-[4px] hover:cursor-pointer bg-studio-2/10'}
               />
               &nbsp;
               <span className="text-[rgba(174,174,183,1)] text-xs text-nowrap">{name}</span>
-              {memberNodeCount > 0 && <span className="text-xs text-studio-secondary">&nbsp;({memberNodeCount})</span>}
+              {memberNodeCount > 0 && <span className="text-xs text-studio-2">&nbsp;({memberNodeCount})</span>}
             </div>
           </div>
         </div>

@@ -211,7 +211,7 @@ const StageNodeInternal: React.FC<NodeProps<GroupNodeProps>> = props => {
           { 'justify-center': !isExpanded },
           { 'w-[337px] h-[77px]': showZeroState }
         )}>
-        <div className="flex items-center justify-between w-full px-2.5 box-border">
+        <div className="flex items-center justify-between w-full box-border">
           <div className="flex items-center">
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <Expand
@@ -220,21 +220,21 @@ const StageNodeInternal: React.FC<NodeProps<GroupNodeProps>> = props => {
                   event.stopPropagation()
                   handleNodeExpandCollapse()
                 }}
-                className={'w-6 h-6 rounded-[4px] hover:cursor-pointer bg-studio-secondary/10'}
+                className={'w-6 h-6 rounded-[4px] hover:cursor-pointer bg-studio-2/10'}
               />
               &nbsp;
               <span className="text-[rgba(174,174,183,1)] text-xs text-nowrap">{name}</span>
-              {memberCount > 0 && <span className="text-xs text-studio-secondary">&nbsp;({memberCount})</span>}
+              {memberCount > 0 && <span className="text-xs text-studio-2">&nbsp;({memberCount})</span>}
             </div>
           </div>
         </div>
         {memberCount === 0 && (
-          <div className="text-studio-secondary" onClick={() => {}}>
+          <div className="text-studio-2" onClick={() => {}}>
             + Add your first step
           </div>
         )}
         {expanded && orientation === GroupOrientation.TB && (
-          <Plus className={cx('w-6 h-6 rounded-[4px] bg-studio-secondary/10')} />
+          <Plus className={cx('w-6 h-6 rounded-[4px] bg-studio-2/10')} />
         )}
       </div>
       {/**

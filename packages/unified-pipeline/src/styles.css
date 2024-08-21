@@ -5,8 +5,9 @@
 @tailwind utilities;
 
 :root {
-  --studio-primary: 29, 29, 32;
-  --studio-secondary: 147, 147, 159;
+  --studio-1: 29, 29, 32;
+  --studio-2: 147, 147, 159;
+  --studio-3: 226, 155, 54;
 }
 
 @layer utilities {
