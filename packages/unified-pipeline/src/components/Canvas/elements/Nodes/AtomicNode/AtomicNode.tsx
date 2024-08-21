@@ -96,7 +96,7 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
       ) : (
         <div
           className={cx(
-            'border p-px rounded-md bg-studio-1 border-[rgba(48,48,54,0.6)] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.3)]',
+            'border p-px rounded-md bg-studio-primary border-[rgba(48,48,54,0.6)] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.3)]',
             { 'gradient-border-gray': status === Status.DONE }
           )}>
           <div

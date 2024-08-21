@@ -5,7 +5,9 @@
 @tailwind utilities;
 
 :root {
-  --studio-1: rgba(29, 29, 32);
+  --studio-primary: rgba(29, 29, 32);
+  --studio-secondary: rgba(147, 147, 159);
+  --studio-secondary-10: rgba(147, 147, 159, 0.1);
 }
 
 @layer utilities {

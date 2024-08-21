@@ -225,13 +225,11 @@ export default function GroupNode(props: NodeProps<GroupNodeProps>) {
                   event.stopPropagation()
                   handleNodeExpandCollapse()
                 }}
-                className={'w-6 h-6 rounded-[4px] hover:cursor-pointer  bg-[rgba(147,147,159,0.1)]'}
+                className={'w-6 h-6 rounded-[4px] hover:cursor-pointer bg-studio-secondary/10'}
               />
               &nbsp;
               <span className="text-[rgba(174,174,183,1)] text-xs text-nowrap">{name}</span>
-              {memberNodeCount > 0 && (
-                <span className="text-xs text-[rgba(147,147,159,1)]">&nbsp;({memberNodeCount})</span>
-              )}
+              {memberNodeCount > 0 && <span className="text-xs text-studio-secondary">&nbsp;({memberNodeCount})</span>}
             </div>
           </div>
         </div>

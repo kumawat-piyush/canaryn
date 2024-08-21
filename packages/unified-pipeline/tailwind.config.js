@@ -10,7 +10,9 @@ module.exports = {
     extend: {
       colors: {
         studio: {
-          1: 'var(--studio-1)'
+          primary: 'var(--studio-primary)',
+          secondary: 'var(--studio-secondary)',
+          'secondary/10': 'var(--studio-secondary-10)'
         }
       }
     }
