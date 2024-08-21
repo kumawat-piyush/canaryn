@@ -4,7 +4,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './
 
 function Root({ children }: { children: React.ReactNode }) {
   return (
-    <div className="select-none grid grid-rows-[auto_1fr_auto] w-[220px] h-screen overflow-y-auto border-r text-sm text-grey-70 bg-secondary-background">
+    <div className="select-none grid grid-rows-[auto_1fr_auto] w-[220px] h-screen overflow-y-auto border-r text-sm text-grey-70 bg-primary-background">
       {children}
     </div>
   )
@@ -35,7 +35,7 @@ function AccordionGroup({ title, children }: { title: string; children: React.Re
       <Accordion type="single" collapsible defaultValue="item-1">
         <AccordionItem value="item-1" className="border-none">
           <AccordionTrigger className="group">
-            <p className="text-xs text-grey-40 font-normal group-hover:text-primary ease-in-out duration-150">
+            <p className="text-xs text-primary opacity-40 font-normal group-hover:text-primary ease-in-out duration-150">
               {title}
             </p>
           </AccordionTrigger>

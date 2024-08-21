@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// eslint-disable-next-line no-undef
 module.exports = {
   darkMode: ['class'],
   content: ['./src/**/*.{ts,tsx}'],
@@ -12,6 +13,9 @@ module.exports = {
       }
     },
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif']
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -20,6 +24,7 @@ module.exports = {
         foreground: 'hsl(var(--foreground))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
+          background: 'hsl(var(--primary-background))',
           foreground: 'hsl(var(--primary-foreground))'
         },
         secondary: {
@@ -100,5 +105,6 @@ module.exports = {
       }
     }
   },
+  // eslint-disable-next-line no-undef
   plugins: [require('tailwindcss-animate')]
 }
