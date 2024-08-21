@@ -11,7 +11,7 @@ const RootLayout: React.FC = () => {
   const primaryMenuItems = [
     {
       text: 'Repositories',
-      icon: <Icon name="archive" />,
+      icon: <Icon name="repositories" />,
       to: '/repos'
     },
     {

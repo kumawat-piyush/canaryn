@@ -103,6 +103,10 @@
     @apply border-border;
   }
 
+  html {
+    @apply antialiased;
+  }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -157,14 +161,14 @@
 
 /* Navbar utilities */
 .navbar-item svg {
-  @apply w-3.5 h-3.5 opacity-60 ease-in-out duration-150 truncate;
+  @apply w-3 h-3 text-tertiary-background opacity-70 ease-in-out duration-150 truncate;
 }
 .navbar-item.active svg,
 .navbar-item:hover svg {
-  @apply opacity-100 brightness-200 contrast-200;
+  @apply text-primary opacity-100 brightness-200 contrast-200 bg-gradient-radial from-primary/25 to-transparent;
 }
 .navbar-item p {
-  @apply font-normal opacity-60 ease-in-out duration-150 truncate;
+  @apply font-medium -tracking-[0.02em] text-tertiary-background ease-in-out duration-150 truncate;
 }
 .navbar-item.active p,
 .navbar-item:hover p {
