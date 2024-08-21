@@ -37,25 +37,6 @@ const RepoLayout: React.FC = () => {
           <></>
         </Topbar.Right>
       </Topbar.Root>
-      {/* <header style={{ background: '#222', padding: '20px' }}>
-        <div style={{ display: 'flex', gap: '10px' }}>
-          <NavLink to={`/repos/${repoId}`} style={({ isActive }) => ({ color: isActive ? 'green' : 'inherit' })} end>
-            Index
-          </NavLink>
-          <NavLink to="pipelines" style={({ isActive }) => ({ color: isActive ? 'green' : 'inherit' })}>
-            Pipelines
-          </NavLink>
-          <NavLink to="commits" style={({ isActive }) => ({ color: isActive ? 'green' : 'inherit' })}>
-            Commits
-          </NavLink>
-          <NavLink to="pull-requests" style={({ isActive }) => ({ color: isActive ? 'green' : 'inherit' })}>
-            Pull requests
-          </NavLink>
-          <NavLink to="branches" style={({ isActive }) => ({ color: isActive ? 'green' : 'inherit' })}>
-            Branches
-          </NavLink>
-        </div>
-      </header> */}
       <Tabs variant="navigation" defaultValue="index">
         <TabsList>
           <NavLink to={`/repos/${repoId}`}>

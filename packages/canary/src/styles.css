@@ -104,11 +104,11 @@
   }
 
   html {
-    @apply antialiased;
+    @apply antialiased text-base;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground text-sm font-normal;
   }
 }
 
@@ -161,11 +161,11 @@
 
 /* Navbar utilities */
 .navbar-item svg {
-  @apply w-3 h-3 text-tertiary-background opacity-70 ease-in-out duration-150 truncate;
+  @apply w-3 h-3 text-tertiary-background opacity-80 ease-in-out duration-150 truncate;
 }
 .navbar-item.active svg,
 .navbar-item:hover svg {
-  @apply text-primary opacity-100 brightness-200 contrast-200 bg-gradient-radial from-primary/25 to-transparent;
+  @apply text-primary opacity-100 brightness-200 contrast-200 bg-gradient-radial from-primary/15 to-transparent;
 }
 .navbar-item p {
   @apply font-medium -tracking-[0.02em] text-tertiary-background ease-in-out duration-150 truncate;

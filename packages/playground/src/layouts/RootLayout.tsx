@@ -91,7 +91,7 @@ const RootLayout: React.FC = () => {
           <Navbar.Header>
             <NavbarProjectChooser.Root
               name="Playground"
-              avatar={<Icon name="harness-logo" size={24} />}
+              avatar={<Icon name="harness" size={16} />}
               projects={sampleProjectList}
             />
           </Navbar.Header>
