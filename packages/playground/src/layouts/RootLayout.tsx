@@ -117,7 +117,7 @@ const RootLayout: React.FC = () => {
           </Navbar.Footer>
         </Navbar.Root>
       )}
-      <main style={{ flexGrow: 1, padding: '0px' }}>
+      <main className="min-h-screen flex-grow">
         <Outlet />
       </main>
     </div>
