@@ -76,21 +76,16 @@ module.exports = {
           DEFAULT: 'hsl(var(--ai))'
         },
         stage: {
-          DEFAULT: 'hsl(var(--grey-104))',
-          foreground: 'hsl(var(--grey-106))'
+          DEFAULT: 'hsl(var(--grey-50))'
         },
         user: {
-          DEFAULT: 'hsl(var(--grey-102))'
+          DEFAULT: 'hsl(var(--grey-40))'
         },
         git: {
-          DEFAULT: 'hsl(var(-grey-108))',
-          background: 'hsl(var(--grey-100))'
-        },
-        status: {
-          DEFAULT: 'hsl(var(--grey-105))'
+          DEFAULT: 'hsl(var(-grey-90))'
         },
         log: {
-          DEFAULT: 'hsl(var(--grey-101))'
+          DEFAULT: 'hsl(var(--grey-30))'
         }
       },
       borderRadius: {

@@ -85,7 +85,7 @@ export const StageExecution: React.FC<StageExecutionProps> = ({ stage }): React.
           <Layout.Horizontal gap="space-x-1" className="flex items-center">
             <Text className="text-stage text-sm">{stage.group}</Text>
             <NavArrowRight />
-            <Text className="text-stage-foreground text-sm">{stage.name}</Text>
+            <Text className="text-ring text-sm">{stage.name}</Text>
           </Layout.Horizontal>
         ) : (
           <Text>{stage.name}</Text>

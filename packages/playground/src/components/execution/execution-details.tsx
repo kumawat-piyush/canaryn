@@ -37,14 +37,14 @@ export const ExecutionDetails: React.FC<ExecutionProps> = (): React.ReactElement
         <div className="flex flex-col gap-2 my-5">
           <Text className="text-white text-base">{execution.message}</Text>
           <div className="flex gap-2 items-center">
-            <Badge variant="secondary" className="bg-git-background flex gap-1">
+            <Badge variant="secondary" className="bg-primary-foreground flex gap-1">
               <Layout.Horizontal gap="space-x-1" className="flex items-center">
                 <GitCommit />
                 <Text className="text-sm text-git">{execution.source}</Text>
               </Layout.Horizontal>
             </Badge>
             <span>to</span>
-            <Badge variant="secondary" className="flex gap-1 bg-git-background">
+            <Badge variant="secondary" className="flex gap-1 bg-primary-foreground">
               <Layout.Horizontal gap="space-x-1" className="flex items-center">
                 <GitBranch />
                 <Text className="text-sm text-git">{execution.target}</Text>
@@ -54,7 +54,7 @@ export const ExecutionDetails: React.FC<ExecutionProps> = (): React.ReactElement
         </div>
         <Layout.Horizontal>
           <Layout.Vertical gap="space-y-1">
-            <Text className="text-sm text-status">Status</Text>
+            <Text className="text-sm text-muted-foreground">Status</Text>
             <ExecutionStatus.Badge
               status={execution.status as ExecutionState}
               minimal
@@ -62,7 +62,7 @@ export const ExecutionDetails: React.FC<ExecutionProps> = (): React.ReactElement
             />
           </Layout.Vertical>
           <Layout.Vertical gap="space-y-1">
-            <Text className="text-sm text-status">Created</Text>
+            <Text className="text-sm text-muted-foreground">Created</Text>
             <span className="text-white">{moment(execution.created).fromNow()}</span>
           </Layout.Vertical>
         </Layout.Horizontal>
