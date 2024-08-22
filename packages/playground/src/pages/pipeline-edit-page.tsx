@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { stringify } from 'yaml'
 import cx from 'classnames'
 import { noop } from 'lodash-es'
@@ -19,7 +19,7 @@ import {
 import { type InlineAction } from '@harnessio/yaml-editor'
 import { ArrowLeft, Box, Search, Xmark } from '@harnessio/icons-noir'
 import { YamlEditor, MonacoGlobals } from '@harnessio/yaml-editor'
-import { PipelineStudio, getNodesFromPipelineYaml } from '@harnessio/unified-pipeline'
+import { Node, PipelineStudio, getNodesFromPipelineYaml } from '@harnessio/unified-pipeline'
 import { ILanguageFeaturesService } from 'monaco-editor/esm/vs/editor/common/services/languageFeatures.js'
 import { OutlineModel } from 'monaco-editor/esm/vs/editor/contrib/documentSymbols/browser/outlineModel.js'
 import { StandaloneServices } from 'monaco-editor/esm/vs/editor/standalone/browser/standaloneServices.js'
@@ -49,7 +49,14 @@ MonacoGlobals.set({
 })
 
 function GraphView() {
-  const nodes = useMemo(() => getNodesFromPipelineYaml(pipeline as unknown as string), [])
+  const [nodes, setNodes] = useState<Node[]>(getNodesFromPipelineYaml(pipeline))
+
+  useEffect(() => {
+    return () => {
+      setNodes([])
+    }
+  }, [])
+
   return <PipelineStudio nodes={nodes} onAddNode={noop} onDeleteNode={noop} onSelectNode={noop} />
 }
 
@@ -227,8 +234,12 @@ const StepPalettePanel = (): JSX.Element => {
 
 export default function PipelineEditPage() {
   const [view, setView] = useState<'visual' | 'yaml'>('visual')
-  const [panelOpen, setPanelOpen] = useState(true)
+  const [panelOpen, setPanelOpen] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState<'palette' | 'stepform'>()
+
+  useEffect(() => {
+    setPanelOpen(view === 'yaml')
+  }, [view])
 
   const main = useMemo(() => {
     return (
