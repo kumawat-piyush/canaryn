@@ -35,26 +35,26 @@ export const ExecutionDetails: React.FC<ExecutionProps> = (): React.ReactElement
           authorEmail={execution.author_email || ''}
         />
         <div className="flex flex-col gap-2 my-5">
-          <span className="text-white">{execution.message}</span>
+          <Text className="text-white text-base">{execution.message}</Text>
           <div className="flex gap-2 items-center">
-            <Badge variant="secondary" className="flex gap-1">
+            <Badge variant="secondary" className="bg-git-background flex gap-1">
               <Layout.Horizontal gap="space-x-1" className="flex items-center">
                 <GitCommit />
-                <span>{execution.source}</span>
+                <Text className="text-sm text-git">{execution.source}</Text>
               </Layout.Horizontal>
             </Badge>
             <span>to</span>
-            <Badge variant="secondary" className="flex gap-1">
+            <Badge variant="secondary" className="flex gap-1 bg-git-background">
               <Layout.Horizontal gap="space-x-1" className="flex items-center">
                 <GitBranch />
-                <span>{execution.target}</span>
+                <Text className="text-sm text-git">{execution.target}</Text>
               </Layout.Horizontal>
             </Badge>
           </div>
         </div>
         <Layout.Horizontal>
           <Layout.Vertical gap="space-y-1">
-            <span>Status</span>
+            <Text className="text-sm text-status">Status</Text>
             <ExecutionStatus.Badge
               status={execution.status as ExecutionState}
               minimal
@@ -62,7 +62,7 @@ export const ExecutionDetails: React.FC<ExecutionProps> = (): React.ReactElement
             />
           </Layout.Vertical>
           <Layout.Vertical gap="space-y-1">
-            <span>Created</span>
+            <Text className="text-sm text-status">Created</Text>
             <span className="text-white">{moment(execution.created).fromNow()}</span>
           </Layout.Vertical>
         </Layout.Horizontal>

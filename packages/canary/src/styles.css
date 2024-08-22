@@ -27,8 +27,12 @@
   --grey-90: 210 6% 90%;
   --grey-94: 210 6% 94%;
   --grey-98: 210 6% 98%;
-  --grey-100: 240 6% 50%;
-  --grey-110: 240 6% 80%;
+  --grey-100: 240, 6%, 10%;
+  --grey-102: 240, 6%, 40%;
+  --grey-104: 240 6% 50%;
+  --grey-105: 240, 6%, 60%;
+  --grey-106: 240 6% 80%;
+  --grey-108: 240, 6%, 90%;
   --white: 0 0% 100%;
 
   /* PP Figma secondary colors */
@@ -99,8 +103,12 @@
     --error: var(--red);
     --warning: var(--orange);
     --ai: var(--purple);
-    --stage: var(--grey-100);
-    --stage-foreground: var(--grey-110);
+    --stage: var(--grey-104);
+    --stage-foreground: var(--grey-106);
+    --user: var(--grey-102);
+    --git: var(-grey-108);
+    --git-background: var(--grey-100);
+    --status: var(--grey-105);
   }
 }
 

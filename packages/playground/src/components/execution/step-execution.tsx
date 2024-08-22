@@ -48,7 +48,7 @@ export const StepExecution: React.FC<StageExecutionProps> = ({ step, stepIndex }
   return (
     <Layout.Vertical>
       <Layout.Horizontal className="flex justify-between items-center">
-        <Text>{step.name}</Text>
+        <Text className="text-lg">{step.name}</Text>
         <ExecutionStatus.Badge status={step.status} duration={getDuration(step.started, step.stopped)} />
       </Layout.Horizontal>
       <Tabs defaultValue={StepExecutionTab.LOG} className="w-full h-full mt-2">

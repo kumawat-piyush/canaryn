@@ -31,7 +31,7 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
   disableDown
 }) => {
   return (
-    <Layout.Horizontal gap="space-x-2" className="h-fit mt-12">
+    <Layout.Horizontal gap="space-x-2" className="h-fit mt-12 pt-0.5">
       <Button
         asChild
         onClick={onClickUp}
