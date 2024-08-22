@@ -30,6 +30,7 @@ export const data = {
       repo_id: 1,
       number: 1,
       name: 'DAST',
+      group: 'Deploy to Prod',
       status: ExecutionState.RUNNING,
       error: 'Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?',
       exit_code: 255,
@@ -42,7 +43,7 @@ export const data = {
         {
           number: 1,
           name: 'Fortify',
-          status: ExecutionState.FAILURE,
+          status: ExecutionState.RUNNING,
           exit_code: 0,
           started: 1722296944000,
           stopped: 1722296949000,
