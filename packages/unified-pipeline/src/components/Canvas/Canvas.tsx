@@ -154,7 +154,6 @@ const CanvasInternal = (props: CanvasProps) => {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         proOptions={{ hideAttribution: true }}
-        minZoom={1}
         /* https://github.com/xyflow/xyflow/discussions/2827 */
         nodeOrigin={[0.5, 0.5]}>
         <Controls>
