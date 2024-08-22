@@ -90,6 +90,9 @@ const mockRepos = [
   }
 ]
 
+const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
+const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
+
 function RepoListPage() {
   return (
     // TODO: get layout componentized, this wrapper div is just for quick presentation!
@@ -103,14 +106,8 @@ function RepoListPage() {
           <SearchBox.Root placeholder="Search" />
         </ListActions.Left>
         <ListActions.Right>
-          <ListActions.Dropdown
-            title="Filter"
-            items={[{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]}
-          />
-          <ListActions.Dropdown
-            title="Sort"
-            items={[{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]}
-          />
+          <ListActions.Dropdown title="Filter" items={filterOptions} />
+          <ListActions.Dropdown title="Sort" items={sortOptions} />
           <Button variant="default">Create repository</Button>
         </ListActions.Right>
       </ListActions.Root>
