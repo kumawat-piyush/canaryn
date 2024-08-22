@@ -88,6 +88,9 @@ module.exports = {
         },
         status: {
           DEFAULT: 'hsl(var(--grey-105))'
+        },
+        log: {
+          DEFAULT: 'hsl(var(--grey-101))'
         }
       },
       borderRadius: {
