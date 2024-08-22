@@ -275,7 +275,7 @@ export default function PipelineEditPage() {
   )
 
   return (
-    <div style={{ height: '650px' }}>
+    <div className="h-[calc(100vh-160px)]">
       <Container.Root wFull={true} hFull={true}>
         <Container.Main>
           <div>

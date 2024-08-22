@@ -7,7 +7,7 @@ const PipelineLayout: React.FC = () => {
   const { pipelineId } = useParams<{ pipelineId: string }>()
 
   return (
-    <div>
+    <div className="h-[calc(100vh-100px)]">
       <div style={{ display: 'flex', gap: '10px' }}>
         <NavLink
           to={`/repos/${repoId}/pipelines/${pipelineId}`}
