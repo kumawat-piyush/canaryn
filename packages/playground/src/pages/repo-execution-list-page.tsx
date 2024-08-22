@@ -10,9 +10,11 @@ import {
   PaginationPrevious,
   PaginationLink,
   PaginationEllipsis,
-  PaginationNext
+  PaginationNext,
+  Button
 } from '@harnessio/canary'
 import ExecutionList from '../components/execution-list'
+import { Link } from 'react-router-dom'
 
 const mockExecutions = [
   {
@@ -100,6 +102,9 @@ function RepoExecutionListPage() {
           <ListActions.Dropdown title="Filter" items={filterOptions} />
           <ListActions.Dropdown title="Sort" items={sortOptions} />
           <ListActions.Dropdown title="View" items={viewOptions} />
+          <Button variant="default" asChild>
+            <Link to="edit">Edit Pipeline</Link>
+          </Button>
         </ListActions.Right>
       </ListActions.Root>
       <Spacer size={5} />
