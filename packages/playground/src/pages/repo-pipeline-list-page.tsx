@@ -107,7 +107,7 @@ function RepoPipelineListPage() {
           <ListActions.Dropdown title="Filter" items={filterOptions} />
           <ListActions.Dropdown title="Sort" items={sortOptions} />
           <ListActions.Dropdown title="View" items={viewOptions} />
-          <Button variant="default">Create pipeline</Button>
+          <Button variant="default">Create Pipeline</Button>
         </ListActions.Right>
       </ListActions.Root>
       <Spacer size={5} />
