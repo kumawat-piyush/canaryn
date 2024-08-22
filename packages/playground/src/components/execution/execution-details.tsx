@@ -11,6 +11,7 @@ import { ExecutionStatus } from './execution-status'
 import { getDuration } from '../../utils/TimeUtils'
 import { ExecutionState } from './types'
 import { ContactCard } from '../contact-card'
+import { ScrollArea } from '@harnessio/canary'
 
 interface ExecutionProps {
   pipelineId: unknown
@@ -24,10 +25,10 @@ export const ExecutionDetails: React.FC<ExecutionProps> = (): React.ReactElement
   return (
     <Layout.Horizontal>
       {/* Hardcoded height added temporarily */}
-      <div className="w-2/3 h-[calc(100vh-16rem)] overflow-y-scroll">
+      <div className="w-2/3">
         <StageExecution stage={stages[0]} />
       </div>
-      <div className="w-1/3 h-[calc(100vh-16rem)] overflow-y-scroll pt-4">
+      <ScrollArea className="w-1/3 h-[calc(100vh-16rem)] pt-4">
         <ContactCard
           imgSrc="https://github.com/shadcn.png"
           authorName={execution.author_name || ''}
@@ -67,7 +68,7 @@ export const ExecutionDetails: React.FC<ExecutionProps> = (): React.ReactElement
         </Layout.Horizontal>
         <Separator className="my-4" />
         <ExecutionTree defaultSelectedId="2" elements={elements} onSelectNode={() => {}} />
-      </div>
+      </ScrollArea>
     </Layout.Horizontal>
   )
 }
