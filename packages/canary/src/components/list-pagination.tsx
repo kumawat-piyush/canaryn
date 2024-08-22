@@ -1,7 +1,7 @@
 import React from 'react'
 
-function Root() {
-  return <p>List Pagination</p>
+function Root({ children }: { children: React.ReactNode }) {
+  return children
 }
 
 export { Root }

@@ -16,10 +16,7 @@ function Root({ placeholder, width = 'fixed' }: SearchBoxProps) {
         size={12}
         className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-tertiary-background"
       />
-      <Input
-        placeholder={placeholder}
-        className="pl-7" // Adds padding to the left to accommodate the icon
-      />
+      <Input placeholder={placeholder} className="pl-7" />
     </div>
   )
 }
