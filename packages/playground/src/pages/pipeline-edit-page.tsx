@@ -275,7 +275,7 @@ export default function PipelineEditPage() {
   )
 
   return (
-    <div className="h-[calc(100vh-160px)]">
+    <div className="h-[calc(100vh-144px)]">
       <Container.Root wFull={true} hFull={true}>
         <Container.Main>
           <div>
