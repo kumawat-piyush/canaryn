@@ -8,7 +8,7 @@ const PipelineLayout: React.FC = () => {
 
   return (
     <div className="h-[calc(100vh-100px)]">
-      <div className="flex p-2 gap-2.5 h-[44px] items-center">
+      <div className="flex p-3 px-8 gap-5">
         <NavLink
           to={`/repos/${repoId}/pipelines/${pipelineId}`}
           style={({ isActive }) => ({ color: isActive ? 'green' : 'inherit' })}
