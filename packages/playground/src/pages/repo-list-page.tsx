@@ -1,5 +1,6 @@
 import React from 'react'
 import RepoList from '../components/repo-list'
+import { Text, Spacer, ListActions, ListPagination, Button, SearchBox } from '@harnessio/canary'
 
 const mockRepos = [
   {
@@ -58,7 +59,35 @@ const mockRepos = [
 ]
 
 function RepoListPage() {
-  return <RepoList pageTitle={'Repositories'} repos={mockRepos} />
+  return (
+    // TODO: get layout componentized, this wrapper div is just for quick presentation!
+    <div className="px-16 py-16 max-w-[1200px] min-w-[770px] mx-auto">
+      <Text size={5} weight={'medium'}>
+        Repositories
+      </Text>
+      <Spacer size={6} />
+      <ListActions.Root>
+        <ListActions.Left>
+          <SearchBox.Root placeholder="Search" />
+        </ListActions.Left>
+        <ListActions.Right>
+          <ListActions.Dropdown
+            title="Filter"
+            items={[{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]}
+          />
+          <ListActions.Dropdown
+            title="Sort"
+            items={[{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]}
+          />
+          <Button variant="default">Create repository</Button>
+        </ListActions.Right>
+      </ListActions.Root>
+      <Spacer size={5} />
+      <RepoList repos={mockRepos} />
+      <Spacer size={5} />
+      <ListPagination.Root></ListPagination.Root>
+    </div>
+  )
 }
 
 export default RepoListPage

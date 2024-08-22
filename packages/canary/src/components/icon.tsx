@@ -13,6 +13,7 @@ import Secrets from '../icons/secrets-icon.svg'
 import Connectors from '../icons/connectors-icon.svg'
 import Star from '../icons/star-icon.svg'
 import Pull from '../icons/pull-icon.svg'
+import Search from '../icons/search.svg'
 // import Fork from '../icons/fork.svg'
 
 const IconNameMap = {
@@ -29,7 +30,8 @@ const IconNameMap = {
   secrets: Secrets,
   connectors: Connectors,
   star: Star,
-  pull: Pull
+  pull: Pull,
+  search: Search
   // fork: Fork
 } satisfies Record<string, React.FunctionComponent<React.SVGProps<SVGSVGElement>>>
 
