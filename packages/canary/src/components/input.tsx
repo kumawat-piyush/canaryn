@@ -43,7 +43,7 @@ const ExtendedInput = React.forwardRef<HTMLInputElement, ExtendedInputProps>(
             {left}
           </div>
         )}
-        <BaseInput className={cn(className)} type={type} {...props} ref={ref} />
+        <BaseInput className={className} type={type} {...props} ref={ref} isExtended={true} />
         {right && (
           <div
             className={cn(
@@ -64,7 +64,7 @@ interface InputProps extends Omit<BaseInputProps, 'isExtended'>, ExtendedInputPr
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(({ left, right, ...props }, ref) => {
   if (left || right) {
-    return <ExtendedInput left={left} right={right} {...props} ref={ref} isExtended={true} />
+    return <ExtendedInput left={left} right={right} {...props} ref={ref} />
   }
   return <BaseInput {...props} ref={ref} />
 })
