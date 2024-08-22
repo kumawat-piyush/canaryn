@@ -32,24 +32,32 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
 }) => {
   return (
     <Layout.Horizontal gap="space-x-2" className="h-fit mt-12">
-      <Button asChild onClick={onClickUp} disabled={stepIndex === 0} variant="outline">
-        <div
-          className={cx(
-            'w-4 h-4 p-1 rounded-sm bg-secondary',
-            { ['cursor-pointer']: !disableUp },
-            { ['cursor-not-allowed']: disableUp }
-          )}>
+      <Button
+        asChild
+        onClick={onClickUp}
+        disabled={stepIndex === 0}
+        variant="ghost"
+        className={cx(
+          'w-4 h-4 p-2 rounded-sm bg-secondary',
+          { ['cursor-pointer']: !disableUp },
+          { ['cursor-not-allowed']: disableUp }
+        )}>
+        <div>
           <NavArrowUp color="white" />
         </div>
       </Button>
 
-      <Button asChild onClick={onClickDown} disabled={stepIndex === 0} variant="outline">
-        <div
-          className={cx(
-            'w-4 h-4 p-1 rounded-sm bg-secondary',
-            { ['cursor-pointer']: !disableDown },
-            { ['cursor-not-allowed']: disableDown }
-          )}>
+      <Button
+        asChild
+        onClick={onClickDown}
+        disabled={stepIndex === 0}
+        variant="ghost"
+        className={cx(
+          'w-4 h-4 p-2 rounded-sm bg-secondary',
+          { ['cursor-pointer']: !disableDown },
+          { ['cursor-not-allowed']: disableDown }
+        )}>
+        <div>
           <NavArrowDown color="white" />
         </div>
       </Button>
