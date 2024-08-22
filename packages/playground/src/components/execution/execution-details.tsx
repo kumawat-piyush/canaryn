@@ -24,10 +24,10 @@ export const ExecutionDetails: React.FC<ExecutionProps> = (): React.ReactElement
   return (
     <Layout.Horizontal>
       {/* Hardcoded height added temporarily */}
-      <div className="h-[calc(100vh-16rem)] overflow-y-scroll">
+      <div className="w-2/3 h-[calc(100vh-16rem)] overflow-y-scroll">
         <StageExecution stage={stages[0]} />
       </div>
-      <div className="w-[450px] h-[calc(100vh-16rem)] overflow-y-scroll p-4">
+      <div className="w-1/3 h-[calc(100vh-16rem)] overflow-y-scroll pt-4">
         <ContactCard
           imgSrc="https://github.com/shadcn.png"
           authorName={execution.author_name || ''}

@@ -74,6 +74,10 @@ module.exports = {
         },
         ai: {
           DEFAULT: 'hsl(var(--ai))'
+        },
+        stage: {
+          DEFAULT: 'hsl(var(--grey-100))',
+          foreground: 'hsl(var(--grey-110))'
         }
       },
       borderRadius: {
