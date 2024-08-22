@@ -27,6 +27,7 @@ import PullRequestChecksPage from './pages/pull-request-checks-page'
 import PipelineEdit from './pages/pipeline-edit-page'
 import PullRequestCommitsPage from './pages/pull-request-commits-page'
 import RepoPipelineListPage from './pages/repo-pipeline-list-page'
+import RepoExecutionListPage from './pages/repo-execution-list-page'
 
 const router = createBrowserRouter([
   {
@@ -70,7 +71,7 @@ const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <ExecutionListPage />
+                element: <RepoExecutionListPage />
               },
               {
                 path: 'edit',
@@ -78,7 +79,7 @@ const router = createBrowserRouter([
               },
               {
                 path: 'executions',
-                element: <ExecutionListPage />
+                element: <RepoExecutionListPage />
               },
               {
                 path: 'executions/:executionId',
@@ -141,7 +142,7 @@ const router = createBrowserRouter([
             children: [
               {
                 path: 'executions',
-                element: <ExecutionListPage />,
+                element: <RepoExecutionListPage />,
                 children: [
                   {
                     path: ':executionId',
@@ -152,6 +153,11 @@ const router = createBrowserRouter([
             ]
           }
         ]
+      },
+      // EXECUTIONS (OUTSIDE REPOS)
+      {
+        path: 'executions',
+        element: <ExecutionListPage />
       }
     ]
   }

@@ -1,5 +1,6 @@
 import { Icon, StackedList } from '@harnessio/canary'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 interface Pipeline {
   id: string
@@ -48,14 +49,16 @@ export default function PipelineList({ ...props }: PageProps) {
       {pipelines && pipelines.length > 0 && (
         <StackedList.Root>
           {pipelines.map((pipeline, pipeline_idx) => (
-            <StackedList.Item key={pipeline.name} isLast={pipelines.length - 1 === pipeline_idx}>
-              <StackedList.Field
-                title={<Title success={pipeline.success} title={pipeline.name} />}
-                description={
-                  <Description sha={pipeline.sha} description={pipeline.description} version={pipeline.version} />
-                }
-              />
-              <StackedList.Field title={pipeline.timestamp} right label secondary />
+            <StackedList.Item key={pipeline.name} isLast={pipelines.length - 1 === pipeline_idx} asChild>
+              <Link to={`${pipeline.id}`}>
+                <StackedList.Field
+                  title={<Title success={pipeline.success} title={pipeline.name} />}
+                  description={
+                    <Description sha={pipeline.sha} description={pipeline.description} version={pipeline.version} />
+                  }
+                />
+                <StackedList.Field title={pipeline.timestamp} right label secondary />
+              </Link>
             </StackedList.Item>
           ))}
         </StackedList.Root>

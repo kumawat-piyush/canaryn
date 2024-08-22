@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  Text,
   Spacer,
   ListActions,
   ListPagination,
@@ -89,14 +88,10 @@ const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' },
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
 const viewOptions = [{ name: 'View option 1' }, { name: 'View option 2' }]
 
-function ExecutionListPage() {
+function RepoExecutionListPage() {
   return (
     // TODO: get layout componentized, this wrapper div is just for quick presentation!
-    <div className="px-16 py-16 max-w-[1200px] min-w-[770px] mx-auto">
-      <Text size={5} weight={'medium'}>
-        Executions
-      </Text>
-      <Spacer size={6} />
+    <div className="px-6 pb-16 max-w-[1200px] min-w-[770px] mx-auto">
       <ListActions.Root>
         <ListActions.Left>
           <SearchBox.Root placeholder="Search" />
@@ -152,4 +147,4 @@ function ExecutionListPage() {
   )
 }
 
-export default ExecutionListPage
+export default RepoExecutionListPage

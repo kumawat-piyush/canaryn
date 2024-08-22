@@ -13,7 +13,7 @@ const PipelineLayout: React.FC = () => {
           to={`/repos/${repoId}/pipelines/${pipelineId}`}
           style={({ isActive }) => ({ color: isActive ? 'green' : 'inherit' })}
           end>
-          Index
+          Executions
         </NavLink>
         <NavLink to={`edit`} style={({ isActive }) => ({ color: isActive ? 'green' : 'inherit' })}>
           Edit
