@@ -6,6 +6,7 @@ import RootLayout from './layouts/RootLayout'
 import RepoLayout from './layouts/RepoLayout'
 import PipelineLayout from './layouts/PipelineLayout'
 import PullRequestLayout from './layouts/PullRequestLayout'
+import ErrorPage from './pages/error-page'
 import HomePage from './pages/home-page'
 import RepoListPage from './pages/repo-list-page'
 import RepoDetailsPage from './pages/repo-details-page'
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     children: [
       // LANDING, SIGN UP & SIGN IN
       {
