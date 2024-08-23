@@ -5,7 +5,7 @@ import { MergeCheckStatus, PullRequestState, TypesPullReq, TypeCheckData } from 
 import { NavArrowUp, NavArrowDown, WarningTriangleSolid, CheckCircleSolid, Clock } from '@harnessio/icons-noir'
 import { mockChangesData } from './mocks/mockChangesData'
 import { mockChecksSucceededInfo, mockChecksFailedInfo } from './mocks/mockCheckInfo'
-import { mockCommentResolvedInfo } from './mocks/mockCommentInfo'
+import { mockCommentResolvedInfo, mockCommentUnresolvedInfo } from './mocks/mockCommentInfo'
 
 import PullRequestCheckSection from './sections/pull-request-check-section'
 import PullRequestCommentSection from './sections/pull-request-comment-section'
@@ -32,7 +32,7 @@ const PullRequestPanel = ({ pullReqMetadata, PRStateLoading, checks }: PullReque
   const checkData = checks || []
   const changesData = mockChangesData
   const checksInfo = !ruleViolation ? mockChecksSucceededInfo : mockChecksFailedInfo
-  const commentsInfo = !ruleViolation && mockCommentResolvedInfo
+  const commentsInfo = ruleViolation ? mockCommentResolvedInfo : mockCommentUnresolvedInfo
 
   return (
     <div className="border mt-1 border-border rounded-md">
