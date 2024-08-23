@@ -1,12 +1,14 @@
+import { cn } from '@/lib/utils'
 import React, { useEffect, useRef } from 'react'
 
 interface SpotlightsProps {
   children: React.ReactNode
   highlightTop?: string
   highlightBottom?: string
+  className?: string
 }
 
-function Root({ children, highlightTop = '#4786B8', highlightBottom = '#AD79D2' }: SpotlightsProps) {
+function Root({ children, highlightTop = '#4786B8', highlightBottom = '#AD79D2', className }: SpotlightsProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -75,7 +77,7 @@ function Root({ children, highlightTop = '#4786B8', highlightBottom = '#AD79D2' 
   }, [])
 
   return (
-    <div className="w-full h-full relative overflow-hidden flex place-content-center items-center">
+    <div className={cn('w-full h-full relative overflow-hidden flex place-content-center items-center', className)}>
       <canvas ref={canvasRef} width="100%" height="100%" className="absolute inset-0 h-full w-full contrast-110" />
       <div className="absolute z-10 inset-0 w-full h-full bg-black opacity-50" />
       {children}
@@ -83,8 +85,13 @@ function Root({ children, highlightTop = '#4786B8', highlightBottom = '#AD79D2' 
   )
 }
 
-function Content({ children }: { children: React.ReactNode }) {
-  return <div className="flex flex-col z-10 max-w-96 p-8">{children}</div>
+interface ContentProps {
+  children: React.ReactNode
+  className?: string
+}
+
+function Content({ children, className }: ContentProps) {
+  return <div className={cn('flex flex-col justify-center z-10 max-w-96 p-8', className)}>{children}</div>
 }
 
 export { Root, Content }
