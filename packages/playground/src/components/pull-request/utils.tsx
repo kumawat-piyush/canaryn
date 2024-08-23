@@ -53,7 +53,12 @@ export function useDateFilters() {
     []
   )
 }
-
+// The timeDistance function calculates the time difference between two dates (in milliseconds)
+//  and returns it in a human-readable format. It can return the difference in days, hours, minutes, and seconds, depending on the onlyHighestDenomination flag.
+// ex) const date1 = new Date('2023-10-01T00:00:00').getTime();
+// const date2 = new Date('2023-10-02T01:30:45').getTime();
+// console.log(timeDistance(date1, date2));
+// Output: "1d 1h 30m 45s"
 export const timeDistance = (date1 = 0, date2 = 0, onlyHighestDenomination = false) => {
   let distance = Math.abs(date1 - date2)
 
