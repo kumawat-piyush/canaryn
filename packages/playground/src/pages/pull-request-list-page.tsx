@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom'
 import PaddingListLayout from '../layouts/PaddingListLayout'
 import PullRequestList from '../components/pull-request/pull-request-list'
 
+// This data is temporary, since Calvin already built a more comprehensive set of mock data. Using this for speed to require less refactoring of the typical stacked list component, however we should get thge original data back in
 const mockPullRequests = [
   {
     id: '1',
