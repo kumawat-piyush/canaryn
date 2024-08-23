@@ -7,10 +7,10 @@ interface PullRequestMergeSectionProps {
 }
 const PullRequestCommentSection = ({ commentsInfo }: PullRequestMergeSectionProps) => {
   return (
-    <div className="py-4  border-b">
+    <div className="py-4 border-b">
       <div className="flex justify-between">
-        <div className="flex ">
-          <CheckCircleSolid className="text-success mt-1 " />
+        <div className="flex">
+          <CheckCircleSolid className="text-success mt-1" />
           <div className="pl-4 flex flex-col">
             <Text size={2}>{commentsInfo.header}</Text>
             {commentsInfo?.content && (

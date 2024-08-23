@@ -11,30 +11,36 @@ import {
   Clock,
   ChatBubble
 } from '@harnessio/icons-noir'
-import { CheckStatus, TypeCheckData } from '../interfaces'
+import { CheckStatus, EnumCheckStatus, TypeCheckData } from '../interfaces'
 import { timeDistance } from '../utils'
 
 interface PullRequestMergeSectionProps {
   checkData: TypeCheckData[]
-  checksInfo: { header: string; content: string; status: CheckStatus }
+  checksInfo: { header: string; content: string; status: EnumCheckStatus }
 }
 const PullRequestCheckSection = ({ checkData, checksInfo }: PullRequestMergeSectionProps) => {
   const [isExpanded, setExpanded] = useState(false)
 
+  const getStatusIcon = (status: EnumCheckStatus) => {
+    switch (status) {
+      case CheckStatus.PENDING:
+        return <Clock className="mt-1" />
+      case CheckStatus.RUNNING:
+        return <ChatBubble className="text-warning mt-1" />
+      case CheckStatus.FAILURE:
+      case CheckStatus.ERROR:
+        return <WarningTriangleSolid className="text-destructive mt-1" />
+      default:
+        return <CheckCircleSolid className="text-success mt-1" />
+    }
+  }
+
   return (
     !isEmpty(checkData) && (
-      <div className={cx(' pt-4  border-b', { 'pb-4': !isExpanded, '!pb-1': isExpanded })}>
+      <div className={cx('pt-4 border-b', { 'pb-4': !isExpanded, '!pb-1': isExpanded })}>
         <div className="flex justify-between">
-          <div className="flex ">
-            {checksInfo.status === CheckStatus.PENDING ? (
-              <Clock className=" mt-1 " />
-            ) : checksInfo.status === CheckStatus.FAILURE || checksInfo.status === CheckStatus.ERROR ? (
-              <WarningTriangleSolid className="text-destructive mt-1 " />
-            ) : checksInfo.status === CheckStatus.RUNNING ? (
-              <ChatBubble className="text-warning mt-1 " />
-            ) : (
-              <CheckCircleSolid className="text-success mt-1 " />
-            )}{' '}
+          <div className="flex">
+            {getStatusIcon(checksInfo.status)}
             <div className="pl-4 flex flex-col">
               <Text size={2}>{checksInfo.header}</Text>
               <Text className="text-tertiary-background" size={1}>
@@ -57,21 +63,12 @@ const PullRequestCheckSection = ({ checkData, checksInfo }: PullRequestMergeSect
             {checkData.map(check => {
               const time = timeDistance(check.check.created, check.check.updated)
               return (
-                <div className="flex  justify-between py-2 border-t ">
+                <div className="flex justify-between py-2 border-t">
                   <div className="flex">
-                    {check.check.status === CheckStatus.PENDING ? (
-                      <Clock className=" mt-1 " />
-                    ) : check.check.status === CheckStatus.FAILURE || check.check.status === CheckStatus.ERROR ? (
-                      <WarningTriangleSolid className="text-destructive mt-1 " />
-                    ) : check.check.status === CheckStatus.RUNNING ? (
-                      <ChatBubble className="text-warning mt-1 " />
-                    ) : (
-                      <CheckCircleSolid className="text-success mt-1 " />
-                    )}
+                    {getStatusIcon(check.check.status as EnumCheckStatus)}
 
-                    <div className="truncate min-w-[200px] max-w-[200px] pl-3 pt-0.5 "> {check.check.identifier}</div>
-                    <div className="truncate  max-w-[200px] pl-3 pt-0.5 ">
-                      {' '}
+                    <div className="truncate min-w-[200px] max-w-[200px] pl-3 pt-0.5"> {check.check.identifier}</div>
+                    <div className="truncate max-w-[200px] pl-3 pt-0.5">
                       {check.check.status === CheckStatus.SUCCESS
                         ? `Succeeded in ${time}`
                         : check.check.status === CheckStatus.FAILURE
@@ -83,7 +80,7 @@ const PullRequestCheckSection = ({ checkData, checksInfo }: PullRequestMergeSect
                               : `Errored in ${time}`}
                     </div>
                   </div>
-                  <div className="grid grid-cols-[84px_auto]  items-center">
+                  <div className="grid grid-cols-[84px_auto] items-center">
                     <div className="col-span-1">
                       {/* TODO: figure out how to do link in this? */}
                       {/* <Link

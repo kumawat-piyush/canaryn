@@ -35,10 +35,10 @@ const PullRequestPanel = ({ pullReqMetadata, PRStateLoading, checks }: PullReque
   const commentsInfo = !ruleViolation && mockCommentResolvedInfo
 
   return (
-    <div className=" border mt-1 border-border rounded-md">
+    <div className="border mt-1 border-border rounded-md">
       <div className="flex flex-col">
         <div
-          className={cx('py-2 px-5 border-b w-full flex items-center justify-between  rounded-tl-md rounded-tr-md ', {
+          className={cx('py-2 px-5 border-b w-full flex items-center justify-between rounded-tl-md rounded-tr-md', {
             'bg-gradient-to-r from-[#182c23] to-grey-12 bg-opacity-45': !PRStateLoading,
             '!bg-gradient-to-r !from-[#2a1717] !to-grey-12 !bg-opacity-45':
               ruleViolation || (mergeable === false && !unchecked && !isClosed && !isDraft)
@@ -64,10 +64,10 @@ const PullRequestPanel = ({ pullReqMetadata, PRStateLoading, checks }: PullReque
         <div className="px-5">
           {/* TODO: create new components for each new section  */}
           {!pullReqMetadata.merged && (
-            <div className="py-4  border-b">
+            <div className="py-4 border-b">
               <div className="flex justify-between">
-                <div className="flex ">
-                  <CheckCircleSolid className="text-success mt-1 " />
+                <div className="flex">
+                  <CheckCircleSolid className="text-success mt-1" />
                   <div className="pl-4 flex flex-col">
                     <Text size={2}>{changesData.header}</Text>
                     <Text className="text-tertiary-background" size={1}>
@@ -82,18 +82,18 @@ const PullRequestPanel = ({ pullReqMetadata, PRStateLoading, checks }: PullReque
           {!pullReqMetadata.merged && <PullRequestCommentSection commentsInfo={commentsInfo} />}
           <PullRequestCheckSection checkData={checkData} checksInfo={checksInfo} />
           {!pullReqMetadata.merged && (
-            <div className="py-4  ">
+            <div className="py-4">
               <div className="flex justify-between">
-                <div className="flex ">
+                <div className="flex">
                   {unchecked ? (
                     // TODO: update icon for unchecked status
-                    <Clock className="text-warning mt-1 " />
+                    <Clock className="text-warning mt-1" />
                   ) : (
                     <>
                       {mergeable ? (
                         <CheckCircleSolid className="text-success mt-1" />
                       ) : (
-                        <WarningTriangleSolid className="text-destructive mt-1 " />
+                        <WarningTriangleSolid className="text-destructive mt-1" />
                       )}
                     </>
                   )}
@@ -112,7 +112,7 @@ const PullRequestPanel = ({ pullReqMetadata, PRStateLoading, checks }: PullReque
                           <> {`This branch has no conflicts with ${pullReqMetadata.target_branch} branch`}</>
                         ) : (
                           <>
-                            Use the{' '}
+                            Use the
                             <span
                               onClick={() => {
                                 // TODO:add commandline information modal
@@ -121,7 +121,7 @@ const PullRequestPanel = ({ pullReqMetadata, PRStateLoading, checks }: PullReque
                               className="pl-1 pr-1 text-blue-500 cursor-pointer">
                               {/* {getString('commandLine')} */}
                               command line
-                            </span>{' '}
+                            </span>
                             to resolve conflicts
                             {/* {getString('pr.useCmdLineToResolveConflicts')} */}
                           </>
