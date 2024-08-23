@@ -1,14 +1,19 @@
 import React, { useMemo, useState } from 'react'
 import cx from 'classnames'
 import { SplitButton, Text } from '@harnessio/canary'
-import { MergeCheckStatus, PullRequestState, TypesPullReq } from './interfaces'
-import { isEmpty } from 'lodash-es'
+import { MergeCheckStatus, PullRequestState, TypesPullReq, TypeCheckData } from './interfaces'
 import { NavArrowUp, NavArrowDown, WarningTriangleSolid, CheckCircleSolid, Clock } from '@harnessio/icons-noir'
 import { mockChangesData } from './mocks/mockChangesData'
+import { mockChecksSucceededInfo, mockChecksFailedInfo } from './mocks/mockCheckInfo'
+import { mockCommentResolvedInfo } from './mocks/mockCommentInfo'
+
+import PullRequestMergeSection from './sections/pull-request-merge-section'
+import PullRequestCommentSection from './sections/pull-request-comment-section'
+
 interface PullRequestPanelProps {
   pullReqMetadata: TypesPullReq
   PRStateLoading: boolean
-  checks?: []
+  checks?: TypeCheckData[]
 }
 
 const PullRequestPanel = ({ pullReqMetadata, PRStateLoading, checks }: PullRequestPanelProps) => {
@@ -26,6 +31,9 @@ const PullRequestPanel = ({ pullReqMetadata, PRStateLoading, checks }: PullReque
   const ruleViolation = false
   const checkData = checks || []
   const changesData = mockChangesData
+  const checksInfo = !ruleViolation ? mockChecksSucceededInfo : mockChecksFailedInfo
+  const commentsInfo = !ruleViolation && mockCommentResolvedInfo
+
   return (
     <div className=" border mt-1 border-border rounded-md">
       <div className="flex flex-col">
@@ -71,8 +79,8 @@ const PullRequestPanel = ({ pullReqMetadata, PRStateLoading, checks }: PullReque
               {/* TODO: add expanded section and show more/less button */}
             </div>
           )}
-          {/* {!pullReqMetadata.merged && <div className=" py-4  border-b">comments section</div>} */}
-          {!isEmpty(checkData) && <div className=" py-4  border-b">checks section</div>}
+          {!pullReqMetadata.merged && <PullRequestCommentSection commentsInfo={commentsInfo} />}
+          <PullRequestMergeSection checkData={checkData} checksInfo={checksInfo} />
           {!pullReqMetadata.merged && (
             <div className="py-4  ">
               <div className="flex justify-between">
