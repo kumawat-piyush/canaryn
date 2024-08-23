@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Text } from '@harnessio/canary'
+import cx from 'classnames'
+
 import { isEmpty } from 'lodash-es'
 import {
   NavArrowUp,
@@ -16,12 +18,12 @@ interface PullRequestMergeSectionProps {
   checkData: TypeCheckData[]
   checksInfo: { header: string; content: string; status: CheckStatus }
 }
-const PullRequestMergeSection = ({ checkData, checksInfo }: PullRequestMergeSectionProps) => {
+const PullRequestCheckSection = ({ checkData, checksInfo }: PullRequestMergeSectionProps) => {
   const [isExpanded, setExpanded] = useState(false)
 
   return (
     !isEmpty(checkData) && (
-      <div className=" pt-4 pb-3  border-b">
+      <div className={cx(' pt-4  border-b', { 'pb-4': !isExpanded, '!pb-1': isExpanded })}>
         <div className="flex justify-between">
           <div className="flex ">
             {checksInfo.status === CheckStatus.PENDING ? (
@@ -120,4 +122,4 @@ const PullRequestMergeSection = ({ checkData, checksInfo }: PullRequestMergeSect
   )
 }
 
-export default PullRequestMergeSection
+export default PullRequestCheckSection

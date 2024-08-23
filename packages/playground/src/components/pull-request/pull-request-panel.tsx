@@ -7,7 +7,7 @@ import { mockChangesData } from './mocks/mockChangesData'
 import { mockChecksSucceededInfo, mockChecksFailedInfo } from './mocks/mockCheckInfo'
 import { mockCommentResolvedInfo } from './mocks/mockCommentInfo'
 
-import PullRequestMergeSection from './sections/pull-request-merge-section'
+import PullRequestCheckSection from './sections/pull-request-check-section'
 import PullRequestCommentSection from './sections/pull-request-comment-section'
 
 interface PullRequestPanelProps {
@@ -80,7 +80,7 @@ const PullRequestPanel = ({ pullReqMetadata, PRStateLoading, checks }: PullReque
             </div>
           )}
           {!pullReqMetadata.merged && <PullRequestCommentSection commentsInfo={commentsInfo} />}
-          <PullRequestMergeSection checkData={checkData} checksInfo={checksInfo} />
+          <PullRequestCheckSection checkData={checkData} checksInfo={checksInfo} />
           {!pullReqMetadata.merged && (
             <div className="py-4  ">
               <div className="flex justify-between">
