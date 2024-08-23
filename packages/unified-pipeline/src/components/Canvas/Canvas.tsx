@@ -155,7 +155,7 @@ const CanvasInternal = (props: CanvasProps) => {
         proOptions={{ hideAttribution: true }}
         /* https://github.com/xyflow/xyflow/discussions/2827 */
         nodeOrigin={[0.5, 0.5]}>
-        <Controls position="bottom-right">
+        <Controls position="bottom-right" showFitView={false} showInteractive={false}>
           {process.env.NODE_ENV !== 'production' && (
             <>
               <ControlButton
