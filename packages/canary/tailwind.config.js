@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 import figmaColors from "./src/style-tokens/colors"
 import figmaDimensions from "./src/style-tokens/dimensions"
+import figmaFontSizes from "./src/style-tokens/fonts"
 
 // eslint-disable-next-line no-undef
 module.exports = {
@@ -95,6 +96,7 @@ module.exports = {
         DEFAULT: '1px'
       },
       fontSize: {
+        ...figmaFontSizes,
         tiny: '12px',
         xs: '13px'
       },
