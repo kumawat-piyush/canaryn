@@ -10,14 +10,17 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "preinstall": "npx only-allow pnpm",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "services": "restful-react import --config restful-react.config.cjs",
+    "postservices": "prettier --write src/services/**/*.tsx"
   },
   "dependencies": {
-    "@harnessio/playground": "workspace:*",
     "@harnessio/canary": "workspace:*",
+    "@harnessio/playground": "workspace:*",
     "prettier": "^3.0.3",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "restful-react": "15.6.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
