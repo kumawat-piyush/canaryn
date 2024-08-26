@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon, Text, Button } from '@harnessio/canary'
+import { Icon, Text, Button, cn } from '@harnessio/canary'
 import PlaygroundListSettings from '../components/playground/list-settings'
 
 export interface NoDataStateProps {
@@ -9,6 +9,7 @@ export interface NoDataStateProps {
   description: string[]
   primaryButtonLabel?: string
   secondaryButtonLabel?: string
+  insideTabView?: boolean
   listState?: string
   setListState?: React.Dispatch<React.SetStateAction<string>>
 }
@@ -21,10 +22,14 @@ const NoDataState: React.FC<NoDataStateProps> = ({
   title,
   description,
   primaryButtonLabel,
-  secondaryButtonLabel
+  secondaryButtonLabel,
+  insideTabView = false
 }) => {
   return (
-    <div className="w-full h-full flex flex-col place-content-center place-items-center">
+    <div
+      className={cn('w-full h-full flex flex-col place-content-center place-items-center', {
+        'py-20 pb-24': insideTabView
+      })}>
       {iconName && <Icon name={iconName} size={iconSize} />}
       <div className="flex flex-col gap-4 place-content-center place-items-center ">
         <Text size={5} weight="medium">
