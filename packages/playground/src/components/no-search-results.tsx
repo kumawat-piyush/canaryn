@@ -10,8 +10,8 @@ const NoSearchResults: React.FC<NoSearchResultsProps> = ({
   iconSize = 112,
   title,
   description,
-  primaryButtonLabel,
-  secondaryButtonLabel
+  primaryButton,
+  secondaryButton
 }) => {
   return (
     <div className="w-full h-full flex flex-col justify-center items-center border rounded-md py-20 pb-24">
@@ -20,8 +20,8 @@ const NoSearchResults: React.FC<NoSearchResultsProps> = ({
         iconSize={iconSize}
         title={title}
         description={description}
-        primaryButtonLabel={primaryButtonLabel}
-        secondaryButtonLabel={secondaryButtonLabel}
+        primaryButton={primaryButton}
+        secondaryButton={secondaryButton}
       />
     </div>
   )

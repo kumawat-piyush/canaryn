@@ -116,8 +116,8 @@ function PipelineListPage() {
             iconName="no-search-magnifying-glass"
             title="No search results"
             description={['Check your spelling and filter options,', 'or search for a different keyword.']}
-            primaryButtonLabel="Clear search"
-            secondaryButtonLabel="Clear filters"
+            primaryButton={{ label: 'Clear search' }}
+            secondaryButton={{ label: 'Clear filters' }}
           />
         )
       default:
@@ -133,8 +133,8 @@ function PipelineListPage() {
         iconName="no-data-folder"
         title="No pipelines yet"
         description={['There are no pipelines yet.', 'Create new or import an existing pipeline.']}
-        primaryButtonLabel="Create pipeline"
-        secondaryButtonLabel="Import pipeline"
+        primaryButton={{ label: 'Create pipeline' }}
+        secondaryButton={{ label: 'Import pipeline' }}
       />
     )
   }

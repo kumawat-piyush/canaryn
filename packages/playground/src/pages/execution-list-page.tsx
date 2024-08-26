@@ -109,8 +109,8 @@ function ExecutionListPage() {
             iconName="no-search-magnifying-glass"
             title="No search results"
             description={['Check your spelling and filter options,', 'or search for a different keyword.']}
-            primaryButtonLabel="Clear search"
-            secondaryButtonLabel="Clear filters"
+            primaryButton={{ label: 'Clear search' }}
+            secondaryButton={{ label: 'Clear filters' }}
           />
         )
       default:
@@ -129,7 +129,7 @@ function ExecutionListPage() {
           "Your pipeline executions will appear here once they're completed.",
           'Start your pipeline to see the results.'
         ]}
-        primaryButtonLabel="Create pipeline"
+        primaryButton={{ label: 'Create pipeline' }}
       />
     )
   }

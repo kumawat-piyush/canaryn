@@ -194,8 +194,8 @@ function PullRequestListPage() {
             iconName="no-search-magnifying-glass"
             title="No search results"
             description={['Check your spelling and filter options,', 'or search for a different keyword.']}
-            primaryButtonLabel="Clear search"
-            secondaryButtonLabel="Clear filters"
+            primaryButton={{ label: 'Clear search' }}
+            secondaryButton={{ label: 'Clear filters' }}
           />
         )
       default:
@@ -212,6 +212,12 @@ function PullRequestListPage() {
         iconName="no-data-merge"
         title="No Pull Requests yet"
         description={['There are no pull requests in this repository yet.']}
+        primaryButton={{
+          label: 'Create pipeline'
+        }}
+        secondaryButton={{
+          label: 'Import pipeline'
+        }}
       />
     )
   }

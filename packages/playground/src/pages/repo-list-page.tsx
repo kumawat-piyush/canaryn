@@ -113,8 +113,8 @@ function RepoListPage() {
             iconName="no-search-magnifying-glass"
             title="No search results"
             description={['Check your spelling and filter options,', 'or search for a different keyword.']}
-            primaryButtonLabel="Clear search"
-            secondaryButtonLabel="Clear filters"
+            primaryButton={{ label: 'Clear search' }}
+            secondaryButton={{ label: 'Clear filters' }}
           />
         )
       default:
@@ -130,8 +130,8 @@ function RepoListPage() {
         iconName="no-data-folder"
         title="No repositories yet"
         description={['There are no repositories in this project yet.', 'Create new or import an existing repository.']}
-        primaryButtonLabel="Create repository"
-        secondaryButtonLabel="Import repository"
+        primaryButton={{ label: 'Create repository' }}
+        secondaryButton={{ label: 'Import repository' }}
       />
     )
   }

@@ -110,8 +110,8 @@ function RepoExecutionListPage() {
             iconName="no-search-magnifying-glass"
             title="No search results"
             description={['Check your spelling and filter options,', 'or search for a different keyword.']}
-            primaryButtonLabel="Clear search"
-            secondaryButtonLabel="Clear filters"
+            primaryButton={{ label: 'Clear search' }}
+            secondaryButton={{ label: 'Clear filters' }}
           />
         )
       default:
