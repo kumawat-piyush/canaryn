@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import RepoList from '../components/repo-list'
 import {
   Text,
@@ -13,15 +13,10 @@ import {
   PaginationPrevious,
   PaginationLink,
   PaginationEllipsis,
-  PaginationNext,
-  DropdownMenu,
-  DropdownMenuTrigger,
-  Icon,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator
+  PaginationNext
 } from '@harnessio/canary'
 import PaddingListLayout from '../layouts/PaddingListLayout'
+import PlaygroundListSettings from '../components/playground/list-settings'
 
 const mockRepos = [
   {
@@ -101,6 +96,23 @@ const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' },
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
 
 function RepoListPage() {
+  const [listState, setListState] = useState('data-loaded')
+
+  const renderListContent = () => {
+    switch (listState) {
+      case 'data-loaded':
+        return <RepoList repos={mockRepos} />
+      case 'loading':
+        return <Text>Loading...</Text>
+      case 'no-data':
+        return <Text>No data available</Text>
+      case 'no-search-matches':
+        return <Text>No search matches found</Text>
+      default:
+        return null
+    }
+  }
+
   return (
     <>
       <PaddingListLayout>
@@ -119,68 +131,50 @@ function RepoListPage() {
           </ListActions.Right>
         </ListActions.Root>
         <Spacer size={5} />
-        <RepoList repos={mockRepos} />
+        {renderListContent()}
         <Spacer size={8} />
-        <ListPagination.Root>
-          <Pagination>
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious size="sm" href="#" />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink isActive size="sm_icon" href="#">
-                  1
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink size="sm_icon" href="#">
-                  2
-                </PaginationLink>
-              </PaginationItem>
+        {listState == 'data-loaded' && (
+          <ListPagination.Root>
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious size="sm" href="#" />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink isActive size="sm_icon" href="#">
+                    1
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink size="sm_icon" href="#">
+                    2
+                  </PaginationLink>
+                </PaginationItem>
 
-              <PaginationItem>
-                <PaginationLink size="sm_icon" href="#">
-                  <PaginationEllipsis />
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink size="sm_icon" href="#">
-                  4
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink size="sm_icon" href="#">
-                  5
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext size="sm" href="#" />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-        </ListPagination.Root>
+                <PaginationItem>
+                  <PaginationLink size="sm_icon" href="#">
+                    <PaginationEllipsis />
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink size="sm_icon" href="#">
+                    4
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink size="sm_icon" href="#">
+                    5
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext size="sm" href="#" />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </ListPagination.Root>
+        )}
       </PaddingListLayout>
-      <div className="group fixed right-0 bottom-0 z-50 p-3">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild className="opacity-50 group-hover:opacity-100">
-            <Button variant="ghost" size="icon">
-              <Icon name="ellipsis" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>
-              <Text weight="bold" size={2}>
-                List states
-              </Text>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Data loaded</DropdownMenuItem>
-            <DropdownMenuItem>Loading</DropdownMenuItem>
-            <DropdownMenuItem>No data</DropdownMenuItem>
-            <DropdownMenuItem>No search matches</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
+      <PlaygroundListSettings listState={listState} setListState={setListState} />
     </>
   )
 }
