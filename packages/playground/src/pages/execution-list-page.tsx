@@ -123,9 +123,13 @@ function ExecutionListPage() {
       <NoDataState
         listState={listState}
         setListState={setListState}
-        iconName="no-data-folder"
+        iconName="no-data-cog"
         title="No executions yet"
-        description={['There are no executions yet.']}
+        description={[
+          "Your pipeline executions will appear here once they're completed.",
+          'Start your pipeline to see the results.'
+        ]}
+        primaryButtonLabel="Create pipeline"
       />
     )
   }
