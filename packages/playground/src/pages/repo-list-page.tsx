@@ -13,7 +13,13 @@ import {
   PaginationPrevious,
   PaginationLink,
   PaginationEllipsis,
-  PaginationNext
+  PaginationNext,
+  DropdownMenu,
+  DropdownMenuTrigger,
+  Icon,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator
 } from '@harnessio/canary'
 import PaddingListLayout from '../layouts/PaddingListLayout'
 
@@ -96,63 +102,86 @@ const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { nam
 
 function RepoListPage() {
   return (
-    <PaddingListLayout>
-      <Text size={5} weight={'medium'}>
-        Repositories
-      </Text>
-      <Spacer size={6} />
-      <ListActions.Root>
-        <ListActions.Left>
-          <SearchBox.Root placeholder="Search" />
-        </ListActions.Left>
-        <ListActions.Right>
-          <ListActions.Dropdown title="Filter" items={filterOptions} />
-          <ListActions.Dropdown title="Sort" items={sortOptions} />
-          <Button variant="default">Create repository</Button>
-        </ListActions.Right>
-      </ListActions.Root>
-      <Spacer size={5} />
-      <RepoList repos={mockRepos} />
-      <Spacer size={8} />
-      <ListPagination.Root>
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious size="sm" href="#" />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink isActive size="sm_icon" href="#">
-                1
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink size="sm_icon" href="#">
-                2
-              </PaginationLink>
-            </PaginationItem>
+    <>
+      <PaddingListLayout>
+        <Text size={5} weight={'medium'}>
+          Repositories
+        </Text>
+        <Spacer size={6} />
+        <ListActions.Root>
+          <ListActions.Left>
+            <SearchBox.Root placeholder="Search" />
+          </ListActions.Left>
+          <ListActions.Right>
+            <ListActions.Dropdown title="Filter" items={filterOptions} />
+            <ListActions.Dropdown title="Sort" items={sortOptions} />
+            <Button variant="default">Create repository</Button>
+          </ListActions.Right>
+        </ListActions.Root>
+        <Spacer size={5} />
+        <RepoList repos={mockRepos} />
+        <Spacer size={8} />
+        <ListPagination.Root>
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious size="sm" href="#" />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink isActive size="sm_icon" href="#">
+                  1
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink size="sm_icon" href="#">
+                  2
+                </PaginationLink>
+              </PaginationItem>
 
-            <PaginationItem>
-              <PaginationLink size="sm_icon" href="#">
-                <PaginationEllipsis />
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink size="sm_icon" href="#">
-                4
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink size="sm_icon" href="#">
-                5
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationNext size="sm" href="#" />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
-      </ListPagination.Root>
-    </PaddingListLayout>
+              <PaginationItem>
+                <PaginationLink size="sm_icon" href="#">
+                  <PaginationEllipsis />
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink size="sm_icon" href="#">
+                  4
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink size="sm_icon" href="#">
+                  5
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationNext size="sm" href="#" />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </ListPagination.Root>
+      </PaddingListLayout>
+      <div className="group fixed right-0 bottom-0 z-50 p-3">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild className="opacity-50 group-hover:opacity-100">
+            <Button variant="ghost" size="icon">
+              <Icon name="ellipsis" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem>
+              <Text weight="bold" size={2}>
+                List states
+              </Text>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Data loaded</DropdownMenuItem>
+            <DropdownMenuItem>Loading</DropdownMenuItem>
+            <DropdownMenuItem>No data</DropdownMenuItem>
+            <DropdownMenuItem>No search matches</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    </>
   )
 }
 
