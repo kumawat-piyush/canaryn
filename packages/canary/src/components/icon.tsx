@@ -24,6 +24,7 @@ import Unmerged from '../icons/unmerged.svg'
 import Comments from '../icons/comments.svg'
 import Tasks from '../icons/tasks.svg'
 import Tick from '../icons/tick.svg'
+import NoDataFolder from '../icons/no-data-folder.svg'
 // import Fork from '../icons/fork.svg'
 
 const IconNameMap = {
@@ -51,7 +52,8 @@ const IconNameMap = {
   unmerged: Unmerged,
   comments: Comments,
   tasks: Tasks,
-  tick: Tick
+  tick: Tick,
+  'no-data-folder': NoDataFolder
   // fork: Fork
 } satisfies Record<string, React.FunctionComponent<React.SVGProps<SVGSVGElement>>>
 
