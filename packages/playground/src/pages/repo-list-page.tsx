@@ -17,6 +17,7 @@ import {
 } from '@harnessio/canary'
 import PaddingListLayout from '../layouts/PaddingListLayout'
 import PlaygroundListSettings from '../components/playground/list-settings'
+import SkeletonList from '../components/loaders/skeleton-list'
 
 const mockRepos = [
   {
@@ -103,7 +104,7 @@ function RepoListPage() {
       case 'data-loaded':
         return <RepoList repos={mockRepos} />
       case 'loading':
-        return <Text>Loading...</Text>
+        return <SkeletonList />
       case 'no-data':
         return <Text>No data available</Text>
       case 'no-search-matches':
