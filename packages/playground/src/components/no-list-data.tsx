@@ -4,7 +4,7 @@ import PlaygroundListSettings from '../components/playground/list-settings'
 
 export interface NoDataStateProps {
   title: string
-  iconName?: 'no-data-folder' | 'no-search-magnifying-glass'
+  iconName?: 'no-data-folder' | 'no-search-magnifying-glass' | 'no-data-merge'
   iconSize?: number
   description: string[]
   primaryButtonLabel?: string

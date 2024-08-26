@@ -25,6 +25,7 @@ import Comments from '../icons/comments.svg'
 import Tasks from '../icons/tasks.svg'
 import Tick from '../icons/tick.svg'
 import NoDataFolder from '../icons/no-data-folder.svg'
+import NoDataMerge from '../icons/no-data-merge.svg'
 import NoSearchMagnifyingGlass from '../icons/no-search-magnifying-glass.svg'
 // import Fork from '../icons/fork.svg'
 
@@ -55,6 +56,7 @@ const IconNameMap = {
   tasks: Tasks,
   tick: Tick,
   'no-data-folder': NoDataFolder,
+  'no-data-merge': NoDataMerge,
   'no-search-magnifying-glass': NoSearchMagnifyingGlass
   // fork: Fork
 } satisfies Record<string, React.FunctionComponent<React.SVGProps<SVGSVGElement>>>

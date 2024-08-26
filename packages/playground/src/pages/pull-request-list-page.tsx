@@ -209,7 +209,7 @@ function PullRequestListPage() {
         insideTabView
         listState={listState}
         setListState={setListState}
-        iconName="no-data-folder"
+        iconName="no-data-merge"
         title="No Pull Requests yet"
         description={['There are no pull requests in this repository yet.']}
       />
