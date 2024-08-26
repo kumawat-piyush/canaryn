@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Text,
   Spacer,
@@ -15,6 +15,10 @@ import {
 } from '@harnessio/canary'
 import ExecutionList from '../components/execution-list'
 import PaddingListLayout from '../layouts/PaddingListLayout'
+import SkeletonList from '../components/loaders/skeleton-list'
+import NoSearchResults from '../components/no-search-results'
+import NoDataState from '../components/no-list-data'
+import PlaygroundListSettings from '../components/playground/list-settings'
 
 const mockExecutions = [
   {
@@ -91,65 +95,104 @@ const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { nam
 const viewOptions = [{ name: 'View option 1' }, { name: 'View option 2' }]
 
 function ExecutionListPage() {
-  return (
-    //Wrapper component for padding and list layout-Jessie
-    <PaddingListLayout>
-      <Text size={5} weight={'medium'}>
-        Executions
-      </Text>
-      <Spacer size={6} />
-      <ListActions.Root>
-        <ListActions.Left>
-          <SearchBox.Root placeholder="Search" />
-        </ListActions.Left>
-        <ListActions.Right>
-          <ListActions.Dropdown title="Filter" items={filterOptions} />
-          <ListActions.Dropdown title="Sort" items={sortOptions} />
-          <ListActions.Dropdown title="View" items={viewOptions} />
-        </ListActions.Right>
-      </ListActions.Root>
-      <Spacer size={5} />
-      <ExecutionList executions={mockExecutions} />
-      <Spacer size={8} />
-      <ListPagination.Root>
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious size="sm" href="#" />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink isActive size="sm_icon" href="#">
-                1
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink size="sm_icon" href="#">
-                2
-              </PaginationLink>
-            </PaginationItem>
+  const [listState, setListState] = useState('data-loaded')
 
-            <PaginationItem>
-              <PaginationLink size="sm_icon" href="#">
-                <PaginationEllipsis />
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink size="sm_icon" href="#">
-                4
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink size="sm_icon" href="#">
-                5
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationNext size="sm" href="#" />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
-      </ListPagination.Root>
-    </PaddingListLayout>
+  const renderListContent = () => {
+    switch (listState) {
+      case 'data-loaded':
+        return <ExecutionList executions={mockExecutions} />
+      case 'loading':
+        return <SkeletonList />
+      case 'no-search-matches':
+        return (
+          <NoSearchResults
+            iconName="no-search-magnifying-glass"
+            title="No search results"
+            description={['Check your spelling and filter options,', 'or search for a different keyword.']}
+            primaryButtonLabel="Clear search"
+            secondaryButtonLabel="Clear filters"
+          />
+        )
+      default:
+        return null
+    }
+  }
+
+  if (listState == 'no-data') {
+    return (
+      <NoDataState
+        listState={listState}
+        setListState={setListState}
+        iconName="no-data-folder"
+        title="No executions yet"
+        description={['There are no executions yet.']}
+      />
+    )
+  }
+
+  return (
+    <>
+      <PaddingListLayout>
+        <Text size={5} weight={'medium'}>
+          Executions
+        </Text>
+        <Spacer size={6} />
+        <ListActions.Root>
+          <ListActions.Left>
+            <SearchBox.Root placeholder="Search" />
+          </ListActions.Left>
+          <ListActions.Right>
+            <ListActions.Dropdown title="Filter" items={filterOptions} />
+            <ListActions.Dropdown title="Sort" items={sortOptions} />
+            <ListActions.Dropdown title="View" items={viewOptions} />
+          </ListActions.Right>
+        </ListActions.Root>
+        <Spacer size={5} />
+        {renderListContent()}
+        <Spacer size={8} />
+        {listState == 'data-loaded' && (
+          <ListPagination.Root>
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious size="sm" href="#" />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink isActive size="sm_icon" href="#">
+                    1
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink size="sm_icon" href="#">
+                    2
+                  </PaginationLink>
+                </PaginationItem>
+
+                <PaginationItem>
+                  <PaginationLink size="sm_icon" href="#">
+                    <PaginationEllipsis />
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink size="sm_icon" href="#">
+                    4
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink size="sm_icon" href="#">
+                    5
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext size="sm" href="#" />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </ListPagination.Root>
+        )}
+      </PaddingListLayout>
+      <PlaygroundListSettings listState={listState} setListState={setListState} />
+    </>
   )
 }
 
