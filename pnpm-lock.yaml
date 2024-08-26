@@ -20,6 +20,9 @@ importers:
 
   apps/gitness:
     dependencies:
+      '@harnessio/canary':
+        specifier: workspace:*
+        version: link:../../packages/canary
       '@harnessio/playground':
         specifier: workspace:*
         version: link:../../packages/playground
