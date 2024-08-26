@@ -28,6 +28,7 @@
     ".": {
       "import": "./dist/index.js"
     },
+    "./tailwind.config": "./tailwind.config.js",
     "./styles": "./dist/style.css"
   },
   "style": "./dist/style.css",

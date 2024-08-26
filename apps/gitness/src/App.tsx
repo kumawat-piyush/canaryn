@@ -1,3 +1,3 @@
 export default function App() {
-  return <h1>Gitness</h1>
+  return <div className="text-sm">Gitness</div>
 }
