@@ -13,12 +13,12 @@ import {
   PaginationPrevious,
   PaginationLink,
   PaginationEllipsis,
-  PaginationNext,
-  Icon
+  PaginationNext
 } from '@harnessio/canary'
 import PaddingListLayout from '../layouts/PaddingListLayout'
 import PlaygroundListSettings from '../components/playground/list-settings'
 import SkeletonList from '../components/loaders/skeleton-list'
+import NoDataState from '../components/no-list-data'
 
 const mockRepos = [
   {
@@ -121,29 +121,15 @@ function RepoListPage() {
 
   if (listState == 'no-data') {
     return (
-      <div className="w-full h-full flex flex-col gap-6 place-content-center place-items-center">
-        <div>
-          <Icon name="no-data-folder" size={112} />
-        </div>
-        <Text size={5} weight="medium">
-          No repositories yet
-        </Text>
-        <div className="flex flex-col">
-          <Text size={2} weight="normal" className="text-tertiary-background">
-            There are no repositories in this project yet.
-          </Text>
-          <Text size={2} weight="normal" className="text-tertiary-background">
-            Create new or import an existing repository.
-          </Text>
-        </div>
-        <div className="mt-1.5 flex gap-4">
-          <Button size="lg">Create repository</Button>
-          <Button variant="outline" size="lg">
-            Import repository
-          </Button>
-        </div>
-        <PlaygroundListSettings listState={listState} setListState={setListState} />
-      </div>
+      <NoDataState
+        listState={listState}
+        setListState={setListState}
+        iconName="no-data-folder"
+        title="No repositories yet"
+        description={['There are no repositories in this project yet.', 'Create new or import an existing repository.']}
+        primaryButtonLabel="Create repository"
+        secondaryButtonLabel="Import repository"
+      />
     )
   }
 
