@@ -10,6 +10,7 @@
     "watch": "vite",
     "build": "vite build",
     "build:watch": "vite build --watch",
+    "build-for-standalone": "NODE_ENV=production vite build --config vite.config.standalone.ts",
     "prepublishOnly": "pnpm build",
     "lint": "eslint ./src",
     "pretty": "prettier --check ./src",
