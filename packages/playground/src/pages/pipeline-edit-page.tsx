@@ -41,6 +41,7 @@ import { StepPaletteFilters } from '../components/pipeline-studio/step-palette/s
 import { StepsPaletteContent } from '../components/pipeline-studio/step-palette/step-palette-content'
 import { StepsPaletteItem } from '../components/pipeline-studio/step-palette/step-palette-item'
 import { stepPaletteItems } from '../assets/stepPaletteItems'
+import FixedHeightLayout from '../layouts/FixedHeightLayout'
 
 MonacoGlobals.set({
   ILanguageFeaturesService,
@@ -279,17 +280,19 @@ export default function PipelineEditPage() {
   )
 
   return (
-    <Container.Root wFull={true} hFull={true} className="h-[calc(100vh-100px)]">
-      <Container.Main>
-        <PipelineStudioToolbar view={view} setView={setView} />
-        {drawer}
-        {main}
-        <FooterBar
-          commitHistory={{ lastCommittedAt: Date.now(), lastCommittedBy: 'harness.io' }}
-          problems={{ error: 2, info: 5, warning: 12 }}
-          togglePane={() => setPanelOpen(!panelOpen)}
-        />
-      </Container.Main>
-    </Container.Root>
+    <FixedHeightLayout className="h-[calc(100vh-100px)]">
+      <Container.Root wFull={true} hFull={true}>
+        <Container.Main>
+          <PipelineStudioToolbar view={view} setView={setView} />
+          {drawer}
+          {main}
+          <FooterBar
+            commitHistory={{ lastCommittedAt: Date.now(), lastCommittedBy: 'harness.io' }}
+            problems={{ error: 2, info: 5, warning: 12 }}
+            togglePane={() => setPanelOpen(!panelOpen)}
+          />
+        </Container.Main>
+      </Container.Root>
+    </FixedHeightLayout>
   )
 }

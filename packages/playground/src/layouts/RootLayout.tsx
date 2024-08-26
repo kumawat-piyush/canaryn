@@ -117,7 +117,7 @@ const RootLayout: React.FC = () => {
           </Navbar.Footer>
         </Navbar.Root>
       )}
-      <main className="min-h-screen box-border overflow-y-scroll overflow-x-hidden">
+      <main className="grid min-h-screen box-border h-auto">
         <Outlet />
       </main>
     </div>

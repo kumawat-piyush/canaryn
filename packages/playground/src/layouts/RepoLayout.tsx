@@ -58,7 +58,7 @@ const RepoLayout: React.FC = () => {
           </NavLink>
         </TabsList>
       </Tabs>
-      <main className="min-h-[calc(100vh-100px)] box-border overflow-hidden">
+      <main className="box-border overflow-hidden min-h-[calc(100vh-100px)] h-auto">
         <Outlet />
       </main>
     </div>
