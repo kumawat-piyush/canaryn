@@ -41,8 +41,7 @@ const PullRequestLayout: React.FC = () => {
   return (
     <div className={'flex flex-col pt-2 pl-8'}>
       <PullRequestHeader data={mockedPullRequest} />
-
-      <div style={{ display: 'flex', gap: '10px' }}>
+      <div className="flex gap-2.5">
         <NavLink
           to={`/repos/${repoId}/pull-requests/${prId}`}
           style={({ isActive }) => ({ color: isActive ? 'green' : 'inherit' })}
