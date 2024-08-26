@@ -49,7 +49,7 @@ const PlaygroundListSettings: React.FC<PlaygroundListSettingsProps> = ({ listSta
           <DropdownMenuItem
             onClick={() => setListState('no-search-matches')}
             className={listState === 'no-search-matches' ? 'text-emerald-500' : ''}>
-            No search matches
+            No search results
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

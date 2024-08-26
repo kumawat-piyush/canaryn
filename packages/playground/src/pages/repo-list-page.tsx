@@ -19,6 +19,7 @@ import PaddingListLayout from '../layouts/PaddingListLayout'
 import PlaygroundListSettings from '../components/playground/list-settings'
 import SkeletonList from '../components/loaders/skeleton-list'
 import NoDataState from '../components/no-list-data'
+import NoSearchResults from '../components/no-search-results'
 
 const mockRepos = [
   {
@@ -108,11 +109,13 @@ function RepoListPage() {
         return <SkeletonList />
       case 'no-search-matches':
         return (
-          <div className="w-full h-full flex place-content-center place-items-center">
-            <Text size={5} weight="medium">
-              No search matches
-            </Text>
-          </div>
+          <NoSearchResults
+            iconName="no-search-magnifying-glass"
+            title="No search results"
+            description={['Check your spelling and filter options,', 'or search for a different keyword.']}
+            primaryButtonLabel="Clear search"
+            secondaryButtonLabel="Clear filters"
+          />
         )
       default:
         return null
