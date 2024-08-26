@@ -1,7 +1,11 @@
 import React from 'react'
 import NoDataState, { NoDataStateProps } from './no-list-data'
 
-const NoSearchResults: React.FC<NoDataStateProps> = ({
+interface NoSearchResultsProps extends Omit<NoDataStateProps, 'iconSize'> {
+  iconSize?: number
+}
+
+const NoSearchResults: React.FC<NoSearchResultsProps> = ({
   iconName,
   iconSize = 112,
   title,
@@ -10,7 +14,7 @@ const NoSearchResults: React.FC<NoDataStateProps> = ({
   secondaryButtonLabel
 }) => {
   return (
-    <div className="w-full h-full flex flex-col place-content-center place-items-center border rounded-md py-20 pb-24">
+    <div className="w-full h-full flex flex-col justify-center items-center border rounded-md py-20 pb-24">
       <NoDataState
         iconName={iconName}
         iconSize={iconSize}
