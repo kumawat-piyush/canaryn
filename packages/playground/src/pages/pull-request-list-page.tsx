@@ -18,7 +18,7 @@ import PaddingListLayout from '../layouts/PaddingListLayout'
 import PullRequestList from '../components/pull-request/pull-request-list'
 import SkeletonList from '../components/loaders/skeleton-list'
 import NoSearchResults from '../components/no-search-results'
-import NoDataState from '../components/no-list-data'
+import NoListData from '../components/no-list-data'
 import PlaygroundListSettings from '../components/playground/list-settings'
 
 // This data is temporary, since Calvin already built a more comprehensive set of mock data. Using this for speed to require less refactoring of the typical stacked list component, however we should get thge original data back in
@@ -205,7 +205,7 @@ function PullRequestListPage() {
 
   if (listState == 'no-data') {
     return (
-      <NoDataState
+      <NoListData
         insideTabView
         listState={listState}
         setListState={setListState}

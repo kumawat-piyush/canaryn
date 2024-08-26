@@ -17,7 +17,7 @@ import ExecutionList from '../components/execution-list'
 import PaddingListLayout from '../layouts/PaddingListLayout'
 import SkeletonList from '../components/loaders/skeleton-list'
 import NoSearchResults from '../components/no-search-results'
-import NoDataState from '../components/no-list-data'
+import NoListData from '../components/no-list-data'
 import PlaygroundListSettings from '../components/playground/list-settings'
 
 const mockExecutions = [
@@ -120,7 +120,7 @@ function ExecutionListPage() {
 
   if (listState == 'no-data') {
     return (
-      <NoDataState
+      <NoListData
         listState={listState}
         setListState={setListState}
         iconName="no-data-cog"
@@ -130,6 +130,7 @@ function ExecutionListPage() {
           'Start your pipeline to see the results.'
         ]}
         primaryButton={{ label: 'Create pipeline' }}
+        secondaryButton={{ label: 'Import pipeline' }}
       />
     )
   }

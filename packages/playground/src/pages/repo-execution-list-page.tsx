@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom'
 import PaddingListLayout from '../layouts/PaddingListLayout'
 import SkeletonList from '../components/loaders/skeleton-list'
 import NoSearchResults from '../components/no-search-results'
-import NoDataState from '../components/no-list-data'
+import NoListData from '../components/no-list-data'
 import PlaygroundListSettings from '../components/playground/list-settings'
 
 const mockExecutions = [
@@ -121,13 +121,15 @@ function RepoExecutionListPage() {
 
   if (listState == 'no-data') {
     return (
-      <NoDataState
+      <NoListData
         insideTabView
         listState={listState}
         setListState={setListState}
         iconName="no-data-folder"
         title="No executions yet"
         description={['There are no executions in this pipeline yet.']}
+        primaryButton={{ label: 'Create pipeline' }}
+        secondaryButton={{ label: 'Import pipeline' }}
       />
     )
   }

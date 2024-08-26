@@ -3,7 +3,7 @@ import { Icon, Text, Button, cn } from '@harnessio/canary'
 import PlaygroundListSettings from '../components/playground/list-settings'
 import { NavLink } from 'react-router-dom'
 
-export interface NoDataStateProps {
+export interface NoListDataProps {
   title: string
   iconName?: 'no-data-folder' | 'no-search-magnifying-glass' | 'no-data-merge' | 'no-data-cog'
   iconSize?: number
@@ -21,7 +21,7 @@ export interface NoDataStateProps {
   setListState?: React.Dispatch<React.SetStateAction<string>>
 }
 
-const NoDataState: React.FC<NoDataStateProps> = ({
+const NoListData: React.FC<NoListDataProps> = ({
   listState,
   setListState,
   iconName,
@@ -71,4 +71,4 @@ const NoDataState: React.FC<NoDataStateProps> = ({
   )
 }
 
-export default NoDataState
+export default NoListData

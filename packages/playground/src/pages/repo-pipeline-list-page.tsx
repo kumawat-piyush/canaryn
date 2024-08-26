@@ -15,7 +15,7 @@ import {
 } from '@harnessio/canary'
 import PipelineList from '../components/pipeline-list'
 import PaddingListLayout from '../layouts/PaddingListLayout'
-import NoDataState from '../components/no-list-data'
+import NoListData from '../components/no-list-data'
 import NoSearchResults from '../components/no-search-results'
 import SkeletonList from '../components/loaders/skeleton-list'
 import PlaygroundListSettings from '../components/playground/list-settings'
@@ -126,7 +126,7 @@ function RepoPipelineListPage() {
 
   if (listState == 'no-data') {
     return (
-      <NoDataState
+      <NoListData
         insideTabView
         listState={listState}
         setListState={setListState}

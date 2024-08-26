@@ -18,7 +18,7 @@ import {
 import PaddingListLayout from '../layouts/PaddingListLayout'
 import PlaygroundListSettings from '../components/playground/list-settings'
 import SkeletonList from '../components/loaders/skeleton-list'
-import NoDataState from '../components/no-list-data'
+import NoListData from '../components/no-list-data'
 import NoSearchResults from '../components/no-search-results'
 
 const mockRepos = [
@@ -124,7 +124,7 @@ function RepoListPage() {
 
   if (listState == 'no-data') {
     return (
-      <NoDataState
+      <NoListData
         listState={listState}
         setListState={setListState}
         iconName="no-data-folder"
