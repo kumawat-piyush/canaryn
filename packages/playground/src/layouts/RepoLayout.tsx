@@ -65,7 +65,7 @@ const RepoLayout: React.FC = () => {
           </TabsList>
         </Tabs>
       </div>
-      <div className="grid">
+      <div className="grid w-full">
         <Outlet />
       </div>
     </div>
