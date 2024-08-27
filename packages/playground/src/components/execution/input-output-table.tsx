@@ -1,19 +1,16 @@
 import React from 'react'
 import { ScrollArea } from '@harnessio/canary'
 import { Table, TableBody, TableCell, TableHeader, TableHead, TableRow } from '@harnessio/canary'
-import { data } from './mocks/mockInput'
 
-// interface InputTableProps {
-//   children: ReactNode
-//   name: string
-//   value: string
-// }
+interface InputTableProps {
+  inputData: { name: string; value: string }[]
+}
 
-export const InputOutputTable = () => {
-  const titleKey = data[0].name
-  const titleValue = data[0].value
+export const InputOutputTable: React.FC<InputTableProps> = ({ inputData }) => {
+  const titleKey = inputData[0].name
+  const titleValue = inputData[0].value
 
-  const dataContent = data.slice(1)
+  const dataContent = inputData.slice(1)
 
   return (
     <ScrollArea className="overflow-x-auto">
