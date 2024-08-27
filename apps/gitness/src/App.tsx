@@ -1,3 +1,4 @@
+import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Button } from '@harnessio/canary'
 import { PipelineList, ThemeProvider, Pipeline } from '@harnessio/playground'

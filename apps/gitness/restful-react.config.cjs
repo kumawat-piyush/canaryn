@@ -3,7 +3,7 @@ module.exports = {
     output: 'src/services/code/index.tsx',
     file: 'src/services/code/swagger.yaml',
     customProps: {
-      base: '/api/v1'
+      base: `"/api/v1"`
     }
   }
 }
