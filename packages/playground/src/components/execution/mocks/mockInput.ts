@@ -1,5 +1,5 @@
 //simple data for rendering
-export const data = [
+export const inputData = [
   {
     name: 'Input Value',
     value: 'canaryDeployment'
