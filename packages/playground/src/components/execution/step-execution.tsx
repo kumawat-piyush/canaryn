@@ -6,6 +6,7 @@ import { data } from './mocks/mockStepLogs'
 import { Layout } from '../layout/layout'
 import { ExecutionState, ExecutionStatus } from './execution-status'
 import { getDuration } from '../../utils/TimeUtils'
+import { InputOutputTable } from './input-output-table'
 
 export interface StepProps {
   name: string
@@ -66,6 +67,12 @@ export const StepExecution: React.FC<StageExecutionProps> = ({ step, stepIndex }
           <TabsContent value={StepExecutionTab.LOG}>
             <ScrollArea className="h-[calc(100vh-23rem)] border-t pt-4">
               <ConsoleLogs logs={data[stepIndex]} />
+            </ScrollArea>
+          </TabsContent>
+          <TabsContent value={StepExecutionTab.INPUT}>
+            {/*here is the execution details of input table */}
+            <ScrollArea className="h-[calc(100vh-23rem)] border-t pt-4">
+              <InputOutputTable />
             </ScrollArea>
           </TabsContent>
         </Layout.Vertical>
