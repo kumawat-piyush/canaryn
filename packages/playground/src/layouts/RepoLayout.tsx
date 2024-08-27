@@ -47,12 +47,15 @@ const RepoLayout: React.FC = () => {
             <NavLink to={`/repos/${repoId}`}>
               <TabsTrigger value="index">Index</TabsTrigger>
             </NavLink>
+            <NavLink to={`commits`}>
+              <TabsTrigger value="commits">2-Panel Child Layout</TabsTrigger>
+            </NavLink>
             <NavLink to={`pipelines`}>
               <TabsTrigger value="pipelines">Pipelines</TabsTrigger>
             </NavLink>
-            <NavLink to={`commits`}>
+            {/* <NavLink to={`commits`}>
               <TabsTrigger value="commits">Commits</TabsTrigger>
-            </NavLink>
+            </NavLink> */}
             <NavLink to={`pull-requests`}>
               <TabsTrigger value="pull-requests">Pull Requests</TabsTrigger>
             </NavLink>
