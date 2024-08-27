@@ -30,6 +30,9 @@ export default function ExecutionDetailsPage() {
       </TabsList>
       <TabsContent value={ExecutionTab.SUMMARY} />
       <TabsContent value={ExecutionTab.LOG}>
+        {/**
+         * @TODO replace with actual values
+         */}
         <ExecutionDetails executionId={1} pipelineId={1} />
       </TabsContent>
     </Tabs>
