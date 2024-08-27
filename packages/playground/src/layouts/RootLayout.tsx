@@ -85,7 +85,7 @@ const RootLayout: React.FC = () => {
   ]
 
   return (
-    <div className="bg-background grid md:grid-cols-[220px_minmax(900px,_1fr)] min-w-screen">
+    <div className="grid h-full w-full bg-background md:grid-cols-[220px_minmax(900px,_1fr)]">
       {showNavbar && (
         <Navbar.Root className="max-md:hidden">
           <Navbar.Header>
@@ -117,9 +117,9 @@ const RootLayout: React.FC = () => {
           </Navbar.Footer>
         </Navbar.Root>
       )}
-      <main className="min-h-screen box-border overflow-y-scroll overflow-x-hidden">
+      <div className="grid h-full w-full overflow-y-auto">
         <Outlet />
-      </main>
+      </div>
     </div>
   )
 }

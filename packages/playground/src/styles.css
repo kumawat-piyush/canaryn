@@ -1,3 +1,11 @@
 @import '@harnessio/canary/src/styles.css';
 @import '@harnessio/unified-pipeline/dist/style.css';
 @import '@harnessio/unified-pipeline/src/styles.css';
+
+body {
+  @apply overflow-hidden;
+}
+
+#root {
+  @apply h-screen w-screen;
+}

@@ -39,7 +39,7 @@ const PullRequestLayout: React.FC = () => {
   const { prId } = useParams<{ prId: string }>()
 
   return (
-    <div className={'flex flex-col pt-2 pl-8'}>
+    <div className={'flex flex-col pt-2 pl-0'}>
       <PullRequestHeader data={mockedPullRequest} />
 
       <div style={{ display: 'flex', gap: '10px' }}>
