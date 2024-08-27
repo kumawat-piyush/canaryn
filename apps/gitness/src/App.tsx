@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Button } from '@harnessio/canary'
-import { PipelineList, ThemeProvider } from '@harnessio/playground'
+import { PipelineList, ThemeProvider, Pipeline } from '@harnessio/playground'
 import { useListPipelines } from './services/code'
 
 export default function App() {
@@ -16,7 +16,8 @@ export default function App() {
     base: 'http://localhost:3000/api/v1',
     repo_ref: 'workspace/repo/+',
     requestOptions: { headers: retHeaders },
-    queryParams: { page: 0, limit: 10, query: '', latest: true }
+    queryParams: { page: 0, limit: 10, query: '', latest: true },
+    debounce: 500
   })
 
   console.log(pipeline)
@@ -25,22 +26,23 @@ export default function App() {
     {
       path: '/',
       element: (
-        <div className="flex flex-col">
+        <div className="flex flex-col justify-center">
+          <h1>Gitness App</h1>
           <Button>Test</Button>
           <PipelineList
-            // pipelines={pipeline?.map(
-            //   pipeline =>
-            //     ({
-            //       description: pipeline?.description || '',
-            //       id: pipeline?.id || '',
-            //       name: pipeline?.id || '',
-            //       sha: pipeline.execution?.after || '',
-            //       success: pipeline?.execution?.status === 'success',
-            //       timestamp: pipeline?.updated || '',
-            //       version: '1'
-            //     }) as Pipeline
-            // )}
-            pipelines={[]}
+            pipelines={pipeline?.map(
+              pipeline =>
+                ({
+                  description: pipeline?.description || '',
+                  id: pipeline?.id || '',
+                  name: pipeline?.id || '',
+                  sha: pipeline.execution?.after || '',
+                  success: pipeline?.execution?.status === 'success',
+                  timestamp: pipeline?.updated || '',
+                  version: '1'
+                }) as Pipeline
+            )}
+            // pipelines={[]}
           />
         </div>
       )
