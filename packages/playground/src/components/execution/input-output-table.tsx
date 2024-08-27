@@ -1,6 +1,6 @@
 import React from 'react'
 import { ScrollArea } from '@harnessio/canary'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@harnessio/canary'
+import { Table, TableBody, TableCell, TableHeader, TableHead, TableRow } from '@harnessio/canary'
 import { data } from './mocks/mockInput'
 
 // interface InputTableProps {
@@ -10,20 +10,22 @@ import { data } from './mocks/mockInput'
 // }
 
 export const InputOutputTable = () => {
-  const headKey = data[0].name
-  const headValue = data[0].value
+  const titleKey = data[0].name
+  const titleValue = data[0].value
+
+  const dataContent = data.slice(1)
 
   return (
     <ScrollArea className="overflow-x-auto">
       <Table>
-        <TableHead>
+        <TableHeader>
           <TableRow>
-            <TableHeader>{headKey}</TableHeader>
-            <TableHeader>{headValue}</TableHeader>
+            <TableHead>{titleKey}</TableHead>
+            <TableHead>{titleValue}</TableHead>
           </TableRow>
-        </TableHead>
+        </TableHeader>
         <TableBody>
-          {data.map((item: { name: string; value: string }) => {
+          {dataContent.map((item: { name: string; value: string }) => {
             return (
               <TableRow key={item.name}>
                 <TableCell>{item.name}</TableCell>
