@@ -2,10 +2,12 @@
 @import '@harnessio/unified-pipeline/dist/style.css';
 @import '@harnessio/unified-pipeline/src/styles.css';
 
-body {
-  @apply overflow-hidden;
+html,
+body,
+#root {
+  @apply h-full;
 }
 
-#root {
-  @apply h-screen w-screen;
+body {
+  @apply overscroll-none;
 }

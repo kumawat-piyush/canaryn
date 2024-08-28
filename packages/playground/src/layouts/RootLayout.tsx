@@ -1,125 +1,47 @@
-// RootLayout.tsx
-import { Navbar, Icon, NavbarProjectChooser, NavbarUser } from '@harnessio/canary'
 import React from 'react'
-import { Outlet, NavLink, useLocation } from 'react-router-dom'
 
 const RootLayout: React.FC = () => {
-  const location = useLocation()
-  const hideNavbarPaths = ['/signin', '/signup']
-  const showNavbar = !hideNavbarPaths.includes(location.pathname)
-
-  const primaryMenuItems = [
-    {
-      text: 'Repositories',
-      icon: <Icon name="repositories" />,
-      to: '/repos'
-    },
-    {
-      text: 'Pipelines',
-      icon: <Icon name="pipelines" />,
-      to: '/pipelines'
-    },
-    {
-      text: 'Executions',
-      icon: <Icon name="executions" />,
-      to: '/executions'
-    },
-    {
-      text: 'Featured Flags',
-      icon: <Icon name="featured-flags" />,
-      to: '/feature-flags'
-    }
-  ]
-
-  const pinnedMenuItems = [
-    {
-      text: 'Chaos Engineering',
-      icon: <Icon name="chaos-engineering" />,
-      to: '/chaos-engineering'
-    },
-    {
-      text: 'Environment',
-      icon: <Icon name="environment" />,
-      to: 'environment'
-    },
-    {
-      text: 'Secrets',
-      icon: <Icon name="secrets" />,
-      to: 'secrets'
-    },
-    {
-      text: 'Connectors',
-      icon: <Icon name="connectors" />,
-      to: 'connectors'
-    },
-    {
-      text: 'Home Page',
-      icon: <Icon name="chaos-engineering" />,
-      to: '/'
-    },
-    {
-      text: 'Sign Up',
-      icon: <Icon name="environment" />,
-      to: '/signup'
-    },
-    {
-      text: 'Sign In',
-      icon: <Icon name="secrets" />,
-      to: '/signin'
-    }
-  ]
-
-  const sampleProjectList = [
-    {
-      title: 'Playground'
-      // icon: <Icon name="archive" />
-    },
-    {
-      title: 'Drone'
-      // icon: <Icon name="archive" />
-    },
-    {
-      title: 'Pixel Point'
-      // icon: <Icon name="archive" />
-    }
-  ]
-
   return (
-    <div className="grid h-full w-full bg-background md:grid-cols-[220px_minmax(900px,_1fr)]">
-      {showNavbar && (
-        <Navbar.Root className="max-md:hidden">
-          <Navbar.Header>
-            <NavbarProjectChooser.Root
-              name="Playground"
-              avatar={<Icon name="harness" size={16} />}
-              projects={sampleProjectList}
-            />
-          </Navbar.Header>
-          <Navbar.Content>
-            <Navbar.Group>
-              {primaryMenuItems.map((item, idx) => (
-                <NavLink key={idx} to={item.to || ''}>
-                  {({ isActive }) => <Navbar.Item key={idx} text={item.text} icon={item.icon} active={isActive} />}
-                </NavLink>
-              ))}
-              <Navbar.Item text="More" icon={<Icon name="ellipsis" />} />
-            </Navbar.Group>
-            <Navbar.AccordionGroup title="Pinned">
-              {pinnedMenuItems.map((item, idx) => (
-                <NavLink key={idx} to={item.to || ''}>
-                  {({ isActive }) => <Navbar.Item key={idx} text={item.text} icon={item.icon} active={isActive} />}
-                </NavLink>
-              ))}
-            </Navbar.AccordionGroup>
-          </Navbar.Content>
-          <Navbar.Footer>
-            <NavbarUser.Root />
-          </Navbar.Footer>
-        </Navbar.Root>
-      )}
-      <div className="grid h-full w-full overflow-y-auto">
-        <Outlet />
+    <div>
+      <nav
+        className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-50 lg:block lg:w-56 lg:overflow-y-auto lg:bg-black lg:pb-4 border-r px-4 py-10 sm:px-6 lg:px-8 lg:py-6"
+        role="navigation"
+        aria-label="Main Navigation">
+        <p>Navbar</p>
+        <div className="h-[2000px]" />
+        <p>End of navbar</p>
+      </nav>
+      <div className="lg:pl-56">
+        <header
+          className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-border bg-background px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
+          role="banner">
+          <p>Header</p>
+        </header>
+        <header
+          className="sticky top-16 z-40 flex h-12 shrink-0 items-center gap-x-4 border-b border-border bg-background px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
+          role="banner">
+          <p>Sub header</p>
+        </header>
+        <main className="xl:pl-56" role="main">
+          <div className="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
+            <p>Main</p>
+            <div className="h-[2000px]" />
+            <p>End of main</p>
+          </div>
+        </main>
+        <footer
+          className="sticky bottom-0 z-40 flex h-12 shrink-0 items-center gap-x-4 border-t border-border bg-background px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
+          role="contentinfo">
+          <p>Footer</p>
+        </footer>
       </div>
+      <aside
+        className="fixed bottom-12 left-56 top-28 hidden w-56 overflow-y-auto border-r border-border px-4 py-6 sm:px-6 lg:px-8 xl:block"
+        role="complementary">
+        <p>Aside</p>
+        <div className="h-[2000px]" />
+        <p>End of aside</p>
+      </aside>
     </div>
   )
 }
