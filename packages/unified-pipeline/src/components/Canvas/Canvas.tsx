@@ -11,7 +11,8 @@ import ReactFlow, {
   OnEdgesChange,
   applyEdgeChanges,
   ControlButton,
-  useReactFlow
+  useReactFlow,
+  MiniMap
 } from 'reactflow'
 import { Circle, Minus } from '@harnessio/icons-noir'
 import { defaultEdgeMarkerOptions } from './nodes-edges-defaults'
@@ -183,6 +184,7 @@ const CanvasInternal = (props: CanvasProps) => {
             </>
           )}
         </Controls>
+        <MiniMap position="top-right" className="bg-card-background" nodeStrokeWidth={2} zoomable pannable />
       </ReactFlow>
       {enableOverlay && mousePosition && <CircleOverlay position={mousePosition} />}
     </div>
