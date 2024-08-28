@@ -11,30 +11,39 @@ export const InputOutputTable: React.FC<InputTableProps> = ({ inputData, classNa
   const titleValue = inputData[0].value
 
   const dataContent = inputData.slice(1)
-
+  // not sure if the header needs to be fixed
   return (
     <ScrollArea className="overflow-x-auto pt-4">
       <Table className={className}>
         <TableHeader>
           <TableRow>
             <TableHead>
-              <Text size={3} weight="bold" style={{ color: '#fff' }}>
+              <Text size={4} weight="semibold" className="text-ring sm">
                 {titleKey}
               </Text>
             </TableHead>
             <TableHead>
-              <Text size={3} weight="bold" style={{ color: '#fff' }}>
+              <Text size={4} weight="semibold" className="text-ring sm">
                 {titleValue}
               </Text>
             </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
+          {/* Todo: currently for the simple data, will add more accdordin sec with recursive data */}
           {dataContent.map((item: { name: string; value: string }) => {
             return (
               <TableRow key={item.name}>
-                <TableCell className="pt-2.5 pl-4">{item.name}</TableCell>
-                <TableCell className="pt-2.5 pl-4">{item.value}</TableCell>
+                <TableCell className="pt-2.5 pl-4">
+                  <Text size={3} weight="normal" className="text-ring sm">
+                    {item.name}
+                  </Text>
+                </TableCell>
+                <TableCell className="pt-2.5 pl-4">
+                  <Text size={3} weight="normal" className="text-ring sm">
+                    {item.value}
+                  </Text>
+                </TableCell>
               </TableRow>
             )
           })}
