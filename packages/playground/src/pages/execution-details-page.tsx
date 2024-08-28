@@ -1,6 +1,7 @@
 import React from 'react'
 import { ExecutionDetails } from '../components/execution/execution-details'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@harnessio/canary'
+import { ExecutionContextProvider } from '../components/execution/execution-context'
 
 export enum ExecutionTab {
   SUMMARY = 'summary',
@@ -11,6 +12,104 @@ export enum ExecutionTab {
   TEST = 'test',
   SECURITY = 'security'
 }
+//simple data for rendering
+const keyValueMockData = [
+  {
+    name: 'Input Name',
+    value: 'Input Value'
+  },
+  {
+    name: 'identifier',
+    value: 'canaryDeployment'
+  },
+  {
+    name: 'name',
+    value: 'canaryDeployment'
+  },
+  {
+    name: 'timeout',
+    value: '10m'
+  },
+  {
+    name: 'type',
+    value: 'K8sCanaryDeploy'
+  },
+  {
+    name: 'type',
+    value: 'percentage'
+  },
+  {
+    name: 'identifier',
+    value: 'canaryDeployment'
+  },
+  {
+    name: 'name',
+    value: 'canaryDeployment'
+  },
+  {
+    name: 'timeout',
+    value: '10m'
+  },
+  {
+    name: 'type',
+    value: 'K8sCanaryDeploy'
+  },
+  {
+    name: 'type',
+    value: 'percentage'
+  },
+  {
+    name: 'identifier',
+    value: 'canaryDeployment'
+  },
+  {
+    name: 'name',
+    value: 'canaryDeployment'
+  },
+  {
+    name: 'timeout',
+    value: '10m'
+  },
+  {
+    name: 'type',
+    value: 'K8sCanaryDeploy'
+  },
+  {
+    name: 'type',
+    value: 'percentage'
+  },
+  {
+    name: 'identifier',
+    value: 'canaryDeployment'
+  },
+  {
+    name: 'name',
+    value: 'canaryDeployment'
+  },
+  {
+    name: 'timeout',
+    value: '10m'
+  },
+  {
+    name: 'type',
+    value: 'K8sCanaryDeploy'
+  },
+  {
+    name: 'type',
+    value: 'percentage'
+  },
+  {
+    specs: [{ name: 'spec1', value: 'value1' }]
+  },
+  {
+    specs: [
+      {
+        name: 'spec2',
+        value: 'value2'
+      }
+    ]
+  }
+]
 
 export default function ExecutionDetailsPage() {
   return (
@@ -33,7 +132,9 @@ export default function ExecutionDetailsPage() {
         {/**
          * @TODO replace with actual values
          */}
-        <ExecutionDetails executionId={1} pipelineId={1} />
+        <ExecutionContextProvider value={keyValueMockData}>
+          <ExecutionDetails executionId={1} pipelineId={1} />
+        </ExecutionContextProvider>
       </TabsContent>
     </Tabs>
   )
