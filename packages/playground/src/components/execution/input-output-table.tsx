@@ -18,12 +18,12 @@ export const InputOutputTable: React.FC<InputTableProps> = ({ inputData, classNa
         <TableHeader>
           <TableRow>
             <TableHead>
-              <Text size={4} weight="semibold" className="text-ring sm">
+              <Text size={2} weight="semibold" className="text-ring">
                 {titleKey}
               </Text>
             </TableHead>
             <TableHead>
-              <Text size={4} weight="semibold" className="text-ring sm">
+              <Text size={2} weight="semibold" className="text-ring">
                 {titleValue}
               </Text>
             </TableHead>
@@ -35,12 +35,12 @@ export const InputOutputTable: React.FC<InputTableProps> = ({ inputData, classNa
             return (
               <TableRow key={item.name}>
                 <TableCell className="pt-2.5 pl-4">
-                  <Text size={3} weight="normal" className="text-ring sm">
+                  <Text size={2} weight="normal" className="text-ring">
                     {item.name}
                   </Text>
                 </TableCell>
                 <TableCell className="pt-2.5 pl-4">
-                  <Text size={3} weight="normal" className="text-ring sm">
+                  <Text size={2} weight="normal" className="text-ring">
                     {item.value}
                   </Text>
                 </TableCell>
