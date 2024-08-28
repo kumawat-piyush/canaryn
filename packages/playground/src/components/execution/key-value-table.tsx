@@ -1,19 +1,18 @@
 import React from 'react'
-import { ScrollArea } from '@harnessio/canary'
 import { Table, TableBody, TableCell, TableHeader, TableHead, TableRow, Text } from '@harnessio/canary'
 interface InputTableProps {
   inputData: { name: string; value: string }[]
   className?: string
 }
 
-export const InputOutputTable: React.FC<InputTableProps> = ({ inputData, className }) => {
+export const KeyValueTable: React.FC<InputTableProps> = ({ inputData, className }) => {
   const titleKey = inputData[0].name
   const titleValue = inputData[0].value
 
   const dataContent = inputData.slice(1)
   // not sure if the header needs to be fixed
   return (
-    <ScrollArea className="overflow-x-auto pt-4">
+    <div className="overflow-x-auto pt-4">
       <Table className={className}>
         <TableHeader>
           <TableRow>
@@ -49,6 +48,6 @@ export const InputOutputTable: React.FC<InputTableProps> = ({ inputData, classNa
           })}
         </TableBody>
       </Table>
-    </ScrollArea>
+    </div>
   )
 }
