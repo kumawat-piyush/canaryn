@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@harnessio/canary": "workspace:*",
-    "@harnessio/code-service-client": "^0.1.0",
+    "@harnessio/code-service-client": "1.1.0",
     "@harnessio/playground": "workspace:*",
     "prettier": "^3.0.3",
     "react": "^18.3.1",
