@@ -38,7 +38,7 @@ export const KeyValueTable: React.FC<InputTableProps> = ({ inputData, className 
                     {item.name}
                   </Text>
                 </TableCell>
-                <TableCell className="pt-2.5 pl-4">
+                <TableCell className="pt-2.5">
                   <Text size={2} weight="normal" className="text-ring">
                     {item.value}
                   </Text>
