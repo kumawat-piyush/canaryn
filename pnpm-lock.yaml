@@ -23,6 +23,9 @@ importers:
       '@harnessio/canary':
         specifier: workspace:*
         version: link:../../packages/canary
+      '@harnessio/code-service-client':
+        specifier: ^0.1.0
+        version: 0.1.0
       '@harnessio/playground':
         specifier: workspace:*
         version: link:../../packages/playground
@@ -2373,6 +2376,9 @@ packages:
 
   '@floating-ui/utils@0.2.3':
     resolution: {integrity: sha512-XGndio0l5/Gvd6CLIABvsav9HHezgDFFhDfHk1bvLfr9ni8dojqLSvBbotJEjmIwNHL7vK4QzBJTdBRoB+c1ww==}
+
+  '@harnessio/code-service-client@0.1.0':
+    resolution: {integrity: sha512-oNks2oTeEk7V3go5eqF1YLWeoiSTBdoT67yGJXWWp3YAw5O8tXcRKEMiAN4zafe06yTu5a+M+u486LyGPrZAsA==}
 
   '@harnessio/icons-noir@0.2.1':
     resolution: {integrity: sha512-gJJmolPrbwVfwznPN6zjOuUqVKCYb7Q/ZvZMR5WvlNdTxl8/UukhtGiCCEdy/JRU4zcZqm24FW2L40+Qv2Tz0Q==}
@@ -11923,6 +11929,8 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
 
   '@floating-ui/utils@0.2.3': {}
+
+  '@harnessio/code-service-client@0.1.0': {}
 
   '@harnessio/icons-noir@0.2.1(@harnessio/svg-icon-react@0.2.1(@harnessio/svg-icon@0.2.1)(react@18.3.1))(@harnessio/svg-icon@0.2.1)(react@18.3.1)':
     dependencies:
