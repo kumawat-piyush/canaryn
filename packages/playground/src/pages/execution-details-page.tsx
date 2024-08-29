@@ -2,7 +2,7 @@ import React from 'react'
 import { ExecutionDetails } from '../components/execution/execution-details'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@harnessio/canary'
 import { ExecutionContextProvider } from '../components/execution/execution-context'
-
+import { keyValueMockData } from './mocks/execution/key-values'
 export enum ExecutionTab {
   SUMMARY = 'summary',
   LOG = 'log',
@@ -13,103 +13,6 @@ export enum ExecutionTab {
   SECURITY = 'security'
 }
 //simple data for rendering
-const keyValueMockData = [
-  {
-    name: 'Input Name',
-    value: 'Input Value'
-  },
-  {
-    name: 'identifier',
-    value: 'canaryDeployment'
-  },
-  {
-    name: 'name',
-    value: 'canaryDeployment'
-  },
-  {
-    name: 'timeout',
-    value: '10m'
-  },
-  {
-    name: 'type',
-    value: 'K8sCanaryDeploy'
-  },
-  {
-    name: 'type',
-    value: 'percentage'
-  },
-  {
-    name: 'identifier',
-    value: 'canaryDeployment'
-  },
-  {
-    name: 'name',
-    value: 'canaryDeployment'
-  },
-  {
-    name: 'timeout',
-    value: '10m'
-  },
-  {
-    name: 'type',
-    value: 'K8sCanaryDeploy'
-  },
-  {
-    name: 'type',
-    value: 'percentage'
-  },
-  {
-    name: 'identifier',
-    value: 'canaryDeployment'
-  },
-  {
-    name: 'name',
-    value: 'canaryDeployment'
-  },
-  {
-    name: 'timeout',
-    value: '10m'
-  },
-  {
-    name: 'type',
-    value: 'K8sCanaryDeploy'
-  },
-  {
-    name: 'type',
-    value: 'percentage'
-  },
-  {
-    name: 'identifier',
-    value: 'canaryDeployment'
-  },
-  {
-    name: 'name',
-    value: 'canaryDeployment'
-  },
-  {
-    name: 'timeout',
-    value: '10m'
-  },
-  {
-    name: 'type',
-    value: 'K8sCanaryDeploy'
-  },
-  {
-    name: 'type',
-    value: 'percentage'
-  },
-  {
-    specs: [{ name: 'spec1', value: 'value1' }]
-  },
-  {
-    specs: [
-      {
-        name: 'spec2',
-        value: 'value2'
-      }
-    ]
-  }
-]
 
 export default function ExecutionDetailsPage() {
   return (

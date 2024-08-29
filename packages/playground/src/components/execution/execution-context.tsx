@@ -1,8 +1,12 @@
 // this component is to prevent props drilling and pass the value to the children
 import React, { createContext, ReactNode, useContext } from 'react'
 
+type Value = string | { [key: string]: string | unknown }
+
+export type KeyValuePair = { name: string; value: Value | Value[] }
+
 export interface ExecutionContextType {
-  value: unknown
+  value: KeyValuePair[]
 }
 
 export const ExecutionContext = createContext<ExecutionContextType | undefined>(undefined)
