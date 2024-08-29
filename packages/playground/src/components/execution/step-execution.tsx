@@ -7,6 +7,7 @@ import { Layout } from '../layout/layout'
 import { ExecutionState, ExecutionStatus } from './execution-status'
 import { getDuration } from '../../utils/TimeUtils'
 import { KeyValueTable } from './key-value-table'
+import { tableNameMockData } from '../../pages/mocks/execution/key-values'
 
 export interface StepProps {
   name: string
@@ -72,7 +73,7 @@ export const StepExecution: React.FC<StageExecutionProps> = ({ step, stepIndex }
           <TabsContent value={StepExecutionTab.INPUT}>
             {/*here is the execution details of input table */}
             <ScrollArea className="h-[calc(100vh-23rem)] border-t pt-4">
-              <KeyValueTable />
+              <KeyValueTable tableName={tableNameMockData.name} tableNameVal={tableNameMockData.value} />
             </ScrollArea>
           </TabsContent>
         </Layout.Vertical>

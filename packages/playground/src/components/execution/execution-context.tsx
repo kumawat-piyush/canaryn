@@ -2,8 +2,10 @@
 import React, { createContext, ReactNode, useContext } from 'react'
 
 type Value = string | { [key: string]: string | unknown }
+type TableVal = string
 
 export type KeyValuePair = { name: string; value: Value | Value[] }
+export type TableTitleKeyPair = { name: string; value: TableVal }
 
 export interface ExecutionContextType {
   value: KeyValuePair[]

@@ -1,4 +1,9 @@
-import { KeyValuePair } from '../../../components/execution/execution-context'
+import { KeyValuePair, TableTitleKeyPair } from '../../../components/execution/execution-context'
+
+export const tableNameMockData: TableTitleKeyPair = {
+  name: 'Input Name',
+  value: 'Input Value'
+}
 
 export const keyValueMockData: KeyValuePair[] = [
   {
