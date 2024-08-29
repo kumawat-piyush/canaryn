@@ -1,21 +1,14 @@
 import React, { useMemo, useState } from 'react'
 import cx from 'classnames'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-  Icon,
-  SplitButton,
-  StackedList,
-  Text
-} from '@harnessio/canary'
+import { Accordion, AccordionItem, AccordionTrigger, Icon, SplitButton, StackedList, Text } from '@harnessio/canary'
 import { MergeCheckStatus, PullRequestState, TypesPullReq, TypeCheckData, EnumCheckStatus } from './interfaces'
 import { NavArrowUp, NavArrowDown, WarningTriangleSolid, CheckCircleSolid, Clock } from '@harnessio/icons-noir'
 
 import PullRequestCheckSection from './sections/pull-request-check-section'
 import PullRequestCommentSection from './sections/pull-request-comment-section'
 import PullRequestChangesSection from './sections/pull-request-changes-section'
+import { LineDescription, LineTitle } from './pull-request-line-title'
+import PullRequestMergeSection from './sections/pull-request-merge-section'
 
 interface PullRequestPanelProps {
   pullReqMetadata: TypesPullReq
@@ -33,16 +26,7 @@ interface HeaderProps {
   unchecked: boolean
   mergeable: boolean
   isOpen: boolean
-  ruleViolation: boolean
-}
-
-interface LineTitleProps {
-  text?: string
-  icon?: React.ReactElement
-}
-
-interface LineDescriptionProps {
-  text?: string
+  ruleViolation?: boolean
 }
 
 const HeaderTitle = ({ ...props }: HeaderProps) => {
@@ -65,32 +49,14 @@ const HeaderTitle = ({ ...props }: HeaderProps) => {
   )
 }
 
-const LineTitle = ({ ...props }: LineTitleProps) => {
-  return (
-    <div className="inline-flex gap-2 items-center">
-      {props.icon}
-      <Text weight="medium">{props.text}</Text>
-    </div>
-  )
-}
-
-const LineDescription = ({ ...props }: LineDescriptionProps) => {
-  return (
-    <div className="ml-6 inline-flex gap-2 items-center">
-      <Text size={1} weight="normal" color={'tertiaryBackground'}>
-        {props.text}
-      </Text>
-    </div>
-  )
-}
-
 const PullRequestPanel = ({
   pullReqMetadata,
   PRStateLoading,
   checks,
   changesInfo,
   checksInfo,
-  commentsInfo
+  commentsInfo,
+  ruleViolation
 }: PullRequestPanelProps) => {
   const [isExpanded, setExpanded] = useState(false)
 
@@ -103,7 +69,6 @@ const PullRequestPanel = ({
     () => pullReqMetadata.merge_check_status === MergeCheckStatus.UNCHECKED && !isClosed,
     [pullReqMetadata, isClosed]
   )
-  const ruleViolation = false
   const checkData = checks || []
 
   return (
@@ -140,49 +105,12 @@ const PullRequestPanel = ({
               />
             </AccordionTrigger>
           </AccordionItem>
-          <AccordionItem value="item-2">
-            <AccordionTrigger className="text-left" hideChevron>
-              <StackedList.Field
-                title={<LineTitle text={'All comments resolved'} icon={<Icon name="success" size={16} />} />}
-              />
-            </AccordionTrigger>
-          </AccordionItem>
-          <AccordionItem value="item-3">
-            <AccordionTrigger className="text-left">
-              <StackedList.Field
-                title={<LineTitle text={'All checks have succeeded'} icon={<Icon name="success" size={16} />} />}
-                description={<LineDescription text={'2 suceeded'} />}
-              />
-            </AccordionTrigger>
-            <AccordionContent className="pl-6">
-              <StackedList.Root>
-                <StackedList.Item>
-                  <StackedList.Field
-                    title={<LineTitle text={'All checks have succeeded'} icon={<Icon name="success" size={16} />} />}
-                    description={<LineDescription text={'2 suceeded'} />}
-                  />
-                </StackedList.Item>
-                <StackedList.Item>
-                  <StackedList.Field
-                    title={<LineTitle text={'All checks have succeeded'} icon={<Icon name="success" size={16} />} />}
-                    description={<LineDescription text={'2 suceeded'} />}
-                  />
-                </StackedList.Item>
-              </StackedList.Root>
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-4" isLast>
-            <AccordionTrigger className="text-left" hideChevron>
-              <StackedList.Field
-                title={
-                  <LineTitle
-                    text={'This branch has no conflicts with main branch'}
-                    icon={<Icon name="success" size={16} />}
-                  />
-                }
-              />
-            </AccordionTrigger>
-          </AccordionItem>
+          {!pullReqMetadata.merged && <PullRequestCommentSection commentsInfo={commentsInfo} />}
+          <PullRequestCheckSection checkData={checkData} checksInfo={checksInfo} />
+
+          {!pullReqMetadata.merged && (
+            <PullRequestMergeSection unchecked={unchecked} mergeable={mergeable} pullReqMetadata={pullReqMetadata} />
+          )}
         </Accordion>
       </StackedList.Item>
     </StackedList.Root>

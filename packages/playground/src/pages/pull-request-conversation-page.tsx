@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import { mockOverviewData } from '../data/mockOverviewData'
 import { mockReviewers } from '../data/mockReviewer'
-import { mockPullReqMetadata } from '../data/mockPullReqMetadata'
-import { mockChecksSuccessData } from '../data/mockChecksData'
+import {
+  mockPullReqMetadata,
+  mockPullReqMetadataConflict,
+  mockPullReqMetadataUnchecked
+} from '../data/mockPullReqMetadata'
+import { mockChecksFailedData, mockChecksSuccessData } from '../data/mockChecksData'
 import { mockChangesData } from '../data/mockChangesData'
 import { mockChecksSucceededInfo, mockChecksFailedInfo } from '../data/mockCheckInfo'
 import { mockCommentResolvedInfo, mockCommentUnresolvedInfo } from '../data/mockCommentInfo'
@@ -24,9 +28,16 @@ export default function PullRequestConversationPage() {
   const [dateOrderSort, setDateOrderSort] = useState<{ label: string; value: string }>(dateFilters[0])
   const activityFilters = useActivityFilters()
   const [activityFilter, setActivityFilter] = useState<{ label: string; value: string }>(activityFilters[0])
-  const ruleViolation = false
-  const checksInfo = !ruleViolation ? mockChecksSucceededInfo : mockChecksFailedInfo
-  const commentsInfo = !ruleViolation ? mockCommentResolvedInfo : mockCommentUnresolvedInfo
+  const ruleViolation = loadState !== 'data-loaded-checksFailed' ? false : true
+  const checksInfo = loadState === 'data-loaded-checksFailed' ? mockChecksFailedInfo : mockChecksSucceededInfo
+  const commentsInfo = loadState === 'data-loaded-checksFailed' ? mockCommentUnresolvedInfo : mockCommentResolvedInfo
+  const checksData = loadState === 'data-loaded-checksFailed' ? mockChecksFailedData : mockChecksSuccessData
+  const pullReqMetadata =
+    loadState === 'data-loaded-unchecked'
+      ? mockPullReqMetadataUnchecked
+      : loadState === 'data-loaded-conflict'
+        ? mockPullReqMetadataConflict
+        : mockPullReqMetadata
 
   if (loadState == 'loading') {
     return (
@@ -60,8 +71,8 @@ export default function PullRequestConversationPage() {
               checksInfo={checksInfo}
               commentsInfo={commentsInfo}
               ruleViolation={ruleViolation}
-              checks={mockChecksSuccessData}
-              pullReqMetadata={mockPullReqMetadata}
+              checks={checksData}
+              pullReqMetadata={pullReqMetadata}
               PRStateLoading={false}
             />
             <Spacer size={9} />
