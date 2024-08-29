@@ -1,4 +1,3 @@
-import { Button } from '@harnessio/canary'
 // import { Pipeline, PipelineList } from '@harnessio/playground'
 import { useListPipelinesQuery, TypesPipeline } from '@harnessio/code-service-client'
 
@@ -10,16 +9,15 @@ export default function Pipelines() {
     },
     /* To enable mock data */
     {
-      placeholderData: [{ name: 'test pipeline' }],
-      enabled: false
+      placeholderData: [{ id: 'pipeline1' }, { id: 'pipeline2' }],
+      enabled: true /* if true, placeholderData will be served even if api call fails */
     }
   )
 
   return (
     <div className="flex flex-col justify-center">
-      <h1>Gitness App</h1>
-      <Button>Test</Button>
-      {pipelines?.map((pipeline: TypesPipeline) => <div>{pipeline.id}</div>)}
+      <h1>Pipelines</h1>
+      {pipelines?.map((pipeline: TypesPipeline) => <div key={pipeline.id}>{pipeline.id}</div>)}
     </div>
   )
 }
