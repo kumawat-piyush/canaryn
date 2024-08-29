@@ -22,10 +22,15 @@ interface KeyValueTableProps {
   tableTitleName: string
   tableTitleVal: string
   className?: string
-  tableVal: KeyValuePair
+  tableSpec: KeyValuePair[]
 }
 
-export const KeyValueTable: React.FC<KeyValueTableProps> = ({ className, tableTitleName, tableTitleVal, tableVal }) => {
+export const KeyValueTable: React.FC<KeyValueTableProps> = ({
+  className,
+  tableTitleName,
+  tableTitleVal,
+  tableSpec
+}) => {
   // ToDO:const getAccordian = () => <div></div> // do this function recursively
   return (
     <div className="overflow-x-auto pt-4">
@@ -46,8 +51,8 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({ className, tableTi
         </TableHeader>
         <TableBody>
           {/* Todo: currently for the simple data, will add more accdordin sec with recursive data */}
-          {Array.isArray(tableVal) &&
-            tableVal.map((item, index: number) => {
+          {Array.isArray(tableSpec) &&
+            tableSpec.map((item, index: number) => {
               //make the detection better
               if (typeof item.value === 'string') {
                 return (
