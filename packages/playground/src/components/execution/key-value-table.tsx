@@ -12,12 +12,16 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '@harnessio/canary'
-import { NavArrowDown } from '@harnessio/icons-noir'
+
+type KeyValuePair = {
+  name: string
+  value: string | KeyValuePair[]
+}
 interface KeyValueTableProps {
   tableTitleName: string
   tableTitleVal: string
   className?: string
-  tableVal: { name: string; value: string | object | [] }[]
+  tableVal: KeyValuePair
 }
 
 export const KeyValueTable: React.FC<KeyValueTableProps> = ({ className, tableTitleName, tableTitleVal, tableVal }) => {
@@ -67,19 +71,18 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({ className, tableTi
             <TableCell colSpan={2} className="p-0">
               <Accordion collapsible type="single">
                 <AccordionItem value="specs">
-                  <AccordionTrigger className="w-full pt-1 pb-2 pl-4 flex">
-                    <NavArrowDown className="h-4 w-4" />
+                  <AccordionTrigger className="w-full pt-2 pb-2 pl-4 flex">
                     <Text
                       size={2}
                       weight="normal"
-                      className="text-ring flex-grow text-left ml-1"
+                      className="text-ring text-left"
                       style={{ color: 'rgba(147, 147, 159, 1)' }}>
                       specs
                     </Text>
                   </AccordionTrigger>
                   <AccordionContent className="w-full pl-0 pr-0">
                     <ul className="border-b">
-                      <li className="p-2.5 pl-12 inline-block w-1/2">
+                      <li className="p-2.5 pl-8 inline-block w-1/2">
                         <Text size={2} weight="normal" className="text-ring">
                           this is spec test col1
                         </Text>
@@ -91,7 +94,7 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({ className, tableTi
                       </li>
                     </ul>
                     <ul className="border-b">
-                      <li className="p-2.5 pl-12 inline-block w-1/2">
+                      <li className="p-2.5 pl-8 inline-block w-1/2">
                         <Text size={2} weight="normal" className="text-ring">
                           this is spec test col2
                         </Text>
