@@ -6,13 +6,12 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5137, // UI dev server port
-    cors: false,
     proxy: {
-      // '/code': {
-      //   target: 'http://localhost:3000' // Proxy API requests to another local server
-      //   // changeOrigin: true
-      // }
-      '/api': 'http://localhost:3000'
+      '/repos': {
+        changeOrigin: true,
+        target: 'http://127.0.0.1:3000' /* setting as "http://localhost:3000" won't work */,
+        rewrite: path => path.replace('/repos', '/api/v1/repos')
+      }
     }
   }
 })

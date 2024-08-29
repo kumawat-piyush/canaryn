@@ -18,6 +18,7 @@
     "@harnessio/canary": "workspace:*",
     "@harnessio/code-service-client": "1.1.0",
     "@harnessio/playground": "workspace:*",
+    "@tanstack/react-query": "4.36.1",
     "prettier": "^3.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
