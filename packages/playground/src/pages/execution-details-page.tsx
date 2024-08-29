@@ -1,8 +1,6 @@
 import React from 'react'
 import { ExecutionDetails } from '../components/execution/execution-details'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@harnessio/canary'
-import { ExecutionContextProvider } from '../components/execution/execution-context'
-import { keyValueMockData } from './mocks/execution/key-values'
 export enum ExecutionTab {
   SUMMARY = 'summary',
   LOG = 'log',
@@ -35,9 +33,7 @@ export default function ExecutionDetailsPage() {
         {/**
          * @TODO replace with actual values
          */}
-        <ExecutionContextProvider value={keyValueMockData}>
-          <ExecutionDetails executionId={1} pipelineId={1} />
-        </ExecutionContextProvider>
+        <ExecutionDetails executionId={1} pipelineId={1} />
       </TabsContent>
     </Tabs>
   )

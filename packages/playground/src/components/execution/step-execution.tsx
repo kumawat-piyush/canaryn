@@ -7,9 +7,10 @@ import { Layout } from '../layout/layout'
 import { ExecutionState, ExecutionStatus } from './execution-status'
 import { getDuration } from '../../utils/TimeUtils'
 import { KeyValueTable } from './key-value-table'
-import { tableNameMockData } from '../../pages/mocks/execution/key-values'
 
 export interface StepProps {
+  input: []
+  inputTitle: { name: string; value: string }
   name: string
   status: ExecutionState
   started?: number
@@ -47,6 +48,8 @@ const StepExecutionToolbar: React.FC = () => {
 }
 
 export const StepExecution: React.FC<StageExecutionProps> = ({ step, stepIndex }) => {
+  const inputTable = step.input
+  const { name, value } = step.inputTitle
   return (
     <Layout.Vertical>
       <Layout.Horizontal className="flex justify-between items-center">
@@ -73,7 +76,7 @@ export const StepExecution: React.FC<StageExecutionProps> = ({ step, stepIndex }
           <TabsContent value={StepExecutionTab.INPUT}>
             {/*here is the execution details of input table */}
             <ScrollArea className="h-[calc(100vh-23rem)] border-t pt-4">
-              <KeyValueTable tableName={tableNameMockData.name} tableNameVal={tableNameMockData.value} />
+              <KeyValueTable tableVal={inputTable} tableTitleName={name} tableTitleVal={value} />
             </ScrollArea>
           </TabsContent>
         </Layout.Vertical>

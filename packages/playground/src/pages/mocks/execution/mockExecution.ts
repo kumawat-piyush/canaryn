@@ -49,6 +49,10 @@ export const data = {
           stopped: 1722296949000,
           image: 'drone/git:latest',
           detached: false,
+          inputTitle: {
+            name: 'Input Name',
+            value: 'Input Value'
+          },
           input: [
             {
               name: '21212',
@@ -167,6 +171,10 @@ export const data = {
           depends_on: ['clone'],
           image: 'docker.io/library/alpine:latest',
           detached: false,
+          inputTitle: {
+            name: 'Input Name',
+            value: 'Input Value'
+          },
           input: [
             {
               name: '21212',
@@ -285,6 +293,10 @@ export const data = {
           depends_on: ['clone'],
           image: 'docker.io/library/alpine:latest',
           detached: false,
+          inputTitle: {
+            name: 'Input Name',
+            value: 'Input Value'
+          },
           input: [
             {
               name: '21212',
@@ -418,6 +430,10 @@ export const data = {
           stopped: 1722296944000,
           image: 'drone/git:latest',
           detached: false,
+          inputTitle: {
+            name: 'Input Name',
+            value: 'Input Value'
+          },
           input: [
             {
               name: '21212',
@@ -520,6 +536,10 @@ export const data = {
           depends_on: ['clone'],
           image: 'docker.io/library/alpine:latest',
           detached: false,
+          inputTitle: {
+            name: 'Input Name',
+            value: 'Input Value'
+          },
           input: [
             {
               name: '21212',
@@ -622,6 +642,10 @@ export const data = {
           depends_on: ['clone'],
           image: 'docker.io/library/alpine:latest',
           detached: false,
+          inputTitle: {
+            name: 'Input Name',
+            value: 'Input Value'
+          },
           input: [
             {
               name: '21212',
