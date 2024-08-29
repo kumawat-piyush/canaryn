@@ -17,6 +17,7 @@ type KeyValuePair = {
   name: string
   value: string | KeyValuePair[]
 }
+
 interface KeyValueTableProps {
   tableTitleName: string
   tableTitleVal: string

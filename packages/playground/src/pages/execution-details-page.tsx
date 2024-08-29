@@ -10,7 +10,6 @@ export enum ExecutionTab {
   TEST = 'test',
   SECURITY = 'security'
 }
-//simple data for rendering
 
 export default function ExecutionDetailsPage() {
   return (
