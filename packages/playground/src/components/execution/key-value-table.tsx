@@ -22,7 +22,6 @@ interface KeyValueTableProps {
 
 export const KeyValueTable: React.FC<KeyValueTableProps> = ({ className, tableTitleName, tableTitleVal, tableVal }) => {
   // ToDO:const getAccordian = () => <div></div> // do this function recursively
-
   return (
     <div className="overflow-x-auto pt-4">
       <Table className={className}>
@@ -44,7 +43,6 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({ className, tableTi
           {/* Todo: currently for the simple data, will add more accdordin sec with recursive data */}
           {Array.isArray(tableVal) &&
             tableVal.map((item, index: number) => {
-              // if (typeof item.value === 'string') {
               //make the detection better
               if (typeof item.value === 'string') {
                 return (
@@ -62,32 +60,9 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({ className, tableTi
                   </TableRow>
                 )
               }
-              // } else {
-              //   //currently low level for nested accordions
-              //   //Todo: render span first recurively and then add the accordion
-              //   return (
-              // <TableRow key={index}>
-              // <Accordion collapsible>
-              //   <AccordionItem value={item.name}>
-              //     <AccordionTrigger>{item.name}</AccordionTrigger>
-              //     <AccordionContent>
-              //       <div className="pt-2.5 pl-4">
-              //         <Text size={2} weight="normal" className="text-ring">
-              //           {item.name}
-              //         </Text>
-              //       </div>
-              //       <div className="pt-2.5">
-              //         <Text size={2} weight="normal" className="text-ring">
-              //           {item.value}
-              //         </Text>
-              //       </div>
-              //     </AccordionContent>
-              //   </AccordionItem>
-              // </Accordion>
-              // </TableRow>
-              //   )
-              // }
             })}
+          {/* // currently low level for nested accordions-successfully
+              // Todo: render span first recurively and then add the accordion */}
           <TableRow key="test">
             <TableCell colSpan={2} className="p-0">
               <Accordion collapsible type="single">
@@ -103,30 +78,30 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({ className, tableTi
                     </Text>
                   </AccordionTrigger>
                   <AccordionContent className="w-full pl-0 pr-0">
-                    <div className="border-b">
-                      <div className="p-2.5 pl-12 inline-block w-1/2">
+                    <ul className="border-b">
+                      <li className="p-2.5 pl-12 inline-block w-1/2">
                         <Text size={2} weight="normal" className="text-ring">
                           this is spec test col1
                         </Text>
-                      </div>
-                      <div className="p-2.5 inline-block w-1/2">
+                      </li>
+                      <li className="p-2.5 inline-block w-1/2">
                         <Text size={2} weight="normal" className="text-ring">
                           this is spec test value col1
                         </Text>
-                      </div>
-                    </div>
-                    <div className="border-b">
-                      <div className="p-2.5 pl-12 inline-block w-1/2">
+                      </li>
+                    </ul>
+                    <ul className="border-b">
+                      <li className="p-2.5 pl-12 inline-block w-1/2">
                         <Text size={2} weight="normal" className="text-ring">
                           this is spec test col2
                         </Text>
-                      </div>
-                      <div className="p-2.5 inline-block w-1/2">
+                      </li>
+                      <li className="p-2.5 inline-block w-1/2">
                         <Text size={2} weight="normal" className="text-ring">
                           this is spec test value col2
                         </Text>
-                      </div>
-                    </div>
+                      </li>
+                    </ul>
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
