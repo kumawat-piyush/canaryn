@@ -13,7 +13,6 @@ import ReactFlow, {
   ControlButton,
   useReactFlow
 } from 'reactflow'
-import { Circle, Minus } from '@harnessio/icons-noir'
 import { defaultEdgeMarkerOptions } from './nodes-edges-defaults'
 import { NodeTypes } from './types'
 import { CanvasEntity, useCanvasStore } from '../../framework/CanvasStore/CanvasStoreContext'
@@ -167,7 +166,7 @@ const CanvasInternal = (props: CanvasProps) => {
                     }
                   })
                 }>
-                <Circle />
+                {/* <Circle /> */}
               </ControlButton>
               <ControlButton
                 onClick={() =>
@@ -178,7 +177,7 @@ const CanvasInternal = (props: CanvasProps) => {
                     }
                   })
                 }>
-                <Minus />
+                {/* <Minus /> */}
               </ControlButton>
             </>
           )}

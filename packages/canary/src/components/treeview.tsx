@@ -2,7 +2,6 @@ import { ScrollArea } from '@radix-ui/react-scroll-area'
 import { cn } from '../lib/utils'
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
 import moment from 'moment'
-import { NavArrowRight, NavArrowDown, Circle, CheckCircleSolid, XmarkCircleSolid } from '@harnessio/icons-noir'
 import React, { createContext, forwardRef, useCallback, useContext, useEffect, useState } from 'react'
 
 enum Status {
@@ -20,13 +19,13 @@ type ExecutionDetail = {
 const getStatusIcon = (status: Status): React.ReactElement => {
   switch (status) {
     case Status.QUEUED:
-      return <Circle size="16" />
+      return <></>
     case Status.IN_PROGRESS:
-      return <Circle size="16" />
+      return <></>
     case Status.SUCCESS:
-      return <CheckCircleSolid color="#63E9A6" size="16" />
+      return <></>
     case Status.FAILED:
-      return <XmarkCircleSolid color="#db6662" size="16" />
+      return <></>
     default:
       return <></>
   }
@@ -226,9 +225,7 @@ const Folder = forwardRef<HTMLDivElement, FolderProps & React.HTMLAttributes<HTM
           })}
           disabled={!isSelectable}
           onClick={() => handleExpand(value)}>
-          {expendedItems?.includes(value)
-            ? (openIcon ?? <NavArrowDown className="h-4 w-4" size="12" />)
-            : (closeIcon ?? <NavArrowRight className="h-4 w-4" size="12" />)}
+          {expendedItems?.includes(value) ? (openIcon ?? <></>) : (closeIcon ?? <></>)}
           <div className="flex items-baseline justify-between w-full mt-1 mr-1">
             <div className="flex items-baseline">
               <div className="flex self-center mr-1">{getStatusIcon(status)}</div>

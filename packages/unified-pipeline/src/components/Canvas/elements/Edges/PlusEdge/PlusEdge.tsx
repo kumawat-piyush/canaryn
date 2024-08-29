@@ -2,7 +2,6 @@ import React from 'react'
 import cx from 'classnames'
 import { capitalize } from 'lodash-es'
 import { SmoothStepEdge, EdgeLabelRenderer, EdgeProps, Node, XYPosition, getBezierPath, useReactFlow } from 'reactflow'
-import { Plus } from '@harnessio/icons-noir'
 import type { NodeType } from '../../../types'
 import { useCanvasStore } from '../../../../../framework/CanvasStore/CanvasStoreContext'
 
@@ -99,7 +98,7 @@ export default function PlusEdge(props: EdgeProps<PlusEdgeProps>) {
                 }
               )}>
               {enableDiagnostics?.Edge && <span className="text-red text-xs">{edgeId}</span>}
-              <Plus color="white" className="hover:cursor-pointer" />
+              {/* <Plus color="white" className="hover:cursor-pointer" /> */}
             </div>
           </EdgeLabelRenderer>
         }

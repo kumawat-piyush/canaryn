@@ -1,6 +1,5 @@
 import React from 'react'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { PlaySolid } from '@harnessio/icons-noir'
 import { DefaultNodeProps, ExpandNodeProps } from '../../../types'
 import { useCanvasStore } from '../../../../../framework/CanvasStore/CanvasStoreContext'
 import { getNodeDiagnostics } from '../../../../../components/Canvas/utils/NodeUtils'
@@ -13,7 +12,7 @@ export default function RootNode({ data, xPos, yPos, zIndex }: NodeProps<RootNod
   return (
     <>
       <div className="w-10 h-10 rounded-full flex justify-center items-center bg-studio-1">
-        <PlaySolid color="green" className="hover:cursor-pointer" />
+        {/* <PlaySolid color="green" className="hover:cursor-pointer" /> */}
       </div>
       <Handle position={sourcePosition} type="source" />
       {enableDiagnostics?.Node && (

@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react'
 import cx from 'classnames'
 import type { NodeProps } from 'reactflow'
 import { Handle, Position, useReactFlow, Node } from 'reactflow'
-import { Plus, Computer } from '@harnessio/icons-noir'
 import { Skeleton, Text } from '@harnessio/canary'
 import {
   PositionType,
@@ -54,7 +53,7 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
       id: 'new_node',
       data: {
         name: 'New node',
-        icon: <Computer />,
+        icon: <></>,
         path: '',
         expandable: true,
         positionType: PositionType.RELATIVE,
@@ -114,16 +113,17 @@ export default function AtomicNode({ isConnectable, data, id, xPos, yPos, zIndex
         </div>
       )}
       <Handle type="source" position={Position.Right} isConnectable={isConnectable}>
-        {status !== Status.QUEUED && (
-          <Plus
-            className={cx(
-              'hover:cursor-pointer rounded-full w-5 h-5 opacity-0 border border-studio-4/[0.6] bg-studio-1 text-studio-7 transform -translate-x-2 -translate-y-2',
-              {
-                'transition-opacity duration-200 ease-in-out opacity-100': showPlus
-              }
-            )}
-          />
-        )}
+        {
+          status !== Status.QUEUED && <></>
+          // <Plus
+          //   className={cx(
+          //     'hover:cursor-pointer rounded-full w-5 h-5 opacity-0 border border-studio-4/[0.6] bg-studio-1 text-studio-7 transform -translate-x-2 -translate-y-2',
+          //     {
+          //       'transition-opacity duration-200 ease-in-out opacity-100': showPlus
+          //     }
+          //   )}
+          // />
+        }
       </Handle>
     </div>
   )
