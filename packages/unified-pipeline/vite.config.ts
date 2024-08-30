@@ -7,12 +7,14 @@ import { uniq } from 'lodash-es'
 import ViteYaml from '@modyfi/vite-plugin-yaml'
 const pkg = require('./package.json')
 
-const external = uniq(
-  Object.keys(pkg.dependencies || [])
-    .concat(Object.keys(pkg.devDependencies || []))
-    .concat(Object.keys(pkg.peerDependencies || []))
-    .concat(['elkjs', 'web-worker'])
-)
+// const external = uniq(
+//   Object.keys(pkg.dependencies || [])
+//     .concat(Object.keys(pkg.devDependencies || []))
+//     .concat(Object.keys(pkg.peerDependencies || []))
+//     .concat(['elkjs', 'web-worker'])
+// )
+
+const external = ['react', 'react-dom']
 
 // https://vitejs.dev/config/
 export default defineConfig({
