@@ -66,6 +66,12 @@
     --input: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
     --radius: 0.5rem;
+    --navbar-icon-secondary: 240 6% 40%;
+    --navbar-text-secondary: var(--grey-70);
+    --success: var(--green);
+    --error: var(--red);
+    --warning: var(--orange);
+    --ai: var(--purple);
   }
 
   .dark {
@@ -93,6 +99,8 @@
     --border: var(--grey-15);
     --input: var(--grey-15);
     --ring: var(--grey-80);
+    --navbar-icon-secondary: 240 6% 40%;
+    --navbar-text-secondary: var(--grey-70);
     --success: var(--green);
     --error: var(--red);
     --warning: var(--orange);
@@ -159,22 +167,6 @@
 .form-input {
   @apply font-light text-sm w-full mt-1 border-white/10 bg-white/5 rounded-[4px];
   @apply placeholder:text-white/50 !important;
-}
-
-/* Navbar utilities */
-.navbar-item svg {
-  @apply w-3 h-3 text-tertiary-background opacity-80 ease-in-out duration-150 truncate;
-}
-.navbar-item.active svg,
-.navbar-item:hover svg {
-  @apply text-primary opacity-100 brightness-200 contrast-200 bg-gradient-radial from-primary/15 to-transparent;
-}
-.navbar-item p {
-  @apply font-medium -tracking-[0.02em] text-tertiary-background ease-in-out duration-150 truncate;
-}
-.navbar-item.active p,
-.navbar-item:hover p {
-  @apply opacity-100 text-primary;
 }
 
 /* Navbar company badge */

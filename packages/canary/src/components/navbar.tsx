@@ -1,6 +1,7 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './accordion'
+import { Text } from './text'
 
 interface NavbarRootProps {
   className?: string
@@ -64,12 +65,25 @@ interface ItemProps {
 
 function Item({ icon, text, active }: ItemProps) {
   return (
-    <div
-      className={cn('navbar-item flex gap-2.5 items-center cursor-pointer group select-none py-1.5', {
-        active: active
-      })}>
-      <div className="flex items-center">{icon}</div>
-      <p className="-tracking-[2%]">{text}</p>
+    <div className={cn('group flex gap-2.5 items-center cursor-pointer group select-none py-1.5')}>
+      <div
+        className={cn(
+          'flex items-center text-navbar-icon-secondary group-hover:text-primary ease-in-out duration-100 truncate',
+          { 'text-primary': active }
+        )}>
+        {icon}
+      </div>
+      <Text
+        size={2}
+        weight="medium"
+        className={cn(
+          '-tracking-[0.02em] text-navbar-text-secondary group-hover:text-primary ease-in-out duration-100 truncate',
+          {
+            'text-primary': active
+          }
+        )}>
+        {text}
+      </Text>
     </div>
   )
 }

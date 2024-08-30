@@ -57,6 +57,12 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'
         },
+        'navbar-icon': {
+          secondary: 'hsl(var(--navbar-icon-secondary))'
+        },
+        'navbar-text': {
+          secondary: 'hsl(var(--navbar-text-secondary))'
+        },
         white: {
           DEFAULT: 'hsl(var(--white))'
         },
@@ -88,6 +94,15 @@ module.exports = {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))'
+      },
+      boxShadow: {
+        't-md': '0 -1px 0 0 var(--border)',
+        'l-md': '-1px 0 0 0 var(--border)',
+        'r-md': '1px 0 0 0 var(--border)',
+        'b-md': '0 1px 0 0 var(--border)',
+        'active-tab':
+          'inset 0 1px 0 0 hsl(var(--border)), inset 1px 0 0 0 hsl(var(--border)), inset -1px 0 0 0 hsl(var(--border))',
+        'inactive-tab': 'inset 0 -1px 0 0 hsl(var(--border))'
       },
       keyframes: {
         'accordion-down': {
