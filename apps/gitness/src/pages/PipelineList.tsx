@@ -1,4 +1,3 @@
-// import { Pipeline, PipelineList } from '@harnessio/playground'
 import { useListPipelinesQuery, TypesPipeline } from '@harnessio/code-service-client'
 
 export default function Pipelines() {
@@ -6,18 +5,18 @@ export default function Pipelines() {
     {
       repo_ref: 'workspace/repo/+',
       queryParams: { page: 0, limit: 10, query: '', latest: true }
-    },
-    /* To enable mock data */
-    {
-      placeholderData: [{ id: 'pipeline1' }, { id: 'pipeline2' }],
-      enabled: true /* if true, placeholderData will be served even if api call fails */
     }
+    // /* To enable mock data */
+    // {
+    //   placeholderData: { content: [{ id: 'pipeline1' }, { id: 'pipeline2' }] },
+    //   enabled: true
+    // }
   )
 
   return (
     <div className="flex flex-col justify-center">
       <h1>Pipelines</h1>
-      {pipelines?.map((pipeline: TypesPipeline) => <div key={pipeline.id}>{pipeline.id}</div>)}
+      {pipelines?.content.map((pipeline: TypesPipeline) => <div key={pipeline.id}>{pipeline.id}</div>)}
     </div>
   )
 }
