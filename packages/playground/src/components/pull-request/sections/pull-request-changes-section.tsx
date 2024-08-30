@@ -162,6 +162,16 @@ const PullRequestChangesSection = ({
       </div>
     )
   }
+
+  const viewBtn =
+    (minApproval && minReqLatestApproval && minApproval > minReqLatestApproval) ||
+    (!isEmpty(approvedEvaluations) && minReqLatestApproval === 0) ||
+    (minApproval && minApproval > 0 && minReqLatestApproval === undefined) ||
+    (minReqLatestApproval && minReqLatestApproval > 0) ||
+    !isEmpty(changeReqEvaluations) ||
+    !isEmpty(codeOwners) ||
+    false
+
   return (
     <AccordionItem value="item-1">
       <AccordionTrigger className="text-left">
@@ -169,6 +179,7 @@ const PullRequestChangesSection = ({
           title={<LineTitle text={changesInfo.header} icon={getStatusIcon(changesInfo.status)} />}
           description={<LineDescription text={changesInfo.content} />}
         />
+        {viewBtn && <Text className="text-xs px-2 py-1.5">Show more</Text>}
       </AccordionTrigger>
       <AccordionContent>
         <div>
