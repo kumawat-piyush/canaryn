@@ -57,12 +57,7 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({
         )
       } else if (Array.isArray(item.value) || typeof item.value === 'object') {
         return (
-          <Accordion
-            type="single"
-            key={index}
-            className="border-0 last:border-b-0"
-            defaultValue={item.name}
-            collapsible>
+          <Accordion type="single" key={index} className="border-0" defaultValue={item.name} collapsible>
             <AccordionItem value={item.name} className="border-0">
               <AccordionTrigger
                 className="w-full pt-2 pb-2 pr-4 flex"
