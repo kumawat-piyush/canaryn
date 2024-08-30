@@ -1,22 +1,25 @@
-import React, { useMemo, useState } from 'react'
-import cx from 'classnames'
-import { Accordion, AccordionItem, AccordionTrigger, Icon, SplitButton, StackedList, Text } from '@harnessio/canary'
-import { MergeCheckStatus, PullRequestState, TypesPullReq, TypeCheckData, EnumCheckStatus } from './interfaces'
-import { NavArrowUp, NavArrowDown, WarningTriangleSolid, CheckCircleSolid, Clock } from '@harnessio/icons-noir'
-
+import React, { useMemo } from 'react'
+import { Accordion, SplitButton, StackedList, Text } from '@harnessio/canary'
+import {
+  MergeCheckStatus,
+  PullRequestState,
+  TypesPullReq,
+  TypeCheckData,
+  EnumCheckStatus,
+  PullRequestChangesSectionProps
+} from './interfaces'
 import PullRequestCheckSection from './sections/pull-request-check-section'
 import PullRequestCommentSection from './sections/pull-request-comment-section'
 import PullRequestChangesSection from './sections/pull-request-changes-section'
-import { LineDescription, LineTitle } from './pull-request-line-title'
 import PullRequestMergeSection from './sections/pull-request-merge-section'
 
-interface PullRequestPanelProps {
+interface PullRequestPanelProps extends PullRequestChangesSectionProps {
   pullReqMetadata: TypesPullReq
+  conflictingFiles?: string[]
   PRStateLoading: boolean
   checks?: TypeCheckData[]
   ruleViolation?: boolean //TODO: fix type
   checksInfo: { header: string; content: string; status: EnumCheckStatus }
-  changesInfo: { header: string; content: string }
   commentsInfo: { header: string; content?: string | undefined; status: string }
 }
 
@@ -51,15 +54,28 @@ const HeaderTitle = ({ ...props }: HeaderProps) => {
 
 const PullRequestPanel = ({
   pullReqMetadata,
-  PRStateLoading,
+  // PRStateLoading,
   checks,
   changesInfo,
   checksInfo,
   commentsInfo,
-  ruleViolation
+  ruleViolation,
+  minApproval,
+  minReqLatestApproval,
+  approvedEvaluations,
+  changeReqEvaluations,
+  codeOwners,
+  latestApprovalArr,
+  reqNoChangeReq,
+  changeReqReviewer,
+  reqCodeOwnerApproval,
+  reqCodeOwnerLatestApproval,
+  codeOwnerChangeReqEntries,
+  codeOwnerPendingEntries,
+  codeOwnerApprovalEntries,
+  latestCodeOwnerApprovalArr,
+  conflictingFiles
 }: PullRequestPanelProps) => {
-  const [isExpanded, setExpanded] = useState(false)
-
   const mergeable = useMemo(() => pullReqMetadata.merge_check_status === MergeCheckStatus.MERGEABLE, [pullReqMetadata])
   const isClosed = pullReqMetadata.state === PullRequestState.CLOSED
   const isOpen = pullReqMetadata.state === PullRequestState.OPEN
@@ -97,123 +113,39 @@ const PullRequestPanel = ({
       </StackedList.Item>
       <StackedList.Item className="py-0 hover:bg-transparent cursor-default">
         <Accordion type="multiple" className="w-full">
-          <AccordionItem value="item-1">
-            <AccordionTrigger className="text-left" hideChevron>
-              <StackedList.Field
-                title={<LineTitle text={'No reviews required'} icon={<Icon name="success" size={16} />} />}
-                description={<LineDescription text={'Pull request can be merged without any reviews'} />}
-              />
-            </AccordionTrigger>
-          </AccordionItem>
+          {!pullReqMetadata.merged && (
+            <PullRequestChangesSection
+              changesInfo={changesInfo}
+              minApproval={minApproval}
+              minReqLatestApproval={minReqLatestApproval}
+              approvedEvaluations={approvedEvaluations}
+              changeReqEvaluations={changeReqEvaluations}
+              codeOwners={codeOwners}
+              latestApprovalArr={latestApprovalArr}
+              reqNoChangeReq={reqNoChangeReq}
+              changeReqReviewer={changeReqReviewer}
+              codeOwnerChangeReqEntries={codeOwnerChangeReqEntries}
+              reqCodeOwnerApproval={reqCodeOwnerApproval}
+              reqCodeOwnerLatestApproval={reqCodeOwnerLatestApproval}
+              codeOwnerPendingEntries={codeOwnerPendingEntries}
+              codeOwnerApprovalEntries={codeOwnerApprovalEntries}
+              latestCodeOwnerApprovalArr={latestCodeOwnerApprovalArr}
+            />
+          )}
           {!pullReqMetadata.merged && <PullRequestCommentSection commentsInfo={commentsInfo} />}
           <PullRequestCheckSection checkData={checkData} checksInfo={checksInfo} />
 
           {!pullReqMetadata.merged && (
-            <PullRequestMergeSection unchecked={unchecked} mergeable={mergeable} pullReqMetadata={pullReqMetadata} />
+            <PullRequestMergeSection
+              unchecked={unchecked}
+              mergeable={mergeable}
+              pullReqMetadata={pullReqMetadata}
+              conflictingFiles={conflictingFiles}
+            />
           )}
         </Accordion>
       </StackedList.Item>
     </StackedList.Root>
-  )
-
-  return (
-    <div className="border mt-1 border-border rounded-md">
-      <div className="flex flex-col">
-        <div
-          className={cx('py-2 px-5 border-b w-full flex items-center justify-between rounded-tl-md rounded-tr-md', {
-            'bg-gradient-to-r from-[#182c23] to-grey-12 bg-opacity-45': !PRStateLoading,
-            '!bg-gradient-to-r !from-[#2a1717] !to-grey-12 !bg-opacity-45':
-              ruleViolation || (mergeable === false && !unchecked && !isClosed && !isDraft)
-            //   TODO: add the other states like checking mergeability, pr closed, pr draft, pr merged
-          })}>
-          <Text weight="medium" size={3}>
-            {isDraft
-              ? 'This pull request is still a work in progress'
-              : isClosed
-                ? 'This pull request is closed'
-                : unchecked
-                  ? 'Checking for ability to merge automatically...'
-                  : mergeable === false && isOpen
-                    ? 'Cannot merge pull request'
-                    : ruleViolation
-                      ? 'Cannot merge pull request'
-                      : `Pull request can be merged`}
-          </Text>
-          {/* TODO: Add other states in button and think of way to incorporate drymerge callback? */}
-          {/* TODO: handle drymerge */}
-          <SplitButton variant="outline">Squash and merge</SplitButton>
-        </div>
-        <div className="px-5">
-          {/* TODO: create new components for each new section  */}
-          {!pullReqMetadata.merged && <PullRequestChangesSection changesInfo={changesInfo} />}
-          {!pullReqMetadata.merged && <PullRequestCommentSection commentsInfo={commentsInfo} />}
-          <PullRequestCheckSection checkData={checkData} checksInfo={checksInfo} />
-          {!pullReqMetadata.merged && (
-            <div className="py-4">
-              <div className="flex justify-between">
-                <div className="flex">
-                  {unchecked ? (
-                    // TODO: update icon for unchecked status
-                    <Clock className="text-warning mt-1" />
-                  ) : (
-                    <>
-                      {mergeable ? (
-                        <CheckCircleSolid className="text-success mt-1" />
-                      ) : (
-                        <WarningTriangleSolid className="text-destructive mt-1" />
-                      )}
-                    </>
-                  )}
-
-                  {unchecked ? (
-                    <div className="pl-4">
-                      <p className="pb-1 text-white">Merge check in progress...</p>
-                      <p className="text-grey-60">Checking for ability to merge automatically...</p>
-                    </div>
-                  ) : (
-                    <div>
-                      {!mergeable && <p className="pl-4 pb-1 text-white">Conflicts found in this branch</p>}
-                      <p className={`pl-4 ${mergeable ? 'text-white' : 'text-grey-60'}`}>
-                        {mergeable ? (
-                          //   getString('prHasNoConflicts')
-                          <> {`This branch has no conflicts with ${pullReqMetadata.target_branch} branch`}</>
-                        ) : (
-                          <>
-                            Use the
-                            <span
-                              onClick={() => {
-                                // TODO:add commandline information modal
-                                // toggleShowCommandLineInfo(!showCommandLineInfo)
-                              }}
-                              className="pl-1 pr-1 text-blue-500 cursor-pointer">
-                              {/* {getString('commandLine')} */}
-                              command line
-                            </span>
-                            to resolve conflicts
-                            {/* {getString('pr.useCmdLineToResolveConflicts')} */}
-                          </>
-                        )}
-                      </p>
-                    </div>
-                  )}
-                </div>
-                {!mergeable && (
-                  <button
-                    // className={cx('text-blue-500 p-0')}
-                    onClick={() => {
-                      setExpanded(!isExpanded)
-                    }}>
-                    {isExpanded ? 'Show less' : 'Show more'}
-                    {isExpanded ? <NavArrowUp className="pt-1" /> : <NavArrowDown className="pt-1" />}
-                  </button>
-                )}
-              </div>
-            </div>
-            // TODO: add table to show conflicting files
-          )}
-        </div>
-      </div>
-    </div>
   )
 }
 

@@ -2,19 +2,25 @@ import { AccordionContent, AccordionItem, AccordionTrigger, Icon, StackedList, T
 import { Clock, WarningTriangleSolid } from '@harnessio/icons-noir'
 import React from 'react'
 import { LineTitle, LineDescription } from '../pull-request-line-title'
+import { isEmpty } from 'lodash-es'
 interface PullRequestMergeSectionProps {
   unchecked: boolean
   mergeable: boolean
   pullReqMetadata: { target_branch?: string }
+  conflictingFiles?: string[]
 }
-
-const PullRequestMergeSection = ({ unchecked, mergeable, pullReqMetadata }: PullRequestMergeSectionProps) => {
+const PullRequestMergeSection = ({
+  unchecked,
+  mergeable,
+  pullReqMetadata,
+  conflictingFiles
+}: PullRequestMergeSectionProps) => {
   return (
     <AccordionItem value="item-4" isLast>
       <AccordionTrigger
         className="text-left"
         hideChevron
-        //   hideChevron={!mergeable || !unchecked}
+        // hideChevron={!mergeable || !unchecked}
       >
         <StackedList.Field
           title={
@@ -69,15 +75,33 @@ const PullRequestMergeSection = ({ unchecked, mergeable, pullReqMetadata }: Pull
             )
           }
         />
-        {/* {!mergeable && !unchecked && (
+        {!mergeable && !unchecked && (
           <Text className="pr-2" size={1}>
             Show more
           </Text>
-        )} */}
+        )}
       </AccordionTrigger>
-      <AccordionContent>
-        <Text className="text-grey-60">You can proceed with the merge.</Text>
-      </AccordionContent>
+      {!mergeable && !unchecked && (
+        <AccordionContent>
+          <StackedList.Root className="bg-inherit ml-2 border-transparent">
+            <StackedList.Item className="px-0.5  pt-0.5 ml-2">
+              <Text
+                size={1}
+                weight="normal"
+                color={'tertiaryBackground'}>{`Conflicting files (${conflictingFiles?.length || 0})`}</Text>
+            </StackedList.Item>
+            {!isEmpty(conflictingFiles) &&
+              conflictingFiles?.map((file, idx) => (
+                <StackedList.Item className="py-1 px-2 ml-2" key={`${file}-${idx}`}>
+                  <Icon size={14} name="changes" />
+                  <Text size={1} className="pl-1">
+                    {file}
+                  </Text>
+                </StackedList.Item>
+              ))}
+          </StackedList.Root>
+        </AccordionContent>
+      )}
     </AccordionItem>
   )
 }
