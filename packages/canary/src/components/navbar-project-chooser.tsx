@@ -6,7 +6,7 @@ import { Spacer } from './spacer'
 interface ProjectProps {
   projects: {
     title: string
-    icon: React.ReactElement<SVGSVGElement>
+    icon?: React.ReactElement<SVGSVGElement>
   }[]
   name: string
   avatar: React.ReactElement<SVGSVGElement>
