@@ -9,7 +9,7 @@ import PipelineList from './pages/PipelineList'
 export default function App() {
   React.useEffect(() => {
     new CodeServiceAPIClient({
-      requestInterceptor: (request: Request) => {
+      requestInterceptor: (request: Request): Request => {
         const token = localStorage.getItem('token') // Retrieve token from storage
         if (token) {
           request.headers.set('Authorization', `Bearer ${token}`)
