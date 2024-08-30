@@ -11,7 +11,8 @@ import {
   PaginationPrevious,
   PaginationLink,
   PaginationEllipsis,
-  PaginationNext
+  PaginationNext,
+  Text
 } from '@harnessio/canary'
 import PipelineList from '../components/pipeline-list'
 import PaddingListLayout from '../layouts/PaddingListLayout'
@@ -143,6 +144,11 @@ function RepoPipelineListPage() {
   return (
     <>
       <PaddingListLayout spaceTop={false}>
+        <Spacer size={2} />
+        <Text size={5} weight={'medium'}>
+          Pipelines
+        </Text>
+        <Spacer size={6} />
         <ListActions.Root>
           <ListActions.Left>
             <SearchBox.Root placeholder="Search" />

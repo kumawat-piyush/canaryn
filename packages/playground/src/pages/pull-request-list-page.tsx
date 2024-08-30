@@ -11,7 +11,8 @@ import {
   PaginationLink,
   PaginationEllipsis,
   PaginationNext,
-  Button
+  Button,
+  Text
 } from '@harnessio/canary'
 import { Link } from 'react-router-dom'
 import PaddingListLayout from '../layouts/PaddingListLayout'
@@ -226,6 +227,11 @@ function PullRequestListPage() {
   return (
     <>
       <PaddingListLayout spaceTop={false}>
+        <Spacer size={2} />
+        <Text size={5} weight={'medium'}>
+          Pull Requests
+        </Text>
+        <Spacer size={6} />
         <ListActions.Root>
           <ListActions.Left>
             <SearchBox.Root placeholder="Search" />

@@ -2,6 +2,7 @@ import * as React from 'react'
 import ChevronDown from '../icons/chevron-down.svg'
 import Archive from '../icons/repositories-icon.svg'
 import Harness from '../icons/harness.svg'
+import HarnessWhite from '../icons/harness-white.svg'
 import Pipelines from '../icons/pipelines-icon.svg'
 import Executions from '../icons/executions-icon.svg'
 import FeaturedFlags from '../icons/featured-flags-icon.svg'
@@ -42,6 +43,7 @@ const IconNameMap = {
   'chevron-down': ChevronDown,
   archive: Archive,
   harness: Harness,
+  'harness-white': HarnessWhite,
   pipelines: Pipelines,
   executions: Executions,
   'featured-flags': FeaturedFlags,

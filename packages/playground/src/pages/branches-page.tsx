@@ -3,7 +3,7 @@ import BranchesList from '../components/branches'
 import SkeletonList from '../components/loaders/skeleton-list'
 import NoData from '../components/no-data'
 import PaddingListLayout from '../layouts/PaddingListLayout'
-import { ListActions, SearchBox, Spacer } from '@harnessio/canary'
+import { ListActions, SearchBox, Spacer, Text } from '@harnessio/canary'
 import PlaygroundBranchesSettings from '../components/playground/branches-settings'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
@@ -34,6 +34,11 @@ export default function BranchesListPage() {
   }
   return (
     <PaddingListLayout spaceTop={false}>
+      <Spacer size={2} />
+      <Text size={5} weight={'medium'}>
+        Branches
+      </Text>
+      <Spacer size={6} />
       <ListActions.Root>
         <ListActions.Left>
           <SearchBox.Root placeholder="Search" />

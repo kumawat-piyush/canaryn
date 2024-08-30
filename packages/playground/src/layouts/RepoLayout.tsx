@@ -4,8 +4,12 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  Icon,
   Tabs,
   TabsList,
   TabsTrigger,
@@ -19,19 +23,36 @@ const RepoLayout: React.FC = () => {
 
   return (
     <div>
+      {/* Replace this with TopBarWidget, make dynamic */}
       <Topbar.Root>
         <Topbar.Left>
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink className="font-medium text-primary" href="/">
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="flex items-center gap-2 outline-none">
+                    <BreadcrumbLink className="font-medium text-primary">Pixel Point</BreadcrumbLink>
+
+                    <Icon name="chevron-down" size={10} className="text-primary" />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start" className="mt-2">
+                    <DropdownMenuItem>Pixel Point</DropdownMenuItem>
+                    <DropdownMenuItem>United Bank</DropdownMenuItem>
+                    <DropdownMenuItem>Code Wizards</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator className="font-thin">&nbsp;/&nbsp;</BreadcrumbSeparator>
+              <BreadcrumbItem>
+                <BreadcrumbLink className="font-normal text-primary" href="/repos">
                   {repoId}
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbSeparator className="font-thin">&nbsp;/&nbsp;</BreadcrumbSeparator>
+              {/* Make this dynamic */}
+              {/* <BreadcrumbSeparator className="font-thin">&nbsp;/&nbsp;</BreadcrumbSeparator>
               <BreadcrumbPage>
                 <BreadcrumbLink href="/components">pipeline.yml</BreadcrumbLink>
-              </BreadcrumbPage>
+              </BreadcrumbPage> */}
             </BreadcrumbList>
           </Breadcrumb>
         </Topbar.Left>

@@ -4,7 +4,7 @@ import SkeletonList from '../components/loaders/skeleton-list'
 import NoData from '../components/no-data'
 import PlaygroundCommitsSettings from '../components/playground/commits-settings'
 import PaddingListLayout from '../layouts/PaddingListLayout'
-import { ListActions, SearchBox, Spacer } from '@harnessio/canary'
+import { ListActions, SearchBox, Spacer, Text } from '@harnessio/canary'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
@@ -34,6 +34,11 @@ export default function CommitsListPage() {
   }
   return (
     <PaddingListLayout spaceTop={false}>
+      <Spacer size={2} />
+      <Text size={5} weight={'medium'}>
+        Commits
+      </Text>
+      <Spacer size={6} />
       <ListActions.Root>
         <ListActions.Left>
           <SearchBox.Root placeholder="Search" />
