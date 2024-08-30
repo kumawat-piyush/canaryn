@@ -52,7 +52,7 @@ const Description = ({ sha, description, version }: { sha: string; description: 
   )
 }
 
-const PipelineList = ({ ...props }: PageProps) => {
+export const PipelineList = ({ ...props }: PageProps) => {
   const { pipelines } = props
 
   return (
@@ -85,5 +85,3 @@ const PipelineList = ({ ...props }: PageProps) => {
     </>
   )
 }
-
-export { PipelineList, type Pipeline }

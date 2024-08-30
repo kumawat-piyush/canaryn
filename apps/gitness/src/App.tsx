@@ -4,7 +4,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { ThemeProvider } from '@harnessio/playground'
 import { CodeServiceAPIClient } from '@harnessio/code-service-client'
 import { queryClient } from './framework/queryClient'
-import PipelineList from './pages/PipelineList'
+import PipelineList from './pages/pipeline-list'
 
 export default function App() {
   React.useEffect(() => {
