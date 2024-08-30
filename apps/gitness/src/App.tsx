@@ -12,9 +12,7 @@ export default function App() {
       requestInterceptor: (request: Request) => {
         const token = localStorage.getItem('token') // Retrieve token from storage
         if (token) {
-          if (token) {
-            request.headers.set('Authorization', `Bearer ${token}`)
-          }
+          request.headers.set('Authorization', `Bearer ${token}`)
         }
         return request
       }
