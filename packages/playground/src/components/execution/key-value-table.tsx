@@ -25,24 +25,30 @@ interface KeyValueTableProps {
   tableSpec: KeyValuePair[]
 }
 
+//manage style for repeated use
+const accordionContentStyle = 'w-full pl-0 pr-0 border-0 pb-0'
+const specTitleStyle = 'text-ring flex-grow text-left -ml-1'
+
 export const KeyValueTable: React.FC<KeyValueTableProps> = ({
   className,
   tableTitleName,
   tableTitleVal,
   tableSpec
 }) => {
-  const renderListItems = (items: KeyValuePair[], level: number = 0) => {
+  const renderListItems = (items: KeyValuePair[], level: number = 1) => {
+    //detect if the listItems is objects or array, tailwind css will not generate
     const listItems = Array.isArray(items) ? items : [items]
+
     return listItems.map((item, index: number) => {
       if (typeof item.value === 'string') {
         return (
           <ul className="border-b" key={index}>
-            <li className={`p-2.5 pl-${level * 2 + 4} inline-block w-1/2`}>
+            <li className="py-2.5 inline-block w-1/2 " style={{ paddingLeft: `${level * 1 + 2}rem` }}>
               <Text size={2} weight="normal" className="text-ring">
                 {item.name}
               </Text>
             </li>
-            <li className="p-2.5 inline-block w-1/2">
+            <li className="pr-2.5 py-2.5 inline-block w-1/2">
               <Text size={2} weight="normal" className="text-ring">
                 {item.value}
               </Text>
@@ -51,14 +57,24 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({
         )
       } else if (Array.isArray(item.value) || typeof item.value === 'object') {
         return (
-          <Accordion collapsible type="single" key={index} className="border-b-0">
-            <AccordionItem value={item.name}>
-              <AccordionTrigger className={`w-full pt-2 pb-2 pl-${level * 2 + 4} flex pr-4`} leftChevron>
-                <Text size={2} weight="normal" className="text-ring">
+          <Accordion
+            type="single"
+            key={index}
+            className="border-0 last:border-b-0"
+            defaultValue={item.name}
+            collapsible>
+            <AccordionItem value={item.name} className="border-0">
+              <AccordionTrigger
+                className="w-full pt-2 pb-2 pr-4 flex"
+                leftChevron
+                style={{ paddingLeft: `${level * 1 + 2}rem` }}>
+                <Text size={2} weight="normal" className={specTitleStyle}>
                   {item.name}
                 </Text>
               </AccordionTrigger>
-              <AccordionContent className="w-full pl-0 pr-0">{renderListItems(item.value, level + 1)}</AccordionContent>
+              <AccordionContent className={accordionContentStyle}>
+                {renderListItems(item.value, level + 1)}
+              </AccordionContent>
             </AccordionItem>
           </Accordion>
         )
@@ -71,7 +87,7 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({
     return tableSpec.map((item, index: number) => {
       if (typeof item.value === 'string') {
         return (
-          <TableRow key={index}>
+          <TableRow key={index} className="border-b">
             <TableCell className="pt-2.5 pl-4 w-1/2">
               <Text size={2} weight="normal" className="text-ring">
                 {item.name}
@@ -86,23 +102,23 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({
         )
       } else if (Array.isArray(item.value) || typeof item.value === 'object') {
         return (
-          <TableRow key={index}>
-            <TableCell colSpan={2} className="p-0">
-              <Accordion collapsible type="single" className="border-b-0">
-                <AccordionItem value={item.name}>
-                  <AccordionTrigger className="w-full pt-2 pb-2 pl-4 flex pr-4" leftChevron>
-                    <Text size={2} weight="normal" className="text-ring">
+          <TableRow key={index} className="border-0">
+            <TableCell colSpan={2} className="p-0 border-0">
+              <Accordion type="single" collapsible defaultValue={item.name}>
+                <AccordionItem value={item.name} className="border-0">
+                  <AccordionTrigger className="w-full pt-2 pb-2 pl-4 flex pr-4 border-0" leftChevron>
+                    <Text size={2} weight="normal" className={specTitleStyle}>
                       {item.name}
                     </Text>
                   </AccordionTrigger>
-                  <AccordionContent className="w-full pl-0 pr-0">{renderListItems(item.value)}</AccordionContent>
+                  <AccordionContent className={accordionContentStyle}>{renderListItems(item.value)}</AccordionContent>
                 </AccordionItem>
               </Accordion>
             </TableCell>
           </TableRow>
         )
       }
-      return 'not the type of data we are expecting'
+      return null
     })
   }
 
