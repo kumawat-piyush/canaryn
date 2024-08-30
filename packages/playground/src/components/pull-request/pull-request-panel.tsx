@@ -108,7 +108,7 @@ const PullRequestPanel = ({
 
   return (
     <StackedList.Root>
-      <StackedList.Item isHeader>
+      <StackedList.Item isHeader disableHover>
         <StackedList.Field
           title={
             <HeaderTitle
@@ -130,7 +130,7 @@ const PullRequestPanel = ({
           }
         />
       </StackedList.Item>
-      <StackedList.Item className="py-0 hover:bg-transparent cursor-default">
+      <StackedList.Item disableHover className="py-0 hover:bg-transparent cursor-default">
         <Accordion type="multiple" className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger className="text-left" hideChevron>
