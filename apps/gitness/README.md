@@ -2,16 +2,6 @@
 
 Gitness is a modern React-based web application designed to help developers manage their Git repositories efficiently. It provides features like repository browsing, commit history visualization, branch management, and more. With a sleek user interface, Gitness simplifies version control management for teams and individual developers.
 
-## Table of Contents
-
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [Scripts](#scripts)
-- [Contributing](#contributing)
-- [License](#license)
-
 ## Features
 
 - **Repository Browsing**: Quickly navigate through repositories, branches, and commits.
