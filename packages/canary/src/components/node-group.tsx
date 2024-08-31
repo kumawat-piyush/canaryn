@@ -18,7 +18,7 @@ function Root({ className, children }: NodeGroupRootProps) {
   )
 }
 
-function Icon({ children, className }: { children: React.ReactNode; className: string }) {
+function Icon({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
     <div className="col-start-1 row-start-1">
       <div
