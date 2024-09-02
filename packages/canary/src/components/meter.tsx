@@ -20,7 +20,7 @@ const stateToBgColor = {
   [MeterState.Empty]: 'bg-tertiary-background/20',
   [MeterState.Inactive]: 'bg-red-400',
   [MeterState.Active]: 'bg-yellow-400',
-  [MeterState.Error]: 'bg-emerald-400'
+  [MeterState.Error]: 'bg-green-300'
 }
 
 const stateToGlow = {
@@ -32,12 +32,12 @@ const stateToGlow = {
 
 function Root({ data, className }: MeterRootProps) {
   return (
-    <div className={cn('flex h-5 gap-1 items-stretch', className)}>
+    <div className={cn('flex h-5 gap-[4px] items-stretch', className)}>
       {data?.map((col, col_idx) => {
         return (
           <div
             key={col_idx}
-            className={cn('flex w-1.5 h-full rounded-sm', stateToBgColor[col.state], stateToGlow[col.state])}
+            className={cn('flex w-[5px] h-full rounded-[1.5px]', stateToBgColor[col.state], stateToGlow[col.state])}
           />
         )
       })}
