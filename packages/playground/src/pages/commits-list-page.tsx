@@ -41,7 +41,7 @@ export default function CommitsListPage() {
       <Spacer size={6} />
       <ListActions.Root>
         <ListActions.Left>
-          <SearchBox.Root placeholder="Search" />
+          <SearchBox.Root placeholder="Search commits" />
         </ListActions.Left>
         <ListActions.Right>
           <ListActions.Dropdown title="Filter" items={filterOptions} />
