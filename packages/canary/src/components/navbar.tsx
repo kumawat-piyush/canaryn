@@ -12,7 +12,7 @@ function Root({ className, children }: NavbarRootProps) {
   return (
     <div
       className={cn(
-        'select-none grid grid-rows-[auto_1fr_auto] w-[220px] h-screen overflow-y-auto border-r border-border-background text-sm text-grey-70 bg-primary-background',
+        'select-none grid grid-rows-[auto_1fr_auto] w-[220px] h-screen overflow-y-auto border-r border-border-background bg-primary-background',
         className
       )}>
       {children}

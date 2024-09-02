@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Input } from './input'
 import { Icon } from './icon'
 import { Text } from './text'
 import { cn } from '@/lib/utils'
 
-// Define the TextSize enum
 enum TextSize {
   'text-[12px]' = 0,
   'text-xs' = 1,
@@ -27,17 +26,59 @@ interface SearchBoxProps {
   hasShortcut?: boolean
   shortcutLetter?: string
   textSize?: TextSize
+  onSearch?: () => void
+  showOnFocus?: boolean // New prop to control dialog appearance on focus
 }
 
 function Root({
-  textSize = TextSize['text-sm'], // default to 'text-sm'
+  textSize = TextSize['text-sm'],
   placeholder,
   width = 'fixed',
   hasShortcut = false,
-  shortcutLetter
+  shortcutLetter,
+  onSearch,
+  showOnFocus = false // Default to false
 }: SearchBoxProps) {
-  // Access the enum value directly by converting `textSize` to the correct string.
+  const [isFocused, setIsFocused] = useState(false)
   const textSizeClass = TextSize[textSize]
+
+  const handleSearch = () => {
+    if (onSearch) {
+      onSearch()
+    }
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      handleSearch()
+    }
+  }
+
+  const handleFocus = () => {
+    if (showOnFocus) {
+      setIsFocused(true)
+      handleSearch()
+    }
+    setIsFocused(true)
+  }
+
+  const handleBlur = () => {
+    setIsFocused(false)
+  }
+
+  useEffect(() => {
+    const handleShortcutKey = (e: KeyboardEvent) => {
+      if (hasShortcut && shortcutLetter && e.key.toLowerCase() === shortcutLetter.toLowerCase()) {
+        handleSearch()
+      }
+    }
+    window.addEventListener('keydown', handleShortcutKey)
+
+    return () => {
+      window.removeEventListener('keydown', handleShortcutKey)
+    }
+  }, [hasShortcut, shortcutLetter, handleSearch])
 
   return (
     <div className={cn('relative', width === 'full' ? 'w-full' : 'w-96')}>
@@ -57,7 +98,17 @@ function Root({
       <Input
         placeholder={placeholder}
         className={cn('border-input-foreground pl-7', textSizeClass, { 'pr-10': hasShortcut })}
+        onKeyDown={handleKeyDown}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
+      {/* Optionally show a dialog or some indication of focus */}
+      {showOnFocus && isFocused && (
+        <div className="absolute top-full left-0 mt-2 bg-white border rounded-md shadow-md p-4">
+          {/* Replace this with your actual dialog component */}
+          <p>Search dialog</p>
+        </div>
+      )}
     </div>
   )
 }
