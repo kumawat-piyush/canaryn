@@ -1,5 +1,4 @@
 import React from 'react'
-import { DropdownMenu, DropdownMenuTrigger } from './dropdown-menu'
 import { Root as SearchBox } from './search-box'
 
 interface ProjectProps {
@@ -13,26 +12,10 @@ interface ProjectProps {
 
 function Root({ avatar }: ProjectProps) {
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger className="select-none outline-none">
-        <div className="grid grid-cols-[auto_1fr] w-full items-center gap-2.5 justify-items-start">
-          <div className="flex items-center">{avatar}</div>
-          <SearchBox width="full" placeholder="Search..." hasShortcut shortcutLetter="K" />
-          {/* <p className="text-[15px] font-medium text-primary truncate" aria-label={name}>
-            {name || 'Choose project'}
-          </p> */}
-          {/* <Icon name="chevron-down" className="nav-company-badge-chevron h-2.5 w-2.5 shrink-0 text-primary" /> */}
-        </div>
-      </DropdownMenuTrigger>
-      {/* <DropdownMenuContent align="end" className="w-[180px] p-0 mt-3">
-        {projects.map((project, project_idx) => (
-          <DropdownMenuItem key={project_idx}>
-            {project.icon && project.icon}
-            {project.title}
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent> */}
-    </DropdownMenu>
+    <div className="grid grid-cols-[auto_1fr] w-full items-center gap-2.5 justify-items-start">
+      <div className="flex items-center">{avatar}</div>
+      <SearchBox textSize={1} width="full" placeholder="Search..." hasShortcut shortcutLetter="K" />
+    </div>
   )
 }
 

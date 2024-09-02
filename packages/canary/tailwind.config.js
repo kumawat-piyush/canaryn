@@ -18,9 +18,9 @@ module.exports = {
       },
       colors: {
         border: 'hsl(var(--border))',
-        'border-foreground': 'hsl(var(--border-foreground))',
+        'border-background': 'hsl(var(--border-background))',
         input: 'hsl(var(--input))',
-        'input-foreground': 'hsl(var(--input-foreground))',
+        'input-background': 'hsl(var(--input-background))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
@@ -98,13 +98,13 @@ module.exports = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))'
       },
       boxShadow: {
-        't-md': '0 -1px 0 0 var(--border)',
-        'l-md': '-1px 0 0 0 var(--border)',
-        'r-md': '1px 0 0 0 var(--border)',
-        'b-md': '0 1px 0 0 var(--border)',
+        't-md': '0 -1px 0 0 var(--border-background)',
+        'l-md': '-1px 0 0 0 var(--border-background)',
+        'r-md': '1px 0 0 0 var(--border-background)',
+        'b-md': '0 1px 0 0 var(--border-background)',
         'active-tab':
-          'inset 0 1px 0 0 hsl(var(--border)), inset 1px 0 0 0 hsl(var(--border)), inset -1px 0 0 0 hsl(var(--border))',
-        'inactive-tab': 'inset 0 -1px 0 0 hsl(var(--border))'
+          'inset 0 1px 0 0 hsl(var(--border-background)), inset 1px 0 0 0 hsl(var(--border-background)), inset -1px 0 0 0 hsl(var(--border-background))',
+        'inactive-tab': 'inset 0 -1px 0 0 hsl(var(--border-background))'
       },
       keyframes: {
         'accordion-down': {

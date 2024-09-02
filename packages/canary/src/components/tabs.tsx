@@ -8,7 +8,7 @@ const tabsListVariants = cva('inline-flex items-center text-muted-foreground', {
     variant: {
       default: 'h-9 rounded-lg bg-muted p-1 justify-center',
       underline: 'h-11 gap-4 justify-center',
-      navigation: 'h-[44px] border-b gap-6 justify-start w-full px-8',
+      navigation: 'h-[44px] border-b border-border-background gap-6 justify-start w-full px-8',
       tabnav: 'h-[36px] gap-0 justify-start w-full'
     }
   },
@@ -70,9 +70,9 @@ const Tabs = React.forwardRef<React.ElementRef<typeof TabsPrimitive.Root>, TabsP
         {variant === 'tabnav' ? (
           <div className="relative w-full grid grid-flow-col grid-cols-[auto_1fr] items-end">
             {children}
-            <div className="h-[36px] border-b" />
-            <div className="absolute right-full w-[9999px] h-[36px] border-b" />
-            <div className="absolute left-full w-[9999px] h-[36px] border-b" />
+            <div className="h-[36px] border-b border-border-background" />
+            <div className="absolute right-full w-[9999px] h-[36px] border-b border-border-background" />
+            <div className="absolute left-full w-[9999px] h-[36px] border-b border-border-background" />
           </div>
         ) : (
           children

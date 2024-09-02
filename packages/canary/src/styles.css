@@ -63,9 +63,9 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
-    --border-foreground: 240 5.9% 90%;
+    --border-background: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --input-foreground: 240 5.9% 90%;
+    --input-background: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
     --radius: 0.5rem;
     --navbar-icon-secondary: 240 6% 40%;
@@ -98,10 +98,10 @@
     --accent-foreground: var(--white);
     --destructive: var(--red);
     --destructive-foreground: var(--white);
-    --border: var(--grey-10);
-    --border-foreground: var(--grey-15);
-    --input: var(--grey-10);
-    --input-foreground: var(--grey-15);
+    --border: var(--grey-15);
+    --border-background: var(--grey-10);
+    --input: var(--grey-15);
+    --input-background: var(--grey-10);
     --ring: var(--grey-80);
     --navbar-icon-secondary: 240 6% 40%;
     --navbar-text-secondary: var(--grey-70);

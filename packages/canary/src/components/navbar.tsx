@@ -12,7 +12,7 @@ function Root({ className, children }: NavbarRootProps) {
   return (
     <div
       className={cn(
-        'select-none grid grid-rows-[auto_1fr_auto] w-[220px] h-screen overflow-y-auto border-r text-sm text-grey-70 bg-primary-background',
+        'select-none grid grid-rows-[auto_1fr_auto] w-[220px] h-screen overflow-y-auto border-r border-border-background text-sm text-grey-70 bg-primary-background',
         className
       )}>
       {children}
@@ -32,7 +32,7 @@ function Group({ children, topBorder }: { children: React.ReactNode; topBorder?:
   return (
     <div
       className={cn('p-5 py-3.5 flex flex-col gap-1.5', {
-        'border-t': topBorder
+        'border-t border-border-background': topBorder
       })}>
       {children}
     </div>
@@ -41,7 +41,7 @@ function Group({ children, topBorder }: { children: React.ReactNode; topBorder?:
 
 function AccordionGroup({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="p-5 py-0.5 border-t">
+    <div className="p-5 py-0.5 border-t border-border-background">
       <Accordion type="single" collapsible defaultValue="item-1">
         <AccordionItem value="item-1" className="border-none">
           <AccordionTrigger className="group">
@@ -89,7 +89,7 @@ function Item({ icon, text, active }: ItemProps) {
 }
 
 function Footer({ children }: { children: React.ReactNode }) {
-  return <div className="grid px-5 h-[76px] items-center border-t">{children}</div>
+  return <div className="grid px-5 h-[76px] items-center border-t border-border-background">{children}</div>
 }
 
 export { Root, Header, Content, Group, AccordionGroup, Item, Footer }

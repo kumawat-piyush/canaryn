@@ -4,14 +4,41 @@ import { Icon } from './icon'
 import { Text } from './text'
 import { cn } from '@/lib/utils'
 
+// Define the TextSize enum
+enum TextSize {
+  'text-[12px]' = 0,
+  'text-xs' = 1,
+  'text-sm' = 2,
+  'text-base' = 3,
+  'text-xl' = 4,
+  'text-2xl' = 5,
+  'text-3xl' = 6,
+  'text-4xl' = 7,
+  'text-5xl' = 8,
+  'text-6xl' = 9,
+  'text-7xl' = 10,
+  'text-8xl' = 11,
+  'text-9xl' = 12
+}
+
 interface SearchBoxProps {
   placeholder: string
   width?: 'full' | 'fixed'
   hasShortcut?: boolean
   shortcutLetter?: string
+  textSize?: TextSize
 }
 
-function Root({ placeholder, width = 'fixed', hasShortcut = false, shortcutLetter }: SearchBoxProps) {
+function Root({
+  textSize = TextSize['text-sm'], // default to 'text-sm'
+  placeholder,
+  width = 'fixed',
+  hasShortcut = false,
+  shortcutLetter
+}: SearchBoxProps) {
+  // Access the enum value directly by converting `textSize` to the correct string.
+  const textSizeClass = TextSize[textSize]
+
   return (
     <div className={cn('relative', width === 'full' ? 'w-full' : 'w-96')}>
       <Icon
@@ -27,7 +54,10 @@ function Root({ placeholder, width = 'fixed', hasShortcut = false, shortcutLette
           </Text>
         </div>
       )}
-      <Input placeholder={placeholder} className={cn('border-input-foreground pl-7', { 'pr-10': hasShortcut })} />
+      <Input
+        placeholder={placeholder}
+        className={cn('border-input-foreground pl-7', textSizeClass, { 'pr-10': hasShortcut })}
+      />
     </div>
   )
 }
