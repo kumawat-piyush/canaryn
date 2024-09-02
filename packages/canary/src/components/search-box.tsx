@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Input } from './input'
 import { Icon } from './icon'
 import { Text } from './text'
@@ -39,7 +39,6 @@ function Root({
   onSearch,
   showOnFocus = false // Default to false
 }: SearchBoxProps) {
-  const [isFocused, setIsFocused] = useState(false)
   const textSizeClass = TextSize[textSize]
 
   const handleSearch = () => {
@@ -57,14 +56,8 @@ function Root({
 
   const handleFocus = () => {
     if (showOnFocus) {
-      setIsFocused(true)
       handleSearch()
     }
-    setIsFocused(true)
-  }
-
-  const handleBlur = () => {
-    setIsFocused(false)
   }
 
   useEffect(() => {
@@ -100,15 +93,7 @@ function Root({
         className={cn('border-input-foreground pl-7', textSizeClass, { 'pr-10': hasShortcut })}
         onKeyDown={handleKeyDown}
         onFocus={handleFocus}
-        onBlur={handleBlur}
       />
-      {/* Optionally show a dialog or some indication of focus */}
-      {showOnFocus && isFocused && (
-        <div className="absolute top-full left-0 mt-2 bg-white border rounded-md shadow-md p-4">
-          {/* Replace this with your actual dialog component */}
-          <p>Search dialog</p>
-        </div>
-      )}
     </div>
   )
 }
