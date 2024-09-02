@@ -34,8 +34,11 @@
   --blue: 216 80% 65%;
   --orange: 35, 75%, 55%;
   --purple: 275 60% 75%;
-  --green: 150, 75%, 65%, 0.7;
-  --red: 0, 80%, 65%, 0.7;
+  --green: 150, 75%, 65%;
+  --red: 0, 80%, 65%;
+  --red-glow: 0, 80%, 65% 0.5;
+  --orange-glow: 35, 75%, 55% 0.5;
+  --green-glow: 150, 75%, 65% 0.5;
 }
 
 @layer themes {
@@ -73,6 +76,9 @@
     --success: var(--green);
     --error: var(--red);
     --warning: var(--orange);
+    --success-glow: var(--green-glow);
+    --error-glow: var(--red-glow);
+    --warning-glow: var(--orange-glow);
     --ai: var(--purple);
   }
 
@@ -108,6 +114,9 @@
     --success: var(--green);
     --error: var(--red);
     --warning: var(--orange);
+    --success-glow: var(--green-glow);
+    --error-glow: var(--red-glow);
+    --warning-glow: var(--orange-glow);
     --ai: var(--purple);
   }
 }

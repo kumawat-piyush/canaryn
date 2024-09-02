@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 
 export enum MeterState {
   Empty = 0,
-  Inactive = 1,
-  Active = 2,
-  Error = 3
+  Error = 1,
+  Warning = 2,
+  Success = 3
 }
 
 interface Pipeline {
