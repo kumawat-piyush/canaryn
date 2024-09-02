@@ -1,5 +1,6 @@
 import React from 'react'
 import { DropdownMenu, DropdownMenuTrigger } from './dropdown-menu'
+import { Root as SearchBox } from './search-box'
 
 interface ProjectProps {
   projects: {
@@ -10,15 +11,16 @@ interface ProjectProps {
   avatar: React.ReactElement<SVGSVGElement>
 }
 
-function Root({ avatar, name }: ProjectProps) {
+function Root({ avatar }: ProjectProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="select-none outline-none">
-        <div className="grid grid-cols-[auto_1fr_auto] w-full items-center gap-2.5 justify-items-start">
+        <div className="grid grid-cols-[auto_1fr] w-full items-center gap-2.5 justify-items-start">
           <div className="flex items-center">{avatar}</div>
-          <p className="text-[15px] font-medium text-primary truncate" aria-label={name}>
+          <SearchBox width="full" placeholder="Search..." hasShortcut shortcutLetter="K" />
+          {/* <p className="text-[15px] font-medium text-primary truncate" aria-label={name}>
             {name || 'Choose project'}
-          </p>
+          </p> */}
           {/* <Icon name="chevron-down" className="nav-company-badge-chevron h-2.5 w-2.5 shrink-0 text-primary" /> */}
         </div>
       </DropdownMenuTrigger>

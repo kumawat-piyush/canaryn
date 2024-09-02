@@ -11,22 +11,22 @@
 
 :root {
   /* PP Figma shades */
-  --black: 210 10% 3%;
-  --grey-6: 210 8% 6%;
-  --grey-8: 210 7% 8%;
-  --grey-10: 210 6% 10%;
-  --grey-12: 210 6% 12%;
-  --grey-15: 210 6% 15%;
-  --grey-20: 210 6% 20%;
-  --grey-30: 210 6% 30%;
-  --grey-40: 210 6% 40%;
-  --grey-50: 210 6% 50%;
-  --grey-60: 210 6% 60%;
-  --grey-70: 210 6% 70%;
-  --grey-80: 210 6% 80%;
-  --grey-90: 210 6% 90%;
-  --grey-94: 210 6% 94%;
-  --grey-98: 210 6% 98%;
+  --black: 240 10% 3%;
+  --grey-6: 240 8% 6%;
+  --grey-8: 240 7% 8%;
+  --grey-10: 240 6% 10%;
+  --grey-12: 240 6% 12%;
+  --grey-15: 240 6% 15%;
+  --grey-20: 240 6% 20%;
+  --grey-30: 240 6% 30%;
+  --grey-40: 240 6% 40%;
+  --grey-50: 240 6% 50%;
+  --grey-60: 240 6% 60%;
+  --grey-70: 240 6% 70%;
+  --grey-80: 240 6% 80%;
+  --grey-90: 240 6% 90%;
+  --grey-94: 240 6% 94%;
+  --grey-98: 240 6% 98%;
   --white: 0 0% 100%;
 
   /* PP Figma secondary colors */
@@ -63,7 +63,9 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
+    --border-foreground: 240 5.9% 90%;
     --input: 240 5.9% 90%;
+    --input-foreground: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
     --radius: 0.5rem;
     --navbar-icon-secondary: 240 6% 40%;
@@ -96,8 +98,10 @@
     --accent-foreground: var(--white);
     --destructive: var(--red);
     --destructive-foreground: var(--white);
-    --border: var(--grey-15);
-    --input: var(--grey-15);
+    --border: var(--grey-10);
+    --border-foreground: var(--grey-15);
+    --input: var(--grey-10);
+    --input-foreground: var(--grey-15);
     --ring: var(--grey-80);
     --navbar-icon-secondary: 240 6% 40%;
     --navbar-text-secondary: var(--grey-70);
