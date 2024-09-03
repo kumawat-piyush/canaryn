@@ -44,10 +44,8 @@ function AccordionGroup({ title, children }: { title: string; children: React.Re
     <div className="p-5 py-0.5 border-t border-border-background">
       <Accordion type="single" collapsible defaultValue="item-1">
         <AccordionItem value="item-1" className="border-none">
-          <AccordionTrigger className="group">
-            <p className="text-xs text-primary opacity-40 font-normal group-hover:text-primary ease-in-out duration-150">
-              {title}
-            </p>
+          <AccordionTrigger className="group text-primary opacity-40">
+            <p className="text-xs font-normal group-hover:text-primary ease-in-out duration-150">{title}</p>
           </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-1.5">{children}</AccordionContent>
         </AccordionItem>
