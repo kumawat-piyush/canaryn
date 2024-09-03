@@ -9,7 +9,7 @@ export default function Pipelines() {
     /* To enable mock data */
     {
       placeholderData: [{ identifier: 'pipeline1' }, { identifier: 'pipeline2' }],
-      enabled: false
+      enabled: true
     }
   )
 

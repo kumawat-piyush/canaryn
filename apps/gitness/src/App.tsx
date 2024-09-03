@@ -5,29 +5,27 @@ import { ThemeProvider } from '@harnessio/playground'
 import { CodeServiceAPIClient } from '@harnessio/code-service-client'
 import { queryClient } from './framework/queryClient'
 import PipelineList from './pages/pipeline-list'
-import { UI_BASE_URL } from '../app_constants.ts'
 
 export default function App() {
   React.useEffect(() => {
     new CodeServiceAPIClient({
       requestInterceptor: (request: Request): Request => {
-        const apiPrefix = 'api/v1/'
+        const baseUrl = import.meta.env.UI_BASE_URL || 'http://localhost:5137/'
 
         let newUrl = request.url
 
-        // Check if the request URL starts with the base URL
-        if (request.url.startsWith(UI_BASE_URL)) {
-          // Insert '/api/v1/' after the base URL
-          newUrl = request.url.replace(UI_BASE_URL, `${UI_BASE_URL}${apiPrefix}`)
+        // Insert '/api/v1/' after the base URL
+        if (request.url.startsWith(baseUrl)) {
+          newUrl = request.url.replace(baseUrl, `${baseUrl}api/v1/`)
         }
 
         // Create a new Request object with the updated URL and existing options
         const newRequest = new Request(newUrl, {
           ...request,
-          headers: new Headers(request.headers) // Create a new Headers object to modify
+          headers: new Headers(request.headers)
         })
 
-        // Retrieve the token from storage
+        // Retrieve the token from storage and add to headers if available
         const token = localStorage.getItem('token')
         if (token) {
           newRequest.headers.set('Authorization', `Bearer ${token}`)
