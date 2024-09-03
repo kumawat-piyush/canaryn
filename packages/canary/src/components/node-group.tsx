@@ -23,8 +23,8 @@ function Icon({ children, className }: { children: React.ReactNode; className?: 
     <div className="col-start-1 row-start-1">
       <div
         className={cn(
-          `opacity-50 relative z-20 h-6 w-6 rounded-full flex place-content-center place-items-center p-1 border border-tertiary-background/30 bg-background text-primary`,
-          { '': className }
+          'relative z-20 h-6 w-6 rounded-full flex place-content-center place-items-center p-1 border border-tertiary-background/30 bg-background text-primary',
+          className
         )}>
         {children}
       </div>

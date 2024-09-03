@@ -37,6 +37,7 @@ import TriangleWarning from '../icons/triangle-warning.svg'
 import PendingClock from '../icons/pending-clock.svg'
 import Circle from '../icons/circle.svg'
 import AppleShortcut from '../icons/apple-shortcut.svg'
+import Edit from '../icons/edit.svg'
 
 // import Fork from '../icons/fork.svg'
 
@@ -78,7 +79,9 @@ const IconNameMap = {
   'triangle-warning': TriangleWarning,
   'pending-clock': PendingClock,
   circle: Circle,
-  'apple-shortcut': AppleShortcut
+  'apple-shortcut': AppleShortcut,
+  'edit-pen': Edit
+
   // fork: Fork
 } satisfies Record<string, React.FunctionComponent<React.SVGProps<SVGSVGElement>>>
 
