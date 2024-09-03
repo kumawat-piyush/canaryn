@@ -40,8 +40,10 @@ function Root({ avatar }: ProjectProps) {
           <DialogContent className="max-w-[800px] h-[600px] bg-primary-background border-border">
             <DialogHeader>
               <DialogTitle>Search</DialogTitle>
-              <Spacer size={6} />
-              <DialogDescription>Search functionality coming soon.</DialogDescription>
+              <DialogDescription>
+                <Spacer size={6} />
+                <SearchBox width="full" placeholder="Search..." />
+              </DialogDescription>
             </DialogHeader>
           </DialogContent>
         </Dialog>
