@@ -25,9 +25,9 @@ interface KeyValueTableProps {
   tableSpec: KeyValuePair[]
 }
 
-//manage style for repeated use
-const accordionContentStyle = 'w-full pl-0 pr-0 border-0 pb-0'
-const specTitleStyle = 'text-ring flex-grow text-left -ml-1'
+//manage style for using repeatly
+const accordionContentStyle = 'w-full pl-1 pr-0 border-0 pb-0'
+const specTitleStyle = 'text-studio-2 flex-grow text-left -ml-1'
 
 export const KeyValueTable: React.FC<KeyValueTableProps> = ({
   className,
@@ -43,13 +43,13 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({
       if (typeof item.value === 'string') {
         return (
           <ul className="border-b" key={index}>
-            <li className="py-2.5 inline-block w-1/2 " style={{ paddingLeft: `${level * 1 + 2}rem` }}>
-              <Text size={2} weight="normal" className="text-ring">
+            <li className="py-2.5 inline-block w-1/2" style={{ paddingLeft: `${level * 1 + 1.5}rem` }}>
+              <Text size={2} weight="normal" className="text-studio-7">
                 {item.name}
               </Text>
             </li>
             <li className="pr-2.5 py-2.5 inline-block w-1/2">
-              <Text size={2} weight="normal" className="text-ring">
+              <Text size={2} weight="normal" className="text-studio-7">
                 {item.value}
               </Text>
             </li>
@@ -62,7 +62,7 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({
               <AccordionTrigger
                 className="w-full pt-2 pb-2 pr-4 flex"
                 leftChevron
-                style={{ paddingLeft: `${level * 1 + 2}rem` }}>
+                style={{ paddingLeft: `${level * 1 + 1}rem` }}>
                 <Text size={2} weight="normal" className={specTitleStyle}>
                   {item.name}
                 </Text>
@@ -84,12 +84,12 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({
         return (
           <TableRow key={index} className="border-b">
             <TableCell className="pt-2.5 pl-4 w-1/2">
-              <Text size={2} weight="normal" className="text-ring">
+              <Text size={2} weight="normal" className="text-studio-7">
                 {item.name}
               </Text>
             </TableCell>
             <TableCell className="pt-2.5 w-1/2">
-              <Text size={2} weight="normal" className="text-ring">
+              <Text size={2} weight="normal" className="text-studio-7">
                 {item.value}
               </Text>
             </TableCell>
@@ -123,21 +123,18 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({
         <TableHeader>
           <TableRow>
             <TableHead>
-              <Text size={2} weight="semibold" className="text-ring">
+              <Text size={2} weight="semibold" className="text-primary">
                 {tableTitleName}
               </Text>
             </TableHead>
             <TableHead>
-              <Text size={2} weight="semibold" className="text-ring">
+              <Text size={2} weight="semibold" className="text-primary">
                 {tableTitleVal}
               </Text>
             </TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
-          {/* Todo: currently for the simple data, will add more accdordin sec with recursive data */}
-          {Array.isArray(tableSpec) && renderTableRows(tableSpec)}
-        </TableBody>
+        <TableBody>{Array.isArray(tableSpec) && renderTableRows(tableSpec)}</TableBody>
       </Table>
     </div>
   )
