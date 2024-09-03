@@ -17,7 +17,7 @@ import {
 } from '@harnessio/canary'
 import { useParams } from 'react-router-dom'
 
-// Avatar Dropdown Component
+// Project Dropdown Component
 const AvatarDropdown = ({ isPrimary }: { isPrimary: boolean }) => (
   <DropdownMenu>
     <DropdownMenuTrigger className="group flex items-center gap-2 outline-none">
