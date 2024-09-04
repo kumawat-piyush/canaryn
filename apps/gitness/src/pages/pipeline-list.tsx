@@ -1,4 +1,5 @@
 import { useListPipelinesQuery, TypesPipeline } from '@harnessio/code-service-client'
+import { PipelineList } from '@harnessio/playground'
 
 export default function Pipelines() {
   const { data: pipelines } = useListPipelinesQuery(
@@ -16,7 +17,16 @@ export default function Pipelines() {
   return (
     <div className="flex flex-col justify-center">
       <h1>Pipelines</h1>
-      {pipelines?.content?.map((pipeline: TypesPipeline) => <div key={pipeline.identifier}>{pipeline.identifier}</div>)}
+      <PipelineList
+        pipelines={pipelines?.content?.map((item: TypesPipeline) => ({
+          id: item?.id,
+          success: item?.execution?.status === 'success',
+          name: item?.identifier,
+          sha: item?.execution?.after,
+          description: item?.description,
+          timestamp: item?.created
+        }))}
+      />
     </div>
   )
 }
