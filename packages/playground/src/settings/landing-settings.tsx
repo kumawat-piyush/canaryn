@@ -34,14 +34,14 @@ const PlaygroundLandingSettings: React.FC<PlaygroundLandingSettingsProps> = ({ l
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-            onClick={() => setLoadState('Landing-auth')}
-            className={loadState === 'Landing-auth' ? 'text-emerald-500' : ''}>
-            Landing page (authed)
+            onClick={() => setLoadState('home-auth')}
+            className={loadState === 'home-auth' ? 'text-emerald-500' : ''}>
+            Home page (authed)
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => setLoadState('Landing-unauth')}
-            className={loadState === 'Landing-unauth' ? 'text-emerald-500' : ''}>
-            Landing page (unauthed)
+            onClick={() => setLoadState('home-unauth')}
+            className={loadState === 'home-unauth' ? 'text-emerald-500' : ''}>
+            Home page (unauthed)
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => setLoadState('sign-in')}
