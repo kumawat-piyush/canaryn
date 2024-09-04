@@ -7,7 +7,7 @@ import RepoLayout from './layouts/RepoLayout'
 import PipelineLayout from './layouts/PipelineLayout'
 import PullRequestLayout from './layouts/PullRequestLayout'
 import ErrorPage from './pages/error-page'
-import HomePage from './pages/home-page'
+import LandingPage from './pages/landing-page'
 import RepoListPage from './pages/repo-list-page'
 import PipelineListPage from './pages/pipeline-list-page'
 import PipelineDetailsPage from './pages/pipeline-details-page'
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       // LANDING
       {
         path: '/',
-        element: <HomePage />
+        element: <LandingPage />
       },
       // REPOS
       {

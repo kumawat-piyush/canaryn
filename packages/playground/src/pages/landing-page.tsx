@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Home from '../components/home'
 import PlaygroundHomeSettings from '../settings/home-settings'
 
-export default function HomeListPage() {
+export default function LandingPage() {
   const [loadState, setLoadState] = useState('home-unauth')
 
   const renderContent = () => {
