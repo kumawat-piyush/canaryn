@@ -95,7 +95,7 @@ export default function Home({ isAuthed, onSelectProject, handleSignIn, handleSi
           <Button variant="default" onClick={handleSignUp}>
             Sign up
           </Button>
-          <Button variant="secondary" onClick={handleSignIn}>
+          <Button variant="outline" onClick={handleSignIn}>
             Sign in
           </Button>
         </ButtonGroup.Root>
