@@ -93,12 +93,6 @@ module.exports = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))'
       },
-      boxShadow: {
-        't-md': '0 -1px 0 0 var(--border-background)',
-        'l-md': '-1px 0 0 0 var(--border-background)',
-        'r-md': '1px 0 0 0 var(--border-background)',
-        'b-md': '0 1px 0 0 var(--border-background)'
-      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
