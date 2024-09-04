@@ -29,24 +29,29 @@ const PlaygroundHomeSettings: React.FC<PlaygroundHomeSettingsProps> = ({ loadSta
         <DropdownMenuContent align="end">
           <DropdownMenuItem>
             <Text weight="bold" size={2}>
-              Home states
+              Landing page states
             </Text>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-            onClick={() => setLoadState('data-loaded')}
-            className={loadState === 'data-loaded' ? 'text-emerald-500' : ''}>
-            Data loaded
+            onClick={() => setLoadState('home-auth')}
+            className={loadState === 'home-auth' ? 'text-emerald-500' : ''}>
+            Home page (authed)
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => setLoadState('loading')}
-            className={loadState === 'loading' ? 'text-emerald-500' : ''}>
-            Loading
+            onClick={() => setLoadState('home-unauth')}
+            className={loadState === 'home-unauth' ? 'text-emerald-500' : ''}>
+            Home page (unauthed)
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => setLoadState('no-data')}
-            className={loadState === 'no-data' ? 'text-emerald-500' : ''}>
-            No data
+            onClick={() => setLoadState('sign-in')}
+            className={loadState === 'sign-in' ? 'text-emerald-500' : ''}>
+            Sign in
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => setLoadState('sign-up')}
+            className={loadState === 'sign-up' ? 'text-emerald-500' : ''}>
+            Sign up
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
