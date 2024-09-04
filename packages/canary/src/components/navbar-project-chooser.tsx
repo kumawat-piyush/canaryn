@@ -35,19 +35,17 @@ function Root({ avatar }: ProjectProps) {
         onSearch={openSearchDialog}
         showOnFocus
       />
-      {isSearchDialogOpen && (
-        <Dialog open={true} defaultOpen onOpenChange={closeSearchDialog}>
-          <DialogContent className="max-w-[800px] h-[600px] bg-primary-background border-border">
-            <DialogHeader>
-              <DialogTitle>Search</DialogTitle>
-              <DialogDescription>
-                <Spacer size={6} />
-                <SearchBox width="full" placeholder="Search..." />
-              </DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
-      )}
+      <Dialog open={isSearchDialogOpen} onOpenChange={closeSearchDialog}>
+        <DialogContent className="max-w-[800px] h-[600px] bg-primary-background border-border">
+          <DialogHeader>
+            <DialogTitle>Search</DialogTitle>
+            <DialogDescription>
+              <Spacer size={6} />
+              <SearchBox width="full" placeholder="Search..." />
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
