@@ -27,7 +27,7 @@ interface KeyValueTableProps {
 
 //manage style for using repeatly
 const accordionContentStyle = `w-full pl-1 pr-0 pb-0`
-const specTitleStyle = 'flex-grow text-left text-studio-2'
+const specTitleStyle = 'flex-grow text-studio-2 text-left'
 
 export const KeyValueTable: React.FC<KeyValueTableProps> = ({
   className,
