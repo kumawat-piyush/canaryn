@@ -4,7 +4,7 @@ import type { FieldValues, Resolver, ResolverOptions } from 'react-hook-form'
 
 import type { IFormDefinition } from '../../types/types'
 import { getValidationSchema } from '../validation/zod-validation'
-import { isZodError, parseErrorSchema } from './zood-resolver-utils'
+import { isZodError, parseErrorSchema } from './zod-resolver-utils'
 
 export function useZodValidationResolver(formDefinition: IFormDefinition): Resolver<any, any> | undefined {
   return useCallback(

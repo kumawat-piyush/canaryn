@@ -2,9 +2,6 @@ import * as zod from 'zod'
 import type { FieldError } from 'react-hook-form'
 import { appendErrors } from 'react-hook-form'
 
-import type { IFormDefinition } from '../../types/types'
-import { getValidationSchema } from '../validation/zod-validation'
-
 export const isZodError = (error: any): error is zod.ZodError => Array.isArray(error?.errors)
 
 export const parseErrorSchema = (zodErrors: zod.ZodIssue[], validateAllFieldCriteria: boolean) => {
