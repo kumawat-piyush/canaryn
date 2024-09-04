@@ -79,6 +79,7 @@ export const StepExecution: React.FC<StageExecutionProps> = ({ step, stepIndex }
             {/*here is the execution details of input table */}
             <ScrollArea className="h-[calc(100vh-23rem)] border-t pt-4">
               <KeyValueTable
+                className="pt-2"
                 tableSpec={inputTable}
                 tableTitleName={step.inputTitle.name}
                 tableTitleVal={step.inputTitle.value}
@@ -89,6 +90,7 @@ export const StepExecution: React.FC<StageExecutionProps> = ({ step, stepIndex }
             {/*here is the execution details of output table */}
             <ScrollArea className="h-[calc(100vh-23rem)] border-t pt-4">
               <KeyValueTable
+                className="pt-2"
                 tableSpec={outputTable}
                 tableTitleName={step.outputTitle.name}
                 tableTitleVal={step.outputTitle.value}
