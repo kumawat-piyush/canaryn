@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import Home from '../components/home'
 import PlaygroundLandingSettings from '../settings/landing-settings'
-import Signin from '../components/signin'
-import Signup from '../components/signup'
+import SignInPage from '../pages/signin-page'
 import { useNavigate } from 'react-router-dom'
+import SignUpPage from './signup-page'
 
 export default function LandingPage() {
   const [loadState, setLoadState] = useState('home-auth')
@@ -28,9 +28,9 @@ export default function LandingPage() {
       case 'home-unauth':
         return <Home isAuthed={false} handleSignUp={handleSignUp} handleSignIn={handleSignIn} />
       case 'sign-in':
-        return <Signin />
+        return <SignInPage />
       case 'sign-up':
-        return <Signup />
+        return <SignUpPage />
       default:
         return null
     }
