@@ -751,9 +751,6 @@ importers:
       yaml-loader:
         specifier: ^0.8.1
         version: 0.8.1
-      yup:
-        specifier: ^0.29.1
-        version: 0.29.3
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -1076,6 +1073,112 @@ importers:
       watch:
         specifier: ^1.0.2
         version: 1.0.2
+      webpack:
+        specifier: ^5.92.1
+        version: 5.94.0(webpack-cli@5.1.4)
+      webpack-cli:
+        specifier: ^5.1.4
+        version: 5.1.4(webpack-dev-server@5.0.4)(webpack@5.94.0)
+      webpack-dev-server:
+        specifier: ^5.0.4
+        version: 5.0.4(webpack-cli@5.1.4)(webpack@5.94.0)
+
+  packages/yaml-editor-playground:
+    dependencies:
+      '@harnessio/yaml-editor':
+        specifier: workspace:*
+        version: link:../yaml-editor
+      '@monaco-editor/react':
+        specifier: 4.6.0
+        version: 4.6.0(monaco-editor@0.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      monaco-editor:
+        specifier: 0.50.0
+        version: 0.50.0
+      monaco-yaml:
+        specifier: 5.2.1
+        version: 5.2.1(monaco-editor@0.50.0)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+      ts-loader:
+        specifier: ^9.5.1
+        version: 9.5.1(typescript@4.9.5)(webpack@5.94.0(webpack-cli@5.1.4))
+      typescript:
+        specifier: ^4.9.5
+        version: 4.9.5
+    devDependencies:
+      '@babel/core':
+        specifier: ^7.24.7
+        version: 7.25.2
+      '@babel/preset-env':
+        specifier: ^7.24.7
+        version: 7.25.4(@babel/core@7.25.2)
+      '@babel/preset-react':
+        specifier: ^7.24.7
+        version: 7.24.7(@babel/core@7.25.2)
+      '@babel/preset-typescript':
+        specifier: ^7.24.7
+        version: 7.24.7(@babel/core@7.25.2)
+      '@testing-library/jest-dom':
+        specifier: ^5.17.0
+        version: 5.17.0
+      '@testing-library/react':
+        specifier: ^13.4.0
+        version: 13.4.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@testing-library/user-event':
+        specifier: ^13.5.0
+        version: 13.5.0(@testing-library/dom@10.1.0)
+      '@types/jest':
+        specifier: ^27.5.2
+        version: 27.5.2
+      '@types/node':
+        specifier: ^16.18.101
+        version: 16.18.106
+      '@types/react':
+        specifier: 18.3.3
+        version: 18.3.3
+      '@types/react-dom':
+        specifier: ^18.3.0
+        version: 18.3.0
+      babel-loader:
+        specifier: ^9.1.3
+        version: 9.1.3(@babel/core@7.25.2)(webpack@5.94.0(webpack-cli@5.1.4))
+      babel-plugin-syntax-dynamic-import:
+        specifier: ^6.18.0
+        version: 6.18.0
+      babel-plugin-transform-class-properties:
+        specifier: ^6.24.1
+        version: 6.24.1
+      babel-plugin-transform-es2015-modules-commonjs:
+        specifier: ^6.26.2
+        version: 6.26.2
+      css-loader:
+        specifier: ^7.1.2
+        version: 7.1.2(webpack@5.94.0(webpack-cli@5.1.4))
+      file-loader:
+        specifier: ^6.2.0
+        version: 6.2.0(webpack@5.94.0(webpack-cli@5.1.4))
+      html-webpack-plugin:
+        specifier: ^5.6.0
+        version: 5.6.0(webpack@5.94.0(webpack-cli@5.1.4))
+      mini-css-extract-plugin:
+        specifier: ^2.9.0
+        version: 2.9.1(webpack@5.94.0(webpack-cli@5.1.4))
+      monaco-editor-webpack-plugin:
+        specifier: ^7.1.0
+        version: 7.1.0(monaco-editor@0.50.0)(webpack@5.94.0(webpack-cli@5.1.4))
+      sass-loader:
+        specifier: ^14.2.1
+        version: 14.2.1(sass@1.77.8)(webpack@5.94.0(webpack-cli@5.1.4))
+      style-loader:
+        specifier: ^4.0.0
+        version: 4.0.0(webpack@5.94.0(webpack-cli@5.1.4))
+      url-loader:
+        specifier: ^4.1.1
+        version: 4.1.1(file-loader@6.2.0(webpack@5.94.0(webpack-cli@5.1.4)))(webpack@5.94.0(webpack-cli@5.1.4))
       webpack:
         specifier: ^5.92.1
         version: 5.94.0(webpack-cli@5.1.4)
@@ -10631,7 +10734,7 @@ snapshots:
   '@jest/console@29.7.0':
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
       chalk: 4.1.2
       jest-message-util: 29.7.0
       jest-util: 29.7.0
@@ -10644,14 +10747,14 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       ci-info: 3.9.0
       exit: 0.1.2
       graceful-fs: 4.2.11
       jest-changed-files: 29.7.0
-      jest-config: 29.7.0(@types/node@20.16.2)
+      jest-config: 29.7.0(@types/node@16.18.106)
       jest-haste-map: 29.7.0
       jest-message-util: 29.7.0
       jest-regex-util: 29.6.3
@@ -10676,7 +10779,7 @@ snapshots:
     dependencies:
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
       jest-mock: 29.7.0
 
   '@jest/expect-utils@29.7.0':
@@ -10694,7 +10797,7 @@ snapshots:
     dependencies:
       '@jest/types': 29.6.3
       '@sinonjs/fake-timers': 10.3.0
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
       jest-message-util: 29.7.0
       jest-mock: 29.7.0
       jest-util: 29.7.0
@@ -10716,7 +10819,7 @@ snapshots:
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
       '@jridgewell/trace-mapping': 0.3.25
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
       chalk: 4.1.2
       collect-v8-coverage: 1.0.2
       exit: 0.1.2
@@ -10786,7 +10889,7 @@ snapshots:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
       '@types/yargs': 17.0.33
       chalk: 4.1.2
 
@@ -12595,7 +12698,7 @@ snapshots:
 
   '@types/cross-spawn@6.0.6':
     dependencies:
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
 
   '@types/d3-array@3.2.1': {}
 
@@ -12751,11 +12854,11 @@ snapshots:
   '@types/glob@7.2.0':
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
 
   '@types/graceful-fs@4.1.9':
     dependencies:
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
 
   '@types/hast@2.3.10':
     dependencies:
@@ -15859,7 +15962,7 @@ snapshots:
       '@jest/expect': 29.7.0
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
       chalk: 4.1.2
       co: 4.6.0
       dedent: 1.5.3
@@ -16008,7 +16111,7 @@ snapshots:
       '@jest/environment': 29.7.0
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
       jest-mock: 29.7.0
       jest-util: 29.7.0
 
@@ -16020,7 +16123,7 @@ snapshots:
     dependencies:
       '@jest/types': 29.6.3
       '@types/graceful-fs': 4.1.9
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
       anymatch: 3.1.3
       fb-watchman: 2.0.2
       graceful-fs: 4.2.11
@@ -16066,7 +16169,7 @@ snapshots:
   jest-mock@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
       jest-util: 29.7.0
 
   jest-pnp-resolver@1.2.3(jest-resolve@29.7.0):
@@ -16101,7 +16204,7 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
       chalk: 4.1.2
       emittery: 0.13.1
       graceful-fs: 4.2.11
@@ -16129,7 +16232,7 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
       chalk: 4.1.2
       cjs-module-lexer: 1.4.0
       collect-v8-coverage: 1.0.2
@@ -16194,7 +16297,7 @@ snapshots:
     dependencies:
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       emittery: 0.13.1
@@ -16209,7 +16312,7 @@ snapshots:
 
   jest-worker@29.7.0:
     dependencies:
-      '@types/node': 20.16.2
+      '@types/node': 16.18.106
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
