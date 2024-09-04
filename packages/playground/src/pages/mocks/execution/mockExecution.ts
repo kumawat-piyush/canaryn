@@ -165,107 +165,107 @@ export const data = {
           ],
           output: [
             {
-              name: '21212',
-              value: 'Input Value'
+              name: '12345',
+              value: 'Output Value'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'spec',
-              value: [{ name: 'instance selection', value: { name: 'type', value: 'Percentage' } }]
+              value: [{ name: 'instance selection', value: { name: 'type', value: 'Fixed' } }]
             },
             {
               name: 'spec',
               value: [
-                { name: 'instance selection', value: { name: 'type', value: 'Percentage' } },
+                { name: 'instance selection', value: { name: 'type', value: 'Fixed' } },
                 {
                   name: 'instance selection',
                   value: [
-                    { name: 'type', value: 'Percentage' },
-                    { name: 'type', value: 'Percentage' }
+                    { name: 'type', value: 'Fixed' },
+                    { name: 'type', value: 'Fixed' }
                   ]
                 },
-                { name: 'spec', value: { name: 'percentage', value: '5' } },
-                { name: 'skipDryRun', value: 'false' },
-                { name: 'delegate selectors', value: 'value1' }
+                { name: 'spec', value: { name: 'percentage', value: '10' } },
+                { name: 'skipDryRun', value: 'true' },
+                { name: 'delegate selectors', value: 'value2' }
               ]
             }
           ]
@@ -396,107 +396,107 @@ export const data = {
           ],
           output: [
             {
-              name: '21212',
-              value: 'Input Value'
+              name: '12345',
+              value: 'Output Value'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'spec',
-              value: [{ name: 'instance selection', value: { name: 'type', value: 'Percentage' } }]
+              value: [{ name: 'instance selection', value: { name: 'type', value: 'Fixed' } }]
             },
             {
               name: 'spec',
               value: [
-                { name: 'instance selection', value: { name: 'type', value: 'Percentage' } },
+                { name: 'instance selection', value: { name: 'type', value: 'Fixed' } },
                 {
                   name: 'instance selection',
                   value: [
-                    { name: 'type', value: 'Percentage' },
-                    { name: 'type', value: 'Percentage' }
+                    { name: 'type', value: 'Fixed' },
+                    { name: 'type', value: 'Fixed' }
                   ]
                 },
-                { name: 'spec', value: { name: 'percentage', value: '5' } },
-                { name: 'skipDryRun', value: 'false' },
-                { name: 'delegate selectors', value: 'value1' }
+                { name: 'spec', value: { name: 'percentage', value: '10' } },
+                { name: 'skipDryRun', value: 'true' },
+                { name: 'delegate selectors', value: 'value2' }
               ]
             }
           ]
@@ -873,107 +873,107 @@ export const data = {
           ],
           output: [
             {
-              name: '21212',
-              value: 'Input Value'
+              name: '12345',
+              value: 'Output Value'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'spec',
-              value: [{ name: 'instance selection', value: { name: 'type', value: 'Percentage' } }]
+              value: [{ name: 'instance selection', value: { name: 'type', value: 'Fixed' } }]
             },
             {
               name: 'spec',
               value: [
-                { name: 'instance selection', value: { name: 'type', value: 'Percentage' } },
+                { name: 'instance selection', value: { name: 'type', value: 'Fixed' } },
                 {
                   name: 'instance selection',
                   value: [
-                    { name: 'type', value: 'Percentage' },
-                    { name: 'type', value: 'Percentage' }
+                    { name: 'type', value: 'Fixed' },
+                    { name: 'type', value: 'Fixed' }
                   ]
                 },
-                { name: 'spec', value: { name: 'percentage', value: '5' } },
-                { name: 'skipDryRun', value: 'false' },
-                { name: 'delegate selectors', value: 'value1' }
+                { name: 'spec', value: { name: 'percentage', value: '10' } },
+                { name: 'skipDryRun', value: 'true' },
+                { name: 'delegate selectors', value: 'value2' }
               ]
             }
           ]
@@ -1104,107 +1104,107 @@ export const data = {
           ],
           output: [
             {
-              name: '21212',
-              value: 'Input Value'
+              name: '12345',
+              value: 'Output Value'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'spec',
-              value: [{ name: 'instance selection', value: { name: 'type', value: 'Percentage' } }]
+              value: [{ name: 'instance selection', value: { name: 'type', value: 'Fixed' } }]
             },
             {
               name: 'spec',
               value: [
-                { name: 'instance selection', value: { name: 'type', value: 'Percentage' } },
+                { name: 'instance selection', value: { name: 'type', value: 'Fixed' } },
                 {
                   name: 'instance selection',
                   value: [
-                    { name: 'type', value: 'Percentage' },
-                    { name: 'type', value: 'Percentage' }
+                    { name: 'type', value: 'Fixed' },
+                    { name: 'type', value: 'Fixed' }
                   ]
                 },
-                { name: 'spec', value: { name: 'percentage', value: '5' } },
-                { name: 'skipDryRun', value: 'false' },
-                { name: 'delegate selectors', value: 'value1' }
+                { name: 'spec', value: { name: 'percentage', value: '10' } },
+                { name: 'skipDryRun', value: 'true' },
+                { name: 'delegate selectors', value: 'value2' }
               ]
             }
           ]
@@ -1335,107 +1335,107 @@ export const data = {
           ],
           output: [
             {
-              name: '21212',
-              value: 'Input Value'
+              name: '12345',
+              value: 'Output Value'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'identifier',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'name',
-              value: 'canaryDeployment'
+              value: 'blueGreenDeployment'
             },
             {
               name: 'timeout',
-              value: '10m'
+              value: '15m'
             },
             {
               name: 'type',
-              value: 'K8sCanaryDeploy'
+              value: 'K8sBlueGreenDeploy'
             },
             {
               name: 'type',
-              value: 'percentage'
+              value: 'rolling'
             },
             {
               name: 'spec',
-              value: [{ name: 'instance selection', value: { name: 'type', value: 'Percentage' } }]
+              value: [{ name: 'instance selection', value: { name: 'type', value: 'Fixed' } }]
             },
             {
               name: 'spec',
               value: [
-                { name: 'instance selection', value: { name: 'type', value: 'Percentage' } },
+                { name: 'instance selection', value: { name: 'type', value: 'Fixed' } },
                 {
                   name: 'instance selection',
                   value: [
-                    { name: 'type', value: 'Percentage' },
-                    { name: 'type', value: 'Percentage' }
+                    { name: 'type', value: 'Fixed' },
+                    { name: 'type', value: 'Fixed' }
                   ]
                 },
-                { name: 'spec', value: { name: 'percentage', value: '5' } },
-                { name: 'skipDryRun', value: 'false' },
-                { name: 'delegate selectors', value: 'value1' }
+                { name: 'spec', value: { name: 'percentage', value: '10' } },
+                { name: 'skipDryRun', value: 'true' },
+                { name: 'delegate selectors', value: 'value2' }
               ]
             }
           ]
