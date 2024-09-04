@@ -10,12 +10,12 @@ import {
 } from '@harnessio/canary'
 import React from 'react'
 
-interface PlaygroundHomeSettingsProps {
+interface PlaygroundLandingSettingsProps {
   loadState: string
   setLoadState: (state: string) => void
 }
 
-const PlaygroundHomeSettings: React.FC<PlaygroundHomeSettingsProps> = ({ loadState, setLoadState }) => {
+const PlaygroundLandingSettings: React.FC<PlaygroundLandingSettingsProps> = ({ loadState, setLoadState }) => {
   return (
     <div className="group fixed right-0 bottom-0 z-50 py-3 px-4">
       <DropdownMenu>
@@ -34,14 +34,14 @@ const PlaygroundHomeSettings: React.FC<PlaygroundHomeSettingsProps> = ({ loadSta
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-            onClick={() => setLoadState('home-auth')}
-            className={loadState === 'home-auth' ? 'text-emerald-500' : ''}>
-            Home page (authed)
+            onClick={() => setLoadState('Landing-auth')}
+            className={loadState === 'Landing-auth' ? 'text-emerald-500' : ''}>
+            Landing page (authed)
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => setLoadState('home-unauth')}
-            className={loadState === 'home-unauth' ? 'text-emerald-500' : ''}>
-            Home page (unauthed)
+            onClick={() => setLoadState('Landing-unauth')}
+            className={loadState === 'Landing-unauth' ? 'text-emerald-500' : ''}>
+            Landing page (unauthed)
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => setLoadState('sign-in')}
@@ -59,4 +59,4 @@ const PlaygroundHomeSettings: React.FC<PlaygroundHomeSettingsProps> = ({ loadSta
   )
 }
 
-export default PlaygroundHomeSettings
+export default PlaygroundLandingSettings

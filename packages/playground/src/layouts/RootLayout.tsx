@@ -51,21 +51,6 @@ const RootLayout: React.FC = () => {
       text: 'Connectors',
       icon: <Icon name="connectors" size={12} />,
       to: 'connectors'
-    },
-    {
-      text: 'Home Page',
-      icon: <Icon name="chaos-engineering" size={12} />,
-      to: '/'
-    },
-    {
-      text: 'Sign Up',
-      icon: <Icon name="environment" size={12} />,
-      to: '/signup'
-    },
-    {
-      text: 'Sign In',
-      icon: <Icon name="secrets" size={12} />,
-      to: '/signin'
     }
   ]
 

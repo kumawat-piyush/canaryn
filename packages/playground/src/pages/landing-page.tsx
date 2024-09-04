@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Home from '../components/home'
-import PlaygroundHomeSettings from '../settings/home-settings'
+import PlaygroundLandingSettings from '../settings/landing-settings'
 
 export default function LandingPage() {
   const [loadState, setLoadState] = useState('home-unauth')
@@ -23,7 +23,7 @@ export default function LandingPage() {
   return (
     <>
       {renderContent()}
-      <PlaygroundHomeSettings loadState={loadState} setLoadState={setLoadState} />
+      <PlaygroundLandingSettings loadState={loadState} setLoadState={setLoadState} />
     </>
   )
 }
