@@ -16,6 +16,7 @@ import {
   cn
 } from '@harnessio/canary'
 import { useParams } from 'react-router-dom'
+import { getInitials } from '../../utils/utils'
 
 interface Project {
   id: string
@@ -36,7 +37,7 @@ const ProjectDropdown: React.FC<{ isPrimary: boolean; projects: Project[] }> = (
   <DropdownMenu>
     <DropdownMenuTrigger className="group flex items-center gap-2 outline-none">
       <Avatar className="w-7 h-7">
-        <AvatarFallback>P</AvatarFallback>
+        <AvatarFallback>{getInitials(projects[0].name, 1)}</AvatarFallback>
       </Avatar>
       <BreadcrumbLink
         className={cn('font-medium', { 'text-primary': isPrimary, 'text-navbar-text-secondary': !isPrimary })}>
