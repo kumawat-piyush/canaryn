@@ -28,9 +28,9 @@ export default function LandingPage() {
       case 'home-unauth':
         return <Home isAuthed={false} handleSignUp={handleSignUp} handleSignIn={handleSignIn} />
       case 'sign-in':
-        return <SignInPage />
+        return <SignInPage handleSignUp={handleSignUp} />
       case 'sign-up':
-        return <SignUpPage />
+        return <SignUpPage handleSignIn={handleSignIn} />
       default:
         return null
     }

@@ -17,6 +17,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import Floating1ColumnLayout from '../layouts/Floating1ColumnLayout'
 
+interface PageProps {
+  handleSignUp?: () => void
+}
+
 interface DataProps {
   email?: string
   password?: string
@@ -27,7 +31,7 @@ const signInSchema = z.object({
   password: z.string().min(6, { message: 'Password must be at least 6 characters' })
 })
 
-export default function SignInPage() {
+export default function SignInPage({ handleSignUp }: PageProps) {
   const {
     register,
     handleSubmit,
@@ -103,7 +107,10 @@ export default function SignInPage() {
           </form>
           <Spacer size={4} />
           <Text size={1} color="tertiaryBackground" weight="normal" align="center" className="block">
-            Don't have an account? <a className="text-primary">Sign up</a>
+            Don't have an account?{' '}
+            <a className="text-primary" onClick={handleSignUp}>
+              Sign up
+            </a>
           </Text>
         </CardContent>
       </Card>

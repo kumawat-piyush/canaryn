@@ -17,6 +17,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import Floating1ColumnLayout from '../layouts/Floating1ColumnLayout'
 
+interface PageProps {
+  handleSignIn?: () => void
+}
+
 interface DataProps {
   userId?: string
   email?: string
@@ -31,7 +35,7 @@ const signUpSchema = z.object({
   confirmPassword: z.string()
 })
 
-export default function SignUpPage() {
+export default function SignUpPage({ handleSignIn }: PageProps) {
   const {
     register,
     handleSubmit,
@@ -155,7 +159,10 @@ export default function SignUpPage() {
           </form>
           <Spacer size={4} />
           <Text size={1} color="tertiaryBackground" weight="normal" align="center" className="block">
-            Already have an account? <a className="text-primary">Sign in</a>
+            Already have an account?{' '}
+            <a className="text-primary" onClick={handleSignIn}>
+              Sign in
+            </a>
           </Text>
         </CardContent>
       </Card>
