@@ -8,7 +8,7 @@ export default function Pipelines() {
     },
     /* To enable mock data */
     {
-      placeholderData: [{ identifier: 'pipeline1' }, { identifier: 'pipeline2' }],
+      placeholderData: { content: [{ identifier: 'pipeline1' }, { identifier: 'pipeline2' }] },
       enabled: true
     }
   )
@@ -16,7 +16,7 @@ export default function Pipelines() {
   return (
     <div className="flex flex-col justify-center">
       <h1>Pipelines</h1>
-      {pipelines?.map((pipeline: TypesPipeline) => <div key={pipeline.identifier}>{pipeline.identifier}</div>)}
+      {pipelines?.content?.map((pipeline: TypesPipeline) => <div key={pipeline.identifier}>{pipeline.identifier}</div>)}
     </div>
   )
 }
