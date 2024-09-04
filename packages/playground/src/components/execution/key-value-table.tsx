@@ -69,8 +69,7 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({
                   {item.name}
                 </Text>
               </AccordionTrigger>
-              <AccordionContent
-                className={`w-full pl-1 pr-0 pb-0 data-[state=open]:border-b-0 data-[state=closed]:border-b`}>
+              <AccordionContent className={`w-full pl-1 pr-0 pb-0`}>
                 {renderListItems(item.value, level + 1)}
               </AccordionContent>
             </AccordionItem>
