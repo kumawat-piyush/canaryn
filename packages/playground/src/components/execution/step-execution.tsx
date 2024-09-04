@@ -86,7 +86,7 @@ export const StepExecution: React.FC<StageExecutionProps> = ({ step, stepIndex }
             </ScrollArea>
           </TabsContent>
           <TabsContent value={StepExecutionTab.OUTPUT}>
-            {/*here is the execution details of input table */}
+            {/*here is the execution details of output table */}
             <ScrollArea className="h-[calc(100vh-23rem)] border-t pt-4">
               <KeyValueTable
                 tableSpec={outputTable}

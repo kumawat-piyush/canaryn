@@ -42,13 +42,13 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({
     return listItems.map((item, index: number) => {
       if (typeof item.value === 'string') {
         return (
-          <ul className="border-b flex flex-row align-middle" key={index} style={{ paddingLeft: `${level / 2}rem` }}>
-            <li className="pr-2.5 py-2.5 w-1/2 text-studio-7" style={{ paddingLeft: `${level * 1 + 1}rem` }}>
+          <ul className="border-b flex flex-row align-middle" key={index}>
+            <li className="pr-2.5 py-2.5 w-1/2 text-studio-7" style={{ paddingLeft: `${level + 1}rem` }}>
               <Text size={2} weight="normal">
                 {item.name}
               </Text>
             </li>
-            <li className="pr-2.5 py-2.5 w-1/2 text-studio-7">
+            <li className="pl-2 pr-2.5 py-2.5 w-1/2 text-studio-7">
               <Text size={2} weight="normal">
                 {item.value}
               </Text>
@@ -63,7 +63,7 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({
                 className="w-full pt-2 pb-2 pr-4 flex gap-1"
                 leftChevron
                 style={{
-                  paddingLeft: `${level * 1 + 1}rem`
+                  paddingLeft: `${level + 1}rem`
                 }}>
                 <Text size={2} weight="normal" className={specTitleStyle}>
                   {item.name}
