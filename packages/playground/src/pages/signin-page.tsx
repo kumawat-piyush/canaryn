@@ -56,7 +56,6 @@ export default function SignInPage() {
               Sign in to Canary
             </Text>
             <Spacer size={2} />
-
             <Text size={2} color="tertiaryBackground">
               Welcome back! Please enter your details.
             </Text>
