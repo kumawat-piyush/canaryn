@@ -57,7 +57,7 @@ export default function SignInPage({ handleSignUp }: PageProps) {
           <CardTitle className="flex flex-col place-items-center">
             <Icon name="gitness-logo" size={104} />
             <Text size={6} weight="medium" color="primary">
-              Sign in to Canary
+              Sign in to Playground
             </Text>
             <Spacer size={2} />
             <Text size={2} color="tertiaryBackground">

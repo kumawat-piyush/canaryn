@@ -69,7 +69,7 @@ export default function SignUpPage({ handleSignIn }: PageProps) {
           <CardTitle className="flex flex-col place-items-center">
             <Icon name="gitness-logo" size={104} />
             <Text size={6} weight="medium" color="primary">
-              Sign up to Canary
+              Sign up to Playground
             </Text>
             <Spacer size={2} />
 
