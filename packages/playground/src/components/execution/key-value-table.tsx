@@ -26,8 +26,8 @@ interface KeyValueTableProps {
 }
 
 //manage style for using repeatly
-const accordionContentStyle = 'w-full pl-1 pr-0 border-0 pb-0'
-const specTitleStyle = 'text-studio-2 flex-grow text-left -ml-1'
+const accordionContentStyle = `w-full pl-1 pr-0 pb-0 border-0`
+const specTitleStyle = 'text-studio-2 flex-grow text-left'
 
 export const KeyValueTable: React.FC<KeyValueTableProps> = ({
   className,
@@ -42,14 +42,14 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({
     return listItems.map((item, index: number) => {
       if (typeof item.value === 'string') {
         return (
-          <ul className="border-b" key={index}>
-            <li className="py-2.5 inline-block w-1/2" style={{ paddingLeft: `${level * 1 + 1.5}rem` }}>
-              <Text size={2} weight="normal" className="text-studio-7">
+          <ul className="border-b flex flex-row align-middle" key={index} style={{ paddingLeft: `${level / 2}rem` }}>
+            <li className="pr-2.5 py-2.5 w-1/2 text-studio-7" style={{ paddingLeft: `${level * 1 + 1}rem` }}>
+              <Text size={2} weight="normal">
                 {item.name}
               </Text>
             </li>
-            <li className="pr-2.5 py-2.5 inline-block w-1/2">
-              <Text size={2} weight="normal" className="text-studio-7">
+            <li className="pr-2.5 py-2.5 w-1/2 text-studio-7">
+              <Text size={2} weight="normal">
                 {item.value}
               </Text>
             </li>
@@ -60,14 +60,17 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({
           <Accordion type="single" key={index} className="border-0" defaultValue={item.name} collapsible>
             <AccordionItem value={item.name} className="border-0">
               <AccordionTrigger
-                className="w-full pt-2 pb-2 pr-4 flex"
+                className="w-full pt-2 pb-2 pr-4 flex gap-1"
                 leftChevron
-                style={{ paddingLeft: `${level * 1 + 1}rem` }}>
+                style={{
+                  paddingLeft: `${level * 1 + 1}rem`
+                }}>
                 <Text size={2} weight="normal" className={specTitleStyle}>
                   {item.name}
                 </Text>
               </AccordionTrigger>
-              <AccordionContent className={accordionContentStyle}>
+              <AccordionContent
+                className={`w-full pl-1 pr-0 pb-0 data-[state=open]:border-b-0 data-[state=closed]:border-b`}>
                 {renderListItems(item.value, level + 1)}
               </AccordionContent>
             </AccordionItem>
@@ -101,7 +104,9 @@ export const KeyValueTable: React.FC<KeyValueTableProps> = ({
             <TableCell colSpan={2} className="p-0 border-0">
               <Accordion type="single" collapsible defaultValue={item.name}>
                 <AccordionItem value={item.name} className="border-0">
-                  <AccordionTrigger className="w-full pt-2 pb-2 pl-4 flex pr-4 border-0" leftChevron>
+                  <AccordionTrigger
+                    className="w-full pt-2 pb-2 pl-4 flex pr-4 gap-1 data-[state=open]:border-b-0 data-[state=closed]:border-b"
+                    leftChevron>
                     <Text size={2} weight="normal" className={specTitleStyle}>
                       {item.name}
                     </Text>
