@@ -1,11 +1,11 @@
 {
   "name": "@harnessio/unified-pipeline",
-  "version": "0.3.0-beta1",
+  "version": "0.3.0-beta3",
   "description": "Harness Unified Pipeline ibrary",
   "scripts": {
     "dev": "run-p typed-scss build:watch",
-    "build:css": "npx tailwindcss -i ./src/styles.css -o ./public/styles.css",
-    "build": "vite build",
+    "build:css": "npx tailwindcss -i ./src/styles.css -o ./dist/tw-styles.css",
+    "build": "pnpm build:css && vite build",
     "build:watch": "vite build --watch",
     "typed-scss": "typed-scss-modules src --watch",
     "prepublishOnly": "pnpm build"
@@ -23,7 +23,8 @@
       "import": "./dist/index.js"
     },
     "./tailwind.config": "./tailwind.config.js",
-    "./styles": "./dist/style.css"
+    "./styles": "./dist/style.css",
+    "./tw-styles": "./dist/tw-styles.css"
   },
   "style": "./dist/style.css",
   "repository": {
