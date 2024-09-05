@@ -10,7 +10,7 @@ const RepoLayout: React.FC = () => {
     <div>
       <TopBarWidget />
       {!executionId && (
-        <Tabs variant="navigation" defaultValue="pipelines">
+        <Tabs variant="navigation" defaultValue="summary">
           <TabsList>
             <NavLink to={`summary`}>
               <TabsTrigger value="summary">Summary</TabsTrigger>

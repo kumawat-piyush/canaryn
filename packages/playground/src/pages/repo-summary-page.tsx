@@ -6,8 +6,8 @@ import NoSearchResults from '../components/no-search-results'
 import SkeletonList from '../components/loaders/skeleton-list'
 import PlaygroundListSettings from '../settings/list-settings'
 import FullWidth2ColumnLayout from '../layouts/FullWidth2ColumnLayout'
-import PaddingListLayout from '../layouts/PaddingListLayout'
 import { mockFiles } from '../data/mockSummaryFiiles'
+import Floating1ColumnLayout from '../layouts/Floating1ColumnLayout'
 
 function RepoSummaryPage() {
   const [loadState, setLoadState] = useState('data-loaded')
@@ -50,10 +50,11 @@ function RepoSummaryPage() {
   }
 
   return (
-    <PaddingListLayout spaceTop={false}>
+    <Floating1ColumnLayout>
       <FullWidth2ColumnLayout
         leftColumn={
           <>
+            <Spacer size={6} />
             <ListActions.Root>
               <ListActions.Left>
                 <ButtonGroup.Root>
@@ -98,6 +99,7 @@ function RepoSummaryPage() {
         }
         rightColumn={
           <div className="flex flex-col">
+            <Spacer size={5} />
             <Text size={4} weight={'medium'}>
               Summary
             </Text>
@@ -109,7 +111,7 @@ function RepoSummaryPage() {
         }
       />
       <PlaygroundListSettings loadState={loadState} setLoadState={setLoadState} />
-    </PaddingListLayout>
+    </Floating1ColumnLayout>
   )
 }
 
