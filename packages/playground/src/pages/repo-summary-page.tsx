@@ -1,21 +1,5 @@
 import React, { useState } from 'react'
-import {
-  Spacer,
-  ListActions,
-  ListPagination,
-  Button,
-  SearchBox,
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationPrevious,
-  PaginationLink,
-  PaginationEllipsis,
-  PaginationNext,
-  Text,
-  Icon,
-  ButtonGroup
-} from '@harnessio/canary'
+import { Spacer, ListActions, Button, SearchBox, Text, Icon, ButtonGroup, StackedList } from '@harnessio/canary'
 import { Summary } from '../components/repo-summary'
 import NoData from '../components/no-data'
 import NoSearchResults from '../components/no-search-results'
@@ -93,47 +77,23 @@ function RepoSummaryPage() {
             </ListActions.Root>
             <Spacer size={5} />
             {renderListContent()}
-            <Spacer size={8} />
-            {loadState == 'data-loaded' && (
-              <ListPagination.Root>
-                <Pagination>
-                  <PaginationContent>
-                    <PaginationItem>
-                      <PaginationPrevious size="sm" href="#" />
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink isActive size="sm_icon" href="#">
-                        1
-                      </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink size="sm_icon" href="#">
-                        2
-                      </PaginationLink>
-                    </PaginationItem>
-
-                    <PaginationItem>
-                      <PaginationLink size="sm_icon" href="#">
-                        <PaginationEllipsis />
-                      </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink size="sm_icon" href="#">
-                        4
-                      </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink size="sm_icon" href="#">
-                        5
-                      </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationNext size="sm" href="#" />
-                    </PaginationItem>
-                  </PaginationContent>
-                </Pagination>
-              </ListPagination.Root>
-            )}
+            <Spacer size={12} />
+            <StackedList.Root>
+              <StackedList.Item isHeader>
+                <StackedList.Field title={<Text color="tertiaryBackground">README.md</Text>} />
+              </StackedList.Item>
+              <StackedList.Item>
+                <Text as="p" color="tertiaryBackground">
+                  Content
+                </Text>
+                <Text as="p" color="tertiaryBackground">
+                  Content
+                </Text>
+                <Text as="p" color="tertiaryBackground">
+                  Content
+                </Text>
+              </StackedList.Item>
+            </StackedList.Root>
           </>
         }
         rightColumn={
