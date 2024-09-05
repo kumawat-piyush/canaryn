@@ -1,37 +1,57 @@
-import { StackedList } from '@harnessio/canary'
+import { Spacer, StackedList, Text } from '@harnessio/canary'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export enum MeterState {
-  Empty = 0,
-  Error = 1,
-  Warning = 2,
-  Success = 3
+export enum SummaryItemType {
+  Folder = 0,
+  File = 1
 }
 
-interface Pipeline {
+interface File {
   id: string
-  success: boolean
   name: string
-  sha: string
-  description: string
-  version: string
+  lastCommitMessage: string
   timestamp: string
-  meter?: {
-    id: string
-    state: MeterState
-  }[]
 }
 
 interface PageProps {
-  pipelines?: Pipeline[]
+  files?: File[]
 }
 
-const Title = ({ title }: { success: boolean; title: string }) => {
+const TopTitle = () => {
+  return (
+    <Text size={2} weight="normal" color="tertiaryBackground">
+      Ted Richardson removing duplicated metrics for servers and swapping to pattern mathematics
+    </Text>
+  )
+}
+
+const Name = ({ title }: { title: string }) => {
   return (
     <div className="flex gap-2 items-center">
-      {/* <Icon size={16} name={success ? 'success' : 'fail'} /> */}
-      {title}
+      <Text size={2} weight="normal" color="tertiaryBackground">
+        {title}
+      </Text>
+    </div>
+  )
+}
+
+const Message = ({ title }: { title: string }) => {
+  return (
+    <div className="flex gap-2 items-center">
+      <Text size={2} weight="normal" color="primary" truncate>
+        {title}
+      </Text>
+    </div>
+  )
+}
+
+const Date = ({ title }: { title: string }) => {
+  return (
+    <div className="flex gap-2 items-center">
+      <Text size={2} weight="normal" color="tertiaryBackground">
+        {title}
+      </Text>
     </div>
   )
 }
@@ -53,35 +73,33 @@ const Title = ({ title }: { success: boolean; title: string }) => {
 // }
 
 export const Summary = ({ ...props }: PageProps) => {
-  const { pipelines } = props
+  const { files } = props
 
   return (
     <>
-      {pipelines && pipelines.length > 0 && (
+      <StackedList.Root>
+        <StackedList.Item disableHover>
+          <StackedList.Field title={<TopTitle />} />
+        </StackedList.Item>
+      </StackedList.Root>
+      <Spacer size={5} />
+      {files && files.length > 0 && (
         <StackedList.Root>
-          <StackedList.Item isHeader>Title</StackedList.Item>
-          {pipelines.map((pipeline, pipeline_idx) => (
-            <StackedList.Item key={pipeline.name} isLast={pipelines.length - 1 === pipeline_idx} asChild>
-              <Link to={`${pipeline.id}`}>
-                <StackedList.Field
-                  title={<Title success={pipeline.success} title={pipeline.name} />}
-                  // description={
-                  //   <Description sha={pipeline.sha} description={pipeline.description} version={pipeline.version} />
-                  // }
-                />
-                {/* <StackedList.Field
-                  label
-                  secondary
-                  title={pipeline.meter ? <Meter.Root data={pipeline.meter} /> : pipeline.timestamp}
-                  right
-                /> */}
+          <StackedList.Item isHeader>
+            <StackedList.Field title="Name" />
+            <StackedList.Field title="Last commit message" />
+            <StackedList.Field right title="Date" />
+          </StackedList.Item>
+          {files.map((file, file_idx) => (
+            <StackedList.Item key={file.name} isLast={files.length - 1 === file_idx} asChild>
+              <Link to={`${file.id}`}>
+                <StackedList.Field title={<Name title={file.name} />} />
+                <StackedList.Field title={<Message title={file.lastCommitMessage} />} />
+                <StackedList.Field right title={<Date title={file.timestamp} />} />
               </Link>
             </StackedList.Item>
           ))}
         </StackedList.Root>
-      )}
-      {!pipelines && (
-        <></> // Handle loading/no items
       )}
     </>
   )
