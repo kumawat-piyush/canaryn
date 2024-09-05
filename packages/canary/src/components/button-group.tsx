@@ -5,20 +5,13 @@ interface ButtonGroupProps {
   children: React.ReactNode
   direction?: 'horizontal' | 'vertical'
   className?: string
+  spacing?: string
 }
 
-function Root({ children, direction, className }: ButtonGroupProps) {
-  return (
-    <div
-      className={cn(
-        'flex',
-        { 'flex-col gap-4': direction && direction == 'vertical' },
-        { 'gap-4': direction && direction == 'horizontal' },
-        className
-      )}>
-      {children}
-    </div>
-  )
+function Root({ children, direction = 'horizontal', className, spacing = '4' }: ButtonGroupProps) {
+  const gapClass = `gap-${spacing}`
+
+  return <div className={cn('flex', direction === 'vertical' ? 'flex-col' : '', gapClass, className)}>{children}</div>
 }
 
 export { Root }

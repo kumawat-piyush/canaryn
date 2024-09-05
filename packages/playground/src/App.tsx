@@ -10,6 +10,7 @@ import ErrorPage from './pages/error-page'
 import LandingPage from './pages/landing-page'
 import RepoListPage from './pages/repo-list-page'
 import PipelineListPage from './pages/pipeline-list-page'
+import RepoSummaryPage from './pages/repo-summary-page'
 import PipelineDetailsPage from './pages/pipeline-details-page'
 import ExecutionListPage from './pages/execution-list-page'
 import ExecutionDetailsPage from './pages/execution-details-page'
@@ -47,7 +48,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Navigate to="pipelines" />
+            element: <Navigate to="summary" />
+          },
+          {
+            path: 'summary',
+            element: <RepoSummaryPage />
           },
           {
             path: 'pipelines',

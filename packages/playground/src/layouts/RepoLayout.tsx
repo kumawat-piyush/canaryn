@@ -12,6 +12,9 @@ const RepoLayout: React.FC = () => {
       {!executionId && (
         <Tabs variant="navigation" defaultValue="pipelines">
           <TabsList>
+            <NavLink to={`summary`}>
+              <TabsTrigger value="summary">Summary</TabsTrigger>
+            </NavLink>
             <NavLink to={`pipelines`}>
               <TabsTrigger value="pipelines">Pipelines</TabsTrigger>
             </NavLink>
