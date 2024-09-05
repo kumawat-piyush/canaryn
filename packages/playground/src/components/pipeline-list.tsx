@@ -16,7 +16,7 @@ interface Pipeline {
   sha: string
   description: string
   version: string
-  timestamp: string
+  timestamp: number
   meter?: {
     id: string
     state: MeterState
@@ -41,7 +41,7 @@ const Description = ({ sha, description, version }: { sha: string; description: 
     <div className="flex gap-2 items-center">
       <div className="ml-[24px] px-1.5 rounded-md flex gap-1 items-center bg-tertiary-background/10">
         <Icon size={11} name={'tube-sign'} />
-        {sha}
+        {sha?.slice(0, 7)}
       </div>
       <div>{description}</div>
       <div className="flex gap-1 items-center">
