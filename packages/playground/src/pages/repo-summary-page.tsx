@@ -45,6 +45,76 @@ const mockFiles = [
     type: 'folder',
     lastCommitMessage: 'removing duplicated metrics for servers and swapping to pattern mathematics ',
     timestamp: '2 hours ago'
+  },
+  {
+    id: '3',
+    name: 'public',
+    type: 'folder',
+    lastCommitMessage: 'removing duplicated metrics for servers and swapping to pattern mathematics ',
+    timestamp: '2 hours ago'
+  },
+  {
+    id: '4',
+    name: 'files',
+    type: 'folder',
+    lastCommitMessage: 'removing duplicated metrics for servers and swapping to pattern mathematics ',
+    timestamp: '2 hours ago'
+  },
+  {
+    id: '5',
+    name: 'src',
+    type: 'folder',
+    lastCommitMessage: 'removing duplicated metrics for servers and swapping to pattern mathematics ',
+    timestamp: '2 hours ago'
+  },
+  {
+    id: '6',
+    name: 'public',
+    type: 'folder',
+    lastCommitMessage: 'removing duplicated metrics for servers and swapping to pattern mathematics ',
+    timestamp: '2 hours ago'
+  },
+  {
+    id: '7',
+    name: 'files',
+    type: 'folder',
+    lastCommitMessage: 'removing duplicated metrics for servers and swapping to pattern mathematics ',
+    timestamp: '2 hours ago'
+  },
+  {
+    id: '8',
+    name: 'src',
+    type: 'folder',
+    lastCommitMessage: 'removing duplicated metrics for servers and swapping to pattern mathematics ',
+    timestamp: '2 hours ago'
+  },
+  {
+    id: '9',
+    name: 'public',
+    type: 'folder',
+    lastCommitMessage: 'removing duplicated metrics for servers and swapping to pattern mathematics ',
+    timestamp: '2 hours ago'
+  },
+  {
+    id: '10',
+    name: 'files',
+    type: 'folder',
+    lastCommitMessage: 'removing duplicated metrics for servers and swapping to pattern mathematics ',
+    timestamp: '2 hours ago'
+  },
+  {
+    id: '11',
+    name: 'public',
+    type: 'folder',
+    lastCommitMessage: 'removing duplicated metrics for servers and swapping to pattern mathematics ',
+    timestamp: '2 hours ago'
+  },
+  {
+    id: '12',
+    name: 'files',
+    type: 'folder',
+    lastCommitMessage: 'removing duplicated metrics for servers and swapping to pattern mathematics ',
+    timestamp: '2 hours ago'
   }
 ]
 
