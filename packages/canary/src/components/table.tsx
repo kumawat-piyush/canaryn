@@ -21,7 +21,7 @@ const Table = React.forwardRef<HTMLTableElement, TableProps>(({ variant, classNa
     className={cn(
       'relative w-full overflow-auto',
       {
-        'rounded-md border [&_th]:px-4 [&_td]:px-4 [&_td]:py-2.5 [&_td]:align-top [&_thead]:bg-primary/[0.02]':
+        'rounded-md border [&_th]:px-4 [&_td]:px-4 [&_td]:py-2.5 [&_td]:align-middle [&_thead]:bg-primary/[0.02]':
           variant === 'asStackedList'
       },
       className
