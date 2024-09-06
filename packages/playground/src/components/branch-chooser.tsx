@@ -24,7 +24,7 @@ export default function RepoSummaryPanel({ ...props }: PageProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="secondary" className="flex gap-1.5 items-center px-3">
+        <Button variant="secondary" size="sm" className="flex gap-1.5 items-center px-3 bg-muted">
           <Icon name="branch" size={14} className="text-tertiary-background" />
           <Text className="text-primary/90">{name}</Text>
           <Icon name="chevron-down" size={11} className="chevron-down ml-6 text-tertiary-background" />
