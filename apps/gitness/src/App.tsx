@@ -5,6 +5,7 @@ import { ThemeProvider, RootLayout } from '@harnessio/playground'
 import { CodeServiceAPIClient } from '@harnessio/code-service-client'
 import { queryClient } from './framework/queryClient'
 import PipelineList from './pages/pipeline-list'
+import SignInPage from './pages/signin'
 
 const BASE_URL_PREFIX = '/api/v1'
 
@@ -35,6 +36,10 @@ export default function App() {
           element: <PipelineList />
         }
       ]
+    },
+    {
+      path: '/signin',
+      element: <SignInPage />
     }
   ])
 
