@@ -3,19 +3,20 @@ import BranchesList from '../components/branches'
 import SkeletonList from '../components/loaders/skeleton-list'
 import NoData from '../components/no-data'
 import PaddingListLayout from '../layouts/PaddingListLayout'
-import { ListActions, SearchBox, Spacer, Text } from '@harnessio/canary'
+import { Button, ListActions, SearchBox, Spacer, Text } from '@harnessio/canary'
 import PlaygroundBranchesSettings from '../settings/branches-settings'
+import { mockBranchData } from '../data/mockBranchData'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
 
 export default function BranchesListPage() {
-  const [loadState, setLoadState] = useState('loading')
+  const [loadState, setLoadState] = useState('data-loaded')
 
   const renderContent = () => {
     switch (loadState) {
       case 'data-loaded':
-        return <BranchesList />
+        return <BranchesList branches={mockBranchData} />
       case 'loading':
         return <SkeletonList />
 
@@ -46,6 +47,7 @@ export default function BranchesListPage() {
         <ListActions.Right>
           <ListActions.Dropdown title="Filter" items={filterOptions} />
           <ListActions.Dropdown title="Sort" items={sortOptions} />
+          <Button variant="default">Create Branch</Button>
         </ListActions.Right>
       </ListActions.Root>
       <Spacer size={5} />

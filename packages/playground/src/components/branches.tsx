@@ -1,9 +1,77 @@
+import { Button, Icon, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Text } from '@harnessio/canary'
 import React from 'react'
 
-export default function Branches() {
+interface PageProps {
+  branches: []
+}
+
+export default function Branches({ branches }: PageProps) {
   return (
-    <div className="px-8 py-8">
-      <p>Branches page</p>
-    </div>
+    <Table variant="asStackedList">
+      <TableHeader>
+        <TableRow>
+          <TableHead>Branch</TableHead>
+          <TableHead>Updated</TableHead>
+          <TableHead>Check status</TableHead>
+          <TableHead>Behind | Ahead</TableHead>
+          <TableHead>Pull request</TableHead>
+          <TableHead>
+            <></>
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {branches &&
+          branches.map(branch => {
+            return (
+              <TableRow>
+                <TableCell>
+                  <div className="flex items-center gap-1.5">
+                    <Text wrap="nowrap" truncate className="text-primary/90">
+                      <Button variant="secondary" size="xs">
+                        <Icon name="branch" size={11} className="text-tertiary-background" />
+                        &nbsp;
+                        {branch.name}
+                      </Button>
+                    </Text>
+                    <Button variant="ghost" size="xs">
+                      <Icon name="clone" size={16} className="text-tertiary-background" />
+                    </Button>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <Text wrap="nowrap" truncate className="text-primary">
+                    {branch.timestamp}
+                  </Text>
+                </TableCell>
+                <TableCell>
+                  <div className="flex gap-1.5 items-center">
+                    <Icon name="tick" size={11} className="text-success" />
+                    <Text size={2} wrap="nowrap" truncate className="text-tertiary-background">
+                      {branch.checks.done} / {branch.checks.total}
+                    </Text>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <Text wrap="nowrap" truncate className="text-tertiary-background">
+                    {branch.behindAhead.behind} | {branch.behindAhead.ahead}
+                  </Text>
+                </TableCell>
+                <TableCell>
+                  <div className="flex gap-1.5 items-center">
+                    <Icon name="open-pr" size={11} className="text-success" />
+                    <Text wrap="nowrap" size={1} truncate className="text-tertiary-background">
+                      #{branch.pullRequest.sha}{' '}
+                    </Text>
+                  </div>
+                </TableCell>
+                <TableCell className="flex justify-end">
+                  <Icon name="vertical-ellipsis" size={14} className="mt-0.5" />
+                </TableCell>
+              </TableRow>
+            )
+          })}
+      </TableBody>
+    </Table>
   )
 }
