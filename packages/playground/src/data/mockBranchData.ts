@@ -23,7 +23,7 @@ export const mockBranchData = [
   },
   {
     id: '1',
-    name: 'feature/login',
+    name: 'login-feature',
     timestamp: '2 weeks ago',
     user: {
       name: 'Sarah Johnson',
@@ -45,7 +45,7 @@ export const mockBranchData = [
   },
   {
     id: '2',
-    name: 'bugfix/header-alignment',
+    name: 'header-bugfix',
     timestamp: '3 days ago',
     user: {
       name: 'John Doe',
@@ -67,7 +67,7 @@ export const mockBranchData = [
   },
   {
     id: '3',
-    name: 'feature/new-dashboard',
+    name: 'dashboard-updates',
     timestamp: 'yesterday',
     user: {
       name: 'Alice Kim',
@@ -89,7 +89,7 @@ export const mockBranchData = [
   },
   {
     id: '4',
-    name: 'hotfix/payment-issue',
+    name: 'payment-hotfix',
     timestamp: '4 hours ago',
     user: {
       name: 'Michael Lee',
@@ -111,7 +111,7 @@ export const mockBranchData = [
   },
   {
     id: '5',
-    name: 'feature/auth-improvements',
+    name: 'auth-improvements',
     timestamp: '2 days ago',
     user: {
       name: 'Emma Stone',
@@ -133,7 +133,7 @@ export const mockBranchData = [
   },
   {
     id: '6',
-    name: 'chore/cleanup',
+    name: 'cleanup-tasks',
     timestamp: 'last week',
     user: {
       name: 'Chris Evans',
@@ -155,7 +155,7 @@ export const mockBranchData = [
   },
   {
     id: '7',
-    name: 'feature/profile-update',
+    name: 'profile-update',
     timestamp: '5 days ago',
     user: {
       name: 'Sophia Turner',
@@ -177,7 +177,7 @@ export const mockBranchData = [
   },
   {
     id: '8',
-    name: 'refactor/code-structure',
+    name: 'code-refactor',
     timestamp: '2 weeks ago',
     user: {
       name: 'Liam Neeson',
@@ -199,7 +199,7 @@ export const mockBranchData = [
   },
   {
     id: '9',
-    name: 'feature/notification-system',
+    name: 'notification-system',
     timestamp: '3 weeks ago',
     user: {
       name: 'Olivia Brown',
@@ -217,6 +217,138 @@ export const mockBranchData = [
     pullRequest: {
       sha: 'T5U9V3',
       status: 'closed'
+    }
+  },
+  {
+    id: '10',
+    name: 'email-service',
+    timestamp: '5 days ago',
+    user: {
+      name: 'Robert Smith',
+      avatarUrl: '../assets/images/user-avatar-11.svg'
+    },
+    checks: {
+      done: 4,
+      total: 5,
+      status: 2
+    },
+    behindAhead: {
+      behind: 18,
+      ahead: 10
+    },
+    pullRequest: {
+      sha: 'R2T6F9',
+      status: 'open'
+    }
+  },
+  {
+    id: '11',
+    name: 'user-onboarding',
+    timestamp: '1 week ago',
+    user: {
+      name: 'Megan Wilson',
+      avatarUrl: '../assets/images/user-avatar-12.svg'
+    },
+    checks: {
+      done: 8,
+      total: 8,
+      status: 1
+    },
+    behindAhead: {
+      behind: 5,
+      ahead: 15
+    },
+    pullRequest: {
+      sha: 'F9H8G7',
+      status: 'merged'
+    }
+  },
+  {
+    id: '12',
+    name: 'api-optimization',
+    timestamp: '3 weeks ago',
+    user: {
+      name: 'David Johnson',
+      avatarUrl: '../assets/images/user-avatar-13.svg'
+    },
+    checks: {
+      done: 3,
+      total: 3,
+      status: 1
+    },
+    behindAhead: {
+      behind: 10,
+      ahead: 20
+    },
+    pullRequest: {
+      sha: 'K1M5N9',
+      status: 'closed'
+    }
+  },
+  {
+    id: '13',
+    name: 'search-feature',
+    timestamp: '2 days ago',
+    user: {
+      name: 'Jessica Parker',
+      avatarUrl: '../assets/images/user-avatar-14.svg'
+    },
+    checks: {
+      done: 5,
+      total: 6,
+      status: 2
+    },
+    behindAhead: {
+      behind: 8,
+      ahead: 14
+    },
+    pullRequest: {
+      sha: 'L8N7V6',
+      status: 'open'
+    }
+  },
+  {
+    id: '14',
+    name: 'mobile-support',
+    timestamp: 'last month',
+    user: {
+      name: 'Henry Thompson',
+      avatarUrl: '../assets/images/user-avatar-15.svg'
+    },
+    checks: {
+      done: 1,
+      total: 3,
+      status: 1
+    },
+    behindAhead: {
+      behind: 25,
+      ahead: 6
+    },
+    pullRequest: {
+      sha: 'X4B3F6',
+      status: 'closed'
+    }
+  },
+  {
+    id: '15',
+    name: 'dark-mode',
+    timestamp: '4 days ago',
+    user: {
+      name: 'Isabella Martinez',
+      avatarUrl: '../assets/images/user-avatar-16.svg'
+    },
+    checks: {
+      done: 7,
+      total: 7,
+      status: 1
+    },
+    behindAhead: {
+      behind: 15,
+      ahead: 18
+    },
+    pullRequest: {
+      sha: 'T2B4X9',
+      status: 'open'
     }
   }
 ]

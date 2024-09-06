@@ -16,7 +16,7 @@ import ExecutionListPage from './pages/execution-list-page'
 import ExecutionDetailsPage from './pages/execution-details-page'
 import PullRequestListPage from './pages/pull-request-list-page'
 import CommitsListPage from './pages/commits-list-page'
-import BranchesPage from './pages/branches-page'
+import BranchesListPage from './pages/branches-list-page'
 import CommitsDetailsPage from './pages/commits-details-page'
 import PullRequestConversationPage from './pages/pull-request-conversation-page'
 import PullRequestChangesPage from './pages/pull-request-changes-page'
@@ -112,7 +112,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'branches',
-            element: <BranchesPage />
+            element: <BranchesListPage />
           },
           {
             path: 'commits',

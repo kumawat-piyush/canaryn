@@ -1,11 +1,34 @@
 import { Button, Icon, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Text } from '@harnessio/canary'
 import React from 'react'
 
-interface PageProps {
-  branches: []
+interface BranchProps {
+  id: string
+  name: string
+  timestamp: string
+  user: {
+    name: string
+    avatarUrl: string
+  }
+  checks: {
+    done: number
+    total: number
+    status: number
+  }
+  behindAhead: {
+    behind: number
+    ahead: number
+  }
+  pullRequest: {
+    sha: string
+    status: string
+  }
 }
 
-export default function Branches({ branches }: PageProps) {
+interface PageProps {
+  branches: BranchProps[]
+}
+
+export default function BranchesList({ branches }: PageProps) {
   return (
     <Table variant="asStackedList">
       <TableHeader>
