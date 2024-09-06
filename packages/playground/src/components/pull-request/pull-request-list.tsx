@@ -1,7 +1,6 @@
 import { Badge, cn, Icon, StackedList, Text } from '@harnessio/canary'
 import React, { useMemo, useState } from 'react'
 import cx from 'classnames'
-import { Link } from 'react-router-dom'
 
 interface PullRequestProps {
   id: string
@@ -23,6 +22,7 @@ interface PullRequestProps {
 
 interface PageProps {
   pullRequests?: PullRequestProps[]
+  LinkComponent: React.ComponentType<{ to: string; children: React.ReactNode }>
 }
 
 const HeaderTitle = ({
@@ -145,9 +145,7 @@ const Comments = ({ comments }: { comments: number }) => {
   )
 }
 
-export default function PullRequestList({ ...props }: PageProps) {
-  const { pullRequests } = props
-
+export default function PullRequestList({ pullRequests, LinkComponent }: PageProps) {
   const [headerFilter, setHeaderFilter] = useState('open')
   const filteredData = useMemo(
     () =>
@@ -168,11 +166,10 @@ export default function PullRequestList({ ...props }: PageProps) {
               title={<HeaderTitle headerFilter={headerFilter} setHeaderFilter={setHeaderFilter} />}></StackedList.Field>
           </StackedList.Item>
           {filteredData?.map((pullRequest, pullRequest_idx) => (
-            <StackedList.Item
-              key={`${pullRequest.name}-${pullRequest_idx}`}
-              isLast={filteredData.length - 1 === pullRequest_idx}
-              asChild>
-              <Link to={pullRequest.id}>
+            <LinkComponent to={pullRequest.id}>
+              <StackedList.Item
+                key={`${pullRequest.name}-${pullRequest_idx}`}
+                isLast={filteredData.length - 1 === pullRequest_idx}>
                 <StackedList.Field
                   title={
                     <Title success={pullRequest.merged} title={pullRequest.name} labels={pullRequest.labels || []} />
@@ -189,8 +186,8 @@ export default function PullRequestList({ ...props }: PageProps) {
                   }
                 />
                 <StackedList.Field title={<Comments comments={pullRequest.comments} />} right label secondary />
-              </Link>
-            </StackedList.Item>
+              </StackedList.Item>
+            </LinkComponent>
           ))}
         </StackedList.Root>
       )}

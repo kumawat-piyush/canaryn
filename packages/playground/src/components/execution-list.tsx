@@ -1,6 +1,5 @@
 import { Icon, StackedList, Text } from '@harnessio/canary'
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 interface Execution {
   id: string
@@ -16,6 +15,7 @@ interface Execution {
 
 interface PageProps {
   executions?: Execution[]
+  LinkComponent: React.ComponentType<{ to: string; children: React.ReactNode }>
 }
 
 const Title = ({ success, title }: { success: boolean; title: string }) => {
@@ -45,16 +45,14 @@ const Description = ({ sha, description, version }: { sha: string; description: 
   )
 }
 
-export default function ExecutionList({ ...props }: PageProps) {
-  const { executions } = props
-
+export default function ExecutionList({ executions, LinkComponent }: PageProps) {
   return (
     <>
       {executions && executions.length > 0 && (
         <StackedList.Root>
           {executions.map((execution, execution_idx) => (
-            <StackedList.Item key={execution.name} isLast={executions.length - 1 === execution_idx} asChild>
-              <Link to={`executions/${execution.id}`}>
+            <LinkComponent to={execution.id}>
+              <StackedList.Item key={execution.name} isLast={executions.length - 1 === execution_idx}>
                 <StackedList.Field
                   title={<Title success={execution.success} title={execution.name} />}
                   description={
@@ -72,8 +70,8 @@ export default function ExecutionList({ ...props }: PageProps) {
                   label
                   secondary
                 />
-              </Link>
-            </StackedList.Item>
+              </StackedList.Item>
+            </LinkComponent>
           ))}
         </StackedList.Root>
       )}

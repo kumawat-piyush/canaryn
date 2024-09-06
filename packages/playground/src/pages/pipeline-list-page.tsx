@@ -22,6 +22,7 @@ import NoData from '../components/no-data'
 import PlaygroundListSettings from '../settings/list-settings'
 import TopBarWidget from '../components/layout/top-bar-widget'
 import { mockProjects } from '../data/mockProjects'
+import { Link } from 'react-router-dom'
 
 const mockPipelines = [
   {
@@ -106,10 +107,12 @@ const viewOptions = [{ name: 'View option 1' }, { name: 'View option 2' }]
 function PipelineListPage() {
   const [loadState, setLoadState] = useState('data-loaded')
 
+  const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
+
   const renderListContent = () => {
     switch (loadState) {
       case 'data-loaded':
-        return <PipelineList pipelines={mockPipelines} />
+        return <PipelineList pipelines={mockPipelines} LinkComponent={LinkComponent} />
       case 'loading':
         return <SkeletonList />
       case 'no-search-matches':

@@ -21,6 +21,7 @@ import NoSearchResults from '../components/no-search-results'
 import SkeletonList from '../components/loaders/skeleton-list'
 import PlaygroundListSettings from '../settings/list-settings'
 import { mockPipelines } from '../data/mockPipelinesData'
+import { Link } from 'react-router-dom'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
@@ -29,10 +30,12 @@ const viewOptions = [{ name: 'View option 1' }, { name: 'View option 2' }]
 function RepoPipelineListPage() {
   const [loadState, setLoadState] = useState('data-loaded')
 
+  const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
+
   const renderListContent = () => {
     switch (loadState) {
       case 'data-loaded':
-        return <PipelineList pipelines={mockPipelines} />
+        return <PipelineList pipelines={mockPipelines} LinkComponent={LinkComponent} />
       case 'loading':
         return <SkeletonList />
       case 'no-search-matches':

@@ -183,10 +183,12 @@ const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { nam
 function PullRequestListPage() {
   const [loadState, setLoadState] = useState('data-loaded')
 
+  const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
+
   const renderListContent = () => {
     switch (loadState) {
       case 'data-loaded':
-        return <PullRequestList pullRequests={mockPullRequests} />
+        return <PullRequestList pullRequests={mockPullRequests} LinkComponent={LinkComponent} />
       case 'loading':
         return <SkeletonList />
       case 'no-search-matches':

@@ -1,6 +1,5 @@
 import { Icon, StackedList, Meter } from '@harnessio/canary'
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 export enum MeterState {
   Empty = 0,
@@ -25,6 +24,7 @@ interface Pipeline {
 
 interface PageProps {
   pipelines?: Pipeline[]
+  LinkComponent: React.ComponentType<{ to: string; children: React.ReactNode }>
 }
 
 const Title = ({ success, title }: { success: boolean; title: string }) => {
@@ -52,16 +52,15 @@ const Description = ({ sha, description, version }: { sha: string; description: 
   )
 }
 
-export const PipelineList = ({ ...props }: PageProps) => {
-  const { pipelines } = props
-
+export const PipelineList = ({ pipelines, LinkComponent }: PageProps) => {
   return (
     <>
       {pipelines && pipelines.length > 0 && (
         <StackedList.Root>
           {pipelines.map((pipeline, pipeline_idx) => (
-            <StackedList.Item key={pipeline.name} isLast={pipelines.length - 1 === pipeline_idx} asChild>
-              <Link to={`${pipeline.id}`}>
+            <LinkComponent to={pipeline.id}>
+              <StackedList.Item key={pipeline.name} isLast={pipelines.length - 1 === pipeline_idx}>
+                {/* <Link to={`${pipeline.id}`}> */}
                 <StackedList.Field
                   title={<Title success={pipeline.success} title={pipeline.name} />}
                   description={
@@ -74,8 +73,9 @@ export const PipelineList = ({ ...props }: PageProps) => {
                   title={pipeline.meter ? <Meter.Root data={pipeline.meter} /> : pipeline.timestamp}
                   right
                 />
-              </Link>
-            </StackedList.Item>
+                {/* </Link> */}
+              </StackedList.Item>
+            </LinkComponent>
           ))}
         </StackedList.Root>
       )}

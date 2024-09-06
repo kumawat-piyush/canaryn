@@ -99,10 +99,14 @@ const viewOptions = [{ name: 'View option 1' }, { name: 'View option 2' }]
 function RepoExecutionListPage() {
   const [loadState, setLoadState] = useState('data-loaded')
 
+  const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => (
+    <Link to={`executions/${to}`}>{children}</Link>
+  )
+
   const renderListContent = () => {
     switch (loadState) {
       case 'data-loaded':
-        return <ExecutionList executions={mockExecutions} />
+        return <ExecutionList executions={mockExecutions} LinkComponent={LinkComponent} />
       case 'loading':
         return <SkeletonList />
       case 'no-search-matches':
