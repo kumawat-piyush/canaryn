@@ -23,6 +23,7 @@ import TopBarWidget from '../components/layout/top-bar-widget'
 import PlaygroundListSettings from '../settings/list-settings'
 import { Link } from 'react-router-dom'
 import { mockRepos } from '../data/mockReposData'
+import { mockProjects } from '../data/mockProjects'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
@@ -75,7 +76,7 @@ function RepoListPage() {
 
   return (
     <>
-      <TopBarWidget />
+      <TopBarWidget projects={mockProjects} />
       <PaddingListLayout>
         <Text size={5} weight={'medium'}>
           Repositories

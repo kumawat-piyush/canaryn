@@ -20,6 +20,7 @@ import NoSearchResults from '../components/no-search-results'
 import NoData from '../components/no-data'
 import PlaygroundListSettings from '../settings/list-settings'
 import TopBarWidget from '../components/layout/top-bar-widget'
+import { mockProjects } from '../data/mockProjects'
 
 const mockExecutions = [
   {
@@ -139,7 +140,7 @@ function ExecutionListPage() {
 
   return (
     <>
-      <TopBarWidget />
+      <TopBarWidget projects={mockProjects} />
       <PaddingListLayout>
         <Text size={5} weight={'medium'}>
           Executions

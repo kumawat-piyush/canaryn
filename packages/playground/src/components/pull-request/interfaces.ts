@@ -344,3 +344,9 @@ export enum MergeStrategy {
   SQUASH = 'squash',
   REBASE = 'rebase'
 }
+
+export interface PullRequestAction {
+  id: string
+  title: string
+  description?: string
+}
