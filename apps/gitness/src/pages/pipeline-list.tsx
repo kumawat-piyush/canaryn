@@ -33,9 +33,10 @@ export default function Pipelines() {
     },
     /* To enable mock data */
     {
+      // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
       placeholderData: {
         content: [{ identifier: 'pipeline1' }, { identifier: 'pipeline2' }]
-      } as any as ListPipelinesOkResponse,
+      } as ListPipelinesOkResponse,
       enabled: true
     }
   )
@@ -48,7 +49,8 @@ export default function Pipelines() {
     }
     return (
       <PipelineList
-        pipelines={(pipelines as any)?.content?.map((item: TypesPipeline) => ({
+        // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
+        pipelines={pipelines?.content?.map((item: TypesPipeline) => ({
           id: item?.id,
           success: item?.execution?.status === ExecutionState.SUCCESS,
           name: item?.identifier,
