@@ -27,7 +27,7 @@ export default function RepoSummaryPanel({ ...props }: PageProps) {
         <Button variant="secondary" className="flex gap-1.5 items-center px-3">
           <Icon name="branch" size={14} className="text-tertiary-background" />
           <Text className="text-primary/90">{name}</Text>
-          <Icon name="chevron-down" size={11} className="ml-6 text-tertiary-background" />
+          <Icon name="chevron-down" size={11} className="chevron-down ml-6 text-tertiary-background" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">

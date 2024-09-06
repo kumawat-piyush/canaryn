@@ -132,7 +132,7 @@ const PullRequestPanel = ({
               dropdown={
                 <DropdownMenu>
                   <DropdownMenuTrigger insideSplitButton>
-                    <Icon name="chevron-down" size={11} />
+                    <Icon name="chevron-down" size={11} className="chevron-down" />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="mt-1">
                     <DropdownMenuGroup>

@@ -110,7 +110,7 @@ function RepoSummaryPage() {
                 <ButtonGroup.Root>
                   <Button variant="outline">
                     Add file&nbsp;&nbsp;
-                    <Icon name="chevron-down" size={11} />
+                    <Icon name="chevron-down" size={11} className="chevron-down" />
                   </Button>
                   <Button variant="default">Clone repository</Button>
                 </ButtonGroup.Root>

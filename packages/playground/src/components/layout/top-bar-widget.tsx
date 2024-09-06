@@ -46,7 +46,10 @@ const ProjectDropdown: React.FC<{ isPrimary: boolean; projects: Project[] }> = (
       <Icon
         name="chevron-down"
         size={10}
-        className={cn({ 'text-primary': isPrimary, 'text-navbar-text-secondary group-hover:text-primary': !isPrimary })}
+        className={cn('chevron-down', {
+          'text-primary': isPrimary,
+          'text-navbar-text-secondary group-hover:text-primary': !isPrimary
+        })}
       />
     </DropdownMenuTrigger>
     <DropdownMenuContent align="start" className="mt-1.5">
