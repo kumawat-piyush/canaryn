@@ -40,6 +40,10 @@ import Edit from '../icons/edit.svg'
 import GitnessLogo from '../icons/gitness-logo.svg'
 import Folder from '../icons/folder.svg'
 import File from '../icons/file.svg'
+import Tag from '../icons/tag.svg'
+import Branch from '../icons/branch.svg'
+import OpenPR from '../icons/open-pr.svg'
+import Plus from '../icons/plus.svg'
 
 // import Fork from '../icons/fork.svg'
 
@@ -84,7 +88,11 @@ const IconNameMap = {
   'edit-pen': Edit,
   'gitness-logo': GitnessLogo,
   folder: Folder,
-  file: File
+  file: File,
+  tag: Tag,
+  branch: Branch,
+  'open-pr': OpenPR,
+  plus: Plus
 
   // fork: Fork
 } satisfies Record<string, React.FunctionComponent<React.SVGProps<SVGSVGElement>>>

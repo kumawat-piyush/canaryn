@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { Spacer, ListActions, Button, SearchBox, Text, Icon, ButtonGroup, StackedList, Badge } from '@harnessio/canary'
+import { Spacer, ListActions, Button, SearchBox, Text, Icon, ButtonGroup, StackedList } from '@harnessio/canary'
 import { Summary } from '../components/repo-summary'
 import NoData from '../components/no-data'
 import NoSearchResults from '../components/no-search-results'
+import RepoSummaryPanel from '../components/repo-summary-panel'
+import BranchChooser from '../components/branch-chooser'
 import SkeletonList from '../components/loaders/skeleton-list'
 import PlaygroundListSettings from '../settings/list-settings'
 import FullWidth2ColumnLayout from '../layouts/FullWidth2ColumnLayout'
@@ -12,27 +14,42 @@ import Floating1ColumnLayout from '../layouts/Floating1ColumnLayout'
 const mockSummaryDetails = [
   {
     id: '0',
-    title: 'Commits',
+    name: 'Commits',
     count: 594,
     iconName: 'tube-sign'
   },
   {
     id: '1',
-    title: 'Branches',
+    name: 'Branches',
     count: 27,
-    iconName: 'unmerged'
+    iconName: 'branch'
   },
   {
     id: '2',
-    title: 'Tags',
+    name: 'Tags',
     count: 69,
-    iconName: 'tube-sign'
+    iconName: 'tag'
   },
   {
     id: '3',
-    title: 'Open pull requests',
+    name: 'Open pull requests',
     count: 0,
-    iconName: 'tube-sign'
+    iconName: 'open-pr'
+  }
+]
+
+const mockBranchList = [
+  {
+    name: 'main'
+  },
+  {
+    name: 'new-feature'
+  },
+  {
+    name: 'test-wip'
+  },
+  {
+    name: 'display-db'
   }
 ]
 
@@ -85,11 +102,7 @@ function RepoSummaryPage() {
             <ListActions.Root>
               <ListActions.Left>
                 <ButtonGroup.Root>
-                  <Button variant="secondary">
-                    <Icon name="merged" size={1} />
-                    &nbsp;&nbsp;main&nbsp;&nbsp;
-                    <Icon name="chevron-down" size={11} />
-                  </Button>
+                  <BranchChooser name={'main'} branchList={mockBranchList} />
                   <SearchBox.Root placeholder="Search" />
                 </ButtonGroup.Root>
               </ListActions.Left>
@@ -152,32 +165,7 @@ function RepoSummaryPage() {
             </StackedList.Root>
           </>
         }
-        rightColumn={
-          <div className="flex flex-col">
-            <Spacer size={5} />
-            <Text size={4} weight={'medium'}>
-              Summary
-            </Text>
-            <Spacer size={2} />
-            <Text size={1} color={'tertiaryBackground'}>
-              Created May 6th, 2024
-            </Text>
-            <Spacer size={5} />
-            <div className="flex flex-col gap-3">
-              {mockSummaryDetails.map(item => {
-                return (
-                  <div className="flex items-center gap-1.5">
-                    <Icon name={item.iconName} size={14} className="text-tertiary-background" />
-                    <Text>{item.title}</Text>
-                    <Badge variant="outline" size="sm">
-                      {item.count}
-                    </Badge>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        }
+        rightColumn={<RepoSummaryPanel title="Summary" timestamp={'May 6, 2024'} details={mockSummaryDetails} />}
       />
       <PlaygroundListSettings loadState={loadState} setLoadState={setLoadState} />
     </Floating1ColumnLayout>
