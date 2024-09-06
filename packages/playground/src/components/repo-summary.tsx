@@ -105,7 +105,7 @@ export const Summary = ({ ...props }: PageProps) => {
           <TableRow>
             <TableHead>Name</TableHead>
             <TableHead>Last commit message</TableHead>
-            <TableHead>Date</TableHead>
+            <TableHead className="text-right">Date</TableHead>
           </TableRow>
         </TableHeader>
         {files && files.length > 0 ? (
@@ -125,7 +125,7 @@ export const Summary = ({ ...props }: PageProps) => {
                 <TableCell>
                   <Text color="primary">{file.lastCommitMessage}</Text>
                 </TableCell>
-                <TableCell>
+                <TableCell className="text-right">
                   <Text color="tertiaryBackground" wrap="nowrap">
                     {file.timestamp}
                   </Text>
