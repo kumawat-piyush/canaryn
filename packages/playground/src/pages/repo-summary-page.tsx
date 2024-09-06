@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Spacer, ListActions, Button, SearchBox, Text, Icon, ButtonGroup, StackedList } from '@harnessio/canary'
+import { Spacer, ListActions, Button, SearchBox, Text, Icon, ButtonGroup, StackedList, Badge } from '@harnessio/canary'
 import { Summary } from '../components/repo-summary'
 import NoData from '../components/no-data'
 import NoSearchResults from '../components/no-search-results'
@@ -8,6 +8,33 @@ import PlaygroundListSettings from '../settings/list-settings'
 import FullWidth2ColumnLayout from '../layouts/FullWidth2ColumnLayout'
 import { mockFiles } from '../data/mockSummaryFiiles'
 import Floating1ColumnLayout from '../layouts/Floating1ColumnLayout'
+
+const mockSummaryDetails = [
+  {
+    id: '0',
+    title: 'Commits',
+    count: 594,
+    iconName: 'tube-sign'
+  },
+  {
+    id: '1',
+    title: 'Branches',
+    count: 27,
+    iconName: 'unmerged'
+  },
+  {
+    id: '2',
+    title: 'Tags',
+    count: 69,
+    iconName: 'tube-sign'
+  },
+  {
+    id: '3',
+    title: 'Open pull requests',
+    count: 0,
+    iconName: 'tube-sign'
+  }
+]
 
 function RepoSummaryPage() {
   const [loadState, setLoadState] = useState('data-loaded')
@@ -132,9 +159,23 @@ function RepoSummaryPage() {
               Summary
             </Text>
             <Spacer size={2} />
-            <Text size={2} color={'tertiaryBackground'}>
+            <Text size={1} color={'tertiaryBackground'}>
               Created May 6th, 2024
             </Text>
+            <Spacer size={5} />
+            <div className="flex flex-col gap-3">
+              {mockSummaryDetails.map(item => {
+                return (
+                  <div className="flex items-center gap-1.5">
+                    <Icon name={item.iconName} size={14} className="text-tertiary-background" />
+                    <Text>{item.title}</Text>
+                    <Badge variant="outline" size="sm">
+                      {item.count}
+                    </Badge>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         }
       />
