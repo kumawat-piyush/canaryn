@@ -22,11 +22,7 @@ const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { nam
 const viewOptions = [{ name: 'View option 1' }, { name: 'View option 2' }]
 
 export default function Pipelines() {
-  const {
-    data: pipelines,
-    isFetching,
-    ...rest
-  } = useListPipelinesQuery(
+  const { data: pipelines, isFetching } = useListPipelinesQuery(
     {
       repo_ref: 'workspace/repo/+',
       queryParams: { page: 0, limit: 10, query: '', latest: true }
@@ -40,8 +36,6 @@ export default function Pipelines() {
       enabled: true
     }
   )
-
-  console.log(rest)
 
   const renderListContent = () => {
     if (isFetching) {
