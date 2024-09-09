@@ -3,7 +3,7 @@ import React from 'react'
 
 interface Execution {
   id: string
-  success: boolean
+  success?: boolean
   name: string
   number: number
   sha?: string
@@ -18,7 +18,7 @@ interface PageProps {
   LinkComponent: React.ComponentType<{ to: string; children: React.ReactNode }>
 }
 
-const Title = ({ success, title }: { success: boolean; title: string }) => {
+const Title = ({ success, title }: { success?: boolean; title: string }) => {
   return (
     <div className="flex gap-2 items-center">
       {typeof success === 'boolean' ? (
