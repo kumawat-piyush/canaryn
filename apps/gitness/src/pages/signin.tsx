@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function SignIn() {
   const navigate = useNavigate()
-  const { mutate: login, isLoading, error, isSuccess } = useOnLoginMutation({})
+  const { mutate: login, isLoading, error, isSuccess } = useOnLoginMutation({ queryParams: { include_cookie: true } })
 
   useEffect(() => {
     if (isSuccess) {
@@ -21,7 +21,6 @@ export default function SignIn() {
       isLoading={isLoading}
       handleSignIn={data => {
         login({
-          queryParams: {},
           body: {
             login_identifier: data.email,
             password: data.password
