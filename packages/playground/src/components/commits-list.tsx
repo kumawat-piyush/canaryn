@@ -1,4 +1,4 @@
-import { Icon, NodeGroup, StackedList, Text } from '@harnessio/canary'
+import { NodeGroup, StackedList, Text } from '@harnessio/canary'
 import React from 'react'
 
 interface Repo {
@@ -24,9 +24,38 @@ export default function RepoList({ repos, LinkComponent }: PageProps) {
     <>
       {repos && repos.length > 0 && (
         <NodeGroup.Root>
-          <NodeGroup.Icon>
-            <Icon name="harness" size={14} className="text-tertiary-background" />
-          </NodeGroup.Icon>
+          <NodeGroup.Icon simpleNodeIcon />
+          <NodeGroup.Title>
+            <Text color="tertiaryBackground">Commits on Jun 27, 2024</Text>
+          </NodeGroup.Title>
+          <NodeGroup.Content>
+            <StackedList.Root>
+              {repos.map((repo, repo_idx) => (
+                <LinkComponent to={repo.name}>
+                  <StackedList.Item key={repo.name} isLast={repos.length - 1 === repo_idx}>
+                    <StackedList.Field description={repo.description} title={<Title title={repo.name} />} />
+                    <StackedList.Field
+                      title={
+                        <>
+                          Updated <em>{repo.timestamp}</em>
+                        </>
+                      }
+                      right
+                      label
+                      secondary
+                    />
+                  </StackedList.Item>
+                </LinkComponent>
+              ))}
+            </StackedList.Root>
+          </NodeGroup.Content>
+          <NodeGroup.Connector first />
+        </NodeGroup.Root>
+      )}
+      {repos && repos.length > 0 && (
+        <NodeGroup.Root>
+          <NodeGroup.Icon simpleNodeIcon />
+
           <NodeGroup.Title>
             <Text color="tertiaryBackground">Commits on Jun 27, 2024</Text>
           </NodeGroup.Title>
@@ -56,41 +85,8 @@ export default function RepoList({ repos, LinkComponent }: PageProps) {
       )}
       {repos && repos.length > 0 && (
         <NodeGroup.Root>
-          <NodeGroup.Icon>
-            <Icon name="harness" size={14} className="text-tertiary-background" />
-          </NodeGroup.Icon>
-          <NodeGroup.Title>
-            <Text color="tertiaryBackground">Commits on Jun 27, 2024</Text>
-          </NodeGroup.Title>
-          <NodeGroup.Content>
-            <StackedList.Root>
-              {repos.map((repo, repo_idx) => (
-                <LinkComponent to={repo.name}>
-                  <StackedList.Item key={repo.name} isLast={repos.length - 1 === repo_idx}>
-                    <StackedList.Field description={repo.description} title={<Title title={repo.name} />} />
-                    <StackedList.Field
-                      title={
-                        <>
-                          Updated <em>{repo.timestamp}</em>
-                        </>
-                      }
-                      right
-                      label
-                      secondary
-                    />
-                  </StackedList.Item>
-                </LinkComponent>
-              ))}
-            </StackedList.Root>
-          </NodeGroup.Content>
-          <NodeGroup.Connector />
-        </NodeGroup.Root>
-      )}
-      {repos && repos.length > 0 && (
-        <NodeGroup.Root>
-          <NodeGroup.Icon>
-            <Icon name="harness" size={14} className="text-tertiary-background" />
-          </NodeGroup.Icon>
+          <NodeGroup.Icon simpleNodeIcon />
+
           <NodeGroup.Title>
             <Text color="tertiaryBackground">Commits on Jun 27, 2024</Text>
           </NodeGroup.Title>
