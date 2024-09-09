@@ -32,8 +32,6 @@ const listFieldVariants = cva(
   }
 )
 
-interface ListProps extends React.ComponentProps<'div'> {}
-
 interface ListItemProps extends React.ComponentProps<'div'>, VariantProps<typeof listItemVariants> {
   thumbnail?: React.ReactNode
   actions?: React.ReactNode
@@ -50,7 +48,7 @@ interface ListFieldProps extends Omit<React.ComponentProps<'div'>, 'title'>, Var
   secondary?: boolean
 }
 
-const List = ({ className, children, ...props }: ListProps) => (
+const List = ({ className, children, ...props }: React.ComponentProps<'div'>) => (
   <div className={cn('w-full [&>div:last-child]:border-0 border rounded-md', className)} {...props}>
     {children}
   </div>
@@ -123,4 +121,4 @@ const Field = ListField
 
 export { Root, Item, Field }
 
-export type { ListProps, ListItemProps, ListFieldProps }
+export type { ListItemProps, ListFieldProps }

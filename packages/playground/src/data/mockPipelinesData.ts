@@ -26,43 +26,24 @@ export const mockPipelines = [
     success: true,
     name: 'Zuul Cloud',
     sha: '366177a6',
-    description: 'Update module github.com/aws/aws-sdk-go to',
-    version: 'v1.54.19',
     timestamp: '3 hours ago',
-    meter: [
-      { id: '0', state: 0 },
-      { id: '1', state: 0 },
-      { id: '2', state: 0 },
-      { id: '3', state: 0 },
-      { id: '4', state: 0 },
-      { id: '5', state: 0 },
-      { id: '6', state: 0 },
-      { id: '7', state: 1 },
-      { id: '8', state: 2 },
-      { id: '9', state: 3 },
-      { id: '10', state: 3 }
-    ]
+    meter: [{ id: '0', state: 1 }]
   },
   {
     id: '2',
-    success: true,
     name: 'build scan push K8S - Trivy',
     sha: '93dbd09a',
     description: 'fix: [CI-13371]: Fix log closers in case of step timeouts',
     version: 'v1.5.4.20',
     timestamp: '5 hours ago',
     meter: [
-      { id: '0', state: 0 },
-      { id: '1', state: 0 },
-      { id: '2', state: 0 },
-      { id: '3', state: 0 },
-      { id: '4', state: 3 },
+      { id: '0', state: 3 },
+      { id: '1', state: 1 },
+      { id: '2', state: 1 },
+      { id: '3', state: 1 },
+      { id: '4', state: 1 },
       { id: '5', state: 1 },
-      { id: '6', state: 1 },
-      { id: '7', state: 1 },
-      { id: '8', state: 1 },
-      { id: '9', state: 1 },
-      { id: '10', state: 1 }
+      { id: '6', state: 1 }
     ]
   },
   {
@@ -96,17 +77,16 @@ export const mockPipelines = [
     version: 'v1.5.4.20',
     timestamp: '5 hours ago',
     meter: [
-      { id: '0', state: 0 },
-      { id: '1', state: 0 },
-      { id: '2', state: 0 },
-      { id: '3', state: 3 },
+      { id: '0', state: 3 },
+      { id: '1', state: 3 },
+      { id: '2', state: 3 },
+      { id: '3', state: 1 },
       { id: '4', state: 3 },
       { id: '5', state: 3 },
-      { id: '6', state: 1 },
+      { id: '6', state: 3 },
       { id: '7', state: 3 },
       { id: '8', state: 3 },
-      { id: '9', state: 3 },
-      { id: '10', state: 3 }
+      { id: '9', state: 3 }
     ]
   },
   {
@@ -114,21 +94,16 @@ export const mockPipelines = [
     success: false,
     name: 'build scan push test - k8s - Clone 2',
     sha: 'fe54f9b1',
-    description: 'Update go-jsonnet version to',
-    version: 'v0.20.0',
     timestamp: '13 hours ago',
     meter: [
-      { id: '0', state: 0 },
-      { id: '1', state: 0 },
-      { id: '2', state: 0 },
-      { id: '3', state: 1 },
-      { id: '4', state: 1 },
-      { id: '5', state: 1 },
+      { id: '0', state: 1 },
+      { id: '1', state: 1 },
+      { id: '2', state: 1 },
+      { id: '3', state: 3 },
+      { id: '4', state: 3 },
+      { id: '5', state: 3 },
       { id: '6', state: 3 },
-      { id: '7', state: 3 },
-      { id: '8', state: 3 },
-      { id: '9', state: 3 },
-      { id: '10', state: 2 }
+      { id: '7', state: 2 }
     ]
   },
   {
@@ -162,17 +137,16 @@ export const mockPipelines = [
     version: 'v1.5.4.20',
     timestamp: '15 hours ago',
     meter: [
-      { id: '0', state: 0 },
+      { id: '0', state: 2 },
       { id: '1', state: 2 },
       { id: '2', state: 2 },
-      { id: '3', state: 2 },
+      { id: '3', state: 1 },
       { id: '4', state: 1 },
       { id: '5', state: 1 },
-      { id: '6', state: 1 },
+      { id: '6', state: 3 },
       { id: '7', state: 3 },
       { id: '8', state: 3 },
-      { id: '9', state: 3 },
-      { id: '10', state: 3 }
+      { id: '9', state: 3 }
     ]
   },
   {
@@ -184,17 +158,16 @@ export const mockPipelines = [
     version: 'v1.5.4.20',
     timestamp: '16 hours ago',
     meter: [
-      { id: '0', state: 0 },
-      { id: '1', state: 0 },
+      { id: '0', state: 3 },
+      { id: '1', state: 3 },
       { id: '2', state: 3 },
-      { id: '3', state: 3 },
-      { id: '4', state: 3 },
-      { id: '5', state: 2 },
-      { id: '6', state: 1 },
+      { id: '3', state: 2 },
+      { id: '4', state: 1 },
+      { id: '5', state: 3 },
+      { id: '6', state: 3 },
       { id: '7', state: 3 },
       { id: '8', state: 3 },
-      { id: '9', state: 3 },
-      { id: '10', state: 3 }
+      { id: '9', state: 3 }
     ]
   }
 ]
