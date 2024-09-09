@@ -4,7 +4,8 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { ThemeProvider } from '@harnessio/playground'
 import { CodeServiceAPIClient } from '@harnessio/code-service-client'
 import { queryClient } from './framework/queryClient'
-import PipelineList from './pages/pipeline-list'
+// import PipelineList from './pages/pipeline-list'
+import MainProjectList from './pages/main-project-list'
 
 const BASE_URL_PREFIX = '/api/v1'
 
@@ -28,7 +29,7 @@ export default function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <PipelineList />
+      element: <MainProjectList />
     }
   ])
 
