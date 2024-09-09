@@ -6,11 +6,11 @@ interface PullRequestProps {
   id: string
   merged: boolean
   name: string
-  number: number
+  number?: number
   sha?: string
-  author: string
-  reviewRequired: boolean
-  tasks: number
+  author?: string
+  reviewRequired?: boolean
+  tasks?: number
   version?: string
   timestamp: string
   comments: number
@@ -79,7 +79,11 @@ const Title = ({
 }) => {
   return (
     <div className="flex gap-2 items-center">
-      <Icon size={16} name={success ? 'merged' : 'unmerged'} />
+      {typeof success === 'boolean' ? (
+        <Icon size={16} name={success ? 'merged' : 'unmerged'} />
+      ) : (
+        <div className="w-4 h-4 rounded-full bg-primary/5 border border-muted border-dotted" />
+      )}
       <Text size={2} truncate>
         {title}
       </Text>
@@ -108,28 +112,42 @@ const Description = ({
   version,
   timestamp
 }: {
-  number: number
-  reviewRequired: boolean
-  tasks: number
-  author: string
-  version: string
-  timestamp: string
+  number?: number
+  reviewRequired?: boolean
+  tasks?: number
+  author?: string
+  version?: string
+  timestamp?: string
 }) => {
   return (
-    <div className="flex gap-2 items-center">
-      <div className="flex gap-1 items-center ml-[25px]">#{number}</div>
-      <div>
-        opened {timestamp} by {author}
-      </div>
-      <div className="flex gap-1 items-center">{reviewRequired ? 'Review required' : 'Draft'}</div>
-      <div className="flex gap-1 items-center">
-        <Icon size={11} name={'tasks'} />
-        {tasks} task{tasks == 1 ? '' : 's'}
-      </div>
-      <div className="flex gap-1 items-center">
-        <Icon size={11} name={'signpost'} />
-        {version}
-      </div>
+    <div className="pl-[24px] inline-flex gap-2 items-center max-w-full overflow-hidden">
+      {number && <div className="flex gap-1 items-center ">#{number}</div>}
+      {author && timestamp && (
+        <Text size={1} color="tertiaryBackground">
+          opened {timestamp} by {author}
+        </Text>
+      )}
+      {typeof reviewRequired === 'boolean' && (
+        <Text size={1} color="tertiaryBackground">
+          {reviewRequired ? 'Review required' : 'Draft'}
+        </Text>
+      )}
+      {typeof tasks !== 'undefined' && tasks > 0 && (
+        <div className="flex gap-1 items-center">
+          <Icon size={11} name={'tasks'} />
+          <Text size={1} color="tertiaryBackground">
+            {tasks} task{tasks === 1 ? '' : 's'}
+          </Text>
+        </div>
+      )}
+      {version && (
+        <div className="flex gap-1 items-center">
+          <Icon size={11} name={'signpost'} />
+          <Text size={1} color="tertiaryBackground">
+            {version}
+          </Text>
+        </div>
+      )}
     </div>
   )
 }

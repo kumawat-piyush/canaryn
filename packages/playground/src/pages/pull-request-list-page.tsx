@@ -30,26 +30,9 @@ const mockPullRequests = [
     merged: true,
     name: '[framework-fixtures]: Bump the core group',
     sha: '93dbd09a',
-    reviewRequired: true,
-    tasks: 3,
-    author: 'fgarson',
-    version: 'v1.5.4.20',
+    tasks: 0,
     timestamp: '1 hour ago',
-    comments: 4,
-    labels: [
-      {
-        text: 'feature',
-        color: 'mint'
-      },
-      {
-        text: 'bug',
-        color: 'red'
-      },
-      {
-        text: 'community',
-        color: 'blue'
-      }
-    ]
+    comments: 4
   },
   {
     id: '2',
