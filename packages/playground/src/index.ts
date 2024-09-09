@@ -1,3 +1,5 @@
+import Home from './components/home' //for test
+import LandingPage from './pages/landing-page'
 export * from './components/execution-list'
 export * from './components/pipeline-list'
 export * from './components/theme-provider'
@@ -10,3 +12,5 @@ export * from './components/pipeline-studio/step-palette/step-palette'
 export * from './components/pipeline-studio/step-palette/step-palette-filters'
 export * from './components/pipeline-studio/step-palette/step-palette-content'
 export * from './components/pipeline-studio/step-palette/step-palette-item'
+export { Home }
+export { LandingPage }
