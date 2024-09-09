@@ -21,7 +21,7 @@ const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' },
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
 const viewOptions = [{ name: 'View option 1' }, { name: 'View option 2' }]
 
-export default function Pipelines() {
+export default function PipelinesPage() {
   const { data: pipelines, isFetching } = useListPipelinesQuery(
     {
       repo_ref: 'workspace/repo/+',
