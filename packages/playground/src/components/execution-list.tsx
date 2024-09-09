@@ -7,7 +7,7 @@ interface Execution {
   name: string
   number: number
   sha?: string
-  description: string
+  description?: string
   version?: string
   timestamp: string
   lastTimestamp: string
@@ -21,26 +21,38 @@ interface PageProps {
 const Title = ({ success, title }: { success: boolean; title: string }) => {
   return (
     <div className="flex gap-2 items-center">
-      <Icon size={16} name={success ? 'success' : 'fail'} />
-      <Text size={2} truncate>
-        {title}
-      </Text>
+      {typeof success === 'boolean' ? (
+        <Icon size={16} name={success ? 'success' : 'fail'} />
+      ) : (
+        <div className="w-4 h-4 rounded-full bg-primary/5 border border-muted border-dotted" />
+      )}
+      <Text truncate>{title}</Text>
     </div>
   )
 }
 
 const Description = ({ sha, description, version }: { sha: string; description: string; version: string }) => {
   return (
-    <div className="flex gap-2 items-center">
-      <div className="ml-[25px]">{description}</div>
-      <div className="px-1.5 rounded-md flex gap-1 items-center bg-tertiary-background/10">
-        <Icon size={11} name={'tube-sign'} />
-        {sha}
-      </div>
-      <div className="flex gap-1 items-center">
-        <Icon size={11} name={'signpost'} />
-        {version}
-      </div>
+    <div className="pl-[24px] inline-flex gap-2 items-center max-w-full overflow-hidden">
+      {description && (
+        <div className="break-words w-full overflow-hidden">
+          <Text size={1} color="tertiaryBackground">
+            {description || ''}
+          </Text>
+        </div>
+      )}
+      {sha && (
+        <div className="px-1.5 rounded-md flex gap-1 items-center bg-tertiary-background/10">
+          <Icon size={11} name={'tube-sign'} />
+          {sha}
+        </div>
+      )}
+      {version && (
+        <div className="flex gap-1 items-center">
+          <Icon size={11} name={'signpost'} />
+          {version}
+        </div>
+      )}
     </div>
   )
 }
@@ -58,7 +70,7 @@ export default function ExecutionList({ executions, LinkComponent }: PageProps) 
                   description={
                     <Description
                       sha={execution.sha || ''}
-                      description={execution.description}
+                      description={execution.description || ''}
                       version={execution.version || ''}
                     />
                   }
@@ -74,9 +86,6 @@ export default function ExecutionList({ executions, LinkComponent }: PageProps) 
             </LinkComponent>
           ))}
         </StackedList.Root>
-      )}
-      {!executions && (
-        <></> // Handle loading/no items
       )}
     </>
   )

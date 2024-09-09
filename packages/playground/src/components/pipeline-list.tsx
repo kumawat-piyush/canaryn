@@ -35,7 +35,7 @@ const Title = ({ success, title }: { success?: boolean; title: string }) => {
       ) : (
         <div className="w-4 h-4 rounded-full bg-primary/5 border border-muted border-dotted" />
       )}
-      <span>{title}</span>
+      <Text truncate>{title}</Text>
     </div>
   )
 }
