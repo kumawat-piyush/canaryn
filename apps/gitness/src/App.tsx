@@ -6,6 +6,7 @@ import { CodeServiceAPIClient } from '@harnessio/code-service-client'
 import { queryClient } from './framework/queryClient'
 import PipelineList from './pages/pipeline-list'
 import SignInPage from './pages/signin'
+import ExecutionDetailsPage from './pages/execution/ExecutionDetailsPage'
 
 const BASE_URL_PREFIX = '/api/v1'
 
@@ -30,6 +31,10 @@ export default function App() {
     {
       path: '/',
       element: <PipelineList />
+    },
+    {
+      path: 'executions/:executionId',
+      element: <ExecutionDetailsPage />
     },
     {
       path: '/signin',
