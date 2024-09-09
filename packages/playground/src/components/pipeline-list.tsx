@@ -44,10 +44,14 @@ const Description = ({ sha, description, version }: { sha: string; description: 
         {sha}
       </div>
       <div>{description}</div>
-      <div className="flex gap-1 items-center">
-        <Icon size={11} name={'signpost'} />
-        {version}
-      </div>
+      {version ? (
+        <div className="flex gap-1 items-center">
+          <Icon size={11} name={'signpost'} />
+          {version}
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   )
 }
