@@ -30,3 +30,13 @@ To set up and run Gitness locally, follow these steps:
    ```bash
    pnpm dev
    ```
+
+4. **An issue may be faced with from importing components**
+
+- export components the index.ts in the playground directory
+- cd to playground directory and command
+  ```bash
+  pnpm build
+  ```
+- Reopen VScode to make red squiggly line from Eslint disappeared
+- run in the whole canary may not work
