@@ -46,7 +46,7 @@ export default function Pipelines() {
         // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
         pipelines={pipelines?.content?.map((item: TypesPipeline) => ({
           id: item?.id,
-          success: item?.execution?.status === ExecutionState.SUCCESS,
+          status: item?.execution?.status,
           name: item?.identifier,
           sha: item?.execution?.after,
           description: item?.execution?.message,
@@ -100,7 +100,6 @@ export default function Pipelines() {
                   2
                 </PaginationLink>
               </PaginationItem>
-
               <PaginationItem>
                 <PaginationLink size="sm_icon" href="#">
                   <PaginationEllipsis />
