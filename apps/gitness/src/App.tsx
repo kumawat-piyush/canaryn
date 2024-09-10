@@ -6,6 +6,7 @@ import { CodeServiceAPIClient } from '@harnessio/code-service-client'
 import { queryClient } from './framework/queryClient'
 import PipelineListPage from './pages/pipeline-list'
 import SignInPage from './pages/signin'
+import PullRequestListPage from './pages/pull-request-list-page'
 
 const BASE_URL_PREFIX = '/api/v1'
 
@@ -42,6 +43,10 @@ export default function App() {
         {
           path: 'pipelines',
           element: <PipelineListPage />
+        },
+        {
+          path: 'pull-requests',
+          element: <PullRequestListPage />
         }
       ]
     },

@@ -14,7 +14,7 @@ import { mockChecksSucceededInfo, mockChecksFailedInfo } from '../data/mockCheck
 import { mockCommentResolvedInfo, mockCommentUnresolvedInfo } from '../data/mockCommentInfo'
 import PlaygroundPullRequestConversationSettings from '../settings/pull-request-conversation-settings'
 import { SkeletonList } from '../components/loaders/skeleton-list'
-import NoData from '../components/no-data'
+import { NoData } from '../components/no-data'
 import PullRequestPanel from '../components/pull-request/pull-request-panel'
 import { Spacer } from '@harnessio/canary'
 import PullRequestFilters from '../components/pull-request/pull-request-filters'
@@ -24,6 +24,7 @@ import PullRequestSideBar from '../components/pull-request/pull-request-side-bar
 import { processReviewDecision, useActivityFilters, useDateFilters } from '../components/pull-request/utils'
 import FullWidth2ColumnLayout from '../layouts/FullWidth2ColumnLayout'
 import { mockCodeOwnerData } from '../data/mockCodeOwner'
+import { mockPullRequestActions } from '../data/mockPullRequestActions'
 
 export default function PullRequestConversationPage() {
   const [loadState, setLoadState] = useState('data-loaded')
@@ -107,6 +108,7 @@ export default function PullRequestConversationPage() {
               latestCodeOwnerApprovalArr={mockLatestCodeOwnerApprovalArr}
               minApproval={mockMinApproval}
               minReqLatestApproval={mockMinReqLatestApproval}
+              actions={mockPullRequestActions}
             />
             <Spacer size={9} />
             <PullRequestFilters
