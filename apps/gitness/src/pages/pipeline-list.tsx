@@ -24,7 +24,7 @@ const viewOptions = [{ name: 'View option 1' }, { name: 'View option 2' }]
 export default function PipelinesPage() {
   const { data: pipelines, isFetching } = useListPipelinesQuery(
     {
-      repo_ref: 'proj/uuid/+',
+      repo_ref: 'workspace/repo/+',
       queryParams: { page: 0, limit: 10, query: '', latest: true }
     },
     /* To enable mock data */
