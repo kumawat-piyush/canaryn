@@ -37,15 +37,17 @@ const Description = ({ sha, description, version }: { sha: string; description: 
         <Icon size={11} name={'tube-sign'} />
         {sha}
       </div>
-      <div className="flex gap-1 items-center">
-        <Icon size={11} name={'signpost'} />
-        {version}
-      </div>
+      {version && (
+        <div className="flex gap-1 items-center">
+          <Icon size={11} name={'signpost'} />
+          {version}
+        </div>
+      )}
     </div>
   )
 }
 
-export default function ExecutionList({ ...props }: PageProps) {
+export const ExecutionList = ({ ...props }: PageProps) => {
   const { executions } = props
 
   return (
