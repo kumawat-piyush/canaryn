@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 export interface NoDataProps {
   title: string
-  iconName?: 'no-data-folder' | 'no-search-magnifying-glass' | 'no-data-merge' | 'no-data-cog'
+  iconName?: Pick<IconProps, 'name'> | 'no-data-folder' | 'no-search-magnifying-glass' | 'no-data-merge' | 'no-data-cog'
   iconSize?: number
   description: string[]
   primaryButton?: {
@@ -20,7 +20,7 @@ export interface NoDataProps {
   setLoadState?: React.Dispatch<React.SetStateAction<string>>
 }
 
-const NoData: React.FC<NoDataProps> = ({
+export const NoData: React.FC<NoDataProps> = ({
   iconName,
   iconSize = 112,
   title,
@@ -66,5 +66,3 @@ const NoData: React.FC<NoDataProps> = ({
     </div>
   )
 }
-
-export default NoData
