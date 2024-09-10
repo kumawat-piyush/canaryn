@@ -1,5 +1,7 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, StackedList, Text } from '@harnessio/canary'
 import React from 'react'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, StackedList, Text } from '@harnessio/canary'
+
+import PullRequestDiffViewer from './pull-request-diff-viewer'
 
 interface LineTitleProps {
   text?: string
@@ -15,23 +17,29 @@ const LineTitle: React.FC<LineTitleProps> = ({ text }) => (
   </div>
 )
 
-const PullRequestAccordion: React.FC<{ title: string }> = ({ title }) => (
-  <StackedList.Root>
-    <StackedList.Item isHeader className="p-0 hover:bg-transparent cursor-default">
-      <Accordion type="multiple" className="w-full">
-        <AccordionItem isLast value={title}>
-          <AccordionTrigger leftChevron className="text-left p-4">
-            <AccordionItem isLast value={title}></AccordionItem>
-            <StackedList.Field title={<LineTitle text={title} />} />
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="flex border-t w-full h-32 p-4"></div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-    </StackedList.Item>
-  </StackedList.Root>
-)
+const PullRequestAccordion: React.FC<{ title: string }> = ({ title }) => {
+  return (
+    <StackedList.Root>
+      <StackedList.Item disableHover isHeader className="p-0 hover:bg-transparent cursor-default">
+        <Accordion type="multiple" className="w-full">
+          <AccordionItem isLast value={title}>
+            <AccordionTrigger leftChevron className="text-left p-4">
+              <StackedList.Field title={<LineTitle text={title} />} />
+            </AccordionTrigger>
+
+            <AccordionContent>
+              <div className="flex border-t w-full p-4">
+                <div className="bg-transparent">
+                  <PullRequestDiffViewer />
+                </div>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </StackedList.Item>
+    </StackedList.Root>
+  )
+}
 
 export default function PullRequestChanges({ data }: DataProps) {
   return (

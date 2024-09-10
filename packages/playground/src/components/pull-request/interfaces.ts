@@ -356,6 +356,8 @@ export interface TypesCodeCommentFields {
 interface GeneralPayload {
   text?: string
   [key: string]: unknown
+  type?: EnumPullReqActivityType
+  kind?: EnumCheckPayloadKind
 }
 
 export interface CommentItem<T = unknown> {
