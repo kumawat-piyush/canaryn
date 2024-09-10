@@ -27,6 +27,7 @@ export default function App() {
       responseInterceptor: (response: Response) => {
         switch (response.status) {
           case 401:
+            localStorage.removeItem('token')
             window.location.href = '/signin'
         }
         return response
