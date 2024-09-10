@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import BranchesList from '../components/branches-list'
-import SkeletonList from '../components/loaders/skeleton-list'
-import NoData from '../components/no-data'
-import PaddingListLayout from '../layouts/PaddingListLayout'
+import { SkeletonList } from '../components/loaders/skeleton-list'
+import { NoData } from '../components/no-data'
+import { PaddingListLayout } from '../layouts/PaddingListLayout'
 import {
   Button,
   ListActions,

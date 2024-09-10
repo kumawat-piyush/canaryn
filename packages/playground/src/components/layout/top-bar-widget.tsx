@@ -1,4 +1,5 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
 import {
   Topbar,
   Breadcrumb,
@@ -15,7 +16,6 @@ import {
   BreadcrumbSeparator,
   cn
 } from '@harnessio/canary'
-import { useParams } from 'react-router-dom'
 import { getInitials } from '../../utils/utils'
 
 interface Project {
@@ -89,7 +89,7 @@ const Breadcrumbs: React.FC<{ items: BreadcrumbItemProps[]; projects: Project[] 
   )
 }
 
-const TopBarWidget: React.FC<WidgetProps> = ({ projects }) => {
+export const TopBarWidget: React.FC<WidgetProps> = ({ projects }) => {
   const { repoId, executionId } = useParams<{ repoId: string; executionId: string }>()
 
   const breadcrumbItems: BreadcrumbItemProps[] = [
@@ -105,5 +105,3 @@ const TopBarWidget: React.FC<WidgetProps> = ({ projects }) => {
     </Topbar.Root>
   )
 }
-
-export default TopBarWidget

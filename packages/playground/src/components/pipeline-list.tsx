@@ -1,5 +1,7 @@
 import { Icon, StackedList, Meter, Text } from '@harnessio/canary'
 import React from 'react'
+import { ExecutionState } from './execution/types'
+import { ExecutionStatus } from './execution/execution-status'
 
 export enum MeterState {
   Empty = 0,
@@ -10,7 +12,7 @@ export enum MeterState {
 
 interface Pipeline {
   id: string
-  success?: boolean | undefined
+  status?: ExecutionState
   name: string
   sha?: string
   description?: string
@@ -27,11 +29,16 @@ interface PageProps {
   LinkComponent: React.ComponentType<{ to: string; children: React.ReactNode }>
 }
 
-const Title = ({ success, title }: { success?: boolean; title: string }) => {
+const Title = ({ status, title }: { status?: ExecutionState; title: string }) => {
+  const isValidStatus = (status: ExecutionState | undefined): status is ExecutionState =>
+    [ExecutionState.SUCCESS, ExecutionState.ERROR, ExecutionState.FAILURE, ExecutionState.RUNNING].includes(
+      status as ExecutionState
+    )
+
   return (
     <div className="flex gap-2 items-center">
-      {typeof success === 'boolean' ? (
-        <Icon size={16} name={success ? 'success' : 'fail'} />
+      {isValidStatus(status) ? (
+        <ExecutionStatus.Icon status={status} />
       ) : (
         <div className="w-4 h-4 rounded-full bg-primary/5 border border-muted border-dotted" />
       )}
@@ -46,7 +53,7 @@ const Description = ({ sha, description, version }: { sha: string; description: 
       {sha && (
         <div className="px-1.5 rounded-md flex gap-1 items-center bg-tertiary-background/10">
           <Icon size={11} name={'tube-sign'} />
-          {sha}
+          {sha?.slice(0, 7)}
         </div>
       )}
       {description && (
@@ -74,9 +81,8 @@ export const PipelineList = ({ pipelines, LinkComponent }: PageProps) => {
           {pipelines.map((pipeline, pipeline_idx) => (
             <LinkComponent to={pipeline.id}>
               <StackedList.Item key={pipeline.name} isLast={pipelines.length - 1 === pipeline_idx}>
-                {/* <Link to={`${pipeline.id}`}> */}
                 <StackedList.Field
-                  title={<Title success={pipeline.success} title={pipeline.name} />}
+                  title={<Title status={pipeline.status} title={pipeline.name} />}
                   description={
                     <Description
                       sha={pipeline.sha || ''}
@@ -91,7 +97,6 @@ export const PipelineList = ({ pipelines, LinkComponent }: PageProps) => {
                   title={pipeline.meter ? <Meter.Root data={pipeline.meter} /> : pipeline.timestamp}
                   right
                 />
-                {/* </Link> */}
               </StackedList.Item>
             </LinkComponent>
           ))}

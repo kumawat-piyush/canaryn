@@ -125,9 +125,10 @@ ${svg}
     prettier.format(svgContent, { parser: 'html', plugins: [htmlPlugin] }).then(setSvg)
   }, [svgContent])
 
-  // useEffect(() => {
-  //   open && ref.current?.showModal()
-  // }, [open])
+  useEffect(() => {
+    /* eslint-disable @typescript-eslint/no-unused-expressions */
+    open && ref.current?.showModal()
+  }, [open])
   const gridSize = 128
 
   return (

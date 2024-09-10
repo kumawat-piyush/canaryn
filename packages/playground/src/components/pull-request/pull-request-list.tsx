@@ -3,17 +3,17 @@ import React, { useMemo, useState } from 'react'
 import cx from 'classnames'
 
 interface PullRequestProps {
-  id: string
-  merged: boolean
-  name: string
+  merged: boolean | number | null | undefined // TODO: Should merged really be all these??
+  name: string | undefined
   number?: number
   sha?: string
   author?: string
-  reviewRequired?: boolean
+  reviewRequired: boolean
   tasks?: number
-  version?: string
+  source_branch?: string
   timestamp: string
-  comments: number
+  comments?: number
+  state?: string
   labels?: {
     text: string
     color: string
@@ -107,17 +107,17 @@ const Title = ({
 const Description = ({
   reviewRequired,
   number,
-  tasks,
+  // tasks,
   author,
-  version,
+  source_branch,
   timestamp
 }: {
-  number?: number
-  reviewRequired?: boolean
+  number: number
+  reviewRequired: boolean
   tasks?: number
-  author?: string
-  version?: string
-  timestamp?: string
+  author: string
+  source_branch: string
+  timestamp: string
 }) => {
   return (
     <div className="pl-[24px] inline-flex gap-2 items-center max-w-full overflow-hidden">
@@ -132,19 +132,20 @@ const Description = ({
           {reviewRequired ? 'Review required' : 'Draft'}
         </Text>
       )}
-      {typeof tasks !== 'undefined' && tasks > 0 && (
+      {/* TODO: where did tasks go?}
+      {/* {typeof tasks !== 'undefined' && tasks > 0 && (
         <div className="flex gap-1 items-center">
           <Icon size={11} name={'tasks'} />
           <Text size={1} color="tertiaryBackground">
             {tasks} task{tasks === 1 ? '' : 's'}
           </Text>
         </div>
-      )}
-      {version && (
+      )} */}
+      {source_branch && (
         <div className="flex gap-1 items-center">
           <Icon size={11} name={'signpost'} />
           <Text size={1} color="tertiaryBackground">
-            {version}
+            {source_branch}
           </Text>
         </div>
       )}
@@ -163,13 +164,13 @@ const Comments = ({ comments }: { comments: number }) => {
   )
 }
 
-export default function PullRequestList({ pullRequests, LinkComponent }: PageProps) {
+export function PullRequestList({ pullRequests, LinkComponent }: PageProps) {
   const [headerFilter, setHeaderFilter] = useState('open')
   const filteredData = useMemo(
     () =>
       pullRequests?.filter(pr => {
-        if (headerFilter === 'open') return !pr.merged
-        if (headerFilter === 'closed') return pr.merged
+        if (headerFilter === 'open') return pr.state === 'open'
+        if (headerFilter === 'closed') return pr.state !== 'open' || pr.merged !== null
         return true
       }),
     [headerFilter]
@@ -184,33 +185,44 @@ export default function PullRequestList({ pullRequests, LinkComponent }: PagePro
               title={<HeaderTitle headerFilter={headerFilter} setHeaderFilter={setHeaderFilter} />}></StackedList.Field>
           </StackedList.Item>
           {filteredData?.map((pullRequest, pullRequest_idx) => (
-            <LinkComponent to={pullRequest.id}>
+            <LinkComponent to={pullRequest.number?.toString() || ''}>
               <StackedList.Item
                 key={`${pullRequest.name}-${pullRequest_idx}`}
                 isLast={filteredData.length - 1 === pullRequest_idx}>
-                <StackedList.Field
-                  title={
-                    <Title success={pullRequest.merged} title={pullRequest.name} labels={pullRequest.labels || []} />
-                  }
-                  description={
-                    <Description
-                      number={pullRequest.number || 123}
-                      author={pullRequest.author}
-                      reviewRequired={pullRequest.reviewRequired}
-                      tasks={pullRequest.tasks}
-                      version={pullRequest.version || ''}
-                      timestamp={pullRequest.timestamp || '1 hour ago'}
+                {pullRequest.number && (
+                  <>
+                    <StackedList.Field
+                      title={
+                        pullRequest.name && (
+                          <Title
+                            success={pullRequest.merged ? true : false}
+                            title={pullRequest.name}
+                            labels={pullRequest.labels || []}
+                          />
+                        )
+                      }
+                      description={
+                        pullRequest.author && (
+                          <Description
+                            number={pullRequest.number || 123}
+                            author={pullRequest.author}
+                            reviewRequired={pullRequest.reviewRequired}
+                            tasks={pullRequest.tasks}
+                            source_branch={pullRequest.source_branch || ''}
+                            timestamp={pullRequest.timestamp || '1 hour ago'}
+                          />
+                        )
+                      }
                     />
-                  }
-                />
-                <StackedList.Field title={<Comments comments={pullRequest.comments} />} right label secondary />
+                    {pullRequest.comments && (
+                      <StackedList.Field title={<Comments comments={pullRequest.comments} />} right label secondary />
+                    )}
+                  </>
+                )}
               </StackedList.Item>
             </LinkComponent>
           ))}
         </StackedList.Root>
-      )}
-      {!pullRequests && (
-        <></> // Handle loading/no items
       )}
     </>
   )

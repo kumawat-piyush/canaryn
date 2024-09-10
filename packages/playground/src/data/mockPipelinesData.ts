@@ -1,12 +1,14 @@
+import { ExecutionState } from '../components/execution/types'
+
 export const mockPipelines = [
   {
     id: '0',
-    success: true,
+    status: ExecutionState.RUNNING,
     name: 'TI v2 - Build jhttp - cloud',
     sha: '93dbd09a',
     description: 'fix(deps): update module github.com/aws/aws-sdk-go to',
     version: 'v1.5.4.20',
-    timestamp: '2 hours ago',
+    timestamp: '1723478906498',
     meter: [
       { id: '0', state: 3 },
       { id: '1', state: 3 },
@@ -23,10 +25,10 @@ export const mockPipelines = [
   },
   {
     id: '1',
-    success: true,
+    status: ExecutionState.SUCCESS,
     name: 'Zuul Cloud',
     sha: '366177a6',
-    timestamp: '3 hours ago',
+    timestamp: '1723478906498',
     meter: [{ id: '0', state: 1 }]
   },
   {
@@ -35,7 +37,7 @@ export const mockPipelines = [
     sha: '93dbd09a',
     description: 'fix: [CI-13371]: Fix log closers in case of step timeouts',
     version: 'v1.5.4.20',
-    timestamp: '5 hours ago',
+    timestamp: '1723478906498',
     meter: [
       { id: '0', state: 3 },
       { id: '1', state: 1 },
@@ -48,12 +50,12 @@ export const mockPipelines = [
   },
   {
     id: '3',
-    success: true,
+    status: ExecutionState.FAILURE,
     name: 'Zuul K8S',
     sha: 'da7c1c67',
     description: 'feat: [CDE-119]: Add task handling to spawn and cleanup VM for CDE/gitspaces on bare metalo',
     version: 'v1.5.4.20',
-    timestamp: '5 hours ago',
+    timestamp: '1723478906498',
     meter: [
       { id: '0', state: 1 },
       { id: '1', state: 1 },
@@ -70,12 +72,12 @@ export const mockPipelines = [
   },
   {
     id: '4',
-    success: true,
+    status: ExecutionState.ERROR,
     name: 'build scan push K8S - Trivy',
     sha: '93dbd09a',
     description: 'fix: [CI-13371]: Fix log closers in case of step timeouts',
     version: 'v1.5.4.20',
-    timestamp: '5 hours ago',
+    timestamp: '1723478906498',
     meter: [
       { id: '0', state: 3 },
       { id: '1', state: 3 },
@@ -91,10 +93,10 @@ export const mockPipelines = [
   },
   {
     id: '5',
-    success: false,
+    status: ExecutionState.FAILURE,
     name: 'build scan push test - k8s - Clone 2',
     sha: 'fe54f9b1',
-    timestamp: '13 hours ago',
+    timestamp: '1723478906498',
     meter: [
       { id: '0', state: 1 },
       { id: '1', state: 1 },
@@ -108,12 +110,12 @@ export const mockPipelines = [
   },
   {
     id: '6',
-    success: true,
+    status: ExecutionState.SUCCESS,
     name: 'build scan push test - cloud',
     sha: 'b7765ad1',
     description: 'update google/go-jsonnet version to',
     version: 'v0.20.0',
-    timestamp: '14 hours ago',
+    timestamp: '1723478906498',
     meter: [
       { id: '0', state: 3 },
       { id: '1', state: 3 },
@@ -130,12 +132,12 @@ export const mockPipelines = [
   },
   {
     id: '7',
-    success: false,
+    status: ExecutionState.SUCCESS,
     name: 'build scan push test - k8s',
     sha: 'cf5f4b4a',
     description: 'fix: [CI-11759]: Fixing sum for Harness code',
     version: 'v1.5.4.20',
-    timestamp: '15 hours ago',
+    timestamp: '1723478906498',
     meter: [
       { id: '0', state: 2 },
       { id: '1', state: 2 },
@@ -151,12 +153,12 @@ export const mockPipelines = [
   },
   {
     id: '8',
-    success: true,
+    status: ExecutionState.FAILURE,
     name: 'build scan push test - k8s - Clone',
     sha: 'da7c1c67',
     description: 'fix: [CI-13371]: Fix log closers in case of step timeouts',
     version: 'v1.5.4.20',
-    timestamp: '16 hours ago',
+    timestamp: '1723478906498',
     meter: [
       { id: '0', state: 3 },
       { id: '1', state: 3 },
