@@ -27,7 +27,7 @@ export default function App() {
       responseInterceptor: (response: Response) => {
         switch (response.status) {
           case 401:
-          // navigate('/signin')
+            window.location.href = '/signin'
         }
         return response
       }
