@@ -38,7 +38,7 @@ const AvatarDropdown = ({ isPrimary, items }: { isPrimary: boolean; items: Avata
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="mt-1.5">
         {items.map((item, index) => (
-          <DropdownMenuItem key={index}>{item}</DropdownMenuItem>
+          <DropdownMenuItem key={index}>{String(item)}</DropdownMenuItem>
         ))}
       </DropdownMenuContent>
     </DropdownMenu>
