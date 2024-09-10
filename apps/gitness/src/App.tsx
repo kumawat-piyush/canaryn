@@ -10,6 +10,7 @@ import SignInPage from './pages/signin'
 const BASE_URL_PREFIX = '/api/v1'
 
 export default function App() {
+  // const navigate = useNavigate()
   React.useEffect(() => {
     new CodeServiceAPIClient({
       urlInterceptor: (url: string) => `${BASE_URL_PREFIX}${url}`,
@@ -22,6 +23,13 @@ export default function App() {
           return newRequest
         }
         return request
+      },
+      responseInterceptor: (response: Response) => {
+        switch (response.status) {
+          case 401:
+          // navigate('/signin')
+        }
+        return response
       }
     })
   }, [])
