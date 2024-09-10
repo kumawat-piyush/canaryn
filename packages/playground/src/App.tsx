@@ -25,6 +25,7 @@ import PipelineEdit from './pages/pipeline-edit-page'
 import PullRequestCommitsPage from './pages/pull-request-commits-page'
 import RepoPipelineListPage from './pages/repo-pipeline-list-page'
 import RepoExecutionListPage from './pages/repo-execution-list-page'
+import { CreatePipelinePage } from './pages/create-pipeline-page'
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
           {
             path: 'pipelines',
             element: <RepoPipelineListPage />
+          },
+          {
+            path: 'pipelines/create',
+            element: <CreatePipelinePage />
           },
           {
             path: 'pipelines/:pipelineId',
