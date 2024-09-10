@@ -16,6 +16,7 @@
   "dependencies": {
     "@harnessio/canary": "workspace:*",
     "@harnessio/code-service-client": "1.2.0",
+    "@harnessio/icons-noir": "workspace:*",
     "@harnessio/playground": "workspace:*",
     "@tanstack/react-query": "4.36.1",
     "react": "^18.3.1",

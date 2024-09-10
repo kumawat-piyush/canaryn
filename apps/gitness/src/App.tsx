@@ -7,6 +7,7 @@ import { queryClient } from './framework/queryClient'
 import PipelineListPage from './pages/pipeline-list'
 import SignInPage from './pages/signin'
 import PullRequestListPage from './pages/pull-request-list-page'
+import PipelineCreate from './pages/pipeline-create'
 
 const BASE_URL_PREFIX = '/api/v1'
 
@@ -47,7 +48,8 @@ export default function App() {
         {
           path: 'pull-requests',
           element: <PullRequestListPage />
-        }
+        },
+        { path: 'pipelines/create', element: <PipelineCreate /> }
       ]
     },
     {

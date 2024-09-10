@@ -13,6 +13,7 @@ import {
   Spacer,
   Text
 } from '@harnessio/canary'
+import { Link } from 'react-router-dom'
 import { useListPipelinesQuery, TypesPipeline, ListPipelinesOkResponse } from '@harnessio/code-service-client'
 import { PipelineList, MeterState, TopBarWidget, PaddingListLayout, SkeletonList } from '@harnessio/playground'
 import { ExecutionState } from '../types'
@@ -24,7 +25,7 @@ const viewOptions = [{ name: 'View option 1' }, { name: 'View option 2' }]
 export default function PipelinesPage() {
   const { data: pipelines, isFetching } = useListPipelinesQuery(
     {
-      repo_ref: 'workspace/repo/+',
+      repo_ref: 'MyNewProject/MyRepo/+',
       queryParams: { page: 0, limit: 10, query: '', latest: true }
     },
     /* To enable mock data */
@@ -78,7 +79,10 @@ export default function PipelinesPage() {
             <ListActions.Dropdown title="Filter" items={filterOptions} />
             <ListActions.Dropdown title="Sort" items={sortOptions} />
             <ListActions.Dropdown title="View" items={viewOptions} />
-            <Button variant="default">Create Pipeline</Button>
+            <Button variant="default" asChild>
+              <Link to="create">Create Pipeline</Link>
+            </Button>
+            {/* <Button variant="default">Create Pipeline</Button> */}
           </ListActions.Right>
         </ListActions.Root>
         <Spacer size={5} />

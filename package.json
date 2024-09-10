@@ -3,6 +3,7 @@
   "scripts": {
     "deps": "pnpm -r i",
     "clean": "pnpm -r --parallel clean",
+    "clean:all": "find ./ -name node_modules -type d -exec rm -rf {} +",
     "build": "pnpm -r build",
     "lint": "pnpm -r lint",
     "pretty": "pnpm -r pretty",
