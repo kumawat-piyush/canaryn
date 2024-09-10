@@ -11,7 +11,6 @@ import PullRequestListPage from './pages/pull-request-list-page'
 const BASE_URL_PREFIX = '/api/v1'
 
 export default function App() {
-  // const navigate = useNavigate()
   React.useEffect(() => {
     new CodeServiceAPIClient({
       urlInterceptor: (url: string) => `${BASE_URL_PREFIX}${url}`,
