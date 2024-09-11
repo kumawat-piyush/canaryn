@@ -8,7 +8,7 @@ const name = 'color-filter/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M12 14.5a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M16 21.5a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M8 21.5a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M12 14.5a6 6 0 1 0 0-12 6 6 0 0 0 0 12"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M16 21.5a6 6 0 1 0 0-12 6 6 0 0 0 0 12"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M8 21.5a6 6 0 1 0 0-12 6 6 0 0 0 0 12"/></svg>`
 )
 
 export function ColorFilter(props: IconProps) {

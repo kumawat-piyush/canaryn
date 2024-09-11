@@ -8,7 +8,7 @@ const name = 'rings/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M8 8a6 6 0 1 0 0 12A6 6 0 0 0 8 8Zm0 0V3"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm0 0V3"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M8 8a6 6 0 1 0 0 12A6 6 0 0 0 8 8m0 0V3"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 1 0 0 12 6 6 0 0 0 0-12m0 0V3"/></svg>`
 )
 
 export function Rings(props: IconProps) {

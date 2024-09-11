@@ -8,7 +8,7 @@ const name = 'align-left-box-solid/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m16.005 3.995-.011.01m4.011-.01-.011.01m.011 3.99-.011.01m.011 3.99-.011.01m.011 3.99-.011.01m.011 3.99-.011.01m-3.989-.01-.011.01"/><path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12.005 3.995h-8v16h8v-16Z"/></svg>`
+  `<svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m16.005 3.995-.011.01m4.011-.01-.011.01m.011 3.99-.011.01m.011 3.99-.011.01m.011 3.99-.011.01m.011 3.99-.011.01m-3.989-.01-.011.01"/><path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12.005 3.995h-8v16h8z"/></svg>`
 )
 
 export function AlignLeftBoxSolid(props: IconProps) {

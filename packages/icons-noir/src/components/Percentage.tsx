@@ -8,7 +8,7 @@ const name = 'percentage/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M17 19a2 2 0 1 1 0-4 2 2 0 0 1 0 4ZM7 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4Zm12-4L5 19"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M17 19a2 2 0 1 1 0-4 2 2 0 0 1 0 4M7 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4m12-4L5 19"/></svg>`
 )
 
 export function Percentage(props: IconProps) {

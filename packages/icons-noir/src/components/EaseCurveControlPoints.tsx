@@ -8,7 +8,7 @@ const name = 'ease-curve-control-points/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M17 20a2 2 0 1 0 4 0 2 2 0 0 0-4 0Zm0 0h-2M7 4a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm0 0h2m5 0h-2m0 16h-2m-7 0c8 0 10-16 18-16"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M17 20a2 2 0 1 0 4 0 2 2 0 0 0-4 0m0 0h-2M7 4a2 2 0 1 1-4 0 2 2 0 0 1 4 0m0 0h2m5 0h-2m0 16h-2m-7 0c8 0 10-16 18-16"/></svg>`
 )
 
 export function EaseCurveControlPoints(props: IconProps) {

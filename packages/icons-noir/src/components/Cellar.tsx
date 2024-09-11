@@ -8,7 +8,7 @@ const name = 'cellar/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M3 21h18v-9a9 9 0 1 0-18 0v9Zm0-4h18"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9 17v-4h12m-8 0V9h7"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M3 21h18v-9a9 9 0 1 0-18 0zm0-4h18"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9 17v-4h12m-8 0V9h7"/></svg>`
 )
 
 export function Cellar(props: IconProps) {

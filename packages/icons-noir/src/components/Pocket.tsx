@@ -8,7 +8,7 @@ const name = 'pocket/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M21 6v5a9 9 0 1 1-18 0V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m8 10 4 4 4-4"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M21 6v5a9 9 0 1 1-18 0V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m8 10 4 4 4-4"/></svg>`
 )
 
 export function Pocket(props: IconProps) {

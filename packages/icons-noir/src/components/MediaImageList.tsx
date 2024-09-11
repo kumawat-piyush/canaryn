@@ -8,7 +8,7 @@ const name = 'media-image-list/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M21 7.6v12.8a.6.6 0 0 1-.6.6H7.6a.6.6 0 0 1-.6-.6V7.6a.6.6 0 0 1 .6-.6h12.8a.6.6 0 0 1 .6.6Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M18 4H4.6a.6.6 0 0 0-.6.6V18m3-1.2 5.444-1.8L21 18m-4.5-5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M21 7.6v12.8a.6.6 0 0 1-.6.6H7.6a.6.6 0 0 1-.6-.6V7.6a.6.6 0 0 1 .6-.6h12.8a.6.6 0 0 1 .6.6"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M18 4H4.6a.6.6 0 0 0-.6.6V18m3-1.2 5.444-1.8L21 18m-4.5-5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/></svg>`
 )
 
 export function MediaImageList(props: IconProps) {

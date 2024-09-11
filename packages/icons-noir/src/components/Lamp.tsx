@@ -8,7 +8,7 @@ const name = 'lamp/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9 21h3m3 0h-3m0 0V11m0-4v4m0 0H6l3-8h6l3 8h-6Z"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9 21h3m3 0h-3m0 0V11m0-4v4m0 0H6l3-8h6l3 8z"/></svg>`
 )
 
 export function Lamp(props: IconProps) {

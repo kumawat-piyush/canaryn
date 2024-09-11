@@ -8,7 +8,7 @@ const name = 'rounded-mirror/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M20 10v4a8 8 0 1 1-16 0v-4a8 8 0 1 1 16 0Zm-2.5-5.5L13 8m6-1-7.5 6"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M20 10v4a8 8 0 1 1-16 0v-4a8 8 0 1 1 16 0m-2.5-5.5L13 8m6-1-7.5 6"/></svg>`
 )
 
 export function RoundedMirror(props: IconProps) {

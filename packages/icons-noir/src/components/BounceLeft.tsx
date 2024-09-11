@@ -8,7 +8,7 @@ const name = 'bounce-left/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M6 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4Zm15 8.5c-3-1-5.5-.5-8 4.5-.5-3-2-7.5-3.5-10"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M6 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4m15 8.5c-3-1-5.5-.5-8 4.5-.5-3-2-7.5-3.5-10"/></svg>`
 )
 
 export function BounceLeft(props: IconProps) {

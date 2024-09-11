@@ -8,7 +8,7 @@ const name = 'hat/noir'
 
 registerIcon(
   name,
-  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M7 17v-2a7 7 0 1 1 14 0v2H7Zm0 0H2M14 6.01l.01-.011"/></svg>`
+  `<svg width="24" height="24" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M7 17v-2a7 7 0 1 1 14 0v2zm0 0H2M14 6.01l.01-.011"/></svg>`
 )
 
 export function Hat(props: IconProps) {
