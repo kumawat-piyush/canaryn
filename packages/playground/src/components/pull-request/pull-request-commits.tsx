@@ -53,7 +53,7 @@ function CommitActions({ sha, enableCopy }: CommitActionButtonProps) {
   )
 }
 
-export default function PullRequestCommits({ ...props }: CommitProps) {
+export const PullRequestCommits = ({ ...props }: CommitProps) => {
   const data = props.data
   const commitsGroupedByDate: Record<string, TypesCommit[]> = useMemo(
     () =>

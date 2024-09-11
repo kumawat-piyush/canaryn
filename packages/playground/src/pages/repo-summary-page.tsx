@@ -9,7 +9,7 @@ import { SkeletonList } from '../components/loaders/skeleton-list'
 import PlaygroundListSettings from '../settings/list-settings'
 import FullWidth2ColumnLayout from '../layouts/FullWidth2ColumnLayout'
 import { mockFiles } from '../data/mockSummaryFiiles'
-import Floating1ColumnLayout from '../layouts/Floating1ColumnLayout'
+import { Floating1ColumnLayout } from '../layouts/Floating1ColumnLayout'
 
 const mockSummaryDetails = [
   {

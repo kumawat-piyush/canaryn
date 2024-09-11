@@ -1,9 +1,8 @@
-// RepoLayout.tsx
 import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
-import { PullRequestHeader } from '../components/pull-request/pull-request-conversation-header'
 import { Badge, Icon, Spacer, Tabs, TabsList, TabsTrigger } from '@harnessio/canary'
-import { Floating1ColumnLayout } from './Floating1ColumnLayout'
+import { Floating1ColumnLayout, PullRequestHeader } from '@harnessio/playground'
+// import { useGetPullReqQuery } from '@harnessio/code-service-client'
 
 const mockedPullRequest = {
   number: 1,
@@ -37,6 +36,25 @@ const mockedPullRequest = {
 }
 
 const PullRequestLayout: React.FC = () => {
+  // const { data: pullrequest, isFetching } = useGetPullReqQuery(
+  //   {
+  //     repo_ref: 'workspace/repo/+',
+  //     pullreq_number: 1
+  //   },
+  //   /* To enable mock data */
+  //   {
+  //     // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
+  //     placeholderData: { content: mockedPullRequest },
+  //     enabled: true
+  //   }
+  // )
+
+  // useEffect(() => {
+  //   if (!isFetching && pullrequest) {
+  //     const pullReqData = pullrequest
+  //   }
+  // }, [pullrequest, isFetching])
+
   return (
     <>
       <Floating1ColumnLayout>

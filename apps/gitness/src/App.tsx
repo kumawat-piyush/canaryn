@@ -1,5 +1,5 @@
 import React from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ThemeProvider, RootLayout } from '@harnessio/playground'
 import { CodeServiceAPIClient } from '@harnessio/code-service-client'
@@ -9,6 +9,8 @@ import SignInPage from './pages/signin'
 import PullRequestListPage from './pages/pull-request-list-page'
 import ExecutionsPage from './pages/execution-list'
 import ReposListPage from './pages/repo-list'
+import PullRequestLayout from './layouts/PullRequestLayout'
+import PullRequestCommitsPage from './pages/pull-request-commits-page'
 
 const BASE_URL_PREFIX = '/api/v1'
 
@@ -53,6 +55,20 @@ export default function App() {
         {
           path: 'pull-requests',
           element: <PullRequestListPage />
+        },
+        {
+          path: 'pull-requests/:pullRequestId',
+          element: <PullRequestLayout />,
+          children: [
+            {
+              index: true,
+              element: <Navigate to="commits" />
+            },
+            {
+              path: 'commits',
+              element: <PullRequestCommitsPage />
+            }
+          ]
         },
         {
           path: 'executions',
