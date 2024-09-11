@@ -11,7 +11,6 @@ import LandingPage from './pages/landing-page'
 import RepoListPage from './pages/repo-list-page'
 import PipelineListPage from './pages/pipeline-list-page'
 import RepoSummaryPage from './pages/repo-summary-page'
-import PipelineDetailsPage from './pages/pipeline-details-page'
 import ExecutionListPage from './pages/execution-list-page'
 import ExecutionDetailsPage from './pages/execution-details-page'
 import PullRequestListPage from './pages/pull-request-list-page'
@@ -25,6 +24,7 @@ import PipelineEdit from './pages/pipeline-edit-page'
 import PullRequestCommitsPage from './pages/pull-request-commits-page'
 import RepoPipelineListPage from './pages/repo-pipeline-list-page'
 import RepoExecutionListPage from './pages/repo-execution-list-page'
+import { CreatePipelinePage } from './pages/create-pipeline-page'
 
 const router = createBrowserRouter([
   {
@@ -57,6 +57,10 @@ const router = createBrowserRouter([
           {
             path: 'pipelines',
             element: <RepoPipelineListPage />
+          },
+          {
+            path: 'pipelines/create',
+            element: <CreatePipelinePage />
           },
           {
             path: 'pipelines/:pipelineId',
@@ -127,24 +131,32 @@ const router = createBrowserRouter([
       // PIPELINES (OUTSIDE REPOS)
       {
         path: 'pipelines',
-        element: <PipelineListPage />,
+        element: <PipelineLayout />,
         children: [
           {
-            path: ':pipelineId',
-            element: <PipelineDetailsPage />,
-            children: [
-              {
-                path: 'executions',
-                element: <RepoExecutionListPage />,
-                children: [
-                  {
-                    path: ':executionId',
-                    element: <ExecutionDetailsPage />
-                  }
-                ]
-              }
-            ]
+            index: true,
+            element: <PipelineListPage />
+          },
+          {
+            path: 'create',
+            element: <CreatePipelinePage />
           }
+          // {
+          //   path: ':pipelineId',
+          //   element: <PipelineDetailsPage />,
+          //   children: [
+          //     {
+          //       path: 'executions',
+          //       element: <RepoExecutionListPage />,
+          //       children: [
+          //         {
+          //           path: ':executionId',
+          //           element: <ExecutionDetailsPage />
+          //         }
+          //       ]
+          //     }
+          //   ]
+          // }
         ]
       },
       // EXECUTIONS (OUTSIDE REPOS)
