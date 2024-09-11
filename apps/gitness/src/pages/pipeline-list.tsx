@@ -13,19 +13,10 @@ import {
   Spacer,
   Text
 } from '@harnessio/canary'
-import {
-  useListPipelinesQuery,
-  TypesPipeline,
-  ListPipelinesOkResponse,
-  useMembershipSpacesQuery
-} from '@harnessio/code-service-client'
-import { PipelineList, MeterState, TopBarWidget, PaddingListLayout, SkeletonList } from '@harnessio/playground'
+import { useListPipelinesQuery, TypesPipeline, ListPipelinesOkResponse } from '@harnessio/code-service-client'
+import { PipelineList, MeterState, PaddingListLayout, SkeletonList } from '@harnessio/playground'
 import { ExecutionState } from '../types'
-
-interface Project {
-  id: string | undefined
-  identifier: string | undefined
-}
+import HeaderApi from '../components/header-api'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
@@ -72,26 +63,9 @@ export default function PipelinesPage() {
     )
   }
 
-  //fetch projects api to get the list of projects
-  const { data: projects, isLoading } = useMembershipSpacesQuery({
-    queryParams: { page: 1, limit: 30, sort: 'identifier', order: 'asc' }
-  })
-
-  //prevent rendering the page until the projects are loaded
-  if (isLoading) {
-    return <div className="w-full h-full text-center">isLoading...</div>
-  }
-
-  const projectsItem: Project[] =
-    // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
-    projects?.content?.map(membership => ({
-      id: `${membership?.space?.id}`,
-      name: membership?.space?.identifier
-    })) || []
-
   return (
     <>
-      <TopBarWidget projects={projectsItem || []} />
+      <HeaderApi />
       <PaddingListLayout>
         <Text size={5} weight={'medium'}>
           Pipelines
