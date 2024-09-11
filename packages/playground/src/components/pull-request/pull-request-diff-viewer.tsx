@@ -13,7 +13,7 @@ import {
 import React, { useEffect, useRef, useState } from 'react'
 import { useDiffConfig } from './hooks/useDiffConfig'
 import { OverlayScrollbars } from 'overlayscrollbars'
-import * as data from './mockDiffViewerdata'
+import * as data from '../../data/mockDiffViewerdata'
 // import '@git-diff-view/react/styles/diff-view.css'
 // import { MessageData } from './worker'
 import { usePrevious } from './usePrevious'
