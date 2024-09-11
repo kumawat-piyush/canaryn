@@ -1,5 +1,7 @@
 import React from 'react'
-import { Text, Icon, Button } from '@harnessio/canary'
+import { Text } from './text'
+import { Button } from './button'
+import { Icon } from './icon'
 
 // Section Root
 function Root({ children }: { children: React.ReactNode }) {
@@ -37,7 +39,7 @@ function Card({ title, subtitle, action }: { title: string; subtitle: string; ac
       <Text size={2} color="tertiaryBackground">
         {subtitle}
       </Text>
-      <Button intent="primary" size="small" className="mt-4">
+      <Button size="sm" className="mt-4">
         {action}
       </Button>
     </div>
