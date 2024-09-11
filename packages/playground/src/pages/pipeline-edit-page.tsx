@@ -53,7 +53,7 @@ MonacoGlobals.set({
 })
 
 function GraphView() {
-  const nodes = useMemo(() => getNodesFromPipelineYaml(pipeline as unknown as string), [])
+  const nodes = useMemo(() => getNodesFromPipelineYaml(pipeline), [])
 
   // const nodesV0 = useMemo(() => getNodesFromV0PipelineYaml(pipelineV0 as unknown as string), [])
 
