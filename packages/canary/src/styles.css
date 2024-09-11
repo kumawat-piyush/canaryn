@@ -1,6 +1,9 @@
+@import "./theme/theme.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 @font-face {
   font-family: 'Inter';
@@ -9,8 +12,9 @@
   src: url('/fonts/InterVariable.ttf') format('truetype');
 }
 
+/*
 :root {
-  /* PP Figma shades */
+  PP Figma shades
   --black: 240 10% 3%;
   --grey-6: 240 8% 6%;
   --grey-8: 240 7% 8%;
@@ -29,7 +33,7 @@
   --grey-98: 240 6% 98%;
   --white: 0 0% 100%;
 
-  /* PP Figma secondary colors */
+  PP Figma secondary colors
   --mint: 175 60% 65%;
   --blue: 216 80% 65%;
   --orange: 35, 75%, 55%;
@@ -39,7 +43,8 @@
 }
 
 @layer themes {
-  /* TODO: replace hsl with variables for theming */
+
+  TODO: replace hsl with variables for theming
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -111,6 +116,7 @@
     --ai: var(--purple);
   }
 }
+*/
 
 @layer base {
   * {

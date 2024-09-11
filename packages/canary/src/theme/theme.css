@@ -1,0 +1,212 @@
+:root {
+  --figma___colors-default-dark-to-white: 240 13% 3% / 1;
+  /* ✦ Theme/Colors/Default/Dark-to-white/Harness Open Source/Light */
+  --figma___colors-default-white-to-dark: 0 0% 100% / 1;
+  /* ✦ Theme/Colors/Default/White-to-dark/Harness Open Source/Light */
+  --figma___semantic-background-cards-and-rows-default: 0 0% 100% / 0;
+  /* ✦ Theme/Semantic/Background/Cards and Rows/Default/Harness Open Source/Light */
+  --figma___colors-default-dark-to-white: 240 13% 3% / 1;
+  /* ✦ Theme/Colors/Default/Dark-to-white/Harness Open Source/Light */
+  --figma___semantic-background-cards-and-rows-default: 0 0% 100% / 0;
+  /* ✦ Theme/Semantic/Background/Cards and Rows/Default/Harness Open Source/Light */
+  --figma___colors-default-dark-to-white: 240 13% 3% / 1;
+  /* ✦ Theme/Colors/Default/Dark-to-white/Harness Open Source/Light */
+  --figma___colors-primary-primary-accent-7: 200 7% 8% / 1;
+  /* ✦ Theme/Colors/Primary/Primary Accent/7/Harness Open Source/Light */
+  --figma___colors-default-white-to-dark: 0 0% 100% / 1;
+  /* ✦ Theme/Colors/Default/White-to-dark/Harness Open Source/Light */
+  --figma___semantic-text-primary: 200 7% 8% / 1;
+  /* ✦ Theme/Semantic/Text/primary/Harness Open Source/Light */
+  --figma___colors-secondary-teal-7: 173 80% 36% / 1;
+  /* ✦ Theme/Colors/Secondary/Teal/7/Harness Open Source/Light */
+  --figma___colors-default-dark-to-white: 240 13% 3% / 1;
+  /* ✦ Theme/Colors/Default/Dark-to-white/Harness Open Source/Light */
+  --figma___semantic-background-paper: 0 0% 98% / 1;
+  /* ✦ Theme/Semantic/Background/Paper/Harness Open Source/Light */
+  --figma___colors-secondary-teal-7: 173 80% 36% / 1;
+  /* ✦ Theme/Colors/Secondary/Teal/7/Harness Open Source/Light */
+  --figma___colors-default-dark-to-white: 240 13% 3% / 1;
+  /* ✦ Theme/Colors/Default/Dark-to-white/Harness Open Source/Light */
+  --figma___semantic-background-backdrop: 230 100% 9% / 0.28;
+  /* ✦ Theme/Semantic/Background/Backdrop/Harness Open Source/Light */
+  --figma___colors-secondary-teal-7: 173 80% 36% / 1;
+  /* ✦ Theme/Colors/Secondary/Teal/7/Harness Open Source/Light */
+  --figma___colors-default-dark-to-white: 240 13% 3% / 1;
+  /* ✦ Theme/Colors/Default/Dark-to-white/Harness Open Source/Light */
+  --figma___component-dropdown-dropdown-item-default: 0 0% 100% / 0;
+  /* ✦ Theme/Component/Dropdown/Dropdown Item/Default/Harness Open Source/Light */
+  --figma___colors-default-dark-to-white: 240 13% 3% / 1;
+  /* ✦ Theme/Colors/Default/Dark-to-white/Harness Open Source/Light */
+  --figma___colors-alerts-status-error-7: 0 80% 65% / 1;
+  /* ✦ Theme/Colors/Alerts & Status/Error/7/Harness Open Source/Light */
+  --figma___colors-default-dark-to-white: 240 13% 3% / 1;
+  /* ✦ Theme/Colors/Default/Dark-to-white/Harness Open Source/Light */
+  --figma___semantic-border-primary: 240 7% 94% / 1;
+  /* ✦ Theme/Semantic/Border/Primary/Harness Open Source/Light */
+  --figma___semantic-border-primary: 240 7% 94% / 1;
+  /* ✦ Theme/Semantic/Border/Primary/Harness Open Source/Light */
+  --figma___colors-primary-primary-accent-7: 200 7% 8% / 1;
+  /* ✦ Theme/Colors/Primary/Primary Accent/7/Harness Open Source/Light */
+  --figma___colors-alerts-status-success-7: 142 72% 29% / 1;
+  /* ✦ Theme/Colors/Alerts & Status/Success/7/Harness Open Source/Light */
+  --figma___colors-alerts-status-error-7: 0 80% 65% / 1;
+  /* ✦ Theme/Colors/Alerts & Status/Error/7/Harness Open Source/Light */
+  --figma___colors-alerts-status-warning-7: 42 100% 62% / 1;
+  /* ✦ Theme/Colors/Alerts & Status/Warning/7/Harness Open Source/Light */
+  --figma___colors-charts-ai-violet-7: 252 56% 57% / 1;
+  /* ✦ Theme/Colors/Charts/AI Violet/7/Harness Open Source/Light */
+
+  --figma___radius-1: 3px;
+  /* ✦ Theme/Radius/1/Harness Open Source/Mode 1 */
+  --figma___radius-2: 4px;
+  /* ✦ Theme/Radius/2/Harness Open Source/Mode 1 */
+  --figma___radius-3: 6px;
+  /* ✦ Theme/Radius/3/Harness Open Source/Mode 1 */
+  --figma___radius-4: 8px;
+  /* ✦ Theme/Radius/4/Harness Open Source/Mode 1 */
+  --figma___radius-full: 9999px;
+  /* ✦ Theme/Radius/full/Harness Open Source/Mode 1 */
+  --figma___space-1: 4px;
+  /* ✦ Theme/Space/1/Harness Open Source/Mode 1 */
+  --figma___space-2: 8px;
+  /* ✦ Theme/Space/2/Harness Open Source/Mode 1 */
+  --figma___space-3: 12px;
+  /* ✦ Theme/Space/3/Harness Open Source/Mode 1 */
+  --figma___space-4: 16px;
+  /* ✦ Theme/Space/4/Harness Open Source/Mode 1 */
+  --figma___space-5: 24px;
+  /* ✦ Theme/Space/5/Harness Open Source/Mode 1 */
+  --figma___space-6: 32px;
+  /* ✦ Theme/Space/6/Harness Open Source/Mode 1 */
+  --figma___space-7: 40px;
+  /* ✦ Theme/Space/7/Harness Open Source/Mode 1 */
+  --figma___space-8: 48px;
+  /* ✦ Theme/Space/8/Harness Open Source/Mode 1 */
+  --figma___space-9: 64px;
+  /* ✦ Theme/Space/9/Harness Open Source/Mode 1 */
+}
+
+.dark {
+  --figma___colors-default-dark-to-white: 0 0% 100% / 1;
+  /* ✦ Theme/Colors/Default/Dark-to-white/Harness Open Source/Dark */
+  --figma___colors-default-white-to-dark: 240 13% 3% / 1;
+  /* ✦ Theme/Colors/Default/White-to-dark/Harness Open Source/Dark */
+  --figma___semantic-background-cards-and-rows-default: 240 5% 12% / 0;
+  /* ✦ Theme/Semantic/Background/Cards and Rows/Default/Harness Open Source/Dark */
+  --figma___colors-default-dark-to-white: 0 0% 100% / 1;
+  /* ✦ Theme/Colors/Default/Dark-to-white/Harness Open Source/Dark */
+  --figma___semantic-background-cards-and-rows-default: 240 5% 12% / 0;
+  /* ✦ Theme/Semantic/Background/Cards and Rows/Default/Harness Open Source/Dark */
+  --figma___colors-default-dark-to-white: 0 0% 100% / 1;
+  /* ✦ Theme/Colors/Default/Dark-to-white/Harness Open Source/Dark */
+  --figma___colors-primary-primary-accent-7: 0 0% 98% / 1;
+  /* ✦ Theme/Colors/Primary/Primary Accent/7/Harness Open Source/Dark */
+  --figma___colors-default-white-to-dark: 240 13% 3% / 1;
+  /* ✦ Theme/Colors/Default/White-to-dark/Harness Open Source/Dark */
+  --figma___semantic-text-primary: 0 0% 98% / 1;
+  /* ✦ Theme/Semantic/Text/primary/Harness Open Source/Dark */
+  --figma___colors-secondary-teal-7: 173 80% 36% / 1;
+  /* ✦ Theme/Colors/Secondary/Teal/7/Harness Open Source/Dark */
+  --figma___colors-default-dark-to-white: 0 0% 100% / 1;
+  /* ✦ Theme/Colors/Default/Dark-to-white/Harness Open Source/Dark */
+  --figma___semantic-background-paper: 210 6% 6% / 1;
+  /* ✦ Theme/Semantic/Background/Paper/Harness Open Source/Dark */
+  --figma___colors-secondary-teal-7: 173 80% 36% / 1;
+  /* ✦ Theme/Colors/Secondary/Teal/7/Harness Open Source/Dark */
+  --figma___colors-default-dark-to-white: 0 0% 100% / 1;
+  /* ✦ Theme/Colors/Default/Dark-to-white/Harness Open Source/Dark */
+  --figma___semantic-background-backdrop: 0 0% 0% / 0.75;
+  /* ✦ Theme/Semantic/Background/Backdrop/Harness Open Source/Dark */
+  --figma___colors-secondary-teal-7: 173 80% 36% / 1;
+  /* ✦ Theme/Colors/Secondary/Teal/7/Harness Open Source/Dark */
+  --figma___colors-default-dark-to-white: 0 0% 100% / 1;
+  /* ✦ Theme/Colors/Default/Dark-to-white/Harness Open Source/Dark */
+  --figma___component-dropdown-dropdown-item-default: 0 0% 100% / 0;
+  /* ✦ Theme/Component/Dropdown/Dropdown Item/Default/Harness Open Source/Dark */
+  --figma___colors-default-dark-to-white: 0 0% 100% / 1;
+  /* ✦ Theme/Colors/Default/Dark-to-white/Harness Open Source/Dark */
+  --figma___colors-alerts-status-error-7: 0 80% 65% / 1;
+  /* ✦ Theme/Colors/Alerts & Status/Error/7/Harness Open Source/Dark */
+  --figma___colors-default-dark-to-white: 0 0% 100% / 1;
+  /* ✦ Theme/Colors/Default/Dark-to-white/Harness Open Source/Dark */
+  --figma___semantic-border-primary: 240 6% 10% / 1;
+  /* ✦ Theme/Semantic/Border/Primary/Harness Open Source/Dark */
+  --figma___semantic-border-primary: 240 6% 10% / 1;
+  /* ✦ Theme/Semantic/Border/Primary/Harness Open Source/Dark */
+  --figma___colors-primary-primary-accent-7: 0 0% 98% / 1;
+  /* ✦ Theme/Colors/Primary/Primary Accent/7/Harness Open Source/Dark */
+  --figma___colors-alerts-status-success-7: 142 72% 29% / 1;
+  /* ✦ Theme/Colors/Alerts & Status/Success/7/Harness Open Source/Dark */
+  --figma___colors-alerts-status-error-7: 0 80% 65% / 1;
+  /* ✦ Theme/Colors/Alerts & Status/Error/7/Harness Open Source/Dark */
+  --figma___colors-alerts-status-warning-7: 42 100% 62% / 1;
+  /* ✦ Theme/Colors/Alerts & Status/Warning/7/Harness Open Source/Dark */
+  --figma___colors-charts-ai-violet-7: 252 56% 57% / 1;
+  /* ✦ Theme/Colors/Charts/AI Violet/7/Harness Open Source/Dark */
+}
+
+@layer themes {
+  :root {
+    --background: var(--figma___colors-default-dark-to-white);
+    --foreground: var(--figma___colors-default-white-to-dark);
+    --card: var(--figma___semantic-background-cards-and-rows-default);
+    --card-foreground: var(--figma___colors-default-dark-to-white);
+    --popover: var(--figma___semantic-background-cards-and-rows-default);
+    --popover-foreground: var(--figma___colors-default-dark-to-white);
+    --primary: var(--figma___colors-primary-primary-accent-7);
+    --primary-background: var(--figma___colors-default-white-to-dark);
+    --primary-foreground: var(--figma___semantic-text-primary);
+    --secondary: var(--figma___colors-secondary-teal-7);
+    --secondary-foreground: var(--figma___colors-default-dark-to-white);
+    --secondary-background: var(--figma___semantic-background-paper);
+    --tertiary: var(--figma___colors-secondary-teal-7);
+    --tertiary-foreground: var(--figma___colors-default-dark-to-white);
+    --tertiary-background: var(--figma___semantic-background-backdrop);
+    --muted: var(--figma___colors-secondary-teal-7);
+    --muted-foreground: var(--figma___colors-default-dark-to-white);
+    --accent: var(--figma___component-dropdown-dropdown-item-default);
+    --accent-foreground: var(--figma___colors-default-dark-to-white);
+    --destructive: var(--figma___colors-alerts-status-error-7);
+    --destructive-foreground: var(--figma___colors-default-dark-to-white);
+    --border: var(--figma___semantic-border-primary);
+    --input: var(--figma___semantic-border-primary);
+    --ring: var(--figma___colors-primary-primary-accent-7);
+    --success: var(--figma___colors-alerts-status-success-7);
+    --error: var(--figma___colors-alerts-status-error-7);
+    --warning: var(--figma___colors-alerts-status-warning-7);
+    --ai: var(--figma___colors-charts-ai-violet-7);
+    --radius: var(--figma___radius-4);
+  }
+
+  .dark {
+    --background: var(--figma___colors-default-dark-to-white);
+    --foreground: var(--figma___colors-default-white-to-dark);
+    --card: var(--figma___semantic-background-cards-and-rows-default);
+    --card-foreground: var(--figma___colors-default-dark-to-white);
+    --popover: var(--figma___semantic-background-cards-and-rows-default);
+    --popover-foreground: var(--figma___colors-default-dark-to-white);
+    --primary: var(--figma___colors-primary-primary-accent-7);
+    --primary-background: var(--figma___colors-default-white-to-dark);
+    --primary-foreground: var(--figma___semantic-text-primary);
+    --secondary: var(--figma___colors-secondary-teal-7);
+    --secondary-foreground: var(--figma___colors-default-dark-to-white);
+    --secondary-background: var(--figma___semantic-background-paper);
+    --tertiary: var(--figma___colors-secondary-teal-7);
+    --tertiary-foreground: var(--figma___colors-default-dark-to-white);
+    --tertiary-background: var(--figma___semantic-background-backdrop);
+    --muted: var(--figma___colors-secondary-teal-7);
+    --muted-foreground: var(--figma___colors-default-dark-to-white);
+    --accent: var(--figma___component-dropdown-dropdown-item-default);
+    --accent-foreground: var(--figma___colors-default-dark-to-white);
+    --destructive: var(--figma___colors-alerts-status-error-7);
+    --destructive-foreground: var(--figma___colors-default-dark-to-white);
+    --border: var(--figma___semantic-border-primary);
+    --input: var(--figma___semantic-border-primary);
+    --ring: var(--figma___colors-primary-primary-accent-7);
+    --success: var(--figma___colors-alerts-status-success-7);
+    --error: var(--figma___colors-alerts-status-error-7);
+    --warning: var(--figma___colors-alerts-status-warning-7);
+    --ai: var(--figma___colors-charts-ai-violet-7);
+    --radius: var(--figma___radius-4);
+  }
+}

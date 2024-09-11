@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 // eslint-disable-next-line no-undef
 module.exports = {
   darkMode: ['class'],
@@ -13,6 +14,13 @@ module.exports = {
       }
     },
     extend: {
+      rounded: {
+        sm: "var(--figma___radius-1)",
+        DEFAULT: "var(--figma___radius-2)",
+        md: "var(--figma___radius-3)",
+        lg: "var(--figma___radius-4)",
+        full: "var(--figma___radius-full)"
+      },
       fontFamily: {
         sans: ['Inter', 'sans-serif']
       },
