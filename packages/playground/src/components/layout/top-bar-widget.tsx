@@ -34,7 +34,7 @@ interface BreadcrumbItemProps {
 }
 
 const ProjectDropdown: React.FC<{ isPrimary: boolean; projects: Project[] }> = ({ isPrimary, projects }) => {
-  const [selectedProject, setSelectedProject] = useState<string>('No Project Selected')
+  const [selectedProject, setSelectedProject] = useState<string>('Please select a project')
 
   const handleOptionChange = (project: Project) => {
     setSelectedProject(project.name)
