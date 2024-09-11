@@ -43,11 +43,12 @@ export const parsePipelineYaml = ({
         pathPrefix: STAGES_PATH_PREFIX
       })
       collectedNodes.push(
-        getStageGroupNode({
-          stageGroup: stage,
-          stageNodes: groupMembers,
-          stageGroupIdx: index,
-          stageGroupNodePathPrefix: newPathPrefix
+        getGroupNode({
+          group: stage,
+          childNodes: groupMembers,
+          groupIdx: index,
+          groupNodePathPrefix: newPathPrefix,
+          isStageGroup: true
         })
       )
     } else if (category === StageCategory.PARALLEL) {
@@ -57,11 +58,12 @@ export const parsePipelineYaml = ({
         isParallel: true
       })
       collectedNodes.push(
-        getStageGroupNode({
-          stageGroup: stage,
-          stageNodes: parallelMembers,
-          stageGroupIdx: index,
-          stageGroupNodePathPrefix: newPathPrefix
+        getGroupNode({
+          group: stage,
+          childNodes: parallelMembers,
+          groupIdx: index,
+          groupNodePathPrefix: newPathPrefix,
+          isStageGroup: true
         })
       )
     } else {
@@ -79,27 +81,29 @@ export const parsePipelineYaml = ({
   return collectedNodes
 }
 
-const getStageGroupNode = ({
-  stageGroup,
-  stageNodes,
-  stageGroupIdx,
-  stageGroupNodePathPrefix
+const getGroupNode = ({
+  group,
+  childNodes,
+  groupIdx,
+  groupNodePathPrefix,
+  isStageGroup
 }: {
-  stageGroup: Record<string, any>
-  stageNodes: Node[]
-  stageGroupIdx: number
-  stageGroupNodePathPrefix: string
+  group: Record<string, any>
+  childNodes: Node[]
+  groupIdx: number
+  groupNodePathPrefix: string
+  isStageGroup: boolean // if false - V0 yaml step group
 }): Node => {
-  const stepGroupName = get(stageGroup, 'name', `${STAGE_GROUP_LABEL} ${stageGroupIdx}`)
-  const stageGroupId = getIdFromName(stepGroupName)
+  const groupName = get(group, 'name', `${isStageGroup ? STAGE_GROUP_LABEL : STEP_GROUP_LABEL} ${groupIdx}`)
+  const groupId = getIdFromName(groupName)
   return {
-    name: stepGroupName,
-    path: stageGroupNodePathPrefix,
+    name: groupName,
+    path: groupNodePathPrefix,
     icon: null,
-    children: stageNodes,
+    children: childNodes,
     deletable: true,
     expandable: true,
-    groupId: stageGroupId
+    groupId: groupId
   } as Node
 }
 
@@ -108,16 +112,18 @@ const getStageNode = ({
   stageIdx,
   childNodes,
   stagePathPrefix,
-  isParallel
+  isParallel,
+  isV0yaml = false
 }: {
   stage: Record<string, any>
   stageIdx: number
   childNodes: Node[]
   stagePathPrefix: string
   isParallel?: boolean
+  isV0yaml?: boolean
 }): Node => {
   return {
-    name: get(stage, 'name') || `${STAGE_LABEL} ${stageIdx}`,
+    name: get(stage, isV0yaml ? 'stage.name' : 'name') || `${STAGE_LABEL} ${stageIdx}`,
     path: `${stagePathPrefix}.${stageIdx}`,
     icon: null,
     children: childNodes,
@@ -136,13 +142,14 @@ const getChildNodes = (stage: Record<string, any>): Node[] => {
   return childNodes
 }
 
-const getStepNode = (step: Record<string, any>, stepIndex: number): Node => {
+const getStepNode = (step: Record<string, any>, stepIndex: number, isV0yaml?: boolean, isParallel?: boolean): Node => {
   return {
-    name: get(step, 'name', `step ${stepIndex + 1}`),
+    name: get(step, isV0yaml ? 'step.name' : 'name', `step ${stepIndex + 1}`),
     icon: getPlaceholderIcon(stepIndex),
     expandable: false,
     path: '',
-    deletable: false
+    deletable: false,
+    ...(isParallel && { parallel: isParallel })
   } as Node
 }
 
@@ -178,51 +185,29 @@ export const parseV0PipelineYaml = ({
         isParallel: true
       })
       collectedNodes.push(
-        getStageGroupNode({
-          stageGroup: stage,
-          stageNodes: parallelMembers,
-          stageGroupIdx: index,
-          stageGroupNodePathPrefix: newPathPrefix
+        getGroupNode({
+          group: stage,
+          childNodes: parallelMembers,
+          groupIdx: index,
+          groupNodePathPrefix: newPathPrefix,
+          isStageGroup: true
         })
       )
     } else {
       // now this is a standalone stage with some steps
       collectedNodes.push(
-        getV0StageNode({
+        getStageNode({
           stage,
           stageIdx: index,
           childNodes: getChildNodesOfV0Stage(stage),
           stagePathPrefix: pathPrefix,
-          isParallel
+          isParallel,
+          isV0yaml: true
         })
       )
     }
   })
   return collectedNodes
-}
-
-const getV0StageNode = ({
-  stage,
-  stageIdx,
-  childNodes,
-  stagePathPrefix,
-  isParallel
-}: {
-  stage: Record<string, any>
-  stageIdx: number
-  childNodes: Node[]
-  stagePathPrefix: string
-  isParallel?: boolean
-}): Node => {
-  return {
-    name: get(stage, 'stage.name') || `${STAGE_LABEL} ${stageIdx}`,
-    path: `${stagePathPrefix}.${stageIdx}`,
-    icon: null,
-    children: childNodes,
-    deletable: true,
-    expandable: true,
-    ...(isParallel && { parallel: isParallel })
-  } as Node
 }
 
 const getChildNodesOfV0Stage = (stage: Record<string, any>): Node[] => {
@@ -237,15 +222,16 @@ const getChildNodesOfV0Stage = (stage: Record<string, any>): Node[] => {
           isParallel: true
         })
         childNodes.push(
-          getV0StepGroupNode({
-            stepGroup: stepOrParallel,
-            stepNodes: parallelNodes,
-            stepGroupIdx: stepIndex,
-            stepGroupNodePathPrefix: `${V0_STEPS_PATH_PREFIX}.${stepIndex}`
+          getGroupNode({
+            group: stepOrParallel,
+            childNodes: parallelNodes,
+            groupIdx: stepIndex,
+            groupNodePathPrefix: `${V0_STEPS_PATH_PREFIX}.${stepIndex}`,
+            isStageGroup: false
           })
         )
       } else {
-        childNodes.push(getV0StepNode(stepOrParallel, stepIndex))
+        childNodes.push(getStepNode(stepOrParallel, stepIndex, true))
       }
     })
   }
@@ -264,43 +250,8 @@ export const parseV0ParallelSteps = ({
   const steps = get(yamlObject, PARALLEL_PATH_PREFIX, [])
   if (Array.isArray(steps) && steps.length > 0) {
     steps.forEach((step: Record<string, any>, stepIndex: number) => {
-      childNodes.push(getV0StepNode(step, stepIndex, isParallel))
+      childNodes.push(getStepNode(step, stepIndex, true, isParallel))
     })
   }
   return childNodes
-}
-
-const getV0StepGroupNode = ({
-  stepGroup,
-  stepNodes,
-  stepGroupIdx,
-  stepGroupNodePathPrefix
-}: {
-  stepGroup: Record<string, any>
-  stepNodes: Node[]
-  stepGroupIdx: number
-  stepGroupNodePathPrefix: string
-}): Node => {
-  const stepGroupName = get(stepGroup, 'name', `${STEP_GROUP_LABEL} ${stepGroupIdx}`)
-  const stepGroupId = getIdFromName(stepGroupName)
-  return {
-    name: stepGroupName,
-    path: stepGroupNodePathPrefix,
-    icon: null,
-    children: stepNodes,
-    deletable: true,
-    expandable: true,
-    groupId: stepGroupId
-  } as Node
-}
-
-const getV0StepNode = (step: Record<string, any>, stepIndex: number, isParallel?: boolean): Node => {
-  return {
-    name: get(step, 'step.name', `step ${stepIndex + 1}`),
-    icon: getPlaceholderIcon(stepIndex),
-    expandable: false,
-    path: '',
-    deletable: false,
-    ...(isParallel && { parallel: isParallel })
-  } as Node
 }

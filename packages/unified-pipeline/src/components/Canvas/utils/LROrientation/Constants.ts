@@ -7,17 +7,20 @@ export const NODE_DEFAULT_HEIGHT = 50
 export const NODE_HORIZONTAL_MARGIN = 25
 /* Increase margin size to avoid potential overalap with node labels */
 export const NODE_HORIZONTAL_MARGIN_2 = 2 * NODE_HORIZONTAL_MARGIN
-export const NODE_VERTICAL_MARGIN = 60
+export const NODE_VERTICAL_MARGIN = 25
 export const INTER_PARENT_NODE_NODE_HORIZONTAL_SEPARATION_READ_ONLY = 2 * NODE_VERTICAL_MARGIN
 export const INTER_PARENT_NODE_NODE_HORIZONTAL_SEPARATION = INTER_PARENT_NODE_NODE_HORIZONTAL_SEPARATION_READ_ONLY + 10
 export const INTER_PARENT_PARENT_HORIZONTAL_SEPARATION = 200
+
+/* temporary adjustment for step groups */
+export const ADJUST_FOR_STEP_GROUPS = 40
 
 /* Group node */
 export const GROUP_NODE_VERTICAL_ALIGNMENT_MARGIN = NODE_VERTICAL_MARGIN
 
 /* Step node constants */
 export const STEP_NODE_WIDTH = 140
-export const STEP_NODE_HEIGHT = 60
+export const STEP_NODE_HEIGHT = 80
 
 export const DEFAULT_NODE_LOCATION: XYPosition = { x: 0, y: 0 }
 
