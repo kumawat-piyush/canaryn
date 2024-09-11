@@ -34,7 +34,7 @@ interface BreadcrumbItemProps {
 }
 
 const ProjectDropdown: React.FC<{ isPrimary: boolean; projects: Project[] }> = ({ isPrimary, projects }) => {
-  const [selectedProject, setSelectedProject] = useState<string>(projects[0]?.name || '')
+  const [selectedProject, setSelectedProject] = useState<string>('No Project Selected')
 
   const handleOptionChange = (project: Project) => {
     setSelectedProject(project.name)
@@ -61,7 +61,7 @@ const ProjectDropdown: React.FC<{ isPrimary: boolean; projects: Project[] }> = (
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="mt-1.5">
         {projects.length === 0
-          ? 'No Project'
+          ? 'No Project Found'
           : projects.map(project => (
               <DropdownMenuItem key={project.id} onClick={() => handleOptionChange(project)}>
                 {project.name}

@@ -42,7 +42,7 @@ export default function HeaderApi() {
   return (
     <>
       <TopBarWidget projects={projectsItem} />
-      {/* migrate route from the repo layout in the playground */}
+      {/* migrate route from the repolayout in the playground */}
       {/* {!executionId && (
         <Tabs variant="navigation" defaultValue="summary">
           <TabsList>
