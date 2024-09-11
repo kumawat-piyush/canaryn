@@ -23,7 +23,7 @@ export default function HeaderApi() {
   const projectsItem: Project[] =
     // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
     projects?.content?.map(membership => ({
-      id: `${membership?.space?.id}`,
+      id: membership?.space?.id,
       name: membership?.space?.identifier
     })) || []
 
