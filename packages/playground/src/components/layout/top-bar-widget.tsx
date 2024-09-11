@@ -19,7 +19,7 @@ import {
 import { getInitials } from '../../utils/utils'
 
 interface Project {
-  id: string
+  id: number
   name: string
 }
 
