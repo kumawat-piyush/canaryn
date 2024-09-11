@@ -64,7 +64,6 @@ const router = createBrowserRouter([
           },
           {
             path: 'pipelines/:pipelineId',
-            element: <PipelineLayout />,
             children: [
               {
                 index: true,
