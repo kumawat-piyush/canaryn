@@ -28,10 +28,13 @@ export default function HeaderApi() {
     })) || []
 
   if (projectsItem.length === 0) {
+    //temperrary for edge cases
+    //will redirect to the create project page for next steps if the user doesn't have any projects
+    //currently the create project page is not implemented
     return (
       <Topbar.Root>
         <Topbar.Left>
-          <Text size={4} weight="medium">
+          <Text size={2} weight="medium" className="text-primary">
             Please create a new project
           </Text>
         </Topbar.Left>
