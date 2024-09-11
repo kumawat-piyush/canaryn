@@ -4,18 +4,52 @@ import { SkeletonList } from '../components/loaders/skeleton-list'
 import { NoData } from '../components/no-data'
 import PlaygroundCommitsSettings from '../settings/commits-settings'
 import { PaddingListLayout } from '../layouts/PaddingListLayout'
-import { ListActions, SearchBox, Spacer, Text } from '@harnessio/canary'
+import {
+  ListActions,
+  ListPagination,
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  Spacer,
+  Text
+} from '@harnessio/canary'
+import BranchChooser from '../components/branch-chooser'
+import { mockRepos } from '../data/mockReposData'
+import { Link } from 'react-router-dom'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
 
+const mockBranchList = [
+  {
+    name: 'main'
+  },
+  {
+    name: 'new-feature'
+  },
+  {
+    name: 'test-wip'
+  },
+  {
+    name: 'display-db'
+  }
+]
+
 export default function CommitsListPage() {
-  const [loadState, setLoadState] = useState('loading')
+  const [loadState, setLoadState] = useState('data-loaded')
+
+  const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => (
+    <Link to={`/repos/${to}`}>{children}</Link>
+  )
 
   const renderContent = () => {
     switch (loadState) {
       case 'data-loaded':
-        return <CommitsList />
+        return <CommitsList repos={mockRepos} LinkComponent={LinkComponent} />
       case 'loading':
         return <SkeletonList />
 
@@ -41,7 +75,7 @@ export default function CommitsListPage() {
       <Spacer size={6} />
       <ListActions.Root>
         <ListActions.Left>
-          <SearchBox.Root placeholder="Search commits" />
+          <BranchChooser name={'main'} branchList={mockBranchList} />
         </ListActions.Left>
         <ListActions.Right>
           <ListActions.Dropdown title="Filter" items={filterOptions} />
@@ -50,6 +84,47 @@ export default function CommitsListPage() {
       </ListActions.Root>
       <Spacer size={5} />
       {renderContent()}
+      <Spacer size={8} />
+      {loadState === 'data-loaded' && (
+        <ListPagination.Root>
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious size="sm" href="#" />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink isActive size="sm_icon" href="#">
+                  1
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink size="sm_icon" href="#">
+                  2
+                </PaginationLink>
+              </PaginationItem>
+
+              <PaginationItem>
+                <PaginationLink size="sm_icon" href="#">
+                  <PaginationEllipsis />
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink size="sm_icon" href="#">
+                  4
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink size="sm_icon" href="#">
+                  5
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationNext size="sm" href="#" />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </ListPagination.Root>
+      )}
       <PlaygroundCommitsSettings loadState={loadState} setLoadState={setLoadState} />
     </PaddingListLayout>
   )

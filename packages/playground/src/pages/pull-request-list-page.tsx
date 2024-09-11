@@ -36,21 +36,7 @@ const mockPullRequests = [
     author: 'fgarson',
     source_branch: 'v1.5.4.20',
     timestamp: '1 hour ago',
-    comments: 4,
-    labels: [
-      {
-        text: 'feature',
-        color: 'mint'
-      },
-      {
-        text: 'bug',
-        color: 'red'
-      },
-      {
-        text: 'community',
-        color: 'blue'
-      }
-    ]
+    comments: 4
   },
   {
     id: '2',
@@ -104,7 +90,7 @@ const mockPullRequests = [
     id: '4',
     number: 14285,
     merged: 12323,
-    state: 'closed',
+    state: 'merged',
     name: '[framework-fixtures]: Bump the core group',
     sha: '93dbd09a',
     reviewRequired: false,
@@ -132,7 +118,7 @@ const mockPullRequests = [
   {
     id: '5',
     number: 14286,
-    merged: false,
+    merged: null,
     state: 'open',
     name: 'Test PPR RSC encoding fixAdd support for jpath in jsonnet (#224) * Add support for jpath in jsonnet Co-a',
     sha: 'fe54f9b1',
@@ -156,7 +142,8 @@ const mockPullRequests = [
   {
     id: '6',
     number: 14287,
-    merged: true,
+    merged: 1233,
+    state: 'merged',
     name: 'fix: u[cli] implements vc deploy --logs and vc inspect --logsse right parameter name for secrets-file',
     sha: 'b7765ad1',
     reviewRequired: true,
@@ -188,10 +175,12 @@ const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { nam
 function PullRequestListPage() {
   const [loadState, setLoadState] = useState('data-loaded')
 
+  const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
+
   const renderListContent = () => {
     switch (loadState) {
       case 'data-loaded':
-        return <PullRequestList pullRequests={mockPullRequests} />
+        return <PullRequestList pullRequests={mockPullRequests} LinkComponent={LinkComponent} />
       case 'loading':
         return <SkeletonList />
       case 'no-search-matches':
