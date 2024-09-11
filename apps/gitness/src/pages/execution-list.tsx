@@ -13,15 +13,21 @@ import {
   Spacer,
   Text
 } from '@harnessio/canary'
-import { TopBarWidget, PaddingListLayout, ExecutionList, SkeletonList, timeDistance } from '@harnessio/playground'
+import { PaddingListLayout, ExecutionList, SkeletonList, timeDistance, NoData } from '@harnessio/playground'
 import { ExecutionState } from '../types'
+import { Link } from 'react-router-dom'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
 const viewOptions = [{ name: 'View option 1' }, { name: 'View option 2' }]
 
 export default function ExecutionsPage() {
-  const { data: executions, isFetching } = useListExecutionsQuery(
+  const {
+    data: executions,
+    isFetching,
+    error,
+    isSuccess
+  } = useListExecutionsQuery(
     {
       repo_ref: 'workspace/repo/+',
       pipeline_identifier: 'pipeline-id',
@@ -35,34 +41,60 @@ export default function ExecutionsPage() {
     }
   )
 
+  const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
+
   const renderListContent = () => {
     if (isFetching) {
       return <SkeletonList />
     }
-    return (
-      <ExecutionList
-        // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
-        executions={executions?.content?.map((item: TypesExecution) => ({
-          id: item?.number,
-          number: item?.number,
-          status: item?.status,
-          success: item?.status === 'success',
-          name: item?.message,
-          sha: item?.after?.slice(0, 6),
-          timestamp: `${timeDistance(item?.finished, Date.now(), true)} ago`,
-          lastTimestamp: timeDistance(
-            item?.started,
-            item?.status === ExecutionState.RUNNING ? Date.now() : item?.finished,
-            true
-          )
-        }))}
-      />
-    )
+    if (isSuccess) {
+      // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
+      if (executions?.content?.length) {
+        return (
+          <ExecutionList
+            // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
+            executions={executions?.content?.map((item: TypesExecution) => ({
+              id: item?.number,
+              number: item?.number,
+              status: item?.status,
+              success: item?.status === 'success',
+              name: item?.message,
+              sha: item?.after?.slice(0, 6),
+              timestamp: `${timeDistance(item?.finished, Date.now(), true)} ago`,
+              lastTimestamp: timeDistance(
+                item?.started,
+                item?.status === ExecutionState.RUNNING ? Date.now() : item?.finished,
+                true
+              )
+            }))}
+            LinkComponent={LinkComponent}
+          />
+        )
+      }
+
+      return (
+        <>
+          <NoData
+            iconName="no-data-cog"
+            title="No executions yet"
+            description={[
+              "Your pipeline executions will appear here once they're completed.",
+              'Start your pipeline to see the results.'
+            ]}
+            primaryButton={{ label: 'Create pipeline' }}
+            secondaryButton={{ label: 'Import pipeline' }}
+          />
+        </>
+      )
+    } else {
+      console.log({ error })
+      return <></>
+    }
   }
 
   return (
     <>
-      <TopBarWidget />
+      {/* <TopBarWidget /> */}
       <PaddingListLayout>
         <Text size={5} weight={'medium'}>
           Executions
