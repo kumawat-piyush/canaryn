@@ -61,7 +61,7 @@ const ProjectDropdown: React.FC<{ isPrimary: boolean; projects: Project[] }> = (
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="mt-1.5">
         {projects.length === 0
-          ? 'No Project Found'
+          ? 'No Projects Found'
           : projects.map(project => (
               <DropdownMenuItem key={project.id} onClick={() => handleOptionChange(project)}>
                 {project.name}

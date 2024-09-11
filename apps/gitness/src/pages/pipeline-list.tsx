@@ -16,7 +16,7 @@ import {
 import { useListPipelinesQuery, TypesPipeline, ListPipelinesOkResponse } from '@harnessio/code-service-client'
 import { PipelineList, MeterState, PaddingListLayout, SkeletonList } from '@harnessio/playground'
 import { ExecutionState } from '../types'
-import HeaderApi from '../components/header-api'
+import Header from '../components/Header'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
@@ -65,7 +65,7 @@ export default function PipelinesPage() {
 
   return (
     <>
-      <HeaderApi />
+      <Header />
       <PaddingListLayout>
         <Text size={5} weight={'medium'}>
           Pipelines
