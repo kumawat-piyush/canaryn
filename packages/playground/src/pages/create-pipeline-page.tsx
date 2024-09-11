@@ -50,7 +50,7 @@ const pageData: PageProps = {
   sections: [
     {
       header: {
-        name: "Don't know where to start? Use a template",
+        name: "Don't know where to start? Use a template...",
         actionText: 'See all templates'
       },
       content: [
