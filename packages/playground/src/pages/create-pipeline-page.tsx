@@ -8,6 +8,7 @@ import {
   Icon,
   SpotlightsBox,
   ButtonGroup,
+  Input,
   AIPrompt
 } from '@harnessio/canary'
 import Floating1ColumnLayout from '../layouts/Floating1ColumnLayout'
@@ -201,8 +202,12 @@ export default function CreatePipelinePage() {
           <Button variant="outline" size="sm" borderRadius="full">
             Start from scratch
           </Button>
-        }
-      />
+        }>
+        <Input
+          placeholder="Start by describing your project goals or key requirements..."
+          className="pl-4 border-none rounded-full flex-grow"
+        />
+      </AIPrompt>
       <Spacer size={6} />
       <SectionList>
         <TemplateSection />
