@@ -2,6 +2,7 @@ export * from './components/theme-provider'
 
 export * from './components/pipeline-list'
 export * from './components/layout/top-bar-widget'
+export * from './components/layout/top-bar-loading'
 export * from './layouts/PaddingListLayout'
 export * from './layouts/Floating1ColumnLayout'
 export * from './components/loaders/skeleton-list'

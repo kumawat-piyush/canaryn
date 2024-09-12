@@ -1,5 +1,5 @@
 import { Topbar, Text } from '@harnessio/canary'
-import { TopBarWidget } from '@harnessio/playground'
+import { TopBarWidget, TopBarWidgetLoading } from '@harnessio/playground'
 import { useMembershipSpacesQuery, TypesSpace } from '@harnessio/code-service-client'
 
 export default function Header() {
@@ -9,15 +9,7 @@ export default function Header() {
   })
   //prevent rendering the page until the projects are loaded
   if (isLoading) {
-    return (
-      <Topbar.Root>
-        <Topbar.Left>
-          <Text size={2} weight="medium" className="text-primary">
-            Loading Your Projects...
-          </Text>
-        </Topbar.Left>
-      </Topbar.Root>
-    )
+    return <TopBarWidgetLoading isLoading={isLoading} />
   }
 
   const projectsItem: TypesSpace[] =
