@@ -187,7 +187,7 @@ export default function CreatePipelinePage() {
         It's very simple to start using Playground. Allow our AI to create your pipeline based on the code base or start
         from a clean state.
       </Text>
-      <Spacer size={6} />
+      <Spacer size={8} />
       <AIPrompt
         placeholder="Start by describing your project goals or key requirements..."
         useAIButton={
