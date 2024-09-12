@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { Icon, Text } from '@harnessio/canary'
+import { Button, Icon, Text } from '@harnessio/canary'
 import {
   CommentItem,
   EnumPullReqActivityType,
@@ -156,19 +156,26 @@ const PullRequestOverview: React.FC<PullRequestOverviewProps> = ({
                         ),
                         name: (payload?.author as PayloadAuthor)?.display_name,
                         // TODO: fix comment to tell between comment or code comment?
-                        description: `commented 3 hours ago `
+                        description: `reviewed 3 hours ago `
                       }
                     ]}
                     content={
-                      <div className="flex flex-col  px-4 pt-4">
-                        <div className="flex w-full justify-between">
-                          <Text size={2} color="primary">
+                      <div className="flex flex-col   pt-2">
+                        <div className="flex items-center w-full px-4 pb-2 justify-between">
+                          <Text size={3} color="primary">
                             {(payload?.code_comment as PayloadCodeComment)?.path}
                           </Text>
-                          <Text size={1} className="flex items-center gap-1" color={'tertiaryBackground'}>
-                            Resolved
-                            <Icon size={14} name="chevron-down" />
-                          </Text>
+                          <div className="flex">
+                            {/* TODO: fix states on this on a comment like resolved and active */}
+                            <Text size={1} className="flex items-center gap-1 pr-2" color={'tertiaryBackground'}>
+                              Resolved
+                              <Icon size={14} name="chevron-down" />
+                            </Text>
+                            {/* TODO: add on click or other menu options */}
+                            <Button size="sm" variant="ghost" className="rotate-90 px-2 py-1 ">
+                              <Icon name="vertical-ellipsis" size={12} />
+                            </Button>
+                          </div>
                         </div>
                         <PullRequestDiffViewer
                           data={diffData}
@@ -177,7 +184,7 @@ const PullRequestOverview: React.FC<PullRequestOverviewProps> = ({
                           mode={DiffModeEnum.Unified}
                           wrap={wrap}
                         />
-                        <div className="px-1 py-2">
+                        <div className="px-4 py-2">
                           {commentItems?.map((commentItem, idx) => {
                             return (
                               <PullRequestTimelineItem
@@ -226,7 +233,7 @@ const PullRequestOverview: React.FC<PullRequestOverviewProps> = ({
                       ),
                       name: (payload?.author as PayloadAuthor)?.display_name,
                       // TODO: fix comment to tell between comment or code comment?
-                      description: `commented 3 hours ago `
+                      description: `commented 3 hours ago`
                     }
                   ]}
                   content={
