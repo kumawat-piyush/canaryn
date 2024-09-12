@@ -14,42 +14,11 @@ import { NoData, PullRequestCommits, SkeletonList } from '@harnessio/playground'
 import { useListPullReqCommitsQuery, TypesCommit } from '@harnessio/code-service-client'
 
 export default function PullRequestCommitsPage() {
-  const { data: commitData, isFetching } = useListPullReqCommitsQuery(
-    {
-      repo_ref: 'workspace/repo/+',
-      pullreq_number: 1,
-      queryParams: { page: 0, limit: 10 }
-    },
-    /* To enable mock data */
-    {
-      placeholderData: {
-        // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
-        content: [
-          {
-            sha: 'a4ff390fb95d9f9c2a6fbdbf8a7727e08278f96c',
-            parent_shas: ['b8f89f0c074b0ecc7dc30ecae0889ae3e6638fc8'],
-            title: 'Create cxzcxzcxzc.txt',
-            message: 'Create cxzcxzcxzc.txt',
-            author: {
-              identity: {
-                name: 'Administrator',
-                email: 'admin@gitness.io'
-              },
-              when: '2024-02-27T13:33:23-07:00'
-            },
-            committer: {
-              identity: {
-                name: 'Gitness',
-                email: 'system@gitness.io'
-              },
-              when: '2024-02-27T13:33:23-07:00'
-            }
-          }
-        ]
-      },
-      enabled: true
-    }
-  )
+  const { data: commitData, isFetching } = useListPullReqCommitsQuery({
+    repo_ref: 'workspace/repo/+',
+    pullreq_number: 1,
+    queryParams: { page: 0, limit: 10 }
+  })
 
   const renderContent = () => {
     if (isFetching) {
