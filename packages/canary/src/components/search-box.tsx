@@ -62,7 +62,7 @@ function Root({
 
   useEffect(() => {
     const handleShortcutKey = (e: KeyboardEvent) => {
-      if (hasShortcut && shortcutLetter && e.key.toLowerCase() === shortcutLetter.toLowerCase()) {
+      if (hasShortcut && shortcutLetter && e?.key?.toLowerCase?.() === shortcutLetter?.toLowerCase()) {
         handleSearch()
       }
     }

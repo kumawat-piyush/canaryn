@@ -45,6 +45,9 @@ import Branch from '../icons/branch.svg'
 import OpenPR from '../icons/open-pr.svg'
 import Plus from '../icons/plus.svg'
 import Running from '../icons/running.svg'
+import NodeLogo from '../icons/node-logo.svg'
+import PythonLogo from '../icons/python-logo.svg'
+import NodePythonLogo from '../icons/node-python-logo.svg'
 
 // import Fork from '../icons/fork.svg'
 
@@ -94,7 +97,10 @@ const IconNameMap = {
   branch: Branch,
   'open-pr': OpenPR,
   plus: Plus,
-  running: Running
+  running: Running,
+  'node-logo': NodeLogo,
+  'python-logo': PythonLogo,
+  'node-python-logo': NodePythonLogo
 
   // fork: Fork
 } satisfies Record<string, React.FunctionComponent<React.SVGProps<SVGSVGElement>>>

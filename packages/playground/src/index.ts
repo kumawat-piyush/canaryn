@@ -5,6 +5,7 @@ export * from './components/layout/top-bar-widget'
 export * from './layouts/PaddingListLayout'
 export * from './components/loaders/skeleton-list'
 export * from './layouts/RootLayout'
+export * from './layouts/Floating1ColumnLayout'
 
 export * from './components/execution-list'
 

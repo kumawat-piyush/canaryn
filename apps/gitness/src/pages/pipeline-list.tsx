@@ -59,13 +59,14 @@ export default function PipelinesPage() {
             }
           ]
         }))}
+        LinkComponent={Link}
       />
     )
   }
 
   return (
     <>
-      <TopBarWidget />
+      {/* <TopBarWidget /> */}
       <PaddingListLayout>
         <Text size={5} weight={'medium'}>
           Pipelines

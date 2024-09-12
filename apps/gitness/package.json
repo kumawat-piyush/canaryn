@@ -4,9 +4,11 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build && pnpm build:css",
+    "dev": "run-p watch:css watch",
+    "watch": "vite",
     "build:css": "npx tailwindcss -i ./src/styles.css -o ./public/styles.css",
+    "watch:css": "pnpm build:css --watch",
+    "build": "vite build && pnpm build:css",
     "lint": "eslint .",
     "preview": "vite preview",
     "preinstall": "npx only-allow pnpm",
@@ -18,9 +20,13 @@
     "@harnessio/code-service-client": "1.2.0",
     "@harnessio/icons-noir": "workspace:*",
     "@harnessio/playground": "workspace:*",
+    "@hookform/resolvers": "^3.6.0",
     "@tanstack/react-query": "4.36.1",
+    "npm-run-all": "^4.1.5",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.53.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

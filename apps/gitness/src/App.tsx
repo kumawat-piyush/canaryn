@@ -8,6 +8,8 @@ import PipelineListPage from './pages/pipeline-list'
 import SignInPage from './pages/signin'
 import PullRequestListPage from './pages/pull-request-list-page'
 import PipelineCreate from './pages/pipeline-create'
+import { Toaster } from '@harnessio/canary'
+import PipelineLayout from './Layouts/PipelineLayout'
 
 const BASE_URL_PREFIX = '/api/v1'
 
@@ -43,13 +45,19 @@ export default function App() {
       children: [
         {
           path: 'pipelines',
-          element: <PipelineListPage />
+          element: <PipelineLayout />,
+          children: [
+            {
+              index: true,
+              element: <PipelineListPage />
+            },
+            { path: 'create', element: <PipelineCreate /> }
+          ]
         },
         {
           path: 'pull-requests',
           element: <PullRequestListPage />
-        },
-        { path: 'pipelines/create', element: <PipelineCreate /> }
+        }
       ]
     },
     {
@@ -59,10 +67,13 @@ export default function App() {
   ])
 
   return (
-    <ThemeProvider defaultTheme="dark">
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    </ThemeProvider>
+    <>
+      <ThemeProvider defaultTheme="dark">
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </ThemeProvider>
+      <Toaster />
+    </>
   )
 }

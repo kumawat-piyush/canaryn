@@ -31,3 +31,4 @@ const Floating1ColumnLayout = ({
 }
 
 export default Floating1ColumnLayout
+export { Floating1ColumnLayout }
