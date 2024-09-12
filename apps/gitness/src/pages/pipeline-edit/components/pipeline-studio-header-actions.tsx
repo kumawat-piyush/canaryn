@@ -27,7 +27,7 @@ const PipelineStudioHeaderActions = (): JSX.Element => {
   const { repoId, spaceId } = useParams<PipelineParams>()
   const repoRef = `${spaceId}/${repoId}/+`
 
-  const { mutateAsync: commitAsync, isLoading: commitLoading } = useCommitFilesMutation({})
+  const { mutateAsync: commitAsync } = useCommitFilesMutation({})
 
   const handleSave = (execute = false): void => {
     const data: OpenapiCommitFilesRequest = {
@@ -68,6 +68,7 @@ const PipelineStudioHeaderActions = (): JSX.Element => {
       queryParams: { branch: 'main' }
     })
       .then(response => {
+        // eslint-disable-next-line  @typescript-eslint/no-explicit-any
         const executionId = (response as any)?.content?.number
         navigate(`../pipelines/${pipelineData?.identifier}/execution/${executionId}`)
         // TODO: toast

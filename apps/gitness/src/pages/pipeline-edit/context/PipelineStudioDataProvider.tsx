@@ -47,14 +47,18 @@ interface PipelineStudioDataContextProps {
   // TODO: check if this should be here
   setAddStepIntention: (props: { path: string; position: InlineActionArgsType['position'] }) => void
   clearAddStepIntention: () => void
-  addStepIntention: { path: string; position: any } | null
+  addStepIntention: { path: string; position: InlineActionArgsType['position'] } | null
   setEditStepIntention: (props: { path: string }) => void
   clearEditStepIntention: () => void
   editStepIntention: { path: string } | null
   //
   requestYamlModifications: {
-    injectInArray: (props: { path: string; position: 'after' | 'before'; item: any }) => void
-    updateInArray: (props: { path: string; item: any }) => void
+    injectInArray: (props: {
+      path: string
+      position: 'first' | 'last' | 'after' | 'before' | undefined
+      item: unknown
+    }) => void
+    updateInArray: (props: { path: string; item: unknown }) => void
     deleteInArray: (props: { path: string }) => void
   }
   //
@@ -85,8 +89,12 @@ const PipelineStudioDataContext = createContext<PipelineStudioDataContextProps>(
   editStepIntention: null,
   //
   requestYamlModifications: {
-    injectInArray: (_props: { path: string; position: 'after' | 'before'; item: any }) => undefined,
-    updateInArray: (_props: { path: string; item: any }) => undefined,
+    injectInArray: (_props: {
+      path: string
+      position: 'first' | 'last' | 'after' | 'after' | 'before' | undefined
+      item: unknown
+    }) => undefined,
+    updateInArray: (_props: { path: string; item: unknown }) => undefined,
     deleteInArray: (_props: { path: string }) => undefined
   },
   //
@@ -120,7 +128,7 @@ const PipelineStudioDataProvider = ({ children }: React.PropsWithChildren) => {
     repo_ref: repoRef
   })
   // TODO: style and model does not match
-  const pipelineData = (data as any)?.content as TypesPipeline | undefined
+  const pipelineData = (data as { content: unknown })?.content as TypesPipeline | undefined
 
   const {
     data: pipelineYAMLFileContentRaw,
@@ -136,7 +144,9 @@ const PipelineStudioDataProvider = ({ children }: React.PropsWithChildren) => {
     { enabled: !!pipelineData?.default_branch }
   )
   // TODO: style and model does not match
-  const pipelineYAMLFileContent = (pipelineYAMLFileContentRaw as any)?.content as OpenapiGetContentOutput | undefined
+  const pipelineYAMLFileContent = (pipelineYAMLFileContentRaw as { content: unknown })?.content as
+    | OpenapiGetContentOutput
+    | undefined
 
   const decodedPipelineYaml = useMemo(() => {
     return decodeGitContent(pipelineYAMLFileContent?.content?.data)
@@ -169,7 +179,7 @@ const PipelineStudioDataProvider = ({ children }: React.PropsWithChildren) => {
   const [currentStepFormDefinition, setCurrentStepFormDefinition] = useState<TypesPlugin | null>(null)
 
   const injectInArray = useCallback(
-    (injectData: { path: string; position: 'after' | 'before' | 'last'; item: any }) => {
+    (injectData: { path: string; position: 'after' | 'before' | 'first' | 'last' | undefined; item: unknown }) => {
       const yaml = injectItemInArray(latestYaml.current, injectData)
       setYamlRevision({ yaml: yaml })
     },
@@ -177,7 +187,7 @@ const PipelineStudioDataProvider = ({ children }: React.PropsWithChildren) => {
   )
 
   const updateInArray = useCallback(
-    (injectData: { path: string; item: any }) => {
+    (injectData: { path: string; item: unknown }) => {
       const yaml = updateItemInArray(latestYaml.current, injectData)
       setYamlRevision({ yaml: yaml })
     },

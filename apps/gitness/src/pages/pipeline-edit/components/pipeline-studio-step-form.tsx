@@ -1,10 +1,9 @@
 import { Button } from '@harnessio/canary'
-import { IFormDefinition, RenderForm, RootForm, useZodValidationResolver } from '@harnessio/forms'
+import { IFormDefinition, RenderForm, RootForm } from '@harnessio/forms'
 import { StepForm, StepFormSection, inputComponentFactory } from '@harnessio/playground'
 import { useEffect, useMemo, useState } from 'react'
 import { usePipelineDataContext } from '../context/PipelineStudioDataProvider'
 import { StepDrawer, usePipelineViewContext } from '../context/PipelineStudioViewProvider'
-import { TypesPlugin } from '../types/api-types'
 import { parse } from 'yaml'
 import { get, set } from 'lodash-es'
 import { ApiInputs, apiInput2IInputDefinition } from '../utils/step-form-utils'
@@ -15,25 +14,18 @@ interface PipelineStudioStepFormProps {
 
 export const PipelineStudioStepForm = (props: PipelineStudioStepFormProps): JSX.Element => {
   const { requestClose } = props
-  const {
-    yamlRevision,
-    requestYamlModifications,
-    currentStepFormDefinition,
-    setCurrentStepFormDefinition,
-    addStepIntention,
-    editStepIntention
-  } = usePipelineDataContext()
+  const { yamlRevision, requestYamlModifications, currentStepFormDefinition, addStepIntention, editStepIntention } =
+    usePipelineDataContext()
   const { setStepDrawerOpen } = usePipelineViewContext()
 
-  const [defaultStepValues, setDefaultStepValues] = useState({})
+  const [_defaultStepValues, setDefaultStepValues] = useState({})
 
   useEffect(() => {
     if (editStepIntention) {
       const yamlJson = parse(yamlRevision.yaml)
       const step = get(yamlJson, editStepIntention.path)
       setDefaultStepValues(step)
-      const stepIdentifier = step?.spec?.name
-
+      //const stepIdentifier = step?.spec?.name
       // TODO
       //   fetchPlugins(1).then(data => {
       //     const stepData = data?.find((_plugin: TypesPlugin) => _plugin.identifier === stepIdentifier)
@@ -42,9 +34,10 @@ export const PipelineStudioStepForm = (props: PipelineStudioStepFormProps): JSX.
     }
   }, [editStepIntention])
 
-  const title = currentStepFormDefinition?.identifier
-  const description = currentStepFormDefinition?.description
+  // const title = currentStepFormDefinition?.identifier
+  // const description = currentStepFormDefinition?.description
 
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   const inputs = (currentStepFormDefinition?.spec as any)?.spec?.inputs as ApiInputs
 
   const formInputs: IFormDefinition['inputs'] = useMemo(() => {

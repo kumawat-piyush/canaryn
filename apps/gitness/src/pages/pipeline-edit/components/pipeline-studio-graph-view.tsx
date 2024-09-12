@@ -1,8 +1,7 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { PipelineStudio, getNodesFromPipelineYaml, type Node } from '@harnessio/unified-pipeline'
 import { usePipelineDataContext } from '../context/PipelineStudioDataProvider'
 import { parse } from 'yaml'
-import { noop } from 'lodash-es'
 
 export const PipelineStudioGraphView = (): React.ReactElement => {
   const { yamlRevision } = usePipelineDataContext()

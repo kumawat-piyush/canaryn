@@ -3,7 +3,7 @@ import { parse, parseDocument, stringify } from 'yaml'
 
 export function injectItemInArray(
   yaml: string,
-  injectData: { path: string; position: 'after' | 'before' | 'last'; item: any }
+  injectData: { path: string; position: 'after' | 'before' | 'last' | undefined; item: unknown }
 ): string {
   const { path, position, item } = injectData
 
@@ -32,7 +32,7 @@ export function injectItemInArray(
   return yaml
 }
 
-export function updateItemInArray(yaml: string, injectData: { path: string; item: any }): string {
+export function updateItemInArray(yaml: string, injectData: { path: string; item: unknown }): string {
   const { path, item } = injectData
 
   // if position is "last" path points to array

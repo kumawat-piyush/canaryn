@@ -1,14 +1,15 @@
 import { ThemeDefinition } from '@harnessio/yaml-editor'
+import { editor } from 'monaco-editor'
 
 const harnessLightTheme = {
-  base: 'vs' as any,
+  base: 'vs' as editor.BuiltinTheme,
   inherit: true,
   rules: [],
   colors: {}
 }
 
 const harnessDarkTheme = {
-  base: 'vs-dark' as any,
+  base: 'vs-dark' as editor.BuiltinTheme,
   inherit: true,
   rules: [
     {
