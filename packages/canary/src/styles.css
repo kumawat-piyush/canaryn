@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @import 'highlight.js/styles/github.css'; */
-
 @font-face {
   font-family: 'Inter';
   font-style: normal;
@@ -76,6 +74,7 @@
     --error: var(--red);
     --warning: var(--orange);
     --ai: var(--purple);
+    --diff-grey: hsl(0, 0%, 33%);
     --diff-add-content--: hsl(156, 28%, 10%);
     --diff-del-content--: hsl(356, 28%, 11%);
     --diff-add-lineNumber--: hsl(153, 40%, 14%);

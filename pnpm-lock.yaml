@@ -790,9 +790,6 @@ importers:
       react-router-dom:
         specifier: ^6.26.0
         version: 6.26.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      reactivity-store:
-        specifier: ^0.3.5
-        version: 0.3.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       yaml:
         specifier: ^2.5.0
         version: 2.5.0

@@ -11,7 +11,6 @@ import {
   Text
 } from '@harnessio/canary'
 import React, { useEffect, useRef, useState } from 'react'
-import { useDiffConfig } from './hooks/useDiffConfig'
 import { OverlayScrollbars } from 'overlayscrollbars'
 // import * as data from '../../data/mockDiffViewerdata'
 // import '@git-diff-view/react/styles/diff-view.css'
@@ -56,9 +55,10 @@ interface PullRequestDiffviewerProps {
   highlight: boolean
   mode: DiffModeEnum
   wrap: boolean
+  addWidget: boolean
 }
 
-const PullRequestDiffViewer = ({ data, highlight, fontsize, mode, wrap }: PullRequestDiffviewerProps) => {
+const PullRequestDiffViewer = ({ data, highlight, fontsize, mode, wrap, addWidget }: PullRequestDiffviewerProps) => {
   // const [v] = useState<K>('a')
 
   const ref = useRef<{ getDiffFileInstance: () => DiffFile }>(null)
@@ -103,15 +103,11 @@ const PullRequestDiffViewer = ({ data, highlight, fontsize, mode, wrap }: PullRe
   useEffect(() => {
     if (expandAll) {
       if (ref?.current) {
-        ref?.current
-          ?.getDiffFileInstance?.()
-          .onAllExpand(useDiffConfig.getReadonlyState().mode & DiffModeEnum.Split ? 'split' : 'unified')
+        ref?.current?.getDiffFileInstance?.().onAllExpand(mode & DiffModeEnum.Split ? 'split' : 'unified')
       }
     } else {
       if (ref?.current) {
-        ref?.current
-          ?.getDiffFileInstance?.()
-          .onAllCollapse(useDiffConfig.getReadonlyState().mode & DiffModeEnum.Split ? 'split' : 'unified')
+        ref?.current?.getDiffFileInstance?.().onAllCollapse(mode & DiffModeEnum.Split ? 'split' : 'unified')
       }
     }
   }, [expandAll])
@@ -256,7 +252,7 @@ const PullRequestDiffViewer = ({ data, highlight, fontsize, mode, wrap }: PullRe
                 <div className='h-6 w-6 rounded-full bg-tertiary-background bg-[url("../images/user-avatar.svg")] bg-cover'></div>
                 <Text color="primary">adam </Text>
                 <Text size={1} color="tertiaryBackground">
-                  4 hours ago{' '}
+                  4 hours ago
                 </Text>
               </div>
               <Text size={2} color="primary" className="px-8 py-2">
@@ -275,7 +271,7 @@ const PullRequestDiffViewer = ({ data, highlight, fontsize, mode, wrap }: PullRe
       diffViewHighlight={highlight}
       diffViewMode={mode}
       diffViewWrap={wrap}
-      diffViewAddWidget
+      diffViewAddWidget={addWidget}
       onAddWidgetClick={() => {
         handleClick()
       }}

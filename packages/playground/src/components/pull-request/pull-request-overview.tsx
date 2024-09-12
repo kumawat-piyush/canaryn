@@ -183,6 +183,7 @@ const PullRequestOverview: React.FC<PullRequestOverviewProps> = ({
                           highlight={highlight}
                           mode={DiffModeEnum.Unified}
                           wrap={wrap}
+                          addWidget={false}
                         />
                         <div className="px-4 py-2">
                           {commentItems?.map((commentItem, idx) => {

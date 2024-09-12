@@ -16,7 +16,7 @@
 .diff-widget-tooltip::after {
   display: none;
   box-sizing: border-box;
-  background-color: #555555;
+  background-color: var(--diff-grey);
   position: absolute;
   content: attr(data-title);
   font-size: 11px;
@@ -28,7 +28,7 @@
   white-space: nowrap;
   transform: translateY(-50%);
   left: calc(100% + 8px);
-  color: #ffffff;
+  color: var(--primary);
 }
 
 .diff-widget-tooltip::before {
@@ -41,7 +41,7 @@
   left: calc(100% - 2px);
   transform: translateY(-50%);
   border: 6px solid transparent;
-  border-right-color: #555555;
+  border-right-color: var(--diff-grey);
 }
 
 .diff-widget-tooltip:hover::before {

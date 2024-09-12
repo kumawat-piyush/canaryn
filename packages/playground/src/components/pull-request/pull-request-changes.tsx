@@ -81,6 +81,7 @@ const PullRequestAccordion: React.FC<{
                     highlight={highlight}
                     mode={DiffModeEnum.Split}
                     wrap={wrap}
+                    addWidget
                   />
                 </div>
               </div>
