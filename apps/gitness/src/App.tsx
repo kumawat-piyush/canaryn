@@ -46,11 +46,11 @@ export default function App() {
       element: <RootLayout />,
       children: [
         {
-          path: 'repos',
+          path: ':space/repos',
           element: <ReposListPage />
         },
         {
-          path: 'repos/:repoId',
+          path: ':space/repos/:repoId',
           element: <RepoLayout />,
           children: [
             {
@@ -77,10 +77,12 @@ export default function App() {
             }
           ]
         },
+        // Pipelines (OUTSIDE REPOS)
         {
           path: 'pipelines',
           element: <PipelineListPage />
         },
+        // Executions (OUTSIDE REPOS)
         {
           path: 'executions',
           element: <ExecutionsPage />
