@@ -47,21 +47,36 @@ export default function App() {
       path: '/',
       element: <RootLayout />,
       children: [
+        { index: true, element: <>Home Page</> },
         {
-          path: ':space/repos',
+          path: ':spaceId/repos',
           element: <ReposListPage />
         },
         {
-          path: ':space/repos/:repoId',
+          path: ':spaceId/repos/:repoId',
           element: <RepoLayout />,
           children: [
             {
               index: true,
-              element: <Navigate to="pull-requests" />
+              element: <>Summary</>
             },
             {
               path: 'pull-requests',
               element: <PullRequestListPage />
+            },
+            {
+              path: 'pipelines',
+              element: <PipelineListPage />,
+              children: [
+                {
+                  index: true,
+                  element: <Navigate to="/" />
+                },
+                {
+                  path: ':pipelineId',
+                  element: <ExecutionsPage />
+                }
+              ]
             },
             {
               path: 'pull-requests/:pullRequestId',

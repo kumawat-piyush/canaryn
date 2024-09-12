@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom'
-import { URLProps } from '../../RouteDefinitions'
-import { useGetSpaceParam } from './useGetSpaceParam'
+import { PathParams } from '../../RouteDefinitions'
+import { useGetSpaceURLParam } from './useGetSpaceParam'
 
-export function useGetRepoPath(): string {
-  const space = useGetSpaceParam()
-  const { repoId } = useParams<URLProps>()
+export function useGetRepoRef(): string {
+  const space = useGetSpaceURLParam()
+  const { repoId } = useParams<PathParams>()
   return space && repoId ? `${space}/${repoId}/+` : ''
 }

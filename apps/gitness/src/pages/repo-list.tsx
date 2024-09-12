@@ -16,7 +16,7 @@ import {
 import { useListReposQuery } from '@harnessio/code-service-client'
 import { PaddingListLayout, SkeletonList, RepoList, Repo } from '@harnessio/playground'
 import { Link } from 'react-router-dom'
-import { useGetSpaceParam } from '../framework/hooks/useGetSpaceParam'
+import { useGetSpaceURLParam } from '../framework/hooks/useGetSpaceParam'
 import Header from '../components/Header'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
@@ -26,7 +26,7 @@ const viewOptions = [{ name: 'View option 1' }, { name: 'View option 2' }]
 const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
 
 export default function ReposListPage() {
-  const space = useGetSpaceParam()
+  const space = useGetSpaceURLParam()
   const { isFetching, data } = useListReposQuery({ queryParams: {}, space_ref: `${space}/+` })
 
   const renderListContent = () => {

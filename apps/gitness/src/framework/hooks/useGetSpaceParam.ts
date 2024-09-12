@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
-import type { URLProps } from '../../RouteDefinitions'
+import type { PathParams } from '../../RouteDefinitions'
 
-export function useGetSpaceParam(): string | undefined {
-  const { space } = useParams<URLProps>()
-  return space
+export function useGetSpaceURLParam(): string | undefined {
+  const { spaceId } = useParams<PathParams>()
+  return spaceId
 }
