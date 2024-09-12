@@ -1,13 +1,15 @@
 import React from 'react'
 import { Refresh } from '@harnessio/icons-noir'
 import { Topbar, Text } from '@harnessio/canary'
-
 interface WidgetLoadingProps {
   isLoading: boolean
 }
 
 export const TopBarWidgetLoading: React.FC<WidgetLoadingProps> = ({ isLoading }) => {
-  console.log(isLoading)
+  if (!isLoading) {
+    return null
+  }
+
   return (
     <Topbar.Root>
       <Topbar.Left>
