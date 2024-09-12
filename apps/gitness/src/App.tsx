@@ -66,11 +66,10 @@ export default function App() {
             },
             {
               path: 'pipelines',
-              element: <PipelineListPage />,
               children: [
                 {
                   index: true,
-                  element: <Navigate to="/" />
+                  element: <PipelineListPage />
                 },
                 {
                   path: ':pipelineId',
