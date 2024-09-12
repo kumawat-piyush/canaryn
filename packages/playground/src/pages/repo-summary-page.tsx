@@ -1,5 +1,15 @@
 import React, { useState } from 'react'
-import { Spacer, ListActions, Button, SearchBox, Text, Icon, ButtonGroup, StackedList } from '@harnessio/canary'
+import {
+  Spacer,
+  ListActions,
+  Button,
+  SearchBox,
+  Text,
+  Icon,
+  ButtonGroup,
+  StackedList,
+  IconProps
+} from '@harnessio/canary'
 import { Summary } from '../components/repo-summary'
 import { NoData } from '../components/no-data'
 import { NoSearchResults } from '../components/no-search-results'
@@ -9,9 +19,9 @@ import { SkeletonList } from '../components/loaders/skeleton-list'
 import PlaygroundListSettings from '../settings/list-settings'
 import FullWidth2ColumnLayout from '../layouts/FullWidth2ColumnLayout'
 import { mockFiles } from '../data/mockSummaryFiiles'
-import Floating1ColumnLayout from '../layouts/Floating1ColumnLayout'
+import { Floating1ColumnLayout } from '../layouts/Floating1ColumnLayout'
 
-const mockSummaryDetails = [
+const mockSummaryDetails: { id: string; name: string; count: number; iconName: IconProps['name'] }[] = [
   {
     id: '0',
     name: 'Commits',
