@@ -187,7 +187,22 @@ export default function CreatePipelinePage() {
         from a clean state.
       </Text>
       <Spacer size={6} />
-      <AIPrompt placeholder="Start by describing your project goals or key requirements..." iconName="ai-sparks" />
+      <AIPrompt
+        placeholder="Start by describing your project goals or key requirements..."
+        useAIButton={
+          <Button variant="outline" size="sm" borderRadius="full">
+            <Icon name="ai-sparks" size={22} />
+            <Text size={2} className="ml-1">
+              Create with AI
+            </Text>
+          </Button>
+        }
+        useManualButton={
+          <Button variant="outline" size="sm" borderRadius="full">
+            Start from scratch
+          </Button>
+        }
+      />
       <Spacer size={6} />
       <SectionList>
         <TemplateSection />
