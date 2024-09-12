@@ -1,172 +1,190 @@
 import React from 'react'
-import { Spacer, Text, Section } from '@harnessio/canary'
+import { Spacer, Text, Section, ResourceBox, Button, Icon, SpotlightsBox, ButtonGroup } from '@harnessio/canary'
 import Floating1ColumnLayout from '../layouts/Floating1ColumnLayout'
+import { Link } from 'react-router-dom'
 
-interface PageProps {
+const SectionList = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex flex-col gap-9 w-full">{children}</div>
+)
+
+type Template = {
   title: string
-  byline: string
-  sections: SectionProps[]
+  highlightTop: string
+  highlightBottom: string
+  logoName: string
+  href?: string
+  logoSize?: number
 }
 
-interface SectionProps {
-  header?: {
-    name: string
-    actionText?: string
-  }
-  content: ContentProps[]
+const TemplateSection = () => {
+  const templates: Template[] = [
+    { title: 'Node.js', highlightTop: '#2ECC71', highlightBottom: '#262930', logoName: 'node-logo', href: '#' },
+    { title: 'Python', highlightTop: '#3498DB', highlightBottom: '#262930', logoName: 'python-logo', href: '#' },
+    {
+      title: 'Python and Node.js',
+      highlightTop: '#3498DB',
+      highlightBottom: '#2ECC71',
+      logoName: 'python-and-node-logo',
+      logoSize: 140,
+      href: '#'
+    }
+  ]
+
+  return (
+    <Section.Root>
+      <Section.Header
+        name="Don't know where to start? Use a template"
+        action={
+          <Link to="#">
+            <ButtonGroup.Root verticalAlign="center" spacing="2">
+              <Text as="p" size={2} weight="medium" className="text-primary/80">
+                See all templates
+              </Text>
+              <Icon size={12} name="chevron-down" className="-rotate-90" />
+            </ButtonGroup.Root>
+          </Link>
+        }
+      />
+      <Section.Content>
+        {templates.map((template, index) => (
+          <Link to={template.href || '#'}>
+            <SpotlightsBox.Root
+              key={index}
+              logo={template.logoName}
+              logoSize={template.logoSize}
+              highlightTop={template.highlightTop}
+              highlightBottom={template.highlightBottom}>
+              <SpotlightsBox.Content>
+                <Text size={3}>{template.title}</Text>
+              </SpotlightsBox.Content>
+            </SpotlightsBox.Root>
+          </Link>
+        ))}
+      </Section.Content>
+    </Section.Root>
+  )
 }
 
-interface ContentProps {
-  templateBoxes?: TemplateBoxProps[]
-  resourceBoxes?: ResourceBoxProps[]
-  card?: CardProps
-}
-
-interface TemplateBoxProps {
-  name: string
+type ResourceItem = {
+  title: string
+  content: string
+  href?: string
   iconName: string
 }
 
-interface ResourceBoxProps {
+type ResourceSectionData = {
   title: string
-  arrowIconName: string
-  list: {
-    iconName: string
-    name: string
-    subtitle: string
-  }[]
+  items: ResourceItem[]
 }
 
-interface CardProps {
-  title: string
-  subtitle: string
-  action: string
-}
+const ResourceSection = ({ title, items }: ResourceSectionData) => (
+  <ResourceBox.Root>
+    <ResourceBox.Header>
+      <ResourceBox.HeaderTitle>
+        <Text size={2} color="tertiaryBackground" weight="medium">
+          {title}
+        </Text>
+      </ResourceBox.HeaderTitle>
+      <ResourceBox.HeaderLink>
+        <Button variant="ghost" size="sm_icon" asChild className="rounded-full bg-primary/5">
+          <Link to="/#">
+            <Icon name="circle-arrow-top-right" size={12} className="text-tertiary-background" />
+          </Link>
+        </Button>
+      </ResourceBox.HeaderLink>
+    </ResourceBox.Header>
+    <ResourceBox.Content>
+      <ResourceBox.List>
+        {items.map((item, index) => (
+          <Link to={item.href ?? '/#'} key={index}>
+            <ResourceBox.ListItem iconName={item.iconName}>
+              <Text size={2} color="primary" weight="medium">
+                {item.title}
+              </Text>
+              <Text size={2} color="tertiaryBackground">
+                {item.content}
+              </Text>
+            </ResourceBox.ListItem>
+          </Link>
+        ))}
+      </ResourceBox.List>
+    </ResourceBox.Content>
+  </ResourceBox.Root>
+)
 
-const pageData: PageProps = {
-  title: 'Create your pipeline',
-  byline:
-    "It's very simple to start using Playground. Allow our AI to create your pipeline based on the code base or start from a clean state.",
-  sections: [
-    {
-      header: {
-        name: "Don't know where to start? Use a template...",
-        actionText: 'See all templates'
-      },
-      content: [
-        {
-          templateBoxes: [
-            {
-              name: 'Node.js',
-              iconName: 'harness'
-            },
-            {
-              name: 'Python',
-              iconName: 'harness'
-            },
-            {
-              name: 'Python and Node.js',
-              iconName: 'harness'
-            }
-          ]
-        }
-      ]
-    },
-    {
-      content: [
-        {
-          card: {
-            title: 'Get started quickly',
-            subtitle: 'Choose a resource to help you begin',
-            action: 'Learn more'
-          },
-          resourceBoxes: [
-            {
-              title: 'Documentation',
-              arrowIconName: 'chevron-down',
-              list: [
-                {
-                  iconName: 'harness',
-                  name: 'Quick start',
-                  subtitle: 'Viverra pellentesque vel'
-                },
-                {
-                  iconName: 'harness',
-                  name: 'Cloning',
-                  subtitle: 'Netus vel purus at ultricies'
-                },
-                {
-                  iconName: 'harness',
-                  name: 'Pull requests',
-                  subtitle: 'Nec tellus eu turpis'
-                }
-              ]
-            },
-            {
-              title: 'Guides',
-              arrowIconName: 'chevron-down',
-              list: [
-                {
-                  iconName: 'harness',
-                  name: 'Matrix strategy',
-                  subtitle: 'Viverra pellentesque vel'
-                },
-                {
-                  iconName: 'harness',
-                  name: 'Secrets management',
-                  subtitle: 'Netus vel purus at ultricies'
-                },
-                {
-                  iconName: 'harness',
-                  name: 'Conditional logic',
-                  subtitle: 'Nec tellus eu turpis'
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
+const ResourceInfo = () => (
+  <div className="flex flex-col justify-start pr-6">
+    <Text size={4} weight="medium">
+      Resources
+    </Text>
+    <Spacer size={3} />
+    <Text size={2} className="text-primary/80">
+      Explore more about Gitness and its architecture in the documentation.
+    </Text>
+    <Spacer size={6} />
+    <DocumentationLink />
+  </div>
+)
 
-const SectionList = ({ children }: { children: React.ReactNode }) => (
-  <div className="flex flex-col gap-8 w-full">{children}</div>
+const DocumentationLink = () => (
+  <Link to="#">
+    <ButtonGroup.Root verticalAlign="center" spacing="2">
+      <Text as="p" size={2}>
+        Read documentation
+      </Text>
+      <Icon size={12} name="chevron-down" className="-rotate-90" />
+    </ButtonGroup.Root>
+  </Link>
+)
+
+const ResourceSectionList = ({ sections }: { sections: ResourceSectionData[] }) => (
+  <>
+    {sections.map((section, index) => (
+      <ResourceSection key={index} title={section.title} items={section.items} />
+    ))}
+  </>
 )
 
 export default function CreatePipelinePage() {
-  const { title, byline, sections } = pageData
+  const resourceSections: ResourceSectionData[] = [
+    {
+      title: 'Documentation',
+      items: [
+        { title: 'Quick start', content: 'Viverra pellentesque vel', href: '#', iconName: 'box-lightning' },
+        { title: 'Cloning', content: 'Netus vel purus at ultricies', href: '#', iconName: 'box-cloning' },
+        { title: 'Pull requests', content: 'Nec tellus eu turpis', href: '#', iconName: 'box-pull-requests' }
+      ]
+    },
+    {
+      title: 'Guides',
+      items: [
+        { title: 'Matrix strategy', content: 'Viverra pellentesque vel', href: '#', iconName: 'box-guide' },
+        { title: 'Secrets management', content: 'Netus vel purus at ultricies', href: '#', iconName: 'box-guide' },
+        { title: 'Conditional logic', content: 'Nec tellus eu turpis', href: '#', iconName: 'box-guide' }
+      ]
+    }
+  ]
 
   return (
     <Floating1ColumnLayout>
-      <Spacer size={12} />
+      <Spacer size={16} />
       <Text as="p" size={6} weight="medium">
-        {title}
+        Create your pipeline
       </Text>
-      <Spacer size={4} />
+      <Spacer size={3} />
       <Text as="p" size={2} color="tertiaryBackground" weight="normal" className="max-w-[50%]">
-        {byline}
+        It's very simple to start using Playground. Allow our AI to create your pipeline based on the code base or start
+        from a clean state.
       </Text>
-      <Spacer size={6} />
+      <Spacer size={9} />
       <SectionList>
-        {sections.map(section => (
-          <Section.Root>
-            {section.header && <Section.Header name={section.header.name} actionText={section.header.actionText} />}
-            <Section.Content>
-              {section.content.map((contentItem, content_idx) => (
-                <>
-                  {contentItem.card && <Section.Card {...contentItem.card} key={`card-${content_idx}`} />}
-                  {contentItem.resourceBoxes?.map((box, box_idx) => (
-                    <Section.ResourceBox {...box} key={`resourceBox-${box_idx}`} />
-                  ))}
-                  {contentItem.templateBoxes?.map((box, box_idx) => (
-                    <Section.TemplateBox {...box} key={`templateBox-${box_idx}`} />
-                  ))}
-                </>
-              ))}
-            </Section.Content>
-          </Section.Root>
-        ))}
+        <TemplateSection />
+        <Section.Root>
+          <Section.Content>
+            <ResourceInfo />
+            <ResourceSectionList sections={resourceSections} />
+          </Section.Content>
+        </Section.Root>
       </SectionList>
     </Floating1ColumnLayout>
   )
