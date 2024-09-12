@@ -53,6 +53,7 @@ import BoxGuide from '../icons/box-guide.svg'
 import NodeLogo from '../icons/node-logo.svg'
 import PythonLogo from '../icons/python-logo.svg'
 import PythonAndNodeLogo from '../icons/python-and-node-logo.svg'
+import AISparks from '../icons/ai-sparks.svg'
 
 // import Fork from '../icons/fork.svg'
 
@@ -110,7 +111,8 @@ const IconNameMap = {
   'box-guide': BoxGuide,
   'node-logo': NodeLogo,
   'python-logo': PythonLogo,
-  'python-and-node-logo': PythonAndNodeLogo
+  'python-and-node-logo': PythonAndNodeLogo,
+  'ai-sparks': AISparks
 
   // fork: Fork
 } satisfies Record<string, React.FunctionComponent<React.SVGProps<SVGSVGElement>>>

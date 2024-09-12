@@ -1,5 +1,15 @@
 import React from 'react'
-import { Spacer, Text, Section, ResourceBox, Button, Icon, SpotlightsBox, ButtonGroup } from '@harnessio/canary'
+import {
+  Spacer,
+  Text,
+  Section,
+  ResourceBox,
+  Button,
+  Icon,
+  SpotlightsBox,
+  ButtonGroup,
+  AIPrompt
+} from '@harnessio/canary'
 import Floating1ColumnLayout from '../layouts/Floating1ColumnLayout'
 import { Link } from 'react-router-dom'
 
@@ -172,11 +182,13 @@ export default function CreatePipelinePage() {
         Create your pipeline
       </Text>
       <Spacer size={3} />
-      <Text as="p" size={2} color="tertiaryBackground" weight="normal" className="max-w-[50%]">
+      <Text as="p" size={2} weight="normal" className="max-w-[50%] text-primary/80">
         It's very simple to start using Playground. Allow our AI to create your pipeline based on the code base or start
         from a clean state.
       </Text>
-      <Spacer size={9} />
+      <Spacer size={6} />
+      <AIPrompt placeholder="Start by describing your project goals or key requirements..." iconName="ai-sparks" />
+      <Spacer size={6} />
       <SectionList>
         <TemplateSection />
         <Section.Root>
