@@ -2,6 +2,8 @@ import React from 'react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, StackedList, Text } from '@harnessio/canary'
 
 import PullRequestDiffViewer from './pull-request-diff-viewer'
+import { useDiffConfig } from './hooks/useDiffConfig'
+import { DiffModeEnum } from '@git-diff-view/react'
 
 interface LineTitleProps {
   text?: string
@@ -9,6 +11,21 @@ interface LineTitleProps {
 
 interface DataProps {
   data: string[]
+  diffData:
+    | {
+        oldFile?: {
+          fileName?: string | null
+          fileLang?: string | null
+          content?: string | null
+        }
+        newFile?: {
+          fileName?: string | null
+          fileLang?: string | null
+          content?: string | null
+        }
+        hunks: string[]
+      }
+    | undefined
 }
 
 const LineTitle: React.FC<LineTitleProps> = ({ text }) => (
@@ -17,7 +34,35 @@ const LineTitle: React.FC<LineTitleProps> = ({ text }) => (
   </div>
 )
 
-const PullRequestAccordion: React.FC<{ title: string }> = ({ title }) => {
+const PullRequestAccordion: React.FC<{
+  title: string
+  data:
+    | {
+        oldFile?: {
+          fileName?: string | null
+          fileLang?: string | null
+          content?: string | null
+        }
+        newFile?: {
+          fileName?: string | null
+          fileLang?: string | null
+          content?: string | null
+        }
+        hunks: string[]
+      }
+    | undefined
+}> = ({ title, data }) => {
+  const {
+    // mode,
+    // setMode,
+    highlight,
+    // setHighlight,
+    wrap,
+    //  setWrap,
+    fontsize
+  } = useDiffConfig()
+
+  // useMemo(()=>{})
   return (
     <StackedList.Root>
       <StackedList.Item disableHover isHeader className="p-0 hover:bg-transparent cursor-default">
@@ -30,7 +75,13 @@ const PullRequestAccordion: React.FC<{ title: string }> = ({ title }) => {
             <AccordionContent>
               <div className="flex border-t w-full p-4">
                 <div className="bg-transparent">
-                  <PullRequestDiffViewer />
+                  <PullRequestDiffViewer
+                    data={data}
+                    fontsize={fontsize}
+                    highlight={highlight}
+                    mode={DiffModeEnum.Split}
+                    wrap={wrap}
+                  />
                 </div>
               </div>
             </AccordionContent>
@@ -41,11 +92,11 @@ const PullRequestAccordion: React.FC<{ title: string }> = ({ title }) => {
   )
 }
 
-export default function PullRequestChanges({ data }: DataProps) {
+export default function PullRequestChanges({ data, diffData }: DataProps) {
   return (
     <div className="flex flex-col gap-4">
       {data.map((item, index) => (
-        <PullRequestAccordion key={index} title={item} />
+        <PullRequestAccordion key={index} title={item} data={diffData} />
       ))}
     </div>
   )

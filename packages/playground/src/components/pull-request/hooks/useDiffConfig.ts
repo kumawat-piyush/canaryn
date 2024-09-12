@@ -14,7 +14,7 @@ export const useDiffConfig = createState(
       highlight: true,
       wrap: true,
       fontsize: 14,
-      mode: DiffModeEnum.Split
+      mode: DiffModeEnum.Unified
     }) as DiffConfig,
   {
     withActions(state) {

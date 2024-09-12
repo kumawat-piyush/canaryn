@@ -3,7 +3,10 @@ import PlaygroundPullRequestChangesSettings from '../settings/pull-request-chang
 import { SkeletonList } from '../components/loaders/skeleton-list'
 import { NoData } from '../components/no-data'
 import { ListActions, Spacer, SplitButton } from '@harnessio/canary'
+import * as data from '../data/mockDiffViewerdata'
+
 import PullRequestChanges from '../components/pull-request/pull-request-changes'
+type K = 'a' | 'b' | 'c' | 'd' | 'e' | 'j'
 
 const FilterSortViewDropdowns: React.FC = () => {
   const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
@@ -27,6 +30,8 @@ const FilterSortViewDropdowns: React.FC = () => {
 }
 
 export default function PullRequestChangesPage() {
+  const [v] = useState<K>('b')
+
   const [loadState, setLoadState] = useState('data-loaded') // Change to data-loaded when component work is finished
 
   const pullRequestData = [
@@ -44,7 +49,7 @@ export default function PullRequestChangesPage() {
   const renderContent = () => {
     switch (loadState) {
       case 'data-loaded':
-        return <PullRequestChanges data={pullRequestData} />
+        return <PullRequestChanges data={pullRequestData} diffData={data[v]} />
       case 'loading':
         return <SkeletonList />
       case 'no-data':

@@ -13,7 +13,7 @@ import {
 import React, { useEffect, useRef, useState } from 'react'
 import { useDiffConfig } from './hooks/useDiffConfig'
 import { OverlayScrollbars } from 'overlayscrollbars'
-import * as data from '../../data/mockDiffViewerdata'
+// import * as data from '../../data/mockDiffViewerdata'
 // import '@git-diff-view/react/styles/diff-view.css'
 // import { MessageData } from './worker'
 import { usePrevious } from './usePrevious'
@@ -36,19 +36,31 @@ const TextArea = ({ onChange }: { onChange: (v: string) => void }) => {
     />
   )
 }
-type K = 'a' | 'b' | 'c' | 'd' | 'e' | 'j'
+interface PullRequestDiffviewerProps {
+  data:
+    | {
+        oldFile?: {
+          fileName?: string | null
+          fileLang?: string | null
+          content?: string | null
+        }
+        newFile?: {
+          fileName?: string | null
+          fileLang?: string | null
+          content?: string | null
+        }
+        hunks: string[]
+      }
+    | undefined
+  fontsize: number
+  highlight: boolean
+  mode: DiffModeEnum
+  wrap: boolean
+}
 
-const PullRequestDiffViewer = () => {
-  const [v] = useState<K>('b')
-  const {
-    mode,
-    // setMode,
-    highlight,
-    // setHighlight,
-    wrap,
-    //  setWrap,
-    fontsize
-  } = useDiffConfig()
+const PullRequestDiffViewer = ({ data, highlight, fontsize, mode, wrap }: PullRequestDiffviewerProps) => {
+  // const [v] = useState<K>('a')
+
   const ref = useRef<{ getDiffFileInstance: () => DiffFile }>(null)
   const valRef = useRef('')
   const reactWrapRef = useRef<HTMLDivElement>(null)
@@ -104,14 +116,14 @@ const PullRequestDiffViewer = () => {
     }
   }, [expandAll])
 
-  useEffect(() => {
-    const _data = data[v]
-    if (_data) {
-      console.time('parse')
-      // Assuming worker is defined and set up correctly
-      //   worker.postMessage({ type: 'parse', data: _data, highlight: highlightRef.current })
-    }
-  }, [v])
+  // useEffect(() => {
+  //   const _data = data[v]
+  //   if (_data) {
+  //     console.time('parse')
+  //     // Assuming worker is defined and set up correctly
+  //     //   worker.postMessage({ type: 'parse', data: _data, highlight: highlightRef.current })
+  //   }
+  // }, [v])
 
   useEffect(() => {
     if (diffFileInstance && scrollBar && !wrap) {
@@ -174,7 +186,7 @@ const PullRequestDiffViewer = () => {
         instanceArray.forEach(i => i.destroy())
       }
     }
-  }, [diffFileInstance, scrollBar, wrap, mode])
+  }, [diffFileInstance, scrollBar, wrap, mode, data])
 
   const handleClick = () => {
     console.log('click')
@@ -258,7 +270,7 @@ const PullRequestDiffViewer = () => {
           </Card>
         </div>
       )}
-      data={data[v]}
+      data={data}
       diffViewFontSize={fontsize}
       diffViewHighlight={highlight}
       diffViewMode={mode}
