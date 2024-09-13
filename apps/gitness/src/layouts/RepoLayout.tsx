@@ -1,16 +1,14 @@
 import React from 'react'
 import { Tabs, TabsList, TabsTrigger } from '@harnessio/canary'
 import { NavLink, Outlet, useParams } from 'react-router-dom'
+import Header from '../components/Header'
 
 const RepoLayout: React.FC = () => {
   const { executionId } = useParams<{ executionId: string }>()
 
   return (
     <div>
-      {/* 
-        add back once projects api is integrated
-        <TopBarWidget projects={mockProjects} />
-      */}
+      <Header />
       {!executionId && (
         <Tabs variant="navigation" defaultValue="summary">
           <TabsList>

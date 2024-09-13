@@ -8,7 +8,6 @@ import { queryClient } from './framework/queryClient'
 import PipelineListPage from './pages/pipeline-list'
 import SignInPage from './pages/signin'
 import PullRequestListPage from './pages/pull-request-list-page'
-import ExecutionsPage from './pages/execution-list'
 import ReposListPage from './pages/repo-list'
 import PullRequestLayout from './layouts/PullRequestLayout'
 import PullRequestCommitsPage from './pages/pull-request-commits-page'
@@ -16,6 +15,8 @@ import RepoLayout from './layouts/RepoLayout'
 import PipelineEditPage from './pages/pipeline-edit/pipeline-edit'
 import { LandingPage } from './pages/landing-page'
 import { AppProvider } from './framework/context/AppContext'
+import CommitsListPage from './pages/commits-list-page'
+import RepoExecutionListPage from './pages/repo-execution-list'
 
 const BASE_URL_PREFIX = '/api/v1'
 
@@ -75,7 +76,20 @@ export default function App() {
                 },
                 {
                   path: ':pipelineId',
-                  element: <ExecutionsPage />
+                  element: <RepoExecutionListPage />
+                }
+              ]
+            },
+            {
+              path: 'pipelines/:pipelineId',
+              children: [
+                {
+                  index: true,
+                  element: <RepoExecutionListPage />
+                },
+                {
+                  path: 'executions',
+                  element: <RepoExecutionListPage />
                 }
               ]
             },
@@ -92,6 +106,10 @@ export default function App() {
                   element: <PullRequestCommitsPage />
                 }
               ]
+            },
+            {
+              path: 'commits',
+              element: <CommitsListPage />
             }
           ]
         },
@@ -100,11 +118,11 @@ export default function App() {
           path: 'pipelines',
           element: <PipelineListPage />
         },
-        // Executions (OUTSIDE REPOS)
-        {
-          path: 'executions',
-          element: <ExecutionsPage />
-        },
+        // Executions (OUTSIDE REPOS) - TODO once api for all executions in workspace is available
+        // {
+        //   path: 'executions',
+        //   element: <ExecutionsPage />
+        // },
         {
           path: ':spaceId/:repoId',
           element: <RepoLayout />,

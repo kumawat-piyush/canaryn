@@ -17,12 +17,13 @@ import { PaddingListLayout, ExecutionList, SkeletonList, timeDistance, NoData } 
 import { ExecutionState } from '../types'
 import { Link } from 'react-router-dom'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
+import Header from '../components/Header'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
 const viewOptions = [{ name: 'View option 1' }, { name: 'View option 2' }]
 
-export default function ExecutionsPage() {
+export default function RepoExecutionListPage() {
   const repoRef = useGetRepoRef()
   const {
     data: executions,
@@ -96,7 +97,7 @@ export default function ExecutionsPage() {
 
   return (
     <>
-      {/* <TopBarWidget /> */}
+      <Header />
       <PaddingListLayout>
         <Text size={5} weight={'medium'}>
           Executions
