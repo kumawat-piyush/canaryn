@@ -14,6 +14,8 @@ import PullRequestLayout from './layouts/PullRequestLayout'
 import PullRequestCommitsPage from './pages/pull-request-commits-page'
 import RepoLayout from './layouts/RepoLayout'
 import PipelineEditPage from './pages/pipeline-edit/pipeline-edit'
+import { LandingPage } from './pages/landing-page'
+import { AppProvider } from './framework/context/AppContext'
 
 const BASE_URL_PREFIX = '/api/v1'
 
@@ -47,7 +49,7 @@ export default function App() {
       path: '/',
       element: <RootLayout />,
       children: [
-        { index: true, element: <>Home Page</> },
+        { index: true, element: <LandingPage /> },
         {
           path: ':spaceId/repos',
           element: <ReposListPage />
@@ -130,12 +132,14 @@ export default function App() {
   ])
 
   return (
-    <ThemeProvider defaultTheme="dark">
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <RouterProvider router={router} />
-        </TooltipProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+    <AppProvider>
+      <ThemeProvider defaultTheme="dark">
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            <RouterProvider router={router} />
+          </TooltipProvider>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </AppProvider>
   )
 }
