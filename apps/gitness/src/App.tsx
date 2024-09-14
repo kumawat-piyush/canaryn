@@ -6,7 +6,7 @@ import { queryClient } from './framework/queryClient'
 import PipelineListPage from './pages/pipeline-list'
 import SignInPage from './pages/signin'
 import PullRequestListPage from './pages/pull-request-list-page'
-import ExecutionsPage from './pages/execution-list'
+import ExecutionsListPage from './pages/execution-list'
 import ReposListPage from './pages/repo-list'
 import PullRequestLayout from './layouts/PullRequestLayout'
 import PullRequestCommitsPage from './pages/pull-request-commits-page'
@@ -47,7 +47,7 @@ export default function App() {
                 },
                 {
                   path: ':pipelineId',
-                  element: <ExecutionsPage />
+                  element: <ExecutionsListPage />
                 }
               ]
             },
@@ -75,7 +75,7 @@ export default function App() {
         // Executions (OUTSIDE REPOS)
         {
           path: 'executions',
-          element: <ExecutionsPage />
+          element: <ExecutionsListPage />
         },
         {
           path: ':spaceId/:repoId',
