@@ -1,4 +1,4 @@
-import { Project } from '../components/layout/top-bar-widget'
+import { Project } from '../components/project-dropdown'
 
 export const mockProjects: Project[] = [
   {
