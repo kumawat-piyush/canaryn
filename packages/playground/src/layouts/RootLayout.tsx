@@ -1,7 +1,8 @@
 // RootLayout.tsx
-import { Navbar, Icon, NavbarProjectChooser, NavbarUser, Sheet, SheetContent } from '@harnessio/canary'
+import { Navbar, Icon, NavbarProjectChooser, NavbarUser } from '@harnessio/canary'
 import React, { useState } from 'react'
 import { Outlet, NavLink, useLocation, Link } from 'react-router-dom'
+import { MoreSubmenu } from '../components/more-submenu'
 
 export const RootLayout: React.FC = () => {
   const location = useLocation()
@@ -63,7 +64,7 @@ export const RootLayout: React.FC = () => {
     <>
       <div className="bg-background grid md:grid-cols-[220px_minmax(900px,_1fr)] min-w-screen">
         {showNavbar && (
-          <Navbar.Root className="max-md:hidden fixed top-0 left-0 bottom-0">
+          <Navbar.Root className="max-md:hidden fixed top-0 left-0 bottom-0 z-50">
             <Navbar.Header>
               <NavbarProjectChooser.Root
                 avatarLink={
@@ -80,7 +81,7 @@ export const RootLayout: React.FC = () => {
                     {({ isActive }) => <Navbar.Item key={idx} text={item.text} icon={item.icon} active={isActive} />}
                   </NavLink>
                 ))}
-                <div onClick={handleMore}>
+                <div onClick={() => (!showMore ? handleMore() : null)}>
                   <Navbar.Item text="More" icon={<Icon name="ellipsis" size={12} />} />
                 </div>
               </Navbar.Group>
@@ -101,22 +102,7 @@ export const RootLayout: React.FC = () => {
           <Outlet />
         </main>
       </div>
-      <Sheet open={showMore} onOpenChange={handleMore}>
-        <SheetContent side="left" className="p-0 w-[220px] h-screen left-[220px] top-0 bottom-0">
-          <Navbar.Root>
-            <Navbar.Content>
-              <Navbar.Group>
-                {primaryMenuItems.map((item, idx) => (
-                  <NavLink key={idx} to={item.to || ''}>
-                    {({ isActive }) => <Navbar.Item key={idx} text={item.text} icon={item.icon} active={isActive} />}
-                  </NavLink>
-                ))}
-                <Navbar.Item text="More" onClick={handleMore} icon={<Icon name="ellipsis" size={12} />} />
-              </Navbar.Group>
-            </Navbar.Content>
-          </Navbar.Root>
-        </SheetContent>
-      </Sheet>
+      <MoreSubmenu showMore={showMore} handleMore={handleMore} />
     </>
   )
 }
