@@ -79,7 +79,7 @@ function RepoWebhooksListPage() {
           </ListActions.Left>
           <ListActions.Right>
             <Button variant="default" asChild>
-              <Link to="create">Create webhook</Link>
+              <Link to="#">Create webhook</Link>
             </Button>
           </ListActions.Right>
         </ListActions.Root>
