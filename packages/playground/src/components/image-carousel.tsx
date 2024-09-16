@@ -20,7 +20,7 @@ interface ImageCarouselProps {
 // TODO: rewrite this to actually work
 const ImageCarousel = (props: ImageCarouselProps) => {
   const { isOpen, setIsOpen, setZoomLevel, zoomLevel, imgEvent } = props
-  const [imgTitle] = useState(imgEvent[0])
+  const [imgTitle] = useState(imgEvent && imgEvent.length > 0 ? imgEvent[0] : '')
   return (
     <Dialog
       open={isOpen}
