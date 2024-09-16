@@ -1,6 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-// eslint-disable-next-line no-undef
-module.exports = {
+import tailwindcssAnimate from 'tailwindcss-animate'
+
+export default {
   darkMode: ['class'],
   content: ['./src/**/*.{ts,tsx}'],
   prefix: '',
@@ -91,7 +91,9 @@ module.exports = {
         xs: '13px'
       },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))'
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'ai-button':
+          'linear-gradient(to right, hsl(var(--ai-button-stop-1)), hsl(var(--ai-button-stop-2)), hsl(var(--ai-button-stop-3)), hsl(var(--ai-button-stop-4)))'
       },
       keyframes: {
         'accordion-down': {
@@ -110,8 +112,7 @@ module.exports = {
     }
   },
   plugins: [
-    // eslint-disable-next-line no-undef
-    require('tailwindcss-animate'),
+    tailwindcssAnimate,
     function ({ addUtilities }) {
       addUtilities({
         '.tabnav-active': {
