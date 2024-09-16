@@ -15,8 +15,9 @@ import {
 } from '@harnessio/canary'
 import { PaddingListLayout, ExecutionList, SkeletonList, timeDistance, NoData } from '@harnessio/playground'
 import { ExecutionState } from '../types'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
+import { PathParams } from '../RouteDefinitions'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
@@ -24,6 +25,7 @@ const viewOptions = [{ name: 'View option 1' }, { name: 'View option 2' }]
 
 export default function ExecutionsListPage() {
   const repoRef = useGetRepoRef()
+  const { pipelineId } = useParams<PathParams>()
   const {
     data: executions,
     isFetching,
@@ -32,7 +34,7 @@ export default function ExecutionsListPage() {
   } = useListExecutionsQuery(
     {
       repo_ref: repoRef,
-      pipeline_identifier: 'pipeline-id',
+      pipeline_identifier: pipelineId || '',
       queryParams: { page: 0, limit: 10 }
     },
     /* To enable mock data */

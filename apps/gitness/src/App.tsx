@@ -32,7 +32,7 @@ export default function App() {
           children: [
             {
               index: true,
-              element: <>Summary</>
+              element: <>Repo Summary</>
             },
             {
               path: 'pull-requests',
@@ -41,14 +41,8 @@ export default function App() {
             {
               path: 'pipelines',
               children: [
-                {
-                  index: true,
-                  element: <PipelineListPage />
-                },
-                {
-                  path: ':pipelineId',
-                  element: <ExecutionsListPage />
-                }
+                { index: true, element: <PipelineListPage /> },
+                { path: ':pipelineId', element: <ExecutionsListPage /> }
               ]
             },
             {
