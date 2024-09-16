@@ -62,7 +62,7 @@ export default function ExecutionsListPage() {
               number: item?.number,
               status: item?.status,
               success: item?.status === 'success',
-              name: item?.message,
+              name: item?.message || item?.title,
               sha: item?.after?.slice(0, 6),
               timestamp: `${timeDistance(item?.finished, Date.now(), true)} ago`,
               lastTimestamp: timeDistance(
