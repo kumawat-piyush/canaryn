@@ -71,6 +71,8 @@ import SubInfra from '../icons/sub-infra.svg'
 import SubInsights from '../icons/sub-insights.svg'
 import SubReliability from '../icons/sub-reliability.svg'
 import SubShield from '../icons/sub-shield.svg'
+import SubChaos from '../icons/sub-chaos.svg'
+import SubRepository from '../icons/sub-repository.svg'
 
 // import Fork from '../icons/fork.svg'
 
@@ -146,7 +148,9 @@ const IconNameMap = {
   'sub-infra': SubInfra,
   'sub-insights': SubInsights,
   'sub-reliability': SubReliability,
-  'sub-shield': SubShield
+  'sub-shield': SubShield,
+  'sub-chaos': SubChaos,
+  'sub-repository': SubRepository
   // fork: Fork
 } satisfies Record<string, React.FunctionComponent<React.SVGProps<SVGSVGElement>>>
 

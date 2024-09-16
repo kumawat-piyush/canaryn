@@ -23,19 +23,19 @@ export const navbarSubmenuData = [
       },
       {
         id: 3,
-        iconName: 'harness',
+        iconName: 'sub-infra',
         title: 'Infrastructure as Code Management',
         description: 'Manage all your infrastructure.'
       },
       {
         id: 4,
-        iconName: 'chaos-engineering',
+        iconName: 'sub-chaos',
         title: 'Chaos Engineering',
         description: 'Validate service resilience.'
       },
       {
         id: 5,
-        iconName: 'harness',
+        iconName: 'sub-reliability',
         title: 'Service Reliability Management',
         description: 'SLO configuration and service reliability.'
       }
@@ -47,19 +47,19 @@ export const navbarSubmenuData = [
     items: [
       {
         id: 0,
-        iconName: 'harness',
+        iconName: 'sub-folder',
         title: 'Internal Developer Portal',
         description: 'Built for developers, onboard in minutes.'
       },
       {
         id: 1,
-        iconName: 'harness',
+        iconName: 'sub-repository',
         title: 'Code Repository',
         description: 'Integrated & familiar git experience.'
       },
       {
         id: 2,
-        iconName: 'harness',
+        iconName: 'sub-insights',
         title: 'Software Engineering Insights',
         description: 'Actionable insights on SDLC.'
       }
@@ -71,13 +71,13 @@ export const navbarSubmenuData = [
     items: [
       {
         id: 0,
-        iconName: 'harness',
+        iconName: 'sub-chain',
         title: 'Software Supply Chain Assurance',
         description: 'Artifact integrity and governance.'
       },
       {
         id: 1,
-        iconName: 'harness',
+        iconName: 'sub-shield',
         title: 'Security Testing Orchestration',
         description: 'Shift left security testing.'
       }
@@ -89,7 +89,7 @@ export const navbarSubmenuData = [
     items: [
       {
         id: 0,
-        iconName: 'harness',
+        iconName: 'sub-cloud',
         title: 'Cloud Cost Management',
         description: 'Intelligent cost management.'
       }
