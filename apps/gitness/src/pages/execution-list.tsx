@@ -18,6 +18,7 @@ import { ExecutionState } from '../types'
 import { Link, useParams } from 'react-router-dom'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
 import { PathParams } from '../RouteDefinitions'
+import { getLabel } from '../utils/execution-utils'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
@@ -64,6 +65,7 @@ export default function ExecutionsListPage() {
               success: item?.status === 'success',
               name: item?.message || item?.title,
               sha: item?.after?.slice(0, 6),
+              description: getLabel(item),
               timestamp: `${timeDistance(item?.finished, Date.now(), true)} ago`,
               lastTimestamp: timeDistance(
                 item?.started,
