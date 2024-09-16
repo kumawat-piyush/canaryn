@@ -14,14 +14,14 @@ import {
   PaginationNext,
   Text
 } from '@harnessio/canary'
-import { PipelineList } from '../components/pipeline-list'
 import { PaddingListLayout } from '../layouts/PaddingListLayout'
 import { NoData } from '../components/no-data'
 import { NoSearchResults } from '../components/no-search-results'
 import { SkeletonList } from '../components/loaders/skeleton-list'
 import PlaygroundListSettings from '../settings/list-settings'
-import { mockPipelines } from '../data/mockPipelinesData'
+import { mockWebhooks } from '../data/mockWebhooksData'
 import { Link } from 'react-router-dom'
+import { WebhooksList } from '../components/webhook-list'
 
 function RepoWebhooksListPage() {
   const [loadState, setLoadState] = useState('data-loaded')
@@ -31,7 +31,7 @@ function RepoWebhooksListPage() {
   const renderListContent = () => {
     switch (loadState) {
       case 'data-loaded':
-        return <PipelineList pipelines={mockPipelines} LinkComponent={LinkComponent} />
+        return <WebhooksList webhooks={mockWebhooks} LinkComponent={LinkComponent} />
       case 'loading':
         return <SkeletonList />
       case 'no-search-matches':
