@@ -54,7 +54,7 @@ function RepoWebhooksListPage() {
       <>
         <NoData
           insideTabView
-          iconName="no-data-folder"
+          iconName="no-data-webhooks"
           title="No webhooks yet"
           description={['There are no webhooks in this repository yet.', 'Create new or import an existing webhook.']}
           primaryButton={{ label: 'Create webhook' }}
