@@ -55,10 +55,10 @@ function RepoWebhooksListPage() {
         <NoData
           insideTabView
           iconName="no-data-folder"
-          title="No pipelines yet"
-          description={['There are no pipelines in this repository yet.', 'Create new or import an existing pipeline.']}
-          primaryButton={{ label: 'Create pipeline' }}
-          secondaryButton={{ label: 'Import pipeline' }}
+          title="No webhooks yet"
+          description={['There are no webhooks in this repository yet.', 'Create new or import an existing webhook.']}
+          primaryButton={{ label: 'Create webhook' }}
+          secondaryButton={{ label: 'Import webhook' }}
         />
         <PlaygroundListSettings loadState={loadState} setLoadState={setLoadState} />
       </>
