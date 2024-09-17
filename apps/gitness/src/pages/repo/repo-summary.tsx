@@ -3,7 +3,6 @@ import { Button, ButtonGroup, Icon, ListActions, SearchBox, Spacer, StackedList,
 import {
   Floating1ColumnLayout,
   FullWidth2ColumnLayout,
-  PlaygroundListSettings,
   RepoSummaryPanel,
   BranchChooser,
   SkeletonList,
@@ -21,7 +20,7 @@ import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { decodeGitContent, normalizeGitRef } from '../../utils/git-utils'
 
 export const RepoSummary: React.FC = () => {
-  const [loadState, setLoadState] = useState('data-loaded')
+  const [loadState] = useState('data-loaded')
   const repoRef = useGetRepoRef()
   const { data: branches } = useListBranchesQuery({
     repo_ref: repoRef,
@@ -82,7 +81,6 @@ export const RepoSummary: React.FC = () => {
           primaryButton={{ label: 'Create file' }}
           secondaryButton={{ label: 'Import file' }}
         />
-        <PlaygroundListSettings loadState={loadState} setLoadState={setLoadState} />
       </>
     )
   }
@@ -160,7 +158,6 @@ export const RepoSummary: React.FC = () => {
           />
         }
       />
-      <PlaygroundListSettings loadState={loadState} setLoadState={setLoadState} />
     </Floating1ColumnLayout>
   )
 }
