@@ -130,7 +130,7 @@ export const RepoSummary: React.FC = () => {
         rightColumn={
           <RepoSummaryPanel
             title="Summary"
-            timestamp={'May 6, 2024'}
+            // timestamp={'May 6, 2024'}
             details={[
               {
                 id: '0',
