@@ -17,8 +17,11 @@ import {
   RadioGroup
 } from '@harnessio/canary'
 import * as data from '../data/mockDiffViewerdata'
-
 import PullRequestChanges from '../components/pull-request/pull-request-changes'
+
+interface FilterViewProps {
+  active: string
+}
 
 const mockApprovalItems = [
   {
@@ -46,7 +49,7 @@ const mockApprovalItems = [
   {
     stateId: 1,
     state: 'warning',
-    title: 'Not mergeable',
+    title: 'Approve',
     items: [
       { id: 0, title: 'This is a title', description: 'This is a description' },
       {
@@ -64,7 +67,7 @@ const mockApprovalItems = [
   {
     stateId: 2,
     state: 'error',
-    title: 'Not mergeable',
+    title: 'Approve',
     items: [
       {
         id: 0,
@@ -85,10 +88,21 @@ const mockApprovalItems = [
   }
 ]
 
-const FilterSortViewDropdowns: React.FC = () => {
+const FilterSortViewDropdowns: React.FC<FilterViewProps> = ({ active }) => {
   const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
   const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
   const viewOptions = [{ name: 'View option 1' }, { name: 'View option 2' }]
+
+  const index = (() => {
+    switch (active) {
+      case 'data-loaded-warning':
+        return 1
+      case 'data-loaded-error':
+        return 2
+      default:
+        return 0
+    }
+  })()
 
   return (
     <ListActions.Root>
@@ -101,7 +115,7 @@ const FilterSortViewDropdowns: React.FC = () => {
         <Button
           variant="split"
           size="xs_split"
-          theme={mockApprovalItems[0].state}
+          theme={mockApprovalItems[index].state}
           dropdown={
             <DropdownMenu>
               <DropdownMenuTrigger insideSplitButton>
@@ -131,7 +145,7 @@ const FilterSortViewDropdowns: React.FC = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           }>
-          {mockApprovalItems[0].title}
+          {mockApprovalItems[index].title}
         </Button>
       </ListActions.Right>
     </ListActions.Root>
@@ -139,7 +153,7 @@ const FilterSortViewDropdowns: React.FC = () => {
 }
 
 export default function PullRequestChangesPage() {
-  const [loadState, setLoadState] = useState('data-loaded') // Change to data-loaded when component work is finished
+  const [loadState, setLoadState] = useState('data-loaded-success') // Change to data-loaded when component work is finished
 
   const pullRequestData = [
     'All checks have succeeded',
@@ -155,7 +169,9 @@ export default function PullRequestChangesPage() {
 
   const renderContent = () => {
     switch (loadState) {
-      case 'data-loaded':
+      case 'data-loaded-success':
+      case 'data-loaded-warning':
+      case 'data-loaded-error':
         return <PullRequestChanges data={pullRequestData} diffData={data['b']} />
       case 'loading':
         return <SkeletonList />
@@ -174,13 +190,12 @@ export default function PullRequestChangesPage() {
 
   return (
     <>
-      {loadState == 'data-loaded' && (
+      {loadState.startsWith('data-loaded-') && (
         <>
-          <FilterSortViewDropdowns />
+          <FilterSortViewDropdowns active={loadState} />
           <Spacer aria-setsize={5} />
         </>
       )}
-
       {renderContent()}
       <PlaygroundPullRequestChangesSettings loadState={loadState} setLoadState={setLoadState} />
     </>
