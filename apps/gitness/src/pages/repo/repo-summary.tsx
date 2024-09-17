@@ -4,25 +4,31 @@ import {
   Floating1ColumnLayout,
   FullWidth2ColumnLayout,
   RepoSummaryPanel,
-  BranchChooser,
+  BranchSelector,
   SkeletonList,
   NoSearchResults,
   Summary,
-  NoData
+  NoData,
+  MarkdownViewer
 } from '@harnessio/playground'
 import {
   useListBranchesQuery,
   useSummaryQuery,
   TypesRepositorySummary,
-  useGetContentQuery
+  useGetContentQuery,
+  useFindRepositoryQuery
 } from '@harnessio/code-service-client'
-import { MarkdownViewer } from '@harnessio/playground'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { decodeGitContent, normalizeGitRef } from '../../utils/git-utils'
 
 export const RepoSummary: React.FC = () => {
   const [loadState] = useState('data-loaded')
   const repoRef = useGetRepoRef()
+
+  const { data: repository } = useFindRepositoryQuery({ repo_ref: repoRef })
+  // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
+  const defaultBranch = repository?.content?.default_branch
+
   const { data: branches } = useListBranchesQuery({
     repo_ref: repoRef,
     queryParams: { include_commit: false, sort: 'date', order: 'asc', limit: 20, page: 1, query: '' }
@@ -94,12 +100,13 @@ export const RepoSummary: React.FC = () => {
             <ListActions.Root>
               <ListActions.Left>
                 <ButtonGroup.Root>
-                  <BranchChooser
-                    name={'main'}
+                  <BranchSelector
+                    name={defaultBranch}
                     branchList={// @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
                     branches?.content?.map(item => ({
                       name: item?.name
                     }))}
+                    preselectedBranch={defaultBranch}
                   />
                   <SearchBox.Root placeholder="Search" />
                 </ButtonGroup.Root>
