@@ -72,9 +72,7 @@ export const PullRequestCommits = ({ ...props }: CommitProps) => {
     <>
       {Object.entries(commitsGroupedByDate).map(([date, commitData]) => (
         <NodeGroup.Root>
-          <NodeGroup.Icon>
-            <Icon name="chaos-engineering" size={14} />
-          </NodeGroup.Icon>
+          <NodeGroup.Icon simpleNodeIcon />
           <NodeGroup.Title>{date && <Text color="tertiaryBackground">Commits on {date}</Text>}</NodeGroup.Title>
           <NodeGroup.Content>
             {commitData && commitData.length > 0 && (
