@@ -34,6 +34,11 @@ export const RepoSummary: React.FC = () => {
     queryParams: { include_commit: false, sort: 'date', order: 'asc', limit: 20, page: 1, query: '' }
   })
 
+  // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
+  const branchList = branches?.content?.map(item => ({
+    name: item?.name
+  }))
+
   const { data: repoSummary } = useSummaryQuery({
     repo_ref: repoRef,
     queryParams: { include_commit: false, sort: 'date', order: 'asc', limit: 20, page: 1, query: '' }
@@ -43,23 +48,60 @@ export const RepoSummary: React.FC = () => {
     // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
     (repoSummary?.content || {}) as TypesRepositorySummary
 
-  const { data: yamlContentRaw } = useGetContentQuery({
+  const { data: readmeContent } = useGetContentQuery({
     path: 'README.md',
     repo_ref: repoRef,
     queryParams: { include_commit: false, git_ref: normalizeGitRef(defaultBranch) }
   })
 
   // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
-  const readmeContentRaw = yamlContentRaw?.content?.content?.data
+  const readmeContentRaw = readmeContent?.content?.content?.data
 
   const decodedReadmeContent = useMemo(() => {
     return decodeGitContent(readmeContentRaw)
-  }, [readmeContentRaw])
+  }, [readmeContent])
+
+  const { data: repoHeaderContent } = useGetContentQuery({
+    path: '',
+    repo_ref: repoRef,
+    queryParams: { include_commit: true, git_ref: normalizeGitRef(defaultBranch) }
+  })
+
+  console.log(repoHeaderContent?.content)
 
   const renderListContent = () => {
     switch (loadState) {
       case 'data-loaded':
-        return <Summary files={[]} />
+        return (
+          <Summary
+            files={[
+              {
+                id: '0',
+                name: 'public',
+                type: 0,
+                user: {
+                  name: 'Ted Richardson',
+                  avatarUrl: '../images/user-avatar.svg'
+                },
+                lastCommitMessage: 'Updated public assets and added new favicon for branding',
+                timestamp: '1 hour ago',
+                sha: '12cbg67a'
+              },
+              {
+                id: '1',
+                name: 'files',
+                type: 0,
+                user: {
+                  name: 'Alice Johnson',
+                  avatarUrl: '../images/alice-avatar.svg'
+                },
+                lastCommitMessage: 'Organized static files and optimized images for faster load times',
+                timestamp: '5 hours ago',
+                sha: '98fgh23d'
+              }
+            ]}
+          />
+        )
       case 'loading':
         return <SkeletonList />
       case 'no-search-matches':
@@ -100,14 +142,7 @@ export const RepoSummary: React.FC = () => {
             <ListActions.Root>
               <ListActions.Left>
                 <ButtonGroup.Root>
-                  <BranchSelector
-                    name={defaultBranch}
-                    branchList={// @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
-                    branches?.content?.map(item => ({
-                      name: item?.name
-                    }))}
-                    preselectedBranch={defaultBranch}
-                  />
+                  <BranchSelector name={defaultBranch} branchList={branchList} preselectedBranch={defaultBranch} />
                   <SearchBox.Root placeholder="Search" />
                 </ButtonGroup.Root>
               </ListActions.Left>
@@ -137,7 +172,6 @@ export const RepoSummary: React.FC = () => {
         rightColumn={
           <RepoSummaryPanel
             title="Summary"
-            // timestamp={'May 6, 2024'}
             details={[
               {
                 id: '0',
