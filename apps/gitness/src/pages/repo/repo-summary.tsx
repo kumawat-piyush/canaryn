@@ -16,6 +16,7 @@ import {
   TypesRepositorySummary,
   useGetContentQuery
 } from '@harnessio/code-service-client'
+import { MarkdownViewer } from '@harnessio/playground'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { decodeGitContent, normalizeGitRef } from '../../utils/git-utils'
 
@@ -120,8 +121,9 @@ export const RepoSummary: React.FC = () => {
               <StackedList.Item isHeader disableHover>
                 <StackedList.Field title={<Text color="tertiaryBackground">README.md</Text>} />
               </StackedList.Item>
-              {/* Need to render this decoded content in a markdown viewer */}
-              <StackedList.Item disableHover>{decodedReadmeContent}</StackedList.Item>
+              <StackedList.Item disableHover>
+                <MarkdownViewer source={decodedReadmeContent || ''} />
+              </StackedList.Item>
             </StackedList.Root>
           </>
         }
