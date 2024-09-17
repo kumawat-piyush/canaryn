@@ -5,18 +5,85 @@ import { NoData } from '../components/no-data'
 import {
   ListActions,
   Spacer,
-  SplitButton,
+  Text,
   Button,
   DropdownMenu,
   DropdownMenuTrigger,
   Icon,
   DropdownMenuContent,
   DropdownMenuGroup,
-  DropdownMenuItem
+  DropdownMenuItem,
+  RadioGroupItem,
+  RadioGroup
 } from '@harnessio/canary'
 import * as data from '../data/mockDiffViewerdata'
 
 import PullRequestChanges from '../components/pull-request/pull-request-changes'
+
+const mockApprovalItems = [
+  {
+    stateId: 0,
+    state: 'success',
+    title: 'Approve',
+    items: [
+      {
+        id: 0,
+        title: 'This is a title',
+        description: 'This is a description'
+      },
+      {
+        id: 1,
+        title: 'This is title 2',
+        description: 'This is description 2'
+      },
+      {
+        id: 2,
+        title: 'This is title 3',
+        description: 'This is description 3'
+      }
+    ]
+  },
+  {
+    stateId: 1,
+    state: 'warning',
+    title: 'Not mergeable',
+    items: [
+      { id: 0, title: 'This is a title', description: 'This is a description' },
+      {
+        id: 1,
+        title: 'This is title 2',
+        description: 'This is description 2'
+      },
+      {
+        id: 2,
+        title: 'This is title 3',
+        description: 'This is description 3'
+      }
+    ]
+  },
+  {
+    stateId: 2,
+    state: 'error',
+    title: 'Not mergeable',
+    items: [
+      {
+        id: 0,
+        title: 'This is a title',
+        description: 'This is a description'
+      },
+      {
+        id: 1,
+        title: 'This is title 2',
+        description: 'This is description 2'
+      },
+      {
+        id: 2,
+        title: 'This is title 3',
+        description: 'This is description 3'
+      }
+    ]
+  }
+]
 
 const FilterSortViewDropdowns: React.FC = () => {
   const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
@@ -31,13 +98,10 @@ const FilterSortViewDropdowns: React.FC = () => {
         <ListActions.Dropdown title="View" items={viewOptions} />
       </ListActions.Left>
       <ListActions.Right>
-        <SplitButton variant="outline" size="sm">
-          Approve
-        </SplitButton>
         <Button
           variant="split"
           size="xs_split"
-          theme={'success'}
+          theme={mockApprovalItems[0].state}
           dropdown={
             <DropdownMenu>
               <DropdownMenuTrigger insideSplitButton>
@@ -45,12 +109,29 @@ const FilterSortViewDropdowns: React.FC = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="mt-1">
                 <DropdownMenuGroup>
-                  <DropdownMenuItem>Item</DropdownMenuItem>
+                  {mockApprovalItems &&
+                    mockApprovalItems[0].items.map(itm => {
+                      return (
+                        <DropdownMenuItem key={itm.id}>
+                          <RadioGroup className="flex items-start gap-2">
+                            <RadioGroupItem value="false" className="w-3 h-3 text-tertiary-background mt-1" />
+                            <div className="flex flex-col">
+                              <Text truncate size={1} color="primary">
+                                {itm.title}
+                              </Text>
+                              <Text size={1} color="tertiaryBackground">
+                                {itm.description}
+                              </Text>
+                            </div>
+                          </RadioGroup>
+                        </DropdownMenuItem>
+                      )
+                    })}
                 </DropdownMenuGroup>
               </DropdownMenuContent>
             </DropdownMenu>
           }>
-          Approve
+          {mockApprovalItems[0].title}
         </Button>
       </ListActions.Right>
     </ListActions.Root>
