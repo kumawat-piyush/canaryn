@@ -75,9 +75,8 @@ export default function App() {
         // Pipelines (OUTSIDE REPOS)
         //
         /**
-         * 🚨 Root level pipelines will be removed 🚨
-         *
-         * Pipelines will only be part of repos
+         * 🚨 Root level pipelines will be disabled 🚨
+         * Pipelines will only be part of repos for now
          */
         {
           path: 'pipelines',

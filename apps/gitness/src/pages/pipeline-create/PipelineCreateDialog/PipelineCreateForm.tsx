@@ -67,7 +67,6 @@ export function PipelineCreateForm({ onCancel, onSubmit }: PipelineCreateFormPro
 
   return (
     <Form className="space-y-6" form={form} onSubmit={onSubmit}>
-      {/* <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}> */}
       <div className="grid gap-2">
         <FormField
           control={form.control}
@@ -167,7 +166,6 @@ export function PipelineCreateForm({ onCancel, onSubmit }: PipelineCreateFormPro
         </Button>
         <Button type="submit">Create Pipeline</Button>
       </div>
-      {/* </form> */}
     </Form>
   )
 }
