@@ -17,6 +17,10 @@ const RepoLayout: React.FC = () => {
             <NavLink to={`summary`}>
               <TabsTrigger value="summary">Summary</TabsTrigger>
             </NavLink>
+            <NavLink to={`code`}>
+              {/* Why called Files in nav but Code in figma? */}
+              <TabsTrigger value="code">Files</TabsTrigger>
+            </NavLink>
             <NavLink to={`pipelines`}>
               <TabsTrigger value="pipelines">Pipelines</TabsTrigger>
             </NavLink>

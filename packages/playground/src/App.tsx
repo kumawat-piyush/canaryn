@@ -11,6 +11,7 @@ import LandingPage from './pages/landing-page'
 import RepoListPage from './pages/repo-list-page'
 import PipelineListPage from './pages/pipeline-list-page'
 import RepoSummaryPage from './pages/repo-summary-page'
+import RepoCodePage from './pages/repo-code-page'
 import ExecutionListPage from './pages/execution-list-page'
 import ExecutionDetailsPage from './pages/execution-details-page'
 import PullRequestListPage from './pages/pull-request-list-page'
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
           {
             path: 'summary',
             element: <RepoSummaryPage />
+          },
+          {
+            path: 'code',
+            element: <RepoCodePage />
           },
           {
             path: 'pipelines',
