@@ -100,7 +100,6 @@ export default function ExecutionsListPage() {
 
   return (
     <>
-      {/* <TopBarWidget /> */}
       <PaddingListLayout>
         <Text size={5} weight={'medium'}>
           Executions
