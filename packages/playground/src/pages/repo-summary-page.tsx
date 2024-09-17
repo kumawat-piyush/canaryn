@@ -93,7 +93,7 @@ function RepoSummaryPage() {
         <NoData
           insideTabView
           iconName="no-data-folder"
-          title="No pipelines yet"
+          title="No files yet"
           description={['There are no files in this repository yet.', 'Create new or import an existing file.']}
           primaryButton={{ label: 'Create file' }}
           secondaryButton={{ label: 'Import file' }}

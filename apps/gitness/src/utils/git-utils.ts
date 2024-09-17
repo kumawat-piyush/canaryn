@@ -10,7 +10,7 @@ export const decodeGitContent = (content = '') => {
       // Return original base64 content for binary file
       return content
     } catch (exception) {
-      console.error(exception) // eslint-disable-line no-console
+      console.error(exception)
     }
   }
   return ''

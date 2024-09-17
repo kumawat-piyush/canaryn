@@ -46,7 +46,7 @@ export const RepoSummary: React.FC = () => {
   const { data: yamlContentRaw } = useGetContentQuery({
     path: 'README.md',
     repo_ref: repoRef,
-    queryParams: { include_commit: false, git_ref: normalizeGitRef('master') ?? '' }
+    queryParams: { include_commit: false, git_ref: normalizeGitRef(defaultBranch) }
   })
 
   // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
@@ -83,7 +83,7 @@ export const RepoSummary: React.FC = () => {
         <NoData
           insideTabView
           iconName="no-data-folder"
-          title="No pipelines yet"
+          title="No files yet"
           description={['There are no files in this repository yet.', 'Create new or import an existing file.']}
           primaryButton={{ label: 'Create file' }}
           secondaryButton={{ label: 'Import file' }}
