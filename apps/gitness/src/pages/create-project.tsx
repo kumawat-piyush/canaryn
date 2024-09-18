@@ -22,8 +22,7 @@ export default function CreateProject() {
         setApiError(null)
         //onSuccess in react-query has allowed 200-299
         const spaceData = data?.content || data
-        const spaceId = data?.content.id
-        console.log(spaceId, spaceData, 'for check the data of spaceId and spaceData')
+        const spaceId = data?.content.id || data.id
         addSpaces([spaceData])
         navigate(`/${spaceId}/repos`)
       },
