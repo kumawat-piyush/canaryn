@@ -32,7 +32,6 @@ export default function CreatePipelineDialog({ open, onClose }: CreatePipelineDi
         body: { config_path: yamlPath, default_branch: branch, identifier: name }
       })
 
-      // 🚨 TODO: Navigate to the newly created pipeline's edit page after successful creation
       navigate(`/${spaceId}/${repoId}/pipelines/${name}/edit`)
     } catch (e) {
       //🚨 Handle error by showing toast
