@@ -15,7 +15,7 @@ import PipelineEditPage from './pages/pipeline-edit/pipeline-edit'
 import { LandingPage } from './pages/landing-page'
 import { AppProvider } from './framework/context/AppContext'
 import { RepoSummary } from './pages/repo/repo-summary'
-import CreateWorkspace from './pages/create-workspace'
+import CreateProject from './pages/create-project'
 
 export default function App() {
   const router = createBrowserRouter([
@@ -96,8 +96,8 @@ export default function App() {
           ]
         },
         {
-          path: 'create-workspace',
-          element: <CreateWorkspace />
+          path: 'create-project',
+          element: <CreateProject />
         }
       ]
     },

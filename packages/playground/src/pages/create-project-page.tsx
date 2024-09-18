@@ -8,6 +8,7 @@ import { Floating1ColumnLayout } from '../layouts/Floating1ColumnLayout'
 interface PageProps {
   isLoading?: boolean
   onFormSubmit: (data: InputProps) => void
+  apiError?: string | null
 }
 interface InputProps {
   identifier: string
@@ -16,17 +17,17 @@ interface InputProps {
   parent_ref?: string
 }
 //temperate the rule of form validation
-const createWorkspaceSchema = z.object({
-  identifier: z.string().min(4, { message: 'Workspace name is required, at least enter more than 3 characters in it' })
+const createProjectSchema = z.object({
+  identifier: z.string().min(4, { message: 'Project name is required, at least enter more than 3 characters in it' })
 })
 
-export function CreateWorkspacePage({ isLoading, onFormSubmit }: PageProps) {
+export function CreateProjectPage({ isLoading, onFormSubmit, apiError }: PageProps) {
   const {
     register,
     handleSubmit, //// react-hook-form's handleSubmit
     formState: { errors }
   } = useForm<InputProps>({
-    resolver: zodResolver(createWorkspaceSchema)
+    resolver: zodResolver(createProjectSchema)
   })
 
   const onSubmit = (data: InputProps) => {
@@ -41,11 +42,11 @@ export function CreateWorkspacePage({ isLoading, onFormSubmit }: PageProps) {
             <Icon name="create-workspace" size={112} />
             <Spacer size={4} />
             <Text size={6} weight="medium" color="primary">
-              Create new workspace
+              Create your new project
             </Text>
             <Spacer size={2} />
             <Text size={2} color="tertiaryBackground">
-              Organize your projects, pipelines, and more.
+              Your project name must include at least 4 characters, ex:letters, numbers, and underscores
             </Text>
           </CardTitle>
         </CardHeader>
@@ -53,21 +54,24 @@ export function CreateWorkspacePage({ isLoading, onFormSubmit }: PageProps) {
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Label htmlFor="identifier" variant="sm">
-              Workspace name
+              Project name
             </Label>
             <Spacer size={1} />
             <Input
               id="identifier"
               type="text"
               {...register('identifier', { required: true })}
-              placeholder="Enter your workspace name"
+              placeholder="Please enter your project name"
               autoFocus
             />
-            {errors.identifier && (
+            {apiError && errors.identifier && (
               <>
                 <Spacer size={2} />
                 <Text size={1} className="text-destructive">
                   {errors.identifier.message?.toString()}
+                </Text>
+                <Text size={1} className="text-destructive">
+                  {apiError?.toString()}
                 </Text>
               </>
             )}
@@ -77,10 +81,6 @@ export function CreateWorkspacePage({ isLoading, onFormSubmit }: PageProps) {
             </Button>
           </form>
           <Spacer size={4} />
-          <Text size={1} color="tertiaryBackground" weight="normal" align="center" className="block">
-            Want to use a different account?
-            <a className="text-primary">Log out</a>
-          </Text>
         </CardContent>
       </Card>
     </Floating1ColumnLayout>
