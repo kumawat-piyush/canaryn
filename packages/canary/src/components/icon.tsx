@@ -75,8 +75,6 @@ import SubShield from '../icons/sub-shield.svg'
 import SubChaos from '../icons/sub-chaos.svg'
 import SubRepository from '../icons/sub-repository.svg'
 
-// import Fork from '../icons/fork.svg'
-
 const IconNameMap = {
   'chevron-down': ChevronDown,
   archive: Archive,
@@ -140,7 +138,7 @@ const IconNameMap = {
   'git-branch': GitBranch,
   'pr-comment': PrComment,
   'create-workspace': CreateWorkspace,
-  'no-data-webhooks': NoDataWebhooks
+  'no-data-webhooks': NoDataWebhooks,
   'sub-rocket': SubRocket,
   'sub-socket': SubSocket,
   'sub-flag': SubFlag,
@@ -153,7 +151,6 @@ const IconNameMap = {
   'sub-shield': SubShield,
   'sub-chaos': SubChaos,
   'sub-repository': SubRepository
-  // fork: Fork
 } satisfies Record<string, React.FunctionComponent<React.SVGProps<SVGSVGElement>>>
 
 export interface IconProps {
