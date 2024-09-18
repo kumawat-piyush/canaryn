@@ -19,6 +19,10 @@ const badgeVariants = cva(
         sm: 'h-5 px-1 text-[12px]',
         xs: 'px-1.5 py-0 text-[11px] font-light'
       },
+      borderRadius: {
+        default: '',
+        full: 'rounded-full'
+      },
       hover: {
         enabled: '',
         disabled: 'hover:bg-transparent hover:shadow-none'
@@ -27,9 +31,17 @@ const badgeVariants = cva(
         default: '',
         destructive: 'text-error border-[hsla(var(--error),0.3)] bg-[hsla(var(--error),0.1)]',
         warning: 'text-warning border-[hsla(var(--warning),0.3)] bg-[hsla(var(--warning),0.1)]',
-        success: 'text-success border-[hsla(var(--success),0.3)] bg-[hsla(var(--success),0.1)]'
+        success: 'text-success border-[hsla(var(--success),0.3)] bg-[hsla(var(--success),0.1)]',
+        muted: 'text-tertiary-background border-[hsla(var(--muted),0.4)] bg-[hsla(var(--muted),0.2)]'
       }
     },
+    compoundVariants: [
+      {
+        size: 'sm',
+        borderRadius: 'full',
+        className: 'px-2'
+      }
+    ],
     defaultVariants: {
       variant: 'default',
       size: 'default',
@@ -41,13 +53,24 @@ const badgeVariants = cva(
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof badgeVariants> {
   disableHover?: boolean
-  color?: 'destructive' | 'success' | 'warning' | 'default'
+  color?: 'destructive' | 'success' | 'warning' | 'muted' | 'default'
 }
 
-function Badge({ className, variant, size, theme = 'default', disableHover, ...props }: BadgeProps) {
+function Badge({
+  className,
+  variant,
+  size,
+  borderRadius = 'default',
+  theme = 'default',
+  disableHover,
+  ...props
+}: BadgeProps) {
   return (
     <div
-      className={cn(badgeVariants({ variant, size, theme, hover: disableHover ? 'disabled' : 'enabled' }), className)}
+      className={cn(
+        badgeVariants({ variant, size, borderRadius, theme, hover: disableHover ? 'disabled' : 'enabled' }),
+        className
+      )}
       {...props}
     />
   )
