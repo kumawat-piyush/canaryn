@@ -29,8 +29,13 @@ interface DataProps {
 }
 
 const LineTitle: React.FC<LineTitleProps> = ({ text }) => (
-  <div className="inline-flex gap-2 items-center">
-    <Text weight="medium">{text}</Text>
+  <div className="flex items-center gap-3 justify-between">
+    <div className="inline-flex gap-2 items-center">
+      <Text weight="medium">{text}</Text>
+    </div>
+    <div className="inline-flex gap-2 items-center">
+      <Text weight="medium">{text}</Text>
+    </div>
   </div>
 )
 
@@ -71,7 +76,6 @@ const PullRequestAccordion: React.FC<{
             <AccordionTrigger leftChevron className="text-left p-4">
               <StackedList.Field title={<LineTitle text={title} />} />
             </AccordionTrigger>
-
             <AccordionContent>
               <div className="flex border-t w-full p-4">
                 <div className="bg-transparent">
