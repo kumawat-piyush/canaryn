@@ -89,6 +89,11 @@ const mockApprovalItems = [
   }
 ]
 
+const filesViewed = {
+  total: 100,
+  viewed: 17
+}
+
 const FilterSortViewDropdowns: React.FC<FilterViewProps> = ({ active }) => {
   const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
   const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
@@ -114,8 +119,10 @@ const FilterSortViewDropdowns: React.FC<FilterViewProps> = ({ active }) => {
       </ListActions.Left>
       <ListActions.Right>
         <Gauge.Root>
-          <Gauge.Content>1 / 3 files viewed</Gauge.Content>
-          <Gauge.Bar total={10} filled={3} />
+          <Gauge.Content>
+            {filesViewed.viewed} / {filesViewed.total} file{filesViewed.total === 1 ? '' : 's'} viewed
+          </Gauge.Content>
+          <Gauge.Bar total={filesViewed.total} filled={filesViewed.viewed} />
         </Gauge.Root>
         <Button
           variant="split"

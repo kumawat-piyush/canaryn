@@ -33,8 +33,8 @@ function Bar({ total, filled }: BarProps) {
   const percentageFilled = (filled / total) * 100
 
   return (
-    <div className="relative flex h-1 rounded-[1px] bg-tertiary-background/20 overflow-hidden">
-      {/* Filled part with dynamic width using style prop */}
+    <div className="relative flex h-[3px] rounded-[1px] bg-tertiary-background/20 overflow-hidden">
+      {/* Style prop is necessary becuase TW does not support dynamic percentage widths */}
       <div
         className="h-full bg-blue-400 transition-all ease-in-out duration-300"
         style={{ width: `${percentageFilled}%` }}
