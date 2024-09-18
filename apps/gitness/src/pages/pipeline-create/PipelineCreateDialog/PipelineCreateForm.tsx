@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import {
   Button,
-  Checkbox,
   Form,
   FormControl,
   FormField,
@@ -14,10 +13,6 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
   useZodForm
 } from '@harnessio/canary'
 import { z } from 'zod'
@@ -33,8 +28,7 @@ interface PipelineCreateFormProps {
 const createPipelineSchema = z.object({
   name: z.string().min(1, { message: 'Pipeline name is required' }),
   branch: z.string().min(1, { message: 'Branch name is required' }),
-  yamlPath: z.string().min(1, { message: 'YAML path is required' }),
-  cloneRepo: z.boolean().optional()
+  yamlPath: z.string().min(1, { message: 'YAML path is required' })
 })
 
 export function PipelineCreateForm({ onCancel, onSubmit }: PipelineCreateFormProps) {
@@ -124,31 +118,6 @@ export function PipelineCreateForm({ onCancel, onSubmit }: PipelineCreateFormPro
         )}
       />
 
-      <FormField
-        control={form.control}
-        name="cloneRepo"
-        render={({ field }) => (
-          <FormItem className="flex gap-2 space-y-0 items-center">
-            <FormControl>
-              <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-            </FormControl>
-            <TooltipProvider>
-              <Tooltip delayDuration={200}>
-                <TooltipTrigger asChild>
-                  <FormLabel className="underline underline-offset-4 decoration-dotted" htmlFor="cloneRepo">
-                    Clone Git Repository
-                  </FormLabel>
-                </TooltipTrigger>
-                <TooltipContent className="bg-primary-foreground w-[350px] text-secondary-foreground border-gray-700">
-                  <p>
-                    If clone is enabled, Gitness will clone your Git Repository automatically when the execution starts.
-                  </p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </FormItem>
-        )}
-      />
       <div className="flex gap-3 justify-end">
         <Button onClick={onCancel} className="text-primary" variant="outline">
           Cancel
