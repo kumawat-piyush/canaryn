@@ -18,6 +18,7 @@ import {
 } from '@harnessio/canary'
 import * as data from '../data/mockDiffViewerdata'
 import PullRequestChanges from '../components/pull-request/pull-request-changes'
+import { Gauge } from '..'
 
 interface FilterViewProps {
   active: string
@@ -112,6 +113,10 @@ const FilterSortViewDropdowns: React.FC<FilterViewProps> = ({ active }) => {
         <ListActions.Dropdown title="View" items={viewOptions} />
       </ListActions.Left>
       <ListActions.Right>
+        <Gauge.Root>
+          <Gauge.Content>1 / 3 files viewed</Gauge.Content>
+          <Gauge.Bar total={10} filled={3} />
+        </Gauge.Root>
         <Button
           variant="split"
           size="xs_split"

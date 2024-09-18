@@ -52,3 +52,4 @@ export * from './pages/signin-page'
 export * from './utils/utils'
 
 export * as ShaBadge from './components/sha-badge'
+export * as Gauge from './components/gauge'
