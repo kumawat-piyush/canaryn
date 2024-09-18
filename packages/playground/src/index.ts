@@ -1,6 +1,11 @@
 export * from './components/layout/container'
 export * from './components/layout/layout'
 export * from './components/layout/topbar'
+export * from './layouts/FullWidth2ColumnLayout'
+export * from './components/repo-summary-panel'
+export * from './components/branch-chooser'
+export * from './components/repo-summary'
+export * from './components/markdown-viewer'
 
 export * from './components/execution-list'
 export * from './components/pipeline-list'
@@ -45,4 +50,8 @@ export * from './components/form-inputs/common/InputLabel'
 export * from './components/form-inputs/common/InputWrapper'
 
 export * from './pages/signin-page'
+export * from './pages/create-project-page'
 export * from './utils/utils'
+
+export * as ShaBadge from './components/sha-badge'
+export * as FileViewGauge from './components/file-view-gauge'

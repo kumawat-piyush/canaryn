@@ -7,13 +7,15 @@ import PipelineListPage from './pages/pipeline-list'
 import SignInPage from './pages/signin'
 import PullRequestListPage from './pages/pull-request-list-page'
 import ExecutionsListPage from './pages/execution-list'
-import ReposListPage from './pages/repo-list'
+import ReposListPage from './pages/repo/repo-list'
 import PullRequestLayout from './layouts/PullRequestLayout'
 import PullRequestCommitsPage from './pages/pull-request-commits-page'
 import RepoLayout from './layouts/RepoLayout'
 import PipelineEditPage from './pages/pipeline-edit/pipeline-edit'
 import { LandingPage } from './pages/landing-page'
 import { AppProvider } from './framework/context/AppContext'
+import { RepoSummary } from './pages/repo/repo-summary'
+import CreateProject from './pages/create-project'
 
 export default function App() {
   const router = createBrowserRouter([
@@ -32,7 +34,11 @@ export default function App() {
           children: [
             {
               index: true,
-              element: <>Summary</>
+              element: <RepoSummary />
+            },
+            {
+              path: 'summary',
+              element: <RepoSummary />
             },
             {
               path: 'pull-requests',
@@ -41,14 +47,8 @@ export default function App() {
             {
               path: 'pipelines',
               children: [
-                {
-                  index: true,
-                  element: <PipelineListPage />
-                },
-                {
-                  path: ':pipelineId',
-                  element: <ExecutionsListPage />
-                }
+                { index: true, element: <PipelineListPage /> },
+                { path: ':pipelineId', element: <ExecutionsListPage /> }
               ]
             },
             {
@@ -94,6 +94,10 @@ export default function App() {
               element: <div>Execution page</div>
             }
           ]
+        },
+        {
+          path: 'create-project',
+          element: <CreateProject />
         }
       ]
     },

@@ -62,6 +62,18 @@ import GitBranch from '../icons/git-branch.svg'
 import PrComment from '../icons/pr-comment.svg'
 import CreateWorkspace from '../icons/create-workspace.svg'
 import NoDataWebhooks from '../icons/no-data-webhooks.svg'
+import SubRocket from '../icons/sub-rocket.svg'
+import SubSocket from '../icons/sub-socket.svg'
+import SubFlag from '../icons/sub-flag.svg'
+import SubChain from '../icons/sub-chain.svg'
+import SubCloud from '../icons/sub-cloud.svg'
+import SubFolder from '../icons/sub-folder.svg'
+import SubInfra from '../icons/sub-infra.svg'
+import SubInsights from '../icons/sub-insights.svg'
+import SubReliability from '../icons/sub-reliability.svg'
+import SubShield from '../icons/sub-shield.svg'
+import SubChaos from '../icons/sub-chaos.svg'
+import SubRepository from '../icons/sub-repository.svg'
 
 // import Fork from '../icons/fork.svg'
 
@@ -129,7 +141,18 @@ const IconNameMap = {
   'pr-comment': PrComment,
   'create-workspace': CreateWorkspace,
   'no-data-webhooks': NoDataWebhooks
-
+  'sub-rocket': SubRocket,
+  'sub-socket': SubSocket,
+  'sub-flag': SubFlag,
+  'sub-chain': SubChain,
+  'sub-cloud': SubCloud,
+  'sub-folder': SubFolder,
+  'sub-infra': SubInfra,
+  'sub-insights': SubInsights,
+  'sub-reliability': SubReliability,
+  'sub-shield': SubShield,
+  'sub-chaos': SubChaos,
+  'sub-repository': SubRepository
   // fork: Fork
 } satisfies Record<string, React.FunctionComponent<React.SVGProps<SVGSVGElement>>>
 

@@ -2,24 +2,26 @@ import React, { createContext, useContext, useState, ReactNode } from 'react'
 import {
   CodeServiceAPIClient,
   MembershipSpacesOkResponse,
-  TypesSpace,
-  membershipSpaces
+  TypesMembershipSpace,
+  membershipSpaces,
+  TypesSpace
 } from '@harnessio/code-service-client'
 
 interface AppContextType {
-  selectedSpace: string
-  setSelectedSpace: (space: string) => void
-  spaces: TypesSpace[]
-  setSpaces: (spaces: TypesSpace[]) => void
+  spaces: TypesMembershipSpace[]
+  setSpaces: (spaces: TypesMembershipSpace[]) => void
+  addSpaces: (newSpaces: TypesSpace[]) => void
 }
+//refactor the code to use the context api because of the error message from vite:
+//Could not Fast Refresh ("useAppContext" export is incompatible)
+//Vite's fast refresh mechanism cannot handle the way useAppContext is exported
 
 const BASE_URL_PREFIX = '/api/v1'
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [selectedSpace, setSelectedSpace] = useState<string>('')
-  const [spaces, setSpaces] = useState<TypesSpace[]>([])
+  const [spaces, setSpaces] = useState<TypesMembershipSpace[]>([])
 
   React.useEffect(() => {
     new CodeServiceAPIClient({
@@ -49,16 +51,17 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
       const spacesList: TypesMembershipSpace[] = response?.content
       setSpaces(spacesList)
-      const preSelectedProject = spacesList?.[0]
-      if (preSelectedProject?.space?.path) {
-        setSelectedSpace(preSelectedProject.space.path)
-      }
     })
   }, [])
 
-  return (
-    <AppContext.Provider value={{ selectedSpace, setSelectedSpace, spaces, setSpaces }}>{children}</AppContext.Provider>
-  )
+  const addSpaces = (newSpaces: TypesSpace[]) => {
+    setSpaces(prevSpaces => [
+      ...prevSpaces, // Keep the previous spaces
+      ...newSpaces // Add new spaces to the array
+    ])
+  }
+
+  return <AppContext.Provider value={{ spaces, setSpaces, addSpaces }}>{children}</AppContext.Provider>
 }
 
 export const useAppContext = (): AppContextType => {
