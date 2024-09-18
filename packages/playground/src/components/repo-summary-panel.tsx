@@ -21,7 +21,7 @@ interface DetailsProps {
 
 interface PageProps {
   title: string
-  timestamp: string
+  // timestamp: string
   details: DetailsProps[]
 }
 
