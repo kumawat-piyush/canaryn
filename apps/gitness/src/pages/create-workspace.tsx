@@ -15,7 +15,7 @@ export default function CreateWorkspace() {
         //onSuccess in react-query has allowed 200-299
         console.log('api response:', data)
         const spaceData = data?.content || data
-        addSpace(spaceData)
+        addSpace([spaceData])
         navigate('/') // redirect to the landing page, to let user select the projects
       },
       onError: (error: unknown) => {

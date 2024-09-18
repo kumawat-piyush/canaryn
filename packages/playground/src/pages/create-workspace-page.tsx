@@ -30,7 +30,7 @@ export function CreateWorkspacePage({ isLoading, onFormSubmit }: PageProps) {
   })
 
   const onSubmit = (data: InputProps) => {
-    console.log(data, 'sending data to the parent component')
+    console.log(data, 'sending data back to the parent component')
     onFormSubmit(data)
   }
 
@@ -58,7 +58,6 @@ export function CreateWorkspacePage({ isLoading, onFormSubmit }: PageProps) {
             </Label>
             <Spacer size={1} />
             <Input
-              id="identifier"
               id="identifier"
               type="text"
               {...register('identifier', { required: true })}
