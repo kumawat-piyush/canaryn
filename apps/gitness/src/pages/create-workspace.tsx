@@ -1,4 +1,9 @@
-import { useCreateSpaceMutation, OpenapiCreateSpaceRequest } from '@harnessio/code-service-client'
+import {
+  useCreateSpaceMutation,
+  OpenapiCreateSpaceRequest,
+  CreateSpaceErrorResponse,
+  CreateSpaceOkResponse
+} from '@harnessio/code-service-client'
 import { CreateWorkspacePage } from '@harnessio/playground'
 import { useNavigate } from 'react-router-dom'
 import { useAppContext } from '../framework/context/AppContext'
@@ -7,19 +12,32 @@ export default function CreateWorkspace() {
   const navigate = useNavigate()
   const { addSpace } = useAppContext() // Get the spaces and addSpace function from context
 
+  const handleCreateSpaceError = (error: CreateSpaceErrorResponse) => {
+    if (error.message) {
+      console.error('API Error:', error.message)
+      alert(`Error: ${error.message}`)
+      if (error.values) {
+        console.log('Error Details:', error.values)
+      }
+    } else {
+      //edge case: unknown error
+      console.error('An unknown error occurred.')
+      alert('An unknown error occurred. Please try again.')
+    }
+  }
+
   // Set up the mutation hook with the form data
   const { mutate, isLoading } = useCreateSpaceMutation(
     {},
     {
-      onSuccess: data => {
+      onSuccess: (data: CreateSpaceOkResponse) => {
         //onSuccess in react-query has allowed 200-299
-        console.log('api response:', data)
         const spaceData = data?.content || data
         addSpace([spaceData])
         navigate('/') // redirect to the landing page, to let user select the projects
       },
-      onError: (error: unknown) => {
-        console.error('Error creating space:', error) //temporary error message, no response of the error message from the api call
+      onError: (error: CreateSpaceErrorResponse) => {
+        handleCreateSpaceError(error)
       }
     }
   )
