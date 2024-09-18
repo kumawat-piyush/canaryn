@@ -18,7 +18,7 @@ import {
 } from '@harnessio/canary'
 import * as data from '../data/mockDiffViewerdata'
 import PullRequestChanges from '../components/pull-request/pull-request-changes'
-import { Gauge } from '..'
+import { FileViewGauge } from '..'
 
 interface FilterViewProps {
   active: string
@@ -90,8 +90,8 @@ const mockApprovalItems = [
 ]
 
 const filesViewed = {
-  total: 100,
-  viewed: 17
+  total: 3,
+  viewed: 1
 }
 
 const FilterSortViewDropdowns: React.FC<FilterViewProps> = ({ active }) => {
@@ -118,12 +118,12 @@ const FilterSortViewDropdowns: React.FC<FilterViewProps> = ({ active }) => {
         <ListActions.Dropdown title="View" items={viewOptions} />
       </ListActions.Left>
       <ListActions.Right>
-        <Gauge.Root>
-          <Gauge.Content>
-            {filesViewed.viewed} / {filesViewed.total} file{filesViewed.total === 1 ? '' : 's'} viewed
-          </Gauge.Content>
-          <Gauge.Bar total={filesViewed.total} filled={filesViewed.viewed} />
-        </Gauge.Root>
+        <FileViewGauge.Root>
+          <FileViewGauge.Content>
+            {filesViewed.viewed}/{filesViewed.total} file{filesViewed.total === 1 ? '' : 's'} viewed
+          </FileViewGauge.Content>
+          <FileViewGauge.Bar total={filesViewed.total} filled={filesViewed.viewed} />
+        </FileViewGauge.Root>
         <Button
           variant="split"
           size="xs_split"
