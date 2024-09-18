@@ -87,8 +87,35 @@ export function shorthandObjectOutputTransformer(parentPath: string) {
     if (typeof parentObj === 'object') {
       const cleanParentObj = omitBy(parentObj, isUndefined)
       if (Object.getOwnPropertyNames(cleanParentObj).length === 1) {
-        return { value, path: 'run' }
+        return { value, path: parentPath }
       }
+    }
+
+    return { value }
+  }
+}
+
+export function shorthandArrayInputTransformer(parentPath: string) {
+  return function (value: unknown, values: Record<string, unknown>) {
+    const parentStr = get(values, parentPath)
+
+    if (typeof parentStr === 'string') {
+      return { value: [parentStr] }
+    }
+
+    return { value }
+  }
+}
+
+export function shorthandArrayOutputTransformer(parentPath: string) {
+  return function (value: unknown, values: Record<string, unknown>) {
+    if (typeof value === 'undefined') return undefined
+    if (!value) return { value }
+
+    const parentArr = get(values, parentPath)
+
+    if (isArray(parentArr) && parentArr.length === 1) {
+      return { value: parentArr[0], path: parentPath }
     }
 
     return { value }

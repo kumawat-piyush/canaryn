@@ -3,6 +3,8 @@ import {
   IInputDefinition,
   arrayToObjectOutputTransformer,
   objectToArrayInputTransformer,
+  shorthandArrayInputTransformer,
+  shorthandArrayOutputTransformer,
   shorthandObjectInputTransformer,
   shorthandObjectOutputTransformer,
   unsetEmptyArrayOutputTransformer,
@@ -54,44 +56,9 @@ const inputs: IInputConfigWithConfig[] = [
         outputTransform: unsetEmptyStringOutputTransformer()
       },
       {
-        inputType: InputType.select,
-        path: 'run.container.pull',
-        label: 'Pull',
-        inputConfig: {
-          options: [
-            { label: 'Always', value: 'always' },
-            { label: 'Never', value: 'never' },
-            { label: 'If not exists', value: 'if-not-exists' }
-          ]
-        }
-      },
-      {
         inputType: InputType.text,
-        path: 'run.container.entrypoint',
-        label: 'Entrypoint',
-        outputTransform: unsetEmptyStringOutputTransformer()
-      },
-      {
-        inputType: InputType.text,
-        path: 'run.container.network',
-        label: 'Network',
-        outputTransform: unsetEmptyStringOutputTransformer()
-      },
-      {
-        inputType: InputType.text,
-        path: 'run.container.network-mode',
-        label: 'Network mode',
-        outputTransform: unsetEmptyStringOutputTransformer()
-      },
-      {
-        inputType: InputType.boolean,
-        path: 'run.container.privileged',
-        label: 'Privileged'
-      },
-      {
-        inputType: InputType.text,
-        path: 'run.container.user',
-        label: 'User',
+        path: 'run.container.connector',
+        label: 'Connector',
         outputTransform: unsetEmptyStringOutputTransformer()
       },
       {
@@ -113,6 +80,180 @@ const inputs: IInputConfigWithConfig[] = [
           }
         ],
         outputTransform: unsetEmptyObjectOutputTransformer()
+      },
+      {
+        inputType: InputType.select,
+        path: 'run.container.pull',
+        label: 'Pull',
+        inputConfig: {
+          options: [
+            { label: 'Always', value: 'always' },
+            { label: 'Never', value: 'never' },
+            { label: 'If not exists', value: 'if-not-exists' }
+          ]
+        }
+      },
+      {
+        inputType: InputType.array,
+        path: 'run.container.entrypoint',
+        label: 'Entrypoint',
+        inputConfig: {
+          input: {
+            inputType: InputType.text,
+            path: ''
+          }
+        },
+        inputTransform: shorthandArrayInputTransformer('run.container.entrypoint'),
+        outputTransform: shorthandArrayOutputTransformer('run.container.entrypoint')
+      },
+      {
+        inputType: InputType.array,
+        path: 'run.container.args',
+        label: 'Args',
+        inputConfig: {
+          input: {
+            inputType: InputType.text,
+            path: ''
+          }
+        },
+        inputTransform: shorthandArrayInputTransformer('run.container.args'),
+        outputTransform: shorthandArrayOutputTransformer('run.container.args')
+      },
+      {
+        inputType: InputType.array,
+        path: 'run.container.dns',
+        label: 'DNS',
+        inputConfig: {
+          input: {
+            inputType: InputType.text,
+            path: ''
+          }
+        },
+        inputTransform: shorthandArrayInputTransformer('run.container.dns'),
+        outputTransform: shorthandArrayOutputTransformer('run.container.dns')
+      },
+      {
+        inputType: InputType.list,
+        path: 'run.container.env',
+        label: 'Environment',
+        inputConfig: {
+          layout: 'grid',
+          inputs: [
+            {
+              inputType: InputType.text,
+              relativePath: 'key',
+              label: 'Key',
+              outputTransform: unsetEmptyStringOutputTransformer()
+            },
+            {
+              inputType: InputType.text,
+              relativePath: 'value',
+              label: 'Value',
+              outputTransform: unsetEmptyStringOutputTransformer()
+            }
+          ]
+        },
+        inputTransform: objectToArrayInputTransformer(),
+        outputTransform: arrayToObjectOutputTransformer({ unsetIfEmpty: true })
+      },
+      {
+        inputType: InputType.array,
+        path: 'run.container.extra-hosts',
+        label: 'Extra hosts',
+        inputConfig: {
+          input: {
+            inputType: InputType.text,
+            path: ''
+          }
+        },
+        inputTransform: shorthandArrayInputTransformer('run.container.extra-hosts'),
+        outputTransform: shorthandArrayOutputTransformer('run.container.extra-hosts')
+      },
+      {
+        inputType: InputType.text,
+        path: 'run.container.network',
+        label: 'Network',
+        outputTransform: unsetEmptyStringOutputTransformer()
+      },
+      {
+        inputType: InputType.text,
+        path: 'run.container.network-mode',
+        label: 'Network mode',
+        outputTransform: unsetEmptyStringOutputTransformer()
+      },
+      {
+        inputType: InputType.boolean,
+        path: 'run.container.privileged',
+        label: 'Privileged'
+      },
+      {
+        inputType: InputType.text,
+        path: 'run.container.workdir',
+        label: 'Workdir',
+        outputTransform: unsetEmptyStringOutputTransformer()
+      },
+      {
+        inputType: InputType.array,
+        path: 'run.container.ports',
+        label: 'Ports',
+        inputConfig: {
+          input: {
+            inputType: InputType.text,
+            path: ''
+          }
+        }
+      },
+      {
+        inputType: InputType.list,
+        path: 'run.container.volumes',
+        label: 'Volumes',
+        inputConfig: {
+          layout: 'grid',
+          inputs: [
+            {
+              inputType: InputType.text,
+              relativePath: 'source',
+              label: 'Source',
+              outputTransform: unsetEmptyStringOutputTransformer()
+            },
+            {
+              inputType: InputType.text,
+              relativePath: 'target',
+              label: 'Target',
+              outputTransform: unsetEmptyStringOutputTransformer()
+            }
+          ]
+        }
+      },
+      {
+        inputType: InputType.text,
+        path: 'run.container.user',
+        label: 'User',
+        outputTransform: unsetEmptyStringOutputTransformer()
+      },
+      {
+        inputType: InputType.text,
+        path: 'run.container.group',
+        label: 'Group',
+        outputTransform: unsetEmptyStringOutputTransformer()
+      },
+      {
+        inputType: InputType.text,
+        path: 'run.container.cpu',
+        label: 'Cpu',
+        outputTransform: unsetEmptyStringOutputTransformer()
+      },
+      {
+        inputType: InputType.text,
+        path: 'run.container.memory',
+        label: 'Memory',
+        outputTransform: unsetEmptyStringOutputTransformer()
+      },
+      {
+        inputType: InputType.text,
+        path: 'run.container.shm-size',
+        label: 'Shm size',
+        outputTransform: unsetEmptyStringOutputTransformer()
       }
     ]
   },
