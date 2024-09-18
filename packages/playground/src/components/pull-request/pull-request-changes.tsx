@@ -1,5 +1,15 @@
 import React from 'react'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, StackedList, Text } from '@harnessio/canary'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+  Badge,
+  Button,
+  Icon,
+  StackedList,
+  Text
+} from '@harnessio/canary'
 
 import PullRequestDiffViewer from './pull-request-diff-viewer'
 import { useDiffConfig } from './hooks/useDiffConfig'
@@ -32,10 +42,17 @@ const LineTitle: React.FC<LineTitleProps> = ({ text }) => (
   <div className="flex items-center gap-3 justify-between">
     <div className="inline-flex gap-2 items-center">
       <Text weight="medium">{text}</Text>
+      <Button size="sm" variant="ghost">
+        <Icon name="clone" size={14} className="text-tertiary-background" />
+      </Button>
+      <Badge variant="outline" size="sm" theme="success">
+        +34
+      </Badge>
+      <Badge variant="outline" size="sm" theme="destructive">
+        -36
+      </Badge>
     </div>
-    <div className="inline-flex gap-2 items-center">
-      <Text weight="medium">{text}</Text>
-    </div>
+    <div className="inline-flex gap-2 items-center"></div>
   </div>
 )
 
