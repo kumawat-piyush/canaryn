@@ -10,7 +10,7 @@ import {
 interface AppContextType {
   spaces: TypesMembershipSpace[]
   setSpaces: (spaces: TypesMembershipSpace[]) => void
-  addSpace: (newSpaces: TypesSpace[]) => void
+  addSpaces: (newSpaces: TypesSpace[]) => void
 }
 //refactor the code to use the context api because of the error message from vite:
 //Could not Fast Refresh ("useAppContext" export is incompatible)
@@ -54,14 +54,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     })
   }, [])
 
-  const addSpace = (newSpaces: TypesSpace[]) => {
+  const addSpaces = (newSpaces: TypesSpace[]) => {
     setSpaces(prevSpaces => [
       ...prevSpaces, // Keep the previous spaces
       ...newSpaces // Add new spaces to the array
     ])
   }
 
-  return <AppContext.Provider value={{ spaces, setSpaces, addSpace }}>{children}</AppContext.Provider>
+  return <AppContext.Provider value={{ spaces, setSpaces, addSpaces }}>{children}</AppContext.Provider>
 }
 
 export const useAppContext = (): AppContextType => {
