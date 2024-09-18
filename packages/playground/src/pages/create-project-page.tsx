@@ -18,7 +18,9 @@ interface InputProps {
 }
 //temperate the rule of form validation
 const createProjectSchema = z.object({
-  identifier: z.string().min(4, { message: 'Project name is required, at least enter more than 3 characters in it' })
+  identifier: z.string().min(4, {
+    message: 'Your project name cannot be empty and must contain at least 4 characters.'
+  })
 })
 
 export function CreateProjectPage({ isLoading, onFormSubmit, apiError }: PageProps) {
