@@ -12,6 +12,7 @@ export default function CreateWorkspace() {
   const navigate = useNavigate()
   const { addSpace } = useAppContext() // Get the spaces and addSpace function from context
 
+  //Todo: think about using throw error instead of alert for improvement
   const handleCreateSpaceError = (error: CreateSpaceErrorResponse) => {
     if (error.message) {
       console.error('API Error:', error.message)
