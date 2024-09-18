@@ -64,12 +64,17 @@ export function CreateProjectPage({ isLoading, onFormSubmit, apiError }: PagePro
               placeholder="Please enter your project name"
               autoFocus
             />
-            {apiError && errors.identifier && (
+            {errors.identifier && (
               <>
                 <Spacer size={2} />
                 <Text size={1} className="text-destructive">
                   {errors.identifier.message?.toString()}
                 </Text>
+              </>
+            )}
+            {apiError && (
+              <>
+                <Spacer size={2} />
                 <Text size={1} className="text-destructive">
                   {apiError?.toString()}
                 </Text>
