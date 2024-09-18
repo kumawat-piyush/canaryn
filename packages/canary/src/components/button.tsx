@@ -36,7 +36,7 @@ const buttonVariants = cva(
         error: 'text-error border-[hsla(var(--error),0.3)] bg-[hsla(var(--error),0.1)]',
         warning: 'text-warning border-[hsla(var(--warning),0.3)] bg-[hsla(var(--warning),0.1)]',
         success: 'text-success border-[hsla(var(--success),0.3)] bg-[hsla(var(--success),0.1)]',
-        muted: 'text-tertiary-background border-[hsla(var(--muted),0.4)] bg-[hsla(var(--muted),0.2)]'
+        muted: 'text-tertiary-background border-tertiary-background/20 bg-tertiary-background/10'
       },
       padding: {
         default: '',
