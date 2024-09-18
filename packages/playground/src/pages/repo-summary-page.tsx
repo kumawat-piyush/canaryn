@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { pick } from 'lodash-es'
 import {
   Spacer,
   ListActions,
@@ -69,7 +70,12 @@ function RepoSummaryPage() {
   const renderListContent = () => {
     switch (loadState) {
       case 'data-loaded':
-        return <Summary files={mockFiles} />
+        return (
+          <Summary
+            files={mockFiles}
+            latestFile={pick(mockFiles[0], ['user', 'lastCommitMessage', 'timestamp', 'sha'])}
+          />
+        )
       case 'loading':
         return <SkeletonList />
       case 'no-search-matches':

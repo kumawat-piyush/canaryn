@@ -19,7 +19,8 @@ import {
   useFindRepositoryQuery
 } from '@harnessio/code-service-client'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
-import { decodeGitContent, normalizeGitRef } from '../../utils/git-utils'
+import { decodeGitContent, getTrimmedSha, normalizeGitRef } from '../../utils/git-utils'
+import { timeAgo } from '../pipeline-edit/utils/time-utils'
 
 export const RepoSummary: React.FC = () => {
   const [loadState] = useState('data-loaded')
@@ -67,13 +68,21 @@ export const RepoSummary: React.FC = () => {
     queryParams: { include_commit: true, git_ref: normalizeGitRef(defaultBranch) }
   })
 
-  console.log(repoHeaderContent?.content)
-
   const renderListContent = () => {
+    // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
+    const { author, message, sha } = repoHeaderContent?.content?.latest_commit || {}
     switch (loadState) {
       case 'data-loaded':
         return (
           <Summary
+            latestFile={{
+              user: {
+                name: author?.identity?.name || ''
+              },
+              lastCommitMessage: message || '',
+              timestamp: author?.when && timeAgo(author.when),
+              sha: sha && getTrimmedSha(sha)
+            }}
             files={[
               {
                 id: '0',
@@ -142,7 +151,7 @@ export const RepoSummary: React.FC = () => {
             <ListActions.Root>
               <ListActions.Left>
                 <ButtonGroup.Root>
-                  <BranchSelector name={defaultBranch} branchList={branchList} preselectedBranch={defaultBranch} />
+                  <BranchSelector name={defaultBranch} branchList={branchList} />
                   <SearchBox.Root placeholder="Search" />
                 </ButtonGroup.Root>
               </ListActions.Left>
