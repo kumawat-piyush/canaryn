@@ -12,6 +12,5 @@ export interface CreateFormType {
   name: string
   branch: string
   yamlPath: string
-  storeInGit?: boolean
   cloneRepo?: boolean
 }

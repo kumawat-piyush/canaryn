@@ -3,16 +3,16 @@ import CreatePipelineDialog from './PipelineCreateDialog/PipelineCreateDialog'
 import { useState } from 'react'
 
 export function PipelineCreate() {
-  const [isSearchDialogOpen, setSearchDialogOpen] = useState(false)
+  const [isCreatePipelineDialogOpen, setCreatePipelineDialogOpen] = useState(false)
 
   const closeSearchDialog = () => {
-    setSearchDialogOpen(false)
+    setCreatePipelineDialogOpen(false)
   }
 
   return (
     <>
-      <CreatePipelineDialog open={isSearchDialogOpen} onClose={closeSearchDialog} />
-      <CreatePipelinePage onClickStartFromScratch={() => setSearchDialogOpen(true)} />
+      <CreatePipelineDialog open={isCreatePipelineDialogOpen} onClose={closeSearchDialog} />
+      <CreatePipelinePage onClickStartFromScratch={() => setCreatePipelineDialogOpen(true)} />
     </>
   )
 }

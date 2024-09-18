@@ -43,7 +43,7 @@ export default function CreatePipelineDialog({ open, onClose }: CreatePipelineDi
       //     description: e?.message
       //   })
       // }
-      console.log('error')
+      console.log(e, 'error')
     }
   }
 

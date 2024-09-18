@@ -23,6 +23,7 @@ import {
 import { z } from 'zod'
 import { useListBranchesQuery } from '@harnessio/code-service-client'
 import { CreateFormType } from '../../../types'
+import { useGetRepoRef } from '../../../framework/hooks/useGetRepoPath'
 
 interface PipelineCreateFormProps {
   onCancel: () => void
@@ -33,7 +34,6 @@ const createPipelineSchema = z.object({
   name: z.string().min(1, { message: 'Pipeline name is required' }),
   branch: z.string().min(1, { message: 'Branch name is required' }),
   yamlPath: z.string().min(1, { message: 'YAML path is required' }),
-  storeInGit: z.boolean().optional(),
   cloneRepo: z.boolean().optional()
 })
 
@@ -47,7 +47,9 @@ export function PipelineCreateForm({ onCancel, onSubmit }: PipelineCreateFormPro
     }
   })
 
-  const { data, isLoading } = useListBranchesQuery({ repo_ref: 'MyNewProject/MyRepo/+', queryParams: {} })
+  const repoRef = useGetRepoRef()
+
+  const { data, isLoading } = useListBranchesQuery({ repo_ref: repoRef, queryParams: {} })
 
   const { watch, setValue, clearErrors, trigger } = form
 
@@ -78,19 +80,6 @@ export function PipelineCreateForm({ onCancel, onSubmit }: PipelineCreateFormPro
                 <Input className="text-primary" {...field} />
               </FormControl>
               <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="storeInGit"
-          render={({ field }) => (
-            <FormItem className="flex gap-2 space-y-0 items-center">
-              <FormControl>
-                <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-              </FormControl>
-              <FormLabel>Store in Git</FormLabel>
             </FormItem>
           )}
         />
@@ -150,9 +139,9 @@ export function PipelineCreateForm({ onCancel, onSubmit }: PipelineCreateFormPro
                     Clone Git Repository
                   </FormLabel>
                 </TooltipTrigger>
-                <TooltipContent className="bg-primary-foreground w-[350px] text-gray-100 border-gray-700">
+                <TooltipContent className="bg-primary-foreground w-[350px] text-secondary-foreground border-gray-700">
                   <p>
-                    If clone is enabled, Harness will clone your Git Repository automatically when the execution starts.
+                    If clone is enabled, Gitness will clone your Git Repository automatically when the execution starts.
                   </p>
                 </TooltipContent>
               </Tooltip>
