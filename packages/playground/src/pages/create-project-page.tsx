@@ -48,7 +48,7 @@ export function CreateProjectPage({ isLoading, onFormSubmit, apiError }: PagePro
             </Text>
             <Spacer size={2} />
             <Text size={2} color="tertiaryBackground">
-              Your project name must include at least 4 characters, ex:letters, numbers, and underscores
+              Orginaze your projects, pipelines and more.
             </Text>
           </CardTitle>
         </CardHeader>
@@ -63,7 +63,7 @@ export function CreateProjectPage({ isLoading, onFormSubmit, apiError }: PagePro
               id="identifier"
               type="text"
               {...register('identifier', { required: true })}
-              placeholder="Please enter your project name"
+              placeholder="Please enter your project name, ex: my-project"
               autoFocus
             />
             {errors.identifier && (
