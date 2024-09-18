@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Button, ButtonGroup, Icon, ListActions, SearchBox, Spacer, StackedList, Text } from '@harnessio/canary'
 import {
   Floating1ColumnLayout,
@@ -6,8 +6,8 @@ import {
   RepoSummaryPanel,
   BranchSelector,
   SkeletonList,
-  NoSearchResults,
   Summary,
+  SummaryItemType,
   NoData,
   MarkdownViewer
 } from '@harnessio/playground'
@@ -16,19 +16,25 @@ import {
   useSummaryQuery,
   TypesRepositorySummary,
   useGetContentQuery,
-  useFindRepositoryQuery
+  useFindRepositoryQuery,
+  pathDetails,
+  RepoPathsDetailsOutput,
+  GitPathDetails,
+  OpenapiGetContentOutput
 } from '@harnessio/code-service-client'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { decodeGitContent, getTrimmedSha, normalizeGitRef } from '../../utils/git-utils'
 import { timeAgo } from '../pipeline-edit/utils/time-utils'
 
 export const RepoSummary: React.FC = () => {
-  const [loadState] = useState('data-loaded')
+  const [loading, setLoading] = useState(false)
+  const [files, setFiles] = useState([])
   const repoRef = useGetRepoRef()
 
   const { data: repository } = useFindRepositoryQuery({ repo_ref: repoRef })
   // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
   const defaultBranch = repository?.content?.default_branch
+  const normalizedGitRef = normalizeGitRef(defaultBranch)
 
   const { data: branches } = useListBranchesQuery({
     repo_ref: repoRef,
@@ -52,7 +58,7 @@ export const RepoSummary: React.FC = () => {
   const { data: readmeContent } = useGetContentQuery({
     path: 'README.md',
     repo_ref: repoRef,
-    queryParams: { include_commit: false, git_ref: normalizeGitRef(defaultBranch) }
+    queryParams: { include_commit: false, git_ref: normalizedGitRef }
   })
 
   // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
@@ -62,75 +68,84 @@ export const RepoSummary: React.FC = () => {
     return decodeGitContent(readmeContentRaw)
   }, [readmeContent])
 
-  const { data: repoHeaderContent } = useGetContentQuery({
+  const { data: repoDetails } = useGetContentQuery({
     path: '',
     repo_ref: repoRef,
-    queryParams: { include_commit: true, git_ref: normalizeGitRef(defaultBranch) }
+    queryParams: { include_commit: true, git_ref: normalizedGitRef }
   })
 
-  const renderListContent = () => {
+  const repoDetailsContent = repoDetails?.content
+  const repoEntryPathToFileTypeMap = useMemo(
+    (): Map<string, OpenapiGetContentOutput['type']> =>
+      new Map(
+        // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
+        repoDetailsContent?.content?.entries.map(entry => [entry.path, entry.type])
+      ),
     // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
-    const { author, message, sha } = repoHeaderContent?.content?.latest_commit || {}
-    switch (loadState) {
-      case 'data-loaded':
-        return (
-          <Summary
-            latestFile={{
-              user: {
-                name: author?.identity?.name || ''
-              },
-              lastCommitMessage: message || '',
-              timestamp: author?.when && timeAgo(author.when),
-              sha: sha && getTrimmedSha(sha)
-            }}
-            files={[
-              {
-                id: '0',
-                name: 'public',
-                type: 0,
-                user: {
-                  name: 'Ted Richardson',
-                  avatarUrl: '../images/user-avatar.svg'
-                },
-                lastCommitMessage: 'Updated public assets and added new favicon for branding',
-                timestamp: '1 hour ago',
-                sha: '12cbg67a'
-              },
-              {
-                id: '1',
-                name: 'files',
-                type: 0,
-                user: {
-                  name: 'Alice Johnson',
-                  avatarUrl: '../images/alice-avatar.svg'
-                },
-                lastCommitMessage: 'Organized static files and optimized images for faster load times',
-                timestamp: '5 hours ago',
-                sha: '98fgh23d'
-              }
-            ]}
-          />
-        )
-      case 'loading':
-        return <SkeletonList />
-      case 'no-search-matches':
-        return (
-          <NoSearchResults
-            iconName="no-search-magnifying-glass"
-            title="No search results"
-            description={['Check your spelling and filter options,', 'or search for a different keyword.']}
-            primaryButton={{ label: 'Clear search' }}
-            secondaryButton={{ label: 'Clear filters' }}
-          />
-        )
-      default:
-        return null
+    [repoDetailsContent?.content?.entries]
+  )
+
+  const getSummaryItemType = (type: OpenapiGetContentOutput['type']): SummaryItemType => {
+    if (type === 'dir') {
+      return SummaryItemType.Folder
+    } else if (type === 'file') {
+      return SummaryItemType.File
     }
   }
 
-  if (loadState == 'no-data') {
-    return (
-      <>
+  useEffect(() => {
+    setLoading(true)
+    if (repoEntryPathToFileTypeMap.size > 0) {
+      pathDetails({
+        queryParams: { git_ref: normalizedGitRef },
+        body: { paths: Array.from(repoEntryPathToFileTypeMap.keys()) },
+        repo_ref: repoRef
+      })
+        .then((response: RepoPathsDetailsOutput) => {
+          // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
+          if (response?.content?.details && response.content.details.length > 0) {
+            setFiles(
+              // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
+              response.content.details.map((item: GitPathDetails) => ({
+                id: item?.path,
+                name: item?.path,
+                type: item?.path && getSummaryItemType(repoEntryPathToFileTypeMap.get(item.path)),
+                user: { name: item?.last_commit?.author?.identity?.name },
+                lastCommitMessage: item?.last_commit?.message,
+                timestamp: item?.last_commit?.author?.when && timeAgo(item.last_commit.author.when),
+                sha: item?.last_commit?.sha && getTrimmedSha(item.last_commit.sha)
+              }))
+            )
+          }
+        })
+        .catch()
+        .finally(() => {
+          setLoading(false)
+        })
+    }
+  }, [repoEntryPathToFileTypeMap.size, repoRef])
+
+  const renderListContent = () => {
+    if (loading) return <SkeletonList />
+
+    if (!loading && repoEntryPathToFileTypeMap.size > 0) {
+      // @ts-expect-error remove "@ts-expect-error" once type issue for "content" is resolved
+      const { author, message, sha } = repoDetailsContent?.latest_commit || {}
+      return (
+        <Summary
+          latestFile={{
+            user: {
+              name: author?.identity?.name || ''
+            },
+            lastCommitMessage: message || '',
+            timestamp: author?.when && timeAgo(author.when),
+            sha: sha && getTrimmedSha(sha)
+          }}
+          files={files}
+        />
+      )
+    } else
+      return (
         <NoData
           insideTabView
           iconName="no-data-folder"
@@ -139,8 +154,7 @@ export const RepoSummary: React.FC = () => {
           primaryButton={{ label: 'Create file' }}
           secondaryButton={{ label: 'Import file' }}
         />
-      </>
-    )
+      )
   }
   return (
     <Floating1ColumnLayout>
