@@ -6,31 +6,32 @@ import { z } from 'zod'
 import { Floating1ColumnLayout } from '../layouts/Floating1ColumnLayout'
 
 interface PageProps {
-  handleSignUp?: () => void
-  handleSignIn: (data: DataProps) => void
   isLoading?: boolean
+  onFormSubmit: (data: InputProps) => void
 }
-
-interface DataProps {
-  email?: string
-  password?: string
+interface InputProps {
+  identifier: string
+  description?: string
+  is_public?: boolean
+  parent_ref?: string
 }
-
+//temperate the rule of form validation
 const createWorkspaceSchema = z.object({
-  workspaceName: z.string().email({ message: 'Invalid workspace name' })
+  identifier: z.string().min(4, { message: 'Workspace name is required, at least enter more than 3 characters in it' })
 })
 
-export function CreateWorkspacePage({ handleSignUp, handleSignIn, isLoading }: PageProps) {
+export function CreateWorkspacePage({ isLoading, onFormSubmit }: PageProps) {
   const {
     register,
-    handleSubmit,
+    handleSubmit, //// react-hook-form's handleSubmit
     formState: { errors }
-  } = useForm({
+  } = useForm<InputProps>({
     resolver: zodResolver(createWorkspaceSchema)
   })
 
-  const onSubmit = (data: DataProps) => {
-    handleSignIn(data)
+  const onSubmit = (data: InputProps) => {
+    console.log(data, 'sending data to the parent component')
+    onFormSubmit(data)
   }
 
   return (
@@ -52,22 +53,23 @@ export function CreateWorkspacePage({ handleSignUp, handleSignIn, isLoading }: P
         <Spacer size={1} />
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Label htmlFor="email" variant="sm">
+            <Label htmlFor="identifier" variant="sm">
               Workspace name
             </Label>
             <Spacer size={1} />
             <Input
-              id="workspaceName"
+              id="identifier"
+              id="identifier"
               type="text"
-              {...register('workspaceName')}
+              {...register('identifier', { required: true })}
               placeholder="Enter your workspace name"
               autoFocus
             />
-            {errors.workspaceName && (
+            {errors.identifier && (
               <>
                 <Spacer size={2} />
                 <Text size={1} className="text-destructive">
-                  {errors.workspaceName.message?.toString()}
+                  {errors.identifier.message?.toString()}
                 </Text>
               </>
             )}
@@ -78,10 +80,8 @@ export function CreateWorkspacePage({ handleSignUp, handleSignIn, isLoading }: P
           </form>
           <Spacer size={4} />
           <Text size={1} color="tertiaryBackground" weight="normal" align="center" className="block">
-            Want to use a different account?{' '}
-            <a className="text-primary" onClick={handleSignUp}>
-              Log out
-            </a>
+            Want to use a different account?
+            <a className="text-primary">Log out</a>
           </Text>
         </CardContent>
       </Card>
