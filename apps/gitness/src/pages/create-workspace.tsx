@@ -14,7 +14,8 @@ export default function CreateWorkspace() {
       onSuccess: data => {
         //onSuccess in react-query has allowed 200-299
         console.log('api response:', data)
-        addSpace(data)
+        const spaceData = data?.content || data
+        addSpace(spaceData)
         navigate('/') // redirect to the landing page, to let user select the projects
       },
       onError: (error: unknown) => {
@@ -25,13 +26,14 @@ export default function CreateWorkspace() {
 
   const handleFormSubmit = (formData: OpenapiCreateSpaceRequest) => {
     // Trigger the mutation with form data as the request body
+    // console.log('Form Data:', formData)
     mutate({
       body: {
-        identifier: formData.identifier,
+        identifier: formData.identifier || '',
         //ui interfaces is not ready for this information
-        description: '',
-        is_public: false, //temporary set to false
-        parent_ref: '' //temporary set to null
+        description: formData.description || '',
+        is_public: formData.is_public ?? false,
+        parent_ref: formData.parent_ref || ''
       }
     })
   }
