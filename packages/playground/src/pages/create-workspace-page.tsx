@@ -30,7 +30,6 @@ export function CreateWorkspacePage({ isLoading, onFormSubmit }: PageProps) {
   })
 
   const onSubmit = (data: InputProps) => {
-    console.log(data, 'sending data back to the parent component')
     onFormSubmit(data)
   }
 
