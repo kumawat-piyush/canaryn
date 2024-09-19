@@ -57,7 +57,7 @@ export const SandboxRoot: React.FC = () => {
   }
   return (
     <SandboxLayout.Root>
-      <SandboxLayout.Sidebar>
+      <SandboxLayout.LeftPanel>
         <Navbar.Root className="max-md:hidden fixed top-0 left-0 bottom-0 z-50">
           <Navbar.Header>
             <NavbarProjectChooser.Root
@@ -89,10 +89,13 @@ export const SandboxRoot: React.FC = () => {
             {/* Sandboxed new layout examples */}
             <Navbar.AccordionGroup title="Layout sandbox">
               <NavLink to="/sandbox/repos">
-                <Navbar.Item text="Repositories" icon={<Icon name="repositories" size={12} />} />
+                <Navbar.Item text="Repo List" icon={<Icon name="repositories" size={12} />} />
               </NavLink>
-              <NavLink to="/sandbox/landing">
-                <Navbar.Item text="Landing" icon={<Icon name="harness" size={12} />} />
+              <NavLink to="/sandbox/repos/drone/summary">
+                <Navbar.Item
+                  text="Repo&nbsp;&nbsp;/&nbsp;&nbsp;Summary"
+                  icon={<Icon name="repositories" size={12} />}
+                />
               </NavLink>
             </Navbar.AccordionGroup>
           </Navbar.Content>
@@ -100,10 +103,8 @@ export const SandboxRoot: React.FC = () => {
             <NavbarUser.Root />
           </Navbar.Footer>
         </Navbar.Root>
-      </SandboxLayout.Sidebar>
-      <SandboxLayout.Main>
-        <Outlet />
-      </SandboxLayout.Main>
+      </SandboxLayout.LeftPanel>
+      <Outlet />
     </SandboxLayout.Root>
   )
 }

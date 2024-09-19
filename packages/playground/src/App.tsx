@@ -27,6 +27,10 @@ import RepoExecutionListPage from './pages/repo-execution-list-page'
 import RepoWebhooksListPage from './pages/repo-webhooks-page'
 import { CreatePipelinePage } from './pages/create-pipeline-page'
 import { SandboxRoot } from './layouts/SandboxRoot'
+import { SandboxRepo } from './layouts/SandboxRepo'
+import { SandboxRepoListPage } from './pages/sandbox-repo-list-page'
+import { SandboxRepoSummaryPage } from './pages/sandbox-repo-summary-page'
+import { SandboxRepoSinglePage } from './pages/sandbox-repo-single-page'
 
 const router = createBrowserRouter([
   // TEMPORARY LAYOUT SANDBOX
@@ -36,7 +40,23 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'repos',
-        element: <div>Sandbox repos</div>
+        element: <SandboxRepo />, // Contains the breadcrumbs header
+        children: [
+          {
+            index: true,
+            element: <SandboxRepoListPage />
+          },
+          {
+            path: ':repoId',
+            element: <SandboxRepoSinglePage />, // Contains the nav tabs header AND inherits the breadcrumbs header
+            children: [
+              {
+                path: 'summary',
+                element: <SandboxRepoSummaryPage />
+              }
+            ]
+          }
+        ]
       },
       {
         path: 'landing',
