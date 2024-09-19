@@ -14,7 +14,7 @@ import {
   Text
 } from '@harnessio/canary'
 import { useListReposQuery, RepoRepositoryOutput } from '@harnessio/code-service-client'
-import { PaddingListLayout, SkeletonList, RepoList, Repo } from '@harnessio/playground'
+import { PaddingListLayout, SkeletonList, RepoList } from '@harnessio/playground'
 import { Link } from 'react-router-dom'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import Header from '../../components/Header'
@@ -43,12 +43,12 @@ export default function ReposListPage() {
               id: repo.id,
               name: repo.identifier,
               description: repo.description,
-              private: repo.is_public,
+              private: !repo.is_public,
               stars: 0,
               forks: repo.num_forks,
               pulls: repo.num_pulls,
               timestamp: repo.updated && timeAgoFromEpochTime(repo.updated)
-            } as Repo
+            }
           })}
         />
       )

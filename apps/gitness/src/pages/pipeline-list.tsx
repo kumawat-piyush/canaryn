@@ -37,8 +37,6 @@ export default function PipelinesPage() {
     }
   )
 
-  console.log(pipelines)
-
   const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
 
   const renderListContent = () => {
