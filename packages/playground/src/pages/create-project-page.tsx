@@ -19,7 +19,7 @@ interface InputProps {
 
 const createProjectSchema = z.object({
   identifier: z.string().min(4, {
-    message: 'Enter a valid project name with at least 4 characters.'
+    message: 'Enter a valid project name with at least 4 characters'
   })
 })
 
