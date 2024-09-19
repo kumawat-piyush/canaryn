@@ -26,8 +26,24 @@ import RepoPipelineListPage from './pages/repo-pipeline-list-page'
 import RepoExecutionListPage from './pages/repo-execution-list-page'
 import RepoWebhooksListPage from './pages/repo-webhooks-page'
 import { CreatePipelinePage } from './pages/create-pipeline-page'
+import { SandboxRoot } from './layouts/SandboxRoot'
 
 const router = createBrowserRouter([
+  // TEMPORARY LAYOUT SANDBOX
+  {
+    path: '/sandbox',
+    element: <SandboxRoot />,
+    children: [
+      {
+        path: 'repos',
+        element: <div>Sandbox repos</div>
+      },
+      {
+        path: 'landing',
+        element: <div>Sandbox landing</div>
+      }
+    ]
+  },
   {
     path: '/',
     element: <RootLayout />,
@@ -145,22 +161,6 @@ const router = createBrowserRouter([
             path: 'create',
             element: <CreatePipelinePage />
           }
-          // {
-          //   path: ':pipelineId',
-          //   element: <PipelineDetailsPage />,
-          //   children: [
-          //     {
-          //       path: 'executions',
-          //       element: <RepoExecutionListPage />,
-          //       children: [
-          //         {
-          //           path: ':executionId',
-          //           element: <ExecutionDetailsPage />
-          //         }
-          //       ]
-          //     }
-          //   ]
-          // }
         ]
       },
       // EXECUTIONS (OUTSIDE REPOS)
