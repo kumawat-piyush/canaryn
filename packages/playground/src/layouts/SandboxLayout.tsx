@@ -77,20 +77,18 @@ function Content({
     hasLeftPanel && hasLeftSubPanel ? 'pl-[440px]' : hasLeftPanel || hasLeftSubPanel ? 'pl-[220px]' : ''
 
   if (fullWidth) {
-    return (
-      <div className={cn('min-h-full', paddingLeftClass)}>
-        <div className={cn('min-h-full w-full px-8 pb-16', paddingTopClass, className)}>{children}</div>
-      </div>
-    )
+    return <div className={cn('h-full', paddingLeftClass, paddingTopClass, className)}>{children}</div>
   }
 
   return (
-    <div className={cn('min-h-full', paddingLeftClass)}>
-      <div className={cn('min-h-full mx-auto max-w-[1200px] w-full px-8 pb-16', paddingTopClass, className)}>
-        {children}
-      </div>
+    <div className={cn('h-full', paddingLeftClass)}>
+      <div className={cn('h-full mx-auto max-w-[1200px]', paddingTopClass, className)}>{children}</div>
     </div>
   )
 }
 
-export { Root, LeftPanel, LeftSubPanel, Header, SubHeader, Content }
+function View({ children, className }: { children: React.ReactNode; className?: string }) {
+  return <div className={cn('px-8 py-5 pb-24', className)}>{children}</div>
+}
+
+export { Root, LeftPanel, LeftSubPanel, Header, SubHeader, Content, View }
