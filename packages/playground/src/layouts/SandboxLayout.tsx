@@ -45,7 +45,7 @@ function LeftSubPanel({
   return (
     <section
       className={cn(
-        'fixed left-[220px] top-0 bottom-0 z-50 w-[220px] border-r border-border-background overflow-y-auto',
+        'fixed left-[220px] top-0 bottom-0 z-50 w-[248px] border-r border-border-background overflow-y-auto',
         paddingTopClass,
         className
       )}
@@ -57,7 +57,7 @@ function LeftSubPanel({
 
 function Header({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <header className={cn('h-auto fixed top-0 left-[220px] right-0 z-50 bg-background', className)} role="banner">
+    <header className={cn('h-[55px] fixed top-0 left-[220px] right-0 z-50 bg-background', className)} role="banner">
       {children}
     </header>
   )
@@ -66,7 +66,7 @@ function Header({ children, className }: { children: React.ReactNode; className?
 function SubHeader({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
     <header
-      className={cn('h-auto fixed top-[55px] left-[220px] right-0 z-40 bg-background', className)}
+      className={cn('h-[45px] fixed top-[55px] left-[220px] right-0 z-40 bg-background', className)}
       role="secondarybanner">
       {children}
     </header>
@@ -91,10 +91,16 @@ function Main({
   hasLeftSubPanel?: boolean
 }) {
   const paddingTopClass =
-    hasHeader && hasSubHeader ? 'pt-[100px]' : hasHeader ? 'pt-[55px]' : hasSubHeader ? 'pt-[45px]' : ''
+    hasHeader && hasSubHeader ? `pt-[calc(55px+45px)]` : hasHeader ? 'pt-[55px]' : hasSubHeader ? 'pt-[45px]' : ''
 
   const paddingLeftClass =
-    hasLeftPanel && hasLeftSubPanel ? 'pl-[440px]' : hasLeftPanel || hasLeftSubPanel ? 'pl-[220px]' : ''
+    hasLeftPanel && hasLeftSubPanel
+      ? 'pl-[calc(220px+248px)]'
+      : hasLeftPanel
+        ? 'pl-[220px]'
+        : hasLeftSubPanel
+          ? 'pl-[248px]'
+          : ''
 
   if (fullWidth) {
     return (
