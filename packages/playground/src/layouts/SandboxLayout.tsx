@@ -1,6 +1,12 @@
 import { cn } from '@harnessio/canary'
 import React from 'react'
 
+interface ColumnsProps {
+  children: React.ReactNode
+  className?: string
+  columnWidths?: string
+}
+
 function Root({ children }: { children: React.ReactNode }) {
   return <div className="h-screen">{children}</div>
 }
@@ -91,4 +97,16 @@ function View({ children, className }: { children: React.ReactNode; className?: 
   return <div className={cn('px-8 py-5 pb-24', className)}>{children}</div>
 }
 
-export { Root, LeftPanel, LeftSubPanel, Header, SubHeader, Content, View }
+function Columns({ children, className, columnWidths = 'repeat(2, 1fr)' }: ColumnsProps) {
+  return (
+    <div className={cn('grid grid-flow-col', className)} style={{ gridTemplateColumns: columnWidths }}>
+      {children}
+    </div>
+  )
+}
+
+function Column({ children, className }: { children: React.ReactNode; className?: string }) {
+  return <div className={cn('', className)}>{children}</div>
+}
+
+export { Root, LeftPanel, LeftSubPanel, Header, SubHeader, Content, View, Columns, Column }
