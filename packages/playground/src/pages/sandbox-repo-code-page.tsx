@@ -25,7 +25,7 @@ const mockBranchList = [
 function Sidebar() {
   return (
     <div className="w-full grid grid-cols-[1fr] auto-cols-auto grid-flow-col gap-3 items-center">
-      <BranchSelector name="main" branchList={mockBranchList} />
+      <BranchSelector size="sm" name="main" branchList={mockBranchList} />
       <ButtonGroup.Root
         spacing="0"
         className="shadow-border shadow-[inset_0_0_0_1px] rounded-md h-full overflow-hidden">
@@ -47,18 +47,18 @@ function SandboxRepoCodePage() {
     <>
       {loadState.includes('sub') && (
         <SandboxLayout.LeftSubPanel hasHeader hasSubHeader>
-          <SandboxLayout.View>
+          <SandboxLayout.Content>
             <Sidebar />
-          </SandboxLayout.View>
+          </SandboxLayout.Content>
         </SandboxLayout.LeftSubPanel>
       )}
-      <SandboxLayout.Content
+      <SandboxLayout.Main
         fullWidth={loadState.includes('full')}
         hasLeftPanel
         hasLeftSubPanel={loadState.includes('sub')}
         hasHeader
         hasSubHeader>
-        <SandboxLayout.View>
+        <SandboxLayout.Content>
           <ListActions.Root>
             <ListActions.Left>
               <ButtonGroup.Root spacing="2">
@@ -85,8 +85,8 @@ function SandboxRepoCodePage() {
             files={mockFiles}
             latestFile={pick(mockFiles[0], ['user', 'lastCommitMessage', 'timestamp', 'sha'])}
           />
-        </SandboxLayout.View>
-      </SandboxLayout.Content>
+        </SandboxLayout.Content>
+      </SandboxLayout.Main>
       <PlaygroundSandboxLayoutSettings loadState={loadState} setLoadState={setLoadState} />
     </>
   )

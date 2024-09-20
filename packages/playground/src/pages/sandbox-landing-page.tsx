@@ -4,9 +4,9 @@ import LandingPage from './landing-page'
 
 function SandboxLandingPage() {
   return (
-    <SandboxLayout.Content fullWidth hasLeftPanel>
+    <SandboxLayout.Main fullWidth hasLeftPanel>
       <LandingPage />
-    </SandboxLayout.Content>
+    </SandboxLayout.Main>
   )
 }
 

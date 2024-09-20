@@ -67,7 +67,7 @@ function SandboxRepoSummaryPage() {
     <>
       {loadState.includes('sub') && (
         <SandboxLayout.LeftSubPanel hasHeader hasSubHeader>
-          <SandboxLayout.View>
+          <SandboxLayout.Content>
             <Text as="p" size={2} className="text-primary/70">
               SubMenu
             </Text>
@@ -78,10 +78,10 @@ function SandboxRepoSummaryPage() {
             <Text as="p" size={2} className="text-primary/70">
               End of SubMenu
             </Text>
-          </SandboxLayout.View>
+          </SandboxLayout.Content>
         </SandboxLayout.LeftSubPanel>
       )}
-      <SandboxLayout.Content
+      <SandboxLayout.Main
         fullWidth={loadState.includes('full')}
         hasLeftPanel
         hasLeftSubPanel={loadState.includes('sub')}
@@ -89,11 +89,11 @@ function SandboxRepoSummaryPage() {
         hasSubHeader>
         <SandboxLayout.Columns columnWidths="1fr 220px">
           <SandboxLayout.Column>
-            <SandboxLayout.View>
+            <SandboxLayout.Content>
               <ListActions.Root>
                 <ListActions.Left>
                   <ButtonGroup.Root>
-                    <BranchSelector name={'main'} branchList={mockBranchList} />
+                    <BranchSelector size="default" name={'main'} branchList={mockBranchList} />
                     <SearchBox.Root placeholder="Search" />
                   </ButtonGroup.Root>
                 </ListActions.Left>
@@ -157,15 +157,15 @@ function SandboxRepoSummaryPage() {
                   </div>
                 </StackedList.Item>
               </StackedList.Root>
-            </SandboxLayout.View>
+            </SandboxLayout.Content>
           </SandboxLayout.Column>
           <SandboxLayout.Column>
-            <SandboxLayout.View className="pl-0">
+            <SandboxLayout.Content className="pl-0">
               <RepoSummaryPanel title="Summary" timestamp={'May 6, 2024'} details={mockSummaryDetails} />
-            </SandboxLayout.View>
+            </SandboxLayout.Content>
           </SandboxLayout.Column>
         </SandboxLayout.Columns>
-      </SandboxLayout.Content>
+      </SandboxLayout.Main>
       <PlaygroundSandboxLayoutSettings loadState={loadState} setLoadState={setLoadState} />
     </>
   )

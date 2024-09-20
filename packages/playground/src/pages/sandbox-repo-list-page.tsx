@@ -34,7 +34,7 @@ function SandboxRepoListPage() {
     <>
       {loadState.includes('sub') && (
         <SandboxLayout.LeftSubPanel hasHeader>
-          <SandboxLayout.View>
+          <SandboxLayout.Content>
             <Text as="p" size={2} className="text-primary/70">
               SubMenu
             </Text>
@@ -45,15 +45,15 @@ function SandboxRepoListPage() {
             <Text as="p" size={2} className="text-primary/70">
               End of SubMenu
             </Text>
-          </SandboxLayout.View>
+          </SandboxLayout.Content>
         </SandboxLayout.LeftSubPanel>
       )}
-      <SandboxLayout.Content
+      <SandboxLayout.Main
         hasHeader
         hasLeftPanel
         hasLeftSubPanel={loadState.includes('sub')}
         fullWidth={loadState.includes('full')}>
-        <SandboxLayout.View>
+        <SandboxLayout.Content>
           <Spacer size={10} />
           <Text size={5} weight={'medium'}>
             Repositories
@@ -111,8 +111,8 @@ function SandboxRepoListPage() {
             </ListPagination.Root>
           )}
           <PlaygroundSandboxLayoutSettings loadState={loadState} setLoadState={setLoadState} />
-        </SandboxLayout.View>
-      </SandboxLayout.Content>
+        </SandboxLayout.Content>
+      </SandboxLayout.Main>
     </>
   )
 }
