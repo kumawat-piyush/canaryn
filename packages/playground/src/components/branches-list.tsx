@@ -28,7 +28,7 @@ interface PageProps {
   branches: BranchProps[]
 }
 
-export default function BranchesList({ branches }: PageProps) {
+export const BranchesList = ({ branches }: PageProps) => {
   return (
     <Table variant="asStackedList">
       <TableHeader>
