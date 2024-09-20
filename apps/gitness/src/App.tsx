@@ -50,7 +50,13 @@ export default function App() {
               path: 'pipelines',
               children: [
                 { index: true, element: <PipelineListPage /> },
-                { path: ':pipelineId', element: <ExecutionsListPage /> },
+                {
+                  path: ':pipelineId',
+                  children: [
+                    { index: true, element: <ExecutionsListPage /> },
+                    { path: 'executions/:executionId', element: <>Execution Details Page</> }
+                  ]
+                },
                 {
                   path: 'create',
                   element: <PipelineCreate />
