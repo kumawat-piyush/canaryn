@@ -5,6 +5,7 @@ type TransformItem = {
   path: string
   /** level is used to sort transformers in order to execute them form leaf to root.*/
   level: number
+  isPrimitive: boolean
   inputTransform?: IInputDefinition['inputTransform']
   outputTransform?: IInputDefinition['outputTransform']
 }
@@ -56,10 +57,19 @@ export function getTransformers(formDefinition: IFormDefinition): TransformItem[
   const flattenInputs = flattenInputsRec(formDefinition.inputs)
 
   const ret = flattenInputs.reduce<TransformItem[]>((acc, input) => {
+    // TODO: has to be abstracted
+    const isPrimitive =
+      input.inputType === 'text' ||
+      input.inputType === 'boolean' ||
+      input.inputType === 'number' ||
+      input.inputType === 'textarea' ||
+      input.inputType === 'select'
+
     if (input.inputTransform || input.outputTransform) {
       acc.push({
         ...pick(input, 'path', 'inputTransform', 'outputTransform'),
-        level: input.path.split('.').length
+        level: input.path.split('.').length,
+        isPrimitive
       })
     }
 
@@ -67,6 +77,7 @@ export function getTransformers(formDefinition: IFormDefinition): TransformItem[
   }, [])
 
   ret.sort((a, b) => {
+    if (a.level === b.level) return !a.isPrimitive ? -1 : 1
     return a.level > b.level ? -1 : 1
   })
 

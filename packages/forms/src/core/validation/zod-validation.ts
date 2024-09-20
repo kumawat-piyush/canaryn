@@ -94,7 +94,7 @@ function generateSchemaRec(schemaObj: SchemaTreeNode, values: AnyFormikValue, op
       const innerSchema = _schemaObj?.___array
         ? generateSchemaRec({ ___array: _schemaObj.___array }, values, options)
         : { ___array: zod.any() }
-      const arraySchema = zod.array(innerSchema.___array)
+      const arraySchema = zod.array(innerSchema.___array).optional()
       const enhancedSchema = getSchemaForArray(_schema, _input, values, options, arraySchema)
       objectSchemas[key] = enhancedSchema!
     } else if (_schema && _input) {

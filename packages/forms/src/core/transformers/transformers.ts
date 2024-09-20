@@ -34,6 +34,8 @@ export function arrayToObjectOutputTransformer(options?: { unsetIfEmpty?: boolea
 
 export function unsetEmptyArrayOutputTransformer() {
   return function (value: unknown, _values: Record<string, unknown>) {
+    if (typeof value === 'undefined') return undefined
+
     if (isArray(value) && isEmpty(value)) {
       return { value: undefined }
     }
@@ -44,6 +46,8 @@ export function unsetEmptyArrayOutputTransformer() {
 
 export function unsetEmptyObjectOutputTransformer() {
   return function (value: unknown, _values: Record<string, unknown>) {
+    if (typeof value === 'undefined') return undefined
+
     if (isObject(value)) {
       const cleanObj = omitBy(value, isUndefined)
       if (isEmpty(cleanObj)) {
@@ -57,6 +61,8 @@ export function unsetEmptyObjectOutputTransformer() {
 
 export function unsetEmptyStringOutputTransformer() {
   return function (value: unknown, _values: Record<string, unknown>) {
+    if (typeof value === 'undefined') return undefined
+
     if (isString(value) && isEmpty(value)) {
       return { value: undefined }
     }
@@ -85,7 +91,7 @@ export function shorthandObjectOutputTransformer(parentPath: string) {
     const parentObj = get(values, parentPath)
 
     if (typeof parentObj === 'object') {
-      const cleanParentObj = omitBy(parentObj, isUndefined)
+      const cleanParentObj = cleanUpObject(parentObj)
       if (Object.getOwnPropertyNames(cleanParentObj).length === 1) {
         return { value, path: parentPath }
       }
@@ -97,6 +103,8 @@ export function shorthandObjectOutputTransformer(parentPath: string) {
 
 export function shorthandArrayInputTransformer(parentPath: string) {
   return function (value: unknown, values: Record<string, unknown>) {
+    if (typeof value === 'undefined') return undefined
+
     const parentStr = get(values, parentPath)
 
     if (typeof parentStr === 'string') {
@@ -107,17 +115,42 @@ export function shorthandArrayInputTransformer(parentPath: string) {
   }
 }
 
-export function shorthandArrayOutputTransformer(parentPath: string) {
+export function shorthandArrayOutputTransformer(parentPath: string, options?: { unsetIfEmpty?: boolean }) {
   return function (value: unknown, values: Record<string, unknown>) {
     if (typeof value === 'undefined') return undefined
     if (!value) return { value }
 
     const parentArr = get(values, parentPath)
 
-    if (isArray(parentArr) && parentArr.length === 1) {
-      return { value: parentArr[0], path: parentPath }
+    if (isArray(parentArr)) {
+      if (parentArr.length === 1) {
+        return { value: parentArr[0], path: parentPath }
+      } else if (parentArr.length === 0) {
+        if (options?.unsetIfEmpty) {
+          return { value: undefined, path: parentPath }
+        }
+      }
     }
 
     return { value }
   }
+}
+
+function isEmptyRec(obj: unknown): boolean {
+  if (typeof obj === 'object') {
+    return !Object.getOwnPropertyNames(obj).some(item => {
+      return !isEmptyRec((obj as Record<string, unknown>)[item])
+    })
+  } else {
+    return isUndefined(obj)
+  }
+}
+
+function cleanUpObject(obj: object | null) {
+  return omitBy(obj, value => {
+    if (typeof value === 'object') {
+      return isEmptyRec(value)
+    }
+    return isUndefined(value)
+  })
 }

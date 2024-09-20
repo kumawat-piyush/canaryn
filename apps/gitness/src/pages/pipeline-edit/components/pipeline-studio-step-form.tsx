@@ -56,7 +56,6 @@ export const PipelineStudioStepForm = (props: PipelineStudioStepFormProps): JSX.
 
   useEffect(() => {
     if (editStepIntention && !addStepIntention && plugins) {
-      console.log(editStepIntention)
       const yamlJson = parse(yamlRevision.yaml)
       const step = get(yamlJson, editStepIntention.path)
 
@@ -99,12 +98,9 @@ export const PipelineStudioStepForm = (props: PipelineStudioStepFormProps): JSX.
     }
   }
 
-  console.log(defaultStepValues)
-
   return (
     <RootForm
       defaultValues={defaultStepValues}
-      // TODO
       // resolver={useZodValidationResolver(formDefinition)}
       resolver={data => ({
         values: data,

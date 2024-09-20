@@ -46,7 +46,7 @@ const inputs: IInputConfigWithConfig[] = [
   },
   {
     inputType: InputType.group,
-    path: '',
+    path: 'run.container',
     label: 'Container',
     inputs: [
       {
@@ -104,7 +104,7 @@ const inputs: IInputConfigWithConfig[] = [
           }
         },
         inputTransform: shorthandArrayInputTransformer('run.container.entrypoint'),
-        outputTransform: shorthandArrayOutputTransformer('run.container.entrypoint')
+        outputTransform: shorthandArrayOutputTransformer('run.container.entrypoint', { unsetIfEmpty: true })
       },
       {
         inputType: InputType.array,
@@ -117,7 +117,7 @@ const inputs: IInputConfigWithConfig[] = [
           }
         },
         inputTransform: shorthandArrayInputTransformer('run.container.args'),
-        outputTransform: shorthandArrayOutputTransformer('run.container.args')
+        outputTransform: shorthandArrayOutputTransformer('run.container.args', { unsetIfEmpty: true })
       },
       {
         inputType: InputType.array,
@@ -130,7 +130,7 @@ const inputs: IInputConfigWithConfig[] = [
           }
         },
         inputTransform: shorthandArrayInputTransformer('run.container.dns'),
-        outputTransform: shorthandArrayOutputTransformer('run.container.dns')
+        outputTransform: shorthandArrayOutputTransformer('run.container.dns', { unsetIfEmpty: true })
       },
       {
         inputType: InputType.list,
@@ -167,7 +167,7 @@ const inputs: IInputConfigWithConfig[] = [
           }
         },
         inputTransform: shorthandArrayInputTransformer('run.container.extra-hosts'),
-        outputTransform: shorthandArrayOutputTransformer('run.container.extra-hosts')
+        outputTransform: shorthandArrayOutputTransformer('run.container.extra-hosts', { unsetIfEmpty: true })
       },
       {
         inputType: InputType.text,
@@ -201,7 +201,8 @@ const inputs: IInputConfigWithConfig[] = [
             inputType: InputType.text,
             path: ''
           }
-        }
+        },
+        outputTransform: unsetEmptyArrayOutputTransformer()
       },
       {
         inputType: InputType.list,
@@ -223,7 +224,8 @@ const inputs: IInputConfigWithConfig[] = [
               outputTransform: unsetEmptyStringOutputTransformer()
             }
           ]
-        }
+        },
+        outputTransform: unsetEmptyArrayOutputTransformer()
       },
       {
         inputType: InputType.text,
@@ -255,7 +257,8 @@ const inputs: IInputConfigWithConfig[] = [
         label: 'Shm size',
         outputTransform: unsetEmptyStringOutputTransformer()
       }
-    ]
+    ],
+    outputTransform: unsetEmptyObjectOutputTransformer()
   },
   {
     inputType: InputType.list,
