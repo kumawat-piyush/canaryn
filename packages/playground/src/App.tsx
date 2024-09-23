@@ -33,6 +33,8 @@ import { SandboxRepoSummaryPage } from './pages/sandbox-repo-summary-page'
 import { SandboxRepoSinglePage } from './pages/sandbox-repo-single-page'
 import { SandboxRepoCodePage } from './pages/sandbox-repo-code-page'
 import { SandboxLandingPage } from './pages/sandbox-landing-page'
+import { SandboxSettingsPage } from './pages/sandbox-settings-page'
+import { SandboxSettings } from './layouts/SandboxSettings'
 
 const router = createBrowserRouter([
   // TEMPORARY LAYOUT SANDBOX
@@ -61,6 +63,16 @@ const router = createBrowserRouter([
                 element: <SandboxRepoCodePage />
               }
             ]
+          }
+        ]
+      },
+      {
+        path: 'settings',
+        element: <SandboxSettings />, // Contains the breadcrumbs header
+        children: [
+          {
+            index: true,
+            element: <SandboxSettingsPage />
           }
         ]
       },
