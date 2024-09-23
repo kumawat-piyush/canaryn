@@ -4,6 +4,7 @@ import { GitBranch, GitCommit } from '@harnessio/icons-noir'
 import moment from 'moment'
 import { StageExecution } from './stage-execution'
 import { data as mockExecution } from '../../pages/mocks/execution/mockExecution'
+import { data as mockStepLogs } from '../../pages/mocks/execution/mockStepLogs'
 import { Layout } from '../layout/layout'
 import { ExecutionTree } from './execution-tree'
 import { elements } from '../../assets/mockExecutionTree'
@@ -26,7 +27,7 @@ export const ExecutionDetails: React.FC<ExecutionProps> = (): React.ReactElement
     <Layout.Horizontal className="px-8">
       {/* Hardcoded height added temporarily */}
       <div className="w-2/3">
-        <StageExecution stage={stages[0]} />
+        <StageExecution stage={stages[0]} logs={mockStepLogs[0]} />
       </div>
       <ScrollArea className="w-1/3 h-[calc(100vh-16rem)] pt-4">
         <ContactCard

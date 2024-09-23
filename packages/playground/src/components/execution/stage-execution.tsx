@@ -4,15 +4,17 @@ import { Button, Text } from '@harnessio/canary'
 import { NavArrowDown, NavArrowRight, NavArrowUp } from '@harnessio/icons-noir'
 import { StepExecution, StepProps } from './step-execution'
 import { Layout } from '../layout/layout'
+import { LivelogLine } from './types'
 
 export interface StageProps {
-  name: string
+  name?: string
   group?: string
   steps?: StepProps[]
 }
 
 interface StageExecutionProps {
   stage: StageProps
+  logs: LivelogLine[]
 }
 
 interface StepNavigationProps {
@@ -65,7 +67,7 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
   )
 }
 
-export const StageExecution: React.FC<StageExecutionProps> = ({ stage }): React.ReactElement => {
+export const StageExecution: React.FC<StageExecutionProps> = ({ stage, logs }): React.ReactElement => {
   const [stepIndex, setStepIndex] = useState<number>(0)
   const steps = stage.steps
   if (!steps || !steps.length) return <Text>No steps found</Text>
@@ -90,7 +92,7 @@ export const StageExecution: React.FC<StageExecutionProps> = ({ stage }): React.
         ) : (
           <Text>{stage.name}</Text>
         )}
-        <StepExecution step={steps[stepIndex]} stepIndex={stepIndex} />
+        <StepExecution step={steps[stepIndex]} logs={logs} />
       </Layout.Vertical>
     </Layout.Horizontal>
   )

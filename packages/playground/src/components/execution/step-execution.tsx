@@ -2,11 +2,11 @@ import React from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger, Input, Button, Text, ScrollArea } from '@harnessio/canary'
 import { Copy, Edit, Download } from '@harnessio/icons-noir'
 import ConsoleLogs from './console-logs'
-import { data } from '../../pages/mocks/execution/mockStepLogs'
 import { Layout } from '../layout/layout'
 import { ExecutionState, ExecutionStatus } from './execution-status'
 import { getDuration } from '../../utils/TimeUtils'
 import { KeyValuePair, KeyValueTable } from './key-value-table'
+import { LivelogLine } from './types'
 
 export interface StepProps {
   name: string
@@ -19,7 +19,7 @@ export interface StepProps {
 
 interface StepExecutionProps {
   step: StepProps
-  stepIndex: number
+  logs: LivelogLine[]
 }
 
 enum StepExecutionTab {
@@ -47,7 +47,7 @@ const StepExecutionToolbar: React.FC = () => {
   )
 }
 
-export const StepExecution: React.FC<StepExecutionProps> = ({ step, stepIndex }) => {
+export const StepExecution: React.FC<StepExecutionProps> = ({ step, logs }) => {
   const inputTable = step?.inputs || []
   const outputTable = step?.outputs || []
   return (
@@ -70,7 +70,7 @@ export const StepExecution: React.FC<StepExecutionProps> = ({ step, stepIndex })
           </Layout.Horizontal>
           <TabsContent value={StepExecutionTab.LOG}>
             <ScrollArea className="h-[calc(100vh-23rem)] border-t pt-4">
-              <ConsoleLogs logs={data[stepIndex]} />
+              <ConsoleLogs logs={logs} />
             </ScrollArea>
           </TabsContent>
           <TabsContent value={StepExecutionTab.INPUT}>

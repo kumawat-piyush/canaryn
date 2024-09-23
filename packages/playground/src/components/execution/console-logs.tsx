@@ -35,6 +35,7 @@ export const createStreamedLogLineElement = (log: LivelogLine) => {
 }
 
 const formatTimestamp = (timestamp: number): string => {
+  console.log(timestamp)
   const date = new Date(timestamp)
 
   const hours = String(date.getUTCHours()).padStart(2, '0')
@@ -52,11 +53,12 @@ const ConsoleLogs: FC<ConsoleLogsProps> = ({ logs }) => {
   return (
     <>
       {logs.map((log, index) => {
+        console.log(log.time, typeof log.time)
         return (
           <div className="flex items-baseline leading-[21px] mb-2" key={index}>
             {typeof log.pos === 'number' && <Text className={'text-log flex justify-end min-w-5'}>{log.pos + 1}</Text>}
             <div className="text-ring font-mono text-sm font-normal ml-2">
-              {log.time && <span>[{formatTimestamp(log.time)}]</span>}
+              {log?.time ? <Text>[{formatTimestamp(log.time)}]</Text> : null}
               <Text className="text-ring">{log.out}</Text>
             </div>
           </div>
