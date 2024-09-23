@@ -2,15 +2,8 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useFindExecutionQuery, useViewLogsQuery } from '@harnessio/code-service-client'
 import { GitCommit, GitBranch } from '@harnessio/icons-noir'
-import { Badge, ScrollArea, Separator, Tabs, TabsContent, TabsList, TabsTrigger, Text } from '@harnessio/canary'
-import {
-  Layout,
-  ExecutionTree,
-  ExecutionStatus,
-  StageExecution,
-  ContactCard,
-  ExecutionTab
-} from '@harnessio/playground'
+import { Badge, ScrollArea, Separator, Text } from '@harnessio/canary'
+import { Layout, ExecutionTree, ExecutionStatus, StageExecution, ContactCard } from '@harnessio/playground'
 import { PathParams } from '../../RouteDefinitions'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { ExecutionState } from '../../types'
@@ -93,23 +86,5 @@ const ExecutionLogs: React.FC = () => {
 }
 
 export const Execution: React.FC = () => {
-  return (
-    <Tabs variant="navigation" defaultValue={ExecutionTab.LOG}>
-      <TabsList>
-        <TabsTrigger value={ExecutionTab.SUMMARY}>Summary</TabsTrigger>
-        <TabsTrigger className="h-full" value={ExecutionTab.LOG}>
-          Logs
-        </TabsTrigger>
-        <TabsTrigger value={ExecutionTab.INPUT}>Inputs</TabsTrigger>
-        <TabsTrigger value={ExecutionTab.POLICY}>Policy Evaluations</TabsTrigger>
-        <TabsTrigger value={ExecutionTab.ARTIFACT}>Artifacts</TabsTrigger>
-        <TabsTrigger value={ExecutionTab.TEST}>Tests</TabsTrigger>
-        <TabsTrigger value={ExecutionTab.SECURITY}>Security Tests</TabsTrigger>
-      </TabsList>
-      <TabsContent value={ExecutionTab.SUMMARY} />
-      <TabsContent value={ExecutionTab.LOG}>
-        <ExecutionLogs />
-      </TabsContent>
-    </Tabs>
-  )
+  return <ExecutionLogs />
 }
