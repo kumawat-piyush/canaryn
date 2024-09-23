@@ -77,7 +77,6 @@ export const RootLayout: React.FC = () => {
   function handleMore() {
     setShowMore(!showMore)
   }
-
   function handlePinItem(item: NavbarItem) {
     setPinnedItems(prevPinnedItems => {
       const isPinned = prevPinnedItems.some(pinned => pinned.id === item.id)
@@ -87,14 +86,14 @@ export const RootLayout: React.FC = () => {
         const itemToPin = navbarSubmenuData.flatMap(group => group.items).find(i => i.id === item.id)
         if (itemToPin) {
           return [
-            ...prevPinnedItems,
             {
               id: itemToPin.id,
               title: itemToPin.title,
-              iconName: itemToPin.iconName,
+              iconName: itemToPin.navbarIconName,
               description: itemToPin.description,
               to: itemToPin.to || ''
-            }
+            },
+            ...prevPinnedItems
           ]
         }
         return prevPinnedItems
