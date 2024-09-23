@@ -1,6 +1,6 @@
 import React from 'react'
 import { Spacer, Text } from '@harnessio/canary'
-import { SandboxLayout } from '..'
+import { SandboxLayout, SkeletonList } from '..'
 
 function SandboxSettingsAccountGeneralPage() {
   return (
@@ -11,6 +11,7 @@ function SandboxSettingsAccountGeneralPage() {
           General
         </Text>
         <Spacer size={6} />
+        <SkeletonList />
       </SandboxLayout.Content>
     </SandboxLayout.Main>
   )

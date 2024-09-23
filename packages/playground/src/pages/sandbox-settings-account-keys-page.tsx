@@ -1,6 +1,6 @@
 import React from 'react'
 import { Spacer, Text } from '@harnessio/canary'
-import { SandboxLayout } from '..'
+import { SandboxLayout, SkeletonList } from '..'
 
 function SandboxSettingsAccountKeysPage() {
   return (
@@ -11,6 +11,7 @@ function SandboxSettingsAccountKeysPage() {
           Keys and tokens
         </Text>
         <Spacer size={6} />
+        <SkeletonList />
       </SandboxLayout.Content>
     </SandboxLayout.Main>
   )
