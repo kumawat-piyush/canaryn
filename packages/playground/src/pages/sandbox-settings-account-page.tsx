@@ -9,11 +9,11 @@ function Sidebar() {
     <Navbar.Root className="w-full border-none bg-transparent px-3">
       <Navbar.Content>
         <Navbar.Group>
-          <NavLink to="account">
-            <Navbar.Item text="Account" icon={<Icon name="harness" size={12} />} />
+          <NavLink to="general">
+            <Navbar.Item text="General" icon={<Icon name="harness" size={12} />} />
           </NavLink>
-          <NavLink to="project">
-            <Navbar.Item text="Project" icon={<Icon name="harness" size={12} />} />
+          <NavLink to="keys">
+            <Navbar.Item text="Keys and tokens" icon={<Icon name="harness" size={12} />} />
           </NavLink>
         </Navbar.Group>
       </Navbar.Content>
@@ -21,7 +21,7 @@ function Sidebar() {
   )
 }
 
-function SandboxSettingsPage() {
+function SandboxSettingsAccountPage() {
   const [loadState, setLoadState] = useState('sub-float')
 
   return (
@@ -37,4 +37,4 @@ function SandboxSettingsPage() {
   )
 }
 
-export { SandboxSettingsPage }
+export { SandboxSettingsAccountPage }
