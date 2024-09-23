@@ -76,44 +76,48 @@ const router = createBrowserRouter([
         path: 'settings',
         element: <SandboxSettings />,
         children: [
-          { index: true, element: <SandboxSettingsPage /> },
           {
-            path: 'account', // /settings/account
+            path: 'account',
             element: <SandboxSettingsAccountPage />,
             children: [
               {
-                index: true, // Default child route for /settings/account
-                element: <Navigate to="general" /> // Renders for /settings/account
+                index: true,
+                element: <Navigate to="general" />
               },
               {
-                path: 'general', // /settings/account/general
+                path: 'general',
                 element: <SandboxSettingsAccountGeneralPage />
               },
               {
-                path: 'keys', // /settings/account/keys
+                path: 'keys',
                 element: <SandboxSettingsAccountKeysPage />
               }
             ]
           },
           {
-            path: 'project', // /settings/project
+            path: 'project',
             element: <SandboxSettingsProjectPage />,
             children: [
               {
-                index: true, // Default child route for /settings/project
-                element: <Navigate to="general" /> // Renders for /settings/project
+                index: true,
+                element: <Navigate to="general" />
               },
               {
-                path: 'general', // /settings/project/general
+                path: 'general',
                 element: <SandboxSettingsProjectGeneralPage />
               },
               {
-                path: 'members', // /settings/project/members
+                path: 'members',
                 element: <SandboxSettingsProjectMembersPage />
               }
             ]
           }
         ]
+      },
+      {
+        path: 'settings',
+        index: true,
+        element: <SandboxSettingsPage />
       },
       {
         path: 'landing',

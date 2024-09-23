@@ -1,37 +1,15 @@
 import React, { useState } from 'react'
-import { Icon, Navbar, Section, Spacer, SpotlightsBox, Text } from '@harnessio/canary'
+import { Section, Spacer, SpotlightsBox, Text } from '@harnessio/canary'
 import { SandboxLayout } from '..'
 import { PlaygroundSandboxLayoutSettings } from '../settings/sandbox-settings'
-import { Link, NavLink } from 'react-router-dom'
-
-function Sidebar() {
-  return (
-    <Navbar.Root className="w-full border-none bg-transparent px-3">
-      <Navbar.Content>
-        <Navbar.Group>
-          <NavLink to="account">
-            <Navbar.Item text="Account" icon={<Icon name="harness" size={12} />} />
-          </NavLink>
-          <NavLink to="project">
-            <Navbar.Item text="Project" icon={<Icon name="harness" size={12} />} />
-          </NavLink>
-        </Navbar.Group>
-      </Navbar.Content>
-    </Navbar.Root>
-  )
-}
+import { Link } from 'react-router-dom'
 
 function SandboxSettingsPage() {
   const [loadState, setLoadState] = useState('sub-float')
 
   return (
     <>
-      {loadState.includes('sub') && (
-        <SandboxLayout.LeftSubPanel hasHeader>
-          <Sidebar />
-        </SandboxLayout.LeftSubPanel>
-      )}
-      <SandboxLayout.Main hasLeftPanel hasLeftSubPanel hasHeader>
+      <SandboxLayout.Main hasLeftPanel>
         <SandboxLayout.Content>
           <Spacer size={10} />
           <Text size={5} weight={'medium'}>
@@ -45,7 +23,7 @@ function SandboxSettingsPage() {
                   <SpotlightsBox.Root
                     logo={'harness'}
                     logoSize={64}
-                    highlightTop={'#2ECC71'}
+                    highlightTop={'#262930'}
                     highlightBottom={'#262930'}>
                     <SpotlightsBox.Content>
                       <Text size={3}>Account</Text>
@@ -56,7 +34,7 @@ function SandboxSettingsPage() {
                   <SpotlightsBox.Root
                     logo={'harness'}
                     logoSize={64}
-                    highlightTop={'#3498DB'}
+                    highlightTop={'#262930'}
                     highlightBottom={'#262930'}>
                     <SpotlightsBox.Content>
                       <Text size={3}>Project</Text>
