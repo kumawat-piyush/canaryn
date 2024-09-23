@@ -19,6 +19,7 @@ import CreateProject from './pages/create-project'
 import { PipelineCreate } from './pages/pipeline-create/pipeline-create'
 import RepoCommitsPage from './pages/repo/repo-commits'
 import { Execution } from './pages/execution/execution-details'
+import RepoWebhooksListPage from './pages/repo/repo-webhooks'
 
 export default function App() {
   const router = createBrowserRouter([
@@ -81,6 +82,10 @@ export default function App() {
             {
               path: 'commits',
               element: <RepoCommitsPage />
+            },
+            {
+              path: 'webhooks',
+              element: <RepoWebhooksListPage />
             }
           ]
         },
