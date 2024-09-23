@@ -361,10 +361,15 @@ export interface GeneralPayload extends TypesPullReqActivity {
   payload?: GeneralPayload
   type?: EnumPullReqActivityType
   kind?: EnumPullReqActivityKind
+  message?: string
 }
 
 export interface PayloadAuthor {
   display_name: string
+}
+
+export interface PayloadCreated {
+  created: number
 }
 
 export interface Payload {

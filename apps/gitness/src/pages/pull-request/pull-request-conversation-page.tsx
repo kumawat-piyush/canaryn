@@ -138,7 +138,7 @@ export default function PullRequestConversationPage() {
     // Create a temporary comment object
 
     const newComment: TypesPullReqActivity = {
-      id: count, // Temporary ID
+      id: parentId, // Temporary ID
       author: { display_name: currentUser }, // Replace with actual user data
       created: Date.now(),
       edited: Date.now(),
@@ -162,11 +162,12 @@ export default function PullRequestConversationPage() {
     count = count + 1
 
     // Update the state locally
-    setActivities(prevData => [...(prevData || []), newComment])
+    // setActivities(prevData => [...(prevData || []), newComment])
 
     // Persist the new comment to the API
     commentCreatePullReq({ repo_ref: repoRef, pullreq_number: prId, body: { text: comment, parent_id: parentId } })
       .then(() => {
+        refetchActivities()
         // TODO: set response after saving the comment to update the local state with the new comment data
         // Update the state with the response from the API
         // setMockActivities(prevData => prevData.map(item => (item.id === newComment.id ? response.data : item)))
