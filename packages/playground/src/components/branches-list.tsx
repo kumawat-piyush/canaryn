@@ -1,5 +1,20 @@
-import { Button, Icon, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Text } from '@harnessio/canary'
-import React from 'react'
+import {
+  Button,
+  Icon,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Text,
+  Avatar,
+  AvatarImage,
+  AvatarFallback
+} from '@harnessio/canary'
+import React, { useState, useEffect } from 'react'
+import { getInitials } from '../utils/utils'
+import AvatarUrl from '../../public/images/user-avatar.svg'
 interface BranchProps {
   // id: string
   name: string
@@ -7,7 +22,7 @@ interface BranchProps {
   timestamp: string
   user: {
     name: string
-    // avatarUrl: string
+    avatarUrl: string
   }
   checks: {
     done: number
@@ -28,6 +43,31 @@ interface PageProps {
   branches: BranchProps[]
 }
 
+const CopyButton = () => {
+  const [copied, setCopied] = useState(false)
+
+  useEffect(() => {
+    let timeoutId: number
+    if (copied) {
+      //add copy function here if we need in the future
+      timeoutId = window.setTimeout(() => setCopied(false), 2500)
+    }
+    return () => {
+      clearTimeout(timeoutId)
+    }
+  }, [copied])
+
+  return (
+    <Button variant="ghost" size="xs" onClick={() => setCopied(true)}>
+      <Icon
+        name={copied ? 'tick' : 'clone'}
+        size={16}
+        className={copied ? 'text-success ' : 'text-tertiary-background'}
+      />
+    </Button>
+  )
+}
+
 export const BranchesList = ({ branches }: PageProps) => {
   return (
     <Table variant="asStackedList">
@@ -38,7 +78,7 @@ export const BranchesList = ({ branches }: PageProps) => {
           <TableHead>Check status</TableHead>
           <TableHead>Behind | Ahead</TableHead>
           {/* since we don't have the data for pull request, we can temporary hide this column */}
-          {/* <TableHead>Pull request</TableHead> */}
+          <TableHead className="hidden">Pull request</TableHead>
           <TableHead>
             <></>
           </TableHead>
@@ -58,15 +98,21 @@ export const BranchesList = ({ branches }: PageProps) => {
                         {branch.name}
                       </Button>
                     </Text>
-                    <Button variant="ghost" size="xs">
-                      <Icon name="clone" size={16} className="text-tertiary-background" />
-                    </Button>
+                    {CopyButton()}
                   </div>
                 </TableCell>
                 <TableCell>
-                  <Text wrap="nowrap" truncate className="text-primary">
-                    {branch.timestamp}
-                  </Text>
+                  <div className="flex items-center gap-1.5">
+                    <Avatar className="w-5 h-5">
+                      <AvatarImage src={branch.user.avatarUrl === '' ? AvatarUrl : branch.user.avatarUrl} />
+                      <AvatarFallback className="text-xs p-1 text-center">
+                        {getInitials(branch.user.name || '')}
+                      </AvatarFallback>
+                    </Avatar>
+                    <Text wrap="nowrap" truncate className="text-primary">
+                      {branch.timestamp}
+                    </Text>
+                  </div>
                 </TableCell>
                 <TableCell>
                   <div className="flex gap-1.5 items-center">
@@ -83,14 +129,15 @@ export const BranchesList = ({ branches }: PageProps) => {
                     </Text>
                   </div>
                 </TableCell>
-                {/* <TableCell>
+                {/* since we don't have the data for pull request, we can temporary hide this column */}
+                <TableCell className="hidden">
                   <div className="flex gap-1.5 items-center">
                     <Icon name="open-pr" size={11} className="text-success" />
                     <Text wrap="nowrap" size={1} truncate className="text-tertiary-background">
-                      #{branch.pullRequest.sha}{' '}
+                      #{branch.sha}{' '}
                     </Text>
                   </div>
-                </TableCell> */}
+                </TableCell>
                 <TableCell>
                   <div className="flex gap-1.5 items-center justify-end">
                     <Icon name="vertical-ellipsis" size={14} className="text-tertiary-background" />

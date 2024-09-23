@@ -59,7 +59,8 @@ export function ReposBranchesListPage() {
             sha: branch.commit?.sha,
             timestamp: timeAgo(branch.commit?.committer?.when || ''),
             user: {
-              name: branch.commit?.committer?.identity?.name
+              name: branch.commit?.committer?.identity?.name,
+              avatarUrl: ''
             },
             //hardcoded
             checks: {
