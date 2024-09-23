@@ -46,8 +46,10 @@ export default function BranchesListPage() {
           iconName="no-data-merge"
           title="No branches yet"
           description={[
-            "Your branches will appear here once they're created. Start branching to see your work organized."
+            "Your branches will appear here once they're created.",
+            'Start branching to see your work organized.'
           ]}
+          primaryButton={{ label: 'Create new branch' }}
         />
         <PlaygroundBranchesSettings loadState={loadState} setLoadState={setLoadState} />
       </>

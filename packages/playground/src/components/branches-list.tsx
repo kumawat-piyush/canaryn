@@ -76,7 +76,7 @@ export const BranchesList = ({ branches }: PageProps) => {
           <TableHead>Branch</TableHead>
           <TableHead>Updated</TableHead>
           <TableHead>Check status</TableHead>
-          <TableHead>Behind | Ahead</TableHead>
+          <TableHead className="text-center">Behind | Ahead</TableHead>
           {/* since we don't have the data for pull request, we can temporary hide this column */}
           <TableHead className="hidden">Pull request</TableHead>
           <TableHead>
@@ -124,7 +124,7 @@ export const BranchesList = ({ branches }: PageProps) => {
                 </TableCell>
                 <TableCell>
                   <div className="flex gap-1.5 items-center">
-                    <Text wrap="nowrap" truncate className="text-tertiary-background text-center">
+                    <Text wrap="nowrap" truncate className="text-tertiary-background text-center flex-grow">
                       {branch.behindAhead.behind} | {branch.behindAhead.ahead}
                     </Text>
                   </div>
