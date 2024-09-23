@@ -3,7 +3,7 @@ import { IconProps } from '@harnessio/canary'
 export const navbarSubmenuData: {
   groupId: number
   title: string
-  items: { id: number; iconName: IconProps['name']; title: string; description: string }[]
+  items: { id: number; iconName: IconProps['name']; title: string; description: string; to: string }[]
 }[] = [
   {
     groupId: 0,
@@ -13,37 +13,43 @@ export const navbarSubmenuData: {
         id: 0,
         iconName: 'sub-rocket',
         title: 'Continuous Delivery & GitOps',
-        description: 'App to production with no scripts.'
+        description: 'App to production with no scripts.',
+        to: '/continuous-delivery-gitops'
       },
       {
         id: 1,
         iconName: 'sub-socket',
         title: 'Continuous Integration',
-        description: 'Up to 4X faster than other solutions.'
+        description: 'Up to 4X faster than other solutions.',
+        to: '/continuous-integration'
       },
       {
         id: 2,
         iconName: 'sub-flag',
         title: 'Feature Flags',
-        description: 'Optimize feature rollout velocity.'
+        description: 'Optimize feature rollout velocity.',
+        to: '/feature-flags'
       },
       {
         id: 3,
         iconName: 'sub-infra',
         title: 'Infrastructure as Code Management',
-        description: 'Manage all your infrastructure.'
+        description: 'Manage all your infrastructure.',
+        to: '/infrastructure-as-code'
       },
       {
         id: 4,
         iconName: 'sub-chaos',
         title: 'Chaos Engineering',
-        description: 'Validate service resilience.'
+        description: 'Validate service resilience.',
+        to: '/chaos-engineering'
       },
       {
         id: 5,
         iconName: 'sub-reliability',
         title: 'Service Reliability Management',
-        description: 'SLO configuration and service reliability.'
+        description: 'SLO configuration and service reliability.',
+        to: '/service-reliability'
       }
     ]
   },
@@ -52,22 +58,25 @@ export const navbarSubmenuData: {
     title: 'Developer Experience',
     items: [
       {
-        id: 0,
+        id: 6,
         iconName: 'sub-folder',
         title: 'Internal Developer Portal',
-        description: 'Built for developers, onboard in minutes.'
+        description: 'Built for developers, onboard in minutes.',
+        to: '/internal-developer-portal'
       },
       {
-        id: 1,
+        id: 7,
         iconName: 'sub-repository',
         title: 'Code Repository',
-        description: 'Integrated & familiar git experience.'
+        description: 'Integrated & familiar git experience.',
+        to: '/code-repository'
       },
       {
-        id: 2,
+        id: 8,
         iconName: 'sub-insights',
         title: 'Software Engineering Insights',
-        description: 'Actionable insights on SDLC.'
+        description: 'Actionable insights on SDLC.',
+        to: '/software-engineering-insights'
       }
     ]
   },
@@ -76,16 +85,18 @@ export const navbarSubmenuData: {
     title: 'Secure Software Delivery',
     items: [
       {
-        id: 0,
+        id: 9,
         iconName: 'sub-chain',
         title: 'Software Supply Chain Assurance',
-        description: 'Artifact integrity and governance.'
+        description: 'Artifact integrity and governance.',
+        to: '/software-supply-chain-assurance'
       },
       {
-        id: 1,
+        id: 10,
         iconName: 'sub-shield',
         title: 'Security Testing Orchestration',
-        description: 'Shift left security testing.'
+        description: 'Shift left security testing.',
+        to: '/security-testing-orchestration'
       }
     ]
   },
@@ -94,10 +105,11 @@ export const navbarSubmenuData: {
     title: 'Cloud Cost Optimization',
     items: [
       {
-        id: 0,
+        id: 11,
         iconName: 'sub-cloud',
         title: 'Cloud Cost Management',
-        description: 'Intelligent cost management.'
+        description: 'Intelligent cost management.',
+        to: '/cloud-cost-management'
       }
     ]
   }
