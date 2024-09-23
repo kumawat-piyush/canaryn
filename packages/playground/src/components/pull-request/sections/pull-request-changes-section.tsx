@@ -237,43 +237,23 @@ const PullRequestChangesSection = ({
       </AccordionTrigger>
       <AccordionContent>
         <div>
-          {(minApproval && minReqLatestApproval && minApproval > minReqLatestApproval) ||
+          {((minApproval ?? 0) > (minReqLatestApproval ?? 0) ||
             (!isEmpty(approvedEvaluations) && minReqLatestApproval === 0) ||
-            (minApproval && minApproval > 0 && minReqLatestApproval === undefined && (
-              <div className="ml-4">
-                <div className="flex pt-2 border-t mt-3 ml-2 items-center justify-between">
-                  {approvedEvaluations && minApproval <= approvedEvaluations?.length ? (
-                    <Text className="flex ml-2">
-                      <CheckCircleSolid className="text-success" />
-                      <Text className="pl-2 text-xs">
-                        {`Changes were approved by ${approvedEvaluations?.length} ${approvedEvaluations?.length === 1 ? 'reviewer' : 'reviewers'}`}
-                      </Text>
-                    </Text>
-                  ) : (
-                    <div className="flex ml-2">
-                      <Icon name="circle" className="text-warning" />
-                      <Text className="pl-2 text-xs">{`${(approvedEvaluations && approvedEvaluations.length) || 0}/${minApproval} approvals completed`}</Text>
-                    </div>
-                  )}
-                  <div className="border rounded-full bg-transparent">
-                    <Text className="text-xs text-tertiary-background px-2 py-1.5">required</Text>
-                  </div>
-                </div>
-              </div>
-            ))}
-          {minReqLatestApproval && minReqLatestApproval > 0 && (
+            ((minApproval ?? 0) > 0 && minReqLatestApproval === undefined)) && (
             <div className="ml-4">
               <div className="flex pt-2 border-t mt-3 ml-2 items-center justify-between">
-                {latestApprovalArr && minReqLatestApproval && minReqLatestApproval <= latestApprovalArr?.length ? (
+                {approvedEvaluations && minApproval && minApproval <= approvedEvaluations?.length ? (
                   <Text className="flex ml-2">
                     <CheckCircleSolid className="text-success" />
-                    <Text className="pl-2 text-xs">{`Latest changes were approved by ${latestApprovalArr?.length || minReqLatestApproval || 0} ${(latestApprovalArr?.length || minReqLatestApproval) === 1 ? 'reviewer' : 'reviewers'}`}</Text>
+                    <Text className="pl-2 text-xs">
+                      {`Changes were approved by ${approvedEvaluations?.length} ${approvedEvaluations?.length === 1 ? 'reviewer' : 'reviewers'}`}
+                    </Text>
                   </Text>
                 ) : (
                   <div className="flex ml-2">
                     <Icon name="circle" className="text-warning" />
                     <Text className="pl-2 text-xs">
-                      {`${latestApprovalArr?.length || minReqLatestApproval || 0} ${(latestApprovalArr?.length || minReqLatestApproval) === 1 ? 'approval' : 'approvals'} pending on latest changes`}
+                      {`${(approvedEvaluations && approvedEvaluations.length) || ''}/${minApproval} approvals completed`}
                     </Text>
                   </div>
                 )}
@@ -283,6 +263,32 @@ const PullRequestChangesSection = ({
               </div>
             </div>
           )}
+
+          {(minReqLatestApproval ?? 0) > 0 && (
+            <div className="ml-4">
+              <div className="flex pt-2 border-t mt-3 ml-2 items-center justify-between">
+                {latestApprovalArr !== undefined &&
+                minReqLatestApproval !== undefined &&
+                minReqLatestApproval <= latestApprovalArr?.length ? (
+                  <Text className="flex ml-2">
+                    <CheckCircleSolid className="text-success" />
+                    <Text className="pl-2 text-xs">{`Latest changes were approved by ${latestApprovalArr?.length || minReqLatestApproval || ''} ${(latestApprovalArr?.length || minReqLatestApproval) === 1 ? 'reviewer' : 'reviewers'}`}</Text>
+                  </Text>
+                ) : (
+                  <div className="flex ml-2">
+                    <Icon name="circle" className="text-warning" />
+                    <Text className="pl-2 text-xs">
+                      {`${latestApprovalArr?.length || minReqLatestApproval || ''} ${(latestApprovalArr?.length || minReqLatestApproval) === 1 ? 'approval' : 'approvals'} pending on latest changes`}
+                    </Text>
+                  </div>
+                )}
+                <div className="border rounded-full bg-transparent">
+                  <Text className="text-xs text-tertiary-background px-2 py-1.5">required</Text>
+                </div>
+              </div>
+            </div>
+          )}
+
           {!isEmpty(changeReqEvaluations) && (
             <div className="ml-4">
               <div className="flex pt-2 border-t mt-3 ml-2 items-center justify-between">

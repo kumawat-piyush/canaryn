@@ -308,7 +308,7 @@ export interface TypesPullReqActivity {
   metadata?: TypesPullReqActivityMetadata
   order?: number
   parent_id?: number | null
-  payload?: GeneralPayload
+  payload?: GeneralPayload | TypesPullReqActivity
   pullreq_id?: number
   repo_id?: number
   resolved?: number | null
@@ -399,4 +399,12 @@ export interface PullRequestAction {
   title: string
   description?: string
   action?: () => void
+}
+
+export const PullRequestFilterOption = {
+  ...PullRequestState,
+  // REJECTED: 'rejected',
+  DRAFT: 'draft',
+  YOURS: 'yours',
+  ALL: 'all'
 }
