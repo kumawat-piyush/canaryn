@@ -9,11 +9,15 @@ function Sidebar() {
     <Navbar.Root className="w-full border-none bg-transparent px-3">
       <Navbar.Content>
         <Navbar.Group>
-          <NavLink to="general">
-            <Navbar.Item text="General" icon={<Icon name="harness" size={12} />} />
+          <NavLink to="general" end>
+            {({ isActive }) => (
+              <Navbar.Item text="General" icon={<Icon name="harness" size={12} />} active={isActive} />
+            )}
           </NavLink>
-          <NavLink to="members">
-            <Navbar.Item text="Members" icon={<Icon name="harness" size={12} />} />
+          <NavLink to="members" className="nav-link">
+            {({ isActive }) => (
+              <Navbar.Item text="Members" icon={<Icon name="harness" size={12} />} active={isActive} />
+            )}
           </NavLink>
         </Navbar.Group>
       </Navbar.Content>
