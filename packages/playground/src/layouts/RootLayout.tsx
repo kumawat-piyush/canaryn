@@ -23,7 +23,7 @@ export const RootLayout: React.FC = () => {
     },
     {
       text: 'Executions',
-      icon: <Icon name="executions" size={12} />,
+      icon: <Icon name="cog-6" size={12} />,
       to: '/executions'
     },
     {
@@ -108,6 +108,9 @@ export const RootLayout: React.FC = () => {
                 </NavLink>
                 <NavLink to="/sandbox/repos/drone/code">
                   <Navbar.Item text="Repo&nbsp;&nbsp;/&nbsp;&nbsp;Code" icon={<Icon name="repositories" size={12} />} />
+                </NavLink>
+                <NavLink to="/sandbox/settings">
+                  <Navbar.Item text="Settings" icon={<Icon name="cog-6" size={12} />} />
                 </NavLink>
               </Navbar.AccordionGroup>
             </Navbar.Content>

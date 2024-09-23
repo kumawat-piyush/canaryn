@@ -3,7 +3,6 @@ import ChevronDown from '../icons/chevron-down.svg'
 import Archive from '../icons/repositories-icon.svg'
 import Harness from '../icons/harness.svg'
 import Pipelines from '../icons/pipelines-icon.svg'
-import Executions from '../icons/executions-icon.svg'
 import FeaturedFlags from '../icons/featured-flags-icon.svg'
 import Ellipsis from '../icons/more-dots-icon.svg'
 import Repositories from '../icons/repositories-icon.svg'
@@ -89,7 +88,6 @@ const IconNameMap = {
   archive: Archive,
   harness: Harness,
   pipelines: Pipelines,
-  executions: Executions,
   'featured-flags': FeaturedFlags,
   ellipsis: Ellipsis,
   repositories: Repositories,
