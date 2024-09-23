@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Icon, Navbar, Spacer, Text } from '@harnessio/canary'
+import { Icon, Navbar, Section, Spacer, SpotlightsBox, Text } from '@harnessio/canary'
 import { SandboxLayout } from '..'
 import { PlaygroundSandboxLayoutSettings } from '../settings/sandbox-settings'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 function Sidebar() {
   return (
@@ -38,6 +38,34 @@ function SandboxSettingsPage() {
             Settings
           </Text>
           <Spacer size={6} />
+          <div className="flex flex-col gap-9 w-full">
+            <Section.Root>
+              <Section.Content>
+                <Link to="account">
+                  <SpotlightsBox.Root
+                    logo={'harness'}
+                    logoSize={64}
+                    highlightTop={'#2ECC71'}
+                    highlightBottom={'#262930'}>
+                    <SpotlightsBox.Content>
+                      <Text size={3}>Account</Text>
+                    </SpotlightsBox.Content>
+                  </SpotlightsBox.Root>
+                </Link>
+                <Link to="project">
+                  <SpotlightsBox.Root
+                    logo={'harness'}
+                    logoSize={64}
+                    highlightTop={'#3498DB'}
+                    highlightBottom={'#262930'}>
+                    <SpotlightsBox.Content>
+                      <Text size={3}>Project</Text>
+                    </SpotlightsBox.Content>
+                  </SpotlightsBox.Root>
+                </Link>
+              </Section.Content>
+            </Section.Root>
+          </div>
         </SandboxLayout.Content>
       </SandboxLayout.Main>
       <PlaygroundSandboxLayoutSettings loadState={loadState} setLoadState={setLoadState} />
