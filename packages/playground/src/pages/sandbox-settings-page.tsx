@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Icon, Navbar } from '@harnessio/canary'
+import { Icon, Navbar, Spacer, Text } from '@harnessio/canary'
 import { SandboxLayout } from '..'
 import { PlaygroundSandboxLayoutSettings } from '../settings/sandbox-settings'
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 function Sidebar() {
   return (
@@ -31,7 +31,15 @@ function SandboxSettingsPage() {
           <Sidebar />
         </SandboxLayout.LeftSubPanel>
       )}
-      <Outlet />
+      <SandboxLayout.Main hasLeftPanel hasLeftSubPanel hasHeader>
+        <SandboxLayout.Content>
+          <Spacer size={10} />
+          <Text size={5} weight={'medium'}>
+            Settings
+          </Text>
+          <Spacer size={6} />
+        </SandboxLayout.Content>
+      </SandboxLayout.Main>
       <PlaygroundSandboxLayoutSettings loadState={loadState} setLoadState={setLoadState} />
     </>
   )
