@@ -9,13 +9,11 @@ interface BranchProps {
     name: string
     // avatarUrl: string
   }
-  //lack of response from status
   checks: {
     done: number
     total: number
     status: number
   }
-  //lack of response from behindAhead
   behindAhead: {
     behind: number
     ahead: number
@@ -39,7 +37,8 @@ export const BranchesList = ({ branches }: PageProps) => {
           <TableHead>Updated</TableHead>
           <TableHead>Check status</TableHead>
           <TableHead>Behind | Ahead</TableHead>
-          <TableHead>Pull request</TableHead>
+          {/* since we don't have the data for pull request, we can temporary hide this column */}
+          {/* <TableHead>Pull request</TableHead> */}
           <TableHead>
             <></>
           </TableHead>
@@ -79,19 +78,19 @@ export const BranchesList = ({ branches }: PageProps) => {
                 </TableCell>
                 <TableCell>
                   <div className="flex gap-1.5 items-center">
-                    <Text wrap="nowrap" truncate className="text-tertiary-background">
+                    <Text wrap="nowrap" truncate className="text-tertiary-background text-center">
                       {branch.behindAhead.behind} | {branch.behindAhead.ahead}
                     </Text>
                   </div>
                 </TableCell>
-                <TableCell>
+                {/* <TableCell>
                   <div className="flex gap-1.5 items-center">
                     <Icon name="open-pr" size={11} className="text-success" />
                     <Text wrap="nowrap" size={1} truncate className="text-tertiary-background">
                       #{branch.pullRequest.sha}{' '}
                     </Text>
                   </div>
-                </TableCell>
+                </TableCell> */}
                 <TableCell>
                   <div className="flex gap-1.5 items-center justify-end">
                     <Icon name="vertical-ellipsis" size={14} className="text-tertiary-background" />
