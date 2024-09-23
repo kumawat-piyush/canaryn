@@ -3,7 +3,7 @@ import { parse } from 'yaml'
 import { PipelineStudio, getNodesFromPipelineYaml, type Node } from '@harnessio/unified-pipeline'
 import { usePipelineDataContext } from '../context/PipelineStudioDataProvider'
 import { StepDrawer, usePipelineViewContext } from '../context/PipelineStudioViewProvider'
-import { InteractionContextProvider } from '../context/InteractionCOntextProvider'
+import { InteractionContextProvider } from '../context/InteractionContextProvider'
 
 export const PipelineStudioGraphView = (): React.ReactElement => {
   const { yamlRevision, setEditStepIntention } = usePipelineDataContext()
