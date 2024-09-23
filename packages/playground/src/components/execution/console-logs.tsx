@@ -52,7 +52,6 @@ const ConsoleLogs: FC<ConsoleLogsProps> = ({ logs }) => {
   return (
     <>
       {logs.map((log, index) => {
-        console.log(log.time, typeof log.time)
         return (
           <div className="flex items-baseline leading-[21px] mb-2" key={index}>
             {typeof log.pos === 'number' && <Text className={'text-log flex justify-end min-w-5'}>{log.pos + 1}</Text>}
