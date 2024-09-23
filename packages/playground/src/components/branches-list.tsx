@@ -1,26 +1,28 @@
 import { Button, Icon, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Text } from '@harnessio/canary'
 import React from 'react'
-
 interface BranchProps {
-  id: string
+  // id: string
   name: string
+  sha: string
   timestamp: string
   user: {
     name: string
-    avatarUrl: string
+    // avatarUrl: string
   }
+  //lack of response from status
   checks: {
     done: number
     total: number
     status: number
   }
+  //lack of response from behindAhead
   behindAhead: {
     behind: number
     ahead: number
   }
   pullRequest: {
     sha: string
-    status: string
+    // status: string
   }
 }
 
@@ -76,9 +78,11 @@ export const BranchesList = ({ branches }: PageProps) => {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <Text wrap="nowrap" truncate className="text-tertiary-background">
-                    {branch.behindAhead.behind} | {branch.behindAhead.ahead}
-                  </Text>
+                  <div className="flex gap-1.5 items-center">
+                    <Text wrap="nowrap" truncate className="text-tertiary-background">
+                      {branch.behindAhead.behind} | {branch.behindAhead.ahead}
+                    </Text>
+                  </div>
                 </TableCell>
                 <TableCell>
                   <div className="flex gap-1.5 items-center">
