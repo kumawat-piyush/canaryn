@@ -35,7 +35,6 @@ export const createStreamedLogLineElement = (log: LivelogLine) => {
 }
 
 const formatTimestamp = (timestamp: number): string => {
-  console.log(timestamp)
   const date = new Date(timestamp)
 
   const hours = String(date.getUTCHours()).padStart(2, '0')
