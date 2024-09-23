@@ -125,14 +125,7 @@ export default function PullRequestConversationPage() {
     setActivities(activityData)
   }, [activityData])
   const currentUser = 'Calvin'
-  // const path = useMemo(
-  //   () => `/api/v1/repos/${repoMetadata.path}/+/pullreq/${pullReqMetadata.number}/comments`,
-  //   [repoMetadata.path, pullReqMetadata.number]
-  // )
-  // const path = useMemo(() => `/api/v1/repos/repo/+/pullreq/${prId}/comments`, [prId])
-  // const { mutate: saveComment } = useCommentCreatePullReqMutation({ repo_ref: repoRef, pullreq_number: prId })
 
-  // const { mutate: saveComment } = useFakeMutate({ verb: 'POST', path })
   let count = 5
   const handleSaveComment = (comment: string, parentId?: number) => {
     // Create a temporary comment object
@@ -329,7 +322,7 @@ export default function PullRequestConversationPage() {
         rightColumn={
           <PullRequestSideBar
             // repoMetadata={undefined}
-            pullRequestMetadata={undefined}
+            pullRequestMetadata={{ source_sha: pullReqMetadata?.source_sha as string }}
             processReviewDecision={processReviewDecision}
             refetchReviewers={refetchReviewers}
             reviewers={reviewers?.map((val: TypesPullReqReviewer) => ({

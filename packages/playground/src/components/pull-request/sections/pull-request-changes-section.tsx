@@ -238,7 +238,7 @@ const PullRequestChangesSection = ({
       <AccordionContent>
         <div>
           {((minApproval ?? 0) > (minReqLatestApproval ?? 0) ||
-            (!isEmpty(approvedEvaluations) && minReqLatestApproval === 0) ||
+            (!isEmpty(approvedEvaluations) && minReqLatestApproval === 0 && minApproval && minApproval > 0) ||
             ((minApproval ?? 0) > 0 && minReqLatestApproval === undefined)) && (
             <div className="ml-4">
               <div className="flex pt-2 border-t mt-3 ml-2 items-center justify-between">
