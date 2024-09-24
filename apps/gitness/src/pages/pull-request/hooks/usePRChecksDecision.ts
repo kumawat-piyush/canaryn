@@ -48,7 +48,6 @@ export function usePRChecksDecision({
     setSummaryText(summaryMessage)
     // @ts-expect-error remove "@ts-expect-error" once CodeServiceClient Response for useChecksPullReqQuery is fixed
     const checkInfoData = determineStatusMessage(data?.checks)
-    console.log(22222, checkInfoData)
     if (checkInfoData) {
       setCheckInfo(checkInfoData)
     }
