@@ -29,9 +29,6 @@ importers:
       '@harnessio/forms':
         specifier: workspace:*
         version: link:../../packages/forms
-      '@harnessio/icons-noir':
-        specifier: workspace:*
-        version: link:../../packages/icons-noir
       '@harnessio/playground':
         specifier: workspace:*
         version: link:../../packages/playground
