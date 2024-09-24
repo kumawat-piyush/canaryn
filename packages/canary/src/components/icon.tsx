@@ -63,7 +63,6 @@ import GitBranch from '../icons/git-branch.svg'
 import PrComment from '../icons/pr-comment.svg'
 import CreateWorkspace from '../icons/create-workspace.svg'
 import NoDataWebhooks from '../icons/no-data-webhooks.svg'
-import SubRepository from '../icons/sub-repository.svg'
 import AddFile from '../icons/add-file.svg'
 import AddFolder from '../icons/add-folder.svg'
 import Lightning from '../icons/lightning.svg'
@@ -151,7 +150,6 @@ const IconNameMap = {
   'pr-comment': PrComment,
   'create-workspace': CreateWorkspace,
   'no-data-webhooks': NoDataWebhooks,
-  'sub-repository': SubRepository,
   'add-folder': AddFolder,
   'add-file': AddFile,
   lightning: Lightning,
