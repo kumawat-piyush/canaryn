@@ -21,6 +21,7 @@ import {
   TypesUserGroupOwnerEvaluation
 } from '../interfaces'
 import { getInitials } from '../../../utils/utils'
+import pluralize from 'pluralize'
 
 interface PullRequestChangesSectionProps {
   changesInfo: { header: string; content: string; status: string }
@@ -246,7 +247,7 @@ const PullRequestChangesSection = ({
                   <Text className="flex ml-2">
                     <CheckCircleSolid className="text-success" />
                     <Text className="pl-2 text-xs">
-                      {`Changes were approved by ${approvedEvaluations?.length} ${approvedEvaluations?.length === 1 ? 'reviewer' : 'reviewers'}`}
+                      {`Changes were approved by ${approvedEvaluations?.length} ${pluralize('reviewers', approvedEvaluations?.length)}`}
                     </Text>
                   </Text>
                 ) : (
@@ -272,13 +273,13 @@ const PullRequestChangesSection = ({
                 minReqLatestApproval <= latestApprovalArr?.length ? (
                   <Text className="flex ml-2">
                     <CheckCircleSolid className="text-success" />
-                    <Text className="pl-2 text-xs">{`Latest changes were approved by ${latestApprovalArr?.length || minReqLatestApproval || ''} ${(latestApprovalArr?.length || minReqLatestApproval) === 1 ? 'reviewer' : 'reviewers'}`}</Text>
+                    <Text className="pl-2 text-xs">{`Latest changes were approved by ${latestApprovalArr?.length || minReqLatestApproval || ''} ${pluralize('reviewer', latestApprovalArr?.length || minReqLatestApproval)}`}</Text>
                   </Text>
                 ) : (
                   <div className="flex ml-2">
                     <Icon name="circle" className="text-warning" />
                     <Text className="pl-2 text-xs">
-                      {`${latestApprovalArr?.length || minReqLatestApproval || ''} ${(latestApprovalArr?.length || minReqLatestApproval) === 1 ? 'approval' : 'approvals'} pending on latest changes`}
+                      {`${latestApprovalArr?.length || minReqLatestApproval || ''} ${pluralize('approval', latestApprovalArr?.length || minReqLatestApproval)} pending on latest changes`}
                     </Text>
                   </div>
                 )}

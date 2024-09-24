@@ -3,7 +3,7 @@ import { TypesPullReq, TypesRepository, useChecksPullReqQuery } from '@harnessio
 
 import { ExecutionState } from '../../../types'
 import { determineStatusMessage, generateStatusSummary } from '../utils'
-
+import pluralize from 'pluralize'
 interface Check {
   check: {
     status: ExecutionState
@@ -73,47 +73,47 @@ export function usePRChecksDecision({
         _status = ExecutionState.ERROR
         setColor('text-destructive')
         setBackground('text-destructive')
-        setMessage(`${_count.error}/${total} ${_count.error === 1 ? 'check' : 'checks'} errored out.`)
+        setMessage(`${_count.error}/${total} ${pluralize('check', _count.error)} errored out.`)
         // setMessage(stringSubstitute(getString('prChecks.error'), { count: _count.error, total }) as string)
       } else if (_count.failure) {
         _status = ExecutionState.FAILURE
         setColor('text-destructive')
         setBackground('text-destructive')
-        setMessage(`${_count.failure}/${total} ${_count.failure === 1 ? 'check' : 'checks'} failed.`)
+        setMessage(`${_count.failure}/${total} ${pluralize('check', _count.failure)} failed.`)
         // setMessage(stringSubstitute(getString('prChecks.failure'), { count: _count.failure, total }) as string)
       } else if (_count.killed) {
         _status = ExecutionState.KILLED
         setColor('text-destructive')
         setBackground('text-destructive')
-        setMessage(`${_count.killed}/${total} ${_count.killed === 1 ? 'check' : 'checks'} killed.`)
+        setMessage(`${_count.killed}/${total} ${pluralize('check', _count.killed)} killed.`)
 
         // setMessage(stringSubstitute(getString('prChecks.killed'), { count: _count.killed, total }) as string)
       } else if (_count.running) {
         _status = ExecutionState.RUNNING
         setColor('text-warning')
         setBackground('text-warning')
-        setMessage(`${_count.running}/${total} ${_count.running === 1 ? 'check' : 'checks'} running.`)
+        setMessage(`${_count.running}/${total} ${pluralize('check', _count.running)} running.`)
 
         // setMessage(stringSubstitute(getString('prChecks.running'), { count: _count.running, total }) as string)
       } else if (_count.pending) {
         _status = ExecutionState.PENDING
         setColor('text-tertiary-background')
         setBackground('text-tertiary-background')
-        setMessage(`${_count.pending}/${total} ${_count.pending === 1 ? 'check' : 'checks'} pending.`)
+        setMessage(`${_count.pending}/${total} ${pluralize('check', _count.pending)} pending.`)
 
         // setMessage(stringSubstitute(getString('prChecks.pending'), { count: _count.pending, total }) as string)
       } else if (_count.skipped) {
         _status = ExecutionState.SKIPPED
         setColor('text-tertiary-background')
         setBackground('text-tertiary-background')
-        setMessage(`${_count.skipped}/${total} ${_count.skipped === 1 ? 'check' : 'checks'} skipped.`)
+        setMessage(`${_count.skipped}/${total} ${pluralize('check', _count.skipped)} skipped.`)
 
         // setMessage(stringSubstitute(getString('prChecks.skipped'), { count: _count.skipped, total }) as string)
       } else if (_count.success) {
         _status = ExecutionState.SUCCESS
         setColor('text-success')
         setBackground('text-success')
-        setMessage(`${_count.success}/${total} ${_count.success === 1 ? 'check' : 'checks'} succeeded.`)
+        setMessage(`${_count.success}/${total} ${pluralize('check', _count.success)} succeeded.`)
 
         // setMessage(stringSubstitute(getString('prChecks.success'), { count: _count.success, total }) as string)
       }

@@ -124,7 +124,7 @@ export default function PullRequestConversationPage() {
   useEffect(() => {
     setActivities(activityData)
   }, [activityData])
-  const currentUser = 'Calvin'
+  const currentUser = 'Default'
 
   let count = 5
   const handleSaveComment = (comment: string, parentId?: number) => {
