@@ -6,7 +6,7 @@ import { data as mockExecution } from '../../pages/mocks/execution/mockExecution
 import { data as mockStepLogs } from '../../pages/mocks/execution/mockStepLogs'
 import { Layout } from '../layout/layout'
 import { ExecutionTree } from './execution-tree'
-import { elements } from '../../assets/mockExecutionTree'
+import { elements } from '../../pages/mocks/execution/mockExecutionTree'
 import { ExecutionStatus } from './execution-status'
 import { getDuration } from '../../utils/TimeUtils'
 import { ExecutionState } from './types'
