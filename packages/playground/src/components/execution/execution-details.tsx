@@ -22,17 +22,15 @@ export const ExecutionDetails: React.FC<ExecutionProps> = (): React.ReactElement
   const execution = mockExecution
   const stages = execution.stages
   if (!stages || !stages.length) return <Text>No stages found</Text>
+  const stageIdx = 0
+  const stepIdx = 0
   return (
     <Layout.Horizontal className="px-8">
       <div className="w-2/3">
-        <StageExecution stage={stages[0]} logs={mockStepLogs[0]} />
+        <StageExecution stage={stages[stageIdx]} logs={mockStepLogs[stepIdx]} />
       </div>
       <ScrollArea className="w-1/3 h-[calc(100vh-16rem)] pt-4">
-        <ContactCard
-          imgSrc="https://github.com/shadcn.png"
-          authorName={execution.author_name || ''}
-          authorEmail={execution.author_email || ''}
-        />
+        <ContactCard authorEmail={execution.author_email} authorName={execution.author_name} />
         <div className="flex flex-col gap-2 my-5">
           <Text className="text-white text-base">{execution.message}</Text>
           <div className="flex gap-2 items-center">

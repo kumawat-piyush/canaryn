@@ -36,11 +36,7 @@ const ExecutionLogs: React.FC = () => {
         {execution?.stages?.[0] && <StageExecution stage={execution.stages?.[0]} logs={logs || []} />}
       </div>
       <ScrollArea className="w-1/3 h-[calc(100vh-16rem)] pt-4">
-        <ContactCard
-          imgSrc="https://github.com/shadcn.png"
-          authorName={execution?.author_name || ''}
-          authorEmail={execution?.author_email || ''}
-        />
+        <ContactCard authorEmail={execution?.author_email || ''} authorName={execution?.author_name} />
         <div className="flex flex-col gap-2 my-5">
           <Text className="text-white text-base">{execution?.message}</Text>
           <div className="flex gap-2 items-center">
