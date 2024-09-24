@@ -56,6 +56,15 @@ const Badge: React.FC<ExecutionStatusProps & BadgeProps> = props => {
           {duration && <span className="text-[#ED5E5E]">{timeAgo(duration)}</span>}
         </div>
       )
+    case ExecutionState.SUCCESS:
+      return minimal ? (
+        <div className="flex items-center gap-1">
+          <div className="w-2 h-2 bg-success rounded-full" />
+          <span className="text-success">Success</span>
+        </div>
+      ) : (
+        /**@TODO add else condition as well*/ <></>
+      )
     default:
       return <></>
   }
