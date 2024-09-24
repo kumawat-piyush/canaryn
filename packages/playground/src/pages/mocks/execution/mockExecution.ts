@@ -36,7 +36,7 @@ export const data = {
       exit_code: 255,
       machine: 'vardan_bansal',
       started: 1722296944000,
-      stopped: 1722296944000,
+      stopped: 1722296944008,
       on_success: true,
       on_failure: false,
       steps: [
@@ -720,7 +720,7 @@ export const data = {
       repo_id: 1,
       number: 2,
       name: 'Deploy to Prod',
-      status: ExecutionState.SUCCESS,
+      status: ExecutionState.RUNNING,
       error: 'Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?',
       exit_code: 255,
       machine: 'vardan_bansal',
