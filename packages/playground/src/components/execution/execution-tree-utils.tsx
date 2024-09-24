@@ -20,7 +20,7 @@ interface Stage {
 }
 
 interface Execution {
-  stages: Stage[]
+  stages?: Stage[]
 }
 
 const mapStatus = (status: ExecutionState): Status => {
@@ -67,5 +67,6 @@ const convertStageToTree = (stage: Stage, id: string): TreeViewElement => {
 }
 
 export const convertExecutionToTree = (execution: Execution): TreeViewElement[] => {
+  if (!execution || !execution.stages) return []
   return execution.stages.map(stage => convertStageToTree(stage, String(stage.number)))
 }
