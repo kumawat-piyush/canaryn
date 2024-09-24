@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { noop } from 'lodash-es'
 import { useFindExecutionQuery, useViewLogsQuery } from '@harnessio/code-service-client'
 import { Badge, Icon, ScrollArea, Separator, Text } from '@harnessio/canary'
 import {
@@ -8,7 +9,8 @@ import {
   ExecutionStatus,
   StageExecution,
   ContactCard,
-  convertExecutionToTree
+  convertExecutionToTree,
+  StageProps
 } from '@harnessio/playground'
 import { PathParams } from '../../RouteDefinitions'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
@@ -40,7 +42,7 @@ const ExecutionLogs: React.FC = () => {
   return (
     <Layout.Horizontal className="px-8">
       <div className="w-2/3">
-        {execution?.stages?.[0] && <StageExecution stage={execution.stages?.[0]} logs={logs || []} />}
+        {execution?.stages?.[0] && <StageExecution stage={execution.stages[0] as StageProps} logs={logs || []} />}
       </div>
       <ScrollArea className="w-1/3 h-[calc(100vh-16rem)] pt-4">
         <ContactCard authorEmail={execution?.author_email || ''} authorName={execution?.author_name} />
@@ -82,7 +84,7 @@ const ExecutionLogs: React.FC = () => {
         </Layout.Horizontal>
         <Separator className="my-4" />
         {execution && (
-          <ExecutionTree defaultSelectedId="2" elements={convertExecutionToTree(execution)} onSelectNode={() => {}} />
+          <ExecutionTree defaultSelectedId="2" elements={convertExecutionToTree(execution)} onSelectNode={noop} />
         )}
       </ScrollArea>
     </Layout.Horizontal>
