@@ -9,7 +9,9 @@ enum Status {
   QUEUED,
   IN_PROGRESS,
   SUCCESS,
-  FAILED
+  FAILED,
+  SKIPPED,
+  UNKNOWN
 }
 
 type ExecutionDetail = {
@@ -27,6 +29,9 @@ const getStatusIcon = (status: Status): React.ReactElement => {
       return <CheckCircleSolid color="#63E9A6" size="16" />
     case Status.FAILED:
       return <XmarkCircleSolid color="#db6662" size="16" />
+    case Status.SKIPPED:
+      return <Circle size="16" />
+    case Status.UNKNOWN:
     default:
       return <></>
   }

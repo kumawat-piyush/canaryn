@@ -1,17 +1,18 @@
 import React from 'react'
 import { Badge, Icon, Separator, Text } from '@harnessio/canary'
 import moment from 'moment'
+import { noop } from 'lodash-es'
+import { ScrollArea } from '@harnessio/canary'
 import { StageExecution } from './stage-execution'
 import { data as mockExecution } from '../../pages/mocks/execution/mockExecution'
 import { data as mockStepLogs } from '../../pages/mocks/execution/mockStepLogs'
 import { Layout } from '../layout/layout'
 import { ExecutionTree } from './execution-tree'
-import { elements } from '../../pages/mocks/execution/mockExecutionTree'
 import { ExecutionStatus } from './execution-status'
 import { getDuration } from '../../utils/TimeUtils'
 import { ExecutionState } from './types'
 import { ContactCard } from '../contact-card'
-import { ScrollArea } from '@harnessio/canary'
+import { convertExecutionToTree } from './execution-tree-utils'
 
 interface ExecutionProps {
   pipelineId: number
@@ -64,7 +65,11 @@ export const ExecutionDetails: React.FC<ExecutionProps> = (): React.ReactElement
           </Layout.Vertical>
         </Layout.Horizontal>
         <Separator className="my-4" />
-        <ExecutionTree defaultSelectedId="2" elements={elements} onSelectNode={() => {}} />
+        <ExecutionTree
+          defaultSelectedId="stage-0"
+          elements={convertExecutionToTree(mockExecution)}
+          onSelectNode={noop}
+        />
       </ScrollArea>
     </Layout.Horizontal>
   )
