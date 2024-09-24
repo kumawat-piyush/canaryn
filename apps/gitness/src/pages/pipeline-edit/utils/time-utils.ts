@@ -80,32 +80,8 @@ export const timeAgoFromEpochTime = (timestamp: number): string => {
   return rtf.format(-diffInYears, 'year')
 }
 
-/**
- * @param startTs
- * @param endTs
- * @returns duration in "1h 2m 3s" format
- */
-export const formatDuration = (startTs?: number, endTs?: number): string => {
-  if (!startTs || !endTs) return '0s'
-
-  const diffInSeconds = Math.floor((endTs - startTs) / 1000)
-
-  const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
-
-  const seconds = diffInSeconds % 60
-  const minutes = Math.floor(diffInSeconds / 60) % 60
-  const hours = Math.floor(diffInSeconds / 3600)
-
-  let formattedDuration = ''
-
-  if (hours > 0) {
-    formattedDuration += `${rtf.format(-hours, 'hour')} `
-  }
-  if (minutes > 0 || hours > 0) {
-    // Always show minutes if hours are present
-    formattedDuration += `${rtf.format(-minutes, 'minute')} `
-  }
-  formattedDuration += `${rtf.format(-seconds, 'second')}`
-
-  return formattedDuration.trim()
+export const getDuration = (startTime?: number, endTime?: number): number => {
+  if (!endTime || !startTime) return 0
+  if (startTime > endTime) return 0
+  return endTime - startTime
 }

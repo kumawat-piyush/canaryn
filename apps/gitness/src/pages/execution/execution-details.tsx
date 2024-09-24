@@ -6,7 +6,7 @@ import { Layout, ExecutionTree, ExecutionStatus, StageExecution, ContactCard } f
 import { PathParams } from '../../RouteDefinitions'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { ExecutionState } from '../../types'
-import { formatDuration, timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
+import { getDuration, timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
 
 const ExecutionLogs: React.FC = () => {
   const { pipelineId, executionId } = useParams<PathParams>()
@@ -66,7 +66,7 @@ const ExecutionLogs: React.FC = () => {
               <ExecutionStatus.Badge
                 status={execution.status as ExecutionState}
                 minimal
-                duration={formatDuration(execution?.started, execution?.finished)}
+                duration={getDuration(execution?.started, execution?.finished)}
               />
             </Layout.Vertical>
           )}
