@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { SandboxLayout } from '../index'
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { Icon, Navbar, NavbarProjectChooser, NavbarUser } from '@harnessio/canary'
-import { MoreSubmenu } from '../components/more-submenu'
+// import { MoreSubmenu } from '../components/more-submenu'
 
 export const SandboxRoot: React.FC = () => {
   const [showMore, setShowMore] = useState<boolean>(false)
@@ -104,6 +104,9 @@ export const SandboxRoot: React.FC = () => {
               <NavLink to="/sandbox/repos/drone/code">
                 <Navbar.Item text="Repo&nbsp;&nbsp;/&nbsp;&nbsp;Code" icon={<Icon name="repositories" size={12} />} />
               </NavLink>
+              <NavLink to="/sandbox/executions">
+                <Navbar.Item text="Executions" icon={<Icon name="executions" size={12} />} />
+              </NavLink>
             </Navbar.AccordionGroup>
           </Navbar.Content>
           <Navbar.Footer>
@@ -112,7 +115,7 @@ export const SandboxRoot: React.FC = () => {
         </Navbar.Root>
       </SandboxLayout.LeftPanel>
       <Outlet />
-      <MoreSubmenu showMore={showMore} handleMore={handleMore} />
+      {/* <MoreSubmenu showMore={showMore} handleMore={handleMore} /> */}
     </SandboxLayout.Root>
   )
 }

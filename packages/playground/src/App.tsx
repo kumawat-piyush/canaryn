@@ -11,7 +11,6 @@ import LandingPage from './pages/landing-page'
 import RepoListPage from './pages/repo-list-page'
 import PipelineListPage from './pages/pipeline-list-page'
 import RepoSummaryPage from './pages/repo-summary-page'
-import ExecutionListPage from './pages/execution-list-page'
 import ExecutionDetailsPage from './pages/execution-details-page'
 import PullRequestListPage from './pages/pull-request-list-page'
 import CommitsListPage from './pages/commits-list-page'
@@ -33,12 +32,22 @@ import { SandboxRepoSummaryPage } from './pages/sandbox-repo-summary-page'
 import { SandboxRepoSinglePage } from './pages/sandbox-repo-single-page'
 import { SandboxRepoCodePage } from './pages/sandbox-repo-code-page'
 import { SandboxLandingPage } from './pages/sandbox-landing-page'
+import { SandboxExecutionSummaryPage } from './pages/sandbox-executions-summary-page'
+import { SandboxExecutions } from './layouts/SandboxExecutions'
+import { SandboxExecutionLogsPage } from './pages/sandbox-executions-logs-page'
+import { SandboxExecutionInputsPage } from './pages/sandbox-executions-inputs-page'
+import { SandboxExecutionPolicyEvaluationsPage } from './pages/sandbox-executions-policy-evaluations-page'
+import { SandboxExecutionArtifactsPage } from './pages/sandbox-executions-artifacts-page'
+import { SandboxExecutionTestsPage } from './pages/sandbox-executions-tests-page'
+import { SandboxExecutionSecurityTestsPage } from './pages/sandbox-executions-security-tests-page'
+import { SandboxExecutionSecretsPage } from './pages/sandbox-executions-secrets-page'
 
 const router = createBrowserRouter([
   // TEMPORARY LAYOUT SANDBOX
   {
     path: '/sandbox',
     element: <SandboxRoot />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: 'repos',
@@ -61,6 +70,49 @@ const router = createBrowserRouter([
                 element: <SandboxRepoCodePage />
               }
             ]
+          }
+        ]
+      },
+      {
+        path: 'executions',
+        element: <SandboxExecutions />,
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="summary" replace />
+          },
+          {
+            path: 'summary',
+            element: <SandboxExecutionSummaryPage />
+          },
+          {
+            path: 'logs',
+            element: <SandboxExecutionLogsPage />
+          },
+          {
+            path: 'inputs',
+            element: <SandboxExecutionInputsPage />
+          },
+          {
+            path: 'policy-evaluations',
+            element: <SandboxExecutionPolicyEvaluationsPage />
+          },
+          {
+            path: 'artifacts',
+            element: <SandboxExecutionArtifactsPage />
+          },
+          {
+            path: 'tests',
+            element: <SandboxExecutionTestsPage />
+          },
+          {
+            path: 'security-tests',
+            element: <SandboxExecutionSecurityTestsPage />
+          },
+          {
+            path: 'secrets',
+            element: <SandboxExecutionSecretsPage />
           }
         ]
       },
@@ -192,7 +244,7 @@ const router = createBrowserRouter([
       // EXECUTIONS (OUTSIDE REPOS)
       {
         path: 'executions',
-        element: <ExecutionListPage />
+        element: <Navigate to="/sandbox/executions" />
       }
     ]
   }

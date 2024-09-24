@@ -157,6 +157,9 @@ export const RootLayout: React.FC = () => {
                 <NavLink to="/sandbox/repos/drone/code">
                   <Navbar.Item text="Repo&nbsp;&nbsp;/&nbsp;&nbsp;Code" icon={<Icon name="repositories" size={12} />} />
                 </NavLink>
+                <NavLink to="/sandbox/executions">
+                  <Navbar.Item text="Executions" icon={<Icon name="executions" size={12} />} />
+                </NavLink>
               </Navbar.AccordionGroup>
             </Navbar.Content>
             <Navbar.Footer>
