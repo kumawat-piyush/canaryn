@@ -176,8 +176,6 @@ const PullRequestDataProvider: React.FC<PullRequestDataProviderProps> = ({ child
     error: activitiesError,
     refetch: refetchActivities
   } = useListPullReqActivitiesQuery({
-    // path: `/api/v1/repos/${repoMetadata?.path}/+/pullreq/${pullRequestId}/activities`,
-    // lazy: true
     repo_ref: repoRef,
     pullreq_number: Number(pullRequestId),
     queryParams: {}
@@ -243,7 +241,6 @@ const PullRequestDataProvider: React.FC<PullRequestDataProviderProps> = ({ child
   useEffect(() => {
     const intervalId = setInterval(async () => {
       if (pullReqMetadata?.source_sha) {
-        // console.log(2313213213)
         dryMerge()
       }
     }, POLLING_INTERVAL) // Poll every 20 seconds
@@ -305,6 +302,11 @@ const PullRequestDataProvider: React.FC<PullRequestDataProviderProps> = ({ child
       // Use an internal flag to prevent flickering during the loading state of buttons
       // internalFlags.current.dryRun = true
 
+      // ******
+      // NOTE: Since this is in the data provider/context, i set all the necessary information from the rule violation
+      // arr that i can use to determine the states in the pr panel and i can get this information from the hook
+      // usePullRequestData
+      // ****
       mergePullReqOp({
         repo_ref: `${repoMetadata?.path}/+`,
         pullreq_number: Number(pullRequestId),

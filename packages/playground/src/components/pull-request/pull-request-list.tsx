@@ -187,7 +187,6 @@ export function PullRequestList({ pullRequests, LinkComponent }: PageProps) {
       }),
     [headerFilter]
   )
-  console.log(filteredData)
   return (
     <>
       {filteredData && filteredData.length > 0 && (
