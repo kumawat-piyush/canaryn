@@ -41,6 +41,14 @@ import { SandboxExecutionArtifactsPage } from './pages/sandbox-executions-artifa
 import { SandboxExecutionTestsPage } from './pages/sandbox-executions-tests-page'
 import { SandboxExecutionSecurityTestsPage } from './pages/sandbox-executions-security-tests-page'
 import { SandboxExecutionSecretsPage } from './pages/sandbox-executions-secrets-page'
+import { SandboxSettings } from './layouts/SandboxSettings'
+import { SandboxSettingsPage } from './pages/sandbox-settings-page'
+import { SandboxSettingsAccountPage } from './pages/sandbox-settings-account-page'
+import { SandboxSettingsAccountGeneralPage } from './pages/sandbox-settings-account-general-page'
+import { SandboxSettingsAccountKeysPage } from './pages/sandbox-settings-account-keys-page'
+import { SandboxSettingsProjectPage } from './pages/sandbox-settings-project-page'
+import { SandboxSettingsProjectGeneralPage } from './pages/sandbox-settings-project-general-page'
+import { SandboxSettingsProjectMembersPage } from './pages/sandbox-settings-project-members-page'
 
 const router = createBrowserRouter([
   // TEMPORARY LAYOUT SANDBOX
@@ -113,6 +121,48 @@ const router = createBrowserRouter([
           {
             path: 'secrets',
             element: <SandboxExecutionSecretsPage />
+          }
+        ]
+      },
+      {
+        path: 'settings',
+        element: <SandboxSettings />,
+        children: [
+          {
+            path: 'account',
+            element: <SandboxSettingsAccountPage />,
+            children: [
+              {
+                index: true,
+                element: <Navigate to="general" />
+              },
+              {
+                path: 'general',
+                element: <SandboxSettingsAccountGeneralPage />
+              },
+              {
+                path: 'keys',
+                element: <SandboxSettingsAccountKeysPage />
+              }
+            ]
+          },
+          {
+            path: 'project',
+            element: <SandboxSettingsProjectPage />,
+            children: [
+              {
+                index: true,
+                element: <Navigate to="general" />
+              },
+              {
+                path: 'general',
+                element: <SandboxSettingsProjectGeneralPage />
+              },
+              {
+                path: 'members',
+                element: <SandboxSettingsProjectMembersPage />
+              }
+            ]
           }
         ]
       },
