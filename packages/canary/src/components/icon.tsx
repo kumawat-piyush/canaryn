@@ -26,6 +26,7 @@ import Tick from '../icons/tick.svg'
 import NoDataFolder from '../icons/no-data-folder.svg'
 import NoDataMerge from '../icons/no-data-merge.svg'
 import NoDataCog from '../icons/no-data-cog.svg'
+import NoDataBranches from '../icons/no-data-branches.svg'
 import NoSearchMagnifyingGlass from '../icons/no-search-magnifying-glass.svg'
 import Changes from '../icons/changes.svg'
 import Checks from '../icons/checks.svg'
@@ -61,18 +62,6 @@ import GitBranch from '../icons/git-branch.svg'
 import PrComment from '../icons/pr-comment.svg'
 import CreateWorkspace from '../icons/create-workspace.svg'
 import NoDataWebhooks from '../icons/no-data-webhooks.svg'
-import SubRocket from '../icons/sub-rocket.svg'
-import SubSocket from '../icons/sub-socket.svg'
-import SubFlag from '../icons/sub-flag.svg'
-import SubChain from '../icons/sub-chain.svg'
-import SubCloud from '../icons/sub-cloud.svg'
-import SubFolder from '../icons/sub-folder.svg'
-import SubInfra from '../icons/sub-infra.svg'
-import SubInsights from '../icons/sub-insights.svg'
-import SubReliability from '../icons/sub-reliability.svg'
-import SubShield from '../icons/sub-shield.svg'
-import SubChaos from '../icons/sub-chaos.svg'
-import SubRepository from '../icons/sub-repository.svg'
 import AddFile from '../icons/add-file.svg'
 import AddFolder from '../icons/add-folder.svg'
 import Lightning from '../icons/lightning.svg'
@@ -81,6 +70,19 @@ import BitrisePlugin from '../icons/bitrise-plugin.svg'
 import Trash from '../icons/trash.svg'
 import XMark from '../icons/x-mark.svg'
 import Cog6 from '../icons/cog-6.svg'
+import Pin from '../icons/pin.svg'
+import Unpin from '../icons/unpin.svg'
+import Rocket from '../icons/rocket.svg'
+import Plug from '../icons/plug.svg'
+import Flag from '../icons/flag.svg'
+import FilterOrganization from '../icons/filter-organization.svg'
+import ShieldLock from '../icons/shield-lock.svg'
+import MoreFolder from '../icons/more-folder.svg'
+import Bookmark from '../icons/bookmark.svg'
+import SearchContent from '../icons/search-content.svg'
+import Chain from '../icons/chain.svg'
+import ShieldTick from '../icons/shield-tick.svg'
+import CloudMining from '../icons/cloud-mining.svg'
 // import Fork from '../icons/fork.svg'
 
 const IconNameMap = {
@@ -111,6 +113,7 @@ const IconNameMap = {
   'no-data-folder': NoDataFolder,
   'no-data-merge': NoDataMerge,
   'no-data-cog': NoDataCog,
+  'no-data-branches': NoDataBranches,
   'no-search-magnifying-glass': NoSearchMagnifyingGlass,
   changes: Changes,
   checks: Checks,
@@ -146,18 +149,6 @@ const IconNameMap = {
   'pr-comment': PrComment,
   'create-workspace': CreateWorkspace,
   'no-data-webhooks': NoDataWebhooks,
-  'sub-rocket': SubRocket,
-  'sub-socket': SubSocket,
-  'sub-flag': SubFlag,
-  'sub-chain': SubChain,
-  'sub-cloud': SubCloud,
-  'sub-folder': SubFolder,
-  'sub-infra': SubInfra,
-  'sub-insights': SubInsights,
-  'sub-reliability': SubReliability,
-  'sub-shield': SubShield,
-  'sub-chaos': SubChaos,
-  'sub-repository': SubRepository,
   'add-folder': AddFolder,
   'add-file': AddFile,
   lightning: Lightning,
@@ -165,7 +156,20 @@ const IconNameMap = {
   'bitrise-plugin': BitrisePlugin,
   trash: Trash,
   'x-mark': XMark,
-  'cog-6': Cog6
+  'cog-6': Cog6,
+  pin: Pin,
+  unpin: Unpin,
+  rocket: Rocket,
+  plug: Plug,
+  flag: Flag,
+  'filter-organization': FilterOrganization,
+  'shield-lock': ShieldLock,
+  'more-folder': MoreFolder,
+  bookmark: Bookmark,
+  'search-content': SearchContent,
+  chain: Chain,
+  'shield-tick': ShieldTick,
+  'cloud-mining': CloudMining
   // fork: Fork
 } satisfies Record<string, React.FunctionComponent<React.SVGProps<SVGSVGElement>>>
 
