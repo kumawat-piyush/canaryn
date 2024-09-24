@@ -15,6 +15,7 @@ import {
 import React, { useState, useEffect } from 'react'
 import { getInitials } from '../utils/utils'
 import AvatarUrl from '../../public/images/user-avatar.svg'
+import copy from 'clipboard-copy'
 interface BranchProps {
   // id: string
   name: string
@@ -43,13 +44,14 @@ interface PageProps {
   branches: BranchProps[]
 }
 
-const CopyButton = () => {
+const CopyButton = (name: string) => {
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     let timeoutId: number
     if (copied) {
       //add copy function here if we need in the future
+      copy(name)
       timeoutId = window.setTimeout(() => setCopied(false), 2500)
     }
     return () => {
@@ -98,7 +100,7 @@ export const BranchesList = ({ branches }: PageProps) => {
                         {branch.name}
                       </Button>
                     </Text>
-                    {CopyButton()}
+                    {CopyButton(branch.name)}
                   </div>
                 </TableCell>
                 <TableCell>
