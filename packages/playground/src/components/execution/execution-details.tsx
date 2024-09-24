@@ -9,10 +9,10 @@ import { data as mockStepLogs } from '../../pages/mocks/execution/mockStepLogs'
 import { Layout } from '../layout/layout'
 import { ExecutionTree } from './execution-tree'
 import { ExecutionStatus } from './execution-status'
-import { getDuration } from '../../utils/TimeUtils'
 import { ExecutionState } from './types'
 import { ContactCard } from '../contact-card'
 import { convertExecutionToTree } from './execution-tree-utils'
+import { getFormattedDuration } from '../../utils/TimeUtils'
 
 interface ExecutionProps {
   pipelineId: number
@@ -56,7 +56,7 @@ export const ExecutionDetails: React.FC<ExecutionProps> = (): React.ReactElement
             <ExecutionStatus.Badge
               status={execution.status as ExecutionState}
               minimal
-              duration={getDuration(execution.started, execution.finished)}
+              duration={getFormattedDuration(execution.started, execution.finished)}
             />
           </Layout.Vertical>
           <Layout.Vertical gap="space-y-1">

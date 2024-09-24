@@ -1,7 +1,6 @@
 import React from 'react'
 import { Refresh, Xmark } from '@harnessio/icons-noir' // TODO: Lose these!
 import { Icon as CanaryIcon } from '@harnessio/canary'
-import { timeAgo } from '../../utils/utils'
 
 export enum ExecutionState {
   PENDING = 'pending',
@@ -18,7 +17,7 @@ interface ExecutionStatusProps {
 }
 
 interface BadgeProps {
-  duration: number
+  duration: string
   minimal?: boolean
 }
 
@@ -37,7 +36,7 @@ const Badge: React.FC<ExecutionStatusProps & BadgeProps> = props => {
             <Refresh color="rgba(226,155,54,1)" size="16" className="animate-spin" />
             <span className="text-studio-3">Running</span>
           </div>
-          {duration && <span className="text-studio-3">{timeAgo(duration)}</span>}
+          {duration && <span className="text-studio-3">{duration}</span>}
         </div>
       )
     case ExecutionState.ERROR:
@@ -53,7 +52,7 @@ const Badge: React.FC<ExecutionStatusProps & BadgeProps> = props => {
             <Xmark color="#ED5E5E" size="20" />
             <span className="text-[#ED5E5E]">Failed</span>
           </div>
-          {duration && <span className="text-[#ED5E5E]">{timeAgo(duration)}</span>}
+          {duration && <span className="text-[#ED5E5E]">{duration}</span>}
         </div>
       )
     case ExecutionState.SUCCESS:

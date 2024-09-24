@@ -4,7 +4,7 @@ import { Copy, Edit, Download } from '@harnessio/icons-noir'
 import ConsoleLogs from './console-logs'
 import { Layout } from '../layout/layout'
 import { ExecutionState, ExecutionStatus } from './execution-status'
-import { getDuration } from '../../utils/TimeUtils'
+import { getFormattedDuration } from '../../utils/TimeUtils'
 import { KeyValuePair, KeyValueTable } from './key-value-table'
 import { LivelogLine } from './types'
 
@@ -55,7 +55,10 @@ export const StepExecution: React.FC<StepExecutionProps> = ({ step, logs }) => {
     <Layout.Vertical>
       <Layout.Horizontal className="flex justify-between items-center">
         <Text className="text-lg">{step?.name}</Text>
-        <ExecutionStatus.Badge status={step?.status} duration={getDuration(step?.started, step?.stopped)} />
+        <ExecutionStatus.Badge
+          status={step?.status}
+          duration={getFormattedDuration(step?.started ?? 0, step?.stopped ?? 0)}
+        />
       </Layout.Horizontal>
       <Tabs defaultValue={StepExecutionTab.LOG} className="w-full h-full mt-2">
         <Layout.Vertical gap="space-y-3">

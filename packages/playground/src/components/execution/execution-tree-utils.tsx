@@ -1,6 +1,6 @@
 import { TreeViewElement, Status } from '@harnessio/canary'
 import { ExecutionState } from '../execution/types'
-import { getDuration } from '../../utils/TimeUtils'
+import { getFormattedDuration } from '../../utils/TimeUtils'
 
 interface Step {
   number: number
@@ -49,7 +49,7 @@ const convertStepToTree = (step: Step, id: string): TreeViewElement => {
     isSelectable: true,
     name: step.name,
     status: mapStatus(step.status),
-    duration: getDuration(step.started, step.stopped),
+    duration: getFormattedDuration(step.started, step.stopped),
     children: []
   }
 }
@@ -61,7 +61,7 @@ const convertStageToTree = (stage: Stage, id: string): TreeViewElement => {
     isSelectable: true,
     name: stage.name,
     status: mapStatus(stage.status),
-    duration: getDuration(stage.started, stage.stopped),
+    duration: getFormattedDuration(stage.started, stage.stopped),
     children: stage.steps ? stage.steps.map(step => convertStepToTree(step, String(step.number))) : []
   }
 }
