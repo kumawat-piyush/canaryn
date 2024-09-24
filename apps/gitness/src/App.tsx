@@ -93,20 +93,23 @@ export default function App() {
             { path: 'webhooks', element: <RepoWebhooksListPage /> }
           ]
         },
-        // Pipelines (OUTSIDE REPOS)
-        //
+        {
+          path: 'repos',
+          element: <ReposListPage />
+        },
+        /* Pipelines (Outside a repo) */
         /**
          * 🚨 Root level pipelines will be disabled 🚨
-         * Pipelines will only be part of repos for now
+         * Pipelines will only be part of a repository for now
          */
         {
           path: 'pipelines',
-          element: <PipelineListPage />
+          element: <></>
         },
-        // Executions (OUTSIDE REPOS)
+        /* Executions (Outside a repo) */
         {
           path: 'executions',
-          element: <ExecutionsListPage />
+          element: <></>
         },
         {
           path: ':spaceId/:repoId',

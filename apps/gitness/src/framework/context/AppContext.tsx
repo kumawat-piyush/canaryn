@@ -8,6 +8,8 @@ import {
 } from '@harnessio/code-service-client'
 
 interface AppContextType {
+  selectedSpace: string
+  setSelectedSpace: (space: string) => void
   spaces: TypesMembershipSpace[]
   setSpaces: (spaces: TypesMembershipSpace[]) => void
   addSpaces: (newSpaces: TypesSpace[]) => void
@@ -18,6 +20,7 @@ const BASE_URL_PREFIX = '/api/v1'
 const AppContext = createContext<AppContextType | undefined>(undefined)
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [selectedSpace, setSelectedSpace] = useState<string>('')
   const [spaces, setSpaces] = useState<TypesMembershipSpace[]>([])
 
   React.useEffect(() => {
@@ -43,9 +46,12 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       }
     })
     membershipSpaces({
-      queryParams: { page: 1, limit: 10, sort: 'identifier', order: 'asc' }
+      queryParams: { page: 1, limit: 10, sort: 'created', order: 'asc' }
     }).then((response: MembershipSpacesOkResponse) => {
       setSpaces(response)
+      if (response?.[0]?.space?.path) {
+        setSelectedSpace(response[0].space.path)
+      }
     })
   }, [])
 
@@ -53,7 +59,11 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     setSpaces(prevSpaces => [...prevSpaces, ...newSpaces])
   }
 
-  return <AppContext.Provider value={{ spaces, setSpaces, addSpaces }}>{children}</AppContext.Provider>
+  return (
+    <AppContext.Provider value={{ selectedSpace, setSelectedSpace, spaces, setSpaces, addSpaces }}>
+      {children}
+    </AppContext.Provider>
+  )
 }
 
 export const useAppContext = (): AppContextType => {
