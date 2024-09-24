@@ -20,6 +20,7 @@ import { PipelineCreate } from './pages/pipeline-create/pipeline-create'
 import RepoCommitsPage from './pages/repo/repo-commits'
 import { Execution } from './pages/execution/execution-details'
 import RepoWebhooksListPage from './pages/repo/repo-webhooks'
+import { ReposBranchesListPage } from './pages/repo/repo-branch-list'
 
 export default function App() {
   const router = createBrowserRouter([
@@ -56,7 +57,11 @@ export default function App() {
                   path: ':pipelineId',
                   children: [
                     { index: true, element: <ExecutionsListPage /> },
-                    { path: 'executions/:executionId', element: <Execution /> }
+                    { path: 'executions/:executionId', element: <Execution /> },
+                    {
+                      path: 'edit',
+                      element: <PipelineEditPage />
+                    }
                   ]
                 },
                 {
@@ -84,9 +89,10 @@ export default function App() {
               element: <RepoCommitsPage />
             },
             {
-              path: 'webhooks',
-              element: <RepoWebhooksListPage />
-            }
+              path: 'branches',
+              element: <ReposBranchesListPage />
+            },
+            { path: 'webhooks', element: <RepoWebhooksListPage /> }
           ]
         },
         // Pipelines (OUTSIDE REPOS)
