@@ -1,6 +1,5 @@
 import React from 'react'
-import { Badge, Separator, Text } from '@harnessio/canary'
-import { GitBranch, GitCommit } from '@harnessio/icons-noir'
+import { Badge, Icon, Separator, Text } from '@harnessio/canary'
 import moment from 'moment'
 import { StageExecution } from './stage-execution'
 import { data as mockExecution } from '../../pages/mocks/execution/mockExecution'
@@ -25,7 +24,6 @@ export const ExecutionDetails: React.FC<ExecutionProps> = (): React.ReactElement
   if (!stages || !stages.length) return <Text>No stages found</Text>
   return (
     <Layout.Horizontal className="px-8">
-      {/* Hardcoded height added temporarily */}
       <div className="w-2/3">
         <StageExecution stage={stages[0]} logs={mockStepLogs[0]} />
       </div>
@@ -40,15 +38,15 @@ export const ExecutionDetails: React.FC<ExecutionProps> = (): React.ReactElement
           <div className="flex gap-2 items-center">
             <Badge variant="secondary" className="bg-primary-foreground flex gap-1">
               <Layout.Horizontal gap="space-x-1" className="flex items-center">
-                <GitCommit />
-                <Text className="text-sm text-git">{execution.source}</Text>
+                <Icon size={12} name={'tube-sign'} />
+                <Text className="text-sm text-git pb-0.5">{execution.source}</Text>
               </Layout.Horizontal>
             </Badge>
             <span>to</span>
             <Badge variant="secondary" className="flex gap-1 bg-primary-foreground">
               <Layout.Horizontal gap="space-x-1" className="flex items-center">
-                <GitBranch />
-                <Text className="text-sm text-git">{execution.target}</Text>
+                <Icon size={12} name={'git-branch'} />
+                <Text className="text-sm text-git pb-0.5">{execution.target}</Text>
               </Layout.Horizontal>
             </Badge>
           </div>

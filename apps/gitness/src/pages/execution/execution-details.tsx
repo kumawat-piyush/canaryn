@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useFindExecutionQuery, useViewLogsQuery } from '@harnessio/code-service-client'
-import { GitCommit, GitBranch } from '@harnessio/icons-noir'
-import { Badge, ScrollArea, Separator, Text } from '@harnessio/canary'
+import { Badge, Icon, ScrollArea, Separator, Text } from '@harnessio/canary'
 import { Layout, ExecutionTree, ExecutionStatus, StageExecution, ContactCard } from '@harnessio/playground'
 import { PathParams } from '../../RouteDefinitions'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
@@ -47,15 +46,15 @@ const ExecutionLogs: React.FC = () => {
           <div className="flex gap-2 items-center">
             <Badge variant="secondary" className="bg-primary-foreground flex gap-1">
               <Layout.Horizontal gap="space-x-1" className="flex items-center">
-                <GitCommit />
-                <Text className="text-sm text-git">{execution?.source}</Text>
+                <Icon size={12} name={'tube-sign'} />
+                <Text className="text-sm text-git pb-0.5">{execution?.source}</Text>
               </Layout.Horizontal>
             </Badge>
             <span>to</span>
             <Badge variant="secondary" className="flex gap-1 bg-primary-foreground">
               <Layout.Horizontal gap="space-x-1" className="flex items-center">
-                <GitBranch />
-                <Text className="text-sm text-git">{execution?.target}</Text>
+                <Icon size={12} name={'git-branch'} />
+                <Text className="text-sm text-git pb-0.5">{execution?.target}</Text>
               </Layout.Horizontal>
             </Badge>
           </div>
