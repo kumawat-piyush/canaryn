@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { noop } from 'lodash-es'
-import { useFindExecutionQuery, useViewLogsQuery } from '@harnessio/code-service-client'
+import { TypesStage, useFindExecutionQuery, useViewLogsQuery } from '@harnessio/code-service-client'
 import { Badge, Icon, ScrollArea, Separator, Text } from '@harnessio/canary'
 import {
   Layout,
@@ -20,8 +19,9 @@ import { getDuration, timeAgoFromEpochTime } from '../pipeline-edit/utils/time-u
 const ExecutionLogs: React.FC = () => {
   const { pipelineId, executionId } = useParams<PathParams>()
   const repoRef = useGetRepoRef()
-  const [stageNum, _setStageNum] = useState<string>('1')
-  const [stepNum, _setStepNum] = useState<string>('1')
+  const [stage, setStage] = useState<TypesStage>()
+  const [stageNum, setStageNum] = useState<number>(1)
+  const [stepNum, setStepNum] = useState<number>(1)
   const pipelineIdentifier = pipelineId || ''
   const executionNum = executionId || ''
 
@@ -35,14 +35,27 @@ const ExecutionLogs: React.FC = () => {
     pipeline_identifier: pipelineIdentifier,
     execution_number: executionNum,
     repo_ref: repoRef,
-    stage_number: stageNum,
-    step_number: stepNum
+    stage_number: String(stageNum),
+    step_number: String(stepNum)
   })
+
+  useEffect(() => {
+    if (execution?.stages && execution.stages.length > 0) {
+      const stageIdx = stageNum > 0 ? stageNum - 1 : 0
+      setStage(execution.stages[stageIdx])
+    }
+  }, [execution?.stages, stageNum])
 
   return (
     <Layout.Horizontal className="px-8">
       <div className="w-2/3">
-        {execution?.stages?.[0] && <StageExecution stage={execution.stages[0] as StageProps} logs={logs || []} />}
+        {stage && (
+          <StageExecution
+            stage={stage as StageProps}
+            logs={logs ?? []}
+            selectedStepIdx={stepNum > 0 ? stepNum - 1 : 0}
+          />
+        )}
       </div>
       <ScrollArea className="w-1/3 h-[calc(100vh-16rem)] pt-4">
         <ContactCard authorEmail={execution?.author_email || ''} authorName={execution?.author_name} />
@@ -84,7 +97,19 @@ const ExecutionLogs: React.FC = () => {
         </Layout.Horizontal>
         <Separator className="my-4" />
         {execution && (
-          <ExecutionTree defaultSelectedId="2" elements={convertExecutionToTree(execution)} onSelectNode={noop} />
+          <ExecutionTree
+            defaultSelectedId=""
+            elements={convertExecutionToTree(execution)}
+            onSelectNode={({ parentId: stageNum, childId: stepNum }: { parentId: string; childId: string }) => {
+              try {
+                setStageNum(parseInt(stageNum))
+                setStepNum(parseInt(stepNum))
+                /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+              } catch (e) {
+                // ignore exception
+              }
+            }}
+          />
         )}
       </ScrollArea>
     </Layout.Horizontal>

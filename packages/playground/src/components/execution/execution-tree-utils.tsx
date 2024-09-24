@@ -3,6 +3,7 @@ import { ExecutionState } from '../execution/types'
 import { getDuration } from '../../utils/TimeUtils'
 
 interface Step {
+  number: number
   name: string
   status: ExecutionState
   started: number
@@ -10,6 +11,7 @@ interface Step {
 }
 
 interface Stage {
+  number: number
   name: string
   status: ExecutionState
   started: number
@@ -60,10 +62,10 @@ const convertStageToTree = (stage: Stage, id: string): TreeViewElement => {
     name: stage.name,
     status: mapStatus(stage.status),
     duration: getDuration(stage.started, stage.stopped),
-    children: stage.steps ? stage.steps.map((step, index) => convertStepToTree(step, `${id}-step-${index}`)) : []
+    children: stage.steps ? stage.steps.map(step => convertStepToTree(step, String(step.number))) : []
   }
 }
 
 export const convertExecutionToTree = (execution: Execution): TreeViewElement[] => {
-  return execution.stages.map((stage, index) => convertStageToTree(stage, `stage-${index}`))
+  return execution.stages.map(stage => convertStageToTree(stage, String(stage.number)))
 }

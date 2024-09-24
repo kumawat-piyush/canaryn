@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import cx from 'classnames'
 import { Button, Text } from '@harnessio/canary'
 import { NavArrowDown, NavArrowRight, NavArrowUp } from '@harnessio/icons-noir'
@@ -14,6 +14,7 @@ export interface StageProps {
 
 interface StageExecutionProps {
   stage: StageProps
+  selectedStepIdx: number
   logs: LivelogLine[]
 }
 
@@ -67,20 +68,35 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
   )
 }
 
-export const StageExecution: React.FC<StageExecutionProps> = ({ stage, logs }): React.ReactElement => {
-  const [stepIndex, setStepIndex] = useState<number>(0)
-  const steps = stage.steps
-  if (!steps || !steps.length) return <Text>No steps found</Text>
+export const StageExecution: React.FC<StageExecutionProps> = ({ stage, selectedStepIdx, logs }): React.ReactElement => {
+  if (!stage || !stage?.steps) {
+    return <Text>No steps found</Text>
+  }
+  const [selectedStepIndex, setSelectedStepIndex] = useState<number>(0)
+  const [step, setStep] = useState<StepProps>()
   const stepCount = (stage.steps || []).length
   const stepMaxIndex = stepCount > 1 ? stepCount - 1 : 0
+
+  useEffect(() => {
+    if (selectedStepIdx >= 0) {
+      setSelectedStepIndex(selectedStepIdx)
+    }
+  }, [selectedStepIdx])
+
+  useEffect(() => {
+    if (stage && stage?.steps && stage.steps.length >= 0 && selectedStepIndex >= 0) {
+      setStep(stage.steps[selectedStepIndex])
+    }
+  }, [stage.steps, selectedStepIndex])
+
   return (
     <Layout.Horizontal gap="space-x-0">
       <StepNavigation
-        stepIndex={stepIndex}
-        onClickUp={() => setStepIndex(currIdx => (currIdx - 1 > 0 ? currIdx - 1 : 0))}
-        onClickDown={() => setStepIndex(currIdx => (currIdx + 1 < stepMaxIndex ? currIdx + 1 : stepMaxIndex))}
-        disableUp={stepIndex === 0}
-        disableDown={steps.length - 1 === stepIndex}
+        stepIndex={selectedStepIndex}
+        onClickUp={() => setSelectedStepIndex(currIdx => (currIdx - 1 > 0 ? currIdx - 1 : 0))}
+        onClickDown={() => setSelectedStepIndex(currIdx => (currIdx + 1 < stepMaxIndex ? currIdx + 1 : stepMaxIndex))}
+        disableUp={selectedStepIndex === 0}
+        disableDown={stepCount - 1 === selectedStepIndex}
       />
       <Layout.Vertical gap="space-y-2" className="p-4 flex-grow">
         {stage?.group ? (
@@ -92,7 +108,7 @@ export const StageExecution: React.FC<StageExecutionProps> = ({ stage, logs }): 
         ) : (
           <Text>{stage.name}</Text>
         )}
-        <StepExecution step={steps[stepIndex]} logs={logs} />
+        {step && <StepExecution step={step} logs={logs} />}
       </Layout.Vertical>
     </Layout.Horizontal>
   )

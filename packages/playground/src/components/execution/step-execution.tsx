@@ -48,13 +48,14 @@ const StepExecutionToolbar: React.FC = () => {
 }
 
 export const StepExecution: React.FC<StepExecutionProps> = ({ step, logs }) => {
+  if (!step) return null
   const inputTable = step?.inputs || []
   const outputTable = step?.outputs || []
   return (
     <Layout.Vertical>
       <Layout.Horizontal className="flex justify-between items-center">
-        <Text className="text-lg">{step.name}</Text>
-        <ExecutionStatus.Badge status={step.status} duration={getDuration(step.started, step.stopped)} />
+        <Text className="text-lg">{step?.name}</Text>
+        <ExecutionStatus.Badge status={step?.status} duration={getDuration(step?.started, step?.stopped)} />
       </Layout.Horizontal>
       <Tabs defaultValue={StepExecutionTab.LOG} className="w-full h-full mt-2">
         <Layout.Vertical gap="space-y-3">
