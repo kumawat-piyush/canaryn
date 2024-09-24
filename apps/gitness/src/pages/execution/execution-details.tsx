@@ -2,7 +2,14 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useFindExecutionQuery, useViewLogsQuery } from '@harnessio/code-service-client'
 import { Badge, Icon, ScrollArea, Separator, Text } from '@harnessio/canary'
-import { Layout, ExecutionTree, ExecutionStatus, StageExecution, ContactCard } from '@harnessio/playground'
+import {
+  Layout,
+  ExecutionTree,
+  ExecutionStatus,
+  StageExecution,
+  ContactCard,
+  convertExecutionToTree
+} from '@harnessio/playground'
 import { PathParams } from '../../RouteDefinitions'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { ExecutionState } from '../../types'
@@ -74,7 +81,9 @@ const ExecutionLogs: React.FC = () => {
           )}
         </Layout.Horizontal>
         <Separator className="my-4" />
-        <ExecutionTree defaultSelectedId="2" elements={[]} onSelectNode={() => {}} />
+        {execution && (
+          <ExecutionTree defaultSelectedId="2" elements={convertExecutionToTree(execution)} onSelectNode={() => {}} />
+        )}
       </ScrollArea>
     </Layout.Horizontal>
   )
