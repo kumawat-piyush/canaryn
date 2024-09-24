@@ -10,12 +10,17 @@ import {
   Text,
   Avatar,
   AvatarImage,
-  AvatarFallback
+  AvatarFallback,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipArrow
 } from '@harnessio/canary'
 import React, { useState, useEffect } from 'react'
 import { getInitials } from '../utils/utils'
 import AvatarUrl from '../../public/images/user-avatar.svg'
 import copy from 'clipboard-copy'
+
 interface BranchProps {
   // id: string
   name: string
@@ -46,29 +51,46 @@ interface PageProps {
 
 const CopyButton = (name: string) => {
   const [copied, setCopied] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     let timeoutId: number
     if (copied) {
-      //add copy function here if we need in the future
       copy(name)
-      timeoutId = window.setTimeout(() => setCopied(false), 2500)
+      //stay for 2.5 seconds and then close the tooltip
+      setIsOpen(true)
+      timeoutId = window.setTimeout(() => {
+        setCopied(false)
+        setIsOpen(false)
+      }, 2500)
     }
     return () => {
       clearTimeout(timeoutId)
     }
-  }, [copied])
+  }, [copied, name])
+
+  const tooltipContent = copied ? 'Copied!' : 'Copy the branch name'
 
   return (
-    <Button variant="ghost" size="xs" onClick={() => setCopied(true)}>
-      <Icon
-        name={copied ? 'tick' : 'clone'}
-        size={16}
-        className={copied ? 'text-success ' : 'text-tertiary-background'}
-      />
-    </Button>
+    <Tooltip open={isOpen} onOpenChange={open => setIsOpen(open)} delayDuration={0}>
+      <TooltipTrigger asChild>
+        <Button variant="ghost" size="xs" onClick={() => setCopied(true)}>
+          <Icon
+            name={copied ? 'tick' : 'clone'}
+            size={16}
+            className={copied ? 'text-success ' : 'text-tertiary-background'}
+          />
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent className="bg-secondary shadow-sm py-2 fill-current text-accent-foreground">
+        <Text className={copied ? 'text-success' : 'text-popover-foreground'}>{tooltipContent}</Text>
+        <TooltipArrow offset={5} width={12} height={7} className="fill-accent" />
+      </TooltipContent>
+    </Tooltip>
   )
 }
+
+//waht if I would like to stay the content for the tooltip in the different backfround color?
 
 export const BranchesList = ({ branches }: PageProps) => {
   return (
