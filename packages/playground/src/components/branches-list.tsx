@@ -70,20 +70,18 @@ const CopyButton = (name: string) => {
   }, [copied, name])
 
   const tooltipContent = copied ? 'Copied!' : 'Copy the branch name'
+  const tooltipTextColor = copied ? 'text-success' : 'text-popover-foreground'
+  const iconCopyStyle = copied ? 'text-success' : 'text-tertiary-background'
 
   return (
     <Tooltip open={isOpen} onOpenChange={open => setIsOpen(open)} delayDuration={0}>
       <TooltipTrigger asChild>
         <Button variant="ghost" size="xs" onClick={() => setCopied(true)}>
-          <Icon
-            name={copied ? 'tick' : 'clone'}
-            size={16}
-            className={copied ? 'text-success ' : 'text-tertiary-background'}
-          />
+          <Icon name={copied ? 'tick' : 'clone'} size={16} className={iconCopyStyle} />
         </Button>
       </TooltipTrigger>
-      <TooltipContent className="bg-secondary shadow-sm py-2 fill-current text-accent-foreground">
-        <Text className={copied ? 'text-success' : 'text-popover-foreground'}>{tooltipContent}</Text>
+      <TooltipContent className="bg-secondary shadow-sm py-2 text-accent-foreground">
+        <Text className={tooltipTextColor}>{tooltipContent}</Text>
         <TooltipArrow offset={5} width={12} height={7} className="fill-accent" />
       </TooltipContent>
     </Tooltip>
