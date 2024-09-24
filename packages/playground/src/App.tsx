@@ -42,7 +42,6 @@ import { SandboxExecutionTestsPage } from './pages/sandbox-executions-tests-page
 import { SandboxExecutionSecurityTestsPage } from './pages/sandbox-executions-security-tests-page'
 import { SandboxExecutionSecretsPage } from './pages/sandbox-executions-secrets-page'
 import { SandboxSettings } from './layouts/SandboxSettings'
-import { SandboxSettingsPage } from './pages/sandbox-settings-page'
 import { SandboxSettingsAccountPage } from './pages/sandbox-settings-account-page'
 import { SandboxSettingsAccountGeneralPage } from './pages/sandbox-settings-account-general-page'
 import { SandboxSettingsAccountKeysPage } from './pages/sandbox-settings-account-keys-page'
