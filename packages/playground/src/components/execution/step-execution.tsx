@@ -9,7 +9,7 @@ import { KeyValuePair, KeyValueTable } from './key-value-table'
 import { LivelogLine } from './types'
 
 export interface StepProps {
-  name: string
+  name?: string
   status: ExecutionState
   started?: number
   stopped?: number
