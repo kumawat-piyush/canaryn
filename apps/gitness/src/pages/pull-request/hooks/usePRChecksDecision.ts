@@ -68,54 +68,56 @@ export function usePRChecksDecision({
             break
         }
       }
-
+      // *******
+      // NOTE:
+      // Determine the overall status based on the counts of each check type after receiving the final counts of everything after
+      // the order of precedence being error, then failure, then killed, followed by running, pending, and finally success.
+      //  {
+      //   const matrix = {error: 1,
+      //   failure: 0,
+      //   killed: 0,
+      //   running: 0,
+      //   pending: 1,
+      //   skipped: 0,
+      //   success: 1 }
+      //   So basically the overall status will be determined by the highest precedence check that has occurred
+      //   which is error and it is then set for it to be used in the check tab.
+      // *******
       if (_count.error) {
         _status = ExecutionState.ERROR
         setColor('text-destructive')
         setBackground('text-destructive')
         setMessage(`${_count.error}/${total} ${pluralize('check', _count.error)} errored out.`)
-        // setMessage(stringSubstitute(getString('prChecks.error'), { count: _count.error, total }) as string)
       } else if (_count.failure) {
         _status = ExecutionState.FAILURE
         setColor('text-destructive')
         setBackground('text-destructive')
         setMessage(`${_count.failure}/${total} ${pluralize('check', _count.failure)} failed.`)
-        // setMessage(stringSubstitute(getString('prChecks.failure'), { count: _count.failure, total }) as string)
       } else if (_count.killed) {
         _status = ExecutionState.KILLED
         setColor('text-destructive')
         setBackground('text-destructive')
         setMessage(`${_count.killed}/${total} ${pluralize('check', _count.killed)} killed.`)
-
-        // setMessage(stringSubstitute(getString('prChecks.killed'), { count: _count.killed, total }) as string)
       } else if (_count.running) {
         _status = ExecutionState.RUNNING
         setColor('text-warning')
         setBackground('text-warning')
         setMessage(`${_count.running}/${total} ${pluralize('check', _count.running)} running.`)
-
-        // setMessage(stringSubstitute(getString('prChecks.running'), { count: _count.running, total }) as string)
       } else if (_count.pending) {
         _status = ExecutionState.PENDING
         setColor('text-tertiary-background')
         setBackground('text-tertiary-background')
         setMessage(`${_count.pending}/${total} ${pluralize('check', _count.pending)} pending.`)
-
-        // setMessage(stringSubstitute(getString('prChecks.pending'), { count: _count.pending, total }) as string)
       } else if (_count.skipped) {
         _status = ExecutionState.SKIPPED
         setColor('text-tertiary-background')
         setBackground('text-tertiary-background')
         setMessage(`${_count.skipped}/${total} ${pluralize('check', _count.skipped)} skipped.`)
-
-        // setMessage(stringSubstitute(getString('prChecks.skipped'), { count: _count.skipped, total }) as string)
       } else if (_count.success) {
         _status = ExecutionState.SUCCESS
         setColor('text-success')
         setBackground('text-success')
         setMessage(`${_count.success}/${total} ${pluralize('check', _count.success)} succeeded.`)
-
-        // setMessage(stringSubstitute(getString('prChecks.success'), { count: _count.success, total }) as string)
       }
 
       setComplete(!_count.pending && !_count.running)

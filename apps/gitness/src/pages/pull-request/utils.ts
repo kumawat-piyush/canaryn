@@ -33,30 +33,44 @@ export function generateStatusSummary(checks: TypeCheckData[]) {
   checks.forEach(check => {
     const status = check.check.status
     const required = check.required
-    if (status === ExecutionState.FAILURE || status === ExecutionState.ERROR) {
-      if (required) {
-        statusCounts.failedReq += 1
-      } else {
-        statusCounts.failed += 1
-      }
-    } else if (status === ExecutionState.PENDING) {
-      if (required) {
-        statusCounts.pendingReq += 1
-      } else {
-        statusCounts.pending += 1
-      }
-    } else if (status === ExecutionState.RUNNING) {
-      if (required) {
-        statusCounts.runningReq += 1
-      } else {
-        statusCounts.running += 1
-      }
-    } else if (status === ExecutionState.SUCCESS) {
-      if (required) {
-        statusCounts.successReq += 1
-      } else {
-        statusCounts.succeeded += 1
-      }
+
+    switch (status) {
+      case ExecutionState.FAILURE:
+      case ExecutionState.ERROR:
+        if (required) {
+          statusCounts.failedReq += 1
+        } else {
+          statusCounts.failed += 1
+        }
+        break
+
+      case ExecutionState.PENDING:
+        if (required) {
+          statusCounts.pendingReq += 1
+        } else {
+          statusCounts.pending += 1
+        }
+        break
+
+      case ExecutionState.RUNNING:
+        if (required) {
+          statusCounts.runningReq += 1
+        } else {
+          statusCounts.running += 1
+        }
+        break
+
+      case ExecutionState.SUCCESS:
+        if (required) {
+          statusCounts.successReq += 1
+        } else {
+          statusCounts.succeeded += 1
+        }
+        break
+
+      default:
+        console.error('Unrecognized status:', status)
+        break
     }
   })
 
