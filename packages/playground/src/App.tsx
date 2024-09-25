@@ -48,6 +48,7 @@ import { SandboxSettingsAccountKeysPage } from './pages/sandbox-settings-account
 import { SandboxSettingsProjectPage } from './pages/sandbox-settings-project-page'
 import { SandboxSettingsProjectGeneralPage } from './pages/sandbox-settings-project-general-page'
 import { SandboxSettingsProjectMembersPage } from './pages/sandbox-settings-project-members-page'
+import { SandboxRepoCreatePage } from './pages/sandbox-repo-create-page'
 
 const router = createBrowserRouter([
   // TEMPORARY LAYOUT SANDBOX
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
             element: <SandboxRepoListPage />
           },
           {
+            path: 'create',
+            element: <SandboxRepoCreatePage />
+          },
+          {
             path: ':repoId',
             element: <SandboxRepoSinglePage />, // Contains the nav tabs header AND inherits the breadcrumbs header
             children: [
@@ -80,6 +85,7 @@ const router = createBrowserRouter([
           }
         ]
       },
+
       {
         path: 'executions',
         element: <SandboxExecutions />,
