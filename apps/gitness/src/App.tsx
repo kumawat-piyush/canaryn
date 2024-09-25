@@ -20,6 +20,9 @@ import { PipelineCreate } from './pages/pipeline-create/pipeline-create'
 import RepoCommitsPage from './pages/repo/repo-commits'
 import RepoWebhooksListPage from './pages/repo/repo-webhooks'
 import { ReposBranchesListPage } from './pages/repo/repo-branch-list'
+import PullRequestDataProvider from './pages/pull-request/context/pull-request-data-provider'
+import PullRequestConversationPage from './pages/pull-request/pull-request-conversation-page'
+import { RepoFiles } from './pages/repo/repo-files'
 
 export default function App() {
   const router = createBrowserRouter([
@@ -45,8 +48,8 @@ export default function App() {
               element: <RepoSummary />
             },
             {
-              path: 'pull-requests',
-              element: <PullRequestListPage />
+              path: 'code',
+              element: <RepoFiles />
             },
             {
               path: 'pipelines',
@@ -69,28 +72,43 @@ export default function App() {
               ]
             },
             {
+              path: 'commits',
+              element: <RepoCommitsPage />
+            },
+            {
+              path: 'pull-requests',
+              element: <PullRequestListPage />
+            },
+            {
               path: 'pull-requests/:pullRequestId',
               element: <PullRequestLayout />,
               children: [
                 {
                   index: true,
-                  element: <Navigate to="commits" />
+                  element: <Navigate to="conversation" />
                 },
                 {
                   path: 'commits',
                   element: <PullRequestCommitsPage />
+                },
+                {
+                  path: 'conversation',
+                  element: (
+                    <PullRequestDataProvider>
+                      <PullRequestConversationPage />
+                    </PullRequestDataProvider>
+                  )
                 }
               ]
             },
             {
-              path: 'commits',
-              element: <RepoCommitsPage />
+              path: 'webhooks',
+              element: <RepoWebhooksListPage />
             },
             {
               path: 'branches',
               element: <ReposBranchesListPage />
-            },
-            { path: 'webhooks', element: <RepoWebhooksListPage /> }
+            }
           ]
         },
         {
@@ -112,7 +130,7 @@ export default function App() {
           element: <></>
         },
         {
-          path: ':spaceId/:repoId',
+          path: ':spaceId/repos/:repoId',
           element: <RepoLayout />,
           children: [
             {

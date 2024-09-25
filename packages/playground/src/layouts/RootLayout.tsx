@@ -1,4 +1,4 @@
-import { Navbar, Icon, NavbarProjectChooser, NavbarUser } from '@harnessio/canary'
+import { Navbar, Icon, NavbarProjectChooser, NavbarUser, IconProps } from '@harnessio/canary'
 import React, { useState } from 'react'
 import { Outlet, NavLink, useLocation, Link } from 'react-router-dom'
 import { MoreSubmenu } from '../components/more-submenu'
@@ -7,7 +7,7 @@ import { navbarSubmenuData } from '../data/mockNavbarSubmenuData'
 interface NavbarItem {
   id: number
   title: string
-  iconName: string
+  iconName: IconProps['name']
   description: string
   to?: string
 }
@@ -31,7 +31,7 @@ export const RootLayout: React.FC = () => {
     },
     {
       text: 'Executions',
-      icon: <Icon name="executions" size={12} />,
+      icon: <Icon name="cog-6" size={12} />,
       to: '/executions'
     },
     {
@@ -77,6 +77,7 @@ export const RootLayout: React.FC = () => {
   function handleMore() {
     setShowMore(!showMore)
   }
+
   function handlePinItem(item: NavbarItem) {
     setPinnedItems(prevPinnedItems => {
       const isPinned = prevPinnedItems.some(pinned => pinned.id === item.id)
@@ -89,7 +90,7 @@ export const RootLayout: React.FC = () => {
             {
               id: itemToPin.id,
               title: itemToPin.title,
-              iconName: itemToPin.navbarIconName,
+              iconName: itemToPin.iconName,
               description: itemToPin.description,
               to: itemToPin.to || ''
             },
@@ -156,6 +157,15 @@ export const RootLayout: React.FC = () => {
                 </NavLink>
                 <NavLink to="/sandbox/repos/drone/code">
                   <Navbar.Item text="Repo&nbsp;&nbsp;/&nbsp;&nbsp;Code" icon={<Icon name="repositories" size={12} />} />
+                </NavLink>
+                <NavLink to="/sandbox/executions">
+                  <Navbar.Item text="Executions" icon={<Icon name="cog-6" size={12} />} />
+                </NavLink>
+                <NavLink to="/sandbox/settings">
+                  <Navbar.Item text="Settings" icon={<Icon name="cog-6" size={12} />} />
+                </NavLink>
+                <NavLink to="/sandbox/repos/create">
+                  <Navbar.Item text="Create repo" icon={<Icon name="repositories" size={12} />} />
                 </NavLink>
               </Navbar.AccordionGroup>
             </Navbar.Content>

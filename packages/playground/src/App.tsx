@@ -11,7 +11,6 @@ import LandingPage from './pages/landing-page'
 import RepoListPage from './pages/repo-list-page'
 import PipelineListPage from './pages/pipeline-list-page'
 import RepoSummaryPage from './pages/repo-summary-page'
-import ExecutionListPage from './pages/execution-list-page'
 import ExecutionDetailsPage from './pages/execution-details-page'
 import PullRequestListPage from './pages/pull-request-list-page'
 import CommitsListPage from './pages/commits-list-page'
@@ -33,12 +32,35 @@ import { SandboxRepoSummaryPage } from './pages/sandbox-repo-summary-page'
 import { SandboxRepoSinglePage } from './pages/sandbox-repo-single-page'
 import { SandboxRepoCodePage } from './pages/sandbox-repo-code-page'
 import { SandboxLandingPage } from './pages/sandbox-landing-page'
+import { SandboxExecutionSummaryPage } from './pages/sandbox-executions-summary-page'
+import { SandboxExecutions } from './layouts/SandboxExecutions'
+import { SandboxExecutionLogsPage } from './pages/sandbox-executions-logs-page'
+import { SandboxExecutionInputsPage } from './pages/sandbox-executions-inputs-page'
+import { SandboxExecutionPolicyEvaluationsPage } from './pages/sandbox-executions-policy-evaluations-page'
+import { SandboxExecutionArtifactsPage } from './pages/sandbox-executions-artifacts-page'
+import { SandboxExecutionTestsPage } from './pages/sandbox-executions-tests-page'
+import { SandboxExecutionSecurityTestsPage } from './pages/sandbox-executions-security-tests-page'
+import { SandboxExecutionSecretsPage } from './pages/sandbox-executions-secrets-page'
+import { SandboxSettings } from './layouts/SandboxSettings'
+import { SandboxSettingsAccountPage } from './pages/sandbox-settings-account-page'
+import { SandboxSettingsAccountGeneralPage } from './pages/sandbox-settings-account-general-page'
+import { SandboxSettingsAccountKeysPage } from './pages/sandbox-settings-account-keys-page'
+import { SandboxSettingsProjectPage } from './pages/sandbox-settings-project-page'
+import { SandboxSettingsProjectGeneralPage } from './pages/sandbox-settings-project-general-page'
+import { SandboxSettingsProjectMembersPage } from './pages/sandbox-settings-project-members-page'
+import { SandboxRepoCreatePage } from './pages/sandbox-repo-create-page'
+import { SandboxRepoSettingsPage } from './pages/sandbox-repo-settings-page'
+import { RepoSettingsGeneralPage } from './pages/repo-settings-general-page'
+import { RepoSettingsCollaborationsPage } from './pages/repo-settings-collaborations-page'
+import { RepoSettingsModerationPage } from './pages/repo-settings-moderation-page'
+import { RepoSettingsPlaceholderPage } from './pages/repo-settings-placeholder-page'
 
 const router = createBrowserRouter([
   // TEMPORARY LAYOUT SANDBOX
   {
     path: '/sandbox',
     element: <SandboxRoot />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: 'repos',
@@ -47,6 +69,10 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <SandboxRepoListPage />
+          },
+          {
+            path: 'create',
+            element: <SandboxRepoCreatePage />
           },
           {
             path: ':repoId',
@@ -59,6 +85,118 @@ const router = createBrowserRouter([
               {
                 path: 'code',
                 element: <SandboxRepoCodePage />
+              },
+              {
+                path: 'settings',
+                element: <SandboxRepoSettingsPage />,
+                children: [
+                  {
+                    index: true,
+                    element: <Navigate to="general" />
+                  },
+                  {
+                    path: 'general',
+                    element: <RepoSettingsGeneralPage />
+                  },
+                  {
+                    path: 'collaborations',
+                    element: <RepoSettingsCollaborationsPage />
+                  },
+                  {
+                    path: 'moderation',
+                    element: <RepoSettingsModerationPage />
+                  },
+                  {
+                    path: '*',
+                    element: <RepoSettingsPlaceholderPage />
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        path: 'executions',
+        element: <SandboxExecutions />,
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="summary" replace />
+          },
+          {
+            path: 'summary',
+            element: <SandboxExecutionSummaryPage />
+          },
+          {
+            path: 'logs',
+            element: <SandboxExecutionLogsPage />
+          },
+          {
+            path: 'inputs',
+            element: <SandboxExecutionInputsPage />
+          },
+          {
+            path: 'policy-evaluations',
+            element: <SandboxExecutionPolicyEvaluationsPage />
+          },
+          {
+            path: 'artifacts',
+            element: <SandboxExecutionArtifactsPage />
+          },
+          {
+            path: 'tests',
+            element: <SandboxExecutionTestsPage />
+          },
+          {
+            path: 'security-tests',
+            element: <SandboxExecutionSecurityTestsPage />
+          },
+          {
+            path: 'secrets',
+            element: <SandboxExecutionSecretsPage />
+          }
+        ]
+      },
+      {
+        path: 'settings',
+        element: <SandboxSettings />,
+        children: [
+          {
+            path: 'account',
+            element: <SandboxSettingsAccountPage />,
+            children: [
+              {
+                index: true,
+                element: <Navigate to="general" />
+              },
+              {
+                path: 'general',
+                element: <SandboxSettingsAccountGeneralPage />
+              },
+              {
+                path: 'keys',
+                element: <SandboxSettingsAccountKeysPage />
+              }
+            ]
+          },
+          {
+            path: 'project',
+            element: <SandboxSettingsProjectPage />,
+            children: [
+              {
+                index: true,
+                element: <Navigate to="general" />
+              },
+              {
+                path: 'general',
+                element: <SandboxSettingsProjectGeneralPage />
+              },
+              {
+                path: 'members',
+                element: <SandboxSettingsProjectMembersPage />
               }
             ]
           }
@@ -91,7 +229,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Navigate to="summary" />
+            element: <Navigate to="/sandbox/repos/drone/summary" />
           },
           {
             path: 'summary',
@@ -192,7 +330,7 @@ const router = createBrowserRouter([
       // EXECUTIONS (OUTSIDE REPOS)
       {
         path: 'executions',
-        element: <ExecutionListPage />
+        element: <Navigate to="/sandbox/executions" />
       }
     ]
   }

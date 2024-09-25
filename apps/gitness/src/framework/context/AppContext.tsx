@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 import {
   CodeServiceAPIClient,
-  MembershipSpacesOkResponse,
   TypesMembershipSpace,
   membershipSpaces,
-  TypesSpace
+  TypesSpace,
+  MembershipSpacesOkResponse
 } from '@harnessio/code-service-client'
 
 interface AppContextType {
