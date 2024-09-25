@@ -48,6 +48,7 @@ import { SandboxSettingsAccountKeysPage } from './pages/sandbox-settings-account
 import { SandboxSettingsProjectPage } from './pages/sandbox-settings-project-page'
 import { SandboxSettingsProjectGeneralPage } from './pages/sandbox-settings-project-general-page'
 import { SandboxSettingsProjectMembersPage } from './pages/sandbox-settings-project-members-page'
+import { SandboxRepoSettingsPage } from './pages/sandbox-repo-settings-page'
 
 const router = createBrowserRouter([
   // TEMPORARY LAYOUT SANDBOX
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
               {
                 path: 'code',
                 element: <SandboxRepoCodePage />
+              },
+              {
+                path: 'settings',
+                element: <SandboxRepoSettingsPage />
               }
             ]
           }
@@ -192,7 +197,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Navigate to="summary" />
+            element: <Navigate to="/sandbox/repos/drone/summary" />
           },
           {
             path: 'summary',
