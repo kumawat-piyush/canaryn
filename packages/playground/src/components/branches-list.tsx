@@ -28,7 +28,7 @@ interface BranchProps {
   timestamp: string
   user: {
     name: string
-    avatarUrl: string
+    avatarUrl?: string
   }
   checks: {
     done: number
@@ -73,6 +73,7 @@ const CopyButton = (name: string) => {
   const tooltipTextColor = copied ? 'text-success' : 'text-popover-foreground'
   const iconCopyStyle = copied ? 'text-success' : 'text-tertiary-background'
 
+  //face some issue with the tooltip, how to render correct tooltip arrow with color
   return (
     <Tooltip open={isOpen} onOpenChange={open => setIsOpen(open)} delayDuration={0}>
       <TooltipTrigger asChild>
@@ -88,8 +89,6 @@ const CopyButton = (name: string) => {
   )
 }
 
-//waht if I would like to stay the content for the tooltip in the different backfround color?
-
 export const BranchesList = ({ branches }: PageProps) => {
   return (
     <Table variant="asStackedList">
@@ -97,8 +96,8 @@ export const BranchesList = ({ branches }: PageProps) => {
         <TableRow>
           <TableHead>Branch</TableHead>
           <TableHead>Updated</TableHead>
-          <TableHead>Check status</TableHead>
-          <TableHead className="text-center">Behind | Ahead</TableHead>
+          <TableHead className="hidden">Check status</TableHead>
+          <TableHead className="text-center hidden">Behind | Ahead</TableHead>
           {/* since we don't have the data for pull request, we can temporary hide this column */}
           <TableHead className="hidden">Pull request</TableHead>
           <TableHead>
@@ -128,7 +127,7 @@ export const BranchesList = ({ branches }: PageProps) => {
                     <Avatar className="w-5 h-5">
                       <AvatarImage src={branch.user.avatarUrl === '' ? AvatarUrl : branch.user.avatarUrl} />
                       <AvatarFallback className="text-xs p-1 text-center">
-                        {getInitials(branch.user.name || '')}
+                        {getInitials(branch.user.name, 2)}
                       </AvatarFallback>
                     </Avatar>
                     <Text wrap="nowrap" truncate className="text-primary">
@@ -136,7 +135,7 @@ export const BranchesList = ({ branches }: PageProps) => {
                     </Text>
                   </div>
                 </TableCell>
-                <TableCell>
+                <TableCell className="hidden">
                   <div className="flex gap-1.5 items-center">
                     <Icon name="tick" size={11} className="text-success" />
                     <Text size={2} wrap="nowrap" truncate className="text-tertiary-background">
@@ -144,7 +143,7 @@ export const BranchesList = ({ branches }: PageProps) => {
                     </Text>
                   </div>
                 </TableCell>
-                <TableCell>
+                <TableCell className="hidden">
                   <div className="flex gap-1.5 items-center">
                     <Text wrap="nowrap" truncate className="text-tertiary-background text-center flex-grow">
                       {branch.behindAhead.behind} | {branch.behindAhead.ahead}
