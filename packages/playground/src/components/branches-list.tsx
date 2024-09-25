@@ -10,16 +10,12 @@ import {
   Text,
   Avatar,
   AvatarImage,
-  AvatarFallback,
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipArrow
+  AvatarFallback
 } from '@harnessio/canary'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { getInitials } from '../utils/utils'
 import AvatarUrl from '../../public/images/user-avatar.svg'
-import copy from 'clipboard-copy'
+import { CopyButton } from './copy-button'
 
 interface BranchProps {
   // id: string
@@ -39,54 +35,10 @@ interface BranchProps {
     behind: number
     ahead: number
   }
-  pullRequest: {
-    sha: string
-    // status: string
-  }
 }
 
 interface PageProps {
   branches: BranchProps[]
-}
-
-const CopyButton = (name: string) => {
-  const [copied, setCopied] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
-
-  useEffect(() => {
-    let timeoutId: number
-    if (copied) {
-      copy(name)
-      //stay for 2.5 seconds and then close the tooltip
-      setIsOpen(true)
-      timeoutId = window.setTimeout(() => {
-        setCopied(false)
-        setIsOpen(false)
-      }, 2500)
-    }
-    return () => {
-      clearTimeout(timeoutId)
-    }
-  }, [copied, name])
-
-  const tooltipContent = copied ? 'Copied!' : 'Copy the branch name'
-  const tooltipTextColor = copied ? 'text-success' : 'text-popover-foreground'
-  const iconCopyStyle = copied ? 'text-success' : 'text-tertiary-background'
-
-  //face some issue with the tooltip, how to render correct tooltip arrow with color
-  return (
-    <Tooltip open={isOpen} onOpenChange={open => setIsOpen(open)} delayDuration={0}>
-      <TooltipTrigger asChild>
-        <Button variant="ghost" size="xs" onClick={() => setCopied(true)}>
-          <Icon name={copied ? 'tick' : 'clone'} size={16} className={iconCopyStyle} />
-        </Button>
-      </TooltipTrigger>
-      <TooltipContent className="bg-secondary shadow-sm py-2 text-accent-foreground">
-        <Text className={tooltipTextColor}>{tooltipContent}</Text>
-        <TooltipArrow offset={5} width={12} height={7} className="fill-accent" />
-      </TooltipContent>
-    </Tooltip>
-  )
 }
 
 export const BranchesList = ({ branches }: PageProps) => {
@@ -119,7 +71,7 @@ export const BranchesList = ({ branches }: PageProps) => {
                         {branch.name}
                       </Button>
                     </Text>
-                    {CopyButton(branch.name)}
+                    <CopyButton name={branch.name} />
                   </div>
                 </TableCell>
                 <TableCell>
