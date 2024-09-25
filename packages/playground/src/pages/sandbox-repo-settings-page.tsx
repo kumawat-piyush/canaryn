@@ -1,36 +1,86 @@
 import React, { useState } from 'react'
 import { PlaygroundListSettings } from '../settings/list-settings'
 import { SandboxLayout } from '../index'
-import { Navbar } from '@harnessio/canary'
+import { Navbar, Text, Spacer } from '@harnessio/canary'
+import { NavLink, Outlet } from 'react-router-dom'
+
+const navItems = [
+  {
+    id: 0,
+    groupTitle: null,
+    items: [{ id: 0, text: 'General', to: 'general' }]
+  },
+  {
+    id: 1,
+    groupTitle: 'Access',
+    items: [
+      { id: 0, text: 'Collaborations', to: 'collaborations' },
+      { id: 1, text: 'Moderation options', to: 'moderation' }
+    ]
+  },
+  {
+    id: 2,
+    groupTitle: 'Code and automation',
+    items: [
+      { id: 0, text: 'Branches', to: 'branches' },
+      { id: 1, text: 'Tags', to: 'tags' },
+      { id: 2, text: 'Rules', to: 'rules' },
+      { id: 3, text: 'Actions', to: 'actions' },
+      { id: 4, text: 'Webhooks', to: 'webhooks' },
+      { id: 5, text: 'Environments', to: 'environments' },
+      { id: 6, text: 'Codespaces', to: 'codespaces' },
+      { id: 7, text: 'Pages', to: 'pages' }
+    ]
+  },
+  {
+    id: 3,
+    groupTitle: 'Security',
+    items: [
+      { id: 0, text: 'Code security and analysis', to: 'code-security' },
+      { id: 1, text: 'Deploy keys', to: 'deploy-keys' },
+      { id: 2, text: 'Secrets and variables', to: 'secrets-variables' }
+    ]
+  },
+  {
+    id: 4,
+    groupTitle: 'Notifications',
+    items: [{ id: 0, text: 'Email notifications', to: 'email-notifications' }]
+  }
+]
 
 function Sidebar() {
   return (
-    <Navbar.Root className="bg-transparent border-none">
-      <Navbar.Content>
-        <Navbar.Group title="Access">
-          <Navbar.Item text="Collaborations" />
-          <Navbar.Item text="Moderation options" />
-        </Navbar.Group>
-        <Navbar.Group title="Code and automation" topBorder>
-          <Navbar.Item text="Branches" />
-          <Navbar.Item text="Tags" />
-          <Navbar.Item text="Rules" />
-          <Navbar.Item text="Actions" />
-          <Navbar.Item text="Webhooks" />
-          <Navbar.Item text="Environments" />
-          <Navbar.Item text="Codespaces" />
-          <Navbar.Item text="Pages" />
-        </Navbar.Group>
-        <Navbar.Group title="Security" topBorder>
-          <Navbar.Item text="Code security and analysis" />
-          <Navbar.Item text="Deploy keys" />
-          <Navbar.Item text="Secrets and variables" />
-        </Navbar.Group>
-        <Navbar.Group title="Security" topBorder>
-          <Navbar.Item text="Email notifications" />
-        </Navbar.Group>
-      </Navbar.Content>
-    </Navbar.Root>
+    <SandboxLayout.Content>
+      <Navbar.Root className="bg-transparent border-none">
+        <Navbar.Content>
+          {navItems.map(group => (
+            <Navbar.Group
+              key={`group-${group.id}`}
+              title={group.groupTitle || ''}
+              topBorder={group.groupTitle ? true : false}>
+              {group.items.map(item => (
+                <NavLink key={`group-${group.id}-item-${item.id}`} to={item.to}>
+                  {({ isActive }) => <Navbar.Item submenuItem text={item.text} active={isActive} />}
+                </NavLink>
+              ))}
+            </Navbar.Group>
+          ))}
+        </Navbar.Content>
+      </Navbar.Root>
+    </SandboxLayout.Content>
+  )
+}
+
+function SettingsContent() {
+  return (
+    <SandboxLayout.Content>
+      <Spacer size={4} />
+      <Text size={5} weight={'medium'}>
+        Settings
+      </Text>
+      <Spacer size={8} />
+      <Outlet />
+    </SandboxLayout.Content>
   )
 }
 
@@ -41,14 +91,10 @@ function SandboxRepoSettingsPage() {
     <SandboxLayout.Main hasHeader hasSubHeader hasLeftPanel>
       <SandboxLayout.Columns columnWidths="auto 1fr">
         <SandboxLayout.Column>
-          <SandboxLayout.Content className="pr-0">
-            <Sidebar />
-          </SandboxLayout.Content>
+          <Sidebar />
         </SandboxLayout.Column>
         <SandboxLayout.Column>
-          <SandboxLayout.Content>
-            <p>Settings</p>
-          </SandboxLayout.Content>
+          <SettingsContent />
         </SandboxLayout.Column>
       </SandboxLayout.Columns>
       <PlaygroundListSettings loadState={loadState} setLoadState={setLoadState} />
@@ -56,4 +102,4 @@ function SandboxRepoSettingsPage() {
   )
 }
 
-export { SandboxRepoSettingsPage }
+export { SandboxRepoSettingsPage, navItems }

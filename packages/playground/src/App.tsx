@@ -49,6 +49,10 @@ import { SandboxSettingsProjectPage } from './pages/sandbox-settings-project-pag
 import { SandboxSettingsProjectGeneralPage } from './pages/sandbox-settings-project-general-page'
 import { SandboxSettingsProjectMembersPage } from './pages/sandbox-settings-project-members-page'
 import { SandboxRepoSettingsPage } from './pages/sandbox-repo-settings-page'
+import { RepoSettingsGeneralPage } from './pages/repo-settings-general-page'
+import { RepoSettingsCollaborationsPage } from './pages/repo-settings-collaborations-page'
+import { RepoSettingsModerationPage } from './pages/repo-settings-moderation-page'
+import { RepoSettingsPlaceholderPage } from './pages/repo-settings-placeholder-page'
 
 const router = createBrowserRouter([
   // TEMPORARY LAYOUT SANDBOX
@@ -79,7 +83,29 @@ const router = createBrowserRouter([
               },
               {
                 path: 'settings',
-                element: <SandboxRepoSettingsPage />
+                element: <SandboxRepoSettingsPage />,
+                children: [
+                  {
+                    index: true,
+                    element: <Navigate to="general" />
+                  },
+                  {
+                    path: 'general',
+                    element: <RepoSettingsGeneralPage />
+                  },
+                  {
+                    path: 'collaborations',
+                    element: <RepoSettingsCollaborationsPage />
+                  },
+                  {
+                    path: 'moderation',
+                    element: <RepoSettingsModerationPage />
+                  },
+                  {
+                    path: '*',
+                    element: <RepoSettingsPlaceholderPage />
+                  }
+                ]
               }
             ]
           }

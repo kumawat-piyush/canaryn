@@ -86,9 +86,15 @@ function Item({ icon, text, description, active, submenuItem, className }: ItemP
       <div
         className={cn(
           'group relative grid grid-cols-[auto_1fr] gap-3 items-center cursor-pointer group select-none py-1.5',
+          { 'gap-0': !icon },
           className
         )}>
-        <div className="absolute -left-2 -right-2 w-auto h-full bg-transparent group-hover:bg-background rounded-md z-0" />
+        <div
+          className={cn(
+            'absolute -left-2 -right-2 w-auto h-full bg-transparent group-hover:bg-primary/5 rounded-md z-0',
+            { 'bg-primary/5': active }
+          )}
+        />
         <div
           className={cn(
             'flex z-10 col-start-1 row-span-full items-center text-secondary-muted group-hover:text-primary ease-in-out duration-100 truncate',
