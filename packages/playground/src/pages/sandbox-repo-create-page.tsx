@@ -3,8 +3,11 @@ import { SandboxLayout } from '..'
 import {
   Button,
   ButtonGroup,
+  Checkbox,
   Input,
   Label,
+  RadioGroup,
+  RadioGroupItem,
   Select,
   SelectContent,
   SelectItem,
@@ -92,13 +95,13 @@ function SandboxRepoCreatePage() {
             </Label>
             <Spacer size={2} />
             <Select>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger>
                 <SelectValue placeholder="Select" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="light">Light</SelectItem>
-                <SelectItem value="dark">Dark</SelectItem>
-                <SelectItem value="system">System</SelectItem>
+                <SelectItem value="1">.gitignore option 1</SelectItem>
+                <SelectItem value="2">.gitignore option 2</SelectItem>
+                <SelectItem value="3">.gitignore option 3</SelectItem>
               </SelectContent>
             </Select>
             {errors.email && (
@@ -116,15 +119,19 @@ function SandboxRepoCreatePage() {
             </Label>
             <Spacer size={2} />
             <Select>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger>
                 <SelectValue placeholder="Select" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="light">Light</SelectItem>
-                <SelectItem value="dark">Dark</SelectItem>
-                <SelectItem value="system">System</SelectItem>
+                <SelectItem value="1">License option 1</SelectItem>
+                <SelectItem value="2">License option 2</SelectItem>
+                <SelectItem value="3">License option 3</SelectItem>
               </SelectContent>
             </Select>
+            <Spacer size={2} />
+            <Text as="p" size={1} color="tertiaryBackground">
+              A license tells others what they can and can't do with your code.
+            </Text>
             {errors.email && (
               <>
                 <Spacer size={2} />
@@ -133,6 +140,48 @@ function SandboxRepoCreatePage() {
                 </Text>
               </>
             )}
+            <Spacer size={12} />
+            {/* Access */}
+            <Label htmlFor="email" variant="sm">
+              Who has access?
+            </Label>
+            <Spacer size={4} />
+            {/* TODO: COMPONENTIZE RADIO/CHECK DIV GROUPINGS BELOW */}
+            <RadioGroup defaultValue="1" className="gap-4">
+              <div className="flex gap-4 items-start">
+                <RadioGroupItem value="1" id="1" className="mt-0.5" />
+                <div className="flex flex-col gap-0.5">
+                  <Label htmlFor="1">Public</Label>
+                  <Text size={1} color="tertiaryBackground">
+                    Anyone with access to the Gitness environment can clone this repo.
+                  </Text>
+                </div>
+              </div>
+              <div className="flex gap-4 items-start">
+                <RadioGroupItem value="2" id="2" className="mt-0.5" />
+                <div className="flex flex-col gap-0.5">
+                  <Label htmlFor="2">Private</Label>
+                  <Text size={1} color="tertiaryBackground">
+                    You choose who can see and commit to this repository.
+                  </Text>
+                </div>
+              </div>
+            </RadioGroup>
+            <Spacer size={12} />
+            {/* Initialize */}
+            <Label htmlFor="email" variant="sm">
+              Initialize this repository with:
+            </Label>
+            <Spacer size={4} />
+            <div className="flex gap-4 items-start">
+              <Checkbox id="readme" className="mt-0.5" />
+              <div className="flex flex-col gap-0.5">
+                <Label htmlFor="readme">Add a README file</Label>
+                <Text size={1} color="tertiaryBackground">
+                  This is where you can write a long description for your project.
+                </Text>
+              </div>
+            </div>
             <Spacer size={16} />
             {/* Buttons */}
             <ButtonGroup.Root>
