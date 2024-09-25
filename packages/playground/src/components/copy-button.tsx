@@ -11,7 +11,7 @@ export const CopyButton = ({ name }: { name: string }) => {
       copy(name)
       timeoutId = window.setTimeout(() => {
         setCopied(false)
-      }, 2500)
+      }, 1000)
     }
     return () => {
       clearTimeout(timeoutId)
