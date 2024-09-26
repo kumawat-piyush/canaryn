@@ -99,8 +99,17 @@ function Sidebar() {
         <Accordion type="multiple">
           {sidebarItems.map(item => (
             <AccordionItem key={item.id} value={item.id.toString()} className="border-none">
-              <AccordionTrigger className={cn('text-tertiary-background py-1.5', { 'text-primary': item.id === 3 })}>
-                <div className="flex gap-1.5 items-center">
+              <AccordionTrigger
+                leftChevron
+                hideChevron={item.type === 'file'}
+                className={cn(
+                  'text-tertiary-background py-1.5',
+                  { 'text-primary': item.id === 3 },
+                  {
+                    'pl-3.5 ml-2': item.type === 'file'
+                  }
+                )}>
+                <div className="flex flex-1 gap-1.5 items-center">
                   <Icon name={item.type} size={14} />
                   <Text className="text-inherit">{item.name}</Text>
                 </div>
