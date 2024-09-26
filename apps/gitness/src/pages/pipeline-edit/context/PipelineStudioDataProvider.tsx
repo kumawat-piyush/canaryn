@@ -19,6 +19,9 @@ import { deleteItemInArray, injectItemInArray, updateItemInArray } from '../util
 import { TypesPlugin } from '../types/api-types'
 import { decodeGitContent, normalizeGitRef } from '../../../utils/git-utils'
 import { starterPipelineV1 } from '../utils/pipelines'
+import useThunkReducer from '../../../hooks/useThunkReducer'
+import { DataReducer, initialState } from './data-store/reducer'
+import { loadPipelineAction, setIsExistingPipelineAction, setYamlRevisionAction } from './data-store/actions'
 
 // TODO: temp interface for params
 export interface PipelineParams extends Record<string, string> {
@@ -110,64 +113,85 @@ const PipelineStudioDataContext = createContext<PipelineStudioDataContextProps>(
 })
 
 const PipelineStudioDataProvider = ({ children }: React.PropsWithChildren) => {
-  const [isExistingPipeline, setIsExistingPipeline] = useState(false)
-
-  // keep state and ref of current yaml
-  const latestYaml = useRef('')
-  const [yamlRevision, setYamlRevisionLocal] = useState<YamlRevision>({ yaml: '' })
-  const setYamlRevision = useCallback(
-    (yamlRevision: YamlRevision) => {
-      latestYaml.current = yamlRevision.yaml
-      setYamlRevisionLocal(yamlRevision)
-    },
-    [setYamlRevisionLocal]
-  )
-
   // TODO: PipelineParams is used temporary
   const { pipelineId = '', repoId, spaceId } = useParams<PipelineParams>()
-  const repoRef = `${spaceId}/${repoId}/+`
+  const repoRef = useMemo(() => `${spaceId}/${repoId}/+`, [spaceId, repoId])
 
-  const { data: pipelineData, isLoading: fetchingPipeline } = useFindPipelineQuery({
-    pipeline_identifier: pipelineId,
-    repo_ref: repoRef
-  })
+  const [state, dispatch] = useThunkReducer(DataReducer, initialState)
 
-  const {
-    data: pipelineYAMLFileContent,
-    isLoading: fetchingPipelineYAMLFileContent,
-    refetch: fetchPipelineYAMLFileContent
-  } = useGetContentQuery(
-    {
-      path: pipelineData?.config_path ?? '',
-      repo_ref: repoRef,
-      queryParams: { git_ref: normalizeGitRef(pipelineData?.default_branch) ?? '', include_commit: true }
-    },
-    {
-      enabled: !!pipelineData?.default_branch,
-      retry: false
-    }
+  console.log(state)
+
+  //const [isExistingPipeline, setIsExistingPipeline] = useState(false)
+
+  // keep state and ref of current yaml
+  // const latestYaml = useRef('')
+  // const [yamlRevision, setYamlRevisionLocal] = useState<YamlRevision>({ yaml: '' })
+  // const setYamlRevision = useCallback(
+  //   (yamlRevision: YamlRevision) => {
+  //     latestYaml.current = yamlRevision.yaml
+  //     setYamlRevisionLocal(yamlRevision)
+  //   },
+  //   [setYamlRevisionLocal]
+  // )
+  const setYamlRevision = useCallback(
+    (yamlRevision: YamlRevision) => dispatch(setYamlRevisionAction({ yamlRevision })),
+    []
   )
 
-  const latestCommitAuthor = useMemo(
-    () => pipelineYAMLFileContent?.latest_commit?.author ?? null,
-    [pipelineYAMLFileContent?.latest_commit?.author]
+  // const setIsExistingPipeline = useCallback(
+  //   (isExisting: boolean) => dispatch(setIsExistingPipelineAction({ isExisting })),
+  //   []
+  // )
+
+  const loadPipeline = useCallback(
+    ({ pipelineId, repoRef }: { pipelineId: string; repoRef: string }) =>
+      dispatch(loadPipelineAction({ pipelineId, repoRef })),
+    [pipelineId, repoRef]
   )
 
-  const decodedPipelineYaml = useMemo(() => {
-    return decodeGitContent(pipelineYAMLFileContent?.content?.data)
-  }, [pipelineYAMLFileContent?.content?.data])
+  // >>>>>>>>>>>
+  // const { data: pipelineData, isLoading: fetchingPipeline } = useFindPipelineQuery({
+  //   pipeline_identifier: pipelineId,
+  //   repo_ref: repoRef
+  // })
 
-  useEffect(() => {
-    if (fetchingPipelineYAMLFileContent === false) {
-      setIsExistingPipeline(!isEmpty(decodedPipelineYaml) && !isUndefined(decodedPipelineYaml))
-      setYamlRevision({ yaml: stringify(starterPipelineV1) })
-    }
-  }, [decodedPipelineYaml, fetchingPipelineYAMLFileContent])
+  // const {
+  //   data: pipelineYAMLFileContent,
+  //   isLoading: fetchingPipelineYAMLFileContent,
+  //   refetch: fetchPipelineYAMLFileContent
+  // } = useGetContentQuery(
+  //   {
+  //     path: pipelineData?.config_path ?? '',
+  //     repo_ref: repoRef,
+  //     queryParams: { git_ref: normalizeGitRef(pipelineData?.default_branch) ?? '', include_commit: true }
+  //   },
+  //   {
+  //     enabled: !!pipelineData?.default_branch,
+  //     retry: false
+  //   }
+  // )
+  // <<<<<<<<<<<<,
 
-  useEffect(() => {
-    const yaml = decodeGitContent(pipelineYAMLFileContent?.content?.data)
-    setYamlRevision({ yaml })
-  }, [pipelineYAMLFileContent?.content?.data, setYamlRevision])
+  // const latestCommitAuthor = useMemo(
+  //   () => pipelineYAMLFileContent?.latest_commit?.author ?? null,
+  //   [pipelineYAMLFileContent?.latest_commit?.author]
+  // )
+
+  // const decodedPipelineYaml = useMemo(() => {
+  //   return decodeGitContent(pipelineYAMLFileContent?.content?.data)
+  // }, [pipelineYAMLFileContent?.content?.data])
+
+  // useEffect(() => {
+  //   if (fetchingPipelineYAMLFileContent === false) {
+  //     setIsExistingPipeline(!isEmpty(decodedPipelineYaml) && !isUndefined(decodedPipelineYaml))
+  //     setYamlRevision({ yaml: stringify(starterPipelineV1) })
+  //   }
+  // }, [decodedPipelineYaml, fetchingPipelineYAMLFileContent])
+
+  // useEffect(() => {
+  //   const yaml = decodeGitContent(pipelineYAMLFileContent?.content?.data)
+  //   setYamlRevision({ yaml })
+  // }, [pipelineYAMLFileContent?.content?.data, setYamlRevision])
 
   const [addStepIntention, setAddStepIntention] = useState<{
     path: string
@@ -188,23 +212,23 @@ const PipelineStudioDataProvider = ({ children }: React.PropsWithChildren) => {
 
   const injectInArray = useCallback(
     (injectData: { path: string; position: 'after' | 'before' | 'last' | undefined; item: unknown }) => {
-      const yaml = injectItemInArray(latestYaml.current, injectData)
-      setYamlRevision({ yaml: yaml })
+      // const yaml = injectItemInArray(latestYaml.current, injectData)
+      // setYamlRevision({ yaml: yaml })
     },
     [clearAddStepIntention]
   )
 
   const updateInArray = useCallback(
     (injectData: { path: string; item: unknown }) => {
-      const yaml = updateItemInArray(latestYaml.current, injectData)
-      setYamlRevision({ yaml: yaml })
+      // const yaml = updateItemInArray(latestYaml.current, injectData)
+      // setYamlRevision({ yaml: yaml })
     },
     [clearAddStepIntention]
   )
 
   const deleteInArray = useCallback((data: { path: string }) => {
-    const yaml = deleteItemInArray(latestYaml.current, data)
-    setYamlRevision({ yaml: yaml })
+    // const yaml = deleteItemInArray(latestYaml.current, data)
+    // setYamlRevision({ yaml: yaml })
   }, [])
 
   const requestYamlModifications = useMemo(
@@ -230,8 +254,8 @@ const PipelineStudioDataProvider = ({ children }: React.PropsWithChildren) => {
   const isYamlValid = useMemo(() => problemsData.problemsCount.error === 0, [problemsData])
 
   const isDirty = useMemo(() => {
-    return decodeGitContent(pipelineYAMLFileContent?.content?.data) !== yamlRevision.yaml
-  }, [yamlRevision.yaml, pipelineYAMLFileContent?.content?.data])
+    return decodeGitContent(pipelineYAMLFileContent?.content?.data) !== state.yamlRevision.yaml
+  }, [state.yamlRevision.yaml, pipelineYAMLFileContent?.content?.data])
 
   if (fetchingPipelineYAMLFileContent || fetchingPipeline) {
     return (
@@ -245,11 +269,11 @@ const PipelineStudioDataProvider = ({ children }: React.PropsWithChildren) => {
   return (
     <PipelineStudioDataContext.Provider
       value={{
-        isDirty,
-        isExistingPipeline,
+        isDirty: state.isDirty,
+        isExistingPipeline: state.isExistingPipeline,
         //
         isYamlValid,
-        yamlRevision,
+        yamlRevision: state.yamlRevision,
         setYamlRevision,
         //
         problems: problemsData,
