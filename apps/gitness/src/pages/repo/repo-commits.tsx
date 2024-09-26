@@ -28,6 +28,7 @@ export default function RepoCommitsPage() {
     repo_ref: repoRef,
     queryParams: { page: 0, limit: 10, git_ref: normalizeGitRef(selectedBranch) }
   })
+  console.log(commitData)
 
   useEffect(() => {
     if (repository) {
