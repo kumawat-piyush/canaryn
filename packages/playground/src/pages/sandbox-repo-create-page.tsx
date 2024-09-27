@@ -54,7 +54,7 @@ function SandboxRepoCreatePage() {
       <SandboxLayout.Main hasLeftPanel hasHeader>
         <SandboxLayout.Content maxWidth="2xl">
           <Spacer size={10} />
-          <Text size={5} weight={'medium'}>
+          <Text size={6} weight={'medium'}>
             Create a new repository
           </Text>
           <Spacer size={3} />
@@ -64,6 +64,11 @@ function SandboxRepoCreatePage() {
           </Text>
           <Spacer size={8} />
           <form onSubmit={handleSubmit(onSubmit)}>
+            {/* Separator */}
+            <FormField.Root>
+              <FormField.Separator />
+            </FormField.Root>
+
             {/* Name */}
             <FormField.Root>
               <FormField.Label htmlFor="name">Name</FormField.Label>
