@@ -31,6 +31,7 @@ export * from './components/pull-request/pull-request-panel'
 export * from './components/pull-request/pull-request-comment-box'
 export * from './components/pull-request/pull-request-filters'
 export * from './components/pull-request/pull-request-side-bar'
+export * from './components/pull-request/pull-request-changes'
 
 export * from './components/no-search-results'
 export * from './components/pipeline-studio/pipeline-studio-toolbar-actions'
@@ -65,6 +66,7 @@ export * from './utils/utils'
 
 export * as ShaBadge from './components/sha-badge'
 export * as FileViewGauge from './components/file-view-gauge'
+export * as FileExplorer from './components/file-explorer'
 
 export * from './components/layout/layout'
 export * from './components/execution/execution-status'
