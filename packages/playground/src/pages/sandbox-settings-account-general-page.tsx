@@ -183,11 +183,7 @@ function SandboxSettingsAccountGeneralPage() {
                     {isProfileSubmitting ? 'Updating...' : 'Update profile'}
                   </Button>
                 ) : (
-                  <Button
-                    variant="ghost"
-                    type="button"
-                    size="sm"
-                    className="text-success hover:bg-transparent cursor-default">
+                  <Button variant="ghost" type="button" size="sm" theme="success" className="pointer-events-none">
                     Updated&nbsp;&nbsp;
                     <Icon name="tick" size={14} />
                   </Button>
@@ -264,11 +260,7 @@ function SandboxSettingsAccountGeneralPage() {
                     {isPasswordSubmitting ? 'Updating...' : 'Update password'}
                   </Button>
                 ) : (
-                  <Button
-                    variant="ghost"
-                    type="button"
-                    size="sm"
-                    className="text-success hover:bg-transparent cursor-default">
+                  <Button variant="ghost" type="button" size="sm" theme="success" className="pointer-events-none">
                     Updated&nbsp;&nbsp;
                     <Icon name="tick" size={14} />
                   </Button>
