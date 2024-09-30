@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { TypesStage, useFindExecutionQuery, useViewLogsQuery } from '@harnessio/code-service-client'
 import { Badge, Icon, ScrollArea, Separator, Text } from '@harnessio/canary'
 import {
@@ -17,6 +17,7 @@ import { ExecutionState } from '../../types'
 import { getDuration, timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
 
 const ExecutionLogs: React.FC = () => {
+  const navigate = useNavigate()
   const { pipelineId, executionId } = useParams<PathParams>()
   const repoRef = useGetRepoRef()
   const [stage, setStage] = useState<TypesStage>()
@@ -54,6 +55,7 @@ const ExecutionLogs: React.FC = () => {
             stage={stage as StageProps}
             logs={logs ?? []}
             selectedStepIdx={stepNum > 0 ? stepNum - 1 : 0}
+            onEdit={() => navigate('../edit')}
           />
         )}
       </div>

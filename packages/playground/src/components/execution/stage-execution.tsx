@@ -16,6 +16,7 @@ interface StageExecutionProps {
   stage: StageProps
   selectedStepIdx: number
   logs: LivelogLine[]
+  onEdit: () => void
 }
 
 interface StepNavigationProps {
@@ -68,7 +69,12 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
   )
 }
 
-export const StageExecution: React.FC<StageExecutionProps> = ({ stage, selectedStepIdx, logs }): React.ReactElement => {
+export const StageExecution: React.FC<StageExecutionProps> = ({
+  stage,
+  selectedStepIdx,
+  logs,
+  onEdit
+}): React.ReactElement => {
   if (!stage || !stage?.steps) {
     return <Text>No steps found</Text>
   }
@@ -108,7 +114,7 @@ export const StageExecution: React.FC<StageExecutionProps> = ({ stage, selectedS
         ) : (
           <Text>{stage.name}</Text>
         )}
-        {step && <StepExecution step={step} logs={logs} />}
+        {step && <StepExecution step={step} logs={logs} onEdit={onEdit} />}
       </Layout.Vertical>
     </Layout.Horizontal>
   )
