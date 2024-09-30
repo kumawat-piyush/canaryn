@@ -3,6 +3,7 @@ import { SandboxLayout } from '..'
 import {
   Button,
   ButtonGroup,
+  Icon,
   Input,
   RadioGroup,
   RadioGroupItem,
@@ -57,6 +58,7 @@ function SandboxRepoCreatePage() {
   const licenseValue = watch('license')
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false) // New state for tracking submission status
 
   const handleSelectChange = (fieldName: keyof FormFields, value: string) => {
     setValue(fieldName, value, { shouldValidate: true })
@@ -72,6 +74,8 @@ function SandboxRepoCreatePage() {
       console.log(data)
       reset()
       setIsSubmitting(false)
+      setIsSubmitted(true) // Set submitted state to true
+      setTimeout(() => setIsSubmitted(false), 2000) // Reset the submitted state after 2 seconds
     }, 2000)
   }
 
@@ -202,12 +206,21 @@ function SandboxRepoCreatePage() {
             <FormFieldSet.Root>
               <FormFieldSet.ControlGroup>
                 <ButtonGroup.Root>
-                  <Button type="submit" size="sm" disabled={!isValid || isSubmitting}>
-                    {!isSubmitting ? 'Create repository' : 'Creating repository...'}
-                  </Button>
-                  <Button type="button" variant="outline" size="sm" onClick={handleCancel}>
-                    Cancel
-                  </Button>
+                  {!isSubmitted ? (
+                    <>
+                      <Button type="submit" size="sm" disabled={!isValid || isSubmitting}>
+                        {!isSubmitting ? 'Create repository' : 'Creating repository...'}
+                      </Button>
+                      <Button type="button" variant="outline" size="sm" onClick={handleCancel}>
+                        Cancel
+                      </Button>
+                    </>
+                  ) : (
+                    <Button variant="ghost" type="button" size="sm" theme="success" className="pointer-events-none">
+                      Repository created&nbsp;&nbsp;
+                      <Icon name="tick" size={14} />
+                    </Button>
+                  )}
                 </ButtonGroup.Root>
               </FormFieldSet.ControlGroup>
             </FormFieldSet.Root>
