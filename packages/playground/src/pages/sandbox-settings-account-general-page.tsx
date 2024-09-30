@@ -1,8 +1,91 @@
-import React from 'react'
-import { Button, ButtonGroup, Input, Spacer, Text } from '@harnessio/canary'
+import React, { useState } from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Button, ButtonGroup, Input, Spacer, Text, Icon, Avatar, AvatarImage, AvatarFallback } from '@harnessio/canary'
 import { SandboxLayout, FormFieldSet } from '..'
+import { MessageTheme } from '../components/form-field-set'
+
+// Define form schemas
+const profileSchema = z.object({
+  name: z.string().min(1, { message: 'Please provide your name' }),
+  username: z.string().min(1, { message: 'Please provide a username' }),
+  email: z.string().email({ message: 'Please provide a valid email address' })
+})
+
+const passwordSchema = z
+  .object({
+    oldPassword: z.string().min(6, { message: 'Old password must be at least 6 characters' }),
+    newPassword: z
+      .string()
+      .min(6, { message: 'New password must be at least 6 characters' })
+      .regex(/[0-9]/, 'New password must contain at least one number')
+      .regex(/[A-Z]/, 'New password must contain at least one uppercase letter'),
+    confirmPassword: z.string().min(6, { message: 'Please confirm your new password' })
+  })
+  .refine(data => data.newPassword === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword']
+  })
+
+// Define TypeScript types
+type ProfileFields = z.infer<typeof profileSchema>
+type PasswordFields = z.infer<typeof passwordSchema>
 
 function SandboxSettingsAccountGeneralPage() {
+  // Profile form handling
+  const {
+    register: registerProfile,
+    handleSubmit: handleProfileSubmit,
+    formState: { errors: profileErrors, isValid: isProfileValid, dirtyFields: profileDirtyFields }
+  } = useForm<ProfileFields>({
+    resolver: zodResolver(profileSchema),
+    mode: 'onChange',
+    defaultValues: {
+      name: 'Brad Rydzewski',
+      username: 'brad',
+      email: 'brad@drone.io'
+    }
+  })
+
+  // Password form handling
+  const {
+    register: registerPassword,
+    reset,
+    handleSubmit: handlePasswordSubmit,
+    formState: { errors: passwordErrors, isValid: isPasswordValid }
+  } = useForm<PasswordFields>({
+    resolver: zodResolver(passwordSchema),
+    mode: 'onChange',
+    defaultValues: {
+      oldPassword: '',
+      newPassword: '',
+      confirmPassword: ''
+    }
+  })
+
+  const [isProfileSubmitting, setIsProfileSubmitting] = useState(false)
+  const [isPasswordSubmitting, setIsPasswordSubmitting] = useState(false)
+
+  // Profile form submit handler
+  const onProfileSubmit: SubmitHandler<ProfileFields> = data => {
+    setIsProfileSubmitting(true)
+    setTimeout(() => {
+      console.log('Profile updated:', data)
+      setIsProfileSubmitting(false)
+    }, 2000)
+  }
+
+  // Password form submit handler
+  const onPasswordSubmit: SubmitHandler<PasswordFields> = data => {
+    setIsPasswordSubmitting(true)
+    setTimeout(() => {
+      console.log('Password updated:', data)
+      reset()
+      setIsPasswordSubmitting(false)
+    }, 2000)
+  }
+
   return (
     <SandboxLayout.Main hasLeftPanel hasHeader hasSubHeader>
       <SandboxLayout.Content maxWidth="2xl">
@@ -11,53 +94,154 @@ function SandboxSettingsAccountGeneralPage() {
           General
         </Text>
         <Spacer size={6} />
-        <FormFieldSet.Root>
-          <FormFieldSet.Legend>Personal information</FormFieldSet.Legend>
-          <FormFieldSet.ControlGroup>
-            <FormFieldSet.Label htmlFor="name">Name</FormFieldSet.Label>
-            <Input id="name" type="text" placeholder="Enter your name" />
-          </FormFieldSet.ControlGroup>
-          <FormFieldSet.ControlGroup>
-            <FormFieldSet.Label htmlFor="username">Username</FormFieldSet.Label>
-            <Input id="username" type="test" placeholder="Enter your username" />
-          </FormFieldSet.ControlGroup>
-          <FormFieldSet.ControlGroup>
-            <FormFieldSet.Label htmlFor="email">Account email</FormFieldSet.Label>
-            <Input id="email" type="email" placeholder="brad@drone.io" />
-          </FormFieldSet.ControlGroup>
-          <FormFieldSet.ControlGroup type="button">
-            <ButtonGroup.Root>
-              <Button size="sm">Update profile</Button>
-            </ButtonGroup.Root>
-          </FormFieldSet.ControlGroup>
-        </FormFieldSet.Root>
+        <form onSubmit={handleProfileSubmit(onProfileSubmit)}>
+          <FormFieldSet.Root>
+            {/* PERSONAL INFORMATION */}
+            <FormFieldSet.Legend>Personal information</FormFieldSet.Legend>
+            <FormFieldSet.ControlGroup className="w-auto flex flex-row gap-x-6 items-center justify-start">
+              <Avatar size="80" className="h-20 w-20 rounded-full bg-primary/[0.02] shadow-md">
+                <AvatarImage src="/images/brad.jpg" />
+                <AvatarFallback>
+                  <Text size={5} weight="medium" color="tertiaryBackground">
+                    BR
+                  </Text>
+                </AvatarFallback>
+              </Avatar>
+              <FormFieldSet.ControlGroup>
+                <FormFieldSet.Label htmlFor="avatar">Profile picture</FormFieldSet.Label>
+                <ButtonGroup.Root spacing="3">
+                  <Button variant="outline" size="sm">
+                    Upload
+                  </Button>
+                  <Button variant="outline" size="sm">
+                    <Icon name="trash" size={14} />
+                  </Button>
+                </ButtonGroup.Root>
+              </FormFieldSet.ControlGroup>
+            </FormFieldSet.ControlGroup>
+
+            {/* NAME */}
+            <FormFieldSet.ControlGroup>
+              <FormFieldSet.Label htmlFor="name" required>
+                Name
+              </FormFieldSet.Label>
+              <Input id="name" {...registerProfile('name')} placeholder="Enter your name" />
+              {profileErrors.name && (
+                <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                  {profileErrors.name.message?.toString()}
+                </FormFieldSet.Message>
+              )}
+            </FormFieldSet.ControlGroup>
+
+            {/* USERNAME */}
+            <FormFieldSet.ControlGroup>
+              <FormFieldSet.Label htmlFor="username" required>
+                Username
+              </FormFieldSet.Label>
+              <Input id="username" {...registerProfile('username')} placeholder="Enter your username" />
+              {profileErrors.username && (
+                <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                  {profileErrors.username.message?.toString()}
+                </FormFieldSet.Message>
+              )}
+            </FormFieldSet.ControlGroup>
+
+            {/* EMAIL */}
+            <FormFieldSet.ControlGroup>
+              <FormFieldSet.Label htmlFor="email" required>
+                Account email
+              </FormFieldSet.Label>
+              <Input id="email" {...registerProfile('email')} placeholder="brad@drone.io" />
+              {profileErrors.email && (
+                <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                  {profileErrors.email.message?.toString()}
+                </FormFieldSet.Message>
+              )}
+            </FormFieldSet.ControlGroup>
+
+            {/* UPDATE PROFILE BUTTON */}
+            <FormFieldSet.ControlGroup type="button">
+              <ButtonGroup.Root>
+                <Button
+                  size="sm"
+                  type="submit"
+                  disabled={!isProfileValid || isProfileSubmitting || !Object.keys(profileDirtyFields).length}>
+                  {isProfileSubmitting ? 'Updating...' : 'Update profile'}
+                </Button>
+              </ButtonGroup.Root>
+            </FormFieldSet.ControlGroup>
+          </FormFieldSet.Root>
+        </form>
+
         <FormFieldSet.Root>
           <FormFieldSet.Separator />
         </FormFieldSet.Root>
-        <FormFieldSet.Root>
-          <FormFieldSet.Legend>Password settings</FormFieldSet.Legend>
-          <FormFieldSet.SubLegend>
-            Minimum of 6 characters long containing at least one number and have a mixture of uppercase and lowercase
-            letters.
-          </FormFieldSet.SubLegend>
-          <FormFieldSet.ControlGroup>
-            <FormFieldSet.Label htmlFor="old-password">Old password</FormFieldSet.Label>
-            <Input id="old-password" type="password" placeholder="Enter your old password" />
-          </FormFieldSet.ControlGroup>
-          <FormFieldSet.ControlGroup>
-            <FormFieldSet.Label htmlFor="new-password">New password</FormFieldSet.Label>
-            <Input id="new-password" type="password" placeholder="Enter a new password" />
-          </FormFieldSet.ControlGroup>
-          <FormFieldSet.ControlGroup>
-            <FormFieldSet.Label htmlFor="confirm-password">Confirm new password</FormFieldSet.Label>
-            <Input id="confirm-password" type="password" placeholder="Confirm the new password" />
-          </FormFieldSet.ControlGroup>
-          <FormFieldSet.ControlGroup type="button">
-            <ButtonGroup.Root>
-              <Button size="sm">Update password</Button>
-            </ButtonGroup.Root>
-          </FormFieldSet.ControlGroup>
-        </FormFieldSet.Root>
+
+        {/* PASSWORD SETTINGS */}
+        <form onSubmit={handlePasswordSubmit(onPasswordSubmit)}>
+          <FormFieldSet.Root>
+            <FormFieldSet.Legend>Password settings</FormFieldSet.Legend>
+            <FormFieldSet.SubLegend>
+              Minimum of 6 characters long containing at least one number and a mixture of uppercase and lowercase
+              letters.
+            </FormFieldSet.SubLegend>
+            <FormFieldSet.ControlGroup>
+              <FormFieldSet.Label htmlFor="oldPassword">Old password</FormFieldSet.Label>
+              <Input
+                id="oldPassword"
+                type="password"
+                {...registerPassword('oldPassword')}
+                placeholder="Enter your old password"
+              />
+              {passwordErrors.oldPassword && (
+                <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                  {passwordErrors.oldPassword.message?.toString()}
+                </FormFieldSet.Message>
+              )}
+            </FormFieldSet.ControlGroup>
+
+            {/* NEW PASSWORD */}
+            <FormFieldSet.ControlGroup>
+              <FormFieldSet.Label htmlFor="newPassword">New password</FormFieldSet.Label>
+              <Input
+                id="newPassword"
+                type="password"
+                {...registerPassword('newPassword')}
+                placeholder="Enter a new password"
+              />
+              {passwordErrors.newPassword && (
+                <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                  {passwordErrors.newPassword.message?.toString()}
+                </FormFieldSet.Message>
+              )}
+            </FormFieldSet.ControlGroup>
+
+            {/* CONFIRM PASSWORD */}
+            <FormFieldSet.ControlGroup>
+              <FormFieldSet.Label htmlFor="confirmPassword">Confirm new password</FormFieldSet.Label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                {...registerPassword('confirmPassword')}
+                placeholder="Confirm the new password"
+              />
+              {passwordErrors.confirmPassword && (
+                <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                  {passwordErrors.confirmPassword.message?.toString()}
+                </FormFieldSet.Message>
+              )}
+            </FormFieldSet.ControlGroup>
+
+            {/* UPDATE PASSWORD BUTTON */}
+            <FormFieldSet.ControlGroup type="button">
+              <ButtonGroup.Root>
+                <Button size="sm" type="submit" disabled={!isPasswordValid || isPasswordSubmitting}>
+                  {isPasswordSubmitting ? 'Updating...' : 'Update password'}
+                </Button>
+              </ButtonGroup.Root>
+            </FormFieldSet.ControlGroup>
+          </FormFieldSet.Root>
+        </form>
       </SandboxLayout.Content>
     </SandboxLayout.Main>
   )
