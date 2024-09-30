@@ -5,7 +5,7 @@ import { SandboxLayout, SkeletonList } from '..'
 function SandboxSettingsAccountKeysPage() {
   return (
     <SandboxLayout.Main hasLeftPanel hasHeader hasSubHeader>
-      <SandboxLayout.Content>
+      <SandboxLayout.Content maxWidth="2xl">
         <Spacer size={10} />
         <Text size={5} weight={'medium'}>
           Keys and tokens

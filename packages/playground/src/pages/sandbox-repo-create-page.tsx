@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SandboxLayout } from '..'
 import {
   Button,
   ButtonGroup,
-  Checkbox,
   Input,
   RadioGroup,
   RadioGroupItem,
@@ -16,38 +15,77 @@ import {
   Text,
   Textarea
 } from '@harnessio/canary'
-import { useForm } from 'react-hook-form'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { FormField } from '../index'
-import { MessageTheme } from '../components/form-field'
+import { FormFieldSet } from '../index'
+import { MessageTheme } from '../components/form-field-set'
 
-export interface DataProps {
-  email?: string
-  description?: string
-  password?: string
-}
-
+// Define the form schema with optional fields for gitignore and license
 const formSchema = z.object({
   name: z.string().min(1, { message: 'Please provide a name' }),
   description: z.string().min(1, { message: 'Please provide a description' }),
-  gitignore: z.string().min(1, { message: 'Please select a file' }),
-  license: z.string().min(1, { message: 'Please select a license' }),
-  access: z.string().min(1, { message: 'Please select who has access' })
+  gitignore: z.enum(['', '1', '2', '3']),
+  license: z.enum(['', '1', '2', '3']),
+  access: z.enum(['1', '2'], { errorMap: () => ({ message: 'Please select who has access' }) })
 })
+
+type FormFields = z.infer<typeof formSchema> // Automatically generate a type from the schema
 
 function SandboxRepoCreatePage() {
   const {
     register,
     handleSubmit,
-    formState: { errors }
-  } = useForm({
-    resolver: zodResolver(formSchema)
+    setValue,
+    watch,
+    reset,
+    formState: { errors, isValid }
+  } = useForm<FormFields>({
+    resolver: zodResolver(formSchema),
+    mode: 'onChange',
+    defaultValues: {
+      name: '',
+      description: '',
+      gitignore: '',
+      license: '',
+      access: '1'
+    }
   })
 
-  const onSubmit = (data: DataProps) => {
-    console.log(data)
+  const accessValue = watch('access')
+  const gitignoreValue = watch('gitignore')
+  const licenseValue = watch('license')
+
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+
+  const handleSelectChange = (fieldName: keyof FormFields, value: string) => {
+    setValue(fieldName, value, { shouldValidate: true })
   }
+
+  const handleAccessChange = (value: '1' | '2') => {
+    setValue('access', value, { shouldValidate: true })
+  }
+
+  const onSubmit: SubmitHandler<FormFields> = data => {
+    setIsSubmitting(true)
+    setTimeout(() => {
+      console.log(data)
+      reset({
+        name: '',
+        description: '',
+        gitignore: '',
+        license: '',
+        access: '1'
+      })
+      setIsSubmitting(false)
+    }, 2000)
+  }
+
+  const handleCancel = () => {
+    console.log('Cancel button clicked')
+  }
+
+  console.log(gitignoreValue)
 
   return (
     <>
@@ -64,50 +102,71 @@ function SandboxRepoCreatePage() {
           </Text>
           <Spacer size={8} />
           <form onSubmit={handleSubmit(onSubmit)}>
-            {/* Separator */}
-            <FormField.Root>
-              <FormField.Separator />
-            </FormField.Root>
-
-            {/* Name */}
-            <FormField.Root>
-              <FormField.Label htmlFor="name">Name</FormField.Label>
-              <FormField.Control>
+            {/* Name Field */}
+            <FormFieldSet.Root>
+              <FormFieldSet.ControlGroup>
+                <FormFieldSet.Label htmlFor="name" required>
+                  Name
+                </FormFieldSet.Label>
                 <Input id="name" {...register('name')} placeholder="Enter repository name" autoFocus />
-              </FormField.Control>
-              {errors.name && (
-                <FormField.Message theme={MessageTheme.ERROR}>{errors.name.message?.toString()}</FormField.Message>
-              )}
-            </FormField.Root>
-
-            {/* Description */}
-            <FormField.Root>
-              <FormField.Label htmlFor="description">Description</FormField.Label>
-              <FormField.Control>
+                {errors.name && (
+                  <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                    {errors.name.message?.toString()}
+                  </FormFieldSet.Message>
+                )}
+              </FormFieldSet.ControlGroup>
+              {/* Description Field */}
+              <FormFieldSet.ControlGroup>
+                <FormFieldSet.Label htmlFor="description" required>
+                  Description
+                </FormFieldSet.Label>
                 <Textarea
                   id="description"
                   {...register('description')}
                   placeholder="Enter a description of this repository..."
                 />
-              </FormField.Control>
-              {errors.description && (
-                <FormField.Message theme={MessageTheme.ERROR}>
-                  {errors.description.message?.toString()}
-                </FormField.Message>
-              )}
-            </FormField.Root>
+                {errors.description && (
+                  <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                    {errors.description.message?.toString()}
+                  </FormFieldSet.Message>
+                )}
+              </FormFieldSet.ControlGroup>
+            </FormFieldSet.Root>
 
-            {/* Separator */}
-            <FormField.Root>
-              <FormField.Separator dashed />
-            </FormField.Root>
+            {/* Access Radio Group */}
+            <FormFieldSet.Root box shaded>
+              <FormFieldSet.ControlGroup>
+                <FormFieldSet.Label htmlFor="access" required>
+                  Who has access?
+                </FormFieldSet.Label>
+                <RadioGroup value={accessValue} onValueChange={handleAccessChange} id="access">
+                  <FormFieldSet.Option
+                    control={<RadioGroupItem value="1" id="access-public" />}
+                    id="access-public"
+                    label="Public"
+                    description="Anyone with access to the environment can clone this repo."
+                  />
+                  <FormFieldSet.Option
+                    control={<RadioGroupItem value="2" id="access-private" />}
+                    id="access-private"
+                    label="Private"
+                    description="You choose who can see and commit to this repository."
+                  />
+                </RadioGroup>
+                {errors.access && (
+                  <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                    {errors.access.message?.toString()}
+                  </FormFieldSet.Message>
+                )}
+              </FormFieldSet.ControlGroup>
+            </FormFieldSet.Root>
 
-            {/* Git Ignore */}
-            <FormField.Root>
-              <FormField.Label htmlFor="gitignore">Add a .gitignore</FormField.Label>
-              <FormField.Control>
-                <Select>
-                  <SelectTrigger id="gitignore" {...register('gitignore')}>
+            {/* Git Ignore Select Field */}
+            <FormFieldSet.Root box>
+              <FormFieldSet.ControlGroup>
+                <FormFieldSet.Label htmlFor="gitignore">Add a .gitignore (optional)</FormFieldSet.Label>
+                <Select value={gitignoreValue} onValueChange={value => handleSelectChange('gitignore', value)}>
+                  <SelectTrigger id="gitignore">
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
                   <SelectContent>
@@ -116,18 +175,18 @@ function SandboxRepoCreatePage() {
                     <SelectItem value="3">.gitignore option 3</SelectItem>
                   </SelectContent>
                 </Select>
-              </FormField.Control>
-              {errors.gitignore && (
-                <FormField.Message theme={MessageTheme.ERROR}>{errors.gitignore.message?.toString()}</FormField.Message>
-              )}
-            </FormField.Root>
+                {errors.gitignore && (
+                  <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                    {errors.gitignore.message?.toString()}
+                  </FormFieldSet.Message>
+                )}
+              </FormFieldSet.ControlGroup>
 
-            {/* License*/}
-            <FormField.Root>
-              <FormField.Label htmlFor="license">Choose a license</FormField.Label>
-              <FormField.Control>
-                <Select>
-                  <SelectTrigger id="license" {...register('license')}>
+              {/* License Select Field */}
+              <FormFieldSet.ControlGroup>
+                <FormFieldSet.Label htmlFor="license">Choose a license (optional)</FormFieldSet.Label>
+                <Select value={licenseValue} onValueChange={value => handleSelectChange('license', value)}>
+                  <SelectTrigger id="license">
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
                   <SelectContent>
@@ -136,72 +195,30 @@ function SandboxRepoCreatePage() {
                     <SelectItem value="3">License option 3</SelectItem>
                   </SelectContent>
                 </Select>
-              </FormField.Control>
-              <FormField.Caption>A license tells others what they can and can't do with your code.</FormField.Caption>
-              {errors.license && (
-                <FormField.Message theme={MessageTheme.ERROR}>{errors.license.message?.toString()}</FormField.Message>
-              )}
-            </FormField.Root>
+                <FormFieldSet.Caption>
+                  A license tells others what they can and can't do with your code.
+                </FormFieldSet.Caption>
+                {errors.license && (
+                  <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                    {errors.license.message?.toString()}
+                  </FormFieldSet.Message>
+                )}
+              </FormFieldSet.ControlGroup>
+            </FormFieldSet.Root>
 
-            <FormField.Root>
-              <FormField.Separator dashed />
-            </FormField.Root>
-
-            {/* Access*/}
-            <FormField.Root box shaded>
-              <FormField.Label htmlFor="access">Who has access?</FormField.Label>
-              <FormField.Control>
-                <RadioGroup id="access" {...register('access')}>
-                  <FormField.Option
-                    control={<RadioGroupItem value="1" id="1" />}
-                    id="1"
-                    label="Public"
-                    description="Anyone with access to the environment can clone this repo."
-                  />
-                  <FormField.Option
-                    control={<RadioGroupItem value="2" id="2" />}
-                    id="2"
-                    label="Private"
-                    description="You choose who can see and commit to this repository."
-                  />
-                </RadioGroup>
-              </FormField.Control>
-              {errors.access && (
-                <FormField.Message theme={MessageTheme.ERROR}>{errors.access.message?.toString()}</FormField.Message>
-              )}
-            </FormField.Root>
-
-            {/* Initialize*/}
-            <FormField.Root box shaded>
-              <FormField.Label htmlFor="access">Initialize this repository with...</FormField.Label>
-              <FormField.Control>
-                <RadioGroup id="access" defaultValue="1" {...register('initialize')}>
-                  <FormField.Option
-                    control={<Checkbox id="readme" />}
-                    id="readme"
-                    label="Add a README file"
-                    description="This is where you can write a long description for your project."
-                  />
-                </RadioGroup>
-              </FormField.Control>
-            </FormField.Root>
-
-            {/* Separator */}
-            <FormField.Root>
-              <FormField.Separator />
-            </FormField.Root>
-
-            {/* Buttons */}
-            <FormField.Root>
-              <FormField.Control>
+            {/* Form Buttons */}
+            <FormFieldSet.Root>
+              <FormFieldSet.ControlGroup>
                 <ButtonGroup.Root>
-                  <Button size="sm">Create repository</Button>
-                  <Button variant="outline" size="sm">
+                  <Button type="submit" size="sm" disabled={!isValid || isSubmitting}>
+                    {!isSubmitting ? 'Create repository' : 'Creating repository...'}
+                  </Button>
+                  <Button type="button" variant="outline" size="sm" onClick={handleCancel}>
                     Cancel
                   </Button>
                 </ButtonGroup.Root>
-              </FormField.Control>
-            </FormField.Root>
+              </FormFieldSet.ControlGroup>
+            </FormFieldSet.Root>
           </form>
         </SandboxLayout.Content>
       </SandboxLayout.Main>

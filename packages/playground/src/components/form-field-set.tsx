@@ -26,6 +26,12 @@ interface MessageProps {
   theme: MessageTheme
 }
 
+interface ControlProps {
+  children: React.ReactNode
+  type?: 'button'
+  className?: string
+}
+
 type ControlType = React.ReactElement<typeof RadioGroupItem> | React.ReactElement<typeof Checkbox>
 
 interface OptionProps {
@@ -39,6 +45,7 @@ interface OptionProps {
 interface LabelProps {
   children: React.ReactNode
   htmlFor?: string
+  required?: boolean
   className?: string
 }
 
@@ -59,21 +66,37 @@ const themeClassMap: Record<MessageTheme, string> = {
   [MessageTheme.DEFAULT]: 'text-tertiary-background'
 }
 
-// Root component for grouping form elements
 function Root({ children, box, shaded, className }: RootProps) {
   return (
     <fieldset
       className={cn(
-        'flex flex-col gap-2 mb-8',
+        'flex flex-col gap-6 mb-8',
         { 'border rounded-md px-5 py-3.5 pb-5': box, 'bg-primary/[0.02]': shaded },
         className
-      )}>
+      )}
+      role="group"
+      aria-describedby="fieldset-description">
       {children}
     </fieldset>
   )
 }
 
-// Form item wrapper, using div for layout purposes
+function Legend({ children, className }: CompProps) {
+  return (
+    <Text size={3} weight={'medium'} className={cn('mb-0', className)} as="p" role="legend">
+      {children}
+    </Text>
+  )
+}
+
+function SubLegend({ children, className }: CompProps) {
+  return (
+    <Text size={2} weight={'normal'} className={cn('text-primary/70 mb-0', className)} as="p" id="fieldset-description">
+      {children}
+    </Text>
+  )
+}
+
 function Item({ children, className }: CompProps) {
   return (
     <div className={cn('item-wrapper', className)} role="presentation">
@@ -82,34 +105,34 @@ function Item({ children, className }: CompProps) {
   )
 }
 
-// Label component associated with its control using htmlFor
-function Label({ htmlFor, children, className }: LabelProps) {
+function Label({ htmlFor, required, children, className }: LabelProps) {
   return (
-    <ShadLabel htmlFor={htmlFor} variant="sm" className={cn('font-medium', className)}>
+    <ShadLabel htmlFor={htmlFor} variant="sm" className={cn('font-normal text-primary/80', className)}>
       {children}
+      {required && <span className="pl-0.5 align-top text-destructive">*</span>}
     </ShadLabel>
   )
 }
 
-// Control component for managing nested form inputs
-function Control({ children, className }: CompProps) {
+function ControlGroup({ children, type, className }: ControlProps) {
   return (
-    <div className={cn('control-wrapper', className)} role="presentation">
+    <div
+      className={cn('flex flex-col gap-2', { 'mt-2': type === 'button' }, className)}
+      role="group"
+      aria-label={type === 'button' ? 'Button control group' : 'Input control group'}>
       {children}
     </div>
   )
 }
 
-// Caption component to display supplementary information about a form field
 function Caption({ children, className }: CompProps) {
   return (
-    <Text as="p" size={1} color="tertiaryBackground" role="note" className={cn(className)}>
+    <Text as="p" size={1} color="tertiaryBackground" role="note" aria-live="polite" className={cn('mt-1', className)}>
       {children}
     </Text>
   )
 }
 
-// Accessible message component for showing alerts, errors, or status updates
 function Message({ children, theme, className }: MessageProps) {
   const textClass = themeClassMap[theme]
   const role = theme === MessageTheme.ERROR ? 'alert' : 'status'
@@ -117,22 +140,23 @@ function Message({ children, theme, className }: MessageProps) {
 
   return (
     <div className={cn('', textClass, className)} role={role} aria-live={ariaLive}>
-      <Text size={1} className="text-inherit">
+      <Text as="p" size={1} className="text-inherit">
         {children}
       </Text>
     </div>
   )
 }
 
-// Option component for form controls like radio buttons or checkboxes
 function Option({ control, id, label, description, className }: OptionProps) {
   return (
-    <div className={cn('flex gap-x-4 items-start mt-2', className)}>
+    <div className={cn('flex gap-x-4 items-start mt-2', className)} role="option" aria-labelledby={`${id}-label`}>
       <div className="mt-0.5">{control}</div>
       <div className="flex flex-col gap-0">
-        <Label htmlFor={id}>{label}</Label>
+        <Label htmlFor={id} className="font-medium">
+          {label}
+        </Label>
         {description && (
-          <Text size={1} color="tertiaryBackground" id={`${id}-description`} role="note">
+          <Text as="p" size={1} color="tertiaryBackground" id={`${id}-description`} role="note">
             {description}
           </Text>
         )}
@@ -142,11 +166,17 @@ function Option({ control, id, label, description, className }: OptionProps) {
 }
 
 function Separator({ dashed, dotted, className }: SeparatorProps) {
-  return <div className={cn('border-b', { 'border-dashed': dashed, 'border-dotted': dotted }, className)} />
+  return (
+    <div
+      className={cn('border-b', { 'border-dashed': dashed, 'border-dotted': dotted }, className)}
+      role="separator"
+      aria-orientation="horizontal"
+    />
+  )
 }
 
 function Spacer({ className }: SpacerProps) {
-  return <div className={cn('mt-1', className)} />
+  return <div className={cn('mt-1', className)} role="presentation" aria-hidden="true" />
 }
 
-export { Root, Item, Label, Control, Caption, Message, Option, Separator, Spacer, MessageTheme }
+export { Root, Legend, SubLegend, Item, Label, ControlGroup, Caption, Message, Option, Separator, Spacer, MessageTheme }
