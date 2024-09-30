@@ -10,9 +10,9 @@ import { PipelineParams, usePipelineDataContext } from '../context/PipelineStudi
 const PipelineStudioHeaderActions = (): JSX.Element => {
   const {
     pipelineData,
-    pipelineYAMLFileContent,
-    fetchPipelineYAMLFileContent,
-    fetchingPipelineYAMLFileContent,
+    pipelineFileContent,
+    fetchPipelineFileContent,
+    fetchingPipelineFileContent,
     yamlRevision,
     isExistingPipeline,
     isDirty,
@@ -32,7 +32,7 @@ const PipelineStudioHeaderActions = (): JSX.Element => {
           action: isExistingPipeline ? 'UPDATE' : 'CREATE',
           path: pipelineData?.config_path,
           payload: yamlRevision.yaml,
-          sha: isExistingPipeline ? pipelineYAMLFileContent?.sha : ''
+          sha: isExistingPipeline ? pipelineFileContent?.sha : ''
         }
       ],
       branch: pipelineData?.default_branch || '',
@@ -45,7 +45,7 @@ const PipelineStudioHeaderActions = (): JSX.Element => {
         if (execute) {
           handleRun()
         } else {
-          fetchPipelineYAMLFileContent?.()
+          fetchPipelineFileContent?.()
         }
         // TODO: toast
       })
@@ -101,7 +101,7 @@ const PipelineStudioHeaderActions = (): JSX.Element => {
     // NOTE: absolute positioning in the top right corner of the page
     <div className="absolute right-0 top-0 w-fit">
       <div className="flex items-center gap-x-3 h-14 px-4">
-        {!fetchingPipelineYAMLFileContent && (
+        {!fetchingPipelineFileContent && (
           <>
             <Button variant="ghost" size="sm">
               Settings

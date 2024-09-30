@@ -1,34 +1,35 @@
-import type { TypesSignature } from '@harnessio/code-service-client'
-import { YamlRevision } from '../PipelineStudioDataProvider'
-import { DataActionName, DataActions, AddStepIntentionActionPayload } from './actions'
-
-export interface DataReducerState {
-  isDirty: boolean
-  isExistingPipeline: boolean
-  //
-  isYamlValid: boolean
-  yamlRevision: YamlRevision
-  //
-  addStepIntention: AddStepIntentionActionPayload
-  //
-  pipelineLatestAuthor: TypesSignature | null
-}
+import { DataActionName, DataActions, DataReducerState } from './types'
 
 export const initialState: DataReducerState = {
   isDirty: false,
   isExistingPipeline: false,
   //
+  /** pipeline from API */
+  pipelineFileContent: null,
+  fetchingPipelineFileContent: false,
+  /** pipeline content from API */
+  pipelineData: null,
+  fetchingPipelineData: false,
+  //
   isYamlValid: true,
   yamlRevision: { yaml: '' },
   //
   addStepIntention: null,
+  editStepIntention: null,
   //
-  pipelineLatestAuthor: null
+  currentStepFormDefinition: null,
+  //
+  latestCommitAuthor: null
 }
 
 export const DataReducer = (state = initialState, data: DataActions): DataReducerState => {
   const { type, payload } = data
   switch (type) {
+    case DataActionName.UpdateState:
+      return {
+        ...state,
+        ...payload
+      }
     case DataActionName.SetYamlRevision:
       return {
         ...state,
@@ -47,7 +48,7 @@ export const DataReducer = (state = initialState, data: DataActions): DataReduce
     case DataActionName.SetPipelineLatestAuthor:
       return {
         ...state,
-        pipelineLatestAuthor: payload
+        latestCommitAuthor: payload
       }
   }
   return state

@@ -11,7 +11,7 @@ import {
   outputTransformValues
 } from '@harnessio/forms'
 import { Icon } from '@harnessio/canary'
-import { ListPluginsOkResponse, useListPluginsQuery } from '@harnessio/code-service-client'
+import { useListPluginsQuery } from '@harnessio/code-service-client'
 import {
   StepForm,
   StepFormSection,
@@ -41,21 +41,19 @@ export const PipelineStudioStepForm = (props: PipelineStudioStepFormProps): JSX.
   const [defaultStepValues, setDefaultStepValues] = useState({})
 
   // TODO: only 100 items
-  const { data: pluginsResponseRaw } = useListPluginsQuery(
+  const { data: pluginsResponse } = useListPluginsQuery(
     { queryParams: { limit: 100, page: 1 } },
     { enabled: !!editStepIntention }
   )
-  // TODO: response type
-  const pluginsResponse = useMemo(
-    () => (pluginsResponseRaw as unknown as { content: ListPluginsOkResponse | undefined })?.content,
-    [pluginsResponseRaw]
-  )
-  // TODO
-  const plugins = useMemo(() => {
-    // TODO: Do not parse all plugins in advance  - check if its not needed (wrap inside try...catch)
-    // TODO: duplicated code
 
-    return pluginsResponse?.map(d => ({ ...d, spec: JSON.parse(d.spec ?? '') })) ?? []
+  const plugins = useMemo(() => {
+    // TODO: Do not parse all plugins in advance
+    // TODO: duplicated code
+    try {
+      return pluginsResponse?.map(d => ({ ...d, spec: JSON.parse(d.spec ?? '') })) ?? []
+    } catch (_ex) {
+      // TODO
+    }
   }, [pluginsResponse])
 
   useEffect(() => {
