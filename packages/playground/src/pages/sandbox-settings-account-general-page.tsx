@@ -37,6 +37,7 @@ function SandboxSettingsAccountGeneralPage() {
   const {
     register: registerProfile,
     handleSubmit: handleProfileSubmit,
+    reset: resetProfileForm, // Add reset for profile form
     formState: { errors: profileErrors, isValid: isProfileValid, dirtyFields: profileDirtyFields }
   } = useForm<ProfileFields>({
     resolver: zodResolver(profileSchema),
@@ -51,7 +52,7 @@ function SandboxSettingsAccountGeneralPage() {
   // Password form handling
   const {
     register: registerPassword,
-    reset,
+    reset: resetPasswordForm, // Add reset for password form
     handleSubmit: handlePasswordSubmit,
     formState: { errors: passwordErrors, isValid: isPasswordValid }
   } = useForm<PasswordFields>({
@@ -66,6 +67,8 @@ function SandboxSettingsAccountGeneralPage() {
 
   const [isProfileSubmitting, setIsProfileSubmitting] = useState(false)
   const [isPasswordSubmitting, setIsPasswordSubmitting] = useState(false)
+  const [profileSubmitted, setProfileSubmitted] = useState(false)
+  const [passwordSubmitted, setPasswordSubmitted] = useState(false)
 
   // Profile form submit handler
   const onProfileSubmit: SubmitHandler<ProfileFields> = data => {
@@ -73,6 +76,14 @@ function SandboxSettingsAccountGeneralPage() {
     setTimeout(() => {
       console.log('Profile updated:', data)
       setIsProfileSubmitting(false)
+      setProfileSubmitted(true)
+      // Reset profile form to clear dirty state
+      resetProfileForm({
+        name: data.name,
+        username: data.username,
+        email: data.email
+      })
+      setTimeout(() => setProfileSubmitted(false), 2000)
     }, 2000)
   }
 
@@ -81,8 +92,10 @@ function SandboxSettingsAccountGeneralPage() {
     setIsPasswordSubmitting(true)
     setTimeout(() => {
       console.log('Password updated:', data)
-      reset()
+      resetPasswordForm()
       setIsPasswordSubmitting(false)
+      setPasswordSubmitted(true)
+      setTimeout(() => setPasswordSubmitted(false), 2000)
     }, 2000)
   }
 
@@ -162,12 +175,23 @@ function SandboxSettingsAccountGeneralPage() {
             {/* UPDATE PROFILE BUTTON */}
             <FormFieldSet.ControlGroup type="button">
               <ButtonGroup.Root>
-                <Button
-                  size="sm"
-                  type="submit"
-                  disabled={!isProfileValid || isProfileSubmitting || !Object.keys(profileDirtyFields).length}>
-                  {isProfileSubmitting ? 'Updating...' : 'Update profile'}
-                </Button>
+                {!profileSubmitted ? (
+                  <Button
+                    size="sm"
+                    type="submit"
+                    disabled={!isProfileValid || isProfileSubmitting || !Object.keys(profileDirtyFields).length}>
+                    {isProfileSubmitting ? 'Updating...' : 'Update profile'}
+                  </Button>
+                ) : (
+                  <Button
+                    variant="ghost"
+                    type="button"
+                    size="sm"
+                    className="text-success hover:bg-transparent cursor-default">
+                    Updated&nbsp;&nbsp;
+                    <Icon name="tick" size={14} />
+                  </Button>
+                )}
               </ButtonGroup.Root>
             </FormFieldSet.ControlGroup>
           </FormFieldSet.Root>
@@ -223,7 +247,7 @@ function SandboxSettingsAccountGeneralPage() {
                 id="confirmPassword"
                 type="password"
                 {...registerPassword('confirmPassword')}
-                placeholder="Confirm the new password"
+                placeholder="Confirm your new password"
               />
               {passwordErrors.confirmPassword && (
                 <FormFieldSet.Message theme={MessageTheme.ERROR}>
@@ -235,9 +259,20 @@ function SandboxSettingsAccountGeneralPage() {
             {/* UPDATE PASSWORD BUTTON */}
             <FormFieldSet.ControlGroup type="button">
               <ButtonGroup.Root>
-                <Button size="sm" type="submit" disabled={!isPasswordValid || isPasswordSubmitting}>
-                  {isPasswordSubmitting ? 'Updating...' : 'Update password'}
-                </Button>
+                {!passwordSubmitted ? (
+                  <Button size="sm" type="submit" disabled={!isPasswordValid || isPasswordSubmitting}>
+                    {isPasswordSubmitting ? 'Updating...' : 'Update password'}
+                  </Button>
+                ) : (
+                  <Button
+                    variant="ghost"
+                    type="button"
+                    size="sm"
+                    className="text-success hover:bg-transparent cursor-default">
+                    Updated&nbsp;&nbsp;
+                    <Icon name="tick" size={14} />
+                  </Button>
+                )}
               </ButtonGroup.Root>
             </FormFieldSet.ControlGroup>
           </FormFieldSet.Root>
