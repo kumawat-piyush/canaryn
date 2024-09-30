@@ -47,7 +47,7 @@ const Badge: React.FC<ExecutionStatusProps & BadgeProps> = props => {
           <span className="text-[#ED5E5E]">Failed</span>
         </div>
       ) : (
-        <div className="flex gap-1 items-center border-solid border border-[#F76E6E1F] pr-1 py-[2px] rounded-md bg-[#F76E6E1A]/[0.1]">
+        <div className="flex gap-1 items-center border-solid border border-[#F76E6E1F] px-1 py-0.5 rounded-md bg-[#F76E6E1A]/[0.1]">
           <div className="flex gap-0.5 items-center">
             <Xmark color="#ED5E5E" size="20" />
             <span className="text-[#ED5E5E]">Failed</span>
@@ -62,7 +62,13 @@ const Badge: React.FC<ExecutionStatusProps & BadgeProps> = props => {
           <span className="text-success">Success</span>
         </div>
       ) : (
-        /**@TODO add else condition as well*/ <></>
+        <div className="flex gap-1 items-center border-solid border border-success px-1 py-0.5 rounded-md bg-success/[0.1]">
+          <div className="flex gap-0.5 items-center">
+            <CanaryIcon size={12} name="success" />
+            <span className="text-success">Success</span>
+          </div>
+          {duration && <span className="text-success">{duration}</span>}
+        </div>
       )
     default:
       return <></>
