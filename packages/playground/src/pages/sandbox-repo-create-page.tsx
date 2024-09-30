@@ -70,13 +70,7 @@ function SandboxRepoCreatePage() {
     setIsSubmitting(true)
     setTimeout(() => {
       console.log(data)
-      reset({
-        name: '',
-        description: '',
-        gitignore: '',
-        license: '',
-        access: '1'
-      })
+      reset()
       setIsSubmitting(false)
     }, 2000)
   }
@@ -84,8 +78,6 @@ function SandboxRepoCreatePage() {
   const handleCancel = () => {
     console.log('Cancel button clicked')
   }
-
-  console.log(gitignoreValue)
 
   return (
     <>
@@ -102,7 +94,7 @@ function SandboxRepoCreatePage() {
           </Text>
           <Spacer size={8} />
           <form onSubmit={handleSubmit(onSubmit)}>
-            {/* Name Field */}
+            {/* NAME */}
             <FormFieldSet.Root>
               <FormFieldSet.ControlGroup>
                 <FormFieldSet.Label htmlFor="name" required>
@@ -115,7 +107,7 @@ function SandboxRepoCreatePage() {
                   </FormFieldSet.Message>
                 )}
               </FormFieldSet.ControlGroup>
-              {/* Description Field */}
+              {/* DESCRIPTION */}
               <FormFieldSet.ControlGroup>
                 <FormFieldSet.Label htmlFor="description" required>
                   Description
@@ -133,7 +125,7 @@ function SandboxRepoCreatePage() {
               </FormFieldSet.ControlGroup>
             </FormFieldSet.Root>
 
-            {/* Access Radio Group */}
+            {/* ACCESS */}
             <FormFieldSet.Root box shaded>
               <FormFieldSet.ControlGroup>
                 <FormFieldSet.Label htmlFor="access" required>
@@ -161,7 +153,7 @@ function SandboxRepoCreatePage() {
               </FormFieldSet.ControlGroup>
             </FormFieldSet.Root>
 
-            {/* Git Ignore Select Field */}
+            {/* GITIGNORE */}
             <FormFieldSet.Root box>
               <FormFieldSet.ControlGroup>
                 <FormFieldSet.Label htmlFor="gitignore">Add a .gitignore (optional)</FormFieldSet.Label>
@@ -182,7 +174,7 @@ function SandboxRepoCreatePage() {
                 )}
               </FormFieldSet.ControlGroup>
 
-              {/* License Select Field */}
+              {/* LICENSE */}
               <FormFieldSet.ControlGroup>
                 <FormFieldSet.Label htmlFor="license">Choose a license (optional)</FormFieldSet.Label>
                 <Select value={licenseValue} onValueChange={value => handleSelectChange('license', value)}>
@@ -206,7 +198,7 @@ function SandboxRepoCreatePage() {
               </FormFieldSet.ControlGroup>
             </FormFieldSet.Root>
 
-            {/* Form Buttons */}
+            {/* SUBMIT BUTTONS */}
             <FormFieldSet.Root>
               <FormFieldSet.ControlGroup>
                 <ButtonGroup.Root>
