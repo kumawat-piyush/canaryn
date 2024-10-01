@@ -53,10 +53,9 @@ export const BranchesList = ({ branches }: PageProps) => {
           {branches[0].checks.done && branches[0].checks.total && branches[0].checks.status && (
             <TableHead>Check status</TableHead>
           )}
-          <TableHead className="text-center">
-            Behind
-            <span className="text-gray-600 mx-1">|</span>
-            Ahead
+          <TableHead className="text-center box-border">
+            <span className="w-[50%] px-1.5 border-r-2 border-gray-20 text-right">Behind</span>
+            <span className="w-[50%] px-1.5 text-left">Ahead</span>
           </TableHead>
           {/* since we don't have the data for pull request, we can temporary hide this column */}
           <TableHead className="hidden">Pull request</TableHead>
