@@ -18,24 +18,22 @@ export const CalculateDivergenceBar = ({ behindAhead, className }: CalDivergence
 
   return (
     <div className={cn('flex flex-col m-auto w-full', className)}>
-      {/* why we need to use width 50% here is because the middle line"|" is not in the middle of the bar if the number is not the same. if we do text-center, 
-        text will be move forward to the right and also caused not aligned the center position" */}
       <Text wrap="nowrap" truncate className="w-full text-tertiary-background text-center flex flex-grow flex-row">
-        <span className="w-[50%] border-r-2 text-right pr-1 border-gray-20">{behindAhead.behind}</span>
-        <span className="w-[50%] text-left pl-1">{behindAhead.ahead}</span>
+        <span className="w-[50%] border-r-2 text-right px-1.5 border-gray-20">{behindAhead.behind}</span>
+        <span className="w-[50%] text-left px-1.5">{behindAhead.ahead}</span>
       </Text>
       {/* bar section : The reason why we don't use the fileviewgauge is the background color cannot be customized even use in the className*/}
       <div className="w-full m-auto text-center flex mt-1 max-w-28 flex-row">
         <Text className="h-1 w-[50%] relative">
           <span
-            className="h-full absolute top-0 right-0 rounded-l-sm"
-            style={{ width: `${behindPercentage}%`, backgroundColor: '#303036' }}
+            className=" h-full absolute top-0 right-0 rounded-l-sm"
+            style={{ width: `${behindPercentage}%`, backgroundColor: '#303036' }} //bg-divergence-behind not working
           />
         </Text>
         <Text className="h-1 w-[50%] relative">
           <span
-            className="h-full absolute top-0 left-0 rounded-r-sm"
-            style={{ width: `${aheadPercentage}%`, backgroundColor: '#484851' }}
+            className=" h-full absolute top-0 left-0 rounded-r-sm "
+            style={{ width: `${aheadPercentage}%`, backgroundColor: '#484851' }} //bg-divergence-ahead not working
           />
         </Text>
       </div>
