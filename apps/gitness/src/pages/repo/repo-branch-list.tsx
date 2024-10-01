@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { SkeletonList, NoData, PaddingListLayout, BranchesList } from '@harnessio/playground'
 import {
   Button,
@@ -15,8 +16,13 @@ import {
 } from '@harnessio/canary'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { usePagination } from '../../framework/hooks/usePagination'
-
-import { useListBranchesQuery, TypesBranch } from '@harnessio/code-service-client'
+import {
+  useListBranchesQuery,
+  TypesBranch,
+  ListBranchesErrorResponse,
+  useCalculateCommitDivergenceMutation,
+  useFindRepositoryQuery
+} from '@harnessio/code-service-client'
 import { timeAgoFromISOTime } from '../pipeline-edit/utils/time-utils'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
@@ -30,17 +36,49 @@ export function ReposBranchesListPage() {
   const repoRef = useGetRepoRef()
 
   const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
+  const { data: repoMetadata } = useFindRepositoryQuery({ repo_ref: repoRef })
 
-  const { isLoading, data: brancheslistData } = useListBranchesQuery({
-    queryParams: { page: currentPage, limit: 20, sort: 'date', order: 'desc', include_commit: true },
+  const {
+    isLoading,
+    data: brancheslistData,
+    isError
+  } = useListBranchesQuery(
+    {
+      queryParams: { page: currentPage, limit: 20, sort: 'date', order: 'desc', include_commit: true },
+      repo_ref: repoRef
+    },
+    {
+      onError: (error: ListBranchesErrorResponse) => {
+        console.error('Error BranchList', error)
+      }
+    }
+  )
+
+  const { data: branchDivergence, mutate } = useCalculateCommitDivergenceMutation({
     repo_ref: repoRef
   })
 
-  //lack of data : avatarUrl: string, checking status , behindAhead{behind: num, ahead:num}, pullRequest{sha: string, branch number : 145}
-  //TODO: fetching behindAhead data
-  const renderContent = () => {
+  useEffect(() => {
+    if (brancheslistData?.length !== 0 && brancheslistData !== undefined) {
+      mutate({
+        body: {
+          requests: brancheslistData?.map(branch => ({ from: branch.name, to: repoMetadata?.default_branch })) || []
+        }
+      })
+    }
+  }, [mutate, brancheslistData, repoMetadata?.default_branch])
+
+  const renderContent = (error?: ListBranchesErrorResponse) => {
     if (isLoading) {
       return <SkeletonList />
+    }
+
+    if (isError) {
+      return (
+        <div className="mt-40">
+          <NoData iconName="no-data-branches" title="Data not available" description={[`${error?.message}`]} />
+        </div>
+      )
     }
 
     if (brancheslistData?.length === 0 || brancheslistData === undefined) {
@@ -59,15 +97,26 @@ export function ReposBranchesListPage() {
       )
     }
 
+    //get the data arr from behindAhead
+    const behindAhead =
+      branchDivergence?.map(divergence => {
+        return {
+          behind: divergence.behind,
+          ahead: divergence.ahead
+        }
+      }) || []
+
     return (
       <BranchesList
-        branches={brancheslistData?.map((branch: TypesBranch) => {
+        branches={brancheslistData?.map((branch: TypesBranch, index) => {
+          const { ahead: branchAhead, behind: branchBehind } = behindAhead[index] || {}
           return {
-            name: branch.name,
-            sha: branch.commit?.sha,
+            id: index,
+            name: branch.name || '',
+            sha: branch.commit?.sha || '',
             timestamp: branch.commit?.committer?.when ? timeAgoFromISOTime(branch.commit.committer.when) : '',
             user: {
-              name: branch.commit?.committer?.identity?.name,
+              name: branch.commit?.committer?.identity?.name || '',
               avatarUrl: ''
             },
             //hardcoded
@@ -76,15 +125,11 @@ export function ReposBranchesListPage() {
               total: 1,
               status: 1
             },
-            //hardcoded
             behindAhead: {
-              behind: 1,
-              ahead: 1
+              behind: branchBehind || 0,
+              ahead: branchAhead || 0,
+              default: repoMetadata?.default_branch === branch.name
             }
-            //temporary hide this column
-            // pullRequest: {
-            //   sha: '123' //hardcoded
-            // }
           }
         })}
       />
@@ -126,11 +171,6 @@ export function ReposBranchesListPage() {
                   disabled={currentPage === 1}
                 />
               </PaginationItem>
-              {/* <PaginationItem>
-              <PaginationLink size="sm_icon" href="#">
-                <PaginationEllipsis />
-              </PaginationLink>
-            </PaginationItem> */}
               {Array.from({ length: totalPages }, (_, index) => (
                 <PaginationItem key={index}>
                   <PaginationLink
