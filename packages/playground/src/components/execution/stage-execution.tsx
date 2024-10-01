@@ -76,7 +76,7 @@ export const StageExecution: React.FC<StageExecutionProps> = ({
   onEdit
 }): React.ReactElement => {
   if (!stage || !stage?.steps) {
-    return <Text>No steps found</Text>
+    return <></>
   }
   const [selectedStepIndex, setSelectedStepIndex] = useState<number>(0)
   const [step, setStep] = useState<StepProps>()
