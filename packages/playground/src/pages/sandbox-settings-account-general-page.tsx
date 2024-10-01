@@ -43,9 +43,9 @@ function SandboxSettingsAccountGeneralPage() {
     resolver: zodResolver(profileSchema),
     mode: 'onChange',
     defaultValues: {
-      name: 'Brad Rydzewski',
-      username: 'brad',
-      email: 'brad@drone.io'
+      name: 'Ann Nonymous',
+      username: 'anon',
+      email: 'user@anon.com'
     }
   })
 
@@ -113,7 +113,7 @@ function SandboxSettingsAccountGeneralPage() {
             <FormFieldSet.Legend>Personal information</FormFieldSet.Legend>
             <FormFieldSet.ControlGroup className="w-auto flex flex-row gap-x-6 items-center justify-start">
               <Avatar size="80" className="h-20 w-20 rounded-full bg-primary/[0.02] shadow-md">
-                <AvatarImage src="/images/brad.jpg" />
+                <AvatarImage src="/images/anon.jpg" />
                 <AvatarFallback>
                   <Text size={5} weight="medium" color="tertiaryBackground">
                     BR
