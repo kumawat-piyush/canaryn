@@ -23,6 +23,7 @@ import {
   useCalculateCommitDivergenceMutation,
   useFindRepositoryQuery
 } from '@harnessio/code-service-client'
+import { orderSortDate } from './types/types'
 import { timeAgoFromISOTime } from '../pipeline-edit/utils/time-utils'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
@@ -44,7 +45,7 @@ export function ReposBranchesListPage() {
     isError
   } = useListBranchesQuery(
     {
-      queryParams: { page: currentPage, limit: 20, sort: 'date', order: 'desc', include_commit: true },
+      queryParams: { page: currentPage, limit: 20, sort: 'date', order: orderSortDate.DESC, include_commit: true },
       repo_ref: repoRef
     },
     {
@@ -121,9 +122,9 @@ export function ReposBranchesListPage() {
             },
             //hardcoded
             checks: {
-              done: 1,
-              total: 1,
-              status: 1
+              done: undefined,
+              total: undefined,
+              status: undefined
             },
             behindAhead: {
               behind: branchBehind || 0,
