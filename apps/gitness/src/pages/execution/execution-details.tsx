@@ -37,8 +37,17 @@ const ExecutionLogs: React.FC = () => {
     repo_ref: repoRef
   })
 
-  const { data: polledExecutionData } = usePolling(fetchExecution, POLLING_INTERVAL)
+  const { data: polledExecutionData, stopPolling } = usePolling(fetchExecution, POLLING_INTERVAL)
   const execution = polledExecutionData?.data
+
+  useEffect(() => {
+    /**
+     * Could be done on other statuses as well, such as, Aborted, Expired etc.
+     */
+    if (execution?.status === ExecutionState.SUCCESS) {
+      stopPolling()
+    }
+  }, [execution?.status])
 
   const { data: logs } = useViewLogsQuery({
     pipeline_identifier: pipelineIdentifier,
