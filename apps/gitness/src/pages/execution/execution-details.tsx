@@ -9,7 +9,9 @@ import {
   StageExecution,
   ContactCard,
   convertExecutionToTree,
-  StageProps
+  StageProps,
+  getStepId,
+  parseStageStepId
 } from '@harnessio/playground'
 import { PathParams } from '../../RouteDefinitions'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
@@ -100,15 +102,19 @@ const ExecutionLogs: React.FC = () => {
         <Separator className="my-4" />
         {execution && (
           <ExecutionTree
-            defaultSelectedId=""
+            defaultSelectedId={getStepId(stageNum, stepNum)}
             elements={convertExecutionToTree(execution)}
-            onSelectNode={({ parentId: stageNum, childId: stepNum }: { parentId: string; childId: string }) => {
+            onSelectNode={({ childId: fullStepId }: { parentId: string; childId: string }) => {
               try {
-                setStageNum(parseInt(stageNum))
-                setStepNum(parseInt(stepNum))
-                /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-              } catch (e) {
-                // ignore exception
+                const { stageId, stepId } = parseStageStepId(fullStepId) || {}
+                if (!isNaN(Number(stageId))) {
+                  setStageNum(Number(stageId))
+                }
+                if (!isNaN(Number(stepId))) {
+                  setStepNum(Number(stepId))
+                }
+              } catch {
+                // Ignore exception
               }
             }}
           />
