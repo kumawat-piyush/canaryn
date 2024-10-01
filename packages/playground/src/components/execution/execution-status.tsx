@@ -17,7 +17,7 @@ interface ExecutionStatusProps {
 }
 
 interface BadgeProps {
-  duration: string
+  duration: string /* time formatted as string */
   minimal?: boolean
 }
 

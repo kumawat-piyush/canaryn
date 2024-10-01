@@ -14,7 +14,7 @@ import {
 import { PathParams } from '../../RouteDefinitions'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { ExecutionState } from '../../types'
-import { getDuration, timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
+import { getDuration, timeAgoFromEpochTime, formatDuration } from '../pipeline-edit/utils/time-utils'
 
 const ExecutionLogs: React.FC = () => {
   const navigate = useNavigate()
@@ -86,7 +86,7 @@ const ExecutionLogs: React.FC = () => {
               <ExecutionStatus.Badge
                 status={execution.status as ExecutionState}
                 minimal
-                duration={getDuration(execution?.started, execution?.finished)}
+                duration={formatDuration(getDuration(execution?.started, execution?.finished))}
               />
             </Layout.Vertical>
           )}

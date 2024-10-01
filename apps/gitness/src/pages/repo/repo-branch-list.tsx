@@ -17,7 +17,7 @@ import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { usePagination } from '../../framework/hooks/usePagination'
 
 import { useListBranchesQuery, TypesBranch } from '@harnessio/code-service-client'
-import { timeAgo } from '../pipeline-edit/utils/time-utils'
+import { timeAgoFromISOTime } from '../pipeline-edit/utils/time-utils'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
@@ -65,7 +65,7 @@ export function ReposBranchesListPage() {
           return {
             name: branch.name,
             sha: branch.commit?.sha,
-            timestamp: timeAgo(branch.commit?.committer?.when || ''),
+            timestamp: branch.commit?.committer?.when ? timeAgoFromISOTime(branch.commit.committer.when) : '',
             user: {
               name: branch.commit?.committer?.identity?.name,
               avatarUrl: ''
