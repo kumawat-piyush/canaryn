@@ -37,6 +37,8 @@ const mapStatus = (status: ExecutionState): Status => {
       return Status.QUEUED
     case ExecutionState.SKIPPED:
       return Status.SKIPPED
+    case ExecutionState.WAITING_ON_DEPENDENCIES:
+      return Status.WAITING_ON_DEPENDENCIES
     default:
       return Status.UNKNOWN
   }

@@ -70,6 +70,21 @@ const Badge: React.FC<ExecutionStatusProps & BadgeProps> = props => {
           {duration && <span className="text-success">{duration}</span>}
         </div>
       )
+    case ExecutionState.PENDING:
+      return minimal ? (
+        <div className="flex items-center gap-1">
+          <div className="w-2 h-2 bg-muted rounded-full" />
+          <span className="text-muted">Pending</span>
+        </div>
+      ) : (
+        <div className="flex gap-1 items-center border-solid border border-muted px-1 py-0.5 rounded-md bg-muted/[0.1]">
+          <div className="flex gap-0.5 items-center">
+            <CanaryIcon size={12} name="pending-clock" />
+            <span className="text-muted">Pending</span>
+          </div>
+          {duration && <span className="text-muted">{duration}</span>}
+        </div>
+      )
     default:
       return <></>
   }
