@@ -185,7 +185,7 @@ function SandboxSettingsProjectGeneralPage() {
         </FormFieldSet.Root>
 
         {/* DELETE PROJECT SETTINGS WITH ALERT DIALOG */}
-        <FormFieldSet.Root>
+        <FormFieldSet.Root box shaded>
           <FormFieldSet.Legend>Delete project</FormFieldSet.Legend>
           <FormFieldSet.SubLegend>
             This will permanently delete this project and all associated data. All repositories in it will also be
