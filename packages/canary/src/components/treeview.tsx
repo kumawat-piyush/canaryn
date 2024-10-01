@@ -1,7 +1,7 @@
 import { ScrollArea } from '@radix-ui/react-scroll-area'
 import { cn } from '../lib/utils'
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
-import { NavArrowRight, NavArrowDown, Circle, CheckCircleSolid, XmarkCircleSolid } from '@harnessio/icons-noir'
+import { NavArrowRight, NavArrowDown, Circle, CheckCircleSolid, XmarkCircleSolid, Refresh } from '@harnessio/icons-noir'
 import React, { createContext, forwardRef, useCallback, useContext, useEffect, useState } from 'react'
 
 enum Status {
@@ -24,7 +24,7 @@ const getStatusIcon = (status: Status): React.ReactElement => {
     case Status.QUEUED:
       return <Circle size="16" />
     case Status.IN_PROGRESS:
-      return <Circle size="16" />
+      return <Refresh color="rgba(226,155,54,1)" size="16" className="animate-spin" />
     case Status.SUCCESS:
       return <CheckCircleSolid color="#63E9A6" size="16" />
     case Status.FAILED:
