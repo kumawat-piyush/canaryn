@@ -19,7 +19,10 @@ export const initialState: DataReducerState = {
   //
   currentStepFormDefinition: null,
   //
-  latestCommitAuthor: null
+  latestCommitAuthor: null,
+  //
+  problems: [],
+  problemsCount: 0
 }
 
 export const DataReducer = (state = initialState, data: DataActions): DataReducerState => {
@@ -39,16 +42,6 @@ export const DataReducer = (state = initialState, data: DataActions): DataReduce
       return {
         ...state,
         addStepIntention: payload
-      }
-    case DataActionName.SetIsExistingPipeline:
-      return {
-        ...state,
-        isExistingPipeline: payload
-      }
-    case DataActionName.SetPipelineLatestAuthor:
-      return {
-        ...state,
-        latestCommitAuthor: payload
       }
   }
   return state

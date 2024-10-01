@@ -1,11 +1,5 @@
 import { stringify } from 'yaml'
-import {
-  OpenapiGetContentOutput,
-  TypesPipeline,
-  TypesSignature,
-  findPipeline,
-  getContent
-} from '@harnessio/code-service-client'
+import { OpenapiGetContentOutput, TypesPipeline, findPipeline, getContent } from '@harnessio/code-service-client'
 import { DispatchFunc } from '../../../../hooks/useThunkReducer'
 import { YamlRevision } from '../PipelineStudioDataProvider'
 import { decodeGitContent, normalizeGitRef } from '../../../../utils/git-utils'
@@ -15,14 +9,6 @@ import { deleteItemInArray, injectItemInArray, updateItemInArray } from '../../u
 
 export const updateState = (payload: Partial<DataReducerState>): DataActions => {
   return { type: DataActionName.UpdateState, payload }
-}
-
-export const pipelineLatestAuthor = ({ author }: { author: TypesSignature | null }): DataActions => {
-  return { type: DataActionName.SetPipelineLatestAuthor, payload: author }
-}
-
-export const setIsExistingPipelineAction = ({ isExisting }: { isExisting: boolean }): DataActions => {
-  return { type: DataActionName.SetIsExistingPipeline, payload: isExisting }
 }
 
 export const setYamlRevisionAction = ({
@@ -111,7 +97,7 @@ export const loadPipelineAction = ({
       } catch (_ex) {
         // NOTE: if there is no file we threat as new pipeline
         dispatch(setYamlRevisionAction({ yamlRevision: { yaml: stringify(starterPipelineV1) } }))
-        dispatch(setIsExistingPipelineAction({ isExisting: false }))
+        dispatch(updateState({ isExistingPipeline: false }))
 
         return
       } finally {
@@ -121,9 +107,14 @@ export const loadPipelineAction = ({
 
     const decodedPipelineYaml = decodeGitContent(pipelineFileContent?.content?.data)
 
-    dispatch(pipelineLatestAuthor({ author: pipelineFileContent?.latest_commit?.author ?? null }))
     dispatch(setYamlRevisionAction({ yamlRevision: { yaml: decodedPipelineYaml } }))
-    dispatch(setIsExistingPipelineAction({ isExisting: true }))
-    dispatch(updateState({ decodedPipeline: decodedPipelineYaml, pipelineFileContent, isDirty: false }))
+    dispatch(
+      updateState({
+        decodedPipeline: decodedPipelineYaml,
+        pipelineFileContent,
+        isDirty: false,
+        isExistingPipeline: true
+      })
+    )
   }
 }

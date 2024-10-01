@@ -9,14 +9,15 @@ import { PipelineParams, usePipelineDataContext } from '../context/PipelineStudi
 
 const PipelineStudioHeaderActions = (): JSX.Element => {
   const {
-    pipelineData,
-    pipelineFileContent,
-    fetchPipelineFileContent,
-    fetchingPipelineFileContent,
-    yamlRevision,
-    isExistingPipeline,
-    isDirty,
-    gitInfo
+    state: {
+      pipelineData,
+      pipelineFileContent,
+      fetchingPipelineFileContent,
+      yamlRevision,
+      isExistingPipeline,
+      isDirty
+    },
+    fetchPipelineFileContent
   } = usePipelineDataContext()
 
   const navigate = useNavigate()
@@ -61,7 +62,7 @@ const PipelineStudioHeaderActions = (): JSX.Element => {
     createExecutionAsync({
       pipeline_identifier: pipelineData?.identifier ?? '',
       repo_ref: repoRef,
-      queryParams: { branch: gitInfo?.default_branch }
+      queryParams: { branch: pipelineData?.default_branch }
     })
       .then(response => {
         const executionId = response.number

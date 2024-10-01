@@ -30,11 +30,8 @@ interface PipelineStudioStepFormProps {
 export const PipelineStudioStepForm = (props: PipelineStudioStepFormProps): JSX.Element => {
   const { requestClose } = props
   const {
-    yamlRevision,
+    state: { yamlRevision, currentStepFormDefinition, addStepIntention, editStepIntention },
     requestYamlModifications,
-    currentStepFormDefinition,
-    addStepIntention,
-    editStepIntention,
     setCurrentStepFormDefinition
   } = usePipelineDataContext()
 

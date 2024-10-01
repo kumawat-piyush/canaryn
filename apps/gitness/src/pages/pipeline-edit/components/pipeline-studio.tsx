@@ -15,10 +15,12 @@ import { timeAgo } from '../utils/time-utils'
 
 export default function PipelineEdit() {
   const { view, setView, panelOpen, stepDrawerOpen, setStepDrawerOpen, setPanelOpen } = usePipelineViewContext()
-  const { problems } = usePipelineDataContext()
-
-  const { clearAddStepIntention, clearEditStepIntention, setCurrentStepFormDefinition, latestCommitAuthor } =
-    usePipelineDataContext()
+  const {
+    state: { latestCommitAuthor, problemsCount },
+    clearAddStepIntention,
+    clearEditStepIntention,
+    setCurrentStepFormDefinition
+  } = usePipelineDataContext()
 
   useEffect(() => {
     setPanelOpen(view === 'yaml')
@@ -112,7 +114,7 @@ export default function PipelineEdit() {
               lastCommittedAt: latestCommitAuthor.when ? timeAgo(latestCommitAuthor.when) : '',
               lastCommittedBy: latestCommitAuthor.identity?.name ?? ''
             }}
-            problems={problems.problemsCount}
+            problems={problemsCount}
             togglePane={() => setPanelOpen(!panelOpen)}
           />
         ) : null}

@@ -20,7 +20,10 @@ interface PipelineStudioStepFormProps {
 
 const PipelineStudioStepPalette = (props: PipelineStudioStepFormProps): JSX.Element => {
   const { requestClose } = props
-  const { addStepIntention, setCurrentStepFormDefinition } = usePipelineDataContext()
+  const {
+    state: { addStepIntention },
+    setCurrentStepFormDefinition
+  } = usePipelineDataContext()
   const { setStepDrawerOpen } = usePipelineViewContext()
 
   const [pluginsData, setPluginsData] = useState<TypesPlugin[]>([])
