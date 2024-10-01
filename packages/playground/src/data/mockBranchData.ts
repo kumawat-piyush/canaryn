@@ -5,7 +5,7 @@ export const mockBranchData = [
     timestamp: 'last month',
     user: {
       name: 'Tim Henderson',
-      avatarUrl: '../assets/images/user-avatar.svg'
+      avatarUrl: '../../public/images/user-avatar.svg'
     },
     checks: {
       done: 1,
@@ -27,7 +27,7 @@ export const mockBranchData = [
     timestamp: '2 weeks ago',
     user: {
       name: 'Sarah Johnson',
-      avatarUrl: '../assets/images/user-avatar-2.svg'
+      avatarUrl: '../../public/images/user-avatar.svg'
     },
     checks: {
       done: 5,
@@ -49,7 +49,7 @@ export const mockBranchData = [
     timestamp: '3 days ago',
     user: {
       name: 'John Doe',
-      avatarUrl: '../assets/images/user-avatar-3.svg'
+      avatarUrl: '../../public/images/user-avatar.svg'
     },
     checks: {
       done: 2,
@@ -71,7 +71,7 @@ export const mockBranchData = [
     timestamp: 'yesterday',
     user: {
       name: 'Alice Kim',
-      avatarUrl: '../assets/images/user-avatar-4.svg'
+      avatarUrl: '../../public/images/user-avatar.svg'
     },
     checks: {
       done: 9,
@@ -93,12 +93,12 @@ export const mockBranchData = [
     timestamp: '4 hours ago',
     user: {
       name: 'Michael Lee',
-      avatarUrl: '../assets/images/user-avatar-5.svg'
+      avatarUrl: '../../public/images/user-avatar.svg'
     },
     checks: {
-      done: 0,
+      done: 3,
       total: 3,
-      status: 0
+      status: 'closed'
     },
     behindAhead: {
       behind: 42,
@@ -115,7 +115,7 @@ export const mockBranchData = [
     timestamp: '2 days ago',
     user: {
       name: 'Emma Stone',
-      avatarUrl: '../assets/images/user-avatar-6.svg'
+      avatarUrl: '../../public/images/user-avatar.svg'
     },
     checks: {
       done: 10,
@@ -137,7 +137,7 @@ export const mockBranchData = [
     timestamp: 'last week',
     user: {
       name: 'Chris Evans',
-      avatarUrl: '../assets/images/user-avatar-7.svg'
+      avatarUrl: '../../public/images/user-avatar.svg'
     },
     checks: {
       done: 2,
@@ -159,7 +159,7 @@ export const mockBranchData = [
     timestamp: '5 days ago',
     user: {
       name: 'Sophia Turner',
-      avatarUrl: '../assets/images/user-avatar-8.svg'
+      avatarUrl: '../../public/images/user-avatar.svg'
     },
     checks: {
       done: 7,
@@ -181,7 +181,7 @@ export const mockBranchData = [
     timestamp: '2 weeks ago',
     user: {
       name: 'Liam Neeson',
-      avatarUrl: '../assets/images/user-avatar-9.svg'
+      avatarUrl: '../../public/images/user-avatar.svg'
     },
     checks: {
       done: 6,
@@ -203,7 +203,7 @@ export const mockBranchData = [
     timestamp: '3 weeks ago',
     user: {
       name: 'Olivia Brown',
-      avatarUrl: '../assets/images/user-avatar-10.svg'
+      avatarUrl: '../../public/images/user-avatar.svg'
     },
     checks: {
       done: 3,
@@ -225,7 +225,7 @@ export const mockBranchData = [
     timestamp: '5 days ago',
     user: {
       name: 'Robert Smith',
-      avatarUrl: '../assets/images/user-avatar-11.svg'
+      avatarUrl: '../../public/images/user-avatar.svg'
     },
     checks: {
       done: 4,
@@ -247,7 +247,7 @@ export const mockBranchData = [
     timestamp: '1 week ago',
     user: {
       name: 'Megan Wilson',
-      avatarUrl: '../assets/images/user-avatar-12.svg'
+      avatarUrl: '../../public/images/user-avatar.svg'
     },
     checks: {
       done: 8,
@@ -269,7 +269,7 @@ export const mockBranchData = [
     timestamp: '3 weeks ago',
     user: {
       name: 'David Johnson',
-      avatarUrl: '../assets/images/user-avatar-13.svg'
+      avatarUrl: '../../public/images/user-avatar.svg'
     },
     checks: {
       done: 3,
@@ -291,7 +291,7 @@ export const mockBranchData = [
     timestamp: '2 days ago',
     user: {
       name: 'Jessica Parker',
-      avatarUrl: '../assets/images/user-avatar-14.svg'
+      avatarUrl: '../../public/images/user-avatar.svg'
     },
     checks: {
       done: 5,
@@ -313,7 +313,7 @@ export const mockBranchData = [
     timestamp: 'last month',
     user: {
       name: 'Henry Thompson',
-      avatarUrl: '../assets/images/user-avatar-15.svg'
+      avatarUrl: '../../public/images/user-avatar.svg'
     },
     checks: {
       done: 1,
@@ -335,7 +335,7 @@ export const mockBranchData = [
     timestamp: '4 days ago',
     user: {
       name: 'Isabella Martinez',
-      avatarUrl: '../assets/images/user-avatar-16.svg'
+      avatarUrl: '../../public/images/user-avatar.svg'
     },
     checks: {
       done: 7,
