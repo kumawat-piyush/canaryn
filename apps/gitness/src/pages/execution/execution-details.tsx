@@ -17,6 +17,9 @@ import { PathParams } from '../../RouteDefinitions'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { ExecutionState } from '../../types'
 import { getDuration, timeAgoFromEpochTime, formatDuration } from '../pipeline-edit/utils/time-utils'
+import usePolling from '../../framework/hooks/usePolling'
+
+const POLLING_INTERVAL = 5_000
 
 const ExecutionLogs: React.FC = () => {
   const navigate = useNavigate()
@@ -28,11 +31,14 @@ const ExecutionLogs: React.FC = () => {
   const pipelineIdentifier = pipelineId || ''
   const executionNum = executionId || ''
 
-  const { data: execution } = useFindExecutionQuery({
+  const { refetch: fetchExecution } = useFindExecutionQuery({
     pipeline_identifier: pipelineIdentifier,
     execution_number: executionNum,
     repo_ref: repoRef
   })
+
+  const { data: polledExecutionData } = usePolling(fetchExecution, POLLING_INTERVAL)
+  const execution = polledExecutionData?.data
 
   const { data: logs } = useViewLogsQuery({
     pipeline_identifier: pipelineIdentifier,
