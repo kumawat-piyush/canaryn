@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Tabs, TabsList, TabsTrigger } from '@harnessio/canary'
 import { SandboxLayout } from '..'
-import { PlaygroundSandboxLayoutSettings } from '../settings/sandbox-settings'
 import { NavLink, Outlet } from 'react-router-dom'
 
 function SandboxSettingsAccountPage() {
-  const [loadState, setLoadState] = useState('sub-float')
-
   return (
     <>
       <SandboxLayout.SubHeader>
@@ -22,7 +19,6 @@ function SandboxSettingsAccountPage() {
         </Tabs>
       </SandboxLayout.SubHeader>
       <Outlet />
-      <PlaygroundSandboxLayoutSettings loadState={loadState} setLoadState={setLoadState} />
     </>
   )
 }
