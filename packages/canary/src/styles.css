@@ -97,6 +97,8 @@
     --diff-add-widget-color--: hsl(0, 0%, 100%);
     --diff-empty-content--: var(--background);
     --diff-hunk-content-color--: hsl(0, 0%, 100%);
+    --divergent-behind: var(--grey-20);
+    --divergent-ahead: var(--grey-30);
   }
 
   .dark {
@@ -138,6 +140,8 @@
     --ai-button-stop-2: 335 58% 76%;
     --ai-button-stop-3: 246 66% 72%;
     --ai-button-stop-4: 188 97% 89%;
+    --divergent-behind: var(--grey-20);
+    --divergent-ahead: var(--grey-30);
   }
 }
 

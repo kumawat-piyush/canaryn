@@ -82,6 +82,10 @@ export default {
         },
         ai: {
           DEFAULT: 'hsl(var(--ai))'
+        },
+        divergence: {
+          behind: 'hsl(var(--divergence-behind))',
+          ahead: 'hsl(var(--divergence-ahead))'
         }
       },
       borderRadius: {
