@@ -141,10 +141,10 @@ function SandboxSettingsProjectGeneralPage() {
               )}
             </FormFieldSet.ControlGroup>
 
-            {/* project URL */}
+            {/* PROJECT URL */}
             <FormFieldSet.ControlGroup>
               <FormFieldSet.Label htmlFor="projectURL" required>
-                project URL
+                Project URL
               </FormFieldSet.Label>
               <Input id="projectURL" {...register('projectURL')} placeholder="https://your-project-url.com" />
               {errors.projectURL && (
@@ -184,7 +184,7 @@ function SandboxSettingsProjectGeneralPage() {
           <FormFieldSet.Separator />
         </FormFieldSet.Root>
 
-        {/* DELETE project SETTINGS WITH ALERT DIALOG */}
+        {/* DELETE PROJECT SETTINGS WITH ALERT DIALOG */}
         <FormFieldSet.Root>
           <FormFieldSet.Legend>Delete project</FormFieldSet.Legend>
           <FormFieldSet.SubLegend>
