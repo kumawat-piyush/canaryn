@@ -220,9 +220,11 @@ const Folder = forwardRef<HTMLDivElement, FolderProps & React.HTMLAttributes<HTM
           })}
           disabled={!isSelectable}
           onClick={() => handleExpand(value)}>
-          {expendedItems?.includes(value)
-            ? (openIcon ?? <NavArrowDown className="h-4 w-4" size="12" />)
-            : (closeIcon ?? <NavArrowRight className="h-4 w-4" size="12" />)}
+          <div className="mt-1 pt-1">
+            {expendedItems?.includes(value)
+              ? (openIcon ?? <NavArrowDown className="h-4 w-4" size="12" />)
+              : (closeIcon ?? <NavArrowRight className="h-4 w-4" size="12" />)}
+          </div>
           <div className="flex items-baseline justify-between w-full mt-1 mr-1">
             <div className="flex items-baseline">
               <div className="flex self-center mr-1">{getStatusIcon(status)}</div>
