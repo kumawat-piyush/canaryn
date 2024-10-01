@@ -15,8 +15,8 @@ import {
 } from '@harnessio/canary'
 import React from 'react'
 import { getInitials } from '../utils/utils'
-import AvatarUrl from '../../public/images/user-avatar.svg'
 import { CopyButton } from './copy-button'
+import { CalculateDivergenceBar } from './calculate-divergence-bar'
 
 interface BranchProps {
   id: number
@@ -50,8 +50,14 @@ export const BranchesList = ({ branches }: PageProps) => {
         <TableRow>
           <TableHead>Branch</TableHead>
           <TableHead>Updated</TableHead>
-          <TableHead className="hidden">Check status</TableHead>
-          <TableHead className="text-center">Behind | Ahead</TableHead>
+          {branches[0].checks.done && branches[0].checks.total && branches[0].checks.status && (
+            <TableHead>Check status</TableHead>
+          )}
+          <TableHead className="text-center">
+            Behind
+            <span className="text-gray-600 mx-1">|</span>
+            Ahead
+          </TableHead>
           {/* since we don't have the data for pull request, we can temporary hide this column */}
           <TableHead className="hidden">Pull request</TableHead>
           <TableHead>
@@ -64,11 +70,12 @@ export const BranchesList = ({ branches }: PageProps) => {
           branches.map(branch => {
             return (
               <TableRow>
-                <TableCell>
+                {/* branch name */}
+                <TableCell className="content-center">
                   <div className="flex items-center gap-1.5">
                     <Text wrap="nowrap" truncate className="text-primary/90">
                       <Button variant="secondary" size="xs">
-                        <Icon name="branch" size={11} className="text-tertiary-background" />
+                        {/* todo: set the private icon here */}
                         &nbsp;
                         {branch.name}
                       </Button>
@@ -76,10 +83,11 @@ export const BranchesList = ({ branches }: PageProps) => {
                     <CopyButton name={branch.name} />
                   </div>
                 </TableCell>
-                <TableCell>
+                {/* user avatar and timestamp */}
+                <TableCell className="content-center">
                   <div className="flex items-center gap-1.5">
                     <Avatar className="w-5 h-5">
-                      <AvatarImage src={branch.user.avatarUrl === '' ? AvatarUrl : branch.user.avatarUrl} />
+                      {branch.user.avatarUrl && <AvatarImage src={branch.user.avatarUrl} />}
                       <AvatarFallback className="text-xs p-1 text-center">
                         {getInitials(branch.user.name, 2)}
                       </AvatarFallback>
@@ -89,32 +97,33 @@ export const BranchesList = ({ branches }: PageProps) => {
                     </Text>
                   </div>
                 </TableCell>
-                <TableCell className="hidden">
-                  <div className="flex gap-1.5 items-center">
-                    <Icon name="tick" size={11} className="text-success" />
-                    <Text size={2} wrap="nowrap" truncate className="text-tertiary-background">
-                      {branch.checks.done} / {branch.checks.total}
-                    </Text>
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <div className="flex gap-1.5 items-center content-center">
+                {/* checkstatus: show in the playground, hide the check status column if the checks are null in the gitness without data */}
+                {branch.checks.done && branch.checks.total && branch.checks.status && (
+                  <TableCell className="content-center">
+                    <div className="flex gap-1.5 items-center">
+                      <Icon name="tick" size={11} className="text-success" />
+                      <Text size={2} wrap="nowrap" truncate className="text-tertiary-background">
+                        {branch.checks.done} / {branch.checks.total}
+                      </Text>
+                    </div>
+                  </TableCell>
+                )}
+                {/* calculated divergence bar & default branch */}
+                <TableCell className="content-center">
+                  <div className="flex gap-1.5 items-center content-center align-middle">
                     {branch.behindAhead.default ? (
                       <Badge
                         variant="outline"
                         size="xs"
-                        className="rounded-full font-normal text-xs p-2 h-5 text-tertiary-background text-center"
-                        style={{ margin: '0 auto' }}>
+                        className="rounded-full font-normal text-xs p-2 h-5 text-tertiary-background text-center m-auto">
                         Default
                       </Badge>
                     ) : (
-                      <Text wrap="nowrap" truncate className="text-tertiary-background text-center flex-grow">
-                        {branch.behindAhead.behind} | {branch.behindAhead.ahead}
-                      </Text>
+                      <CalculateDivergenceBar behindAhead={branch.behindAhead} />
                     )}
                   </div>
                 </TableCell>
-                {/* since we don't have the data for pull request, we can temporary hide this column */}
+                {/* pull request: hidden without data */}
                 <TableCell className="hidden">
                   <div className="flex gap-1.5 items-center">
                     <Icon name="open-pr" size={11} className="text-success" />
