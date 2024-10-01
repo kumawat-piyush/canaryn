@@ -19,7 +19,7 @@ export const CalculateDivergenceBar = ({ behindAhead, className }: CalDivergence
   return (
     <div className={cn('flex flex-col m-auto w-full', className)}>
       {/* why we need to use width 50% here is because the middle line"|" is not in the middle of the bar if the number is not the same. if we do text-center, 
-        text will be move forward ot the right and also caused not aligned the center position" */}
+        text will be move forward to the right and also caused not aligned the center position" */}
       <Text wrap="nowrap" truncate className="w-full text-tertiary-background text-center flex flex-grow flex-row">
         <span className="w-[50%] border-r-2 text-right pr-1 border-gray-20">{behindAhead.behind}</span>
         <span className="w-[50%] text-left pl-1">{behindAhead.ahead}</span>
