@@ -18,7 +18,8 @@ const mockExecutions = [
     sha: '93dbd09a',
     description: 'fix(deps): update module github.com/aws/aws-sdk-go to',
     timestamp: '7 days ago',
-    lastTimestamp: '11:24'
+    lastTimestamp: '11:24',
+    success: false
   },
   {
     id: '2',

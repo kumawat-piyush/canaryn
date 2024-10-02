@@ -31,7 +31,7 @@ type ExecutionDetail = {
 const getStatusIcon = (status: Status): React.ReactElement => {
   switch (status) {
     case Status.IN_PROGRESS:
-      return <Refresh color="rgba(226,155,54,1)" size="16" className="animate-spin" />
+      return <Refresh size="16" className="animate-spin text-warning" />
     case Status.SUCCESS:
       return <CheckCircleSolid color="#63E9A6" size="16" />
     case Status.FAILED:

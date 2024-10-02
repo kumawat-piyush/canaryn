@@ -33,7 +33,7 @@ const Badge: React.FC<ExecutionStatusProps & BadgeProps> = props => {
       ) : (
         <div className="flex gap-1 items-center border-solid border border-studio-3/[0.12] px-1 py-0.5 rounded-md bg-studio-3/10">
           <div className="flex gap-1 items-center">
-            <Refresh color="rgba(226,155,54,1)" size="16" className="animate-spin" />
+            <Refresh size="16" className="animate-spin text-warning" />
             <span className="text-studio-3">Running</span>
           </div>
           {duration && <span className="text-studio-3">{duration}</span>}
