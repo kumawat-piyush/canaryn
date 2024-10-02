@@ -27,21 +27,24 @@ export const DivergenceGauge = ({ behindAhead, className }: GaugeProps) => {
           {behindAhead.ahead ?? 0}
         </Text>
       </div>
-      <div className="grid grid-flow-col grid-cols-2 justify-center items-center w-28 mx-auto">
-        <Progress
-          variant="divergence"
-          value={behindPercentage}
-          rotated="180deg"
-          indicatorRounded="right-sm"
-          indicatorColor="tertiary-background-20"
-        />
-        <Progress
-          variant="divergence"
-          value={aheadPercentage}
-          indicatorRounded="right-sm"
-          indicatorColor="tertiary-background-40"
-        />
-      </div>
+      {/* Both behind and ahead are 0, don't show the progress bar */}
+      {behindAhead.behind === 0 && behindAhead.ahead == 0 ? null : (
+        <div className="grid grid-flow-col grid-cols-2 justify-center items-center w-28 mx-auto">
+          <Progress
+            variant="divergence"
+            value={behindPercentage}
+            rotated="180deg"
+            indicatorRounded="right-sm"
+            indicatorColor="tertiary-background-20"
+          />
+          <Progress
+            variant="divergence"
+            value={aheadPercentage}
+            indicatorRounded="right-sm"
+            indicatorColor="tertiary-background-40"
+          />
+        </div>
+      )}
     </div>
   )
 }
