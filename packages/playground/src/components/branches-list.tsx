@@ -131,7 +131,7 @@ export const BranchesList = ({ branches }: PageProps) => {
                     </Text>
                   </div>
                 </TableCell>
-                <TableCell>
+                <TableCell className="content-center">
                   <div className="flex gap-1.5 items-center justify-end">
                     <Icon name="vertical-ellipsis" size={14} className="text-tertiary-background" />
                   </div>
