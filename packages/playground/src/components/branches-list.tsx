@@ -16,7 +16,7 @@ import {
 import React from 'react'
 import { getInitials } from '../utils/utils'
 import { CopyButton } from './copy-button'
-import { CalculateDivergenceBar } from './calculate-divergence-bar'
+import { DivergenceGauge } from './divergence-gauge'
 
 interface BranchProps {
   id: number
@@ -118,7 +118,7 @@ export const BranchesList = ({ branches }: PageProps) => {
                         Default
                       </Badge>
                     ) : (
-                      <CalculateDivergenceBar behindAhead={branch.behindAhead} />
+                      <DivergenceGauge behindAhead={branch.behindAhead} />
                     )}
                   </div>
                 </TableCell>
