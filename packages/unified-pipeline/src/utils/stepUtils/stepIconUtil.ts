@@ -4,7 +4,7 @@ import {
   getIsBackgroundStep,
   getIsRunStep,
   getIsRunTestStep,
-  getIstemplateStep
+  getIsTemplateStep
 } from './commonStepUtil'
 
 export const getIconBasedOnStep = (step: any): IconProps['name'] => {
@@ -16,7 +16,7 @@ export const getIconBasedOnStep = (step: any): IconProps['name'] => {
 
   if (getIsActionStep(step)) return 'github-actions'
 
-  if (getIstemplateStep(step)) return 'harness-plugin'
+  if (getIsTemplateStep(step)) return 'harness-plugin'
 
   /**
    * Yet to add Bitrise plugins,

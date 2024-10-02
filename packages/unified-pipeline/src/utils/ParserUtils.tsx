@@ -144,7 +144,6 @@ const getChildNodes = (stage: Record<string, any>): Node[] => {
 }
 
 function getIconAndDisplayName(step: Record<string, any>, stepIndex: number, isV0yaml?: boolean) {
-  //🚨 check the purpose of isV0yaml before merging and add the necessary changes
   return {
     name: getNameBasedOnStep(step, stepIndex),
     icon: (

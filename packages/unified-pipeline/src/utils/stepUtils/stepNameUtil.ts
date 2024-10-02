@@ -3,7 +3,7 @@ import {
   getIsBackgroundStep,
   getIsRunStep,
   getIsRunTestStep,
-  getIstemplateStep
+  getIsTemplateStep
 } from './commonStepUtil'
 import get from 'lodash-es/get'
 
@@ -33,7 +33,7 @@ export const getNameBasedOnStep = (step: any, stepIndex: number): string => {
   }
 
   // Template
-  else if (getIstemplateStep(step)) {
+  else if (getIsTemplateStep(step)) {
     displayName = get(step?.template, 'uses', 'Harness Template')
   }
 

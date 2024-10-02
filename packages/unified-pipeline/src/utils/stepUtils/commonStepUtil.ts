@@ -6,4 +6,4 @@ export const getIsBackgroundStep = (step: Record<string, any>) => Object.hasOwn(
 
 export const getIsActionStep = (step: Record<string, any>) => Object.hasOwn(step, 'action')
 
-export const getIstemplateStep = (step: Record<string, any>) => Object.hasOwn(step, 'template')
+export const getIsTemplateStep = (step: Record<string, any>) => Object.hasOwn(step, 'template')
