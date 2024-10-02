@@ -26,14 +26,14 @@ export const CalculateDivergenceBar = ({ behindAhead, className }: CalDivergence
       <div className="w-full m-auto text-center flex mt-1 max-w-28 flex-row">
         <Text className="h-1 w-[50%] relative">
           <span
-            className=" h-full absolute top-0 right-0 rounded-l-sm"
-            style={{ width: `${behindPercentage}%`, backgroundColor: '#303036' }} //bg-divergence-behind not working
+            className="h-full absolute top-0 right-0 rounded-l-sm bg-divergence-behind"
+            style={{ width: `${behindPercentage}%` }}
           />
         </Text>
         <Text className="h-1 w-[50%] relative">
           <span
-            className=" h-full absolute top-0 left-0 rounded-r-sm "
-            style={{ width: `${aheadPercentage}%`, backgroundColor: '#484851' }} //bg-divergence-ahead not working
+            className="h-full absolute top-0 left-0 rounded-r-sm bg-divergence-ahead"
+            style={{ width: `${aheadPercentage}%` }}
           />
         </Text>
       </div>
