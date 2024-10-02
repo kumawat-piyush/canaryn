@@ -15,20 +15,10 @@ import {
 } from '@harnessio/playground'
 import { PathParams } from '../../RouteDefinitions'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
-import { ExecutionState } from '../../types'
+import { ExecutionEvent, ExecutionState } from '../../types'
 import { getDuration, timeAgoFromEpochTime, formatDuration } from '../pipeline-edit/utils/time-utils'
 import useSpaceSSE from '../../framework/hooks/useSpaceSSE'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
-
-/**
- * Ensure this should come from @harnessio/code-service-client instead
- */
-enum ExecutionEvent {
-  EXECUTION_UPDATED = 'execution_updated',
-  EXECUTION_COMPLETED = 'execution_completed',
-  EXECUTION_CANCELED = 'execution_canceled',
-  EXECUTION_RUNNING = 'execution_running'
-}
 
 const ExecutionLogs: React.FC = () => {
   const navigate = useNavigate()
