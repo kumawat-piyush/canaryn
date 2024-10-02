@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { TypesStage, useFindExecutionQuery, useViewLogsQuery } from '@harnessio/code-service-client'
 import { Badge, Icon, ScrollArea, Separator, Text } from '@harnessio/canary'
@@ -17,12 +17,22 @@ import { PathParams } from '../../RouteDefinitions'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { ExecutionState } from '../../types'
 import { getDuration, timeAgoFromEpochTime, formatDuration } from '../pipeline-edit/utils/time-utils'
-import usePolling from '../../framework/hooks/usePolling'
+import useSpaceSSE from '../../framework/hooks/useSpaceSSE'
+import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 
-const POLLING_INTERVAL = 5_000
+/**
+ * Ensure this should come from @harnessio/code-service-client instead
+ */
+enum ExecutionEvent {
+  EXECUTION_UPDATED = 'execution_updated',
+  EXECUTION_COMPLETED = 'execution_completed',
+  EXECUTION_CANCELED = 'execution_canceled',
+  EXECUTION_RUNNING = 'execution_running'
+}
 
 const ExecutionLogs: React.FC = () => {
   const navigate = useNavigate()
+  const space = useGetSpaceURLParam() ?? ''
   const { pipelineId, executionId } = useParams<PathParams>()
   const repoRef = useGetRepoRef()
   const [stage, setStage] = useState<TypesStage>()
@@ -31,23 +41,43 @@ const ExecutionLogs: React.FC = () => {
   const pipelineIdentifier = pipelineId || ''
   const executionNum = executionId || ''
 
-  const { refetch: fetchExecution } = useFindExecutionQuery({
+  const { data: execution, refetch: fetchExecution } = useFindExecutionQuery({
     pipeline_identifier: pipelineIdentifier,
     execution_number: executionNum,
     repo_ref: repoRef
   })
 
-  const { data: polledExecutionData, stopPolling } = usePolling(fetchExecution, POLLING_INTERVAL)
-  const execution = polledExecutionData?.data
+  const onEvent = useCallback(
+    (data: { repo_id: number | undefined; pipeline_id: number | undefined; number: number | undefined }) => {
+      if (
+        data?.repo_id === execution?.repo_id &&
+        data?.pipeline_id === execution?.pipeline_id &&
+        data?.number === execution?.number
+      ) {
+        fetchExecution()
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [execution?.number, execution?.pipeline_id, execution?.repo_id]
+  )
 
-  useEffect(() => {
-    /**
-     * Could be done on other statuses as well, such as, Aborted, Expired etc.
-     */
-    if (execution?.status === ExecutionState.SUCCESS) {
-      stopPolling()
-    }
-  }, [execution?.status])
+  useSpaceSSE({
+    space,
+    events: useMemo(
+      () => [
+        ExecutionEvent.EXECUTION_UPDATED,
+        ExecutionEvent.EXECUTION_COMPLETED,
+        ExecutionEvent.EXECUTION_CANCELED,
+        ExecutionEvent.EXECUTION_RUNNING
+      ],
+      []
+    ),
+    onEvent,
+    shouldRun: useMemo(
+      () => [ExecutionState.RUNNING, ExecutionState.PENDING].includes(execution?.status as ExecutionState),
+      [execution?.status]
+    )
+  })
 
   const { data: logs } = useViewLogsQuery({
     pipeline_identifier: pipelineIdentifier,
