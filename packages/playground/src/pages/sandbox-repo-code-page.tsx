@@ -71,7 +71,7 @@ function Sidebar() {
   return (
     <div className="flex flex-col gap-5">
       <div className="w-full grid grid-cols-[1fr] auto-cols-auto grid-flow-col gap-3 items-center">
-        <BranchSelector size="sm" name="main" branchList={mockBranchList} selectBranch={noop} />
+        <BranchSelector size="sm" name="main" branchList={mockBranchList} selectBranch={noop} width="full" />
         <ButtonGroup.Root
           spacing="0"
           className="shadow-border shadow-[inset_0_0_0_1px] rounded-md h-full overflow-hidden">
@@ -84,9 +84,9 @@ function Sidebar() {
         </ButtonGroup.Root>
       </div>
       <SearchBox.Root width="full" placeholder="Search" />
-      <FileExplorer.Root>
+      <FileExplorer.Root onValueChange={noop}>
         {/* 2 nested levels of identical data for demo purposes */}
-        {sidebarItems.map((itm, itm_idx) =>
+        {sidebarItems.map(itm =>
           itm.type === 'file' ? (
             <Link to="#">
               <FileExplorer.FileItem key={itm.id.toString()}>{itm.name}</FileExplorer.FileItem>
@@ -95,9 +95,9 @@ function Sidebar() {
             <FileExplorer.FolderItem
               key={itm.id.toString()}
               value={itm.id.toString()}
-              isActive={itm_idx === 3}
+              // isActive={itm_idx === 3}
               content={
-                <FileExplorer.Root>
+                <FileExplorer.Root onValueChange={noop}>
                   {sidebarItems.map(itm =>
                     itm.type === 'file' ? (
                       <Link to="#">
@@ -108,7 +108,7 @@ function Sidebar() {
                         key={itm.id.toString()}
                         value={itm.id.toString()}
                         content={
-                          <FileExplorer.Root>
+                          <FileExplorer.Root onValueChange={noop}>
                             {sidebarItems.map(itm =>
                               itm.type === 'file' ? (
                                 <Link to="#">
