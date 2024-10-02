@@ -12,6 +12,9 @@ import {
 } from '@harnessio/icons-noir'
 import React, { createContext, forwardRef, useCallback, useContext, useEffect, useState } from 'react'
 
+/**
+ * @TODO remove this from treeview component
+ */
 enum Status {
   QUEUED = 'queued',
   IN_PROGRESS = 'in_progress',
