@@ -138,7 +138,9 @@ const ExecutionLogs: React.FC = () => {
   }
 
   const handleCancel = (): void => {
-    cancelExecution({}).then().catch()
+    cancelExecution({})
+      .then(() => {})
+      .catch()
   }
 
   return (
