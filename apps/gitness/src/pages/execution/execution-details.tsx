@@ -22,7 +22,7 @@ import {
 } from '@harnessio/playground'
 import { PathParams } from '../../RouteDefinitions'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
-import { ExecutionEvent, ExecutionState } from '../../types'
+import { SSEEvent, ExecutionState } from '../../types'
 import { getDuration, timeAgoFromEpochTime, formatDuration } from '../pipeline-edit/utils/time-utils'
 import useSpaceSSE from '../../framework/hooks/useSpaceSSE'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
@@ -86,10 +86,10 @@ const ExecutionLogs: React.FC = () => {
     space,
     events: useMemo(
       () => [
-        ExecutionEvent.EXECUTION_UPDATED,
-        ExecutionEvent.EXECUTION_COMPLETED,
-        ExecutionEvent.EXECUTION_CANCELED,
-        ExecutionEvent.EXECUTION_RUNNING
+        SSEEvent.EXECUTION_UPDATED,
+        SSEEvent.EXECUTION_COMPLETED,
+        SSEEvent.EXECUTION_CANCELED,
+        SSEEvent.EXECUTION_RUNNING
       ],
       []
     ),
@@ -97,13 +97,16 @@ const ExecutionLogs: React.FC = () => {
     shouldRun: isPipelineStillExecuting
   })
 
-  const { data: logs } = useViewLogsQuery({
-    pipeline_identifier: pipelineIdentifier,
-    execution_number: executionNum,
-    repo_ref: repoRef,
-    stage_number: String(stageNum),
-    step_number: String(stepNum)
-  })
+  const { data: logs } = useViewLogsQuery(
+    {
+      pipeline_identifier: pipelineIdentifier,
+      execution_number: executionNum,
+      repo_ref: repoRef,
+      stage_number: String(stageNum),
+      step_number: String(stepNum)
+    },
+    { enabled: isPipelineStillExecuting }
+  )
 
   useEffect(() => {
     if (execution?.stages && execution.stages.length > 0) {
