@@ -59,7 +59,7 @@ const ConsoleLogs: FC<ConsoleLogsProps> = ({ logs }) => {
             )}
             <div className="text-ring font-mono text-sm font-normal ml-2 flex gap-1">
               {log?.time ? <Text>[{formatTimestamp(log.time)}]</Text> : null}
-              <Text className="text-ring">{log.out}</Text>
+              {log?.out && <Text className="text-ring">{log.out}</Text>}
             </div>
           </div>
         )
