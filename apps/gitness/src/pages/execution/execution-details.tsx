@@ -42,12 +42,18 @@ const ExecutionLogs: React.FC = () => {
   const pipelineIdentifier = pipelineId || ''
   const executionNum = executionId || ''
   const isPipelineStillExecuting: boolean = useMemo(
+    /**
+     * @TODO remove ExecutionState and replace with EnumCiStatus, would then not need this type assertion
+     */
     () => [ExecutionState.RUNNING, ExecutionState.PENDING].includes(execution?.status as ExecutionState),
     [execution?.status]
   )
   const currentStepStatus = useMemo((): ExecutionState | undefined => {
     const stageIndex = Math.max(0, stageNum - 1)
     const stepIndex = Math.max(0, stepNum - 1)
+    /**
+     * @TODO remove ExecutionState and replace with EnumCiStatus, would then not need this type assertion
+     */
     return execution?.stages?.[stageIndex]?.steps?.[stepIndex]?.status as ExecutionState | undefined
   }, [execution, stageNum, stepNum])
 
