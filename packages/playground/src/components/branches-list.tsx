@@ -74,7 +74,6 @@ export const BranchesList = ({ branches }: PageProps) => {
                   <div className="flex items-center gap-1.5">
                     <Text wrap="nowrap" truncate className="text-primary/90">
                       <Button variant="secondary" size="xs">
-                        {/* todo: set the private icon here */}
                         &nbsp;
                         {branch.name}
                       </Button>
