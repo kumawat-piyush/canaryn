@@ -27,7 +27,7 @@ interface BranchProps {
     name: string
     avatarUrl?: string
   }
-  checks: {
+  checks?: {
     done?: number
     total?: number
     status?: number
@@ -50,7 +50,7 @@ export const BranchesList = ({ branches }: PageProps) => {
         <TableRow>
           <TableHead>Branch</TableHead>
           <TableHead>Updated</TableHead>
-          {branches[0].checks.done && branches[0].checks.total && branches[0].checks.status && (
+          {branches[0]?.checks?.done && branches[0]?.checks?.total && branches[0]?.checks?.status && (
             <TableHead>Check status</TableHead>
           )}
           <TableHead className="text-center box-border">
@@ -97,12 +97,12 @@ export const BranchesList = ({ branches }: PageProps) => {
                   </div>
                 </TableCell>
                 {/* checkstatus: show in the playground, hide the check status column if the checks are null in the gitness without data */}
-                {branch.checks.done && branch.checks.total && branch.checks.status && (
+                {branch?.checks?.done && branch?.checks?.total && branch?.checks?.status && (
                   <TableCell className="content-center">
                     <div className="flex gap-1.5 items-center">
                       <Icon name="tick" size={11} className="text-success" />
                       <Text size={2} wrap="nowrap" truncate className="text-tertiary-background">
-                        {branch.checks.done} / {branch.checks.total}
+                        {branch?.checks?.done} / {branch?.checks?.total}
                       </Text>
                     </div>
                   </TableCell>

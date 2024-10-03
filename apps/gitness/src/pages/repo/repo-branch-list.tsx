@@ -23,7 +23,7 @@ import {
   useCalculateCommitDivergenceMutation,
   useFindRepositoryQuery
 } from '@harnessio/code-service-client'
-import { orderSortDate } from './types/types'
+import { orderSortDate } from '../../types'
 import { timeAgoFromISOTime } from '../pipeline-edit/utils/time-utils'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
@@ -119,12 +119,6 @@ export function ReposBranchesListPage() {
             user: {
               name: branch.commit?.committer?.identity?.name || '',
               avatarUrl: ''
-            },
-            //hardcoded
-            checks: {
-              done: undefined,
-              total: undefined,
-              status: undefined
             },
             behindAhead: {
               behind: branchBehind || 0,
