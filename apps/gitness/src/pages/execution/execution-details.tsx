@@ -27,6 +27,7 @@ import { getDuration, timeAgoFromEpochTime, formatDuration } from '../pipeline-e
 import useSpaceSSE from '../../framework/hooks/useSpaceSSE'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { usePipelineDataContext } from '../pipeline-edit/context/PipelineStudioDataProvider'
+import { useLogs } from '../../framework/hooks/useLogs'
 
 const ExecutionLogs: React.FC = () => {
   const { gitInfo } = usePipelineDataContext()
@@ -40,12 +41,32 @@ const ExecutionLogs: React.FC = () => {
   const [execution, setExecution] = useState<TypesExecution | undefined>()
   const pipelineIdentifier = pipelineId || ''
   const executionNum = executionId || ''
+  const isPipelineStillExecuting: boolean = useMemo(
+    () => [ExecutionState.RUNNING, ExecutionState.PENDING].includes(execution?.status as ExecutionState),
+    [execution?.status]
+  )
+  const currentStepStatus = useMemo((): ExecutionState | undefined => {
+    const stageIndex = Math.max(0, stageNum - 1)
+    const stepIndex = Math.max(0, stepNum - 1)
+    return execution?.stages?.[stageIndex]?.steps?.[stepIndex]?.status as ExecutionState | undefined
+  }, [execution, stageNum, stepNum])
 
   const { data: initialExecutionData } = useFindExecutionQuery({
     pipeline_identifier: pipelineIdentifier,
     execution_number: executionNum,
     repo_ref: repoRef
   })
+
+  const { data: logs } = useViewLogsQuery(
+    {
+      pipeline_identifier: pipelineIdentifier,
+      execution_number: executionNum,
+      repo_ref: repoRef,
+      stage_number: String(stageNum),
+      step_number: String(stepNum)
+    },
+    { enabled: !isPipelineStillExecuting }
+  )
 
   const { mutateAsync: cancelExecution } = useCancelExecutionMutation({
     pipeline_identifier: pipelineIdentifier,
@@ -73,13 +94,7 @@ const ExecutionLogs: React.FC = () => {
         setExecution(data)
       }
     },
-
     [execution?.number, execution?.pipeline_id, execution?.repo_id]
-  )
-
-  const isPipelineStillExecuting: boolean = useMemo(
-    () => [ExecutionState.RUNNING, ExecutionState.PENDING].includes(execution?.status as ExecutionState),
-    [execution?.status]
   )
 
   useSpaceSSE({
@@ -97,16 +112,14 @@ const ExecutionLogs: React.FC = () => {
     shouldRun: isPipelineStillExecuting
   })
 
-  const { data: logs } = useViewLogsQuery(
-    {
-      pipeline_identifier: pipelineIdentifier,
-      execution_number: executionNum,
-      repo_ref: repoRef,
-      stage_number: String(stageNum),
-      step_number: String(stepNum)
-    },
-    { enabled: isPipelineStillExecuting }
-  )
+  const { logs: streamedLogs } = useLogs({
+    executionNum,
+    pipelineId: pipelineIdentifier,
+    repoPath: repoRef,
+    stageNum,
+    stepNum,
+    stepStatus: currentStepStatus
+  })
 
   useEffect(() => {
     if (execution?.stages && execution.stages.length > 0) {
@@ -153,7 +166,9 @@ const ExecutionLogs: React.FC = () => {
           {stage && (
             <StageExecution
               stage={stage as StageProps}
-              logs={logs ?? []}
+              logs={
+                isPipelineStillExecuting && currentStepStatus === ExecutionState.RUNNING ? streamedLogs : logs || []
+              }
               selectedStepIdx={stepNum > 0 ? stepNum - 1 : 0}
               onEdit={() => navigate('../edit')}
             />
