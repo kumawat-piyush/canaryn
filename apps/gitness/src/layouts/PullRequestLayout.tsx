@@ -4,7 +4,7 @@ import { Badge, Icon, Spacer, Tabs, TabsList, TabsTrigger } from '@harnessio/can
 import { Floating1ColumnLayout, PullRequestHeader } from '@harnessio/playground'
 import { TypesPullReq, useGetPullReqQuery } from '@harnessio/code-service-client'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
-import { PathParams, routes } from '../RouteDefinitions'
+import { PathParams, PullRequestRoutePathParams, routes } from '../RouteDefinitions'
 
 enum PullRequestTab {
   CONVERSATION = 'conversation',
@@ -24,7 +24,11 @@ const PullRequestLayout: React.FC = () => {
     pullreq_number: prId
   })
   const [pullRequestTab, setPullRequestTab] = useState<PullRequestTab | null>(null)
-  const urlMatchArgs = { spaceId: spaceId || '', repoId: repoId || '', pullRequestId: String(prId) }
+  const urlMatchArgs: PullRequestRoutePathParams = {
+    spaceId: spaceId || '',
+    repoId: repoId || '',
+    pullRequestId: String(prId)
+  }
   const routeTabMapping = [
     {
       match: useMatch(routes.toPullRequest(urlMatchArgs)),
