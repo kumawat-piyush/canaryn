@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -32,7 +32,24 @@ const passwordSchema = z
 type ProfileFields = z.infer<typeof profileSchema>
 type PasswordFields = z.infer<typeof passwordSchema>
 
-function SandboxSettingsAccountGeneralPage() {
+interface UserData {
+  name: string
+  username: string
+  email: string
+}
+interface SandboxSettingsAccountGeneralPageProps {
+  userData: UserData
+  isLoading: boolean
+  error: string | null
+  onUpdateUser: (data: Omit<UserData, 'username'>) => void
+}
+
+const SandboxSettingsAccountGeneralPage: React.FC<SandboxSettingsAccountGeneralPageProps> = ({
+  userData,
+  isLoading,
+  error,
+  onUpdateUser
+}) => {
   // Profile form handling
   const {
     register: registerProfile,
@@ -43,11 +60,21 @@ function SandboxSettingsAccountGeneralPage() {
     resolver: zodResolver(profileSchema),
     mode: 'onChange',
     defaultValues: {
-      name: 'Ann Nonymous',
-      username: 'anon',
-      email: 'user@anon.com'
+      name: userData?.name || '',
+      username: userData?.username || '',
+      email: userData?.email || ''
     }
   })
+
+  useEffect(() => {
+    if (userData) {
+      resetProfileForm({
+        name: userData.name,
+        username: userData.username,
+        email: userData.email
+      })
+    }
+  }, [userData])
 
   // Password form handling
   const {
@@ -73,8 +100,12 @@ function SandboxSettingsAccountGeneralPage() {
   // Profile form submit handler
   const onProfileSubmit: SubmitHandler<ProfileFields> = data => {
     setIsProfileSubmitting(true)
+    const { username, ...updatedData } = data
+
+    onUpdateUser(updatedData)
+
     setTimeout(() => {
-      console.log('Profile updated:', data)
+      // console.log('Profile updated:', updatedData)
       setIsProfileSubmitting(false)
       setProfileSubmitted(true)
       // Reset profile form to clear dirty state
@@ -87,7 +118,7 @@ function SandboxSettingsAccountGeneralPage() {
     }, 2000)
   }
 
-  // Password form submit handler
+  // Password form submit
   const onPasswordSubmit: SubmitHandler<PasswordFields> = data => {
     setIsPasswordSubmitting(true)
     setTimeout(() => {
@@ -151,7 +182,7 @@ function SandboxSettingsAccountGeneralPage() {
               <FormFieldSet.Label htmlFor="username" required>
                 Username
               </FormFieldSet.Label>
-              <Input id="username" {...registerProfile('username')} placeholder="Enter your username" />
+              <Input id="username" {...registerProfile('username')} placeholder="Enter your username" disabled />
               {profileErrors.username && (
                 <FormFieldSet.Message theme={MessageTheme.ERROR}>
                   {profileErrors.username.message?.toString()}
