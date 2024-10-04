@@ -9,7 +9,7 @@ import {
 } from '@harnessio/forms'
 import { InputConfigType, InputType } from '../form-inputs/types'
 import { IInputConfigWithConfig, RUN_TEST_STEP_IDENTIFIER } from './types'
-import { getContainerPartial } from './partials/contailer-partial'
+import { getContainerPartial } from './partials/container-partial'
 
 export const RUN_TEST_STEP_DESCRIPTION = 'Run test step description.'
 

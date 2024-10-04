@@ -9,7 +9,7 @@ import {
 } from '@harnessio/forms'
 import { InputConfigType, InputType } from '../form-inputs/types'
 import { IInputConfigWithConfig, RUN_STEP_IDENTIFIER } from './types'
-import { getContainerPartial } from './partials/contailer-partial'
+import { getContainerPartial } from './partials/container-partial'
 
 export const RUN_STEP_DESCRIPTION =
   'Execute scripts in the shell session. The scripts can be executed on the pod/instance running a Harness Delegate or on a remote host in the infrastructure.'
