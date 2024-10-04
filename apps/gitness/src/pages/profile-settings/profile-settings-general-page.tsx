@@ -128,14 +128,16 @@ const SandboxSettingsAccountGeneralPage: React.FC<SandboxSettingsAccountGeneralP
       setProfileSubmitted(true)
       setTimeout(() => setProfileSubmitted(false), 2000)
     }
+  }, [profileUpdateSuccess])
 
+  useEffect(() => {
     if (passwordUpdateSuccess === true) {
       resetPasswordForm()
 
       setPasswordSubmitted(true)
       setTimeout(() => setPasswordSubmitted(false), 2000)
     }
-  }, [profileUpdateSuccess, passwordUpdateSuccess])
+  }, [passwordUpdateSuccess])
 
   if (isLoadingUser) {
     return (
