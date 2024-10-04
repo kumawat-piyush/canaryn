@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, ButtonGroup, Input, Spacer, Text, Icon, Avatar, AvatarImage, AvatarFallback } from '@harnessio/canary'
-import { SandboxLayout, FormFieldSet } from '..'
-import { MessageTheme } from '../components/form-field-set'
+import { SandboxLayout, FormFieldSet, SkeletonList } from '@harnessio/playground'
 
-// Define form schemas
 const profileSchema = z.object({
   name: z.string().min(1, { message: 'Please provide your name' }),
   username: z.string().min(1, { message: 'Please provide a username' }),
@@ -15,7 +13,7 @@ const profileSchema = z.object({
 
 const passwordSchema = z
   .object({
-    oldPassword: z.string().min(6, { message: 'Old password must be at least 6 characters' }),
+    // oldPassword: z.string().min(6, { message: 'Old password must be at least 6 characters' }),
     newPassword: z
       .string()
       .min(6, { message: 'New password must be at least 6 characters' })
@@ -29,25 +27,66 @@ const passwordSchema = z
   })
 
 // Define TypeScript types
-type ProfileFields = z.infer<typeof profileSchema>
-type PasswordFields = z.infer<typeof passwordSchema>
+export type ProfileFields = z.infer<typeof profileSchema>
+export type PasswordFields = z.infer<typeof passwordSchema>
 
-function SandboxSettingsAccountGeneralPage() {
+interface SandboxSettingsAccountGeneralPageProps {
+  userData: ProfileFields
+  isLoadingUser: boolean
+  isUpdatingUser: boolean
+  isUpdatingPassword: boolean
+  profileUpdateSuccess: boolean
+  passwordUpdateSuccess: boolean
+  error: { type: 'profile' | 'password'; message: string } | null
+  onUpdateUser: (data: Omit<ProfileFields, 'username'>) => void
+  onUpdatePassword: (data: PasswordFields) => void
+}
+
+const SandboxSettingsAccountGeneralPage: React.FC<SandboxSettingsAccountGeneralPageProps> = ({
+  userData,
+  isLoadingUser,
+  isUpdatingUser,
+  isUpdatingPassword,
+  profileUpdateSuccess,
+  passwordUpdateSuccess,
+  error,
+  onUpdateUser,
+  onUpdatePassword
+}) => {
   // Profile form handling
   const {
     register: registerProfile,
     handleSubmit: handleProfileSubmit,
-    reset: resetProfileForm, // Add reset for profile form
+    reset: resetProfileForm,
     formState: { errors: profileErrors, isValid: isProfileValid, dirtyFields: profileDirtyFields }
   } = useForm<ProfileFields>({
     resolver: zodResolver(profileSchema),
     mode: 'onChange',
     defaultValues: {
-      name: 'Ann Nonymous',
-      username: 'anon',
-      email: 'user@anon.com'
+      name: userData?.name || '',
+      username: userData?.username || '',
+      email: userData?.email || ''
     }
   })
+
+  useEffect(() => {
+    if (userData) {
+      resetProfileForm({
+        name: userData.name,
+        username: userData.username,
+        email: userData.email
+      })
+    }
+  }, [userData])
+
+  const extractInitials = (name: string): string => {
+    const parts = name.trim().split(/\s+/)
+    if (parts.length === 1) {
+      return parts[0].charAt(0).toUpperCase()
+    } else {
+      return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase()
+    }
+  }
 
   // Password form handling
   const {
@@ -59,68 +98,79 @@ function SandboxSettingsAccountGeneralPage() {
     resolver: zodResolver(passwordSchema),
     mode: 'onChange',
     defaultValues: {
-      oldPassword: '',
+      // oldPassword: '',
       newPassword: '',
       confirmPassword: ''
     }
   })
 
-  const [isProfileSubmitting, setIsProfileSubmitting] = useState(false)
-  const [isPasswordSubmitting, setIsPasswordSubmitting] = useState(false)
+  // const [isProfileSubmitting, setIsProfileSubmitting] = useState(false)
+  // const [isPasswordSubmitting, setIsPasswordSubmitting] = useState(false)
   const [profileSubmitted, setProfileSubmitted] = useState(false)
   const [passwordSubmitted, setPasswordSubmitted] = useState(false)
 
   // Profile form submit handler
   const onProfileSubmit: SubmitHandler<ProfileFields> = data => {
-    setIsProfileSubmitting(true)
-    setTimeout(() => {
-      console.log('Profile updated:', data)
-      setIsProfileSubmitting(false)
-      setProfileSubmitted(true)
-      // Reset profile form to clear dirty state
-      resetProfileForm({
-        name: data.name,
-        username: data.username,
-        email: data.email
-      })
-      setTimeout(() => setProfileSubmitted(false), 2000)
-    }, 2000)
+    const { username: _, ...updatedData } = data
+    onUpdateUser(updatedData)
   }
 
-  // Password form submit handler
+  // Password form submit
   const onPasswordSubmit: SubmitHandler<PasswordFields> = data => {
-    setIsPasswordSubmitting(true)
-    setTimeout(() => {
-      console.log('Password updated:', data)
+    onUpdatePassword(data)
+  }
+
+  useEffect(() => {
+    if (profileUpdateSuccess === true) {
+      resetProfileForm({
+        name: userData.name,
+        username: userData.username,
+        email: userData.email
+      })
+      setProfileSubmitted(true)
+      setTimeout(() => setProfileSubmitted(false), 2000)
+    }
+
+    if (passwordUpdateSuccess === true) {
       resetPasswordForm()
-      setIsPasswordSubmitting(false)
+
       setPasswordSubmitted(true)
       setTimeout(() => setPasswordSubmitted(false), 2000)
-    }, 2000)
+    }
+  }, [profileUpdateSuccess, passwordUpdateSuccess])
+
+  if (isLoadingUser) {
+    return (
+      <SandboxLayout.Main hasLeftPanel hasHeader hasSubHeader>
+        <SandboxLayout.Content maxWidth="2xl">
+          <SkeletonList />
+        </SandboxLayout.Content>
+      </SandboxLayout.Main>
+    )
   }
 
   return (
     <SandboxLayout.Main hasLeftPanel hasHeader hasSubHeader>
       <SandboxLayout.Content maxWidth="2xl">
         <Spacer size={10} />
-        <Text size={5} weight={'medium'}>
+        <Text size={5} weight={'medium'} className="flex justify-center">
           General
         </Text>
         <Spacer size={6} />
         <form onSubmit={handleProfileSubmit(onProfileSubmit)}>
           <FormFieldSet.Root>
             {/* PERSONAL INFORMATION */}
-            <FormFieldSet.Legend>Personal information</FormFieldSet.Legend>
-            <FormFieldSet.ControlGroup className="w-auto flex flex-row gap-x-6 items-center justify-start">
+            <FormFieldSet.Legend className="flex justify-center">Personal information</FormFieldSet.Legend>
+            <FormFieldSet.ControlGroup className="w-auto flex flex-row gap-x-6 items-center justify-center">
               <Avatar size="80" className="h-20 w-20 rounded-full bg-primary/[0.02] shadow-md">
                 <AvatarImage src="/images/anon.jpg" />
                 <AvatarFallback>
                   <Text size={5} weight="medium" color="tertiaryBackground">
-                    BR
+                    {extractInitials(userData.name)}
                   </Text>
                 </AvatarFallback>
               </Avatar>
-              <FormFieldSet.ControlGroup>
+              {/* <FormFieldSet.ControlGroup>
                 <FormFieldSet.Label htmlFor="avatar">Profile picture</FormFieldSet.Label>
                 <ButtonGroup.Root spacing="3">
                   <Button variant="outline" size="sm">
@@ -130,7 +180,7 @@ function SandboxSettingsAccountGeneralPage() {
                     <Icon name="trash" size={14} />
                   </Button>
                 </ButtonGroup.Root>
-              </FormFieldSet.ControlGroup>
+              </FormFieldSet.ControlGroup> */}
             </FormFieldSet.ControlGroup>
 
             {/* NAME */}
@@ -140,7 +190,7 @@ function SandboxSettingsAccountGeneralPage() {
               </FormFieldSet.Label>
               <Input id="name" {...registerProfile('name')} placeholder="Enter your name" />
               {profileErrors.name && (
-                <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
                   {profileErrors.name.message?.toString()}
                 </FormFieldSet.Message>
               )}
@@ -151,9 +201,9 @@ function SandboxSettingsAccountGeneralPage() {
               <FormFieldSet.Label htmlFor="username" required>
                 Username
               </FormFieldSet.Label>
-              <Input id="username" {...registerProfile('username')} placeholder="Enter your username" />
+              <Input id="username" {...registerProfile('username')} placeholder="Enter your username" disabled />
               {profileErrors.username && (
-                <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
                   {profileErrors.username.message?.toString()}
                 </FormFieldSet.Message>
               )}
@@ -166,11 +216,20 @@ function SandboxSettingsAccountGeneralPage() {
               </FormFieldSet.Label>
               <Input id="email" {...registerProfile('email')} placeholder="brad@drone.io" />
               {profileErrors.email && (
-                <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
                   {profileErrors.email.message?.toString()}
                 </FormFieldSet.Message>
               )}
             </FormFieldSet.ControlGroup>
+
+            {error && error.type === 'profile' && (
+              <>
+                <Spacer size={2} />
+                <Text size={1} className="text-destructive">
+                  {error.message}
+                </Text>
+              </>
+            )}
 
             {/* UPDATE PROFILE BUTTON */}
             <FormFieldSet.ControlGroup type="button">
@@ -179,8 +238,8 @@ function SandboxSettingsAccountGeneralPage() {
                   <Button
                     size="sm"
                     type="submit"
-                    disabled={!isProfileValid || isProfileSubmitting || !Object.keys(profileDirtyFields).length}>
-                    {isProfileSubmitting ? 'Updating...' : 'Update profile'}
+                    disabled={!isProfileValid || isUpdatingUser || !Object.keys(profileDirtyFields).length}>
+                    {isUpdatingUser ? 'Updating...' : 'Update profile'}
                   </Button>
                 ) : (
                   <Button variant="ghost" type="button" size="sm" theme="success" className="pointer-events-none">
@@ -205,7 +264,7 @@ function SandboxSettingsAccountGeneralPage() {
               Minimum of 6 characters long containing at least one number and a mixture of uppercase and lowercase
               letters.
             </FormFieldSet.SubLegend>
-            <FormFieldSet.ControlGroup>
+            {/* <FormFieldSet.ControlGroup>
               <FormFieldSet.Label htmlFor="oldPassword">Old password</FormFieldSet.Label>
               <Input
                 id="oldPassword"
@@ -214,11 +273,11 @@ function SandboxSettingsAccountGeneralPage() {
                 placeholder="Enter your old password"
               />
               {passwordErrors.oldPassword && (
-                <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
                   {passwordErrors.oldPassword.message?.toString()}
                 </FormFieldSet.Message>
               )}
-            </FormFieldSet.ControlGroup>
+            </FormFieldSet.ControlGroup> */}
 
             {/* NEW PASSWORD */}
             <FormFieldSet.ControlGroup>
@@ -230,7 +289,7 @@ function SandboxSettingsAccountGeneralPage() {
                 placeholder="Enter a new password"
               />
               {passwordErrors.newPassword && (
-                <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
                   {passwordErrors.newPassword.message?.toString()}
                 </FormFieldSet.Message>
               )}
@@ -246,18 +305,27 @@ function SandboxSettingsAccountGeneralPage() {
                 placeholder="Confirm your new password"
               />
               {passwordErrors.confirmPassword && (
-                <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
                   {passwordErrors.confirmPassword.message?.toString()}
                 </FormFieldSet.Message>
               )}
             </FormFieldSet.ControlGroup>
 
+            {error && error.type === 'password' && (
+              <>
+                <Spacer size={2} />
+                <Text size={1} className="text-destructive">
+                  {error.message}
+                </Text>
+              </>
+            )}
+
             {/* UPDATE PASSWORD BUTTON */}
             <FormFieldSet.ControlGroup type="button">
               <ButtonGroup.Root>
                 {!passwordSubmitted ? (
-                  <Button size="sm" type="submit" disabled={!isPasswordValid || isPasswordSubmitting}>
-                    {isPasswordSubmitting ? 'Updating...' : 'Update password'}
+                  <Button size="sm" type="submit" disabled={!isPasswordValid || isUpdatingPassword}>
+                    {isUpdatingPassword ? 'Updating...' : 'Update password'}
                   </Button>
                 ) : (
                   <Button variant="ghost" type="button" size="sm" theme="success" className="pointer-events-none">

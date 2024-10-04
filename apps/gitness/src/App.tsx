@@ -6,7 +6,6 @@ import {
   SandboxRoot,
   SandboxSettings,
   SandboxSettingsAccountPage,
-  SandboxSettingsAccountGeneralPage,
   SandboxSettingsAccountKeysPage
 } from '@harnessio/playground'
 import { TooltipProvider } from '@harnessio/canary'
@@ -35,7 +34,7 @@ import PullRequestConversationPage from './pages/pull-request/pull-request-conve
 import { RepoFiles } from './pages/repo/repo-files'
 import { SandboxRepoHeader } from './pages/repo-sandbox/repo-sandbox-header'
 import ReposSandboxListPage from './pages/repo-sandbox/repo-sandbox-list'
-import { SettingsAccountGeneralPage } from './pages/account-settings/account-settings-general'
+import { SettingsAccountGeneralPage } from './pages/profile-settings/profile-settings-general-container'
 
 export default function App() {
   const router = createBrowserRouter([
@@ -202,11 +201,10 @@ export default function App() {
         {
           path: 'settings',
           element: <SandboxSettings />,
-          // element: <UserProfile />,
 
           children: [
             {
-              path: 'account',
+              path: 'profile',
               element: <SandboxSettingsAccountPage />,
               children: [
                 {
