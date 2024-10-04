@@ -24,27 +24,24 @@ const PullRequestLayout: React.FC = () => {
     pullreq_number: prId
   })
   const [pullRequestTab, setPullRequestTab] = useState<PullRequestTab | null>(null)
-
-  const args = { spaceId: spaceId || '', repoId: repoId || '', pullRequestId: String(prId) }
-
+  const urlMatchArgs = { spaceId: spaceId || '', repoId: repoId || '', pullRequestId: String(prId) }
   const routeTabMapping = [
     {
-      match: useMatch(routes.toPullRequest(args)),
+      match: useMatch(routes.toPullRequest(urlMatchArgs)),
       tab: PullRequestTab.CONVERSATION
     },
     {
-      match: useMatch(routes.toPullRequestConversation(args)),
+      match: useMatch(routes.toPullRequestConversation(urlMatchArgs)),
       tab: PullRequestTab.CONVERSATION
     },
-    { match: useMatch(routes.toPullRequestCommits(args)), tab: PullRequestTab.COMMITS },
-    { match: useMatch(routes.toPullRequestChanges(args)), tab: PullRequestTab.CHANGES },
-    { match: useMatch(routes.toPullRequestChecks(args)), tab: PullRequestTab.CHECKS }
+    { match: useMatch(routes.toPullRequestCommits(urlMatchArgs)), tab: PullRequestTab.COMMITS },
+    { match: useMatch(routes.toPullRequestChanges(urlMatchArgs)), tab: PullRequestTab.CHANGES },
+    { match: useMatch(routes.toPullRequestChecks(urlMatchArgs)), tab: PullRequestTab.CHECKS }
   ]
 
   useEffect(() => {
     const matchedRoute = routeTabMapping.find(route => route.match)
     if (matchedRoute) {
-      console.log(matchedRoute.tab)
       setPullRequestTab(matchedRoute.tab)
     }
   }, [routeTabMapping, spaceId, repoId, prId])
