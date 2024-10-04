@@ -45,9 +45,7 @@ const ConsoleLogs: FC<ConsoleLogsProps> = ({ logs }) => (
           )}
           {out && <Text className="text-ring font-mono text-sm font-normal ml-2 flex gap-1">{out}</Text>}
         </div>
-        <Text className="text-log font-mono text-sm font-normal mr-2 flex gap-1">
-          {formatDuration(time ? time * 1_000 : 0)}
-        </Text>
+        <Text className="text-log text-sm font-normal mr-2 flex gap-1">{formatDuration(time ? time * 1_000 : 0)}</Text>
       </div>
     ))}
   </>
