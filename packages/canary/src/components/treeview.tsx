@@ -237,7 +237,7 @@ const Folder = forwardRef<HTMLDivElement, FolderProps & React.HTMLAttributes<HTM
                 {element}&nbsp;<span className="text-[#787887]">({React.Children.count(children)})</span>
               </span>
             </div>
-            <span className="text-ring">{duration ?? '--'}</span>
+            <span className="text-muted-foreground">{duration ?? '--'}</span>
           </div>
         </AccordionPrimitive.Trigger>
         <AccordionPrimitive.Content className="text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down relative overflow-hidden h-full">
@@ -312,7 +312,7 @@ const File = forwardRef<
               <div className="flex self-center h-4 w-4 mr-1">{getStatusIcon(status)}</div>
               <span className="ml-1 font-normal text-sm">{children}</span>
             </div>
-            <span className="text-ring">{duration ?? '--'}</span>
+            <span className="text-muted-foreground">{duration ?? '--'}</span>
           </div>
         </AccordionPrimitive.Trigger>
       </AccordionPrimitive.Item>
