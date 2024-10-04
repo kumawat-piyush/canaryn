@@ -44,8 +44,11 @@ export * from './components/pipeline-studio/step-palette/step-palette-filters'
 export * from './components/pipeline-studio/step-palette/step-palette-content'
 export * from './components/pipeline-studio/step-palette/step-palette-item'
 export * from './assets/form/run-step'
+export * from './assets/form/template-step'
+
 export * from './components/pipeline-studio/pipeline-studio-footer-bar/pipeline-studio-footer-bar'
 export * from './components/branches-list'
+export * from './components/divergence-gauge'
 
 export * from './components/form-inputs/factory/factory'
 export * from './components/form-inputs/ArrayInput'
@@ -82,5 +85,6 @@ export * as FormFieldSet from './components/form-field-set'
 // SANDBOX LAYOUTS
 export * as SandboxLayout from './layouts/SandboxLayout'
 export * from './pages/sandbox-repo-create-page'
+export * from './layouts/SandboxRoot'
 
 export * from './configs/canary-outlets'
