@@ -104,8 +104,6 @@ const SandboxSettingsAccountGeneralPage: React.FC<SandboxSettingsAccountGeneralP
     }
   })
 
-  // const [isProfileSubmitting, setIsProfileSubmitting] = useState(false)
-  // const [isPasswordSubmitting, setIsPasswordSubmitting] = useState(false)
   const [profileSubmitted, setProfileSubmitted] = useState(false)
   const [passwordSubmitted, setPasswordSubmitted] = useState(false)
 
