@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Button, ButtonGroup, Icon, ListActions, SearchBox, Spacer, Text } from '@harnessio/canary'
 import {
   BranchSelector,
@@ -8,8 +8,7 @@ import {
   FileProps,
   SummaryItemType,
   NoData,
-  SandboxLayout,
-  FileExplorer
+  SandboxLayout
 } from '@harnessio/playground'
 import {
   useListBranchesQuery,
@@ -19,18 +18,22 @@ import {
   RepoPathsDetailsOutput,
   GitPathDetails,
   OpenapiGetContentOutput,
-  OpenapiContentInfo,
-  getContent
+  OpenapiContentInfo
 } from '@harnessio/code-service-client'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { getTrimmedSha, normalizeGitRef } from '../../utils/git-utils'
 import { timeAgoFromISOTime } from '../pipeline-edit/utils/time-utils'
+import { PathParams } from '../../RouteDefinitions'
+import Explorer from '../../components/FileExplorer'
 
 export const RepoFiles: React.FC = () => {
   const [loading, setLoading] = useState(false)
   const [files, setFiles] = useState<FileProps[]>([])
   const repoRef = useGetRepoRef()
-  // const { gitRef } = useParams<PathParams>()
+  const { spaceId, repoId, gitRef, resourcePath } = useParams<PathParams>()
+  const subResourcePath = useParams()['*'] || ''
+  const fullResourcePath = subResourcePath ? resourcePath + '/' + subResourcePath : resourcePath
+  const navigate = useNavigate()
 
   const { data: repository } = useFindRepositoryQuery({ repo_ref: repoRef })
 
@@ -39,14 +42,14 @@ export const RepoFiles: React.FC = () => {
     queryParams: { include_commit: false, sort: 'date', order: 'asc', limit: 20, page: 1, query: '' }
   })
 
-  const [selectedBranch, setSelectedBranch] = useState<string>('')
+  const [selectedBranch, setSelectedBranch] = useState<string>(gitRef || '')
 
   const branchList = branches?.map(item => ({
     name: item?.name
   }))
 
   const { data: repoDetails } = useGetContentQuery({
-    path: '',
+    path: fullResourcePath || '',
     repo_ref: repoRef,
     queryParams: { include_commit: true, git_ref: normalizeGitRef(selectedBranch) }
   })
@@ -62,6 +65,15 @@ export const RepoFiles: React.FC = () => {
       return SummaryItemType.Folder
     }
     return SummaryItemType.File
+  }
+
+  const getLastPathSegment = (path: string) => {
+    if (!path || /^\/+$/.test(path)) {
+      return ''
+    }
+    path = path.replace(/\/+$/, '')
+    const segments = path.split('/')
+    return segments[segments.length - 1]
   }
 
   useEffect(() => {
@@ -82,7 +94,7 @@ export const RepoFiles: React.FC = () => {
                     type: item?.path
                       ? getSummaryItemType(repoEntryPathToFileTypeMap.get(item.path))
                       : SummaryItemType.File,
-                    name: item?.path || '',
+                    name: getLastPathSegment(item?.path || ''),
                     lastCommitMessage: item?.last_commit?.message || '',
                     timestamp: item?.last_commit?.author?.when ? timeAgoFromISOTime(item.last_commit.author.when) : '',
                     user: { name: item?.last_commit?.author?.identity?.name },
@@ -100,13 +112,14 @@ export const RepoFiles: React.FC = () => {
   }, [repoEntryPathToFileTypeMap.size, repoRef])
 
   useEffect(() => {
-    if (repository) {
+    if (repository && !gitRef) {
       setSelectedBranch(repository?.default_branch || '')
     }
   }, [repository])
 
   const selectBranch = (branch: string) => {
     setSelectedBranch(branch)
+    navigate(`/${spaceId}/repos/${repoId}/code/${branch}`)
   }
 
   const renderListContent = () => {
@@ -158,7 +171,7 @@ export const RepoFiles: React.FC = () => {
         </div>
         <SearchBox.Root width="full" placeholder="Search" />
         {repoDetails?.content?.entries?.length && (
-          <Explorer initialEntries={repoDetails?.content?.entries} selectedBranch={selectedBranch} repoRef={repoRef} />
+          <Explorer selectedBranch={selectedBranch} fullResourcePath={fullResourcePath} />
         )}
       </div>
     )
@@ -196,87 +209,5 @@ export const RepoFiles: React.FC = () => {
         </SandboxLayout.Content>
       </SandboxLayout.Main>
     </>
-  )
-}
-interface ExplorerProps {
-  initialEntries: OpenapiContentInfo[]
-  selectedBranch: string
-  repoRef: string
-}
-
-function Explorer({ initialEntries, selectedBranch, repoRef }: ExplorerProps) {
-  const [openFolderPaths, setOpenFolderPaths] = useState<string[]>([])
-  const [folderContentsCache, setFolderContentsCache] = useState<{
-    [folderPath: string]: OpenapiContentInfo[]
-  }>({})
-
-  const handleOpenFoldersChange = (newOpenFolderPaths: string[]) => {
-    // Identify newly opened folders by comparing with the previous state
-    const newlyOpenedFolders = newOpenFolderPaths.filter(folderPath => !openFolderPaths.includes(folderPath))
-
-    // Fetch contents for any newly opened folders that haven't been fetched yet
-    newlyOpenedFolders.forEach(folderPath => {
-      if (!folderContentsCache[folderPath]) {
-        fetchFolderContents(folderPath).then(contents => {
-          setFolderContentsCache(prevContents => ({
-            ...prevContents,
-            [folderPath]: contents
-          }))
-        })
-      }
-    })
-    // Update the state with the new open folder paths
-    setOpenFolderPaths(newOpenFolderPaths)
-  }
-
-  const fetchFolderContents = async (folderPath: string): Promise<OpenapiContentInfo[]> => {
-    try {
-      const response = await getContent({
-        path: folderPath,
-        repo_ref: repoRef,
-        queryParams: { include_commit: false, git_ref: normalizeGitRef(selectedBranch) }
-      })
-      return response?.content?.entries || []
-    } catch (error) {
-      console.error(`Error fetching contents for folder "${folderPath}":`, error)
-      return []
-    }
-  }
-  const renderEntries = (entries: OpenapiContentInfo[], parentPath: string = '') => {
-    return entries.map((item, idx) => {
-      // Construct the full path of the item
-      const itemPath = parentPath ? `${parentPath}/${item.name}` : item.name
-
-      if (item.type === 'file') {
-        return (
-          <Link to="#">
-            <FileExplorer.FileItem key={itemPath || idx.toString()}>{item.name}</FileExplorer.FileItem>
-          </Link>
-        )
-      } else {
-        return (
-          <FileExplorer.FolderItem
-            key={itemPath || idx.toString()}
-            value={itemPath}
-            content={
-              folderContentsCache[itemPath] ? (
-                <FileExplorer.Root onValueChange={handleOpenFoldersChange}>
-                  {renderEntries(folderContentsCache[itemPath], itemPath)}
-                </FileExplorer.Root>
-              ) : (
-                <div>Loading...</div>
-              )
-            }>
-            {item.name}
-          </FileExplorer.FolderItem>
-        )
-      }
-    })
-  }
-
-  return (
-    <FileExplorer.Root onValueChange={handleOpenFoldersChange}>
-      {initialEntries && renderEntries(initialEntries)}
-    </FileExplorer.Root>
   )
 }

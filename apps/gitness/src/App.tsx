@@ -61,6 +61,14 @@ export default function App() {
               element: <RepoFiles />
             },
             {
+              path: 'code/:gitRef',
+              element: <RepoFiles />
+            },
+            {
+              path: 'code/:gitRef/~/:resourcePath*',
+              element: <RepoFiles />
+            },
+            {
               path: 'pipelines',
               children: [
                 { index: true, element: <PipelineListPage /> },
