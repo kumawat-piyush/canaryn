@@ -11,7 +11,6 @@ import {
 } from '@harnessio/canary'
 
 const SandboxSettings: React.FC = () => {
-  // Determine if the current route matches 'account' or 'project'
   const isAccountRoute = useMatch('/sandbox/settings/profile/*')
   const isProjectRoute = useMatch('/sandbox/settings/project/*')
 

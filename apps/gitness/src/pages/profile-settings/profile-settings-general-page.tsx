@@ -54,6 +54,10 @@ const SandboxSettingsAccountGeneralPage: React.FC<SandboxSettingsAccountGeneralP
   onUpdatePassword
 }) => {
   // Profile form handling
+
+  const [profileSubmitted, setProfileSubmitted] = useState(false)
+  const [passwordSubmitted, setPasswordSubmitted] = useState(false)
+
   const {
     register: registerProfile,
     handleSubmit: handleProfileSubmit,
@@ -68,25 +72,6 @@ const SandboxSettingsAccountGeneralPage: React.FC<SandboxSettingsAccountGeneralP
       email: userData?.email || ''
     }
   })
-
-  useEffect(() => {
-    if (userData) {
-      resetProfileForm({
-        name: userData.name,
-        username: userData.username,
-        email: userData.email
-      })
-    }
-  }, [userData])
-
-  const extractInitials = (name: string): string => {
-    const parts = name.trim().split(/\s+/)
-    if (parts.length === 1) {
-      return parts[0].charAt(0).toUpperCase()
-    } else {
-      return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase()
-    }
-  }
 
   // Password form handling
   const {
@@ -104,19 +89,15 @@ const SandboxSettingsAccountGeneralPage: React.FC<SandboxSettingsAccountGeneralP
     }
   })
 
-  const [profileSubmitted, setProfileSubmitted] = useState(false)
-  const [passwordSubmitted, setPasswordSubmitted] = useState(false)
-
-  // Profile form submit handler
-  const onProfileSubmit: SubmitHandler<ProfileFields> = data => {
-    const { username: _, ...updatedData } = data
-    onUpdateUser(updatedData)
-  }
-
-  // Password form submit
-  const onPasswordSubmit: SubmitHandler<PasswordFields> = data => {
-    onUpdatePassword(data)
-  }
+  useEffect(() => {
+    if (userData) {
+      resetProfileForm({
+        name: userData.name,
+        username: userData.username,
+        email: userData.email
+      })
+    }
+  }, [userData])
 
   useEffect(() => {
     if (profileUpdateSuccess === true) {
@@ -138,6 +119,26 @@ const SandboxSettingsAccountGeneralPage: React.FC<SandboxSettingsAccountGeneralP
       setTimeout(() => setPasswordSubmitted(false), 2000)
     }
   }, [passwordUpdateSuccess])
+
+  const extractInitials = (name: string): string => {
+    const parts = name.trim().split(/\s+/)
+    if (parts.length === 1) {
+      return parts[0].charAt(0).toUpperCase()
+    } else {
+      return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase()
+    }
+  }
+
+  // Profile form submit handler
+  const onProfileSubmit: SubmitHandler<ProfileFields> = data => {
+    const { username: _, ...updatedData } = data
+    onUpdateUser(updatedData)
+  }
+
+  // Password form submit
+  const onPasswordSubmit: SubmitHandler<PasswordFields> = data => {
+    onUpdatePassword(data)
+  }
 
   if (isLoadingUser) {
     return (
