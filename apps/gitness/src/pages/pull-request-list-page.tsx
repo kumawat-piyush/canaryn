@@ -34,12 +34,12 @@ function PullRequestListPage() {
   const repoRef = useGetRepoRef()
   const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
 
-  const { Filter, sort } = useCommonFilter({ sortOptions: sortOptions })
+  const { Filter, sort } = useCommonFilter({ sortOptions })
 
   const { data: pullrequests, isFetching } = useListPullReqQuery(
     {
       repo_ref: repoRef,
-      queryParams: { page: 0, limit: 10, query: '', sort: sort }
+      queryParams: { page: 0, limit: 10, query: '', sort }
     },
     /* To enable mock data */
     {
