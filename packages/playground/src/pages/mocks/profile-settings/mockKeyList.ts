@@ -1,6 +1,6 @@
 import { KeysList } from '../../../components/profile-settings-keys-list'
 
-export const data: KeysList[] = [
+export const mockKeys: KeysList[] = [
   {
     created: 1728145770582,
     verified: null,

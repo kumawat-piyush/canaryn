@@ -1,9 +1,10 @@
 import React from 'react'
-import { Spacer, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Text } from '@harnessio/canary'
+import { Spacer, Text } from '@harnessio/canary'
 import { FormFieldSet, SandboxLayout } from '..'
 import { ProfileKeysList } from '../components/profile-settings-keys-list'
 import { ProfileTokensList } from '../components/profile-settings-tokens-list'
-import { data } from './mocks/profile-settings/mockKeyList'
+import { mockKeys } from './mocks/profile-settings/mockKeyList'
+import { mockTokens } from './mocks/profile-settings/mockTokensList'
 
 function SandboxSettingsAccountKeysPage() {
   return (
@@ -19,7 +20,7 @@ function SandboxSettingsAccountKeysPage() {
             {/* PERSONAL ACCESS TOKEN */}
             <FormFieldSet.Legend>Personal access token</FormFieldSet.Legend>
             <FormFieldSet.ControlGroup>
-              <ProfileTokensList />
+              <ProfileTokensList tokens={mockTokens} />
             </FormFieldSet.ControlGroup>
           </FormFieldSet.Root>
           <FormFieldSet.Root>
@@ -32,7 +33,7 @@ function SandboxSettingsAccountKeysPage() {
               SSH keys allow you to establish a secure connection to your code repository.
             </FormFieldSet.SubLegend>
             <FormFieldSet.ControlGroup>
-              <ProfileKeysList publicKeys={data} />
+              <ProfileKeysList publicKeys={mockKeys} />
             </FormFieldSet.ControlGroup>
           </FormFieldSet.Root>
         </form>

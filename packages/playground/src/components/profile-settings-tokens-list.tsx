@@ -1,11 +1,23 @@
 import React from 'react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Text } from '@harnessio/canary'
 import { Icon } from '@harnessio/canary'
-// export interface TokensList {}
+import ReactTimeago from 'react-timeago'
 
-// interface PageProps {}
+export interface TokensList {
+  principal_id?: number
+  type?: string
+  identifier?: string
+  expires_at?: number
+  issued_at?: number
+  created_by?: number
+  uid?: string
+}
 
-export const ProfileTokensList: React.FC = () => {
+interface PageProps {
+  tokens: TokensList[]
+}
+
+export const ProfileTokensList: React.FC<PageProps> = ({ tokens }) => {
   return (
     <Table variant="asStackedList">
       <TableHeader>
@@ -18,25 +30,38 @@ export const ProfileTokensList: React.FC = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow>
-          {/* <TableCell colSpan={5}>
-            <Text as="p" size={2} align="center" color={'tertiaryBackground'} className="text-center w-full">
-              There are no personal access tokens associated with this account.
-            </Text>
-          </TableCell> */}
-          <TableCell>
-            <Text>test</Text>
-          </TableCell>
-          <TableCell>
-            <div>
-              <Icon name="green-dot" />
-              <Text>active</Text>
-            </div>
-          </TableCell>
-          <TableCell>Nov 26, 2024</TableCell>
-          <TableCell>45 Seconds Ago</TableCell>
-          <TableCell>ellipsis</TableCell>
-        </TableRow>
+        {tokens && tokens.length > 0 ? (
+          tokens.map(token => (
+            <TableRow key={token.uid}>
+              <TableCell>
+                <Text weight="bold">{token.identifier}</Text>
+              </TableCell>
+              <TableCell>
+                <div className="flex items-center gap-2">
+                  <Icon name="green-dot" size={8} />
+                  <Text>Active</Text>
+                </div>
+              </TableCell>
+              <TableCell>{token.expires_at ? new Date(token.expires_at).toLocaleString() : 'No Expiration'}</TableCell>
+              <TableCell>
+                <ReactTimeago date={new Date(token.issued_at)} />
+              </TableCell>
+              <TableCell className="content-center">
+                <div className="flex gap-1.5 items-center justify-end">
+                  <Icon name="vertical-ellipsis" size={14} className="text-tertiary-background" />
+                </div>
+              </TableCell>
+            </TableRow>
+          ))
+        ) : (
+          <TableRow>
+            <TableCell colSpan={5}>
+              <Text as="p" size={2} align="center" color={'tertiaryBackground'} className="text-center w-full">
+                There are no personal access tokens associated with this account.
+              </Text>
+            </TableCell>
+          </TableRow>
+        )}
       </TableBody>
     </Table>
   )
