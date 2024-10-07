@@ -43,8 +43,8 @@ export * from './components/pipeline-studio/step-palette/step-palette'
 export * from './components/pipeline-studio/step-palette/step-palette-filters'
 export * from './components/pipeline-studio/step-palette/step-palette-content'
 export * from './components/pipeline-studio/step-palette/step-palette-item'
-export * from './assets/form/run-step'
-export * from './assets/form/template-step'
+export * from './components/steps/harness-steps'
+export * from './components/steps/types'
 
 export * from './components/pipeline-studio/pipeline-studio-footer-bar/pipeline-studio-footer-bar'
 export * from './components/branches-list'
@@ -80,6 +80,9 @@ export * from './components/execution/stage-execution'
 export * from './components/contact-card'
 export * from './constants/ExecutionConstants'
 export * from './components/execution/execution-tree-utils'
+
+// HOOKS
+export * from './hooks/useCommonFilter'
 
 export * as FormFieldSet from './components/form-field-set'
 

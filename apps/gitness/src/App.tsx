@@ -35,6 +35,8 @@ import { SandboxRepoHeader } from './pages/repo-sandbox/repo-sandbox-header'
 import ReposSandboxListPage from './pages/repo-sandbox/repo-sandbox-list'
 import { SettingsProfileGeneralPage } from './pages/profile-settings/profile-settings-general-container'
 import { SettingsProfileKeysPage } from './pages/profile-settings/profile-settings-keys-container'
+import { FileViewer } from './components/FileViewer'
+import PullRequestChangesPage from './pages/pull-request/pull-request-changes-page'
 
 export default function App() {
   const router = createBrowserRouter([
@@ -66,7 +68,27 @@ export default function App() {
             },
             {
               path: 'code',
-              element: <RepoFiles />
+              element: <RepoFiles />,
+              children: [
+                {
+                  index: true,
+                  element: <FileViewer />
+                },
+                {
+                  path: ':gitRef',
+                  element: <FileViewer />,
+                  children: [
+                    {
+                      index: true,
+                      element: <FileViewer />
+                    },
+                    {
+                      path: '~/:resourcePath*',
+                      element: <FileViewer />
+                    }
+                  ]
+                }
+              ]
             },
             {
               path: 'pipelines',
@@ -119,7 +141,11 @@ export default function App() {
                 },
                 {
                   path: 'changes',
-                  element: <>Changes</>
+                  element: (
+                    <PullRequestDataProvider>
+                      <PullRequestChangesPage />
+                    </PullRequestDataProvider>
+                  )
                 },
                 {
                   path: 'checks',
