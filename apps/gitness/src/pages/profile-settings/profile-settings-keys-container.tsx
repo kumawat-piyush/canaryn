@@ -39,7 +39,7 @@ export const SettingsProfileKeysPage = () => {
     fetch(TEMP_USER_TOKENS_API_PATH)
       .then(resp => resp.json())
       .then(res => setTokens(res))
-      .catch(err => console.log(err))
+    // .catch(err => console.log(err))
   }, [])
 
   return <SandboxSettingsAccountKeysPage publicKeys={publicKeys} tokens={tokens} />
