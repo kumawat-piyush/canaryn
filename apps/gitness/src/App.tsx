@@ -35,6 +35,7 @@ import { SandboxRepoHeader } from './pages/repo-sandbox/repo-sandbox-header'
 import ReposSandboxListPage from './pages/repo-sandbox/repo-sandbox-list'
 import { SettingsProfileGeneralPage } from './pages/profile-settings/profile-settings-general-container'
 import { SettingsProfileKeysPage } from './pages/profile-settings/profile-settings-keys-container'
+import { SettingsAccountGeneralPage } from './pages/profile-settings/profile-settings-general-container'
 
 export default function App() {
   const router = createBrowserRouter([
@@ -106,16 +107,24 @@ export default function App() {
                   element: <Navigate to="conversation" />
                 },
                 {
-                  path: 'commits',
-                  element: <PullRequestCommitsPage />
-                },
-                {
                   path: 'conversation',
                   element: (
                     <PullRequestDataProvider>
                       <PullRequestConversationPage />
                     </PullRequestDataProvider>
                   )
+                },
+                {
+                  path: 'commits',
+                  element: <PullRequestCommitsPage />
+                },
+                {
+                  path: 'changes',
+                  element: <>Changes</>
+                },
+                {
+                  path: 'checks',
+                  element: <>Checks</>
                 }
               ]
             },
