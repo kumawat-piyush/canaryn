@@ -10,7 +10,7 @@ import {
 export const SettingsProfileKeysPage = () => {
   const [publicKeys, setPublicKeys] = useState<ListPublicKeyOkResponse[]>([])
 
-  const [apiError, setApiError] = useState<{ type: 'keys' | 'tokens'; message: string } | null>(null)
+  const [_, setApiError] = useState<{ type: 'keys' | 'tokens'; message: string } | null>(null)
 
   const queryParams: ListPublicKeyQueryQueryParams = {
     page: 1,
@@ -23,7 +23,6 @@ export const SettingsProfileKeysPage = () => {
     { queryParams },
     {
       onSuccess: (data: ListPublicKeyOkResponse[]) => {
-        console.log(data)
         setPublicKeys(data)
         setApiError(null)
       },

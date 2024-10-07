@@ -1,6 +1,8 @@
 import React from 'react'
 import { Spacer, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Text } from '@harnessio/canary'
 import { FormFieldSet, SandboxLayout } from '..'
+import { ProfileKeysList } from '../components/profile-settings-keys-list'
+import { data } from './mocks/profile-settings/mockKeyList'
 
 function SandboxSettingsAccountKeysPage() {
   return (
@@ -47,24 +49,7 @@ function SandboxSettingsAccountKeysPage() {
               SSH keys allow you to establish a secure connection to your code repository.
             </FormFieldSet.SubLegend>
             <FormFieldSet.ControlGroup>
-              <Table variant="asStackedList">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Added</TableHead>
-                    <TableHead>Last used date</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell colSpan={3}>
-                      <Text as="p" size={2} align="center" color={'tertiaryBackground'} className="text-center w-full">
-                        There are no SSH keys associated with this account.
-                      </Text>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
+              <ProfileKeysList publicKeys={data} />
             </FormFieldSet.ControlGroup>
           </FormFieldSet.Root>
         </form>
