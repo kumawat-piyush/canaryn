@@ -36,7 +36,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         switch (response.status) {
           case 401:
             localStorage.removeItem('token')
-            window.location.href = '/signin'
+            //prevent infinite loop for redirect signin page
+            if (window.location.pathname !== '/signin') {
+              window.location.href = '/signin'
+            }
         }
         return response
       }
