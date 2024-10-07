@@ -251,7 +251,6 @@ export default function App() {
                 },
                 {
                   path: 'keys',
-                  // element: <SandboxSettingsAccountKeysPage />
                   element: <SettingsProfileKeysPage />
                 }
               ]
