@@ -1,6 +1,5 @@
 import { SandboxSettingsAccountKeysPage } from './profile-settings-keys-page'
 import { useState } from 'react'
-import React from 'react'
 import {
   useListPublicKeyQuery,
   ListPublicKeyQueryQueryParams,
