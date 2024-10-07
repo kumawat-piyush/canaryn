@@ -2,6 +2,7 @@ import React from 'react'
 import { Spacer, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Text } from '@harnessio/canary'
 import { FormFieldSet, SandboxLayout } from '..'
 import { ProfileKeysList } from '../components/profile-settings-keys-list'
+import { ProfileTokensList } from '../components/profile-settings-tokens-list'
 import { data } from './mocks/profile-settings/mockKeyList'
 
 function SandboxSettingsAccountKeysPage() {
@@ -18,25 +19,7 @@ function SandboxSettingsAccountKeysPage() {
             {/* PERSONAL ACCESS TOKEN */}
             <FormFieldSet.Legend>Personal access token</FormFieldSet.Legend>
             <FormFieldSet.ControlGroup>
-              <Table variant="asStackedList">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Token</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Expiration date</TableHead>
-                    <TableHead>Created</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell colSpan={4}>
-                      <Text as="p" size={2} align="center" color={'tertiaryBackground'} className="text-center w-full">
-                        There are no personal access tokens associated with this account.
-                      </Text>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
+              <ProfileTokensList />
             </FormFieldSet.ControlGroup>
           </FormFieldSet.Root>
           <FormFieldSet.Root>
