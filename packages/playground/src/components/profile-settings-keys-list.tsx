@@ -45,7 +45,7 @@ export const ProfileKeysList: React.FC<PageProps> = ({ publicKeys }) => {
               </TableCell>
               <TableCell className="h-1">
                 <div className="h-full flex items-center">
-                  <ReactTimeago date={new Date(key.created)} />
+                  <ReactTimeago date={new Date(key.created!)} />
                 </div>
               </TableCell>
               <TableCell className="h-1">

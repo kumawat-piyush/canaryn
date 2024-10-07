@@ -44,7 +44,7 @@ export const ProfileTokensList: React.FC<PageProps> = ({ tokens }) => {
               </TableCell>
               <TableCell>{token.expires_at ? new Date(token.expires_at).toLocaleString() : 'No Expiration'}</TableCell>
               <TableCell>
-                <ReactTimeago date={new Date(token.issued_at)} />
+                <ReactTimeago date={new Date(token.issued_at!)} />
               </TableCell>
               <TableCell className="content-center">
                 <div className="flex gap-1.5 items-center justify-end">
