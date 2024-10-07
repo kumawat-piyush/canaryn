@@ -16,7 +16,7 @@ The Library uses **form config** and **inputs** to generate form. For **schema**
 
 ### Step by step guide
 
-#### 1. Create inputs enum
+#### 1. Create input types enum
 
 Each input has a unique type. Before start creating inputs create input type enum.
 
@@ -30,7 +30,7 @@ export enum InputType {
 
 #### 2. Create inputs
 
-Examples of inputs can be found in the playground:
+Examples of input can be found in the playground:
 [Text input example](../playground/src/components/form-inputs/TextInput.tsx)
 
 #### 3. Register inputs
@@ -47,7 +47,7 @@ inputComponentFactory.registerComponent(new TextInput())
 export default inputComponentFactory
 ```
 
-#### 4. Create form model
+#### 4. Create form model - IFormDefinition
 
 Form model is a blueprint for creating form.
 
@@ -59,7 +59,7 @@ export const formDefinition: IFormDefinition = {
         path: "name",
         label: "Name",
     },
-    inputs: {
+    {
         inputType: InputType.number,
         path: "age",
         label: "Age",
@@ -101,7 +101,7 @@ For more info check [List input example](../playground/src/components/form-input
 Use RootForm and RenderForm components.
 
 ```js
-<RootForm initialValues={{}} onSubmit={onSubmit}>
+<RootForm initialValues={{...}} onSubmit={handleOnSubmit}>
   <RenderForm factory={inputComponentFactory} inputs={formDefinition} />
 </RootFormik>
 ```
@@ -124,7 +124,7 @@ const validationConfig: IGlobalValidationConfig = {
     [InputType.number]: zod.number(),
     [InputType.myCustomInput]: zod.custom(....),
   },
-  requiredSchema: zod.custom(....), // << used for all inputs except string, number and myCustomInput
+  requiredSchema: zod.custom(....), // << used for validating all inputs except string, number and myCustomInput
 };
 ```
 
