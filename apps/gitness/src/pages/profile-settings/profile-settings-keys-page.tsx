@@ -1,12 +1,19 @@
 import React from 'react'
-import { Spacer, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Text } from '@harnessio/canary'
-import { FormFieldSet, SandboxLayout, ProfileKeysList } from '@harnessio/playground'
-import { ListPublicKeyOkResponse } from '@harnessio/code-service-client'
+import { Spacer, Text } from '@harnessio/canary'
+import {
+  FormFieldSet,
+  SandboxLayout,
+  ProfileKeysList,
+  KeysList,
+  ProfileTokensList,
+  TokensList
+} from '@harnessio/playground'
 
 interface SandboxSettingsAccountKeysPageProps {
-  publicKeys: ListPublicKeyOkResponse[]
+  publicKeys: KeysList[]
+  tokens: TokensList[]
 }
-const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPageProps> = ({ publicKeys }) => {
+const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPageProps> = ({ publicKeys, tokens }) => {
   return (
     <SandboxLayout.Main hasLeftPanel hasHeader hasSubHeader>
       <SandboxLayout.Content maxWidth="2xl">
@@ -20,26 +27,7 @@ const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPagePro
             {/* PERSONAL ACCESS TOKEN */}
             <FormFieldSet.Legend>Personal access token</FormFieldSet.Legend>
             <FormFieldSet.ControlGroup>
-              <Table variant="asStackedList">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Token</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Expiration date</TableHead>
-                    <TableHead>Created</TableHead>
-                    <TableHead>Created</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell colSpan={5}>
-                      <Text as="p" size={2} align="center" color={'tertiaryBackground'} className="text-center w-full">
-                        There are no personal access tokens associated with this account.
-                      </Text>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
+              <ProfileTokensList tokens={tokens} />
             </FormFieldSet.ControlGroup>
           </FormFieldSet.Root>
           <FormFieldSet.Root>

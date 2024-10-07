@@ -1,5 +1,5 @@
 import { SandboxSettingsAccountKeysPage } from './profile-settings-keys-page'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   useListPublicKeyQuery,
   ListPublicKeyQueryQueryParams,
@@ -7,10 +7,13 @@ import {
   ListPublicKeyErrorResponse
 } from '@harnessio/code-service-client'
 
-export const SettingsProfileKeysPage = () => {
-  const [publicKeys, setPublicKeys] = useState<ListPublicKeyOkResponse[]>([])
+import { TokensList } from '@harnessio/playground'
 
-  const [_, setApiError] = useState<{ type: 'keys' | 'tokens'; message: string } | null>(null)
+export const SettingsProfileKeysPage = () => {
+  const TEMP_USER_TOKENS_API_PATH = '/api/v1/user/tokens'
+
+  const [publicKeys, setPublicKeys] = useState<ListPublicKeyOkResponse[]>([])
+  const [tokens, setTokens] = useState<TokensList[]>([])
 
   const queryParams: ListPublicKeyQueryQueryParams = {
     page: 1,
@@ -24,14 +27,20 @@ export const SettingsProfileKeysPage = () => {
     {
       onSuccess: (data: ListPublicKeyOkResponse[]) => {
         setPublicKeys(data)
-        setApiError(null)
       },
       onError: (error: ListPublicKeyErrorResponse) => {
         const message = error.message || 'An unknown error occurred.'
-        setApiError({ type: 'keys', message })
+        console.log(message)
       }
     }
   )
 
-  return <SandboxSettingsAccountKeysPage publicKeys={publicKeys} />
+  useEffect(() => {
+    fetch(TEMP_USER_TOKENS_API_PATH)
+      .then(resp => resp.json())
+      .then(res => setTokens(res))
+      .catch(err => console.log(err))
+  }, [])
+
+  return <SandboxSettingsAccountKeysPage publicKeys={publicKeys} tokens={tokens} />
 }
