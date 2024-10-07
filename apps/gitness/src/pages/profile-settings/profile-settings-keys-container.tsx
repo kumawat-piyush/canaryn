@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react'
 import {
   useListPublicKeyQuery,
   ListPublicKeyQueryQueryParams,
-  ListPublicKeyOkResponse,
-  ListPublicKeyErrorResponse
+  ListPublicKeyOkResponse
+  // ListPublicKeyErrorResponse
 } from '@harnessio/code-service-client'
 
 import { TokensList } from '@harnessio/playground'
@@ -27,11 +27,11 @@ export const SettingsProfileKeysPage = () => {
     {
       onSuccess: (data: ListPublicKeyOkResponse[]) => {
         setPublicKeys(data)
-      },
-      onError: (error: ListPublicKeyErrorResponse) => {
-        const message = error.message || 'An unknown error occurred.'
-        console.log(message)
       }
+      // onError: (error: ListPublicKeyErrorResponse) => {
+      //   const message = error.message || 'An unknown error occurred.'
+      //   console.log(message)
+      // }
     }
   )
 
