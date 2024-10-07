@@ -24,7 +24,7 @@ import { PathParams } from '../../../RouteDefinitions'
 import useSpaceSSE from '../../../framework/hooks/useSpaceSSE'
 import { usePRChecksDecision } from '../hooks/usePRChecksDecision'
 import { ExecutionState, SSEEvent } from '../../../types'
-import { PullRequestState } from '../types/types'
+import { PullRequestState, PullRequestTab } from '../types/types'
 import { extractSpecificViolations } from '../utils'
 export const codeOwnersNotFoundMessage = 'CODEOWNERS file not found'
 export const codeOwnersNotFoundMessage2 = `path "CODEOWNERS" not found`
@@ -109,7 +109,7 @@ const PullRequestDataProvider: React.FC<PullRequestDataProviderProps> = ({ child
   const repoRef = useGetRepoRef()
   const { data: repoMetadata } = useFindRepositoryQuery({ repo_ref: repoRef })
   const { pullRequestId } = useParams<PathParams>()
-
+  const pullRequestSection = window.location.href.split(pullRequestId + '/')[1]
   //   const {
   //     // repoMetadata,
   //     // error: repoError,
@@ -241,7 +241,7 @@ const PullRequestDataProvider: React.FC<PullRequestDataProviderProps> = ({ child
 
   useEffect(() => {
     const intervalId = setInterval(async () => {
-      if (pullReqMetadata?.source_sha) {
+      if (pullReqMetadata?.source_sha && pullRequestSection === PullRequestTab.CONVERSATION) {
         dryMerge()
       }
     }, POLLING_INTERVAL) // Poll every 20 seconds
