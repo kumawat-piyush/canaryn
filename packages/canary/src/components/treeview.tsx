@@ -234,7 +234,7 @@ const Folder = forwardRef<HTMLDivElement, FolderProps & React.HTMLAttributes<HTM
             <div className="flex items-baseline">
               <div className="flex self-center mr-1">{getStatusIcon(status)}</div>
               <span className="ml-1 font-normal text-sm">
-                {element}&nbsp;<span className="text-[#787887]">({React.Children.count(children)})</span>
+                {element}&nbsp;<span className="text-muted-foreground">({React.Children.count(children)})</span>
               </span>
             </div>
             <span className="text-muted-foreground">{duration ?? '--'}</span>
