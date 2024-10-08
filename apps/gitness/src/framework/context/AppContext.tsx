@@ -3,14 +3,20 @@ import {
   CodeServiceAPIClient,
   TypesMembershipSpace,
   membershipSpaces,
-  TypesSpace
+  TypesSpace,
+  TypesUser,
+  getUser
 } from '@harnessio/code-service-client'
 import useToken from '../hooks/useToken'
+import { useAtom } from 'jotai'
+import { currentUserAtom } from './currentUser'
+import { newCacheStrategy } from './utils'
 
 interface AppContextType {
   spaces: TypesMembershipSpace[]
   setSpaces: (spaces: TypesMembershipSpace[]) => void
   addSpaces: (newSpaces: TypesSpace[]) => void
+  currentUser?: TypesUser
 }
 
 const BASE_URL_PREFIX = '/api/v1'
@@ -20,6 +26,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined)
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [spaces, setSpaces] = useState<TypesMembershipSpace[]>([])
   const { token } = useToken()
+  const [currentUser, setCurrentUser] = useAtom(currentUserAtom)
 
   useLayoutEffect(() => {
     new CodeServiceAPIClient({
@@ -40,6 +47,15 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         return response
       }
     })
+    membershipSpaces({
+      queryParams: { page: 1, limit: 10, sort: 'identifier', order: 'asc' }
+    }).then(response => {
+      setSpaces(response)
+    })
+    getUser({}).then(_currentUser => {
+      setCurrentUser(_currentUser)
+      cacheStrategy.update()
+    })
   }, [])
 
   useEffect(() => {
@@ -56,7 +72,20 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     setSpaces(prevSpaces => [...prevSpaces, ...newSpaces])
   }
 
-  return <AppContext.Provider value={{ spaces, setSpaces, addSpaces }}>{children}</AppContext.Provider>
+  useEffect(() => {
+    // Fetch current user when conditions to fetch it matched and
+    //  - cache does not exist yet
+    //  - or cache is expired
+    if (
+      !currentUser ||
+      cacheStrategy.isExpired()
+      // && !initialValue.isCurrentSessionPublic TODO: add currentsession is public
+    ) {
+      getUser({})
+    }
+  }, [getUser, currentUser])
+
+  return <AppContext.Provider value={{ spaces, setSpaces, addSpaces, currentUser }}>{children}</AppContext.Provider>
 }
 
 export const useAppContext = (): AppContextType => {
@@ -66,3 +95,5 @@ export const useAppContext = (): AppContextType => {
   }
   return context
 }
+
+const cacheStrategy = newCacheStrategy()
