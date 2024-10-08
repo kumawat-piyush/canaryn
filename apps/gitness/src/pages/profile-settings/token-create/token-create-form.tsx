@@ -7,9 +7,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
-  Spacer,
-  Text
+  SelectValue
 } from '@harnessio/canary'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -105,7 +103,9 @@ export function TokenCreateForm({
 
         <FormFieldSet.Root>
           <FormFieldSet.ControlGroup>
-            <FormFieldSet.Label htmlFor="lifetime">Expiration</FormFieldSet.Label>
+            <FormFieldSet.Label htmlFor="lifetime" required>
+              Expiration
+            </FormFieldSet.Label>
             <Select value={expirationValue} onValueChange={value => handleSelectChange('lifetime', value)}>
               <SelectTrigger id="lifetime">
                 <SelectValue placeholder="Select" />
