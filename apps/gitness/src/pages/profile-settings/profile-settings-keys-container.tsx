@@ -3,10 +3,15 @@ import { useState, useEffect } from 'react'
 import {
   useListPublicKeyQuery,
   ListPublicKeyQueryQueryParams,
-  ListPublicKeyOkResponse
+  ListPublicKeyOkResponse,
+  useCreateTokenMutation,
+  CreateTokenOkResponse,
+  CreateTokenErrorResponse,
+  CreateTokenRequestBody
+
   // ListPublicKeyErrorResponse
 } from '@harnessio/code-service-client'
-
+import { TokenCreateDialog } from './token-create/token-create-dialog'
 import { TokensList } from '@harnessio/playground'
 
 export const SettingsProfileKeysPage = () => {
@@ -14,6 +19,10 @@ export const SettingsProfileKeysPage = () => {
 
   const [publicKeys, setPublicKeys] = useState<ListPublicKeyOkResponse[]>([])
   const [tokens, setTokens] = useState<TokensList[]>([])
+
+  const [openCreateTokenDialog, setCreateTokenDialog] = useState(false)
+  const openTokenDialog = () => setCreateTokenDialog(true)
+  const closeTokenDialog = () => setCreateTokenDialog(false)
 
   const queryParams: ListPublicKeyQueryQueryParams = {
     page: 1,
@@ -42,5 +51,38 @@ export const SettingsProfileKeysPage = () => {
     // .catch(err => console.log(err))
   }, [])
 
-  return <SandboxSettingsAccountKeysPage publicKeys={publicKeys} tokens={tokens} />
+  const createTokenMutation = useCreateTokenMutation(
+    { body: {} },
+    {
+      onSuccess: (newToken: CreateTokenOkResponse) => {
+        // Add the newly created token to the list of tokens
+        // setTokens(prevTokens => [...prevTokens, newToken])
+        console.log(newToken)
+        closeTokenDialog()
+      },
+      onError: (error: CreateTokenErrorResponse) => {
+        console.error('Failed to create token:', error)
+      }
+    }
+  )
+
+  const handleCreateToken = (tokenData: { identifier: string; lifetime: string }) => {
+    const convertedLifetime = parseInt(tokenData.lifetime, 10) * 24 * 60 * 60 * 1000
+    const body: CreateTokenRequestBody = {
+      identifier: tokenData.identifier,
+      lifetime: convertedLifetime
+    }
+    createTokenMutation.mutate({ body })
+  }
+
+  return (
+    <>
+      <SandboxSettingsAccountKeysPage publicKeys={publicKeys} tokens={tokens} openTokenDialog={openTokenDialog} />
+      <TokenCreateDialog
+        open={openCreateTokenDialog}
+        onClose={closeTokenDialog}
+        handleCreateToken={handleCreateToken}
+      />
+    </>
+  )
 }
