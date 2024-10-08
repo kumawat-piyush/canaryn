@@ -119,7 +119,7 @@ export function PullRequestChanges({ data }: DataProps) {
   return (
     <div className="flex flex-col gap-4">
       {data.map((item, index) => (
-        <PullRequestAccordion key={`${item?.title}-${index}`} header={item} data={item?.data} />
+        <PullRequestAccordion key={item?.title && `${item?.title}-${index}`} header={item} data={item?.data} />
       ))}
     </div>
   )

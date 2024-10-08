@@ -168,6 +168,13 @@ export enum ViewStyle {
   LINE_BY_LINE = 'line-by-line'
 }
 
+//**
+//  * parses diff strings to extract the starting line number from the hunk header. this
+//  * function is needed because the diff viewer being used hides that info because it assumes
+//  * the starting line is not relevant for the displayed diffs, leading to potential confusion for users.
+//  * @param diffString: string
+//  * @returns string or null
+//
 export function parseStartingLineIfOne(diffString: string) {
   // Use a regular expression to find the hunk header in the diff string
   const hunkHeaderMatch = diffString.match(/@@ -(\d+),\d+ \+\d+,\d+ @@/)
