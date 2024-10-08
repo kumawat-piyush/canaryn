@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Button, ButtonGroup, Icon, ListActions, SearchBox, Spacer, StackedList, Text } from '@harnessio/canary'
+import { Button, ButtonGroup, Icon, ListActions, Spacer, StackedList, Text } from '@harnessio/canary'
 import {
   Floating1ColumnLayout,
   FullWidth2ColumnLayout,

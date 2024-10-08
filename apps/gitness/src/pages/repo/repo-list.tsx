@@ -1,6 +1,5 @@
 import {
   Button,
-  ListActions,
   ListPagination,
   Pagination,
   PaginationContent,
@@ -8,7 +7,6 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-  SearchBox,
   Spacer,
   Text
 } from '@harnessio/canary'
