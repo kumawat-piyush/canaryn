@@ -44,9 +44,9 @@ export default function App() {
     {
       path: '/',
       element: <RootLayout />,
-
       children: [
         { index: true, element: <LandingPage /> },
+        { path: 'repos', element: <ReposListPage /> },
         {
           path: ':spaceId/repos',
           element: <ReposListPage />
