@@ -39,6 +39,8 @@ import { FileViewer } from './components/FileViewer'
 import PullRequestChangesPage from './pages/pull-request/pull-request-changes-page'
 import { Logout } from './pages/logout'
 
+import { TokenCreateDialog } from './pages/profile-settings/token-create/token-create-dialog'
+
 export default function App() {
   const router = createBrowserRouter([
     {
@@ -50,6 +52,7 @@ export default function App() {
         {
           path: ':spaceId/repos',
           element: <ReposListPage />
+          // element: <TokenCreateDialog />
         },
         {
           path: ':spaceId/repos/create',
