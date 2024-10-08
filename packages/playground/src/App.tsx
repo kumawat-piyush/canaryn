@@ -211,7 +211,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <RootLayout />,
+    element: <RootLayout isPlayground={true} />,
     errorElement: <ErrorPage />,
     children: [
       // LANDING
