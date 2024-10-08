@@ -8,19 +8,17 @@ import {
   ProfileTokensList,
   TokensList
 } from '@harnessio/playground'
-import { TokenCreateDialog } from './token-create/token-create-dialog'
 
 interface SandboxSettingsAccountKeysPageProps {
   publicKeys: KeysList[]
   tokens: TokensList[]
+  openTokenDialog: () => void
 }
-const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPageProps> = ({ publicKeys, tokens }) => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
-
-  const openDialog = () => setIsDialogOpen(true)
-
-  const closeDialog = () => setIsDialogOpen(false)
-
+const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPageProps> = ({
+  publicKeys,
+  tokens,
+  openTokenDialog
+}) => {
   return (
     <SandboxLayout.Main hasLeftPanel hasHeader hasSubHeader>
       <SandboxLayout.Content maxWidth="2xl">
@@ -35,7 +33,7 @@ const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPagePro
             <FormFieldSet.Legend>
               <div className="flex justify-between">
                 Personal access token
-                <Button type="button" variant="outline" className="text-primary" onClick={openDialog}>
+                <Button type="button" variant="outline" className="text-primary" onClick={openTokenDialog}>
                   Add new token
                 </Button>
               </div>
@@ -63,7 +61,6 @@ const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPagePro
             </FormFieldSet.ControlGroup>
           </FormFieldSet.Root>
         </form>
-        <TokenCreateDialog open={isDialogOpen} onClose={closeDialog} />
       </SandboxLayout.Content>
     </SandboxLayout.Main>
   )

@@ -4,9 +4,10 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Sp
 interface TokenCreateDialogProps {
   open: boolean
   onClose: () => void
+  handleCreateToken: () => void
 }
 
-export const TokenCreateDialog: React.FC<TokenCreateDialogProps> = ({ open, onClose }) => {
+export const TokenCreateDialog: React.FC<TokenCreateDialogProps> = ({ open, onClose, handleCreateToken }) => {
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-[500px]  bg-primary-background border-border">
@@ -14,7 +15,7 @@ export const TokenCreateDialog: React.FC<TokenCreateDialogProps> = ({ open, onCl
           <DialogTitle className="text-left">Create a token</DialogTitle>
         </DialogHeader>
         <DialogDescription>
-          <TokenCreateForm />
+          <TokenCreateForm handleCreateToken={handleCreateToken} />
         </DialogDescription>
       </DialogContent>
     </Dialog>

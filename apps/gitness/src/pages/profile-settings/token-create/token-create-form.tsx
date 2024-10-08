@@ -17,18 +17,18 @@ import { z } from 'zod'
 import { FormFieldSet } from '@harnessio/playground'
 
 const formSchema = z.object({
-  name: z.string().min(1, { message: 'Please provide a name' }),
-  expiration: z.string().min(1, { message: 'Please select an expiration' })
+  identifier: z.string().min(1, { message: 'Please provide a name' }),
+  lifetime: z.string().min(1, { message: 'Please select an expiration' })
 })
 
 export type TokenFormType = z.infer<typeof formSchema>
 
 const expirationOptions = [
-  { value: '7d', label: '7 days' },
-  { value: '30d', label: '30 days' },
-  { value: '90d', label: '90 days' },
-  { value: '180d', label: '180 days' },
-  { value: '365d', label: '365 days' },
+  { value: '7', label: '7 days' },
+  { value: '30', label: '30 days' },
+  { value: '90', label: '90 days' },
+  { value: '180', label: '180 days' },
+  { value: '365', label: '365 days' },
   { value: 'never', label: 'Never' }
 ]
 
@@ -38,6 +38,7 @@ interface TokenCreateFormProps {
   apiError?: string | null
   isLoading?: boolean
   isSuccess?: boolean
+  handleCreateToken: (data: TokenFormType) => void
 }
 
 export function TokenCreateForm({
@@ -45,7 +46,8 @@ export function TokenCreateForm({
   onCancel = () => {},
   apiError = null,
   isLoading = false,
-  isSuccess = false
+  isSuccess = false,
+  handleCreateToken
 }: TokenCreateFormProps) {
   const {
     register,
@@ -58,12 +60,11 @@ export function TokenCreateForm({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
     defaultValues: {
-      name: '',
-      expiration: '30d'
+      identifier: ''
     }
   })
 
-  const expirationValue = watch('expiration')
+  const expirationValue = watch('lifetime')
   const [isSubmitted, setIsSubmitted] = useState(false)
 
   const handleSelectChange = (fieldName: keyof TokenFormType, value: string) => {
@@ -80,6 +81,7 @@ export function TokenCreateForm({
   const handleFormSubmit: SubmitHandler<TokenFormType> = data => {
     // onSubmit(data)
     console.log(data)
+    handleCreateToken(data)
   }
   const handleCancel = () => {}
 
@@ -89,13 +91,13 @@ export function TokenCreateForm({
         {/* NAME */}
         <FormFieldSet.Root>
           <FormFieldSet.ControlGroup>
-            <FormFieldSet.Label htmlFor="name" required>
+            <FormFieldSet.Label htmlFor="identifier" required>
               Name
             </FormFieldSet.Label>
-            <Input id="name" {...register('name')} placeholder="Enter repository name" autoFocus />
-            {errors.name && (
+            <Input id="identifier" {...register('identifier')} placeholder="Enter token name" autoFocus />
+            {errors.identifier && (
               <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
-                {errors.name.message?.toString()}
+                {errors.identifier.message?.toString()}
               </FormFieldSet.Message>
             )}
           </FormFieldSet.ControlGroup>
@@ -103,9 +105,9 @@ export function TokenCreateForm({
 
         <FormFieldSet.Root>
           <FormFieldSet.ControlGroup>
-            <FormFieldSet.Label htmlFor="expiration">Expiration</FormFieldSet.Label>
-            <Select value={expirationValue} onValueChange={value => handleSelectChange('expiration', value)}>
-              <SelectTrigger id="expiration">
+            <FormFieldSet.Label htmlFor="lifetime">Expiration</FormFieldSet.Label>
+            <Select value={expirationValue} onValueChange={value => handleSelectChange('lifetime', value)}>
+              <SelectTrigger id="lifetime">
                 <SelectValue placeholder="Select" />
               </SelectTrigger>
               <SelectContent>
@@ -114,9 +116,9 @@ export function TokenCreateForm({
                 })}
               </SelectContent>
             </Select>
-            {errors.expiration && (
+            {errors.lifetime && (
               <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
-                {errors.expiration.message?.toString()}
+                {errors.lifetime.message?.toString()}
               </FormFieldSet.Message>
             )}
           </FormFieldSet.ControlGroup>
