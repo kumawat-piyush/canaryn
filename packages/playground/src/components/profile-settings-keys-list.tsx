@@ -1,6 +1,6 @@
 import React from 'react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Text } from '@harnessio/canary'
-import ReactTimeago from 'react-timeago'
+import { timeAgo } from '../utils/utils'
 import { Icon } from '@harnessio/canary'
 
 export interface KeysList {
@@ -44,9 +44,7 @@ export const ProfileKeysList: React.FC<PageProps> = ({ publicKeys }) => {
                 </div>
               </TableCell>
               <TableCell className="h-1">
-                <div className="h-full flex items-center">
-                  <ReactTimeago date={new Date(key.created!)} />
-                </div>
+                <div className="h-full flex items-center">{timeAgo(new Date(key.created!).getTime())}</div>
               </TableCell>
               <TableCell className="h-1">
                 {/* <div className="h-full flex items-center">
