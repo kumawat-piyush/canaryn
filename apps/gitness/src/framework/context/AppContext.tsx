@@ -10,7 +10,6 @@ import {
 import useToken from '../hooks/useToken'
 import { useAtom } from 'jotai'
 import { currentUserAtom } from './currentUser'
-import { newCacheStrategy } from './utils'
 
 interface AppContextType {
   spaces: TypesMembershipSpace[]
@@ -54,7 +53,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     })
     getUser({}).then(_currentUser => {
       setCurrentUser(_currentUser)
-      cacheStrategy.update()
     })
   }, [])
 
@@ -75,10 +73,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   useEffect(() => {
     // Fetch current user when conditions to fetch it matched and
     //  - cache does not exist yet
-    //  - or cache is expired
     if (
-      !currentUser ||
-      cacheStrategy.isExpired()
+      !currentUser
       // && !initialValue.isCurrentSessionPublic TODO: add currentsession is public
     ) {
       getUser({})
@@ -95,5 +91,3 @@ export const useAppContext = (): AppContextType => {
   }
   return context
 }
-
-const cacheStrategy = newCacheStrategy()
