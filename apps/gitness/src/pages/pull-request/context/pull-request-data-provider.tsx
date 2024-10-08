@@ -24,9 +24,9 @@ import { PathParams } from '../../../RouteDefinitions'
 import useSpaceSSE from '../../../framework/hooks/useSpaceSSE'
 import { usePRChecksDecision } from '../hooks/usePRChecksDecision'
 import { ExecutionState, SSEEvent } from '../../../types'
-import { PullRequestState, PullRequestTab } from '../types/types'
+import { PullRequestState } from '../types/types'
 import { extractSpecificViolations } from '../utils'
-import useGetPullRequestTab from '../../../hooks/useGetPullRequestTab'
+import useGetPullRequestTab, { PullRequestTab } from '../../../hooks/useGetPullRequestTab'
 export const codeOwnersNotFoundMessage = 'CODEOWNERS file not found'
 export const codeOwnersNotFoundMessage2 = `path "CODEOWNERS" not found`
 export const codeOwnersNotFoundMessage3 = `failed to find node 'CODEOWNERS' in 'main': failed to get tree node: failed to ls file: path "CODEOWNERS" not found`

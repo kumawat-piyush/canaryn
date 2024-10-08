@@ -152,10 +152,3 @@ export interface CommentItem<T = unknown> {
   content: string
   payload?: T // optional payload for callers to handle on callback calls
 }
-
-export enum PullRequestTab {
-  CONVERSATION = 'conversation',
-  COMMITS = 'commits',
-  CHANGES = 'changes',
-  CHECKS = 'checks'
-}
