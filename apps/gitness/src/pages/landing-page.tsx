@@ -7,9 +7,8 @@ export const LandingPage: React.FC = () => {
   const { spaces } = useAppContext()
   useEffect(() => {
     if (!spaces || !spaces.length) return
-    const preSelectedProject = spaces[0]
-    if (preSelectedProject?.space?.path) {
-      navigate(`${preSelectedProject.space.path}/repos`)
+    if (spaces[0]?.space?.path) {
+      navigate(`${spaces[0].space.path}/repos`)
     }
   }, [spaces])
   return null
