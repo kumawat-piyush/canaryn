@@ -21,9 +21,9 @@ const BASE_URL_PREFIX = '/api/v1'
 const AppContext = createContext<AppContextType | undefined>(undefined)
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [spaces, setSpaces] = useState<TypesMembershipSpace[]>([])
   const { token } = useToken()
-  const [currentUser, setCurrentUser] = useState<TypesUser>({})
+  const [spaces, setSpaces] = useState<TypesMembershipSpace[]>([])
+  const [currentUser, setCurrentUser] = useState<TypesUser>()
 
   useLayoutEffect(() => {
     new CodeServiceAPIClient({
@@ -44,14 +44,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         return response
       }
     })
-    membershipSpaces({
-      queryParams: { page: 1, limit: 10, sort: 'identifier', order: 'asc' }
-    }).then(response => {
-      setSpaces(response)
-    })
-    getUser({}).then(_currentUser => {
-      setCurrentUser(_currentUser)
-    })
   }, [])
 
   useEffect(() => {
@@ -61,23 +53,16 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       }).then(response => {
         setSpaces(response)
       })
+
+      getUser({}).then(_currentUser => {
+        setCurrentUser(_currentUser)
+      })
     }
   }, [token])
 
   const addSpaces = (newSpaces: TypesSpace[]) => {
     setSpaces(prevSpaces => [...prevSpaces, ...newSpaces])
   }
-
-  useEffect(() => {
-    // Fetch current user when conditions to fetch it matched and
-    //  - cache does not exist yet
-    if (
-      !currentUser
-      // && !initialValue.isCurrentSessionPublic TODO: add currentsession is public
-    ) {
-      getUser({})
-    }
-  }, [currentUser])
 
   return <AppContext.Provider value={{ spaces, setSpaces, addSpaces, currentUser }}>{children}</AppContext.Provider>
 }
