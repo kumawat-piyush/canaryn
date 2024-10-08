@@ -4,15 +4,9 @@ import { useOnLoginMutation } from '@harnessio/code-service-client'
 import { useNavigate } from 'react-router-dom'
 import { DataProps } from '@harnessio/playground'
 
-export default function SignIn() {
+export const SignIn: React.FC = () => {
   const navigate = useNavigate()
-  const {
-    mutate: login,
-    isLoading,
-    error,
-    isSuccess,
-    data
-  } = useOnLoginMutation({ queryParams: { include_cookie: true } })
+  const { mutate: login, isLoading, isSuccess, data } = useOnLoginMutation({ queryParams: { include_cookie: true } })
 
   useEffect(() => {
     if (isSuccess) {
@@ -21,8 +15,6 @@ export default function SignIn() {
         localStorage.setItem('token', data.access_token)
       }
       navigate('/')
-    } else {
-      console.log({ error })
     }
   }, [isSuccess])
 

@@ -36,7 +36,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         switch (response.status) {
           case 401:
             localStorage.removeItem('token')
-            window.location.href = '/signin'
+          // window.location.href = '/signin'
         }
         return response
       }
