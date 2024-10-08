@@ -1,7 +1,8 @@
 import React from 'react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Text } from '@harnessio/canary'
 import { Icon } from '@harnessio/canary'
-import ReactTimeago from 'react-timeago'
+// import ReactTimeago from 'react-timeago'
+import { timeAgo } from '../utils/utils'
 
 export interface TokensList {
   principal_id?: number
@@ -43,9 +44,7 @@ export const ProfileTokensList: React.FC<PageProps> = ({ tokens }) => {
                 </div>
               </TableCell>
               <TableCell>{token.expires_at ? new Date(token.expires_at).toLocaleString() : 'No Expiration'}</TableCell>
-              <TableCell>
-                <ReactTimeago date={new Date(token.issued_at!)} />
-              </TableCell>
+              <TableCell>{timeAgo(new Date(token.issued_at!).getTime())}</TableCell>
               <TableCell className="content-center">
                 <div className="flex gap-1.5 items-center justify-end">
                   <Icon name="vertical-ellipsis" size={14} className="text-tertiary-background" />
