@@ -8,8 +8,6 @@ import {
   getUser
 } from '@harnessio/code-service-client'
 import useToken from '../hooks/useToken'
-import { useAtom } from 'jotai'
-import { currentUserAtom } from './currentUser'
 
 interface AppContextType {
   spaces: TypesMembershipSpace[]
@@ -25,7 +23,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined)
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [spaces, setSpaces] = useState<TypesMembershipSpace[]>([])
   const { token } = useToken()
-  const [currentUser, setCurrentUser] = useAtom(currentUserAtom)
+  const [currentUser, setCurrentUser] = useState<TypesUser>({})
 
   useLayoutEffect(() => {
     new CodeServiceAPIClient({
@@ -79,7 +77,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     ) {
       getUser({})
     }
-  }, [getUser, currentUser])
+  }, [currentUser])
 
   return <AppContext.Provider value={{ spaces, setSpaces, addSpaces, currentUser }}>{children}</AppContext.Provider>
 }
