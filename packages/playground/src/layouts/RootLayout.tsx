@@ -1,32 +1,11 @@
-import { Navbar, Icon, NavbarProjectChooser, NavbarUser, IconProps } from '@harnessio/canary'
+import { Navbar, Icon, NavbarProjectChooser, NavbarUser } from '@harnessio/canary'
 import React, { useState } from 'react'
 import { Outlet, NavLink, useLocation, Link } from 'react-router-dom'
 import { MoreSubmenu } from '../components/more-submenu'
 import { navbarSubmenuData } from '../data/mockNavbarSubmenuData'
+import { PlaygroundProps, ScopeProps, UserInfoProps, NavbarItem } from './types'
 
-interface NavbarItem {
-  id: number
-  title: string
-  iconName: IconProps['name']
-  description: string
-  to?: string
-}
-
-interface ScopeProps {
-  /**
-   * Optional project id
-   */
-  projectId?: string
-}
-
-interface UserInfoProps {
-  username: string
-  isAdmin?: boolean
-}
-
-interface RootLayoutProps extends ScopeProps, UserInfoProps {
-  isPlayground?: boolean
-}
+interface RootLayoutProps extends PlaygroundProps, ScopeProps, UserInfoProps {}
 
 export const RootLayout: React.FC<RootLayoutProps> = ({ isPlayground, projectId, username, isAdmin }) => {
   const location = useLocation()
