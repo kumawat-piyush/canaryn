@@ -18,8 +18,11 @@ import { TokenCreateDialog } from './token-create/token-create-dialog'
 import { SshKeyCreateDialog } from './ssh-key-create/ssh-key-create-dialog'
 import { TokenSuccessDialog } from './token-create/token-success-dialog'
 import { TokensList } from '@harnessio/playground'
+import { useQueryClient } from '@tanstack/react-query'
 
 export const SettingsProfileKeysPage = () => {
+  const queryClient = useQueryClient()
+
   const TEMP_USER_TOKENS_API_PATH = '/api/v1/user/tokens'
 
   const [publicKeys, setPublicKeys] = useState<ListPublicKeyOkResponse[]>([])
@@ -100,21 +103,13 @@ export const SettingsProfileKeysPage = () => {
       onSuccess: (newSshKey: CreatePublicKeyOkResponse) => {
         console.log(newSshKey)
         closeSshKeyDialog()
+        queryClient.invalidateQueries(['listPublicKey'])
       },
       onError: (error: CreatePublicKeyErrorResponse) => {
         console.error('Failed to create :', error)
       }
     }
   )
-
-  // const handleCreateToken = (tokenData: { identifier: string; lifetime: string }) => {
-  //   const convertedLifetime = parseInt(tokenData.lifetime, 10) * 24 * 60 * 60 * 1000 * 1000000
-  //   const body: CreateTokenRequestBody = {
-  //     identifier: tokenData.identifier,
-  //     lifetime: convertedLifetime
-  //   }
-  //   createTokenMutation.mutate({ body })
-  // }
 
   const handleCreateToken = (tokenData: { identifier: string; lifetime: string }) => {
     let body: CreateTokenRequestBody = {
