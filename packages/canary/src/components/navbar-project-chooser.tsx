@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Root as SearchBox } from './search-box'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './dialog'
 import { Spacer } from './spacer'
+import { Text } from '..'
 
 interface ProjectProps {
   avatarLink: React.ReactNode
@@ -22,7 +23,7 @@ function Root({ avatarLink, enableSearch }: ProjectProps) {
   return (
     <div className="grid grid-cols-[auto_1fr] w-full items-center gap-2.5 justify-items-start">
       <div className="flex items-center">{avatarLink}</div>
-      {enableSearch && (
+      {enableSearch ? (
         <>
           <SearchBox
             textSize={1}
@@ -46,6 +47,8 @@ function Root({ avatarLink, enableSearch }: ProjectProps) {
             </DialogContent>
           </Dialog>
         </>
+      ) : (
+        <Text>Harness Open Source</Text>
       )}
     </div>
   )
