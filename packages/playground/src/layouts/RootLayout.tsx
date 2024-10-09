@@ -15,7 +15,7 @@ export const RootLayout: React.FC = () => {
     {
       text: 'Repositories',
       icon: <Icon name="repositories" size={12} />,
-      to: `/repos`
+      to: '/repos'
     },
 
     {
