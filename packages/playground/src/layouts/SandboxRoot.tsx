@@ -170,7 +170,7 @@ export const SandboxRoot: React.FC = () => {
             </Navbar.AccordionGroup>
           </Navbar.Content>
           <Navbar.Footer>
-            <NavbarUser.Root />
+            <NavbarUser.Root username="Steven M." profile="Admin" url="../images/user-avatar.svg" />
           </Navbar.Footer>
         </Navbar.Root>
       </SandboxLayout.LeftPanel>

@@ -205,7 +205,7 @@ export const RootLayout: React.FC<RootLayoutProps> = ({ projectId, isPlayground 
               )}
             </Navbar.Content>
             <Navbar.Footer>
-              <NavbarUser.Root />
+              <NavbarUser.Root username="Steven M." profile="Admin" url="../images/user-avatar.svg" />
             </Navbar.Footer>
           </Navbar.Root>
         )}
