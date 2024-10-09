@@ -123,7 +123,7 @@ export const RootLayout: React.FC<RootLayoutProps> = ({ isPlayground, projectId,
                     <Icon name="harness" size={20} className="text-primary" />
                   </Link>
                 }
-                enableSearch
+                enableSearch={isPlayground}
               />
             </Navbar.Header>
             <Navbar.Content>
