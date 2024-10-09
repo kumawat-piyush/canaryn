@@ -213,11 +213,13 @@ export const RootLayout: React.FC<RootLayoutProps> = ({ isPlayground, projectId,
               )}
             </Navbar.Content>
             <Navbar.Footer>
-              <NavbarUser.Root
-                {...(isPlayground
-                  ? { username: 'Steven M.', profile: 'Admin', url: '../images/user-avatar.svg' }
-                  : { username, profile })}
-              />
+              <NavLink to="/sandbox/settings/profile/general" className="p-2 hover:bg-tertiary">
+                <NavbarUser.Root
+                  {...(isPlayground
+                    ? { username: 'Steven M.', profile: 'Admin', url: '../images/user-avatar.svg' }
+                    : { username, profile })}
+                />
+              </NavLink>
             </Navbar.Footer>
           </Navbar.Root>
         )}
