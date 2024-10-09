@@ -21,14 +21,14 @@ interface ScopeProps {
 
 interface UserInfoProps {
   username: string
-  profile: string
+  isAdmin?: boolean
 }
 
 interface RootLayoutProps extends ScopeProps, UserInfoProps {
   isPlayground?: boolean
 }
 
-export const RootLayout: React.FC<RootLayoutProps> = ({ isPlayground, projectId, username, profile }) => {
+export const RootLayout: React.FC<RootLayoutProps> = ({ isPlayground, projectId, username, isAdmin }) => {
   const location = useLocation()
   const hideNavbarPaths = ['/signin', '/signup']
   const showNavbar = !hideNavbarPaths.includes(location.pathname)
@@ -216,8 +216,8 @@ export const RootLayout: React.FC<RootLayoutProps> = ({ isPlayground, projectId,
               <NavLink to="/sandbox/settings/profile/general" className="p-2 hover:bg-tertiary">
                 <NavbarUser.Root
                   {...(isPlayground
-                    ? { username: 'Steven M.', profile: 'Admin', url: '../images/user-avatar.svg' }
-                    : { username, profile })}
+                    ? { username: 'Steven M.', isAdmin: true, url: '../images/user-avatar.svg' }
+                    : { username, isAdmin })}
                 />
               </NavLink>
             </Navbar.Footer>

@@ -171,7 +171,7 @@ export const SandboxRoot: React.FC = () => {
           </Navbar.Content>
           <Navbar.Footer>
             <NavLink to="/sandbox/settings/profile/general" className="p-2 hover:bg-tertiary">
-              <NavbarUser.Root username="Steven M." profile="Admin" url="../images/user-avatar.svg" />
+              <NavbarUser.Root username="Steven M." isAdmin url="../images/user-avatar.svg" />
             </NavLink>
           </Navbar.Footer>
         </Navbar.Root>

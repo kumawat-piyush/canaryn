@@ -4,9 +4,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '..'
 
 const Root: React.FC<{
   username: string
-  profile: string
+  isAdmin?: boolean
   url?: string
-}> = ({ username, profile, url }) => {
+}> = ({ username, isAdmin, url }) => {
   return (
     <div className="grid grid-rows-2 grid-cols-[auto_1fr] gap-x-3 items-center justify-start cursor-pointer">
       <div className="col-start-1 row-span-2">
@@ -16,7 +16,9 @@ const Root: React.FC<{
         </Avatar>
       </div>
       <p className="col-start-2 row-start-1 text-xs text-primary font-medium">{username}</p>
-      <p className="col-start-2 row-start-2 text-xs font-normal text-tertiary-background">{profile}</p>
+      <p className="col-start-2 row-start-2 text-xs font-normal text-tertiary-background">
+        {isAdmin ? 'Admin' : 'Account Member'}
+      </p>
     </div>
   )
 }
