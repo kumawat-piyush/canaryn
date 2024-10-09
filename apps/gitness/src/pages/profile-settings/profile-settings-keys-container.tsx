@@ -32,13 +32,14 @@ export const SettingsProfileKeysPage = () => {
   const [openSuccessTokenDialog, setSuccessTokenDialog] = useState(false)
   const closeSuccessTokenDialog = () => setSuccessTokenDialog(false)
 
+  const openTokenDialog = () => setCreateTokenDialog(true)
+  const closeTokenDialog = () => setCreateTokenDialog(false)
+
   const [createdTokenData, setCreatedTokenData] = useState<{
     identifier: string
     lifetime: string
     token: string
   } | null>(null)
-  const openTokenDialog = () => setCreateTokenDialog(true)
-  const closeTokenDialog = () => setCreateTokenDialog(false)
 
   const [saveSshKeyDialog, setSshKeyDialog] = useState(false)
   const openSshKeyDialog = () => setSshKeyDialog(true)

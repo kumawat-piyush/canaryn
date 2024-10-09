@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { Button, ButtonGroup, Input, Textarea } from '@harnessio/canary'
+import React, { useState } from 'react'
+import { Button, ButtonGroup, Input, Textarea, Icon } from '@harnessio/canary'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { FormFieldSet } from '@harnessio/playground'
+import { FormFieldSet } from '../index'
 
 const formSchema = z.object({
   identifier: z.string().min(1, { message: 'Please provide a name' }),
@@ -12,28 +12,10 @@ const formSchema = z.object({
 
 export type SshKeyFormType = z.infer<typeof formSchema>
 
-interface SshKeyCreateFormProps {
-  onSubmit?: (data: SshKeyFormType) => void
-  onCancel?: () => void
-  apiError?: string | null
-  isLoading?: boolean
-  isSuccess?: boolean
-  handleCreateSshKey: (data: SshKeyFormType) => void
-}
-
-export function SshKeyCreateForm({
-  onSubmit = () => {},
-  onCancel = () => {},
-  apiError = null,
-  isLoading = false,
-  isSuccess = false,
-  handleCreateSshKey
-}: SshKeyCreateFormProps) {
+export function SshKeyCreateForm() {
   const {
     register,
     handleSubmit,
-    setValue,
-    watch,
     reset,
     formState: { errors, isValid }
   } = useForm<SshKeyFormType>({
@@ -46,19 +28,19 @@ export function SshKeyCreateForm({
   })
 
   const [isSubmitted, setIsSubmitted] = useState(false)
-
-  //   useEffect(() => {
-  //     if (isSuccess === true) {
-  //       reset()
-  //       setIsSubmitted(true)
-  //     }
-  //   }, [isSuccess, reset])
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleFormSubmit: SubmitHandler<SshKeyFormType> = data => {
-    // onSubmit(data)
-    console.log(data)
-    handleCreateSshKey(data)
+    setIsSubmitting(true)
+    setTimeout(() => {
+      console.log('SSH key created:', data)
+      reset()
+      setIsSubmitting(false)
+      setIsSubmitted(true)
+      setTimeout(() => setIsSubmitted(false), 2000)
+    }, 2000)
   }
+
   const handleCancel = () => {}
 
   return (
@@ -103,13 +85,13 @@ export function SshKeyCreateForm({
                   <Button type="button" variant="outline" size="sm" onClick={handleCancel}>
                     Cancel
                   </Button>
-                  <Button type="submit" size="sm" disabled={!isValid || isLoading}>
-                    {!isLoading ? 'Save' : 'Saving...'}
+                  <Button type="submit" size="sm" disabled={!isValid || isSubmitting}>
+                    {!isSubmitting ? 'Save' : 'Saving...'}
                   </Button>
                 </>
               ) : (
                 <Button variant="ghost" type="button" size="sm" theme="success" className="pointer-events-none">
-                  Generated Token&nbsp;&nbsp;
+                  Key Saved&nbsp;&nbsp;
                   <Icon name="tick" size={14} />
                 </Button>
               )}
