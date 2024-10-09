@@ -7,7 +7,8 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
+  Text
 } from '@harnessio/canary'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -24,9 +25,8 @@ export type TokenFormType = z.infer<typeof formSchema>
 const expirationOptions = [
   { value: '7', label: '7 days' },
   { value: '30', label: '30 days' },
+  { value: '60', label: '60 days' },
   { value: '90', label: '90 days' },
-  { value: '180', label: '180 days' },
-  { value: '365', label: '365 days' },
   { value: 'never', label: 'Never' }
 ]
 
@@ -83,6 +83,21 @@ export function TokenCreateForm({
   }
   const handleCancel = () => {}
 
+  const calculateExpirationDate = (lifetime: string): string => {
+    if (lifetime === 'never') return ''
+
+    const days = parseInt(lifetime, 10)
+    const expirationDate = new Date()
+    expirationDate.setDate(expirationDate.getDate() + days)
+
+    return expirationDate.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -101,7 +116,7 @@ export function TokenCreateForm({
           </FormFieldSet.ControlGroup>
         </FormFieldSet.Root>
 
-        <FormFieldSet.Root>
+        <FormFieldSet.Root className="mb-2">
           <FormFieldSet.ControlGroup>
             <FormFieldSet.Label htmlFor="lifetime" required>
               Expiration
@@ -123,6 +138,21 @@ export function TokenCreateForm({
             )}
           </FormFieldSet.ControlGroup>
         </FormFieldSet.Root>
+
+        {/* Expiration Info */}
+        {isValid && (
+          <FormFieldSet.Root className="mb-4">
+            <FormFieldSet.ControlGroup>
+              {watch('lifetime') === 'never' ? (
+                <Text color="tertiaryBackground">Token will never expire</Text>
+              ) : (
+                <Text color="tertiaryBackground">
+                  Token will expire on {calculateExpirationDate(watch('lifetime'))}
+                </Text>
+              )}
+            </FormFieldSet.ControlGroup>
+          </FormFieldSet.Root>
+        )}
 
         {/* SUBMIT BUTTONS */}
         <FormFieldSet.Root>

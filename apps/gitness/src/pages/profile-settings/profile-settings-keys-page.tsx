@@ -13,11 +13,13 @@ interface SandboxSettingsAccountKeysPageProps {
   publicKeys: KeysList[]
   tokens: TokensList[]
   openTokenDialog: () => void
+  openSshKeyDialog: () => void
 }
 const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPageProps> = ({
   publicKeys,
   tokens,
-  openTokenDialog
+  openTokenDialog,
+  openSshKeyDialog
 }) => {
   return (
     <SandboxLayout.Main hasLeftPanel hasHeader hasSubHeader>
@@ -51,7 +53,7 @@ const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPagePro
             <FormFieldSet.SubLegend>
               <div className="flex justify-between">
                 SSH keys allow you to establish a secure connection to your code repository.
-                <Button variant="outline" className="text-primary">
+                <Button variant="outline" className="text-primary" type="button" onClick={openSshKeyDialog}>
                   Add new SSH key
                 </Button>
               </div>

@@ -1,13 +1,14 @@
-import { TokenCreateForm } from './token-create-form'
+import React from 'react'
+import { TokenSuccessForm } from './token-success-form'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@harnessio/canary'
 
 interface TokenCreateDialogProps {
   open: boolean
   onClose: () => void
-  handleCreateToken: () => void
+  tokenData: any
 }
 
-export const TokenCreateDialog: React.FC<TokenCreateDialogProps> = ({ open, onClose, handleCreateToken }) => {
+export const TokenSuccessDialog: React.FC<TokenCreateDialogProps> = ({ open, onClose, tokenData }) => {
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-[500px]  bg-primary-background border-border">
@@ -15,7 +16,7 @@ export const TokenCreateDialog: React.FC<TokenCreateDialogProps> = ({ open, onCl
           <DialogTitle className="text-left">Create a token</DialogTitle>
         </DialogHeader>
         <DialogDescription>
-          <TokenCreateForm handleCreateToken={handleCreateToken} />
+          <TokenSuccessForm defaultValues={tokenData} />
         </DialogDescription>
       </DialogContent>
     </Dialog>
