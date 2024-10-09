@@ -8,5 +8,5 @@ import { PathParams } from '../RouteDefinitions'
  */
 export const RootLayout: React.FC = () => {
   const { spaceId } = useParams<PathParams>()
-  return <_RootLayout projectId={spaceId} />
+  return <_RootLayout projectId={spaceId} profile="" username="" />
 }
