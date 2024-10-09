@@ -14,12 +14,11 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm run build
 
 FROM nginx:alpine
-ARG API_URL=http://localhost:3000
-ENV API_URL=$API_URL
+# ARG API_URL=http://localhost:3000
+# ENV API_URL=$API_URL
 COPY --from=build /canary/apps/gitness/dist /canary
 COPY --from=build /canary/nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /canary/entrypoint.sh /canary/entrypoint.sh
 WORKDIR /canary
-RUN sed -i "s|<\!-- apiurl -->|<script>window.apiUrl = '$API_URL'</script>|" index.html
-# Start nginx
 EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["sh", "/canary/entrypoint.sh"]
