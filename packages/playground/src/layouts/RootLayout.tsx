@@ -17,7 +17,7 @@ export const RootLayout: React.FC<RootLayoutProps> = ({ isPlayground, projectId,
     /**
      * Render only if a project is selected (and is in url)
      */
-    ...(projectId
+    ...(isPlayground || (!isPlayground && projectId)
       ? [
           {
             text: 'Repositories',

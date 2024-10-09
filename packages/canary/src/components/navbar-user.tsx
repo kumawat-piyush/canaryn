@@ -3,7 +3,7 @@ import { getInitials } from '@/utils/StringUtils'
 import { Avatar, AvatarFallback, AvatarImage } from '..'
 
 const Root: React.FC<{
-  username: string
+  username?: string
   isAdmin?: boolean
   url?: string
 }> = ({ username, isAdmin, url }) => {
@@ -12,7 +12,7 @@ const Root: React.FC<{
       <div className="col-start-1 row-span-2">
         <Avatar>
           {url && <AvatarImage src={url} alt="user" />}
-          <AvatarFallback>{getInitials(username)}</AvatarFallback>
+          {username && <AvatarFallback>{getInitials(username)}</AvatarFallback>}
         </Avatar>
       </div>
       <p className="col-start-2 row-start-1 text-xs text-primary font-medium">{username}</p>

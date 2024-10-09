@@ -120,6 +120,7 @@ export const SandboxRoot: React.FC<SandboxRootProps> = ({ isPlayground, projectI
                   <Icon name="harness" size={20} className="text-primary" />
                 </Link>
               }
+              enableSearch={isPlayground}
             />
           </Navbar.Header>
           <Navbar.Content>
