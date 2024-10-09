@@ -13,21 +13,35 @@ interface NavbarItem {
 }
 
 interface RootLayoutProps {
+  /**
+   * Optional project id
+   */
+  projectId?: string
   isPlayground?: boolean
 }
 
-export const RootLayout: React.FC<RootLayoutProps> = ({ isPlayground }) => {
+export const RootLayout: React.FC<RootLayoutProps> = ({ projectId, isPlayground }) => {
   const location = useLocation()
   const hideNavbarPaths = ['/signin', '/signup']
   const showNavbar = !hideNavbarPaths.includes(location.pathname)
   const [showMore, setShowMore] = useState<boolean>(false)
 
   const primaryMenuItems = [
-    {
-      text: 'Repositories',
-      icon: <Icon name="repositories" size={12} />,
-      to: '/repos'
-    },
+    /**
+     * Render only if a project is selected (and is in url)
+     */
+    ...(projectId
+      ? [
+          {
+            text: 'Repositories',
+            icon: <Icon name="repositories" size={12} />,
+            to: `${projectId}/repos`
+          }
+        ]
+      : []),
+    /**
+     * Hiding these links till we support displaying pipelines, executions, etc. at a project/space level
+     */
     ...(isPlayground
       ? [
           {

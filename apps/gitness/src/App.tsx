@@ -2,7 +2,6 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import { QueryClientProvider } from '@tanstack/react-query'
 import {
   ThemeProvider,
-  RootLayout,
   SandboxRoot,
   SandboxSettings,
   SandboxSettingsAccountPage,
@@ -38,6 +37,7 @@ import { FileViewer } from './components/FileViewer'
 import { SettingsAccountGeneralPage } from './pages/profile-settings/profile-settings-general-container'
 import PullRequestChangesPage from './pages/pull-request/pull-request-changes-page'
 import { Logout } from './pages/logout'
+import { RootLayout } from './components/RootLayout'
 
 export default function App() {
   const router = createBrowserRouter([
