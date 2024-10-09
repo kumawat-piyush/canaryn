@@ -32,13 +32,13 @@ import { SettingsProfileKeysPage } from './pages/profile-settings/profile-settin
 import { FileViewer } from './components/FileViewer'
 import PullRequestChangesPage from './pages/pull-request/pull-request-changes-page'
 import { Logout } from './pages/logout'
-import { RootLayout } from './components/RootLayout'
+import { AppLayout } from './components/AppLayout'
 
 export default function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <RootLayout />,
+      element: <AppLayout />,
 
       children: [
         { index: true, element: <LandingPage /> },
