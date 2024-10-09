@@ -5,7 +5,7 @@ import { PathParams } from '../RouteDefinitions'
 import { useAppContext } from '../framework/context/AppContext'
 
 /**
- * Need this wrapper component around RootLayout to be able to access url params
+ * Need this wrapper component around RootLayout to be able to access url params, user info from context etc.
  */
 export const RootLayout: React.FC = () => {
   const { currentUser } = useAppContext()
