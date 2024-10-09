@@ -18,14 +18,14 @@ import { TokenCreateDialog } from './token-create/token-create-dialog'
 import { SshKeyCreateDialog } from './ssh-key-create/ssh-key-create-dialog'
 import { TokenSuccessDialog } from './token-create/token-success-dialog'
 import { TokensList } from '@harnessio/playground'
-import { useQueryClient } from '@tanstack/react-query'
+// import { useQueryClient } from '@tanstack/react-query'
 
 export const SettingsProfileKeysPage = () => {
-  const queryClient = useQueryClient()
+  // const queryClient = useQueryClient()
 
   const TEMP_USER_TOKENS_API_PATH = '/api/v1/user/tokens'
 
-  const [publicKeys, setPublicKeys] = useState<ListPublicKeyOkResponse[]>([])
+  const [publicKeys, setPublicKeys] = useState<ListPublicKeyOkResponse>([])
   const [tokens, setTokens] = useState<TokensList[]>([])
 
   const [openCreateTokenDialog, setCreateTokenDialog] = useState(false)
@@ -54,7 +54,7 @@ export const SettingsProfileKeysPage = () => {
   useListPublicKeyQuery(
     { queryParams },
     {
-      onSuccess: (data: ListPublicKeyOkResponse[]) => {
+      onSuccess: (data: ListPublicKeyOkResponse) => {
         setPublicKeys(data)
       }
       // onError: (error: ListPublicKeyErrorResponse) => {
@@ -103,7 +103,7 @@ export const SettingsProfileKeysPage = () => {
       onSuccess: (newSshKey: CreatePublicKeyOkResponse) => {
         console.log(newSshKey)
         closeSshKeyDialog()
-        queryClient.invalidateQueries(['listPublicKey'])
+        setPublicKeys(prevKeys => [...prevKeys, newSshKey])
       },
       onError: (error: CreatePublicKeyErrorResponse) => {
         console.error('Failed to create :', error)

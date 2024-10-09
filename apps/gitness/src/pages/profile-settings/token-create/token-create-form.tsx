@@ -116,7 +116,7 @@ export function TokenCreateForm({
           </FormFieldSet.ControlGroup>
         </FormFieldSet.Root>
 
-        <FormFieldSet.Root className="mb-2">
+        <FormFieldSet.Root>
           <FormFieldSet.ControlGroup>
             <FormFieldSet.Label htmlFor="lifetime" required>
               Expiration
@@ -141,7 +141,7 @@ export function TokenCreateForm({
 
         {/* Expiration Info */}
         {isValid && (
-          <FormFieldSet.Root className="mb-4">
+          <FormFieldSet.Root>
             <FormFieldSet.ControlGroup>
               {watch('lifetime') === 'never' ? (
                 <Text color="tertiaryBackground">Token will never expire</Text>
