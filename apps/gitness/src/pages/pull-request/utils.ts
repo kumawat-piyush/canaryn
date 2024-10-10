@@ -1,5 +1,5 @@
-import { EnumPullReqReviewDecision, TypesCodeOwnerEvaluationEntry } from '@harnessio/code-service-client'
-import { PullReqReviewDecision, TypeCheckData } from './types/types'
+import { TypesCodeOwnerEvaluationEntry } from '@harnessio/code-service-client'
+import { EnumPullReqReviewDecision, PullReqReviewDecision, TypeCheckData } from './types/types'
 import { ExecutionState, extractInfoForCodeOwnerContentProps } from '../../types'
 import { isEmpty } from 'lodash-es'
 import type * as Diff2Html from 'diff2html'
