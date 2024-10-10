@@ -40,6 +40,7 @@ export default function Header() {
           navigate(`/${project.name}/repos`)
         }
       }}
+      selectedProject={selectedProject}
       preselectedProject={selectedProject}
     />
   )
