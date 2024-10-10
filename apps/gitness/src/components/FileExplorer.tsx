@@ -8,16 +8,28 @@ import { PathParams } from '../RouteDefinitions'
 
 interface ExplorerProps {
   selectedBranch: string
-  fullResourcePath?: string
 }
 
 const generateLocalStorageKey = (repoRef: string, gitRef: string, keyType: string) => {
   return `${repoRef}_${gitRef}_${keyType}`
 }
 
-export default function Explorer({ selectedBranch, fullResourcePath }: ExplorerProps) {
+const sortEntriesByType = (entries: OpenapiContentInfo[]): OpenapiContentInfo[] => {
+  return entries.sort((a, b) => {
+    if (a.type === 'dir' && b.type === 'file') {
+      return -1
+    } else if (a.type === 'file' && b.type === 'dir') {
+      return 1
+    }
+    return 0
+  })
+}
+
+export default function Explorer({ selectedBranch }: ExplorerProps) {
   const repoRef = useGetRepoRef()
-  const { spaceId, repoId } = useParams<PathParams>()
+  const { spaceId, repoId, resourcePath } = useParams<PathParams>()
+  const subResourcePath = useParams()['*'] || ''
+  const fullResourcePath = subResourcePath ? resourcePath + '/' + subResourcePath : resourcePath
 
   const uniqueOpenFoldersKey = generateLocalStorageKey(repoRef, selectedBranch, 'openFolderPaths')
   const uniqueFolderContentsKey = generateLocalStorageKey(repoRef, selectedBranch, 'folderContents')
@@ -112,7 +124,8 @@ export default function Explorer({ selectedBranch, fullResourcePath }: ExplorerP
   }
 
   const renderEntries = (entries: OpenapiContentInfo[], parentPath: string = '') => {
-    return entries.map((item, idx) => {
+    const sortedEntries = sortEntriesByType(entries)
+    return sortedEntries.map((item, idx) => {
       const itemPath = parentPath ? `${parentPath}/${item.name}` : item.name
       const fullPath = `/${spaceId}/repos/${repoId}/code/${selectedBranch}/~/${itemPath}`
 
@@ -121,7 +134,7 @@ export default function Explorer({ selectedBranch, fullResourcePath }: ExplorerP
           <Link to={fullPath}>
             <FileExplorer.FileItem
               key={itemPath || idx.toString()}
-              isActive={fullResourcePath === itemPath}
+              isActive={itemPath === fullResourcePath}
               link={fullPath}>
               {item.name}
             </FileExplorer.FileItem>
@@ -133,7 +146,7 @@ export default function Explorer({ selectedBranch, fullResourcePath }: ExplorerP
             key={itemPath || idx.toString()}
             value={itemPath}
             link={fullPath}
-            isActive={fullResourcePath === itemPath}
+            isActive={itemPath === fullResourcePath}
             content={
               // If the folder's content is already cached, render it. Otherwise, show loading.
               folderContentsCache[itemPath] ? (

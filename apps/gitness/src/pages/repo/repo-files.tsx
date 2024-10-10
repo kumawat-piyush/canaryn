@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate, Outlet } from 'react-router-dom'
-import { Button, ButtonGroup, Icon, ListActions, Spacer, Text } from '@harnessio/canary'
-import { BranchSelector, SandboxLayout, Filter } from '@harnessio/playground'
+import { Button, ButtonGroup, Icon } from '@harnessio/canary'
+import { BranchSelector, SandboxLayout } from '@harnessio/playground'
 import { useListBranchesQuery, useFindRepositoryQuery } from '@harnessio/code-service-client'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { PathParams } from '../../RouteDefinitions'
@@ -52,9 +52,10 @@ export const RepoFiles: React.FC = () => {
             </Button>
           </ButtonGroup.Root>
         </div>
-
-        <Filter />
-
+        {/* <Filter /> */}
+        {/*  Add back when search api is available  
+          <SearchBox.Root width="full" placeholder="Search" /> 
+        */}
         <Explorer selectedBranch={selectedBranch} />
       </div>
     )
@@ -67,30 +68,7 @@ export const RepoFiles: React.FC = () => {
           <Sidebar />
         </SandboxLayout.Content>
       </SandboxLayout.LeftSubPanel>
-      <SandboxLayout.Main fullWidth hasLeftSubPanel>
-        <SandboxLayout.Content>
-          <ListActions.Root>
-            <ListActions.Left>
-              <ButtonGroup.Root spacing="2">
-                <Text size={2} color="tertiaryBackground">
-                  {repository?.identifier}
-                </Text>
-                <Text size={2} color="tertiaryBackground">
-                  /
-                </Text>
-              </ButtonGroup.Root>
-            </ListActions.Left>
-            <ListActions.Right>
-              <Button variant="outline" size="sm">
-                Add file&nbsp;&nbsp;
-                <Icon name="chevron-down" size={11} className="chevron-down" />
-              </Button>
-            </ListActions.Right>
-          </ListActions.Root>
-          <Spacer size={5} />
-          <Outlet />
-        </SandboxLayout.Content>
-      </SandboxLayout.Main>
+      <Outlet />
     </>
   )
 }
