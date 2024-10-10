@@ -1,4 +1,5 @@
 import {
+  EnumPullReqReviewDecision,
   ReviewerListPullReqOkResponse,
   TypesCheck,
   TypesPullReq,
@@ -183,4 +184,4 @@ export interface FilterViewProps {
   loading?: boolean
 }
 
-export type EnumPullReqReviewDecision = 'approved' | 'changereq' | 'pending' | 'reviewed' | 'outdated'
+export type EnumPullReqReviewDecisionExtended = EnumPullReqReviewDecision | 'outdated'
