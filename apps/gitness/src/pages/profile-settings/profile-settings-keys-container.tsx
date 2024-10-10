@@ -30,7 +30,7 @@ export const SettingsProfileKeysPage = () => {
   const [openSuccessTokenDialog, setSuccessTokenDialog] = useState(false)
   const [saveSshKeyDialog, setSshKeyDialog] = useState(false)
   const [apiError, setApiError] = useState<{
-    type: 'keyFetch' | 'tokenFetch' | 'keyCreate' | 'tokenCreate' | 'tokenDelete'
+    type: 'keyFetch' | 'tokenFetch' | 'keyCreate' | 'tokenCreate' | 'tokenDelete' | 'keyDelete'
     message: string
   } | null>(null)
 
@@ -148,15 +148,16 @@ export const SettingsProfileKeysPage = () => {
   )
 
   const deletePublicKeyMutation = useDeletePublicKeyMutation(
-    {},
+    { public_key_identifier: '' },
+
     {
-      onSuccess: () => {
-        console.log('Public key deleted successfully')
-        // Optionally, you can refetch the list of public keys or update the UI
+      onSuccess: (_data, variables) => {
+        setPublicKeys(prevKeys => prevKeys.filter(key => key.identifier !== variables.public_key_identifier))
+        setApiError(null)
       },
       onError: error => {
-        console.error('Error deleting public key:', error)
-        // Handle the error, e.g., show an error message to the user
+        const message = error.message || 'An unknown error occurred.'
+        setApiError({ type: 'keyDelete', message: message })
       }
     }
   )
