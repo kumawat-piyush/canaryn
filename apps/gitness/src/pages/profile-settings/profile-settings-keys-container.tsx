@@ -73,6 +73,7 @@ export const SettingsProfileKeysPage = () => {
     }
   )
 
+  // TODO: replace with actual query hook once its fixed
   const fetchTokens = () => {
     fetch(TEMP_USER_TOKENS_API_PATH)
       .then(resp => resp.json())

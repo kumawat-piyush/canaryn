@@ -70,7 +70,6 @@ export function SshKeyCreateForm({ isLoading, handleCreateSshKey, onClose, error
             <FormFieldSet.Label htmlFor="content" required>
               Public key
             </FormFieldSet.Label>
-            {/* <Input id="content" {...register('content')} autoFocus /> */}
             <Textarea id="content" value={content} {...register('content')} />
             {errors.identifier && (
               <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
