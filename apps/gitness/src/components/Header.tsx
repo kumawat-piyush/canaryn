@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { TopBarWidget, Project } from '@harnessio/playground'
 import { useNavigate } from 'react-router-dom'
-import { TypesMembershipSpace } from '@harnessio/code-service-client'
+import { TypesSpace } from '@harnessio/code-service-client'
 import { useAppContext } from '../framework/context/AppContext'
 import { useGetSpaceURLParam } from '../framework/hooks/useGetSpaceParam'
 
@@ -9,16 +9,18 @@ export default function Header() {
   const navigate = useNavigate()
   const space = useGetSpaceURLParam()
   const { spaces } = useAppContext()
-  const [projects, setProjects] = useState<Project[]>([])
+  const [projects, setProjects] = useState<Project[]>([{ id: 'create-project', name: '+ Create a new project' }])
   const [selectedProject, setSelectedProject] = useState<Project | undefined>(undefined)
 
   useEffect(() => {
     if (spaces.length > 0) {
-      const _projects = spaces.map((space: TypesMembershipSpace) => ({
-        id: space?.space?.id,
-        name: space?.space?.path
-      }))
-      setProjects([..._projects, { id: 'create-project', name: '+ Create a new project' }])
+      setProjects((existingProjects: Project[]) => [
+        ...spaces.map((space: TypesSpace) => ({
+          id: space?.id,
+          name: space?.path
+        })),
+        ...existingProjects
+      ])
     }
   }, [spaces])
 
