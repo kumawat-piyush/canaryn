@@ -3,7 +3,20 @@ import { CodeEditor } from '@harnessio/yaml-editor'
 import { themes } from '../pages/pipeline-edit/theme/monaco-theme'
 import copy from 'clipboard-copy'
 import { decodeGitContent, filenameToLanguage, formatBytes, getTrimmedSha } from '../utils/git-utils'
-import { ButtonGroup, Icon, Spacer, StackedList, Text, ToggleGroup, ToggleGroupItem } from '@harnessio/canary'
+import {
+  Button,
+  ButtonGroup,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  Icon,
+  Spacer,
+  StackedList,
+  Text,
+  ToggleGroup,
+  ToggleGroupItem
+} from '@harnessio/canary'
 import { timeAgoFromISOTime } from '../pages/pipeline-edit/utils/time-utils'
 import { MarkdownViewer, PipelineStudioToolbarActions, TopDetails, TopTitle } from '@harnessio/playground'
 import { OpenapiGetContentOutput } from '@harnessio/code-service-client'
@@ -64,7 +77,23 @@ export default function FileContentViewer({ repoContent }: FileContentViewerProp
           onDownloadClick={() => undefined}
           onEditClick={() => setIsEditMode(true)}
         />
-        <Icon name="ellipsis" size={15} />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="sm_icon">
+              <Icon name="ellipsis" size={15} />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem className="flex gap-1.5 items-center">
+              <Icon name="arrow-long" size={12} className="text-tertiary-background" />
+              <Text>View Raw</Text>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="flex gap-1.5 items-center">
+              <Icon name="trash" size={12} className="text-tertiary-background" />
+              <Text>Delete</Text>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </ButtonGroup.Root>
     )
   }
