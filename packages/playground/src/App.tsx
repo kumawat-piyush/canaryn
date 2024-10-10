@@ -55,6 +55,7 @@ import { RepoSettingsCollaborationsPage } from './pages/repo-settings-collaborat
 import { RepoSettingsModerationPage } from './pages/repo-settings-moderation-page'
 import { RepoSettingsPlaceholderPage } from './pages/repo-settings-placeholder-page'
 import { SandboxSettingsAccountGeneralPage } from './pages/sandbox-settings-account-general-page'
+import { SandboxRepoCodeBlamePage } from './pages/sandbox-repo-code-blame-page'
 
 const router = createBrowserRouter([
   // TEMPORARY LAYOUT SANDBOX
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
               {
                 path: 'code',
                 element: <SandboxRepoCodePage />
+              },
+              {
+                path: 'code/blame',
+                element: <SandboxRepoCodeBlamePage />
               },
               {
                 path: 'settings',

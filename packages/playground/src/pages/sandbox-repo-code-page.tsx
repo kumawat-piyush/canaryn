@@ -67,7 +67,7 @@ const sidebarItems = [
 ]
 
 // Move sidebar function to playground components
-function Sidebar() {
+export function Sidebar() {
   return (
     <div className="flex flex-col gap-5">
       <div className="w-full grid grid-cols-[1fr] auto-cols-auto grid-flow-col gap-3 items-center">
