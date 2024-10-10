@@ -35,12 +35,12 @@ const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPagePro
           <FormFieldSet.Root>
             {/* PERSONAL ACCESS TOKEN */}
             <FormFieldSet.Legend>
-              <div className="flex justify-between">
+              <span className="flex justify-between">
                 Personal access token
                 <Button type="button" variant="outline" className="text-primary" onClick={openTokenDialog}>
                   Add new token
                 </Button>
-              </div>
+              </span>
             </FormFieldSet.Legend>
             <FormFieldSet.ControlGroup>
               <>
@@ -63,12 +63,12 @@ const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPagePro
             {/* PERSONAL ACCESS TOKEN */}
             <FormFieldSet.Legend>My SSH keys</FormFieldSet.Legend>
             <FormFieldSet.SubLegend>
-              <div className="flex justify-between">
+              <span className="flex justify-between">
                 SSH keys allow you to establish a secure connection to your code repository.
                 <Button variant="outline" className="text-primary" type="button" onClick={openSshKeyDialog}>
                   Add new SSH key
                 </Button>
-              </div>
+              </span>
             </FormFieldSet.SubLegend>
             <FormFieldSet.ControlGroup>
               <>

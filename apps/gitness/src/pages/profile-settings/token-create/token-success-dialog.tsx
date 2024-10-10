@@ -1,6 +1,6 @@
 import React from 'react'
 import { TokenSuccessForm } from './token-success-form'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@harnessio/canary'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@harnessio/canary'
 
 interface TokenCreateDialogProps {
   open: boolean
@@ -19,9 +19,7 @@ export const TokenSuccessDialog: React.FC<TokenCreateDialogProps> = ({ open, onC
         <DialogHeader>
           <DialogTitle className="text-left">Create a token</DialogTitle>
         </DialogHeader>
-        <DialogDescription>
-          <TokenSuccessForm defaultValues={tokenData} onClose={onClose} />
-        </DialogDescription>
+        <TokenSuccessForm defaultValues={tokenData} onClose={onClose} />
       </DialogContent>
     </Dialog>
   )
