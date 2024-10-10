@@ -26,7 +26,7 @@ export const AppLayout: React.FC = () => {
   return (
     <>
       <div className="bg-background grid md:grid-cols-[220px_minmax(900px,_1fr)] min-w-screen">
-        <Navbar.Root>
+        <Navbar.Root className="max-md:hidden fixed top-0 left-0 bottom-0 z-50">
           <Navbar.Header>
             <NavbarProjectChooser.Root
               avatarLink={
