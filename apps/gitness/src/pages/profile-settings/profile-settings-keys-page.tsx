@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Spacer, Text, Button } from '@harnessio/canary'
 import {
   FormFieldSet,
@@ -14,12 +14,14 @@ interface SandboxSettingsAccountKeysPageProps {
   tokens: TokensList[]
   openTokenDialog: () => void
   openSshKeyDialog: () => void
+  error: { type: string; message: string } | null
 }
 const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPageProps> = ({
   publicKeys,
   tokens,
   openTokenDialog,
-  openSshKeyDialog
+  openSshKeyDialog,
+  error
 }) => {
   return (
     <SandboxLayout.Main hasLeftPanel hasHeader hasSubHeader>
@@ -41,7 +43,17 @@ const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPagePro
               </div>
             </FormFieldSet.Legend>
             <FormFieldSet.ControlGroup>
-              <ProfileTokensList tokens={tokens} />
+              <>
+                {(!error || error.type !== 'tokenFetch') && <ProfileTokensList tokens={tokens} />}
+                {error && error.type === 'tokenFetch' && (
+                  <>
+                    <Spacer size={2} />
+                    <Text size={1} className="text-destructive">
+                      {error.message}
+                    </Text>
+                  </>
+                )}
+              </>
             </FormFieldSet.ControlGroup>
           </FormFieldSet.Root>
           <FormFieldSet.Root>
@@ -59,7 +71,17 @@ const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPagePro
               </div>
             </FormFieldSet.SubLegend>
             <FormFieldSet.ControlGroup>
-              <ProfileKeysList publicKeys={publicKeys} />
+              <>
+                {(!error || error.type !== 'keyFetch') && <ProfileKeysList publicKeys={publicKeys} />}
+                {error && error.type === 'keyFetch' && (
+                  <>
+                    <Spacer size={2} />
+                    <Text size={1} className="text-destructive">
+                      {error.message}
+                    </Text>
+                  </>
+                )}
+              </>
             </FormFieldSet.ControlGroup>
           </FormFieldSet.Root>
         </form>

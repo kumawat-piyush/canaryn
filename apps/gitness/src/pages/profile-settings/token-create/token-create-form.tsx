@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react'
 import {
   Button,
   ButtonGroup,
@@ -8,7 +7,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  Text
+  Text,
+  Spacer
 } from '@harnessio/canary'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -31,57 +31,38 @@ const expirationOptions = [
 ]
 
 interface TokenCreateFormProps {
-  onSubmit?: (data: TokenFormType) => void
-  onCancel?: () => void
-  apiError?: string | null
-  isLoading?: boolean
-  isSuccess?: boolean
+  error: { type: string; message: string } | null
+  isLoading: boolean
   handleCreateToken: (data: TokenFormType) => void
+  onClose: () => void
 }
 
-export function TokenCreateForm({
-  onSubmit = () => {},
-  onCancel = () => {},
-  apiError = null,
-  isLoading = false,
-  isSuccess = false,
-  handleCreateToken
-}: TokenCreateFormProps) {
+export function TokenCreateForm({ error, isLoading, handleCreateToken, onClose }: TokenCreateFormProps) {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-    reset,
     formState: { errors, isValid }
   } = useForm<TokenFormType>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
     defaultValues: {
-      identifier: ''
+      identifier: '',
+      lifetime: ''
     }
   })
 
   const expirationValue = watch('lifetime')
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const identifier = watch('identifier')
 
   const handleSelectChange = (fieldName: keyof TokenFormType, value: string) => {
     setValue(fieldName, value, { shouldValidate: true })
   }
 
-  //   useEffect(() => {
-  //     if (isSuccess === true) {
-  //       reset()
-  //       setIsSubmitted(true)
-  //     }
-  //   }, [isSuccess, reset])
-
   const handleFormSubmit: SubmitHandler<TokenFormType> = data => {
-    // onSubmit(data)
-    console.log(data)
     handleCreateToken(data)
   }
-  const handleCancel = () => {}
 
   const calculateExpirationDate = (lifetime: string): string => {
     if (lifetime === 'never') return ''
@@ -107,7 +88,13 @@ export function TokenCreateForm({
             <FormFieldSet.Label htmlFor="identifier" required>
               Name
             </FormFieldSet.Label>
-            <Input id="identifier" {...register('identifier')} placeholder="Enter token name" autoFocus />
+            <Input
+              id="identifier"
+              value={identifier}
+              {...register('identifier')}
+              placeholder="Enter token name"
+              autoFocus
+            />
             {errors.identifier && (
               <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
                 {errors.identifier.message?.toString()}
@@ -154,25 +141,29 @@ export function TokenCreateForm({
           </FormFieldSet.Root>
         )}
 
+        <>
+          {error && error.type === 'tokenCreate' && (
+            <>
+              <Text size={1} className="text-destructive">
+                {error.message}
+              </Text>
+              <Spacer size={4} />
+            </>
+          )}
+        </>
+
         {/* SUBMIT BUTTONS */}
         <FormFieldSet.Root>
           <FormFieldSet.ControlGroup>
             <ButtonGroup.Root className="justify-end">
-              {!isSubmitted ? (
-                <>
-                  <Button type="button" variant="outline" size="sm" onClick={handleCancel}>
-                    Cancel
-                  </Button>
-                  <Button type="submit" size="sm" disabled={!isValid || isLoading}>
-                    {!isLoading ? 'Generate Token' : 'Generating Token...'}
-                  </Button>
-                </>
-              ) : (
-                <Button variant="ghost" type="button" size="sm" theme="success" className="pointer-events-none">
-                  Generated Token&nbsp;&nbsp;
-                  <Icon name="tick" size={14} />
+              <>
+                <Button type="button" variant="outline" size="sm" onClick={onClose}>
+                  Cancel
                 </Button>
-              )}
+                <Button type="submit" size="sm" disabled={!isValid || isLoading}>
+                  {!isLoading ? 'Generate Token' : 'Generating Token...'}
+                </Button>
+              </>
             </ButtonGroup.Root>
           </FormFieldSet.ControlGroup>
         </FormFieldSet.Root>

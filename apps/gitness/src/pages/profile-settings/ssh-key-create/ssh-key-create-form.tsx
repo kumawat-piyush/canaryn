@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { Button, ButtonGroup, Input, Textarea } from '@harnessio/canary'
+import { Button, ButtonGroup, Input, Textarea, Spacer, Text } from '@harnessio/canary'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -13,28 +12,18 @@ const formSchema = z.object({
 export type SshKeyFormType = z.infer<typeof formSchema>
 
 interface SshKeyCreateFormProps {
-  onSubmit?: (data: SshKeyFormType) => void
-  onCancel?: () => void
   apiError?: string | null
   isLoading?: boolean
-  isSuccess?: boolean
+  onClose: () => void
   handleCreateSshKey: (data: SshKeyFormType) => void
+  error: { type: string; message: string } | null
 }
 
-export function SshKeyCreateForm({
-  onSubmit = () => {},
-  onCancel = () => {},
-  apiError = null,
-  isLoading = false,
-  isSuccess = false,
-  handleCreateSshKey
-}: SshKeyCreateFormProps) {
+export function SshKeyCreateForm({ isLoading, handleCreateSshKey, onClose, error }: SshKeyCreateFormProps) {
   const {
     register,
     handleSubmit,
-    setValue,
     watch,
-    reset,
     formState: { errors, isValid }
   } = useForm<SshKeyFormType>({
     resolver: zodResolver(formSchema),
@@ -45,21 +34,12 @@ export function SshKeyCreateForm({
     }
   })
 
-  const [isSubmitted, setIsSubmitted] = useState(false)
-
-  //   useEffect(() => {
-  //     if (isSuccess === true) {
-  //       reset()
-  //       setIsSubmitted(true)
-  //     }
-  //   }, [isSuccess, reset])
+  const content = watch('content')
+  const identifier = watch('identifier')
 
   const handleFormSubmit: SubmitHandler<SshKeyFormType> = data => {
-    // onSubmit(data)
-    console.log(data)
     handleCreateSshKey(data)
   }
-  const handleCancel = () => {}
 
   return (
     <>
@@ -70,7 +50,13 @@ export function SshKeyCreateForm({
             <FormFieldSet.Label htmlFor="identifier" required>
               New SSH key
             </FormFieldSet.Label>
-            <Input id="identifier" {...register('identifier')} placeholder="Enter the name" autoFocus />
+            <Input
+              id="identifier"
+              value={identifier}
+              {...register('identifier')}
+              placeholder="Enter the name"
+              autoFocus
+            />
             {errors.identifier && (
               <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
                 {errors.identifier.message?.toString()}
@@ -85,7 +71,7 @@ export function SshKeyCreateForm({
               Public key
             </FormFieldSet.Label>
             {/* <Input id="content" {...register('content')} autoFocus /> */}
-            <Textarea id="content" {...register('content')} />
+            <Textarea id="content" value={content} {...register('content')} />
             {errors.identifier && (
               <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
                 {errors.identifier.message?.toString()}
@@ -93,26 +79,28 @@ export function SshKeyCreateForm({
             )}
           </FormFieldSet.ControlGroup>
         </FormFieldSet.Root>
-
+        <>
+          {error && error.type === 'keyCreate' && (
+            <>
+              <Text size={1} className="text-destructive">
+                {error.message}
+              </Text>
+              <Spacer size={4} />
+            </>
+          )}
+        </>
         {/* SUBMIT BUTTONS */}
         <FormFieldSet.Root>
           <FormFieldSet.ControlGroup>
             <ButtonGroup.Root className="justify-end">
-              {!isSubmitted ? (
-                <>
-                  <Button type="button" variant="outline" size="sm" onClick={handleCancel}>
-                    Cancel
-                  </Button>
-                  <Button type="submit" size="sm" disabled={!isValid || isLoading}>
-                    {!isLoading ? 'Save' : 'Saving...'}
-                  </Button>
-                </>
-              ) : (
-                <Button variant="ghost" type="button" size="sm" theme="success" className="pointer-events-none">
-                  Generated Token&nbsp;&nbsp;
-                  <Icon name="tick" size={14} />
+              <>
+                <Button type="button" variant="outline" size="sm" onClick={onClose}>
+                  Cancel
                 </Button>
-              )}
+                <Button type="submit" size="sm" disabled={!isValid || isLoading}>
+                  {!isLoading ? 'Save' : 'Saving...'}
+                </Button>
+              </>
             </ButtonGroup.Root>
           </FormFieldSet.ControlGroup>
         </FormFieldSet.Root>

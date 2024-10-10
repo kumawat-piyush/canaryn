@@ -11,29 +11,26 @@ import {
   useCreatePublicKeyMutation,
   CreatePublicKeyRequestBody,
   CreatePublicKeyOkResponse,
-  CreatePublicKeyErrorResponse
-  // ListPublicKeyErrorResponse
+  CreatePublicKeyErrorResponse,
+  ListPublicKeyErrorResponse
 } from '@harnessio/code-service-client'
 import { TokenCreateDialog } from './token-create/token-create-dialog'
 import { SshKeyCreateDialog } from './ssh-key-create/ssh-key-create-dialog'
 import { TokenSuccessDialog } from './token-create/token-success-dialog'
 import { TokensList } from '@harnessio/playground'
-// import { useQueryClient } from '@tanstack/react-query'
 
 export const SettingsProfileKeysPage = () => {
-  // const queryClient = useQueryClient()
-
   const TEMP_USER_TOKENS_API_PATH = '/api/v1/user/tokens'
 
   const [publicKeys, setPublicKeys] = useState<ListPublicKeyOkResponse>([])
   const [tokens, setTokens] = useState<TokensList[]>([])
-
   const [openCreateTokenDialog, setCreateTokenDialog] = useState(false)
   const [openSuccessTokenDialog, setSuccessTokenDialog] = useState(false)
-  const closeSuccessTokenDialog = () => setSuccessTokenDialog(false)
-
-  const openTokenDialog = () => setCreateTokenDialog(true)
-  const closeTokenDialog = () => setCreateTokenDialog(false)
+  const [saveSshKeyDialog, setSshKeyDialog] = useState(false)
+  const [apiError, setApiError] = useState<{
+    type: 'keyFetch' | 'tokenFetch' | 'keyCreate' | 'tokenCreate'
+    message: string
+  } | null>(null)
 
   const [createdTokenData, setCreatedTokenData] = useState<{
     identifier: string
@@ -41,8 +38,18 @@ export const SettingsProfileKeysPage = () => {
     token: string
   } | null>(null)
 
-  const [saveSshKeyDialog, setSshKeyDialog] = useState(false)
-  const openSshKeyDialog = () => setSshKeyDialog(true)
+  const closeSuccessTokenDialog = () => setSuccessTokenDialog(false)
+
+  const openTokenDialog = () => {
+    setCreateTokenDialog(true)
+    setApiError(null)
+  }
+  const closeTokenDialog = () => setCreateTokenDialog(false)
+
+  const openSshKeyDialog = () => {
+    setSshKeyDialog(true)
+    setApiError(null)
+  }
   const closeSshKeyDialog = () => setSshKeyDialog(false)
 
   const queryParams: ListPublicKeyQueryQueryParams = {
@@ -57,19 +64,23 @@ export const SettingsProfileKeysPage = () => {
     {
       onSuccess: (data: ListPublicKeyOkResponse) => {
         setPublicKeys(data)
+        setApiError(null)
+      },
+      onError: (error: ListPublicKeyErrorResponse) => {
+        const message = error.message || 'An unknown error occurred.'
+        setApiError({ type: 'keyFetch', message: message })
       }
-      // onError: (error: ListPublicKeyErrorResponse) => {
-      //   const message = error.message || 'An unknown error occurred.'
-      //   console.log(message)
-      // }
     }
   )
 
   const fetchTokens = () => {
     fetch(TEMP_USER_TOKENS_API_PATH)
       .then(resp => resp.json())
-      .then(res => setTokens(res))
-      .catch(err => console.log(err))
+      .then(res => {
+        setTokens(res)
+        setApiError(null)
+      })
+      .catch(err => setApiError({ type: 'tokenFetch', message: err }))
   }
 
   useEffect(() => {
@@ -80,11 +91,12 @@ export const SettingsProfileKeysPage = () => {
     { body: {} },
     {
       onSuccess: (newToken: CreateTokenOkResponse) => {
-        // console.log(newToken)
         const tokenData = {
-          identifier: newToken.token.identifier,
-          lifetime: new Date(newToken.token.expires_at).toLocaleDateString(),
-          token: newToken.access_token
+          identifier: newToken.token?.identifier ?? 'Unknown',
+          lifetime: newToken.token?.expires_at
+            ? new Date(newToken.token.expires_at).toLocaleDateString()
+            : 'No Expiration',
+          token: newToken.access_token ?? 'Token not available'
         }
 
         closeTokenDialog()
@@ -93,7 +105,8 @@ export const SettingsProfileKeysPage = () => {
         fetchTokens()
       },
       onError: (error: CreateTokenErrorResponse) => {
-        console.error('Failed to create token:', error)
+        const message = error.message || 'An unknown error occurred.'
+        setApiError({ type: 'tokenCreate', message: message })
       }
     }
   )
@@ -102,18 +115,18 @@ export const SettingsProfileKeysPage = () => {
     { body: {} },
     {
       onSuccess: (newSshKey: CreatePublicKeyOkResponse) => {
-        console.log(newSshKey)
         closeSshKeyDialog()
         setPublicKeys(prevKeys => [...prevKeys, newSshKey])
       },
       onError: (error: CreatePublicKeyErrorResponse) => {
-        console.error('Failed to create :', error)
+        const message = error.message || 'An unknown error occurred.'
+        setApiError({ type: 'keyCreate', message: message })
       }
     }
   )
 
   const handleCreateToken = (tokenData: { identifier: string; lifetime: string }) => {
-    let body: CreateTokenRequestBody = {
+    const body: CreateTokenRequestBody = {
       identifier: tokenData.identifier
     }
 
@@ -141,13 +154,21 @@ export const SettingsProfileKeysPage = () => {
         tokens={tokens}
         openTokenDialog={openTokenDialog}
         openSshKeyDialog={openSshKeyDialog}
+        error={apiError}
       />
       <TokenCreateDialog
         open={openCreateTokenDialog}
         onClose={closeTokenDialog}
         handleCreateToken={handleCreateToken}
+        error={apiError}
+        isLoading={createTokenMutation.isLoading}
       />
-      <SshKeyCreateDialog open={saveSshKeyDialog} onClose={closeSshKeyDialog} handleCreateSshKey={handleCreateSshKey} />
+      <SshKeyCreateDialog
+        open={saveSshKeyDialog}
+        onClose={closeSshKeyDialog}
+        handleCreateSshKey={handleCreateSshKey}
+        error={apiError}
+      />
       {createdTokenData && (
         <TokenSuccessDialog
           open={openSuccessTokenDialog}

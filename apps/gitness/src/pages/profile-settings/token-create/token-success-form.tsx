@@ -15,15 +15,12 @@ export type TokenSuccessFormType = z.infer<typeof formSchema>
 
 interface TokenCreateFormProps {
   defaultValues: TokenSuccessFormType
+  onClose: () => void
 }
 
-export function TokenSuccessForm({ defaultValues }: TokenCreateFormProps) {
-  const {
-    setValue
-    // formState: { errors, isValid }
-  } = useForm<TokenSuccessFormType>({
+export function TokenSuccessForm({ defaultValues, onClose }: TokenCreateFormProps) {
+  const { setValue } = useForm<TokenSuccessFormType>({
     resolver: zodResolver(formSchema),
-    // mode: 'onChange',
     defaultValues: defaultValues
   })
 
@@ -42,7 +39,12 @@ export function TokenSuccessForm({ defaultValues }: TokenCreateFormProps) {
         <FormFieldSet.Root>
           <FormFieldSet.ControlGroup>
             <FormFieldSet.Label htmlFor="identifier">Name</FormFieldSet.Label>
-            <Input id="identifier" value={defaultValues?.identifier} readOnly right={<CopyButton />} />
+            <Input
+              id="identifier"
+              value={defaultValues?.identifier}
+              readOnly
+              right={<CopyButton name={defaultValues?.identifier} />}
+            />
           </FormFieldSet.ControlGroup>
         </FormFieldSet.Root>
 
@@ -61,7 +63,7 @@ export function TokenSuccessForm({ defaultValues }: TokenCreateFormProps) {
               id="token"
               value={defaultValues?.token}
               readOnly
-              right={<CopyButton />}
+              right={<CopyButton name={defaultValues?.token} />}
               autoFocus
               className="overflow-hidden text-ellipsis whitespace-nowrap"
             />
@@ -81,7 +83,7 @@ export function TokenSuccessForm({ defaultValues }: TokenCreateFormProps) {
         <FormFieldSet.Root>
           <FormFieldSet.ControlGroup>
             <ButtonGroup.Root className="justify-end">
-              <Button type="button" variant="outline" size="default" onClick={() => {}}>
+              <Button type="button" variant="outline" size="default" onClick={onClose}>
                 Got it
               </Button>
             </ButtonGroup.Root>

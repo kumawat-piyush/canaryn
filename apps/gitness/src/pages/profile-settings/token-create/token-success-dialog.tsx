@@ -5,7 +5,11 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 interface TokenCreateDialogProps {
   open: boolean
   onClose: () => void
-  tokenData: any
+  tokenData: {
+    identifier: string
+    lifetime: string
+    token: string
+  }
 }
 
 export const TokenSuccessDialog: React.FC<TokenCreateDialogProps> = ({ open, onClose, tokenData }) => {
@@ -16,7 +20,7 @@ export const TokenSuccessDialog: React.FC<TokenCreateDialogProps> = ({ open, onC
           <DialogTitle className="text-left">Create a token</DialogTitle>
         </DialogHeader>
         <DialogDescription>
-          <TokenSuccessForm defaultValues={tokenData} />
+          <TokenSuccessForm defaultValues={tokenData} onClose={onClose} />
         </DialogDescription>
       </DialogContent>
     </Dialog>
