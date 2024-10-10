@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { CodeEditor } from '@harnessio/yaml-editor'
 import { themes } from '../pages/pipeline-edit/theme/monaco-theme'
 import copy from 'clipboard-copy'
@@ -14,11 +14,15 @@ interface FileContentViewerProps {
 
 export type ViewTypeValue = 'preview' | 'code' | 'blame'
 
+const setDefaultView = (language: string): ViewTypeValue => {
+  return language === 'markdown' ? 'preview' : 'code'
+}
+
 export default function FileContentViewer({ repoContent }: FileContentViewerProps) {
   const fileName = repoContent?.name || ''
-  const language = filenameToLanguage(fileName) || 'plaintext'
+  const language = filenameToLanguage(fileName) || ''
   const fileContent = decodeGitContent(repoContent?.content?.data)
-  const [view, setView] = useState<ViewTypeValue>(language === 'markdown' ? 'preview' : 'code')
+  const [view, setView] = useState<ViewTypeValue>(setDefaultView(language))
   const [isEditMode, setIsEditMode] = useState<boolean>(false)
   const latestFile = {
     user: {
@@ -39,6 +43,10 @@ export default function FileContentViewer({ repoContent }: FileContentViewerProp
     []
   )
 
+  useEffect(() => {
+    setView(setDefaultView(language))
+  }, [language])
+
   const RightDetails = () => {
     return (
       <ButtonGroup.Root verticalAlign="center" spacing="2">
@@ -49,7 +57,7 @@ export default function FileContentViewer({ repoContent }: FileContentViewerProp
           |
         </Text>
         <Text size={2} weight="normal" color="tertiaryBackground" className="pr-3">
-          {formatBytes(repoContent?.content?.size)}
+          {formatBytes(repoContent?.content?.size || 0)}
         </Text>
         <PipelineStudioToolbarActions
           onCopyClick={() => copy(fileContent)}

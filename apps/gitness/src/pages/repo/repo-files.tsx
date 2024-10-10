@@ -2,15 +2,18 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate, Outlet } from 'react-router-dom'
 import { Button, ButtonGroup, Icon } from '@harnessio/canary'
 import { BranchSelector, SandboxLayout } from '@harnessio/playground'
-import { useListBranchesQuery, useFindRepositoryQuery } from '@harnessio/code-service-client'
+import { useListBranchesQuery, useFindRepositoryQuery, useGetContentQuery } from '@harnessio/code-service-client'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { PathParams } from '../../RouteDefinitions'
 import Explorer from '../../components/FileExplorer'
+import { normalizeGitRef } from '../../utils/git-utils'
 
 export const RepoFiles: React.FC = () => {
   const repoRef = useGetRepoRef()
   const { spaceId, repoId, gitRef } = useParams<PathParams>()
   const navigate = useNavigate()
+
+  const [selectedBranch, setSelectedBranch] = useState<string>(gitRef || '')
 
   const { data: repository } = useFindRepositoryQuery({ repo_ref: repoRef })
 
@@ -19,7 +22,11 @@ export const RepoFiles: React.FC = () => {
     queryParams: { include_commit: false, sort: 'date', order: 'asc', limit: 20, page: 1, query: '' }
   })
 
-  const [selectedBranch, setSelectedBranch] = useState<string>(gitRef || '')
+  const { data: repoDetails } = useGetContentQuery({
+    path: '',
+    repo_ref: repoRef,
+    queryParams: { include_commit: true, git_ref: normalizeGitRef(selectedBranch) }
+  })
 
   const branchList = branches?.map(item => ({
     name: item?.name
@@ -56,7 +63,9 @@ export const RepoFiles: React.FC = () => {
         {/*  Add back when search api is available  
           <SearchBox.Root width="full" placeholder="Search" /> 
         */}
-        <Explorer selectedBranch={selectedBranch} />
+        {repoDetails?.content?.entries?.length && (
+          <Explorer repoDetails={repoDetails} selectedBranch={selectedBranch} />
+        )}
       </div>
     )
   }

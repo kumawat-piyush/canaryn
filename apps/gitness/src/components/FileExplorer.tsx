@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { FileExplorer } from '@harnessio/playground'
-import { useGetContentQuery, OpenapiContentInfo, getContent } from '@harnessio/code-service-client'
+import { OpenapiContentInfo, getContent, OpenapiGetContentOutput } from '@harnessio/code-service-client'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
 import { normalizeGitRef } from '../utils/git-utils'
 import { PathParams } from '../RouteDefinitions'
 
 interface ExplorerProps {
   selectedBranch: string
+  repoDetails: OpenapiGetContentOutput
 }
 
 const generateLocalStorageKey = (repoRef: string, gitRef: string, keyType: string) => {
@@ -25,7 +26,7 @@ const sortEntriesByType = (entries: OpenapiContentInfo[]): OpenapiContentInfo[] 
   })
 }
 
-export default function Explorer({ selectedBranch }: ExplorerProps) {
+export default function Explorer({ selectedBranch, repoDetails }: ExplorerProps) {
   const repoRef = useGetRepoRef()
   const { spaceId, repoId, resourcePath } = useParams<PathParams>()
   const subResourcePath = useParams()['*'] || ''
@@ -45,12 +46,6 @@ export default function Explorer({ selectedBranch }: ExplorerProps) {
   const [folderContentsCache, setFolderContentsCache] = useState<{ [folderPath: string]: OpenapiContentInfo[] }>(() => {
     const storedFolderContents = localStorage.getItem(uniqueFolderContentsKey)
     return storedFolderContents ? JSON.parse(storedFolderContents) : {}
-  })
-
-  const { data: repoDetails } = useGetContentQuery({
-    path: '',
-    repo_ref: repoRef,
-    queryParams: { include_commit: true, git_ref: normalizeGitRef(selectedBranch) }
   })
 
   const mergeFolderTree = (initialEntries: OpenapiContentInfo[], existingTree: OpenapiContentInfo[]) => {
