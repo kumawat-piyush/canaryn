@@ -12,7 +12,7 @@ import {
   AlertDialogFooter,
   AlertDialogCancel
 } from '@harnessio/canary'
-import { FormFieldSet, MessageTheme } from '@harnessio/playground'
+import { FormFieldSet } from '@harnessio/playground'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -27,9 +27,15 @@ interface FormProjDeleteProps {
   handleDeleteProject: () => void
   isDeleteSuccess: boolean
   isDeleting: boolean
+  deleteError: string | null
 }
 //delete project form with dialog
-export const FormDialogProjectDelete = ({ handleDeleteProject, isDeleteSuccess, isDeleting }: FormProjDeleteProps) => {
+export const FormDialogProjectDelete = ({
+  handleDeleteProject,
+  isDeleteSuccess,
+  isDeleting,
+  deleteError
+}: FormProjDeleteProps) => {
   const {
     register,
     formState: { errors },
@@ -49,9 +55,7 @@ export const FormDialogProjectDelete = ({ handleDeleteProject, isDeleteSuccess, 
   const handleDelete = () => {
     handleDeleteProject()
     if (isDeleteSuccess) {
-      setTimeout(() => {
-        setIsDialogOpen(false) // Close the dialog
-      }, 2000) // Redirect after 2 seconds
+      setIsDialogOpen(false) // Close the dialog
     }
   }
 
@@ -82,9 +86,14 @@ export const FormDialogProjectDelete = ({ handleDeleteProject, isDeleteSuccess, 
               </FormFieldSet.Label>
               <Input id="verification" {...register('verification')} placeholder="" />
               {errors.verification && (
-                <FormFieldSet.Message theme={MessageTheme.ERROR}>
+                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
                   {errors.verification.message?.toString()}
+                  {deleteError}
                 </FormFieldSet.Message>
+              )}
+              {/* delete msg from api */}
+              {deleteError && (
+                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>{deleteError}</FormFieldSet.Message>
               )}
             </AlertDialogHeader>
             <AlertDialogFooter>
@@ -101,7 +110,7 @@ export const FormDialogProjectDelete = ({ handleDeleteProject, isDeleteSuccess, 
               ) : (
                 <Button
                   size="default"
-                  theme="error"
+                  variant="destructive"
                   className="self-start"
                   onClick={handleDelete}
                   disabled={!typeCheck(verificationCheck) || isDeleting}>

@@ -2,19 +2,19 @@ import { useState } from 'react'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { useAppContext } from '../../framework/context/AppContext'
 import {
-  OpenapiUpdateSpaceRequest,
   TypesSpace,
   useUpdateSpaceMutation,
   useDeleteSpaceMutation,
+  UpdateSpaceOkResponse,
+  DeleteSpaceOkResponse,
   UpdateSpaceErrorResponse,
-  DeleteSpaceErrorResponse
+  DeleteSpaceErrorResponse,
+  UpdateSpaceRequestBody
 } from '@harnessio/code-service-client'
 import { ProjectSettingsSandboxPage } from './project-settings-sandbox-page'
 import { redirect } from 'react-router-dom'
 
 export const ProjectSettingsGeneralPage = () => {
-  const [isDeleteSuccess, setIsDeleteSuccess] = useState(false)
-  const [isDeleting, setIsDeleting] = useState(false)
   const spaceId = useGetSpaceURLParam()
   const { spaces } = useAppContext()
   const space = spaces.find((space: TypesSpace) => space?.identifier === spaceId)
@@ -31,7 +31,7 @@ export const ProjectSettingsGeneralPage = () => {
       space_ref: space?.path
     },
     {
-      onSuccess: data => {
+      onSuccess: (data: UpdateSpaceOkResponse) => {
         if (space) {
           space.description = data?.description
         }
@@ -44,8 +44,8 @@ export const ProjectSettingsGeneralPage = () => {
     }
   )
 
-  const handleUpdateDescription = (descriptionData: OpenapiUpdateSpaceRequest) => {
-    const requestBody: OpenapiUpdateSpaceRequest = {
+  const handleUpdateDescription = (descriptionData: UpdateSpaceRequestBody) => {
+    const requestBody: UpdateSpaceRequestBody = {
       description: descriptionData?.description
     }
 
@@ -74,13 +74,10 @@ export const ProjectSettingsGeneralPage = () => {
       space_ref: space?.path
     },
     {
-      onSuccess: () => {
-        setIsDeleting(true)
-        setTimeout(() => {
-          setIsDeleting(false)
-          setIsDeleteSuccess(true) // Mark deletion as successful
+      onSuccess: (data: DeleteSpaceOkResponse) => {
+        if (data) {
           window.location.href = '/'
-        }, 2000)
+        }
       },
       onError: (error: DeleteSpaceErrorResponse) => {
         const deleteErrorMsg = error?.message || 'An unknown error occurred.'
@@ -93,7 +90,9 @@ export const ProjectSettingsGeneralPage = () => {
     deleteSpaceMutation.mutate(
       { space_ref: space?.path },
       {
-        onSettled: () => setIsDeleting(false) // Ensure isDeleting is reset after the mutation completes
+        onSettled: () => {
+          setDeleteError(null)
+        } // Ensure isDeleting is reset after the mutation completes
       }
     )
   }
@@ -104,8 +103,10 @@ export const ProjectSettingsGeneralPage = () => {
       onFormSubmit={handleFormSubmit}
       onHandleDescription={handleDescriptionChange}
       handleDeleteProject={handleDeleteProject}
-      isDeleteSuccess={isDeleteSuccess}
-      isDeleting={isDeleting}
+      isUpdating={updateDescription.isLoading}
+      isDeleting={deleteSpaceMutation.isLoading}
+      isUpateSuccess={updateDescription.isSuccess}
+      isDeleteSuccess={deleteSpaceMutation.isSuccess}
       updateError={updateError}
       deleteError={deleteError}
     />
