@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 import { CanaryOutletFactory, CanaryOutletName } from '@/lib/CanaryOutletFactory'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-[4px] text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-[4px] text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-not-allowed',
   {
     variants: {
       variant: {
@@ -37,7 +37,8 @@ const buttonVariants = cva(
         error: 'text-error border-[hsla(var(--error),0.3)] bg-[hsla(var(--error),0.1)]',
         warning: 'text-warning border-[hsla(var(--warning),0.3)] bg-[hsla(var(--warning),0.1)]',
         success: 'text-success border-[hsla(var(--success),0.3)] bg-[hsla(var(--success),0.1)]',
-        muted: 'text-tertiary-background border-tertiary-background/20 bg-tertiary-background/10'
+        muted: 'text-tertiary-background border-tertiary-background/20 bg-tertiary-background/10',
+        primary: 'text-primary-foreground border-primary-foreground/20 bg-primary'
       },
       padding: {
         default: '',
