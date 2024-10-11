@@ -25,28 +25,7 @@ import { getTrimmedSha, normalizeGitRef } from '../utils/git-utils'
 import { PathParams } from '../RouteDefinitions'
 import { timeAgoFromISOTime } from '../pages/pipeline-edit/utils/time-utils'
 import FileContentViewer from './FileContentViewer'
-
-interface PathParts {
-  path: string
-  parentPath: string
-}
-function splitPathWithParents(fullResourcePath: string) {
-  const pathParts = fullResourcePath?.split('/')
-  const result: PathParts[] = []
-  if (pathParts.length) {
-    let parentPath = ''
-
-    pathParts.map((path, index) => {
-      parentPath += (index === 0 ? '' : '/') + path
-
-      result.push({
-        path: path,
-        parentPath: parentPath
-      })
-    })
-  }
-  return result
-}
+import { PathParts, splitPathWithParents } from '../utils/path-utils'
 
 export const FileViewer: React.FC = () => {
   const repoRef = useGetRepoRef()
@@ -170,7 +149,7 @@ export const FileViewer: React.FC = () => {
               <Text size={2} color="tertiaryBackground">
                 /
               </Text>
-              {pathParts?.map((path, index) => {
+              {pathParts?.map((path: PathParts, index: number) => {
                 return (
                   <>
                     <BreadcrumbItem>

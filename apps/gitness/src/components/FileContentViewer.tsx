@@ -27,15 +27,15 @@ interface FileContentViewerProps {
 
 export type ViewTypeValue = 'preview' | 'code' | 'blame'
 
-const setDefaultView = (language: string): ViewTypeValue => {
-  return language === 'markdown' ? 'preview' : 'code'
+const getDefaultView = (language?: string): ViewTypeValue => {
+  return language && language === 'markdown' ? 'preview' : 'code'
 }
 
 export default function FileContentViewer({ repoContent }: FileContentViewerProps) {
   const fileName = repoContent?.name || ''
   const language = filenameToLanguage(fileName) || ''
   const fileContent = decodeGitContent(repoContent?.content?.data)
-  const [view, setView] = useState<ViewTypeValue>(setDefaultView(language))
+  const [view, setView] = useState<ViewTypeValue>(getDefaultView(language))
   const [isEditMode, setIsEditMode] = useState<boolean>(false)
   const latestFile = {
     user: {
@@ -57,7 +57,7 @@ export default function FileContentViewer({ repoContent }: FileContentViewerProp
   )
 
   useEffect(() => {
-    setView(setDefaultView(language))
+    setView(getDefaultView(language))
   }, [language])
 
   const RightDetails = () => {
