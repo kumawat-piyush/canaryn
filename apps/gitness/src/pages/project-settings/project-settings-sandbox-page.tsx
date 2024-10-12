@@ -70,15 +70,6 @@ export const ProjectSettingsSandboxPage = ({
 
   // Form submit handler
   const onSubmit: SubmitHandler<ProjectSettingsFields> = formData => {
-    // setIsSubmitting(true)
-
-    // setTimeout(() => {
-    //   setIsSubmitting(false)
-    //   setSubmitted(true)
-    //   // TODO:will use this to reset the form after api call has projectName
-    //   // resetProjectSettingsForm(formData)
-    //   setTimeout(() => setSubmitted(false), 2000)
-    // }, 2000)
     onFormSubmit(formData)
   }
 
@@ -164,9 +155,6 @@ export const ProjectSettingsSandboxPage = ({
               {updateError && (
                 <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>{updateError}</FormFieldSet.Message>
               )}
-              {deleteError && (
-                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>{deleteError}</FormFieldSet.Message>
-              )}
             </FormFieldSet.ControlGroup>
 
             {/*BUTTON CONTROL: SAVE & CANCEL*/}
@@ -184,8 +172,7 @@ export const ProjectSettingsSandboxPage = ({
                           : isSaveButtonDisabled
                             ? 'cursor-not-allowed opacity-50'
                             : 'cursor-pointer'
-                      }`}
-                      style={{ pointerEvents: isSaveButtonDisabled || isUpdating ? 'initial' : 'auto' }}>
+                      }`}>
                       {isUpdating ? 'Saving...' : 'Save changes'}
                     </Button>
                     <Button
