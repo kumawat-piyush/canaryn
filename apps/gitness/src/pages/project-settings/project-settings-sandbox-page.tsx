@@ -155,6 +155,9 @@ export const ProjectSettingsSandboxPage = ({
               {updateError && (
                 <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>{updateError}</FormFieldSet.Message>
               )}
+              {deleteError && (
+                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>{deleteError}</FormFieldSet.Message>
+              )}
             </FormFieldSet.ControlGroup>
 
             {/*BUTTON CONTROL: SAVE & CANCEL*/}
