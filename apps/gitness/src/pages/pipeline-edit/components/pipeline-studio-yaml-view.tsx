@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { InlineAction, YamlEditor, MonacoGlobals } from '@harnessio/yaml-editor'
+import { InlineAction, YamlEditor, MonacoGlobals, BlameEditor } from '@harnessio/yaml-editor'
 import { ILanguageFeaturesService } from 'monaco-editor/esm/vs/editor/common/services/languageFeatures.js'
 import { OutlineModel } from 'monaco-editor/esm/vs/editor/contrib/documentSymbols/browser/outlineModel.js'
 import { StandaloneServices } from 'monaco-editor/esm/vs/editor/standalone/browser/standaloneServices.js'
@@ -109,10 +109,35 @@ const PipelineStudioYamlView = (): JSX.Element => {
     }
   }, [yamlRevision])
 
+  const code = `const inlineActionCallback: InlineAction<InlineActionArgsType>['onClick'] = useCallback(
+props => {
+  const { data, path } = props
+  // TODO: move this to utils, refactor
+  switch (data.entityType) {
+    case 'step':
+      switch (data.action) {
+        case 'add':
+          addStep(path, data.position)
+          break
+        case 'edit':
+          editStep(path)
+          break
+        case 'delete':
+          deleteStep(path)
+          break
+      }
+      break
+    default:
+      break
+  }
+},
+[addStep, deleteStep, editStep]
+  )`
   return useMemo(
     () => (
       <div className="flex h-full w-full">
-        <YamlEditor
+        <BlameEditor code={code} language="typescript" />
+        {/* <YamlEditor
           onYamlRevisionChange={value => {
             currentYamlRef.current = value?.yaml
             setYamlRevision(value ?? { yaml: '', revisionId: 0 })
@@ -121,7 +146,7 @@ const PipelineStudioYamlView = (): JSX.Element => {
           themeConfig={themeConfig}
           schemaConfig={schemaConfig}
           inlineActions={inlineActions}
-        />
+        /> */}
       </div>
     ),
     [reRenderYamlEditor, themeConfig, schemaConfig, inlineActions]
