@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Button,
   Input,
@@ -54,10 +54,13 @@ export const FormDialogProjectDelete = ({
 
   const handleDelete = () => {
     handleDeleteProject()
+  }
+
+  useEffect(() => {
     if (isDeleteSuccess) {
       setIsDialogOpen(false) // Close the dialog
     }
-  }
+  }, [isDeleteSuccess])
 
   return (
     <FormFieldSet.Root box shaded>
