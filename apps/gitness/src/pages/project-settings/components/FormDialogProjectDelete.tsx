@@ -91,8 +91,10 @@ export const FormDialogProjectDelete = ({
               {errors.verification && (
                 <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
                   {errors.verification.message?.toString()}
-                  {deleteError}
                 </FormFieldSet.Message>
+              )}
+              {deleteError && (
+                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>{deleteError}</FormFieldSet.Message>
               )}
             </AlertDialogHeader>
             <AlertDialogFooter>
