@@ -49,6 +49,7 @@ export const ProjectSettingsSandboxPage = ({
     handleSubmit,
     // TODO: will use this to reset the form after api call has projectName
     // reset: resetProjectSettingsForm,
+    reset,
     resetField,
     setValue,
     formState: { errors, isValid, isDirty }
@@ -61,12 +62,11 @@ export const ProjectSettingsSandboxPage = ({
     }
   })
 
-  // const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [prodescription, setProDescription] = useState(spaceData?.description)
   const [isCancelDisabled, setIsCancelDisabled] = useState(true)
 
-  const isSaveButtonDisabled = !isValid || isUpdating || !isDirty
+  const isSaveButtonDisabled = submitted || !isValid || !isDirty || isUpdating
 
   // Form submit handler
   const onSubmit: SubmitHandler<ProjectSettingsFields> = formData => {
@@ -76,8 +76,20 @@ export const ProjectSettingsSandboxPage = ({
   useEffect(() => {
     if (isUpateSuccess) {
       setSubmitted(true)
+      setIsCancelDisabled(true)
+
+      const timer = setTimeout(() => {
+        setSubmitted(false)
+      }, 1000) // Reset after 1 seconds
+
+      reset({
+        // Reset form to current values, so the button stays clickable if user makes changes
+        identifier: spaceData.identifier,
+        description: prodescription
+      })
+      return () => clearTimeout(timer)
     }
-    setTimeout(() => setSubmitted(false), 2000)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isUpateSuccess])
 
   useEffect(() => {
@@ -94,6 +106,7 @@ export const ProjectSettingsSandboxPage = ({
     const newDescription = e.target.value
     setProDescription(newDescription)
     setValue('description', newDescription, { shouldValidate: true, shouldDirty: true })
+    setSubmitted(false)
     setIsCancelDisabled(false)
   }
 
