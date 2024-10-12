@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { useAppContext } from '../../framework/context/AppContext'
 import {
@@ -25,6 +25,14 @@ export const ProjectSettingsGeneralPage = () => {
     identifier: space?.identifier ?? '',
     description: space?.description ?? ''
   }
+
+  useEffect(() => {
+    if (!space?.identifier) {
+      // Handle "Project not found" case here temporarily
+      // TODO: will redirect to an error page: project not found
+      setUpdateError('Project not found')
+    }
+  }, [space])
 
   const updateDescription = useUpdateSpaceMutation(
     {
