@@ -94,10 +94,6 @@ export const FormDialogProjectDelete = ({
                   {deleteError}
                 </FormFieldSet.Message>
               )}
-              {/* delete msg from api */}
-              {deleteError && (
-                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>{deleteError}</FormFieldSet.Message>
-              )}
             </AlertDialogHeader>
             <AlertDialogFooter>
               {!isDeleting && !isDeleteSuccess && (
