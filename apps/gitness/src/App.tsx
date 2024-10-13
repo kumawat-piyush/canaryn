@@ -12,6 +12,7 @@ import {
 import { TooltipProvider } from '@harnessio/canary'
 import { queryClient } from './framework/queryClient'
 import PipelineListPage from './pages/pipeline-list'
+import SandboxPipelinesPage from './pages/sandbox-pipeline-list'
 import { SignIn } from './pages/signin'
 import PullRequestListPage from './pages/pull-request-list-page'
 import ExecutionsListPage from './pages/execution-list'
@@ -34,12 +35,14 @@ import { ReposBranchesListPage } from './pages/repo/repo-branch-list'
 import PullRequestDataProvider from './pages/pull-request/context/pull-request-data-provider'
 import PullRequestConversationPage from './pages/pull-request/pull-request-conversation-page'
 import { RepoFiles } from './pages/repo/repo-files'
+import { RepoSandboxFiles } from './pages/repo-sandbox/repo-sandbox-files'
 import { SandboxRepoHeader } from './pages/repo-sandbox/repo-sandbox-header'
 import ReposSandboxListPage from './pages/repo-sandbox/repo-sandbox-list'
 import RepoSandboxLayout from './layouts/RepoSandboxLayout'
 import { SettingsProfileGeneralPage } from './pages/profile-settings/profile-settings-general-container'
 import { SettingsProfileKeysPage } from './pages/profile-settings/profile-settings-keys-container'
 import { FileViewer } from './components/FileViewer'
+import { SandboxFileViewer } from './components/SandboxFileViewer'
 import PullRequestChangesPage from './pages/pull-request/pull-request-changes-page'
 import { Logout } from './pages/logout'
 import { ProjectSettingsGeneralPage } from './pages/project-settings/project-settings-general-page'
@@ -250,25 +253,34 @@ export default function App() {
                 },
                 {
                   path: 'code',
-                  element: <RepoFiles />,
+                  element: <RepoSandboxFiles />,
                   children: [
                     {
                       index: true,
-                      element: <FileViewer />
+                      element: <SandboxFileViewer />
                     },
                     {
                       path: ':gitRef',
-                      element: <FileViewer />,
+                      element: <SandboxFileViewer />,
                       children: [
                         {
                           index: true,
-                          element: <FileViewer />
+                          element: <SandboxFileViewer />
                         },
                         {
                           path: '~/:resourcePath*',
-                          element: <FileViewer />
+                          element: <SandboxFileViewer />
                         }
                       ]
+                    }
+                  ]
+                },
+                {
+                  path: 'pipelines',
+                  children: [
+                    {
+                      index: true,
+                      element: <SandboxPipelinesPage />
                     }
                   ]
                 }
