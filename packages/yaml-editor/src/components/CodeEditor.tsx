@@ -77,7 +77,7 @@ export function CodeEditor<T>(props: CodeEditorProps<T>): JSX.Element {
         }}
         language={language}
         theme={theme}
-        options={options}
+        options={mergedOptions}
         onMount={handleEditorDidMount}
       />
     </>
