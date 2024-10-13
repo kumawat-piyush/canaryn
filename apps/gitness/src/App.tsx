@@ -23,6 +23,7 @@ import PipelineEditPage from './pages/pipeline-edit/pipeline-edit'
 import { LandingPage } from './pages/landing-page'
 import { AppProvider } from './framework/context/AppContext'
 import { RepoSummary } from './pages/repo/repo-summary'
+import { RepoSandboxSummaryList } from './pages/repo-sandbox/repo-sandbox-summary'
 import CreateProject from './pages/create-project'
 import { CreateRepo } from './pages/repo/repo-create-page'
 import { PipelineCreate } from './pages/pipeline-create/pipeline-create'
@@ -35,6 +36,7 @@ import PullRequestConversationPage from './pages/pull-request/pull-request-conve
 import { RepoFiles } from './pages/repo/repo-files'
 import { SandboxRepoHeader } from './pages/repo-sandbox/repo-sandbox-header'
 import ReposSandboxListPage from './pages/repo-sandbox/repo-sandbox-list'
+import RepoSandboxLayout from './layouts/RepoSandboxLayout'
 import { SettingsProfileGeneralPage } from './pages/profile-settings/profile-settings-general-container'
 import { SettingsProfileKeysPage } from './pages/profile-settings/profile-settings-keys-container'
 import { FileViewer } from './components/FileViewer'
@@ -54,10 +56,10 @@ export default function App() {
           path: ':spaceId/repos',
           element: <ReposListPage />
         },
-        {
-          path: ':spaceId/repos/create',
-          element: <CreateRepo />
-        },
+        // {
+        //   path: ':spaceId/repos/create',
+        //   element: <CreateRepo />
+        // },
         {
           path: ':spaceId/repos/:repoId',
           element: <RepoLayout />,
@@ -233,6 +235,44 @@ export default function App() {
             {
               path: ':spaceId/repos',
               element: <ReposSandboxListPage />
+            },
+            {
+              path: ':spaceId/repos/:repoId',
+              element: <RepoSandboxLayout />,
+              children: [
+                {
+                  index: true,
+                  element: <RepoSandboxSummaryList />
+                },
+                {
+                  path: 'summary',
+                  element: <RepoSandboxSummaryList />
+                },
+                {
+                  path: 'code',
+                  element: <RepoFiles />,
+                  children: [
+                    {
+                      index: true,
+                      element: <FileViewer />
+                    },
+                    {
+                      path: ':gitRef',
+                      element: <FileViewer />,
+                      children: [
+                        {
+                          index: true,
+                          element: <FileViewer />
+                        },
+                        {
+                          path: '~/:resourcePath*',
+                          element: <FileViewer />
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             },
             {
               path: ':spaceId/repos/create',
