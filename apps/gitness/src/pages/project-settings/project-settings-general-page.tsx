@@ -87,6 +87,7 @@ export const ProjectSettingsGeneralPage = () => {
     {
       onSuccess: (data: DeleteSpaceOkResponse) => {
         if (data) {
+          setDeleteError(null)
           window.location.href = '/'
         }
       },
@@ -102,11 +103,9 @@ export const ProjectSettingsGeneralPage = () => {
       { space_ref: space?.path },
       {
         onSuccess: () => {
-          window.location.href = '/'
-        },
-        onSettled: () => {
           setDeleteError(null)
-        } // Ensure isDeleting is reset after the mutation completes
+          window.location.href = '/'
+        }
       }
     )
   }
