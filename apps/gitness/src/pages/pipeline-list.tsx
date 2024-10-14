@@ -96,25 +96,32 @@ export default function PipelinesPage() {
     )
   }
 
+  const pipelinesExist = (pipelines?.length ?? 0) > 0
+
   return (
     <>
-      <PaddingListLayout>
-        <Text size={5} weight={'medium'}>
-          Pipelines
-        </Text>
-        <Spacer size={6} />
-        <div className="flex justify-between gap-5">
-          <div className="flex-1">
-            <Filter />
-          </div>
-          <Button variant="default" asChild>
-            <Link to="create">Create Pipeline</Link>
-          </Button>
-        </div>
+      <PaddingListLayout spaceTop={false}>
+        <Spacer size={2} />
+        {pipelinesExist && (
+          <>
+            <Text size={5} weight={'medium'}>
+              Pipelines
+            </Text>
+            <Spacer size={6} />
+            <div className="flex justify-between gap-5">
+              <div className="flex-1">
+                <Filter />
+              </div>
+              <Button variant="default" asChild>
+                <Link to="create">Create Pipeline</Link>
+              </Button>
+            </div>
+          </>
+        )}
         <Spacer size={5} />
         {renderListContent()}
         <Spacer size={8} />
-        {(pipelines?.length ?? 0) > 0 && (
+        {pipelinesExist && (
           <ListPagination.Root>
             <Pagination>
               <PaginationContent>

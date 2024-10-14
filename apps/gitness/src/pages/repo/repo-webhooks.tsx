@@ -69,29 +69,32 @@ function RepoWebhooksListPage() {
     return <WebhooksList webhooks={webhooks} LinkComponent={LinkComponent} />
   }
 
+  const webhooksExist = (webhooks?.length ?? 0) > 0
+
   return (
     <>
       <PaddingListLayout spaceTop={false}>
         <Spacer size={2} />
-        <Text size={5} weight={'medium'}>
-          Webhooks
-        </Text>
-        <Spacer size={6} />
-
-        <div className="flex justify-between gap-5 items-center">
-          <div className="flex-1">
-            <Filter />
-          </div>
-          <Button variant="default" asChild>
-            <Link to="#">Create webhook</Link>
-          </Button>
-        </div>
-
+        {webhooksExist && (
+          <>
+            <Text size={5} weight={'medium'}>
+              Webhooks
+            </Text>
+            <Spacer size={6} />
+            <div className="flex justify-between gap-5 items-center">
+              <div className="flex-1">
+                <Filter />
+              </div>
+              <Button variant="default" asChild>
+                <Link to="#">Create webhook</Link>
+              </Button>
+            </div>
+          </>
+        )}
         <Spacer size={5} />
         {renderListContent()}
         <Spacer size={8} />
-
-        {(webhooks?.length ?? 0) > 0 && (
+        {webhooksExist && (
           <ListPagination.Root>
             <Pagination>
               <PaginationContent>

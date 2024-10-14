@@ -189,28 +189,32 @@ function PullRequestListPage() {
     )
   }
 
+  const pullRequestsExist = (pullrequests?.length ?? 0) > 0
+
   return (
     <>
       <PaddingListLayout spaceTop={false}>
         <Spacer size={2} />
-        <Text size={5} weight={'medium'}>
-          Pull Requests
-        </Text>
-        <Spacer size={6} />
-
-        <div className="flex justify-between gap-5 items-center">
-          <div className="flex-1">
-            <Filter sortOptions={SortOptions} />
-          </div>
-          <Button variant="default" asChild>
-            <Link to="#">New pull request</Link>
-          </Button>
-        </div>
-
+        {pullRequestsExist && (
+          <>
+            <Text size={5} weight={'medium'}>
+              Pull Requests
+            </Text>
+            <Spacer size={6} />
+            <div className="flex justify-between gap-5 items-center">
+              <div className="flex-1">
+                <Filter sortOptions={SortOptions} />
+              </div>
+              <Button variant="default" asChild>
+                <Link to="#">New pull request</Link>
+              </Button>
+            </div>
+          </>
+        )}
         <Spacer size={5} />
         {renderListContent()}
         <Spacer size={8} />
-        {(pullrequests?.length ?? 0) > 0 && (
+        {pullRequestsExist && (
           <ListPagination.Root>
             <Pagination>
               <PaginationContent>

@@ -102,18 +102,22 @@ export default function ReposListPage() {
     <>
       <Header />
       <PaddingListLayout>
-        <Text size={5} weight={'medium'}>
-          Repositories
-        </Text>
-        <Spacer size={6} />
-        <div className="flex justify-between gap-5">
-          <div className="flex-1">
-            <Filter sortOptions={sortOptions} />
-          </div>
-          <Button variant="default" asChild>
-            <Link to={`/sandbox/spaces/${space}/repos/create`}>Create Repository</Link>
-          </Button>
-        </div>
+        {repositories?.length && (
+          <>
+            <Text size={5} weight={'medium'}>
+              Repositories
+            </Text>
+            <Spacer size={6} />
+            <div className="flex justify-between gap-5">
+              <div className="flex-1">
+                <Filter sortOptions={sortOptions} />
+              </div>
+              <Button variant="default" asChild>
+                <Link to={`/sandbox/spaces/${space}/repos/create`}>Create Repository</Link>
+              </Button>
+            </div>
+          </>
+        )}
         <Spacer size={5} />
         {renderListContent()}
         <Spacer size={8} />

@@ -123,25 +123,31 @@ export function ReposBranchesListPage() {
     )
   }
 
+  const branchesExist = (branches?.length ?? 0) > 0
+
   return (
     <PaddingListLayout spaceTop={false}>
       <Spacer size={2} />
-      <Text size={5} weight={'medium'}>
-        Branches
-      </Text>
-      <Spacer size={6} />
-      <div className="flex justify-between gap-5 items-center">
-        <div className="flex-1">
-          <Filter sortOptions={sortOptions} />
-        </div>
-        <Button variant="default" asChild>
-          <Link to="create">Create Branch</Link>
-        </Button>
-      </div>
+      {branchesExist && (
+        <>
+          <Text size={5} weight={'medium'}>
+            Branches
+          </Text>
+          <Spacer size={6} />
+          <div className="flex justify-between gap-5 items-center">
+            <div className="flex-1">
+              <Filter sortOptions={sortOptions} />
+            </div>
+            <Button variant="default" asChild>
+              <Link to="create">Create Branch</Link>
+            </Button>
+          </div>
+        </>
+      )}
       <Spacer size={5} />
       {renderListContent()}
       <Spacer size={8} />
-      {(branches?.length ?? 0) > 0 && (
+      {branchesExist && (
         <ListPagination.Root>
           <Pagination>
             <PaginationContent>
