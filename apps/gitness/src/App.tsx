@@ -63,10 +63,7 @@ export default function App() {
           path: ':spaceId/repos',
           element: <ReposListPage />
         },
-        // {
-        //   path: ':spaceId/repos/create',
-        //   element: <CreateRepo />
-        // },
+
         {
           path: ':spaceId/repos/:repoId',
           element: <RepoLayout />,
