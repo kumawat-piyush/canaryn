@@ -49,7 +49,7 @@ export default function ReposListPage() {
   const { query, sort } = useCommonFilter<ListReposQueryQueryParams['sort']>()
 
   const { isFetching, data } = useListReposQuery({ queryParams: { sort, query, page }, space_ref: `${space}/+` })
-  const { content: repositories, pageResponse } = usePagedContent<ListReposOkResponse>(data || {})
+  const { content: repositories, pageResponse } = usePagedContent<ListReposOkResponse>(data)
   const { totalPages } = pageResponse || {}
   const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
 
@@ -92,18 +92,16 @@ export default function ReposListPage() {
     return (
       <RepoList
         LinkComponent={LinkComponent}
-        repos={repositories?.map((repo: RepoRepositoryOutput) => {
-          return {
-            id: repo.id,
-            name: repo.identifier,
-            description: repo.description,
-            private: !repo.is_public,
-            stars: 0,
-            forks: repo.num_forks,
-            pulls: repo.num_pulls,
-            timestamp: repo.updated && timeAgoFromEpochTime(repo.updated)
-          }
-        })}
+        repos={repositories?.map((repo: RepoRepositoryOutput) => ({
+          id: repo?.id ? String(repo.id) : '',
+          name: repo?.identifier || '',
+          description: repo.description,
+          private: !repo.is_public,
+          stars: 0,
+          forks: repo?.num_forks || 0,
+          pulls: repo?.num_pulls || 0,
+          timestamp: repo?.updated ? timeAgoFromEpochTime(repo.updated) : ''
+        }))}
       />
     )
   }

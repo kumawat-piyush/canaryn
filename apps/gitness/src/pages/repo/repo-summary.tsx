@@ -42,15 +42,11 @@ export const RepoSummary: React.FC = () => {
     repo_ref: repoRef,
     queryParams: { include_commit: false, sort: 'date', order: 'asc', limit: 20, page: 1, query: '' }
   })
-  const { content: branches } = usePagedContent<ListBranchesOkResponse>(data || {})
+  const { content: branches } = usePagedContent<ListBranchesOkResponse>(data)
 
   const [selectedBranch, setSelectedBranch] = useState<string>('')
 
   const { query } = useCommonFilter()
-
-  const branchList = branches?.map(item => ({
-    name: item?.name
-  }))
 
   const { data: repoSummary } = useSummaryQuery({
     repo_ref: repoRef,
@@ -174,7 +170,11 @@ export const RepoSummary: React.FC = () => {
                 <ButtonGroup.Root>
                   <BranchSelector
                     name={selectedBranch}
-                    branchList={branchList}
+                    branchList={branches
+                      ?.filter(item => item?.name)
+                      .map(item => ({
+                        name: item.name || ''
+                      }))}
                     selectBranch={branch => selectBranch(branch)}
                   />
 
