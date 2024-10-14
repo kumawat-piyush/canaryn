@@ -20,11 +20,13 @@ import {
   ListBranchesErrorResponse,
   useCalculateCommitDivergenceMutation,
   useFindRepositoryQuery,
-  ListBranchesQueryQueryParams
+  ListBranchesQueryQueryParams,
+  ListBranchesOkResponse
 } from '@harnessio/code-service-client'
 import { orderSortDate } from '../../types'
 import { timeAgoFromISOTime } from '../pipeline-edit/utils/time-utils'
 import { Link } from 'react-router-dom'
+import { usePagedContent } from '../../hooks/usePagedContent'
 
 const sortOptions = [
   { name: 'Date', value: 'date' },
@@ -43,11 +45,7 @@ export function ReposBranchesListPage() {
 
   const { sort, query } = useCommonFilter<ListBranchesQueryQueryParams['sort']>()
 
-  const {
-    isLoading,
-    data: brancheslistData,
-    isError
-  } = useListBranchesQuery(
+  const { isLoading, data, isError } = useListBranchesQuery(
     {
       queryParams: { page: currentPage, limit: 20, sort, query, order: orderSortDate.DESC, include_commit: true },
       repo_ref: repoRef
@@ -58,6 +56,7 @@ export function ReposBranchesListPage() {
       }
     }
   )
+  const { content: brancheslistData } = usePagedContent<ListBranchesOkResponse>(data)
 
   const { data: branchDivergence, mutate } = useCalculateCommitDivergenceMutation({
     repo_ref: repoRef
