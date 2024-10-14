@@ -51,9 +51,7 @@ export default function PipelinesPage() {
   const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
 
   const renderListContent = () => {
-    if (isFetching) {
-      return <SkeletonList />
-    }
+    if (isFetching) return <SkeletonList />
 
     if (!pipelines?.length) {
       if (query) {
