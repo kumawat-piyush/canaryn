@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { useAppContext } from '../../framework/context/AppContext'
+import { NoData } from '@harnessio/playground'
 import {
   TypesSpace,
   useUpdateSpaceMutation,
@@ -110,18 +111,28 @@ export const ProjectSettingsGeneralPage = () => {
     )
   }
 
-  return (
-    <ProjectSettingsSandboxPage
-      spaceData={spaceData}
-      onFormSubmit={handleFormSubmit}
-      onHandleDescription={handleDescriptionChange}
-      handleDeleteProject={handleDeleteProject}
-      isUpdating={updateDescription.isLoading}
-      isDeleting={deleteSpaceMutation.isLoading}
-      isUpateSuccess={updateDescription.isSuccess}
-      isDeleteSuccess={deleteSpaceMutation.isSuccess}
-      updateError={updateError}
-      deleteError={deleteError}
-    />
-  )
+  const renderContent = (space: { identifier: string } | undefined) => {
+    if (space?.identifier === '') {
+      return (
+        <NoData iconName="no-data-folder" title="No project found" description={['There are no projects found.']} />
+      )
+    } else {
+      return (
+        <ProjectSettingsSandboxPage
+          spaceData={spaceData}
+          onFormSubmit={handleFormSubmit}
+          onHandleDescription={handleDescriptionChange}
+          handleDeleteProject={handleDeleteProject}
+          isUpdating={updateDescription.isLoading}
+          isDeleting={deleteSpaceMutation.isLoading}
+          isUpateSuccess={updateDescription.isSuccess}
+          isDeleteSuccess={deleteSpaceMutation.isSuccess}
+          updateError={updateError}
+          deleteError={deleteError}
+        />
+      )
+    }
+  }
+
+  return <>{renderContent(spaceData)}</>
 }
