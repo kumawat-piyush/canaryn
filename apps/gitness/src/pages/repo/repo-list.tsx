@@ -11,14 +11,19 @@ import {
   Spacer,
   Text
 } from '@harnessio/canary'
-import { useListReposQuery, RepoRepositoryOutput, ListReposQueryQueryParams } from '@harnessio/code-service-client'
+import {
+  useListReposQuery,
+  RepoRepositoryOutput,
+  ListReposQueryQueryParams,
+  ListReposOkResponse
+} from '@harnessio/code-service-client'
 import { PaddingListLayout, SkeletonList, RepoList, Filter, useCommonFilter } from '@harnessio/playground'
 import { Link, useNavigate } from 'react-router-dom'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { usePagination } from '../../framework/hooks/usePagination'
 import Header from '../../components/Header'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
-import { WithPageResponse } from '../../types'
+import { useGetPageResponse } from '../../hooks/useGetPageResponse'
 
 const sortOptions = [
   { name: 'Created', value: 'created' },
@@ -36,8 +41,7 @@ export default function ReposListPage() {
   const { query, sort } = useCommonFilter<ListReposQueryQueryParams['sort']>()
 
   const { isFetching, data } = useListReposQuery({ queryParams: { sort, query, page }, space_ref: `${space}/+` })
-  // @ts-expect-error: content and pageResponse do not appear in response type
-  const { content: repositories, pageResponse } = data as WithPageResponse<ListReposOkResponse>
+  const { content: repositories, pageResponse } = useGetPageResponse<ListReposOkResponse>(data || {})
   const { totalPages } = pageResponse || {}
   const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
 

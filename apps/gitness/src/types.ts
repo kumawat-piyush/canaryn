@@ -99,16 +99,3 @@ export enum orderSortDate {
   ASC = 'asc',
   DESC = 'desc'
 }
-
-export interface WithPageResponse<T> {
-  content: T
-  pageResponse: PageResponse
-}
-
-interface PageResponse {
-  totalItems: number
-  totalPages: number
-  pageSize: number
-  nextPage: number
-  previousPage: number
-}
