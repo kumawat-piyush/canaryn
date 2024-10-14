@@ -18,6 +18,7 @@ import { usePagination } from '../../framework/hooks/usePagination'
 
 import Header from '../../components/Header'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
+import { PageResponse } from '../../types'
 
 const sortOptions = [
   { name: 'Created', value: 'created' },
@@ -28,14 +29,15 @@ const sortOptions = [
 const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
 
 export default function ReposListPage() {
-  // hardcoded
-  const totalPages = 10
   const navigate = useNavigate()
   const space = useGetSpaceURLParam()
 
   const { query, sort } = useCommonFilter<ListReposQueryQueryParams['sort']>()
 
   const { isFetching, data } = useListReposQuery({ queryParams: { sort, query }, space_ref: `${space}/+` })
+  // @ts-expect-error: content and pageResponse do not appear in response type
+  const { content: repositories, pageResponse } = data || {}
+  const { totalPages } = (pageResponse as PageResponse) || {}
   const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
 
   const renderListContent = () => {
@@ -43,10 +45,10 @@ export default function ReposListPage() {
       return <SkeletonList />
     }
     return (
-      data && (
+      repositories && (
         <RepoList
           LinkComponent={LinkComponent}
-          repos={data?.map((repo: RepoRepositoryOutput) => {
+          repos={repositories?.map((repo: RepoRepositoryOutput) => {
             return {
               id: repo.id,
               name: repo.identifier,
@@ -82,7 +84,7 @@ export default function ReposListPage() {
         <Spacer size={5} />
         {renderListContent()}
         <Spacer size={8} />
-        {(data?.length ?? 0) > 0 && (
+        {(repositories?.length ?? 0) > 0 && (
           <ListPagination.Root>
             <Pagination>
               <PaginationContent>
