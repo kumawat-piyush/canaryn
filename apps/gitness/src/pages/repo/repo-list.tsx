@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import {
   Button,
   ListPagination,
@@ -31,14 +32,19 @@ const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode
 export default function ReposListPage() {
   const navigate = useNavigate()
   const space = useGetSpaceURLParam()
+  const [page, setPage] = useState<number>(1)
 
   const { query, sort } = useCommonFilter<ListReposQueryQueryParams['sort']>()
 
-  const { isFetching, data } = useListReposQuery({ queryParams: { sort, query }, space_ref: `${space}/+` })
+  const { isFetching, data } = useListReposQuery({ queryParams: { sort, query, page }, space_ref: `${space}/+` })
   // @ts-expect-error: content and pageResponse do not appear in response type
   const { content: repositories, pageResponse } = data || {}
   const { totalPages } = (pageResponse as PageResponse) || {}
   const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
+
+  useEffect(() => {
+    setPage(currentPage)
+  }, [currentPage])
 
   const renderListContent = () => {
     if (isFetching) {
