@@ -31,6 +31,8 @@ export const ProjectSettingsGeneralPage = () => {
       // Handle "Project not found" case here temporarily
       // TODO: will redirect to an error page: project not found
       setUpdateError('Project not found')
+    } else {
+      setUpdateError('')
     }
   }, [space])
 
@@ -41,6 +43,7 @@ export const ProjectSettingsGeneralPage = () => {
     {
       onSuccess: (data: UpdateSpaceOkResponse) => {
         if (space) {
+          setUpdateError('')
           space.description = data?.description
         }
         redirect('/')
@@ -98,6 +101,9 @@ export const ProjectSettingsGeneralPage = () => {
     deleteSpaceMutation.mutate(
       { space_ref: space?.path },
       {
+        onSuccess: () => {
+          window.location.href = '/'
+        },
         onSettled: () => {
           setDeleteError(null)
         } // Ensure isDeleting is reset after the mutation completes

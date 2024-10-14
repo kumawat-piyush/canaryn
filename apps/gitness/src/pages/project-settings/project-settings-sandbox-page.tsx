@@ -4,7 +4,7 @@ import { SandboxLayout, FormFieldSet } from '@harnessio/playground'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { FormDialogProjectDelete } from './components/FormDialogProjectDelete'
+import { FormDialogProjectDelete } from './components/form-dialog-project-delete'
 
 interface PageProps {
   spaceData: InputProps
@@ -78,6 +78,7 @@ export const ProjectSettingsSandboxPage = ({
       setSubmitted(true)
       setIsCancelDisabled(true)
 
+      // After 1 second, reset the submitted state and make the button clickable again
       const timer = setTimeout(() => {
         setSubmitted(false)
       }, 1000) // Reset after 1 seconds
@@ -87,6 +88,7 @@ export const ProjectSettingsSandboxPage = ({
         identifier: spaceData.identifier,
         description: prodescription
       })
+
       return () => clearTimeout(timer)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
