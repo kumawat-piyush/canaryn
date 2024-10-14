@@ -15,6 +15,11 @@ import {
 import { ProjectSettingsSandboxPage } from './project-settings-sandbox-page'
 import { redirect } from 'react-router-dom'
 
+type spaceData = {
+  identifier: string
+  description: string
+}
+
 export const ProjectSettingsGeneralPage = () => {
   const spaceId = useGetSpaceURLParam()
   const { spaces } = useAppContext()
@@ -22,7 +27,7 @@ export const ProjectSettingsGeneralPage = () => {
   const [updateError, setUpdateError] = useState<string | null>(null)
   const [deleteError, setDeleteError] = useState<string | null>(null)
 
-  const spaceData = {
+  const spaceData: spaceData = {
     identifier: space?.identifier ?? '',
     description: space?.description ?? ''
   }
@@ -101,7 +106,7 @@ export const ProjectSettingsGeneralPage = () => {
     )
   }
 
-  const renderContent = (space: { identifier: string } | undefined) => {
+  const renderContent = (space: spaceData) => {
     if (space?.identifier === '') {
       return (
         <NoData iconName="no-data-folder" title="No project found" description={['There are no projects found.']} />
