@@ -16,10 +16,9 @@ import { PaddingListLayout, SkeletonList, RepoList, Filter, useCommonFilter } fr
 import { Link, useNavigate } from 'react-router-dom'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { usePagination } from '../../framework/hooks/usePagination'
-
 import Header from '../../components/Header'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
-import { PageResponse } from '../../types'
+import { WithPageResponse } from '../../types'
 
 const sortOptions = [
   { name: 'Created', value: 'created' },
@@ -38,8 +37,8 @@ export default function ReposListPage() {
 
   const { isFetching, data } = useListReposQuery({ queryParams: { sort, query, page }, space_ref: `${space}/+` })
   // @ts-expect-error: content and pageResponse do not appear in response type
-  const { content: repositories, pageResponse } = data || {}
-  const { totalPages } = (pageResponse as PageResponse) || {}
+  const { content: repositories, pageResponse } = data as WithPageResponse<ListReposOkResponse>
+  const { totalPages } = pageResponse || {}
   const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
 
   useEffect(() => {

@@ -100,7 +100,12 @@ export enum orderSortDate {
   DESC = 'desc'
 }
 
-export interface PageResponse {
+export interface WithPageResponse<T> {
+  content: T
+  pageResponse: PageResponse
+}
+
+interface PageResponse {
   totalItems: number
   totalPages: number
   pageSize: number
