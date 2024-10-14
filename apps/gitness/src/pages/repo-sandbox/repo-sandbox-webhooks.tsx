@@ -13,15 +13,7 @@ import {
   PaginationNext
 } from '@harnessio/canary'
 // import { NoSearchResults } from '../components/no-search-results'
-import {
-  Filter,
-  NoData,
-  PaddingListLayout,
-  SandboxLayout,
-  SkeletonList,
-  useCommonFilter,
-  WebhooksList
-} from '@harnessio/playground'
+import { Filter, NoData, SandboxLayout, SkeletonList, useCommonFilter, WebhooksList } from '@harnessio/playground'
 import { useListWebhooksQuery } from '@harnessio/code-service-client'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { usePagination } from '../../framework/hooks/usePagination'
