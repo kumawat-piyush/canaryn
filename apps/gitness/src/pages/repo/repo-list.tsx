@@ -11,11 +11,10 @@ import {
   Text
 } from '@harnessio/canary'
 import { useListReposQuery, RepoRepositoryOutput, ListReposQueryQueryParams } from '@harnessio/code-service-client'
-import { PaddingListLayout, SkeletonList, RepoList, Filter, useCommonFilter } from '@harnessio/playground'
+import { PaddingListLayout, SkeletonList, RepoList, Filter, useCommonFilter, NoData } from '@harnessio/playground'
 import { Link, useNavigate } from 'react-router-dom'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { usePagination } from '../../framework/hooks/usePagination'
-
 import Header from '../../components/Header'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
 
@@ -39,27 +38,40 @@ export default function ReposListPage() {
   const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
 
   const renderListContent = () => {
-    if (isFetching) {
-      return <SkeletonList />
-    }
-    return (
-      data && (
-        <RepoList
-          LinkComponent={LinkComponent}
-          repos={data?.map((repo: RepoRepositoryOutput) => {
-            return {
-              id: repo.id,
-              name: repo.identifier,
-              description: repo.description,
-              private: !repo.is_public,
-              stars: 0,
-              forks: repo.num_forks,
-              pulls: repo.num_pulls,
-              timestamp: repo.updated && timeAgoFromEpochTime(repo.updated)
-            }
-          })}
+    if (isFetching) return <SkeletonList />
+
+    if (!data || data?.length === 0)
+      return (
+        <NoData
+          iconName="no-data-folder"
+          title="No repositories yet"
+          description={[
+            'There are no repositories in this project yet.',
+            'Create new or import an existing repository.'
+          ]}
+          primaryButton={{ label: 'Create repository', to: `/sandbox/spaces/${space}/repos/create` }}
+          /**
+           * @TODO add "to" link when Import repository gets implemented
+           */
+          secondaryButton={{ label: 'Import repository', to: '' }}
         />
       )
+    return (
+      <RepoList
+        LinkComponent={LinkComponent}
+        repos={data?.map((repo: RepoRepositoryOutput) => {
+          return {
+            id: repo.id,
+            name: repo.identifier,
+            description: repo.description,
+            private: !repo.is_public,
+            stars: 0,
+            forks: repo.num_forks,
+            pulls: repo.num_pulls,
+            timestamp: repo.updated && timeAgoFromEpochTime(repo.updated)
+          }
+        })}
+      />
     )
   }
 
@@ -71,14 +83,16 @@ export default function ReposListPage() {
           Repositories
         </Text>
         <Spacer size={6} />
-        <div className="flex justify-between gap-5">
-          <div className="flex-1">
-            <Filter sortOptions={sortOptions} />
+        {data && data.length > 0 && (
+          <div className="flex justify-between gap-5">
+            <div className="flex-1">
+              <Filter sortOptions={sortOptions} />
+            </div>
+            <Button variant="default" onClick={() => navigate(`/sandbox/spaces/${space}/repos/create`)}>
+              Create Repository
+            </Button>
           </div>
-          <Button variant="default" onClick={() => navigate(`/sandbox/spaces/${space}/repos/create`)}>
-            Create Repo
-          </Button>
-        </div>
+        )}
         <Spacer size={5} />
         {renderListContent()}
         <Spacer size={8} />
