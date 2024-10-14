@@ -11,7 +11,15 @@ import {
   Text
 } from '@harnessio/canary'
 import { useListReposQuery, RepoRepositoryOutput, ListReposQueryQueryParams } from '@harnessio/code-service-client'
-import { PaddingListLayout, SkeletonList, RepoList, Filter, useCommonFilter, NoData } from '@harnessio/playground'
+import {
+  PaddingListLayout,
+  SkeletonList,
+  RepoList,
+  Filter,
+  useCommonFilter,
+  NoData,
+  NoSearchResults
+} from '@harnessio/playground'
 import { Link, useNavigate } from 'react-router-dom'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { usePagination } from '../../framework/hooks/usePagination'
@@ -40,7 +48,18 @@ export default function ReposListPage() {
   const renderListContent = () => {
     if (isFetching) return <SkeletonList />
 
-    if (!data || data?.length === 0)
+    if (!data?.length) {
+      if (query) {
+        return (
+          <NoSearchResults
+            iconName="no-search-magnifying-glass"
+            title="No search results"
+            description={['Check your spelling and filter options,', 'or search for a different keyword.']}
+            primaryButton={{ label: 'Clear search' }}
+            secondaryButton={{ label: 'Clear filters' }}
+          />
+        )
+      }
       return (
         <NoData
           iconName="no-data-folder"
@@ -56,6 +75,7 @@ export default function ReposListPage() {
           secondaryButton={{ label: 'Import repository', to: '' }}
         />
       )
+    }
     return (
       <RepoList
         LinkComponent={LinkComponent}
@@ -83,16 +103,14 @@ export default function ReposListPage() {
           Repositories
         </Text>
         <Spacer size={6} />
-        {data && data.length > 0 && (
-          <div className="flex justify-between gap-5">
-            <div className="flex-1">
-              <Filter sortOptions={sortOptions} />
-            </div>
-            <Button variant="default" onClick={() => navigate(`/sandbox/spaces/${space}/repos/create`)}>
-              Create Repository
-            </Button>
+        <div className="flex justify-between gap-5">
+          <div className="flex-1">
+            <Filter sortOptions={sortOptions} />
           </div>
-        )}
+          <Button variant="default" onClick={() => navigate(`/sandbox/spaces/${space}/repos/create`)}>
+            Create Repository
+          </Button>
+        </div>
         <Spacer size={5} />
         {renderListContent()}
         <Spacer size={8} />
