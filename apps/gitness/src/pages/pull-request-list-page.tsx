@@ -195,7 +195,11 @@ function PullRequestListPage() {
     <>
       <PaddingListLayout spaceTop={false}>
         <Spacer size={2} />
-        {pullRequestsExist && (
+        {/**
+         * Show if branches exist.
+         * Additionally, show if query(search) is applied.
+         */}
+        {(query || pullRequestsExist) && (
           <>
             <Text size={5} weight={'medium'}>
               Pull Requests

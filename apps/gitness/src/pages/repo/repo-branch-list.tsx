@@ -128,7 +128,11 @@ export function ReposBranchesListPage() {
   return (
     <PaddingListLayout spaceTop={false}>
       <Spacer size={2} />
-      {branchesExist && (
+      {/**
+       * Show if branches exist.
+       * Additionally, show if query(search) is applied.
+       */}
+      {(query || branchesExist) && (
         <>
           <Text size={5} weight={'medium'}>
             Branches

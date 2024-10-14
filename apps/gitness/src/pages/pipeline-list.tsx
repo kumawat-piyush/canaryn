@@ -102,7 +102,11 @@ export default function PipelinesPage() {
     <>
       <PaddingListLayout spaceTop={false}>
         <Spacer size={2} />
-        {pipelinesExist && (
+        {/**
+         * Show if pipelines exist.
+         * Additionally, show if query(search) is applied.
+         */}
+        {(query || pipelinesExist) && (
           <>
             <Text size={5} weight={'medium'}>
               Pipelines

@@ -102,7 +102,11 @@ export default function ReposListPage() {
     <>
       <Header />
       <PaddingListLayout>
-        {repositories?.length && (
+        {/**
+         * Show if repositories exist.
+         * Additionally, show if query(search) is applied.
+         */}
+        {(query || repositories?.length) && (
           <>
             <Text size={5} weight={'medium'}>
               Repositories
