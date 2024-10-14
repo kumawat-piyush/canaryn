@@ -76,7 +76,7 @@ function RepoWebhooksListPage() {
       <PaddingListLayout spaceTop={false}>
         <Spacer size={2} />
         {/**
-         * Show if branches exist.
+         * Show if webhooks exist.
          * Additionally, show if query(search) is applied.
          */}
         {(query || webhooksExist) && (
