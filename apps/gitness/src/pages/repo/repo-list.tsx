@@ -20,7 +20,7 @@ import {
   NoData,
   NoSearchResults
 } from '@harnessio/playground'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { usePagination } from '../../framework/hooks/usePagination'
 import Header from '../../components/Header'
@@ -37,18 +37,20 @@ const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode
 export default function ReposListPage() {
   // hardcoded
   const totalPages = 10
-  const navigate = useNavigate()
   const space = useGetSpaceURLParam()
 
   const { query, sort } = useCommonFilter<ListReposQueryQueryParams['sort']>()
 
-  const { isFetching, data } = useListReposQuery({ queryParams: { sort, query }, space_ref: `${space}/+` })
+  const { isFetching, data: repositories } = useListReposQuery({
+    queryParams: { sort, query },
+    space_ref: `${space}/+`
+  })
   const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
 
   const renderListContent = () => {
     if (isFetching) return <SkeletonList />
 
-    if (!data?.length) {
+    if (!repositories?.length) {
       if (query) {
         return (
           <NoSearchResults
@@ -76,10 +78,11 @@ export default function ReposListPage() {
         />
       )
     }
+
     return (
       <RepoList
         LinkComponent={LinkComponent}
-        repos={data?.map((repo: RepoRepositoryOutput) => {
+        repos={repositories?.map((repo: RepoRepositoryOutput) => {
           return {
             id: repo.id,
             name: repo.identifier,
@@ -107,14 +110,14 @@ export default function ReposListPage() {
           <div className="flex-1">
             <Filter sortOptions={sortOptions} />
           </div>
-          <Button variant="default" onClick={() => navigate(`/sandbox/spaces/${space}/repos/create`)}>
-            Create Repository
+          <Button variant="default" asChild>
+            <Link to={`/sandbox/spaces/${space}/repos/create`}>Create Repository</Link>
           </Button>
         </div>
         <Spacer size={5} />
         {renderListContent()}
         <Spacer size={8} />
-        {(data?.length ?? 0) > 0 && (
+        {repositories?.length && (
           <ListPagination.Root>
             <Pagination>
               <PaginationContent>

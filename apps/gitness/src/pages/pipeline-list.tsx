@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import {
   Button,
   ListPagination,
@@ -18,13 +18,17 @@ import {
   PaddingListLayout,
   SkeletonList,
   Filter,
-  useCommonFilter
+  useCommonFilter,
+  NoData,
+  NoSearchResults
 } from '@harnessio/playground'
 import { ExecutionState } from '../types'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
 import { usePagination } from '../framework/hooks/usePagination'
+import { PathParams } from '../RouteDefinitions'
 
 export default function PipelinesPage() {
+  const { spaceId, repoId } = useParams<PathParams>()
   // hardcoded
   const totalPages = 10
   const repoRef = useGetRepoRef()
@@ -50,6 +54,29 @@ export default function PipelinesPage() {
     if (isFetching) {
       return <SkeletonList />
     }
+
+    if (!pipelines?.length) {
+      if (query) {
+        return (
+          <NoSearchResults
+            iconName="no-search-magnifying-glass"
+            title="No search results"
+            description={['Check your spelling and filter options,', 'or search for a different keyword.']}
+            primaryButton={{ label: 'Clear search' }}
+            secondaryButton={{ label: 'Clear filters' }}
+          />
+        )
+      }
+      return (
+        <NoData
+          iconName="no-data-folder"
+          title="No pipelines yet"
+          description={['There are no pipelines in this repository yet.']}
+          primaryButton={{ label: 'Create pipeline', to: `/${spaceId}/repos/${repoId}/pipelines/create` }}
+        />
+      )
+    }
+
     return (
       <PipelineList
         pipelines={pipelines?.map((item: TypesPipeline) => ({
@@ -86,7 +113,6 @@ export default function PipelinesPage() {
             <Link to="create">Create Pipeline</Link>
           </Button>
         </div>
-
         <Spacer size={5} />
         {renderListContent()}
         <Spacer size={8} />
