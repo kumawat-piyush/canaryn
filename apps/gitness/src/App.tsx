@@ -15,6 +15,7 @@ import PipelineListPage from './pages/pipeline-list'
 import SandboxPipelinesPage from './pages/sandbox-pipeline-list'
 import { SignIn } from './pages/signin'
 import PullRequestListPage from './pages/pull-request-list-page'
+import PullRequestSandboxListPage from './pages/sandbox-pull-request-list-page'
 import ExecutionsListPage from './pages/execution-list'
 import ReposListPage from './pages/repo/repo-list'
 import PullRequestLayout from './layouts/PullRequestLayout'
@@ -29,9 +30,12 @@ import CreateProject from './pages/create-project'
 import { CreateRepo } from './pages/repo/repo-create-page'
 import { PipelineCreate } from './pages/pipeline-create/pipeline-create'
 import RepoCommitsPage from './pages/repo/repo-commits'
+import RepoSandboxCommitsPage from './pages/repo-sandbox/repo-sandbox-commits'
 import { Execution } from './pages/execution/execution-details'
 import RepoWebhooksListPage from './pages/repo/repo-webhooks'
+import RepoSandboxWebhooksListPage from './pages/repo-sandbox/repo-sandbox-webhooks'
 import { ReposBranchesListPage } from './pages/repo/repo-branch-list'
+import { RepoSandboxBranchesListPage } from './pages/repo-sandbox/repo-sandbox-branch-list'
 import PullRequestDataProvider from './pages/pull-request/context/pull-request-data-provider'
 import PullRequestConversationPage from './pages/pull-request/pull-request-conversation-page'
 import { RepoFiles } from './pages/repo/repo-files'
@@ -283,6 +287,22 @@ export default function App() {
                       element: <SandboxPipelinesPage />
                     }
                   ]
+                },
+                {
+                  path: 'commits',
+                  element: <RepoSandboxCommitsPage />
+                },
+                {
+                  path: 'pull-requests',
+                  element: <PullRequestSandboxListPage />
+                },
+                {
+                  path: 'webhooks',
+                  element: <RepoSandboxWebhooksListPage />
+                },
+                {
+                  path: 'branches',
+                  element: <RepoSandboxBranchesListPage />
                 }
               ]
             },
