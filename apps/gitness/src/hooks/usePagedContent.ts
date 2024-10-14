@@ -11,7 +11,7 @@ interface PageResponse {
   previousPage: number
 }
 
-export function useGetPageResponse<T>(data: unknown): WithPageResponse<T> {
+export function usePagedContent<T>(data: unknown): WithPageResponse<T> {
   const { content, pageResponse } = data as WithPageResponse<T>
   return { content, pageResponse }
 }

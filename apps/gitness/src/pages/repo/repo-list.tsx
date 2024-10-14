@@ -23,7 +23,7 @@ import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { usePagination } from '../../framework/hooks/usePagination'
 import Header from '../../components/Header'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
-import { useGetPageResponse } from '../../hooks/useGetPageResponse'
+import { usePagedContent } from '../../hooks/usePagedContent'
 
 const sortOptions = [
   { name: 'Created', value: 'created' },
@@ -41,7 +41,7 @@ export default function ReposListPage() {
   const { query, sort } = useCommonFilter<ListReposQueryQueryParams['sort']>()
 
   const { isFetching, data } = useListReposQuery({ queryParams: { sort, query, page }, space_ref: `${space}/+` })
-  const { content: repositories, pageResponse } = useGetPageResponse<ListReposOkResponse>(data || {})
+  const { content: repositories, pageResponse } = usePagedContent<ListReposOkResponse>(data || {})
   const { totalPages } = pageResponse || {}
   const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
 
