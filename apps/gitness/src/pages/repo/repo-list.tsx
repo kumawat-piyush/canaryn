@@ -108,6 +108,8 @@ export default function ReposListPage() {
     )
   }
 
+  const repositoriesExist = repositories?.length
+
   return (
     <>
       <Header />
@@ -116,7 +118,7 @@ export default function ReposListPage() {
          * Show if repositories exist.
          * Additionally, show if query(search) is applied.
          */}
-        {(query || repositories?.length) && (
+        {(query || repositoriesExist) && (
           <>
             <Text size={5} weight={'medium'}>
               Repositories
@@ -135,7 +137,7 @@ export default function ReposListPage() {
         <Spacer size={5} />
         {renderListContent()}
         <Spacer size={8} />
-        {(repositories?.length ?? 0) > 0 && (
+        {repositoriesExist && (
           <ListPagination.Root>
             <Pagination>
               <PaginationContent>
