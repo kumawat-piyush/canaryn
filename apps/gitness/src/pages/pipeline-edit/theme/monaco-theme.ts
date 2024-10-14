@@ -52,6 +52,3 @@ export const themesForBlame: ThemeDefinition[] = [
   { themeName: 'dark', themeData: getHarnessDarkTheme({ isBlame: true }) },
   { themeName: 'light', themeData: harnessLightTheme }
 ]
-
-console.log(themes)
-console.log(themesForBlame)
