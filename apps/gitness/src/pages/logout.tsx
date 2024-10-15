@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import useToken from '../framework/hooks/useToken'
 import { Button } from '@harnessio/canary'
@@ -12,7 +12,7 @@ export const Logout: React.FC = () => {
     navigate('/signin') // Redirect to sign-in page
   }
   return (
-    <Button theme="error" type="button" /*variant={'destructive'}*/ size="sm" onClick={handleLogout}>
+    <Button theme="error" type="button" size="sm" onClick={handleLogout}>
       Log Out
     </Button>
   )
