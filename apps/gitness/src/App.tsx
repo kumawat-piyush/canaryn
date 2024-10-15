@@ -244,10 +244,7 @@ export default function App() {
       path: '/new-password',
       element: <NewPasswordPage />
     },
-    {
-      path: '/logout',
-      element: <Logout />
-    },
+
     {
       path: '/sandbox',
       element: <SnadboxRootWraper />,
