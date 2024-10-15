@@ -469,3 +469,15 @@ export enum ViewStyle {
   SIDE_BY_SIDE = 'side-by-side',
   LINE_BY_LINE = 'line-by-line'
 }
+
+export function generateAlphaNumericHash(length: number) {
+  let result = ''
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const charactersLength = characters.length
+
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength))
+  }
+
+  return result
+}
