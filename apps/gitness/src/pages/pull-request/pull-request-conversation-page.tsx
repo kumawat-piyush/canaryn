@@ -30,6 +30,7 @@ import {
   extractInfoForCodeOwnerContent,
   findChangeReqDecisions,
   findWaitingDecisions,
+  generateAlphaNumericHash,
   processReviewDecision
 } from './utils'
 import { useParams } from 'react-router-dom'
@@ -37,6 +38,7 @@ import { PathParams } from '../../RouteDefinitions'
 import { usePullRequestData } from './context/pull-request-data-provider'
 import { isEmpty } from 'lodash-es'
 import { CodeOwnerReqDecision } from '../../types'
+import { useAppContext } from '../../framework/context/AppContext'
 
 export default function PullRequestConversationPage() {
   const {
@@ -48,6 +50,9 @@ export default function PullRequestConversationPage() {
     setRuleViolationArr,
     loading: prLoading
   } = usePullRequestData()
+  const { currentUser: currentUserData } = useAppContext()
+  const [checkboxBypass, setCheckboxBypass] = useState(false)
+
   const repoRef = useGetRepoRef()
   const { pullRequestId } = useParams<PathParams>()
   const prId = (pullRequestId && Number(pullRequestId)) || -1
@@ -69,6 +74,7 @@ export default function PullRequestConversationPage() {
     pullreq_number: prId,
     queryParams: {}
   })
+  const [changesLoading, setChangesLoading] = useState(true)
 
   const [activities, setActivities] = useState(activityData)
   const approvedEvaluations = reviewers?.filter(evaluation => evaluation.review_decision === 'approved')
@@ -110,9 +116,9 @@ export default function PullRequestConversationPage() {
   useEffect(() => {
     setActivities(activityData)
   }, [activityData])
-  const currentUser = 'Default'
+  const currentUser = currentUserData?.display_name || ''
 
-  let count = 5
+  let count = generateAlphaNumericHash(5)
   const handleSaveComment = (comment: string, parentId?: number) => {
     // Create a temporary comment object
 
@@ -173,18 +179,30 @@ export default function PullRequestConversationPage() {
     changeReqReviewer,
     changeReqEvaluations
   })
+  useEffect(() => {
+    if (
+      !prPanelData?.PRStateLoading &&
+      changesInfo?.title !== '' &&
+      changesInfo?.statusMessage !== '' &&
+      changesInfo?.statusIcon !== ''
+    ) {
+      setChangesLoading(false)
+    } else if (pullReqMetadata?.merged) {
+      setChangesLoading(false)
+    }
+  }, [changesInfo, prPanelData, pullReqMetadata?.merged])
 
   const onPRStateChanged = useCallback(() => {
     refetchCodeOwners()
     refetchPullReq()
     refetchActivities()
-  }, [refetchCodeOwners]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [refetchCodeOwners, repoRef]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleMerge = () => {
+  const handleMerge = (method: string) => {
     const payload: OpenapiMergePullReq = {
-      method: 'squash' as EnumMergeMethod,
+      method: method as EnumMergeMethod,
       source_sha: pullReqMetadata?.source_sha,
-      // bypass_rules: bypass,
+      bypass_rules: checkboxBypass,
       dry_run: false
       // message: data.commitMessage
     }
@@ -200,20 +218,28 @@ export default function PullRequestConversationPage() {
       id: '0',
       title: 'Squash and merge',
       description: 'All commits from this branch will be combined into one commit in the base branch.',
-      action: handleMerge
+      action: () => {
+        handleMerge('squash')
+      }
     },
     {
       id: '1',
       title: 'Merge pull request',
-      description: 'All commits from this branch will be added to the base branch via a merge commit.'
+      description: 'All commits from this branch will be added to the base branch via a merge commit.',
+      action: () => {
+        handleMerge('merge')
+      }
     },
     {
       id: '2',
       title: 'Rebase and merge',
-      description: 'All commits from this branch will be rebased and added to the base branch.'
+      description: 'All commits from this branch will be rebased and added to the base branch.',
+      action: () => {
+        handleMerge('rebase')
+      }
     }
   ]
-  if (prLoading) {
+  if (prLoading || prPanelData?.PRStateLoading || changesLoading) {
     return <SkeletonList />
   }
   return (
@@ -238,7 +264,7 @@ export default function PullRequestConversationPage() {
               // @ts-expect-error remove "@ts-expect-error" once CodeServiceClient Response for useChecksPullReqQuery is fixed
               checks={pullReqChecksDecision?.data?.checks}
               pullReqMetadata={pullReqMetadata}
-              PRStateLoading={prPanelData?.PRStateLoading}
+              PRStateLoading={prPanelData?.PRStateLoading || prLoading}
               // TODO: add dry merge check into pr context
               conflictingFiles={prPanelData?.conflictingFiles}
               approvedEvaluations={approvedEvaluations}
@@ -258,6 +284,9 @@ export default function PullRequestConversationPage() {
               actions={mockPullRequestActions}
               resolvedCommentArr={prPanelData?.resolvedCommentArr}
               requiresCommentApproval={prPanelData?.requiresCommentApproval}
+              ruleViolationArr={prPanelData?.ruleViolationArr}
+              checkboxBypass={checkboxBypass}
+              setCheckboxBypass={setCheckboxBypass}
             />
             <Spacer size={9} />
             <PullRequestFilters
@@ -269,6 +298,7 @@ export default function PullRequestConversationPage() {
               setDateOrderSort={setDateOrderSort}
             />
             <Spacer size={6} />
+
             <PullRequestOverview
               data={activities?.map((item: TypesPullReqActivity) => {
                 return {

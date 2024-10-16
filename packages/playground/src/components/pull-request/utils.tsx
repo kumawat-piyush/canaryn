@@ -5,6 +5,8 @@ import {
   PRCommentFilterType,
   PullReqReviewDecision,
   TypesPullReqActivity,
+  TypesRuleViolations,
+  TypesViolation,
   orderSortDate
 } from './interfaces'
 import type * as Diff2Html from 'diff2html'
@@ -188,4 +190,32 @@ export function parseStartingLineIfOne(diffString: string) {
 
   // Return null if the starting line is not 1 or if the header is not found
   return null
+}
+
+export const getPrState = (is_draft?: boolean, merged?: number | null, state?: string) => {
+  if (state === 'open' && is_draft) {
+    return { icon: 'pr-draft', text: 'Draft', theme: 'warning' }
+  } else if (merged) {
+    return { icon: 'pr-merge', text: 'Merged', theme: 'emphasis' }
+  } else if (state === 'closed') {
+    return { icon: 'pr-closed', text: 'Closed', theme: 'muted' }
+  } else {
+    return { icon: 'pr-open', text: 'Open', theme: 'success' }
+  }
+}
+
+export const extractInfoFromRuleViolationArr = (ruleViolationArr: TypesRuleViolations[]) => {
+  const tempArray: unknown[] = ruleViolationArr?.flatMap(
+    (item: { violations?: TypesViolation[] | null }) => item?.violations?.map(violation => violation.message) ?? []
+  )
+  const uniqueViolations = new Set(tempArray)
+  const violationArr = [...uniqueViolations].map(violation => ({ violation: violation }))
+
+  const checkIfBypassAllowed = ruleViolationArr.some(ruleViolation => ruleViolation.bypassed === false)
+
+  return {
+    uniqueViolations,
+    checkIfBypassAllowed,
+    violationArr
+  }
 }

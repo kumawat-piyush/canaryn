@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   Spacer,
   ListPagination,
@@ -11,15 +12,7 @@ import {
   Button
 } from '@harnessio/canary'
 import { Link } from 'react-router-dom'
-import {
-  PaddingListLayout,
-  SkeletonList,
-  PullRequestList,
-  NoData,
-  useCommonFilter,
-  Filter,
-  NoSearchResults
-} from '@harnessio/playground'
+import { SkeletonList, PullRequestList, NoData, useCommonFilter, Filter, SandboxLayout } from '@harnessio/playground'
 import { ListPullReqQueryQueryParams, TypesPullReq, useListPullReqQuery } from '@harnessio/code-service-client'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
 import { usePagination } from '../framework/hooks/usePagination'
@@ -34,9 +27,7 @@ const SortOptions = [
   { name: 'Updated', value: 'updated' }
 ] as const satisfies DropdownItemProps[]
 
-const colorArr = ['mint', 'yellow', 'red', 'blue', 'purple']
-
-function PullRequestListPage() {
+function PullRequestSandboxListPage() {
   // hardcoded
   const totalPages = 10
   const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
@@ -113,12 +104,14 @@ function PullRequestListPage() {
           merger: {},
           stats: { commits: 1, files_changed: 1, additions: 1, deletions: 0, conversations: 2 },
           labels: [
-            { id: 1, key: 'P0', color: 'red', value_count: 0 },
+            { id: 1, key: 'P0', color: 'red', scope: 1, value_count: 0 },
             {
               id: 2,
               key: 'P1',
               color: 'red',
+              scope: 0,
               value_count: 5,
+              value_id: 5,
               value: 'asdsa',
               value_color: 'red'
             },
@@ -126,7 +119,9 @@ function PullRequestListPage() {
               id: 3,
               key: 'teststringssdsjakteststringssdsjakteststringssdsj',
               color: 'blue',
+              scope: 0,
               value_count: 1,
+              value_id: 2,
               value: 'teststringssdsjakteststringssdsjak',
               value_color: 'blue'
             }
@@ -141,18 +136,7 @@ function PullRequestListPage() {
     if (isFetching) {
       return <SkeletonList />
     }
-    if (!pullrequests?.length) {
-      if (query) {
-        return (
-          <NoSearchResults
-            iconName="no-search-magnifying-glass"
-            title="No search results"
-            description={['Check your spelling and filter options,', 'or search for a different keyword.']}
-            primaryButton={{ label: 'Clear search' }}
-            secondaryButton={{ label: 'Clear filters' }}
-          />
-        )
-      }
+    if (pullrequests?.length === 0) {
       return (
         <NoData
           insideTabView
@@ -160,7 +144,10 @@ function PullRequestListPage() {
           title="No Pull Requests yet"
           description={['There are no pull requests in this repository yet.']}
           primaryButton={{
-            label: 'Open a pull request'
+            label: 'Create pull requests'
+          }}
+          secondaryButton={{
+            label: 'Import pull requests'
           }}
         />
       )
@@ -172,98 +159,87 @@ function PullRequestListPage() {
           author: item?.author?.display_name,
           name: item?.title,
           // TODO: fix review required when its actually there
-          reviewRequired: !item?.is_draft,
+          reviewRequired: true,
           merged: item.merged,
           comments: item.stats?.conversations,
           number: item?.number,
-          is_draft: item?.is_draft,
           // TODO: add label information to display associated labels for each pull request
           // labels: item?.labels?.map((key: string, color: string) => ({ text: key, color: color })),
           // TODO: fix 2 hours ago in timestamp
           timestamp: item?.created ? timeAgoFromEpochTime(item?.created) : '',
           source_branch: item?.source_branch,
-          state: item?.state,
-          labels: item?.labels?.map((label, index) => ({
-            text: label?.key && label?.value ? `${label?.key}:${label?.value}` : (label.key ?? ''),
-            color: colorArr[index % colorArr.length]
-          }))
+          state: item?.state
         }))}
       />
     )
   }
 
-  const pullRequestsExist = (pullrequests?.length ?? 0) > 0
-
   return (
     <>
-      <PaddingListLayout spaceTop={false}>
-        <Spacer size={2} />
-        {/**
-         * Show if pull requests exist.
-         * Additionally, show if query(search) is applied.
-         */}
-        {(query || pullRequestsExist) && (
-          <>
-            <Text size={5} weight={'medium'}>
-              Pull Requests
-            </Text>
-            <Spacer size={6} />
-            <div className="flex justify-between gap-5 items-center">
-              <div className="flex-1">
-                <Filter sortOptions={SortOptions} />
-              </div>
-              <Button variant="default" asChild>
-                <Link to="#">New pull request</Link>
-              </Button>
+      <SandboxLayout.Main hasHeader hasLeftPanel>
+        <SandboxLayout.Content>
+          <Spacer size={10} />
+          <Text size={5} weight={'medium'}>
+            Pull Requests
+          </Text>
+          <Spacer size={6} />
+
+          <div className="flex justify-between gap-5 items-center">
+            <div className="flex-1">
+              <Filter sortOptions={SortOptions} />
             </div>
-          </>
-        )}
-        <Spacer size={5} />
-        {renderListContent()}
-        <Spacer size={8} />
-        {pullRequestsExist && (
-          <ListPagination.Root>
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious
-                    size="sm"
-                    href="#"
-                    onClick={() => currentPage > 1 && previousPage()}
-                    disabled={currentPage === 1}
-                  />
-                </PaginationItem>
-                {/* <PaginationItem>
+            <Button variant="default" asChild>
+              <Link to="#">New pull request</Link>
+            </Button>
+          </div>
+
+          <Spacer size={5} />
+          {renderListContent()}
+          <Spacer size={8} />
+          {(pullrequests?.length ?? 0) > 0 && (
+            <ListPagination.Root>
+              <Pagination>
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious
+                      size="sm"
+                      href="#"
+                      onClick={() => currentPage > 1 && previousPage()}
+                      disabled={currentPage === 1}
+                    />
+                  </PaginationItem>
+                  {/* <PaginationItem>
               <PaginationLink size="sm_icon" href="#">
                 <PaginationEllipsis />
               </PaginationLink>
             </PaginationItem> */}
-                {Array.from({ length: totalPages }, (_, index) => (
-                  <PaginationItem key={index}>
-                    <PaginationLink
-                      isActive={currentPage === index + 1}
-                      size="sm_icon"
+                  {Array.from({ length: totalPages }, (_, index) => (
+                    <PaginationItem key={index}>
+                      <PaginationLink
+                        isActive={currentPage === index + 1}
+                        size="sm_icon"
+                        href="#"
+                        onClick={() => handleClick(index + 1)}>
+                        {index + 1}
+                      </PaginationLink>
+                    </PaginationItem>
+                  ))}
+                  <PaginationItem>
+                    <PaginationNext
+                      size="sm"
                       href="#"
-                      onClick={() => handleClick(index + 1)}>
-                      {index + 1}
-                    </PaginationLink>
+                      onClick={() => currentPage < totalPages && nextPage()}
+                      disabled={currentPage === totalPages}
+                    />
                   </PaginationItem>
-                ))}
-                <PaginationItem>
-                  <PaginationNext
-                    size="sm"
-                    href="#"
-                    onClick={() => currentPage < totalPages && nextPage()}
-                    disabled={currentPage === totalPages}
-                  />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
-          </ListPagination.Root>
-        )}
-      </PaddingListLayout>
+                </PaginationContent>
+              </Pagination>
+            </ListPagination.Root>
+          )}
+        </SandboxLayout.Content>
+      </SandboxLayout.Main>
     </>
   )
 }
 
-export default PullRequestListPage
+export default PullRequestSandboxListPage

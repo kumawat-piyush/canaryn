@@ -16,9 +16,9 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Floating1ColumnLayout } from '../layouts/Floating1ColumnLayout'
+import { Link } from 'react-router-dom'
 
 interface PageProps {
-  handleSignUp?: () => void
   handleSignIn: (data: DataProps) => void
   isLoading?: boolean
 }
@@ -33,7 +33,7 @@ const signInSchema = z.object({
   password: z.string().min(6, { message: 'Password must be at least 6 characters' })
 })
 
-export function SignInPage({ handleSignUp, handleSignIn, isLoading }: PageProps) {
+export function SignInPage({ handleSignIn, isLoading }: PageProps) {
   const {
     register,
     handleSubmit,
@@ -78,9 +78,16 @@ export function SignInPage({ handleSignUp, handleSignIn, isLoading }: PageProps)
               </>
             )}
             <Spacer size={4} />
-            <Label htmlFor="password" variant="sm">
-              Password
-            </Label>
+            <div className="flex justify-between">
+              <Label htmlFor="password" variant="sm">
+                Password
+              </Label>
+              <Link to="/forgot">
+                <Button variant="link" size="xs" className="text-secondary-muted" type="button">
+                  Forgot password?
+                </Button>
+              </Link>
+            </div>
             <Spacer size={1} />
             <Input
               id="password"
@@ -104,9 +111,9 @@ export function SignInPage({ handleSignUp, handleSignIn, isLoading }: PageProps)
           <Spacer size={4} />
           <Text size={1} color="tertiaryBackground" weight="normal" align="center" className="block">
             Don't have an account?{' '}
-            <a className="text-primary" onClick={handleSignUp}>
+            <Link to="/signup" className="text-primary">
               Sign up
-            </a>
+            </Link>
           </Text>
         </CardContent>
       </Card>
