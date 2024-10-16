@@ -22,51 +22,66 @@ function SandboxSettingsProjectMembersPage() {
 
   const renderMemberListContent = () => {
     switch (loadState) {
-      case 'no-data':
-        return (
-          //reivse name later
-          <>
-            <NoData
-              iconName="no-data-members"
-              title="No Members yet"
-              description={['Add your first team members by inviting them to join this project.']}
-              primaryButton={{ label: 'Invite new members' }}
-            />
-            <PlaygroundListSettings loadState={loadState} setLoadState={setLoadState} />
-          </>
-        )
       case 'loading':
         return <SkeletonList />
       case 'data-loaded':
         return <MembersList members={mockMemberData as MembersProps[]} />
       case 'no-search-matches':
         return (
-          <NoData
-            iconName="no-search-magnifying-glass"
-            title="No search results"
-            description={['Check your spelling and filter options,', 'or search for a different keyword.']}
-            primaryButton={{ label: 'Clear search' }}
-            secondaryButton={{ label: 'Clear filters' }}
-          />
+          <>
+            <Spacer size={10} />
+            <NoData
+              iconName="no-search-magnifying-glass"
+              title="No search results"
+              description={['Check your spelling and filter options,', 'or search for a different keyword.']}
+              primaryButton={{ label: 'Clear search' }}
+              secondaryButton={{ label: 'Clear filters' }}
+            />
+          </>
         )
     }
+  }
+
+  const showMembersCounts = () => {
+    switch (loadState) {
+      case 'data-loaded':
+        return ', 30 members'
+      case 'no-data':
+        return ', 0 members'
+      case 'no-search-matches':
+        return ', 30 members'
+      default:
+        return ''
+    }
+  }
+
+  if (loadState === 'no-data') {
+    return (
+      //add this layout to target the content in the center of the page without header and subheader
+      <SandboxLayout.Main hasLeftPanel>
+        <SandboxLayout.Content maxWidth="3xl" className="h-screen">
+          <NoData
+            iconName="no-data-members"
+            title="No Members yet"
+            description={['Add your first team members by inviting them to join this project.']}
+            primaryButton={{ label: 'Invite new members' }}
+          />
+          <PlaygroundListSettings loadState={loadState} setLoadState={setLoadState} />
+        </SandboxLayout.Content>
+      </SandboxLayout.Main>
+    )
   }
 
   return (
     <SandboxLayout.Main hasLeftPanel hasHeader hasSubHeader>
       <SandboxLayout.Content maxWidth="3xl">
         <Spacer size={10} />
-        <div>
-          <Text size={5} weight={'medium'}>
-            Team
-          </Text>
-          <Text size={5} weight={'medium'} color="tertiaryBackground">
-            {loadState === 'loading' && ''}
-            {loadState === 'no-data' && ', 0 members'}
-            {loadState === 'loaded' && ', 30 members'}
-            {loadState === 'no-search-matches' && ', 30 members'}
-          </Text>
-        </div>
+        <Text size={5} weight={'medium'}>
+          Team
+        </Text>
+        <Text size={5} weight={'medium'} color="tertiaryBackground">
+          {showMembersCounts()}
+        </Text>
         <Spacer size={6} />
         <ListActions.Root>
           <ListActions.Left>

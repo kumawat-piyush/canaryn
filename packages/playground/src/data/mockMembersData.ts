@@ -1,106 +1,107 @@
 export const mockMemberData = [
   {
     display_name: 'John Doe',
-    role: 'Admin',
+    role: 'Owner',
     email: 'johndoe@gmail.com',
     avatarUrl: '../public/images/user-avatar.svg',
     timestamp: '2 days ago'
   },
   {
     display_name: 'Jane Smith',
-    role: 'Member',
+    role: 'Reader',
     email: 'janesmith@yahoo.com',
     avatarUrl: '../public/images/user-avatar.svg',
     timestamp: '3 days ago'
   },
   {
     display_name: 'Michael Brown',
-    role: 'Editor',
+    role: 'Contributor',
     email: 'michaelbrown@hotmail.com',
     avatarUrl: '../public/images/user-avatar.svg',
     timestamp: '4 hours ago'
   },
   {
     display_name: 'Emily Davis',
-    role: 'Admin',
+    role: 'Executor',
     email: 'emilydavis@outlook.com',
     avatarUrl: '../public/images/user-avatar.svg',
     timestamp: '1 hour ago'
   },
   {
     display_name: 'William Johnson',
-    role: 'Member',
+    role: 'Reader',
     email: 'williamjohnson@gmail.com',
     avatarUrl: '../public/images/user-avatar.svg',
     timestamp: '5 days ago'
   },
   {
     display_name: 'Olivia Wilson',
-    role: 'Editor',
+    role: 'Contributor',
     email: 'oliviawilson@live.com',
+    avatarUrl: '../public/images/user-avatar.svg',
     timestamp: '1 week ago'
   },
   {
     display_name: 'James Miller',
-    role: 'Member',
+    role: 'Reader',
     email: 'jamesmiller@protonmail.com',
     avatarUrl: '../public/images/user-avatar.svg',
     timestamp: '30 minutes ago'
   },
   {
     display_name: 'Sophia Moore',
-    role: 'Admin',
+    role: 'Executor',
     email: 'sophiamoore@gmail.com',
-    avatarUrl: '',
+    avatarUrl: '../public/images/user-avatar.svg',
     timestamp: '3 hours ago'
   },
   {
     display_name: 'Liam Anderson',
-    role: 'Member',
+    role: 'Reader',
     email: 'liamanderson@yahoo.com',
     avatarUrl: '../public/images/user-avatar.svg',
     timestamp: '2 days ago'
   },
   {
     display_name: 'Mia Thomas',
-    role: 'Editor',
+    role: 'Contributor',
     email: 'miathomas@outlook.com',
-    avatarUrl: '',
+    avatarUrl: '../public/images/user-avatar.svg',
     timestamp: '10 minutes ago'
   },
   {
     display_name: 'Lucas Martin',
-    role: 'Member',
+    role: 'Reader',
     email: 'lucasmartin@hotmail.com',
-    avatarUrl: '',
+    avatarUrl: '../public/images/user-avatar.svg',
     timestamp: '2 weeks ago'
   },
   {
     display_name: 'Ava Jackson',
-    role: 'Admin',
+    role: 'Owner',
     email: 'avajackson@protonmail.com',
-    avatarUrl: '',
+    avatarUrl: '../public/images/user-avatar.svg',
     timestamp: '15 minutes ago'
   },
   {
     display_name: 'Ethan White',
-    role: 'Editor',
+    role: 'Contributor',
     email: 'ethanwhite@live.com',
-    avatarUrl: '',
+    avatarUrl: '../public/images/user-avatar.svg',
     timestamp: '5 days ago'
   },
   {
     display_name: 'Isabella Harris',
-    role: 'Member',
+    role: 'Reader',
     email: 'isabellaharris@gmail.com',
-    avatarUrl: '',
+    avatarUrl: '../public/images/user-avatar.svg',
     timestamp: '20 minutes ago'
   },
   {
     display_name: 'Noah Clark',
-    role: 'Admin',
+    role: 'Owner',
     email: 'noahclark@yahoo.com',
-    avatarUrl: '',
+    avatarUrl: '../public/images/user-avatar.svg',
     timestamp: '1 day ago'
   }
 ]

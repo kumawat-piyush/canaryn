@@ -29,7 +29,7 @@ interface PageProps {
 
 export const MembersList = ({ members }: PageProps) => {
   return (
-    <Table variant="asStackedList">
+    <Table variant="asStackedList" className="border-0">
       <TableHeader>
         <TableRow>
           <TableHead className="text-primary">Name</TableHead>
@@ -68,7 +68,7 @@ export const MembersList = ({ members }: PageProps) => {
                       <Badge
                         variant="outline"
                         size="xs"
-                        className="rounded-full font-normal text-xs p-2 h-5 text-tertiary-background text-center m-auto bg-gray-900">
+                        className="rounded-full font-normal text-xs p-2 h-5 text-tertiary-background text-center m-auto bg-tertiary-background/10">
                         {member.role}
                       </Badge>
                     </Text>
