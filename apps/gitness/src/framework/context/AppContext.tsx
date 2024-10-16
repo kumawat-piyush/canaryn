@@ -26,7 +26,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       responseInterceptor: (response: Response) => {
         switch (response.status) {
           case 401:
+            resetApp()
             window.location.href = '/signin'
+            break
         }
         return response
       }
