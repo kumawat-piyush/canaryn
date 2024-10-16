@@ -205,8 +205,7 @@ export const getPrState = (is_draft?: boolean, merged?: number | null, state?: s
 }
 
 export const extractInfoFromRuleViolationArr = (ruleViolationArr: TypesRuleViolations[]) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const tempArray: any[] = ruleViolationArr?.flatMap(
+  const tempArray: unknown[] = ruleViolationArr?.flatMap(
     (item: { violations?: TypesViolation[] | null }) => item?.violations?.map(violation => violation.message) ?? []
   )
   const uniqueViolations = new Set(tempArray)
