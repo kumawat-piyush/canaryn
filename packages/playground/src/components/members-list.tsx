@@ -35,7 +35,6 @@ export const MembersList = ({ members }: PageProps) => {
           <TableHead className="text-primary">Name</TableHead>
           <TableHead className="text-primary">Role</TableHead>
           <TableHead className="text-primary">Email</TableHead>
-          {/* since we don't have the data for pull request, we can change data to Commit to match the original gitness */}
           {members[0]?.timestamp && <TableHead className="text-right text-primary">Date added</TableHead>}
           <TableHead>
             <></>
