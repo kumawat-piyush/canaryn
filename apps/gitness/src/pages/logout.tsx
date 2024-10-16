@@ -5,13 +5,13 @@ import { useOpLogoutMutation } from '@harnessio/code-service-client'
 import { useAppContext } from '../framework/context/AppContext'
 
 export const Logout: React.FC = () => {
-  const { setIsUserAuthorized } = useAppContext()
+  const { resetApp } = useAppContext()
   const navigate = useNavigate()
   const { mutate: logout, isSuccess } = useOpLogoutMutation({})
 
   useEffect(() => {
     if (isSuccess) {
-      setIsUserAuthorized(false)
+      resetApp()
       navigate('/signin') // Redirect to sign-in page
     }
   }, [isSuccess])

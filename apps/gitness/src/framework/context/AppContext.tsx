@@ -14,6 +14,7 @@ interface AppContextType {
   addSpaces: (newSpaces: TypesSpace[]) => void
   isUserAuthorized: boolean
   setIsUserAuthorized: React.Dispatch<React.SetStateAction<boolean>>
+  resetApp: () => void
   currentUser?: TypesUser
 }
 
@@ -55,6 +56,12 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }
   }, [isAuthorized])
 
+  const resetApp = (): void => {
+    setSpaces([])
+    setCurrentUser({})
+    setIsAuthorized(false)
+  }
+
   const addSpaces = (newSpaces: TypesSpace[]) => {
     setSpaces(prevSpaces => [...prevSpaces, ...newSpaces])
   }
@@ -67,7 +74,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         addSpaces,
         currentUser,
         isUserAuthorized: isAuthorized,
-        setIsUserAuthorized: setIsAuthorized
+        setIsUserAuthorized: setIsAuthorized,
+        resetApp
       }}>
       {children}
     </AppContext.Provider>
