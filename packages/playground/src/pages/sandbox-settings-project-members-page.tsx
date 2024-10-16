@@ -27,7 +27,7 @@ function SandboxSettingsProjectMembersPage() {
           //reivse name later
           <>
             <NoData
-              iconName="no-data-folder"
+              iconName="no-data-members"
               title="No Members yet"
               description={['Add your first team members by inviting them to join this project.']}
               primaryButton={{ label: 'Invite new members' }}

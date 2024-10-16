@@ -44,9 +44,9 @@ export const MembersList = ({ members }: PageProps) => {
       </TableHeader>
       <TableBody>
         {members &&
-          members.map(member => {
+          members.map((member, index) => {
             return (
-              <TableRow>
+              <TableRow key={index}>
                 {/* NAME */}
                 <TableCell className="content-center my-6">
                   <div className="flex items-center gap-4">
