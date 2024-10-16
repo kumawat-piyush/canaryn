@@ -8,7 +8,8 @@ import {
   SandboxSettingsProjectMembersPage,
   ForgotPasswordPage,
   NewPasswordPage,
-  OTPPage
+  OTPPage,
+  SandboxRepoSettingsPage
 } from '@harnessio/playground'
 import SnadboxRootWraper from './components/SandboxRootWrapper'
 import RootLayoutWrapper from './components/RootLayoutWrapper'
@@ -173,6 +174,10 @@ export default function App() {
             {
               path: 'branches',
               element: <ReposBranchesListPage />
+            },
+            {
+              path: 'settings',
+              element: <SandboxRepoSettingsPage />
             }
           ]
         },
@@ -316,6 +321,10 @@ export default function App() {
                 {
                   path: 'branches',
                   element: <RepoSandboxBranchesListPage />
+                },
+                {
+                  path: 'settings',
+                  element: <SandboxRepoSettingsPage />
                 }
               ]
             },
