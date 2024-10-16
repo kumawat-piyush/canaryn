@@ -7,12 +7,13 @@ import {
   getUser,
   MembershipSpacesOkResponse
 } from '@harnessio/code-service-client'
-import useToken from '../hooks/useToken'
 
 interface AppContextType {
   spaces: TypesSpace[]
-  setSpaces: (spaces: TypesSpace[]) => void
+  setSpaces: React.Dispatch<React.SetStateAction<TypesSpace[]>>
   addSpaces: (newSpaces: TypesSpace[]) => void
+  isUserAuthorized: boolean
+  setIsUserAuthorized: React.Dispatch<React.SetStateAction<boolean>>
   currentUser?: TypesUser
 }
 
@@ -21,21 +22,13 @@ const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
 const AppContext = createContext<AppContextType | undefined>(undefined)
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const { token } = useToken()
   const [spaces, setSpaces] = useState<TypesSpace[]>([])
   const [currentUser, setCurrentUser] = useState<TypesUser>()
+  const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
 
   useLayoutEffect(() => {
     new CodeServiceAPIClient({
       urlInterceptor: (url: string) => `${BASE_URL_PREFIX}${url}`,
-      requestInterceptor: (request: Request): Request => {
-        if (token) {
-          const newRequest = request.clone()
-          newRequest.headers.set('Authorization', `Bearer ${token}`)
-          return newRequest
-        }
-        return request
-      },
       responseInterceptor: (response: Response) => {
         switch (response.status) {
           case 401:
@@ -47,7 +40,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   }, [])
 
   useEffect(() => {
-    if (token) {
+    if (isAuthorized) {
       membershipSpaces({
         queryParams: { page: 1, limit: 10, sort: 'identifier', order: 'asc' }
       }).then((response: MembershipSpacesOkResponse) => {
@@ -60,13 +53,25 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         setCurrentUser(_currentUser)
       })
     }
-  }, [token])
+  }, [isAuthorized])
 
   const addSpaces = (newSpaces: TypesSpace[]) => {
     setSpaces(prevSpaces => [...prevSpaces, ...newSpaces])
   }
 
-  return <AppContext.Provider value={{ spaces, setSpaces, addSpaces, currentUser }}>{children}</AppContext.Provider>
+  return (
+    <AppContext.Provider
+      value={{
+        spaces,
+        setSpaces,
+        addSpaces,
+        currentUser,
+        isUserAuthorized: isAuthorized,
+        setIsUserAuthorized: setIsAuthorized
+      }}>
+      {children}
+    </AppContext.Provider>
+  )
 }
 
 export const useAppContext = (): AppContextType => {
