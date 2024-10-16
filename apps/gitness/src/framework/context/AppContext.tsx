@@ -48,6 +48,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         if (response.length > 0) {
           const spaceList = response.filter(item => item?.space).map(item => item.space as TypesSpace)
           setSpaces(spaceList)
+        } else {
+          window.location.href = '/create-project'
         }
       })
       getUser({}).then(_currentUser => {

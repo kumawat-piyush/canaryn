@@ -6,9 +6,7 @@ export const LandingPage: React.FC = () => {
   const navigate = useNavigate()
   const { spaces } = useAppContext()
   useEffect(() => {
-    if (!spaces.length) {
-      navigate('/create-project')
-    }
+    if (!spaces.length) return
     if (spaces[0]?.path) {
       navigate(`${spaces[0].path}/repos`)
     }
