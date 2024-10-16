@@ -67,7 +67,7 @@ export default function PullRequestConversationPage() {
   const checksInfo = loadState === 'data-loaded-checksFailed' ? mockChecksFailedInfo : mockChecksSucceededInfo
   const commentsInfo = loadState === 'data-loaded-checksFailed' ? mockCommentUnresolvedInfo : mockCommentResolvedInfo
   const checksData = loadState === 'data-loaded-checksFailed' ? mockChecksFailedData : mockChecksSuccessData
-  const [checkboxBypass, setCheckboxBypass] = useState(false)
+  const [checkboxBypass, setCheckboxBypass] = useState(true)
   const pullReqMetadata =
     loadState === 'data-loaded-unchecked'
       ? mockPullReqMetadataUnchecked
