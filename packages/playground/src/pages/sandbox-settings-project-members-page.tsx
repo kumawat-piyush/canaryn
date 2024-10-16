@@ -42,19 +42,6 @@ function SandboxSettingsProjectMembersPage() {
     }
   }
 
-  const showMembersCounts = () => {
-    switch (loadState) {
-      case 'data-loaded':
-        return ', 30 members'
-      case 'no-data':
-        return ', 0 members'
-      case 'no-search-matches':
-        return ', 30 members'
-      default:
-        return ''
-    }
-  }
-
   if (loadState === 'no-data') {
     return (
       //add this layout to target the content in the center of the page without header and subheader
@@ -80,7 +67,7 @@ function SandboxSettingsProjectMembersPage() {
           Team
         </Text>
         <Text size={5} weight={'medium'} color="tertiaryBackground">
-          {showMembersCounts()}
+          {loadState === 'data-loaded' || loadState === 'no-search-matches' ? ', 30 members' : ''}
         </Text>
         <Spacer size={6} />
         <ListActions.Root>
