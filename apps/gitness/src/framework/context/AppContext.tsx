@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect, useLayoutEffect } from 'react'
+import { noop } from 'lodash-es'
 import { CodeServiceAPIClient, membershipSpaces, TypesSpace, TypesUser, getUser } from '@harnessio/code-service-client'
 
 interface AppContextType {
@@ -13,7 +14,14 @@ interface AppContextType {
 
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
 
-const AppContext = createContext<AppContextType | undefined>(undefined)
+const AppContext = createContext<AppContextType>({
+  spaces: [],
+  setSpaces: noop,
+  addSpaces: noop,
+  isUserAuthorized: false,
+  setIsUserAuthorized: noop,
+  resetApp: noop
+})
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [spaces, setSpaces] = useState<TypesSpace[]>([])
