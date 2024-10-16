@@ -272,7 +272,7 @@ export const extractInfoForCodeOwnerContent = ({
       title = 'Changes Requested'
       statusMessage = `${changeReqReviewer} requested changes to the pull request`
       statusColor = 'text-destructive'
-      statusIcon = 'warning'
+      statusIcon = 'error'
     } else if (
       (codeOwnerPendingEntries && codeOwnerPendingEntries?.length > 0 && reqCodeOwnerLatestApproval) ||
       (!isEmpty(latestCodeOwnerApprovalArr) &&

@@ -18,6 +18,8 @@ import React, { useMemo } from 'react'
 import { Badge, Button, Icon, Text } from '@harnessio/canary'
 import moment from 'moment'
 import { Layout } from '../layout/layout'
+import { getPrState } from './utils'
+import { IconType } from './interfaces'
 
 interface PullRequestTitleProps {
   data: {
@@ -33,7 +35,6 @@ interface PullRequestTitleProps {
     state?: string
   }
 }
-type IconType = 'pr-open' | 'pr-closed' | 'pr-draft' | 'pr-merge'
 
 export const PullRequestHeader: React.FC<PullRequestTitleProps> = ({
   data: { title, number, merged, author, stats, target_branch, source_branch, created, is_draft, state }
@@ -44,18 +45,7 @@ export const PullRequestHeader: React.FC<PullRequestTitleProps> = ({
   // Format the parsed date as relative time from now
   const formattedTime = parsedDate.fromNow()
 
-  const getState = () => {
-    if (state === 'open' && is_draft) {
-      return { icon: 'pr-draft', text: 'Draft', theme: 'warning' }
-    } else if (merged) {
-      return { icon: 'pr-merge', text: 'Merged', theme: 'emphasis' }
-    } else if (state === 'closed') {
-      return { icon: 'pr-closed', text: 'Closed', theme: 'muted' }
-    } else {
-      return { icon: 'pr-open', text: 'Open', theme: 'success' }
-    }
-  }
-  const stateObject = getState()
+  const stateObject = getPrState(is_draft, merged, state)
   return (
     <div className="flex flex-col gap-2 pb-8">
       <div className="flex pt-1 pb-1 items-center">
