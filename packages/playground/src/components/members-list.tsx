@@ -46,7 +46,7 @@ export const MembersList = ({ members }: PageProps) => {
         {members &&
           members.map(member => {
             return (
-              <TableRow className="h-16">
+              <TableRow>
                 {/* NAME */}
                 <TableCell className="content-center my-6">
                   <div className="flex items-center gap-4">
@@ -104,10 +104,3 @@ export const MembersList = ({ members }: PageProps) => {
     </Table>
   )
 }
-
-//TODO:
-//change title color & font size - done
-//change font style in the table list - done
-//width of the table - I think it's relate to the layout setting - done: 3xl currently
-//table cell 65px - done
-//add search box -done

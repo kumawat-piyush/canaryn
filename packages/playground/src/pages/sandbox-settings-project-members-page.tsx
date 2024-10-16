@@ -73,8 +73,8 @@ function SandboxSettingsProjectMembersPage() {
             <SearchBox.Root placeholder="Search Members" />
           </ListActions.Left>
           <ListActions.Right>
-            <ListActions.Dropdown title="Filter" items={filterOptions} />
-            <ListActions.Dropdown title="Sort" items={sortOptions} />
+            <ListActions.Dropdown title="All Team Roles" items={filterOptions} />
+            <ListActions.Dropdown title="Last added" items={sortOptions} />
             <Button variant="default">Invite New Members</Button>
           </ListActions.Right>
         </ListActions.Root>
