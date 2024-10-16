@@ -1,6 +1,5 @@
-import { useState } from 'react'
-import { SandboxSettingsAccountGeneralPage, ProfileFields, PasswordFields } from './profile-settings-general-page'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   useGetUserQuery,
   GetUserOkResponse,
@@ -10,8 +9,12 @@ import {
   UpdateUserOkResponse,
   UpdateUserErrorResponse
 } from '@harnessio/code-service-client'
+import { SandboxSettingsAccountGeneralPage, ProfileFields, PasswordFields } from './profile-settings-general-page'
+import { useAppContext } from '../../framework/context/AppContext'
 
 export const SettingsProfileGeneralPage: React.FC = () => {
+  const navigate = useNavigate()
+  const { isUserAuthorized, resetApp } = useAppContext()
   const [apiError, setApiError] = useState<{ type: 'profile' | 'password'; message: string } | null>(null)
 
   const [userData, setUserData] = useState<ProfileFields>({
@@ -19,6 +22,13 @@ export const SettingsProfileGeneralPage: React.FC = () => {
     username: '',
     email: ''
   })
+
+  useEffect(() => {
+    if (!isUserAuthorized) {
+      resetApp()
+      navigate('/signin') // Redirect to sign-in page
+    }
+  }, [isUserAuthorized])
 
   const { isLoading: isLoadingUser } = useGetUserQuery(
     {},
