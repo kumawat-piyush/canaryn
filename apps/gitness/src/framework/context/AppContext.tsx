@@ -37,24 +37,19 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   useEffect(() => {
     if (isAuthorized) {
-      const fetchData = async () => {
-        try {
-          const [memberships, user] = await Promise.all([
-            membershipSpaces({
-              queryParams: { page: 1, limit: 10, sort: 'identifier', order: 'asc' }
-            }),
-            getUser({})
-          ])
+      Promise.all([
+        membershipSpaces({
+          queryParams: { page: 1, limit: 10, sort: 'identifier', order: 'asc' }
+        }),
+        getUser({})
+      ])
+        .then(([memberships, user]) => {
           setCurrentUser(user)
-          if (memberships.length > 0) {
-            const spaceList = memberships.filter(item => item?.space).map(item => item.space as TypesSpace)
-            setSpaces(spaceList)
-          }
-        } catch (_e) {
-          /* Ignore/toast error */
-        }
-      }
-      fetchData()
+          setSpaces(memberships.filter(item => item?.space).map(item => item.space as TypesSpace))
+        })
+        .catch(_e => {
+          // Ignore/toast error
+        })
     }
   }, [isAuthorized])
 

@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
-import { SignInPage } from '@harnessio/playground'
+import { SignInPage, DataProps } from '@harnessio/playground'
 import { useOnLoginMutation } from '@harnessio/code-service-client'
 import { useNavigate } from 'react-router-dom'
-import { DataProps } from '@harnessio/playground'
 import { useAppContext } from '../framework/context/AppContext'
 
 export const SignIn: React.FC = () => {
