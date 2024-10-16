@@ -49,7 +49,7 @@ export const MembersList = ({ members }: PageProps) => {
                 {/* NAME */}
                 <TableCell className="content-center my-6">
                   <div className="flex items-center gap-4">
-                    <Avatar className="w-8 h-8">
+                    <Avatar size="10">
                       {member.avatarUrl && <AvatarImage src={member.avatarUrl} />}
                       <AvatarFallback className="text-xs p-1 text-center">
                         {getInitials(member.display_name, 2)}
