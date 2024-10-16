@@ -1,12 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect, useLayoutEffect } from 'react'
-import {
-  CodeServiceAPIClient,
-  membershipSpaces,
-  TypesSpace,
-  TypesUser,
-  getUser,
-  MembershipSpacesOkResponse
-} from '@harnessio/code-service-client'
+import { CodeServiceAPIClient, membershipSpaces, TypesSpace, TypesUser, getUser } from '@harnessio/code-service-client'
 
 interface AppContextType {
   spaces: TypesSpace[]
@@ -42,19 +35,24 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   useEffect(() => {
     if (isAuthorized) {
-      membershipSpaces({
-        queryParams: { page: 1, limit: 10, sort: 'identifier', order: 'asc' }
-      }).then((response: MembershipSpacesOkResponse) => {
-        if (response.length > 0) {
-          const spaceList = response.filter(item => item?.space).map(item => item.space as TypesSpace)
-          setSpaces(spaceList)
-        } else {
-          window.location.href = '/create-project'
+      const fetchData = async () => {
+        try {
+          const [memberships, user] = await Promise.all([
+            membershipSpaces({
+              queryParams: { page: 1, limit: 10, sort: 'identifier', order: 'asc' }
+            }),
+            getUser({})
+          ])
+          setCurrentUser(user)
+          if (memberships.length > 0) {
+            const spaceList = memberships.filter(item => item?.space).map(item => item.space as TypesSpace)
+            setSpaces(spaceList)
+          }
+        } catch (_e) {
+          /* Ignore/toast error */
         }
-      })
-      getUser({}).then(_currentUser => {
-        setCurrentUser(_currentUser)
-      })
+      }
+      fetchData()
     }
   }, [isAuthorized])
 
