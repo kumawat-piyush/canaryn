@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState, ReactNode, useEffect, useLayoutEffect } from 'react'
+import React, { createContext, useContext, useState, ReactNode, useLayoutEffect } from 'react'
 import { noop } from 'lodash-es'
-import { CodeServiceAPIClient, membershipSpaces, TypesSpace, TypesUser, getUser } from '@harnessio/code-service-client'
+import { CodeServiceAPIClient, TypesSpace, TypesUser } from '@harnessio/code-service-client'
 
 interface AppContextType {
   spaces: TypesSpace[]
@@ -8,6 +8,7 @@ interface AppContextType {
   addSpaces: (newSpaces: TypesSpace[]) => void
   resetApp: () => void
   currentUser?: TypesUser
+  setCurrentUser: React.Dispatch<React.SetStateAction<TypesUser | undefined>>
 }
 
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
@@ -16,12 +17,14 @@ const AppContext = createContext<AppContextType>({
   spaces: [],
   setSpaces: noop,
   addSpaces: noop,
-  resetApp: noop
+  resetApp: noop,
+  currentUser: undefined,
+  setCurrentUser: noop
 })
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [spaces, setSpaces] = useState<TypesSpace[]>([])
-  const [currentUser, setCurrentUser] = useState<TypesUser>()
+  const [currentUser, setCurrentUser] = useState<TypesUser | undefined>(undefined)
 
   useLayoutEffect(() => {
     new CodeServiceAPIClient({
@@ -36,22 +39,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         return response
       }
     })
-  }, [])
-
-  useEffect(() => {
-    Promise.all([
-      membershipSpaces({
-        queryParams: { page: 1, limit: 10, sort: 'identifier', order: 'asc' }
-      }),
-      getUser({})
-    ])
-      .then(([memberships, user]) => {
-        setCurrentUser(user)
-        setSpaces(memberships.filter(item => item?.space).map(item => item.space as TypesSpace))
-      })
-      .catch(_e => {
-        // Ignore/toast error
-      })
   }, [])
 
   const resetApp = (): void => {
@@ -70,7 +57,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         setSpaces,
         addSpaces,
         resetApp,
-        currentUser
+        currentUser,
+        setCurrentUser
       }}>
       {children}
     </AppContext.Provider>
