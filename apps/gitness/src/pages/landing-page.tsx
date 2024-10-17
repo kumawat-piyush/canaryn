@@ -1,23 +1,15 @@
-import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { MembershipSpacesOkResponse, membershipSpaces } from '@harnessio/code-service-client'
+import { useEffect } from 'react'
+import { useAppContext } from '../framework/context/AppContext'
 
 export const LandingPage: React.FC = () => {
   const navigate = useNavigate()
+  const { spaces } = useAppContext()
+
   useEffect(() => {
-    membershipSpaces({
-      queryParams: { page: 1, limit: 10, sort: 'identifier', order: 'asc' }
-    })
-      .then((memberships: MembershipSpacesOkResponse) => {
-        if (memberships.length === 0) {
-          navigate('/create-project')
-        } else if (memberships[0]?.space?.path) {
-          navigate(`${memberships[0].space.path}/repos`)
-        }
-      })
-      .catch(_e => {
-        /* Ignore/toast error */
-      })
-  }, [navigate])
+    if (spaces.length === 0) navigate('/create-project')
+    if (spaces?.[0]?.path) navigate(`${spaces[0].path}/repos`)
+  }, [spaces])
+
   return null
 }

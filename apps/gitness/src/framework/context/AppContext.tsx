@@ -6,8 +6,6 @@ interface AppContextType {
   spaces: TypesSpace[]
   setSpaces: React.Dispatch<React.SetStateAction<TypesSpace[]>>
   addSpaces: (newSpaces: TypesSpace[]) => void
-  isUserAuthorized: boolean
-  setIsUserAuthorized: React.Dispatch<React.SetStateAction<boolean>>
   resetApp: () => void
   currentUser?: TypesUser
 }
@@ -18,15 +16,12 @@ const AppContext = createContext<AppContextType>({
   spaces: [],
   setSpaces: noop,
   addSpaces: noop,
-  isUserAuthorized: false,
-  setIsUserAuthorized: noop,
   resetApp: noop
 })
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [spaces, setSpaces] = useState<TypesSpace[]>([])
   const [currentUser, setCurrentUser] = useState<TypesUser>()
-  const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
 
   useLayoutEffect(() => {
     new CodeServiceAPIClient({
@@ -44,31 +39,28 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   }, [])
 
   useEffect(() => {
-    if (isAuthorized) {
-      Promise.all([
-        membershipSpaces({
-          queryParams: { page: 1, limit: 10, sort: 'identifier', order: 'asc' }
-        }),
-        getUser({})
-      ])
-        .then(([memberships, user]) => {
-          setCurrentUser(user)
-          setSpaces(memberships.filter(item => item?.space).map(item => item.space as TypesSpace))
-        })
-        .catch(_e => {
-          // Ignore/toast error
-        })
-    }
-  }, [isAuthorized])
+    Promise.all([
+      membershipSpaces({
+        queryParams: { page: 1, limit: 10, sort: 'identifier', order: 'asc' }
+      }),
+      getUser({})
+    ])
+      .then(([memberships, user]) => {
+        setCurrentUser(user)
+        setSpaces(memberships.filter(item => item?.space).map(item => item.space as TypesSpace))
+      })
+      .catch(_e => {
+        // Ignore/toast error
+      })
+  }, [])
 
   const resetApp = (): void => {
     setSpaces([])
     setCurrentUser({})
-    setIsAuthorized(false)
   }
 
-  const addSpaces = (newSpaces: TypesSpace[]) => {
-    setSpaces(prevSpaces => [...prevSpaces, ...newSpaces])
+  const addSpaces = (newSpaces: TypesSpace[]): void => {
+    setSpaces(prevSpaces => [...(prevSpaces || []), ...newSpaces])
   }
 
   return (
@@ -77,10 +69,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         spaces,
         setSpaces,
         addSpaces,
-        currentUser,
-        isUserAuthorized: isAuthorized,
-        setIsUserAuthorized: setIsAuthorized,
-        resetApp
+        resetApp,
+        currentUser
       }}>
       {children}
     </AppContext.Provider>
