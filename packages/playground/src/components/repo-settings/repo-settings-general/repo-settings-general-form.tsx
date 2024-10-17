@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
   Button,
   ButtonGroup,
@@ -76,7 +76,7 @@ export const RepoSettingsGeneralForm: React.FC<RepoSettingsGeneralFormProps> = (
   const handleAccessChange = (value: '1' | '2') => {
     setValue('access', value, { shouldValidate: true })
   }
-  const onSubmit = (data: FormFields) => {
+  const onSubmit: SubmitHandler<FormFields> = data => {
     setIsSubmitted(true)
     console.log(data)
     reset()

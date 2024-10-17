@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { Spacer, Text, Checkbox } from '@harnessio/canary'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import React from 'react'
+import { Text, Checkbox } from '@harnessio/canary'
+import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -13,12 +13,14 @@ const formSchema = z.object({
 export type FormFields = z.infer<typeof formSchema> // Automatically generate a type from the schema
 
 interface RepoSettingsSecurityFormProps {
-  onFormSubmit?: (data: FormFields) => void
+  // onFormSubmit?: (data: FormFields) => void
   // apiError: string | null
 }
-export const RepoSettingsSecurityForm: React.FC<RepoSettingsSecurityFormProps> = ({
-  onFormSubmit /*apiError = null */
-}) => {
+export const RepoSettingsSecurityForm: React.FC<RepoSettingsSecurityFormProps> = (
+  {
+    // onFormSubmit apiError = null
+  }
+) => {
   const {
     handleSubmit,
     setValue,
