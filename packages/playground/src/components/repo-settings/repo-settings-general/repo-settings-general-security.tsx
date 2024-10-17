@@ -25,7 +25,7 @@ export const RepoSettingsSecurityForm: React.FC<RepoSettingsSecurityFormProps> =
     handleSubmit,
     setValue,
     watch,
-    formState: { errors, isValid }
+    formState: { errors }
   } = useForm<FormFields>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
@@ -56,6 +56,11 @@ export const RepoSettingsSecurityForm: React.FC<RepoSettingsSecurityFormProps> =
             label="Secret scanning"
             description="Block commits containing secrets like passwords, API keys and tokens."
           />
+          {errors.secretScanning && (
+            <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
+              {errors.secretScanning.message?.toString()}
+            </FormFieldSet.Message>
+          )}
         </FormFieldSet.ControlGroup>
 
         {/* {apiError && (
