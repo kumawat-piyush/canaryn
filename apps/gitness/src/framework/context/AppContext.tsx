@@ -1,17 +1,16 @@
-import React, { createContext, useContext, useState, ReactNode, useLayoutEffect } from 'react'
+import React, { createContext, useContext, ReactNode } from 'react'
 import { noop } from 'lodash-es'
-import { CodeServiceAPIClient, TypesSpace, TypesUser } from '@harnessio/code-service-client'
+import { TypesSpace, TypesUser } from '@harnessio/code-service-client'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 interface AppContextType {
   spaces: TypesSpace[]
-  setSpaces: React.Dispatch<React.SetStateAction<TypesSpace[]>>
+  setSpaces: (value: TypesSpace[]) => void
   addSpaces: (newSpaces: TypesSpace[]) => void
   resetApp: () => void
   currentUser?: TypesUser
-  setCurrentUser: React.Dispatch<React.SetStateAction<TypesUser | undefined>>
+  setCurrentUser: (value: TypesUser) => void
 }
-
-const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
 
 const AppContext = createContext<AppContextType>({
   spaces: [],
@@ -23,23 +22,8 @@ const AppContext = createContext<AppContextType>({
 })
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [spaces, setSpaces] = useState<TypesSpace[]>([])
-  const [currentUser, setCurrentUser] = useState<TypesUser | undefined>(undefined)
-
-  useLayoutEffect(() => {
-    new CodeServiceAPIClient({
-      urlInterceptor: (url: string) => `${BASE_URL_PREFIX}${url}`,
-      responseInterceptor: (response: Response) => {
-        switch (response.status) {
-          case 401:
-            resetApp()
-            window.location.href = '/signin'
-            break
-        }
-        return response
-      }
-    })
-  }, [])
+  const [spaces, setSpaces] = useLocalStorage<TypesSpace[]>('spaces', [])
+  const [currentUser, setCurrentUser] = useLocalStorage<TypesUser>('currentUser', {})
 
   const resetApp = (): void => {
     setSpaces([])
@@ -47,7 +31,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   }
 
   const addSpaces = (newSpaces: TypesSpace[]): void => {
-    setSpaces(prevSpaces => [...(prevSpaces || []), ...newSpaces])
+    setSpaces([...spaces, ...newSpaces])
   }
 
   return (
