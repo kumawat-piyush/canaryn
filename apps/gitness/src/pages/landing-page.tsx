@@ -18,7 +18,7 @@ export const LandingPage: React.FC = () => {
         setCurrentUser(user)
 
         const spaceList = memberships.filter(item => item?.space).map(item => item.space as TypesSpace)
-        setSpaces(memberships.filter(item => item?.space).map(item => item.space as TypesSpace))
+        setSpaces(spaceList)
         if (spaceList.length === 0) navigate('/create-project')
         if (spaceList?.[0]?.path) navigate(`${spaceList[0].path}/repos`)
       })
