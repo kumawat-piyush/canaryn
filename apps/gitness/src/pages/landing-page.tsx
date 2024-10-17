@@ -1,22 +1,17 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useAppContext } from '../framework/context/AppContext'
-import { TypesSpace, getUser, membershipSpaces } from '@harnessio/code-service-client'
+import { TypesSpace, membershipSpaces } from '@harnessio/code-service-client'
 
 export const LandingPage: React.FC = () => {
   const navigate = useNavigate()
-  const { setCurrentUser, setSpaces } = useAppContext()
+  const { setSpaces } = useAppContext()
 
   useEffect(() => {
-    Promise.all([
-      membershipSpaces({
-        queryParams: { page: 1, limit: 10, sort: 'identifier', order: 'asc' }
-      }),
-      getUser({})
-    ])
-      .then(([memberships, user]) => {
-        setCurrentUser(user)
-
+    membershipSpaces({
+      queryParams: { page: 1, limit: 10, sort: 'identifier', order: 'asc' }
+    })
+      .then(memberships => {
         const spaceList = memberships.filter(item => item?.space).map(item => item.space as TypesSpace)
         setSpaces(spaceList)
         if (spaceList.length === 0) navigate('/create-project')
