@@ -12,11 +12,11 @@ const formSchema = z.object({
 
 export type FormFields = z.infer<typeof formSchema> // Automatically generate a type from the schema
 
-interface RepoSettingsSecurityFormProps {
-  // onFormSubmit?: (data: FormFields) => void
-  // apiError: string | null
-}
-export const RepoSettingsSecurityForm: React.FC<RepoSettingsSecurityFormProps> = (
+// interface RepoSettingsSecurityFormProps {
+//   onFormSubmit?: (data: FormFields) => void
+//   apiError: string | null
+// }
+export const RepoSettingsSecurityForm: React.FC /*<RepoSettingsSecurityFormProps>*/ = (
   {
     // onFormSubmit apiError = null
   }
