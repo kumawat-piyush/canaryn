@@ -1,9 +1,11 @@
+import { get } from 'lodash-es'
+
 interface WithPageResponse<T> {
   content: T
-  pageResponse: PageResponse
+  headers: Request['headers']
 }
 
-interface PageResponse {
+export interface PageResponse {
   totalItems: number
   totalPages: number
   pageSize: number
@@ -12,8 +14,7 @@ interface PageResponse {
 }
 
 export function getPagedContent<T>(data: unknown): WithPageResponse<T> {
-  const { content, pageResponse } = (data as WithPageResponse<T>) || {}
-  return { content, pageResponse }
+  return { content: get(data, 'content') as T, headers: get(data, 'headers', {}) as Request['headers'] }
 }
 
 export function usePagedContent<T>(data: unknown): WithPageResponse<T> {
