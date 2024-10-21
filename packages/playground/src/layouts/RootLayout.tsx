@@ -147,7 +147,7 @@ export const RootLayout: React.FC<RootLayoutProps> = ({ currentUser }) => {
                 ))}
               </Navbar.AccordionGroup>
               {/* Sandboxed new layout examples */}
-              <Navbar.AccordionGroup title="Layout Sandbox">
+              <Navbar.AccordionGroup title="Layout Sandbox" collapsed>
                 <NavLink to="/sandbox/landing">
                   <Navbar.Item text="Landing" icon={<Icon name="harness" size={12} />} />
                 </NavLink>
