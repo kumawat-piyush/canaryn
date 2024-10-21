@@ -6,6 +6,7 @@ import { Button, ButtonGroup, Input, Spacer, Text, Icon } from '@harnessio/canar
 import { SandboxLayout, FormFieldSet } from '..'
 import { MessageTheme } from '../components/form-field-set'
 import { InfoCircle } from '@harnessio/icons-noir'
+import { useNavigate } from 'react-router-dom'
 
 // Define form schema for Project Settings
 const newUserSchema = z.object({
@@ -18,6 +19,7 @@ const newUserSchema = z.object({
 type NewUserFields = z.infer<typeof newUserSchema>
 
 function SandboxSettingsCreateNewUserPage() {
+  const navigate = useNavigate()
   // Project Settings form handling
   const {
     register,
@@ -46,6 +48,7 @@ function SandboxSettingsCreateNewUserPage() {
       setSubmitted(true)
       resetNewUserForm(data) // Reset to the current values
       setTimeout(() => setSubmitted(false), 2000)
+      navigate('/sandbox/settings/user-mamagement/users')
     }, 2000)
   }
 
@@ -108,7 +111,12 @@ function SandboxSettingsCreateNewUserPage() {
                     <Button size="sm" type="submit" disabled={!isValid || isSubmitting}>
                       {isSubmitting ? 'Inviting...' : 'Invite New User'}
                     </Button>
-                    <Button size="sm" variant="outline" type="button" onClick={() => resetNewUserForm()}>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      type="button"
+                      onClick={() => resetNewUserForm()}
+                      disabled={!isValid || isSubmitting}>
                       Cancel
                     </Button>
                   </>
