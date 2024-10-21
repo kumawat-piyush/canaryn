@@ -90,7 +90,7 @@ export const FormEditDialog: React.FC<FormEditDialogProps> = ({ member, onSave, 
               <FormFieldSet.Label htmlFor="memberName" required>
                 Member Name
               </FormFieldSet.Label>
-              <Input value={member.display_name} disabled className="cursor-not-allowed" />
+              <Input id="memberName" value={member.display_name} disabled className="cursor-not-allowed" />
             </FormFieldSet.ControlGroup>
 
             {/* Select Role (Integrated with react-hook-form) */}
