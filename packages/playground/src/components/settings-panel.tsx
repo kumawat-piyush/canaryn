@@ -8,7 +8,7 @@ interface SettingsPanelProps {
   handleSettings: () => void
 }
 
-export function SetttingsPanel({ showSettings, handleSettings }: SettingsPanelProps) {
+export function SettingsPanel({ showSettings, handleSettings }: SettingsPanelProps) {
   const [hoveredItemId, setHoveredItemId] = useState<number | null>(null)
 
   return (

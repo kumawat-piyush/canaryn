@@ -5,7 +5,7 @@ import { Icon, IconProps, Navbar, NavbarProjectChooser, NavbarUser } from '@harn
 import { MoreSubmenu } from '../components/more-submenu'
 import { navbarSubmenuData } from '../data/mockNavbarSubmenuData'
 import { TypesUser } from './types'
-import { SetttingsPanel } from '../components/settings-panel'
+import { SettingsPanel } from '../components/settings-panel'
 
 interface NavbarItem {
   id: number
@@ -199,7 +199,7 @@ export const SandboxRoot: React.FC<SandboxRootProps> = ({ currentUser }) => {
       </SandboxLayout.LeftPanel>
       <Outlet />
       <MoreSubmenu showMore={showMore} handleMore={handleMore} onPinItem={handlePinItem} pinnedItems={pinnedItems} />
-      <SetttingsPanel showSettings={showSettings} handleSettings={handleSettings} />
+      <SettingsPanel showSettings={showSettings} handleSettings={handleSettings} />
     </SandboxLayout.Root>
   )
 }
