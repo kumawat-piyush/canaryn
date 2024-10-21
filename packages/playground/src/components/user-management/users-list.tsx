@@ -52,7 +52,12 @@ interface PageProps {
 export const UsersList = ({ users }: PageProps) => {
   const [isDialogDeleteOpen, setIsDialogDeleteOpen] = useState(false)
   const [isDialogEditOpen, setIsDialogEditOpen] = useState(false)
+  const [isDialogRemoveOpen, setIsDialogRemoveOpen] = useState(false)
+  const [isDialogResetPasswordOpen, setIsDialogResetPasswordOpen] = useState(false)
   const [editUser, setEditUser] = useState<UsersProps | null>(null) // Store user being edited
+  const [removeUser, setRemoveUser] = useState<UsersProps | null>(null) // Store user being removed
+  const [resetPwd, setResetPwd] = useState<UsersProps | null>(null) // Store user being removed
+
   //open delete dialog for a specific member
   const openDeleteDialog = () => {
     setIsDialogDeleteOpen(true)
@@ -63,12 +68,28 @@ export const UsersList = ({ users }: PageProps) => {
     setEditUser(user)
     setIsDialogEditOpen(true)
   }
+  // Open the remove admin dialog for a specific member
+  const onRemoveDialog = (user: UsersProps) => {
+    setRemoveUser(user)
+    setIsDialogRemoveOpen(true)
+  }
+
+  const onResetPasswordDialog = (user: UsersProps) => {
+    setResetPwd(user)
+    setIsDialogResetPasswordOpen(true)
+  }
 
   // Close the edit dialog
   const closeEditDialog = () => {
     setIsDialogEditOpen(false)
   }
 
+  //form submit
+  const handleFormSave = () => {
+    setIsDialogEditOpen(false)
+  }
+
+  //Form Delete Member Dialog
   const FormDeleteMemberDialog = () => {
     const [isDeleting, setIsDeleting] = useState(false)
     const [deleteSuccess, setDeleteSuccess] = useState(false)
@@ -112,8 +133,96 @@ export const UsersList = ({ users }: PageProps) => {
     )
   }
 
-  const handleFormSave = () => {
-    setIsDialogEditOpen(false)
+  //Form Remove Admin Dialog
+  const FormRemoveUserDialog = ({ user }: { user: UsersProps | null }) => {
+    const [isRemoving, setIsRemoving] = useState(false)
+    const [removeSuccess, setRemoveSuccess] = useState(false)
+    // Delete project handler
+    const handleRemove = () => {
+      setIsRemoving(true)
+      setTimeout(() => {
+        setIsRemoving(false)
+        setRemoveSuccess(true) // Mark deletion as successful
+        setTimeout(() => {
+          setIsDialogRemoveOpen(false) // Close the dialog
+        }, 2000)
+      }, 2000)
+    }
+    return (
+      <AlertDialog open={isDialogRemoveOpen} onOpenChange={setIsDialogRemoveOpen}>
+        <AlertDialogTrigger asChild></AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure you want to remove {user?.display_name} as an admin?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will permanently remove a admin tag for {user?.display_name} ({user?.uid}).
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <Spacer size={3} />
+          <AlertDialogFooter>
+            {!isRemoving && !removeSuccess && (
+              <AlertDialogCancel onClick={() => setIsDialogRemoveOpen(false)}>Cancel</AlertDialogCancel>
+            )}
+            {removeSuccess ? (
+              <Button size="default" theme="success" className="self-start pointer-events-none">
+                Users removed&nbsp;&nbsp;
+                <Icon name="tick" size={14} />
+              </Button>
+            ) : (
+              <Button size="default" theme="error" className="self-start" onClick={handleRemove}>
+                {isRemoving ? 'Removing Member...' : 'Yes, remove Member'}
+              </Button>
+            )}
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    )
+  }
+
+  const FormResetPasswordDialog = ({ user }: { user: UsersProps | null }) => {
+    const [isResetting, setIsResetting] = useState(false)
+    const [resetSuccess, setResetSuccess] = useState(false)
+    // Delete project handler
+    const handleReset = () => {
+      setIsResetting(true)
+      setTimeout(() => {
+        setIsResetting(false)
+        setResetSuccess(true) // Mark deletion as successful
+        setTimeout(() => {
+          setIsDialogResetPasswordOpen(false) // Close the dialog
+        }, 2000)
+      }, 2000)
+    }
+    return (
+      <AlertDialog open={isDialogResetPasswordOpen} onOpenChange={setIsDialogResetPasswordOpen}>
+        <AlertDialogTrigger asChild></AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure you want to reset password for {user?.display_name}?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will send a password reset email to {user?.display_name} ({user?.uid}).
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <Spacer size={3} />
+          <AlertDialogFooter>
+            {!isResetting && !resetSuccess && (
+              <AlertDialogCancel onClick={() => setIsDialogResetPasswordOpen(false)}>Cancel</AlertDialogCancel>
+            )}
+            {/* TODO: check the page flow of reset password */}
+            {resetSuccess ? (
+              <Button size="default" theme="success" className="self-start pointer-events-none">
+                Password reset email sent&nbsp;&nbsp;
+                <Icon name="tick" size={14} />
+              </Button>
+            ) : (
+              <Button size="default" theme="error" className="self-start" onClick={handleReset}>
+                {isResetting ? 'Resetting Password...' : 'Yes, reset Password'}
+              </Button>
+            )}
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    )
   }
 
   const moreActionsTooltip = ({ user }: { user: UsersProps }) => {
@@ -126,13 +235,21 @@ export const UsersList = ({ users }: PageProps) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="shadow-sm py-2 bg-primary-background border border-gray-800 rounded-[10px] w-[180px]">
           <DropdownMenuGroup>
-            <DropdownMenuItem className="cursor-pointer">
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onSelect={() => {
+                onRemoveDialog(user)
+              }}>
               <DropdownMenuShortcut className="ml-0">
                 <Icon name="trash" className="mr-2" />
               </DropdownMenuShortcut>
               Remove Admin
             </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer">
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onSelect={() => {
+                onResetPasswordDialog(user)
+              }}>
               <DropdownMenuShortcut className="ml-0">
                 <Icon name="cog-6" className="mr-2" />
               </DropdownMenuShortcut>
@@ -142,8 +259,6 @@ export const UsersList = ({ users }: PageProps) => {
               className="cursor-pointer"
               onSelect={() => {
                 openEditDialog(user)
-                setEditUser(user) // Set the clicked member's data
-                setIsDialogEditOpen(true) // Open the edit dialog
               }}>
               <DropdownMenuShortcut className="ml-0">
                 <Icon name="edit-pen" className="mr-2" />
@@ -250,6 +365,8 @@ export const UsersList = ({ users }: PageProps) => {
       {isDialogEditOpen && editUser && (
         <FormUserEditDialog user={editUser} onSave={handleFormSave} onClose={closeEditDialog} />
       )}
+      {isDialogRemoveOpen && <FormRemoveUserDialog user={removeUser} />}
+      {isDialogResetPasswordOpen && <FormResetPasswordDialog user={resetPwd} />}
     </>
   )
 }
