@@ -46,7 +46,6 @@ interface PageProps {
 }
 
 export const MembersList = ({ members }: PageProps) => {
-  console.log(members)
   const [isDialogDeleteOpen, setIsDialogDeleteOpen] = useState(false)
   const [isDialogEditOpen, setIsDialogEditOpen] = useState(false)
   const [editMember, setEditMember] = useState<MembersProps | null>(null) // Store member being edited
