@@ -149,7 +149,7 @@ const ExecutionLogs: React.FC = () => {
               </>
             }>
             <Icon name="lightning" className="mr-2" />
-            Rerun
+            Run
           </SplitButton>
         </div>
       </div>
