@@ -32,6 +32,7 @@ import {
 } from '@harnessio/canary'
 import { getInitials } from '../../utils/utils'
 import { FormUserEditDialog } from './form-user-edit-dialog'
+import { FormRemoveUserDialog } from './form-user-remove-dialog'
 import { timeAgo } from '../../utils/utils'
 
 interface UsersProps {
@@ -125,52 +126,6 @@ export const UsersList = ({ users }: PageProps) => {
             ) : (
               <Button size="default" theme="error" className="self-start" onClick={handleDelete}>
                 {isDeleting ? 'Removing Member...' : 'Yes, remove Member'}
-              </Button>
-            )}
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    )
-  }
-
-  //Form Remove Admin Dialog
-  const FormRemoveUserDialog = ({ user }: { user: UsersProps | null }) => {
-    const [isRemoving, setIsRemoving] = useState(false)
-    const [removeSuccess, setRemoveSuccess] = useState(false)
-    // Delete project handler
-    const handleRemove = () => {
-      setIsRemoving(true)
-      setTimeout(() => {
-        setIsRemoving(false)
-        setRemoveSuccess(true) // Mark deletion as successful
-        setTimeout(() => {
-          setIsDialogRemoveOpen(false) // Close the dialog
-        }, 2000)
-      }, 2000)
-    }
-    return (
-      <AlertDialog open={isDialogRemoveOpen} onOpenChange={setIsDialogRemoveOpen}>
-        <AlertDialogTrigger asChild></AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure you want to remove {user?.display_name} as an admin?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This will permanently remove a admin tag for {user?.display_name} ({user?.uid}).
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <Spacer size={3} />
-          <AlertDialogFooter>
-            {!isRemoving && !removeSuccess && (
-              <AlertDialogCancel onClick={() => setIsDialogRemoveOpen(false)}>Cancel</AlertDialogCancel>
-            )}
-            {removeSuccess ? (
-              <Button size="default" theme="success" className="self-start pointer-events-none">
-                Users removed&nbsp;&nbsp;
-                <Icon name="tick" size={14} />
-              </Button>
-            ) : (
-              <Button size="default" theme="error" className="self-start" onClick={handleRemove}>
-                {isRemoving ? 'Removing Member...' : 'Yes, remove Member'}
               </Button>
             )}
           </AlertDialogFooter>
@@ -365,7 +320,7 @@ export const UsersList = ({ users }: PageProps) => {
       {isDialogEditOpen && editUser && (
         <FormUserEditDialog user={editUser} onSave={handleFormSave} onClose={closeEditDialog} />
       )}
-      {isDialogRemoveOpen && <FormRemoveUserDialog user={removeUser} />}
+      {isDialogRemoveOpen && <FormRemoveUserDialog user={removeUser} onClose={() => setIsDialogRemoveOpen(false)} />}
       {isDialogResetPasswordOpen && <FormResetPasswordDialog user={resetPwd} />}
     </>
   )
