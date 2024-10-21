@@ -21,7 +21,7 @@ import {
 import { z } from 'zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { FormFieldSet, MessageTheme } from '..'
+import { FormFieldSet, MessageTheme } from '../..'
 
 interface FormEditDialogProps {
   member: { display_name: string; role: string }
@@ -124,7 +124,9 @@ export const FormEditDialog: React.FC<FormEditDialogProps> = ({ member, onSave, 
                 <ButtonGroup.Root>
                   {!submitted ? (
                     <>
-                      <AlertDialogCancel onClick={onClose}>Cancel</AlertDialogCancel>
+                      <AlertDialogCancel onClick={onClose} disabled={!isValid || isSubmitting || !dirtyFields.role}>
+                        Cancel
+                      </AlertDialogCancel>
                       <Button type="submit" theme="primary" disabled={!isValid || isSubmitting || !dirtyFields.role}>
                         {isSubmitting ? 'Saving...' : 'Save'}
                       </Button>

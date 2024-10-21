@@ -30,7 +30,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger
 } from '@harnessio/canary'
-import { getInitials } from '../utils/utils'
+import { getInitials } from '../../utils/utils'
 import { FormEditDialog } from './form-member-edit-dialog'
 
 interface MembersProps {
@@ -67,8 +67,7 @@ export const MembersList = ({ members }: PageProps) => {
     setIsDialogEditOpen(false)
   }
 
-  const handleRoleSave = (newRole: string) => {
-    console.log(`Role for ${editMember?.display_name} has been updated to ${newRole}`)
+  const handleRoleSave = () => {
     setIsDialogEditOpen(false) // Close dialog after save
   }
 

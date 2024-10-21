@@ -17,6 +17,7 @@ import {
 } from '@harnessio/canary'
 import { SandboxLayout, FormFieldSet } from '..'
 import { MessageTheme } from '../components/form-field-set'
+import { useNavigate } from 'react-router-dom'
 
 // Define form schema for Project Settings
 const newMemberSchema = z.object({
@@ -36,6 +37,7 @@ const roleSelector = [
 ]
 
 function SandboxSettingsCreateNewMemberPage() {
+  const navigate = useNavigate()
   // new member form handling
   const {
     register,
@@ -48,8 +50,8 @@ function SandboxSettingsCreateNewMemberPage() {
     resolver: zodResolver(newMemberSchema),
     mode: 'onChange',
     defaultValues: {
-      memberName: 'Eric Smith',
-      email: 'example@gmail.com',
+      memberName: '',
+      email: '',
       role: ''
     }
   })
@@ -71,6 +73,7 @@ function SandboxSettingsCreateNewMemberPage() {
       setSubmitted(true)
       resetNewMemberForm(data) // Reset to the current values
       setTimeout(() => setSubmitted(false), 2000)
+      navigate('/sandbox/settings/project/members')
     }, 2000)
   }
 
@@ -144,7 +147,12 @@ function SandboxSettingsCreateNewMemberPage() {
                     <Button size="sm" type="submit" disabled={!isValid || isSubmitting}>
                       {isSubmitting ? 'Inviting...' : 'Invite New Member'}
                     </Button>
-                    <Button size="sm" variant="outline" type="button" onClick={() => resetNewMemberForm()}>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      type="button"
+                      onClick={() => resetNewMemberForm()}
+                      disabled={!isValid || isSubmitting}>
                       Cancel
                     </Button>
                   </>
