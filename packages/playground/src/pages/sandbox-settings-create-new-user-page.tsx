@@ -95,7 +95,7 @@ function SandboxSettingsCreateNewUserPage() {
             {/* ROLE */}
             <FormFieldSet.ControlGroup>
               <FormFieldSet.Label htmlFor="displayName">Display Name</FormFieldSet.Label>
-              <Input id="displayName" {...register('displayName')} placeholder="Enter a displayName" />
+              <Input id="displayName" {...register('displayName')} placeholder="Enter a display name" />
               {errors.displayName && (
                 <FormFieldSet.Message theme={MessageTheme.ERROR}>
                   {errors.displayName.message?.toString()}

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Spacer, Text, ListActions, SearchBox, Button } from '@harnessio/canary'
 import { SandboxLayout, SkeletonList, NoData } from '..'
 import { mockUsersData } from '../data/mockUsersData'
-import { UsersList } from '../components/users-list'
+import { UsersList } from '../components/user-management/users-list'
 import { PlaygroundListSettings } from '../settings/list-settings'
 import { PaginationComponent } from '../components/pagination'
 import { useNavigate } from 'react-router-dom'
@@ -11,11 +11,14 @@ const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' },
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
 
 type UsersProps = {
-  display_name: string
-  role: string
+  admin: boolean
+  uid: string
+  display_name?: string | undefined // Add a default value of undefined
   email: string
+  created: number // Update the type to number
+  updated?: number
   avatarUrl?: string
-  timestamp?: string
+  blocked?: boolean
 }
 
 function SandboxSettingsUserManagementPage() {

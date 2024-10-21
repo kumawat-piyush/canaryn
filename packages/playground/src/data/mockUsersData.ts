@@ -1,92 +1,102 @@
 export const mockUsersData = [
   {
-    display_name: 'John Doe',
-    role: 'Admin',
-    email: 'johndoe@gmail.com',
-    avatarUrl: '../public/images/user-avatar.svg'
+    admin: true,
+    blocked: false,
+    created: 1727991451278,
+    display_name: 'jackiechen',
+    email: 'jackiechen@gmail.com',
+    uid: 'jackiechen666',
+    updated: 1727991451278,
+    avatarUrl: ''
   },
   {
-    display_name: 'Jane Smith',
-    role: 'janesmith',
-    email: 'janesmith@yahoo.com',
-    avatarUrl: '../public/images/user-avatar.svg'
+    admin: false,
+    blocked: false,
+    created: 1727991451279,
+    display_name: 'samanthalee',
+    email: 'samanthalee@gmail.com',
+    uid: 'samanthalee123',
+    updated: 1727991451279,
+    avatarUrl: ''
   },
   {
-    display_name: 'Michael Brown',
-    role: 'michaelbrown',
-    email: 'michaelbrown@hotmail.com',
-    avatarUrl: '../public/images/user-avatar.svg'
+    admin: true,
+    blocked: true,
+    created: 1727991451280,
+    display_name: 'robertsmith',
+    email: 'robertsmith@gmail.com',
+    uid: 'robertsmith456',
+    updated: 1727991451280,
+    avatarUrl: ''
   },
   {
-    display_name: 'Emily Davis',
-    role: 'emilydavis',
-    email: 'emilydavis@outlook.com',
-    avatarUrl: '../public/images/user-avatar.svg'
+    admin: false,
+    blocked: false,
+    created: 1727991451281,
+    display_name: 'michaeljohnson',
+    email: 'michaeljohnson@gmail.com',
+    uid: 'michaeljohnson789',
+    updated: 1727991451281,
+    avatarUrl: ''
   },
   {
-    display_name: 'William Johnson',
-    role: 'williamjohnson',
-    email: 'williamjohnson@gmail.com',
-    avatarUrl: '../public/images/user-avatar.svg'
+    admin: true,
+    blocked: false,
+    created: 1727991451282,
+    display_name: 'emilydavis',
+    email: 'emilydavis@gmail.com',
+    uid: 'emilydavis001',
+    updated: 1727991451282,
+    avatarUrl: ''
   },
   {
-    display_name: 'Olivia Wilson',
-    role: 'oliviawilson',
-    email: 'oliviawilson@live.com',
-    avatarUrl: '../public/images/user-avatar.svg'
+    admin: false,
+    blocked: true,
+    created: 1727991451283,
+    display_name: 'chrismartin',
+    email: 'chrismartin@gmail.com',
+    uid: 'chrismartin234',
+    updated: 1727991451283,
+    avatarUrl: ''
   },
   {
-    display_name: 'James Miller',
-    role: 'jamesmiller',
-    email: 'jamesmiller@protonmail.com',
-    avatarUrl: '../public/images/user-avatar.svg'
+    admin: true,
+    blocked: false,
+    created: 1727991451284,
+    display_name: 'lauraallen',
+    email: 'lauraallen@gmail.com',
+    uid: 'lauraallen567',
+    updated: 1727991451284,
+    avatarUrl: ''
   },
   {
-    display_name: 'Sophia Moore',
-    role: 'sophiamoore',
-    email: 'sophiamoore@gmail.com',
-    avatarUrl: '../public/images/user-avatar.svg'
+    admin: false,
+    blocked: false,
+    created: 1727991451285,
+    display_name: 'davidbrown',
+    email: 'davidbrown@gmail.com',
+    uid: 'davidbrown890',
+    updated: 1727991451285,
+    avatarUrl: ''
   },
   {
-    display_name: 'Liam Anderson',
-    role: 'liamanderson',
-    email: 'liamanderson@yahoo.com',
-    avatarUrl: '../public/images/user-avatar.svg'
+    admin: true,
+    blocked: true,
+    created: 1727991451286,
+    display_name: 'lisawilliams',
+    email: 'lisawilliams@gmail.com',
+    uid: 'lisawilliams345',
+    updated: 1727991451286,
+    avatarUrl: ''
   },
   {
-    display_name: 'Mia Thomas',
-    role: 'miathomas',
-    email: 'miathomas@outlook.com',
-    avatarUrl: '../public/images/user-avatar.svg'
-  },
-  {
-    display_name: 'Lucas Martin',
-    role: 'lucasmartin',
-    email: 'lucasmartin@hotmail.com',
-    avatarUrl: '../public/images/user-avatar.svg'
-  },
-  {
-    display_name: 'Ava Jackson',
-    role: 'avajackson',
-    email: 'avajackson@protonmail.com',
-    avatarUrl: '../public/images/user-avatar.svg'
-  },
-  {
-    display_name: 'Ethan White',
-    role: 'ethanwhite',
-    email: 'ethanwhite@live.com',
-    avatarUrl: '../public/images/user-avatar.svg'
-  },
-  {
-    display_name: 'Isabella Harris',
-    role: 'isabellaharris',
-    email: 'isabellaharris@gmail.com',
-    avatarUrl: '../public/images/user-avatar.svg'
-  },
-  {
-    display_name: 'Noah Clark',
-    role: 'noahclark',
-    email: 'noahclark@yahoo.com',
-    avatarUrl: '../public/images/user-avatar.svg'
+    admin: false,
+    blocked: false,
+    created: 1727991451287,
+    display_name: 'johnmiller',
+    email: 'johnmiller@gmail.com',
+    uid: 'johnmiller678',
+    updated: 1727991451287,
+    avatarUrl: ''
   }
 ]
