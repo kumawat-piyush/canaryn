@@ -22,7 +22,7 @@ import { useNavigate } from 'react-router-dom'
 // Define form schema for Project Settings
 const newMemberSchema = z.object({
   memberName: z.string().min(1, { message: 'Please provide a project name' }),
-  email: z.string().min(1, { message: 'Please enter a email address' }),
+  email: z.string().email({ message: 'Please provide a valid email address' }),
   role: z.string().min(1, { message: 'Please select a role for the new member' })
 })
 
@@ -74,6 +74,11 @@ function SandboxSettingsCreateNewMemberPage() {
       setTimeout(() => setSubmitted(false), 2000)
       navigate('/sandbox/settings/project/members')
     }, 2000)
+  }
+
+  const handleCancel = () => {
+    resetNewMemberForm()
+    navigate('/sandbox/settings/project/members')
   }
 
   return (
@@ -146,12 +151,7 @@ function SandboxSettingsCreateNewMemberPage() {
                     <Button size="sm" type="submit" disabled={!isValid || isSubmitting}>
                       {isSubmitting ? 'Inviting...' : 'Invite New Member'}
                     </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      type="button"
-                      onClick={() => resetNewMemberForm()}
-                      disabled={!isValid || isSubmitting}>
+                    <Button size="sm" variant="outline" type="button" onClick={handleCancel} disabled={isSubmitting}>
                       Cancel
                     </Button>
                   </>

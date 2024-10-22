@@ -11,8 +11,8 @@ import { useNavigate } from 'react-router-dom'
 // Define form schema for Project Settings
 const newUserSchema = z.object({
   userID: z.string().min(1, { message: 'Please provide a project name' }),
-  email: z.string().min(1, { message: 'Please enter a email address' }),
-  displayName: z.string()
+  email: z.string().email({ message: 'Please enter a email address' }),
+  displayName: z.string() //optional
 })
 
 // TypeScript types for forms
@@ -49,6 +49,11 @@ function SandboxSettingsCreateNewUserPage() {
       setTimeout(() => setSubmitted(false), 2000)
       navigate('/sandbox/settings/user-mamagement/users')
     }, 2000)
+  }
+
+  const handleCancel = () => {
+    resetNewUserForm()
+    navigate('/sandbox/settings/user-mamagement/users')
   }
 
   return (
@@ -114,7 +119,7 @@ function SandboxSettingsCreateNewUserPage() {
                       size="sm"
                       variant="outline"
                       type="button"
-                      onClick={() => resetNewUserForm()}
+                      onClick={handleCancel}
                       disabled={!isValid || isSubmitting}>
                       Cancel
                     </Button>
