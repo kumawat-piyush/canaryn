@@ -40,7 +40,7 @@ export const FormUserEditDialog: React.FC<FormEditDialogProps> = ({ user, onSave
     handleSubmit,
     register,
     reset: resetNewMemberForm,
-    formState: { errors, isValid }
+    formState: { errors, isValid, isDirty }
   } = useForm<MemberFields>({
     resolver: zodResolver(newMemberSchema),
     mode: 'onChange',
@@ -143,7 +143,7 @@ export const FormUserEditDialog: React.FC<FormEditDialogProps> = ({ user, onSave
                       <AlertDialogCancel onClick={onClose} disabled={!isValid || isSubmitting}>
                         Cancel
                       </AlertDialogCancel>
-                      <Button type="submit" theme="primary" disabled={!isValid || isSubmitting}>
+                      <Button type="submit" theme="primary" disabled={!isValid || isSubmitting || !isDirty}>
                         {isSubmitting ? 'Saving...' : 'Save'}
                       </Button>
                     </>
