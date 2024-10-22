@@ -13,15 +13,6 @@ import {
   AvatarFallback,
   Badge,
   Button,
-  Spacer,
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogCancel,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -33,6 +24,8 @@ import {
 import { getInitials } from '../../utils/utils'
 import { FormUserEditDialog } from './form-user-edit-dialog'
 import { FormRemoveUserDialog } from './form-user-remove-dialog'
+import { FormDeleteUserDialog } from './form-user-delete-dialog'
+import { FormResetPasswordDialog } from './form-user-reset-password'
 import { timeAgo } from '../../utils/utils'
 
 interface UsersProps {
@@ -88,96 +81,6 @@ export const UsersList = ({ users }: PageProps) => {
   //form submit
   const handleFormSave = () => {
     setIsDialogEditOpen(false)
-  }
-
-  //Form Delete Member Dialog
-  const FormDeleteMemberDialog = () => {
-    const [isDeleting, setIsDeleting] = useState(false)
-    const [deleteSuccess, setDeleteSuccess] = useState(false)
-    // Delete project handler
-    const handleDelete = () => {
-      setIsDeleting(true)
-      setTimeout(() => {
-        setIsDeleting(false)
-        setDeleteSuccess(true) // Mark deletion as successful
-        setTimeout(() => {
-          setIsDialogDeleteOpen(false) // Close the dialog
-        }, 2000)
-      }, 2000)
-    }
-    return (
-      <AlertDialog open={isDialogDeleteOpen} onOpenChange={setIsDialogDeleteOpen}>
-        <AlertDialogTrigger asChild></AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription>This will permanently remove your users.</AlertDialogDescription>
-          </AlertDialogHeader>
-          <Spacer size={3} />
-          <AlertDialogFooter>
-            {!isDeleting && !deleteSuccess && (
-              <AlertDialogCancel onClick={() => setIsDialogDeleteOpen(false)}>Cancel</AlertDialogCancel>
-            )}
-            {deleteSuccess ? (
-              <Button size="default" theme="success" className="self-start pointer-events-none">
-                Users removed&nbsp;&nbsp;
-                <Icon name="tick" size={14} />
-              </Button>
-            ) : (
-              <Button size="default" theme="error" className="self-start" onClick={handleDelete}>
-                {isDeleting ? 'Removing Member...' : 'Yes, remove Member'}
-              </Button>
-            )}
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    )
-  }
-
-  const FormResetPasswordDialog = ({ user }: { user: UsersProps | null }) => {
-    const [isResetting, setIsResetting] = useState(false)
-    const [resetSuccess, setResetSuccess] = useState(false)
-    // Delete project handler
-    const handleReset = () => {
-      setIsResetting(true)
-      setTimeout(() => {
-        setIsResetting(false)
-        setResetSuccess(true) // Mark deletion as successful
-        setTimeout(() => {
-          setIsDialogResetPasswordOpen(false) // Close the dialog
-        }, 2000)
-      }, 2000)
-    }
-    return (
-      <AlertDialog open={isDialogResetPasswordOpen} onOpenChange={setIsDialogResetPasswordOpen}>
-        <AlertDialogTrigger asChild></AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure you want to reset password for {user?.display_name}?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This will send a password reset email to {user?.display_name} ({user?.uid}).
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <Spacer size={3} />
-          <AlertDialogFooter>
-            {!isResetting && !resetSuccess && (
-              <AlertDialogCancel onClick={() => setIsDialogResetPasswordOpen(false)}>Cancel</AlertDialogCancel>
-            )}
-            {/* TODO: check the page flow of reset password */}
-            {resetSuccess ? (
-              <Button size="default" theme="success" className="self-start pointer-events-none">
-                Password reset email sent&nbsp;&nbsp;
-                <Icon name="tick" size={14} />
-              </Button>
-            ) : (
-              <Button size="default" theme="error" className="self-start" onClick={handleReset}>
-                {isResetting ? 'Resetting Password...' : 'Yes, reset Password'}
-              </Button>
-            )}
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    )
   }
 
   const moreActionsTooltip = ({ user }: { user: UsersProps }) => {
@@ -315,13 +218,15 @@ export const UsersList = ({ users }: PageProps) => {
         </TableBody>
       </Table>
       {/* Delete Dialog */}
-      {isDialogDeleteOpen && <FormDeleteMemberDialog />}
+      {isDialogDeleteOpen && <FormDeleteUserDialog onClose={() => setIsDialogDeleteOpen(false)} />}
       {/* Edit Dialog */}
       {isDialogEditOpen && editUser && (
         <FormUserEditDialog user={editUser} onSave={handleFormSave} onClose={closeEditDialog} />
       )}
       {isDialogRemoveOpen && <FormRemoveUserDialog user={removeUser} onClose={() => setIsDialogRemoveOpen(false)} />}
-      {isDialogResetPasswordOpen && <FormResetPasswordDialog user={resetPwd} />}
+      {isDialogResetPasswordOpen && (
+        <FormResetPasswordDialog user={resetPwd} onClose={() => setIsDialogResetPasswordOpen(false)} />
+      )}
     </>
   )
 }
