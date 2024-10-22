@@ -1,5 +1,6 @@
 import { IFormDefinition, IInputDefinition } from '@harnessio/forms'
 import { forOwn } from 'lodash-es'
+import { Pipeline } from '../../../types/pipeline-schema'
 
 export interface PipelineInput<T = unknown> {
   type: 'string' | 'number' | 'secret' | 'boolean'
@@ -8,7 +9,7 @@ export interface PipelineInput<T = unknown> {
   pattern?: string
 }
 
-export function createFormFromPipelineInputs(pipeline: { pipeline: { inputs: unknown } }): IFormDefinition {
+export function createFormFromPipelineInputs(pipeline: Pipeline): IFormDefinition {
   const inputs: IInputDefinition[] = []
 
   const pipelineInputs = pipeline?.pipeline?.inputs

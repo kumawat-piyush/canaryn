@@ -31,6 +31,7 @@ import { PipelineParams } from '../pipeline-edit/context/PipelineStudioDataProvi
 import { decodeGitContent, normalizeGitRef } from '../../utils/git-utils'
 import { createFormFromPipelineInputs } from './utils/utils'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
+import { Inputs } from '../../types/pipeline-schema'
 
 const ADDITIONAL_INPUTS_PREFIX = '_'
 interface RunPipelineDialogProps {
@@ -60,20 +61,16 @@ export default function RunPipelineDialog({ open, onClose, pipelineId, branch }:
           path: pipelineData.config_path ?? '',
           repo_ref: repoRef,
           queryParams: { git_ref: normalizeGitRef(branch ?? pipelineData.default_branch) ?? '', include_commit: true }
+        }).then(pipelineFileContent => {
+          try {
+            const pipelineObj = parse(decodeGitContent(pipelineFileContent?.content?.data))
+            setPipeline(pipelineObj)
+          } catch (ex) {
+            // TODO: toast
+            console.error(ex)
+          }
+          setLoading(false)
         })
-          .then(pipelineFileContent => {
-            try {
-              const pipelineObj = parse(decodeGitContent(pipelineFileContent?.content?.data))
-              setPipeline(pipelineObj)
-            } catch (ex) {
-              // TODO: toast
-              console.error(ex)
-            }
-            setLoading(false)
-          })
-          .catch(e => {
-            throw e
-          })
       })
       .catch(ex => {
         // TODO: toast
@@ -100,18 +97,12 @@ export default function RunPipelineDialog({ open, onClose, pipelineId, branch }:
 
   const { mutateAsync: createExecutionAsync, isLoading: isLoadingCreateExecution } = useCreateExecutionMutation({})
 
-  const runPipeline = ({
-    branch,
-    runtimeInputsValues
-  }: {
-    branch: string
-    runtimeInputsValues: Record<string, unknown>
-  }) => {
+  const runPipeline = ({ branch, inputsValues }: { branch: string; inputsValues: Inputs }) => {
     createExecutionAsync({
       pipeline_identifier: pipelineId ?? '',
       repo_ref: repoRef,
       queryParams: { branch: branch },
-      body: runtimeInputsValues
+      body: inputsValues
     })
       .then(response => {
         onClose()
@@ -140,9 +131,9 @@ export default function RunPipelineDialog({ open, onClose, pipelineId, branch }:
         const transformedValues = outputTransformValues(values, transformers)
 
         const branch = transformedValues._.branch
-        const runtimeInputsValues = omit(transformedValues, '_')
+        const inputsValues = omit(transformedValues, '_')
 
-        runPipeline({ branch, runtimeInputsValues })
+        runPipeline({ branch, inputsValues })
       }}
       validateAfterFirstSubmit={true}>
       {rootForm => (
