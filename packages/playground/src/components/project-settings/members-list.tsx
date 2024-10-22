@@ -22,7 +22,7 @@ import {
   DropdownMenuTrigger
 } from '@harnessio/canary'
 import { getInitials } from '../../utils/utils'
-import { FormEditDialog } from './form-member-edit-dialog'
+import { FormEditMemberDialog } from './form-member-edit-dialog'
 import { FormDeleteMemberDialog } from './form-member-delete-dialog'
 
 interface MembersProps {
@@ -55,11 +55,6 @@ export const MembersList = ({ members }: PageProps) => {
     setIsDialogEditOpen(true)
   }
 
-  // Close the edit dialog
-  const closeEditDialog = () => {
-    setIsDialogEditOpen(false)
-  }
-
   const handleRoleSave = () => {
     setIsDialogEditOpen(false) // Close dialog after save
   }
@@ -69,7 +64,7 @@ export const MembersList = ({ members }: PageProps) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="xs">
-            <Icon name="vertical-ellipsis" size={14} className="text-tertiary-background" />
+            <Icon name="vertical-ellipsis" size={14} className="text-tertiary-background cursor-pointer" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="shadow-sm py-2 bg-primary-background border border-gray-800 rounded-[10px] w-[180px]">
@@ -181,7 +176,7 @@ export const MembersList = ({ members }: PageProps) => {
       )}
       {/* Edit Dialog */}
       {isDialogEditOpen && editMember && (
-        <FormEditDialog member={editMember} onSave={handleRoleSave} onClose={closeEditDialog} />
+        <FormEditMemberDialog member={editMember} onSave={handleRoleSave} onClose={() => setIsDialogEditOpen(false)} />
       )}
     </>
   )

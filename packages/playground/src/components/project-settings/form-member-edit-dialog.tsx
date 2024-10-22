@@ -29,7 +29,7 @@ interface FormEditDialogProps {
   onClose: () => void
 }
 
-export const FormEditDialog: React.FC<FormEditDialogProps> = ({ member, onSave, onClose }) => {
+export const FormEditMemberDialog: React.FC<FormEditDialogProps> = ({ member, onSave, onClose }) => {
   const newMemberSchema = z.object({
     memberName: z.string().min(1, { message: 'Please provide a project name' }),
     role: z.string().min(1, { message: 'Please select a role for the new member' })
@@ -124,7 +124,7 @@ export const FormEditDialog: React.FC<FormEditDialogProps> = ({ member, onSave, 
                 <ButtonGroup.Root>
                   {!submitted ? (
                     <>
-                      <AlertDialogCancel onClick={onClose} disabled={!isValid || isSubmitting || !dirtyFields.role}>
+                      <AlertDialogCancel onClick={onClose} disabled={!isValid || isSubmitting}>
                         Cancel
                       </AlertDialogCancel>
                       <Button type="submit" theme="primary" disabled={!isValid || isSubmitting || !dirtyFields.role}>

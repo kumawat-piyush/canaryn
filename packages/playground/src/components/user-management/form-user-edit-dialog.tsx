@@ -56,7 +56,6 @@ export const FormUserEditDialog: React.FC<FormEditDialogProps> = ({ user, onSave
 
   // Form submit handler
   const onSubmit: SubmitHandler<MemberFields> = data => {
-    console.log('Submitting new member:', data)
     setIsSubmitting(true)
     setTimeout(() => {
       onSave()
@@ -72,7 +71,7 @@ export const FormUserEditDialog: React.FC<FormEditDialogProps> = ({ user, onSave
     <AlertDialog open={true} onOpenChange={onClose}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Update user</AlertDialogTitle>
+          <AlertDialogTitle>Update User</AlertDialogTitle>
         </AlertDialogHeader>
 
         {/* Accessibility: Add Description */}
@@ -94,7 +93,7 @@ export const FormUserEditDialog: React.FC<FormEditDialogProps> = ({ user, onSave
                 id="userID"
                 {...register('userID')}
                 placeholder="Enter User ID"
-                value={user.uid}
+                defaultValue={user.uid}
                 className={user.uid ? 'cursor-not-allowed' : ''}
                 disabled={user.uid ? true : false}
               />
@@ -110,7 +109,7 @@ export const FormUserEditDialog: React.FC<FormEditDialogProps> = ({ user, onSave
               <FormFieldSet.Label htmlFor="email" required>
                 Email
               </FormFieldSet.Label>
-              <Input id="email" {...register('email')} value={user.email} />
+              <Input id="email" {...register('email')} defaultValue={user.email} />
               {errors.email && (
                 <FormFieldSet.Message theme={MessageTheme.ERROR}>
                   {errors.email.message?.toString()}
@@ -124,7 +123,7 @@ export const FormUserEditDialog: React.FC<FormEditDialogProps> = ({ user, onSave
               <Input
                 id="displayName"
                 {...register('displayName')}
-                value={user.display_name}
+                defaultValue={user.display_name}
                 placeholder="Enter a display name"
               />
               {errors.displayName && (
