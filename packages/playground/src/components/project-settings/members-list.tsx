@@ -13,15 +13,6 @@ import {
   AvatarFallback,
   Badge,
   Button,
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogCancel,
-  Spacer,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -32,6 +23,7 @@ import {
 } from '@harnessio/canary'
 import { getInitials } from '../../utils/utils'
 import { FormEditDialog } from './form-member-edit-dialog'
+import { FormDeleteMemberDialog } from './form-member-delete-dialog'
 
 interface MembersProps {
   display_name: string
@@ -109,50 +101,6 @@ export const MembersList = ({ members }: PageProps) => {
     )
   }
 
-  const FormDeleteMemberDialog = () => {
-    const [isDeleting, setIsDeleting] = useState(false)
-    const [deleteSuccess, setDeleteSuccess] = useState(false)
-    // Delete project handler
-    const handleDelete = () => {
-      setIsDeleting(true)
-      setTimeout(() => {
-        setIsDeleting(false)
-        setDeleteSuccess(true) // Mark deletion as successful
-        setTimeout(() => {
-          setIsDialogDeleteOpen(false) // Close the dialog
-        }, 2000)
-      }, 2000)
-    }
-
-    return (
-      <AlertDialog open={isDialogDeleteOpen} onOpenChange={setIsDialogDeleteOpen}>
-        <AlertDialogTrigger asChild></AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription>This will permanently remove your member.</AlertDialogDescription>
-          </AlertDialogHeader>
-          <Spacer size={3} />
-          <AlertDialogFooter>
-            {!isDeleting && !deleteSuccess && (
-              <AlertDialogCancel onClick={() => setIsDialogDeleteOpen(false)}>Cancel</AlertDialogCancel>
-            )}
-            {deleteSuccess ? (
-              <Button size="default" theme="success" className="self-start pointer-events-none">
-                Member removed&nbsp;&nbsp;
-                <Icon name="tick" size={14} />
-              </Button>
-            ) : (
-              <Button size="default" theme="error" className="self-start" onClick={handleDelete}>
-                {isDeleting ? 'Removing Member...' : 'Yes, remove Member'}
-              </Button>
-            )}
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    )
-  }
-
   return (
     <>
       <Table variant="asStackedList">
@@ -226,7 +174,7 @@ export const MembersList = ({ members }: PageProps) => {
         </TableBody>
       </Table>
       {/* Delete Dialog */}
-      {isDialogDeleteOpen && <FormDeleteMemberDialog />}
+      {isDialogDeleteOpen && <FormDeleteMemberDialog onClose={() => setIsDialogDeleteOpen(false)} />}
       {/* Edit Dialog */}
       {isDialogEditOpen && editMember && (
         <FormEditDialog member={editMember} onSave={handleRoleSave} onClose={closeEditDialog} />
