@@ -31,9 +31,9 @@ import { timeAgo } from '../../utils/utils'
 interface UsersProps {
   admin: boolean
   uid: string
-  display_name?: string // Add a default value of undefined
+  display_name?: string
   email: string
-  created: number // Add a default value of undefined
+  created: number
   updated?: number
   avatarUrl?: string
   blocked?: boolean
@@ -50,7 +50,7 @@ export const UsersList = ({ users }: PageProps) => {
   const [isDialogResetPasswordOpen, setIsDialogResetPasswordOpen] = useState(false)
   const [editUser, setEditUser] = useState<UsersProps | null>(null) // Store user being edited
   const [removeUser, setRemoveUser] = useState<UsersProps | null>(null) // Store user being removed
-  const [resetPwd, setResetPwd] = useState<UsersProps | null>(null) // Store user being removed
+  const [resetPwd, setResetPwd] = useState<UsersProps | null>(null) // Store reser password user
 
   //open delete dialog for a specific member
   const openDeleteDialog = () => {
@@ -71,11 +71,6 @@ export const UsersList = ({ users }: PageProps) => {
   const onResetPasswordDialog = (user: UsersProps) => {
     setResetPwd(user)
     setIsDialogResetPasswordOpen(true)
-  }
-
-  // Close the edit dialog
-  const closeEditDialog = () => {
-    setIsDialogEditOpen(false)
   }
 
   //form submit
@@ -221,7 +216,7 @@ export const UsersList = ({ users }: PageProps) => {
       {isDialogDeleteOpen && <FormDeleteUserDialog onClose={() => setIsDialogDeleteOpen(false)} />}
       {/* Edit Dialog */}
       {isDialogEditOpen && editUser && (
-        <FormUserEditDialog user={editUser} onSave={handleFormSave} onClose={closeEditDialog} />
+        <FormUserEditDialog user={editUser} onSave={handleFormSave} onClose={() => setIsDialogEditOpen(false)} />
       )}
       {isDialogRemoveOpen && <FormRemoveUserDialog user={removeUser} onClose={() => setIsDialogRemoveOpen(false)} />}
       {isDialogResetPasswordOpen && (
