@@ -1,3 +1,5 @@
+import { z } from 'zod'
+
 export interface TypesUser {
   admin?: boolean
   blocked?: boolean
@@ -7,3 +9,10 @@ export interface TypesUser {
   uid?: string
   updated?: number
 }
+
+// Define the form schema with optional fields for gitignore and license
+export const formSchema = z.object({
+  title: z.string().min(1, { message: 'Please provide a pull request title' }),
+  description: z.string().min(1, { message: 'Please provide a description' })
+})
+export type FormFields = z.infer<typeof formSchema> // Automatically generate a type from the schema

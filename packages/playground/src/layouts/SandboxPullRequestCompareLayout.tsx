@@ -1,17 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { noop } from 'lodash-es'
 import { BranchSelector, Layout, PullRequestCommits, SandboxLayout } from '..'
 import { Tabs, TabsContent, TabsList } from '@harnessio/canary'
 import { Icon, Spacer, Text } from '@harnessio/canary'
-import { mockCommitData } from '../data/mockCommitData'
 import { z } from 'zod'
 import PullRequestCompareForm from '../components/pull-request/pull-request-compare-form'
 import TabTriggerItem from '../components/TabsTriggerItem'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import PullRequestCompareButton from '../components/pull-request/pull-request-compare-button'
-
-const mockBranchList = [{ name: 'main' }, { name: 'new-feature' }, { name: 'test-wip' }, { name: 'display-db' }]
+import { TypesCommit } from '../components/pull-request/interfaces'
 
 // Define the form schema with optional fields for gitignore and license
 export const formSchema = z.object({
@@ -27,6 +24,11 @@ interface SandboxPullRequestCompareProps {
   apiError: string | null
   isLoading: boolean
   isSuccess: boolean
+  mergeability: boolean
+  branchList: { name: string }[]
+  selectTargetBranch: (name: string) => void
+  selectSourceBranch: (name: string) => void
+  commitData?: TypesCommit[]
 }
 
 const SandboxPullRequestCompare: React.FC<SandboxPullRequestCompareProps> = ({
@@ -34,9 +36,13 @@ const SandboxPullRequestCompare: React.FC<SandboxPullRequestCompareProps> = ({
   apiError = null,
   isLoading,
   isSuccess,
-  onFormDraftSubmit
+  onFormDraftSubmit,
+  mergeability = false,
+  selectTargetBranch,
+  selectSourceBranch,
+  branchList,
+  commitData
 }) => {
-  const mergeability = true
   const formRef = useRef<HTMLFormElement>(null) // Create a ref for the form
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
   const {
@@ -74,20 +80,21 @@ const SandboxPullRequestCompare: React.FC<SandboxPullRequestCompareProps> = ({
           </Text>
           <Layout.Horizontal className="items-center text-tertiary-background">
             <Icon name="pull" size={16} className="text-tertiary-background" />
+
             <BranchSelector
               prefix={'base'}
               size="default"
               name={'main'}
-              branchList={mockBranchList}
-              selectBranch={noop}
+              branchList={branchList}
+              selectBranch={selectTargetBranch}
             />
             <Icon name="arrow-long" size={14} className="rotate-180 text-tertiary-background" />
             <BranchSelector
               prefix="compare"
               size="default"
               name={'main'}
-              branchList={mockBranchList}
-              selectBranch={noop}
+              branchList={branchList}
+              selectBranch={selectSourceBranch}
             />
             {mergeability ? (
               <Layout.Horizontal className="items-center gap-x-0">
@@ -149,7 +156,7 @@ const SandboxPullRequestCompare: React.FC<SandboxPullRequestCompareProps> = ({
             </TabsContent>
             <TabsContent className="flex flex-col" value="commits">
               <Spacer size={10} />
-              <PullRequestCommits data={mockCommitData} />
+              <PullRequestCommits data={commitData} />
             </TabsContent>
             <TabsContent value="changes">
               {/* Content for Changes */}
