@@ -68,7 +68,6 @@ function SandboxSettingsCreateNewMemberPage() {
   const onSubmit: SubmitHandler<NewMemberFields> = data => {
     setIsSubmitting(true)
     setTimeout(() => {
-      console.log('New member updated:', data)
       setIsSubmitting(false)
       setSubmitted(true)
       resetNewMemberForm(data) // Reset to the current values

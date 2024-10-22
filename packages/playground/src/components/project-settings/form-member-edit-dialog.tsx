@@ -60,11 +60,9 @@ export const FormEditMemberDialog: React.FC<FormEditDialogProps> = ({ member, on
 
   // Form submit handler
   const onSubmit: SubmitHandler<MemberFields> = data => {
-    console.log('Submitting new member:', data)
     setIsSubmitting(true)
     setTimeout(() => {
       onSave(data.role) // Pass the new role on save
-      console.log('New member updated:', data)
       setIsSubmitting(false)
       setSubmitted(true)
       resetNewMemberForm(data) // Reset to the current values

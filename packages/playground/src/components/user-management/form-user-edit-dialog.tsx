@@ -59,7 +59,6 @@ export const FormUserEditDialog: React.FC<FormEditDialogProps> = ({ user, onSave
     setIsSubmitting(true)
     setTimeout(() => {
       onSave()
-      console.log('New member updated:', data)
       setIsSubmitting(false)
       setSubmitted(true)
       resetNewMemberForm(data) // Reset to the current values

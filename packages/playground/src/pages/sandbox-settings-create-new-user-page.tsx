@@ -43,7 +43,6 @@ function SandboxSettingsCreateNewUserPage() {
   const onSubmit: SubmitHandler<NewUserFields> = data => {
     setIsSubmitting(true)
     setTimeout(() => {
-      console.log('Project settings updated:', data)
       setIsSubmitting(false)
       setSubmitted(true)
       resetNewUserForm(data) // Reset to the current values
