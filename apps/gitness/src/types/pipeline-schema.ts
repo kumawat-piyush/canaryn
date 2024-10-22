@@ -1,15 +1,7 @@
 export type Inputs = Record<string, Input>
 
 export interface Input<T = unknown> {
-  type:
-    | 'string'
-    | 'number'
-    | 'boolean'
-    | 'array'
-    | 'duration'
-    | 'choice' // GitHub compatibility
-    | 'environment' // GitHub compatibility
-    | 'secret'
+  type: 'string' | 'number' | 'boolean' | 'array' | 'duration' | 'secret'
   description?: string
   default?: T
   required?: boolean
