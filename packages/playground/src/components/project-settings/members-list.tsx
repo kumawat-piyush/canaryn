@@ -41,9 +41,11 @@ export const MembersList = ({ members }: PageProps) => {
   const [isDialogDeleteOpen, setIsDialogDeleteOpen] = useState(false)
   const [isDialogEditOpen, setIsDialogEditOpen] = useState(false)
   const [editMember, setEditMember] = useState<MembersProps | null>(null) // Store member being edited
+  const [deleteMember, setDeleteMember] = useState<MembersProps | null>(null) // Store member being deleted
 
   //open delete dialog for a specific member
-  const openDeleteDialog = () => {
+  const openDeleteDialog = (member: MembersProps) => {
+    setDeleteMember(member)
     setIsDialogDeleteOpen(true)
   }
 
@@ -88,7 +90,7 @@ export const MembersList = ({ members }: PageProps) => {
             <DropdownMenuItem
               className="cursor-pointer text-red-400 hover:text-red-400 focus:text-red-400"
               onSelect={() => {
-                openDeleteDialog()
+                openDeleteDialog(member)
               }}>
               <DropdownMenuShortcut className="ml-0">
                 <Icon name="trash" className="mr-2 text-red-400" />
@@ -174,7 +176,9 @@ export const MembersList = ({ members }: PageProps) => {
         </TableBody>
       </Table>
       {/* Delete Dialog */}
-      {isDialogDeleteOpen && <FormDeleteMemberDialog onClose={() => setIsDialogDeleteOpen(false)} />}
+      {isDialogDeleteOpen && (
+        <FormDeleteMemberDialog member={deleteMember as MembersProps} onClose={() => setIsDialogDeleteOpen(false)} />
+      )}
       {/* Edit Dialog */}
       {isDialogEditOpen && editMember && (
         <FormEditDialog member={editMember} onSave={handleRoleSave} onClose={closeEditDialog} />

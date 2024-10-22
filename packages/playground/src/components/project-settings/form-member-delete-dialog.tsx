@@ -13,11 +13,15 @@ import {
   Spacer
 } from '@harnessio/canary'
 
+interface MemberProps {
+  display_name?: string
+}
 interface FormDeleteMemberDialogProps {
+  member: MemberProps
   onClose: () => void
 }
 
-export const FormDeleteMemberDialog: React.FC<FormDeleteMemberDialogProps> = ({ onClose }) => {
+export const FormDeleteMemberDialog: React.FC<FormDeleteMemberDialogProps> = ({ member, onClose }) => {
   const [isDeleting, setIsDeleting] = useState(false)
   const [deleteSuccess, setDeleteSuccess] = useState(false)
   // Delete project handler
@@ -38,7 +42,7 @@ export const FormDeleteMemberDialog: React.FC<FormDeleteMemberDialogProps> = ({ 
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>This will permanently remove your member.</AlertDialogDescription>
+          <AlertDialogDescription>This will permanently remove {member.display_name}.</AlertDialogDescription>
         </AlertDialogHeader>
         <Spacer size={3} />
         <AlertDialogFooter>
