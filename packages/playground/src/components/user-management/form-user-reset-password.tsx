@@ -15,7 +15,7 @@ import {
 
 interface UsersProps {
   uid: string
-  display_name?: string // Add a default value of undefined
+  display_name?: string
 }
 
 interface FormResetPasswordrDialogProps {
@@ -57,7 +57,7 @@ export const FormResetPasswordDialog: React.FC<FormResetPasswordrDialogProps> = 
               <Icon name="tick" size={14} />
             </Button>
           ) : (
-            <Button size="default" theme="error" className="self-start" onClick={handleReset}>
+            <Button size="default" theme="error" className="self-start" onClick={handleReset} disabled={isResetting}>
               {isResetting ? 'Resetting Password...' : 'Yes, reset Password'}
             </Button>
           )}

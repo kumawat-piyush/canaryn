@@ -39,7 +39,7 @@ function SandboxSettingsUserManagementPage() {
               iconName="no-search-magnifying-glass"
               title="No search results"
               description={['Check your spelling and filter options,', 'or search for a different keyword.']}
-              primaryButton={{ label: 'Clear search', to: 'sandbox/settings/user-mamagement/create-new-user' }}
+              primaryButton={{ label: 'Clear search' }}
               secondaryButton={{ label: 'Clear filters' }}
             />
           </>
@@ -56,7 +56,7 @@ function SandboxSettingsUserManagementPage() {
             iconName="no-data-members"
             title="No Users yet"
             description={['Add your first team members by inviting them to join this project.']}
-            primaryButton={{ label: 'Invite new members' }}
+            primaryButton={{ label: 'Invite new members', to: '/sandbox/settings/user-mamagement/create-new-user' }}
           />
           <PlaygroundListSettings loadState={loadState} setLoadState={setLoadState} />
         </SandboxLayout.Content>

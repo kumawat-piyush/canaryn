@@ -148,7 +148,13 @@ export const FormUserEditDialog: React.FC<FormEditDialogProps> = ({ user, onSave
                       </Button>
                     </>
                   ) : (
-                    <Button variant="ghost" type="button" size="sm" theme="success" className="pointer-events-none">
+                    <Button
+                      variant="ghost"
+                      type="button"
+                      size="sm"
+                      theme="success"
+                      className="pointer-events-none"
+                      disabled={submitted}>
                       Saved&nbsp;&nbsp;
                       <Icon name="tick" size={14} />
                     </Button>
