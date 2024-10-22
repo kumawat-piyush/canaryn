@@ -233,6 +233,7 @@ const ExecutionLogs: React.FC = () => {
         }}
         pipelineId={pipelineIdentifier}
         branch={initialExecutionData?.source} // TODO: check this
+        toExecutions={'../executions'}
       />
     </>
   )

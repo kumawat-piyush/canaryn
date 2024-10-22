@@ -124,6 +124,7 @@ export default function ExecutionsListPage() {
         }}
         pipelineId={pipelineId}
         branch={executions?.[0].source} // TODO: check this
+        toExecutions={'./executions'}
       />
     </>
   )

@@ -39,9 +39,10 @@ interface RunPipelineDialogProps {
   onClose: () => void
   pipelineId?: string
   branch?: string
+  toExecutions: string
 }
 
-export default function RunPipelineDialog({ open, onClose, pipelineId, branch }: RunPipelineDialogProps) {
+export default function RunPipelineDialog({ open, onClose, pipelineId, branch, toExecutions }: RunPipelineDialogProps) {
   const { pipelineId: pipelineIdFromParams = '' } = useParams<PipelineParams>()
   const navigate = useNavigate()
 
@@ -108,7 +109,7 @@ export default function RunPipelineDialog({ open, onClose, pipelineId, branch }:
         onClose()
 
         const executionId = response.number
-        navigate(`../executions/${executionId}`)
+        navigate(`${toExecutions}/${executionId}`)
         // TODO: toast here ?
       })
       .catch(error => {
