@@ -23,7 +23,7 @@ import {
 } from '@harnessio/canary'
 import { getInitials } from '../../utils/utils'
 import { FormUserEditDialog } from './form-user-edit-dialog'
-import { FormRemoveUserDialog } from './form-user-remove-dialog'
+import { FormRemoveAdminDialog } from './form-admin-remove-dialog'
 import { FormDeleteUserDialog } from './form-user-delete-dialog'
 import { FormResetPasswordDialog } from './form-user-reset-password'
 import { timeAgo } from '../../utils/utils'
@@ -50,10 +50,12 @@ export const UsersList = ({ users }: PageProps) => {
   const [isDialogResetPasswordOpen, setIsDialogResetPasswordOpen] = useState(false)
   const [editUser, setEditUser] = useState<UsersProps | null>(null) // Store user being edited
   const [removeUser, setRemoveUser] = useState<UsersProps | null>(null) // Store user being removed
-  const [resetPwd, setResetPwd] = useState<UsersProps | null>(null) // Store reser password user
+  const [removeAdmin, setRemoveAdmin] = useState<UsersProps | null>(null) // Store admin being removed
+  const [resetPwd, setResetPwd] = useState<UsersProps | null>(null) // Store reset password user
 
   //open delete dialog for a specific member
-  const openDeleteDialog = () => {
+  const openDeleteDialog = (user: UsersProps) => {
+    setRemoveUser(user)
     setIsDialogDeleteOpen(true)
   }
 
@@ -64,7 +66,7 @@ export const UsersList = ({ users }: PageProps) => {
   }
   // Open the remove admin dialog for a specific member
   const onRemoveDialog = (user: UsersProps) => {
-    setRemoveUser(user)
+    setRemoveAdmin(user)
     setIsDialogRemoveOpen(true)
   }
 
@@ -122,7 +124,7 @@ export const UsersList = ({ users }: PageProps) => {
             <DropdownMenuItem
               className="cursor-pointer text-red-400 hover:text-red-400 focus:text-red-400"
               onSelect={() => {
-                openDeleteDialog()
+                openDeleteDialog(user)
               }}>
               <DropdownMenuShortcut className="ml-0">
                 <Icon name="trash" className="mr-2 text-red-400" />
@@ -213,12 +215,14 @@ export const UsersList = ({ users }: PageProps) => {
         </TableBody>
       </Table>
       {/* Delete Dialog */}
-      {isDialogDeleteOpen && <FormDeleteUserDialog onClose={() => setIsDialogDeleteOpen(false)} />}
+      {isDialogDeleteOpen && removeUser && (
+        <FormDeleteUserDialog user={removeUser} onClose={() => setIsDialogDeleteOpen(false)} />
+      )}
       {/* Edit Dialog */}
       {isDialogEditOpen && editUser && (
         <FormUserEditDialog user={editUser} onSave={handleFormSave} onClose={() => setIsDialogEditOpen(false)} />
       )}
-      {isDialogRemoveOpen && <FormRemoveUserDialog user={removeUser} onClose={() => setIsDialogRemoveOpen(false)} />}
+      {isDialogRemoveOpen && <FormRemoveAdminDialog user={removeAdmin} onClose={() => setIsDialogRemoveOpen(false)} />}
       {isDialogResetPasswordOpen && (
         <FormResetPasswordDialog user={resetPwd} onClose={() => setIsDialogResetPasswordOpen(false)} />
       )}

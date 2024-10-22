@@ -25,7 +25,7 @@ interface FormRemoveUserDialogProps {
 }
 
 //Form Remove Admin Dialog
-export const FormRemoveUserDialog: React.FC<FormRemoveUserDialogProps> = ({ user, onClose }) => {
+export const FormRemoveAdminDialog: React.FC<FormRemoveUserDialogProps> = ({ user, onClose }) => {
   const [isRemoving, setIsRemoving] = useState(false)
   const [removeSuccess, setRemoveSuccess] = useState(false)
   // Delete project handler
