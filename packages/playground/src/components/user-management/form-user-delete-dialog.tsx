@@ -50,7 +50,7 @@ export const FormDeleteUserDialog: React.FC<FormResetPasswordrDialogProps> = ({ 
               <Icon name="tick" size={14} />
             </Button>
           ) : (
-            <Button size="default" theme="error" className="self-start" onClick={handleDelete}>
+            <Button size="default" theme="error" className="self-start" onClick={handleDelete} disabled={isDeleting}>
               {isDeleting ? 'Removing Member...' : 'Yes, remove Member'}
             </Button>
           )}
