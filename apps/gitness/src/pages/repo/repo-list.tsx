@@ -45,7 +45,7 @@ export default function ReposListPage() {
     queryParams: { sort, query },
     space_ref: `${space}/+`
   })
-  const { content: repositories } = data || {}
+  const { content: repositories, headers: _pageResponseHeaders } = data || {}
   const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
 
   const renderListContent = () => {
