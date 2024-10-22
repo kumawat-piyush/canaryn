@@ -25,7 +25,6 @@ import { parseStartingLineIfOne } from '../components/pull-request/utils'
 import { useDiffConfig } from '../components/pull-request/hooks/useDiffConfig'
 import { TypesDiffStats } from './types'
 
-// Define the form schema with optional fields for gitignore and license
 export const formSchema = z.object({
   title: z.string().min(1, { message: 'Please provide a pull request title' }),
   description: z.string().min(1, { message: 'Please provide a description' })
