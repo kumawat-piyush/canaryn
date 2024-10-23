@@ -58,12 +58,9 @@ import { SandboxSettingsAccountGeneralPage } from './pages/sandbox-settings-acco
 import { SignInPage } from './pages/signin-page'
 import { RepoBranchSettingsRulesPage } from './pages/repo-branch-settings-rules-page'
 import SandboxPullRequestComparePage from './pages/sandbox-pull-request-compare-page'
-<<<<<<< HEAD
 import { mockBypassUserData, mockStatusChecks } from './pages/mocks/repo-branch-settings/mockData'
 import { BypassUsersList } from './components/repo-settings/repo-branch-settings-rules/types'
-=======
 import { currentUser } from './pages/mocks/mockCurrentUserData'
->>>>>>> d9ab50cd (fixes to comments)
 
 const router = createBrowserRouter([
   // TEMPORARY LAYOUT SANDBOX
