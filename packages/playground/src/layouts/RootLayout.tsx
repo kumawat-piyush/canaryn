@@ -182,9 +182,9 @@ export const RootLayout: React.FC<RootLayoutProps> = ({ currentUser }) => {
             </Navbar.Content>
             <Navbar.Footer>
               <NavbarUser.Root
-                username={currentUser ? currentUser.display_name : 'Steven M.'}
-                isAdmin={currentUser ? currentUser.admin : false}
-                url={currentUser ? undefined : '../images/user-avatar.svg'}
+                username={currentUser?.display_name || currentUser?.uid}
+                isAdmin={currentUser?.admin || false}
+                url={currentUser?.url || ''}
                 menuItems={[
                   {
                     key: 0,
@@ -192,7 +192,7 @@ export const RootLayout: React.FC<RootLayoutProps> = ({ currentUser }) => {
                   },
                   {
                     key: 1,
-                    element: <Link to="logout">Log out</Link>
+                    element: <Link to="/logout">Log out</Link>
                   }
                 ]}
               />
