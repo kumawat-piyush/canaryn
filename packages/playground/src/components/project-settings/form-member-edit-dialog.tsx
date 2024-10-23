@@ -64,7 +64,6 @@ export const FormEditMemberDialog: React.FC<FormEditDialogProps> = ({
       resetNewMemberForm() // Reset the form after submission
     }
   }
-
   return (
     <AlertDialog open={true} onOpenChange={onClose}>
       <AlertDialogContent>
