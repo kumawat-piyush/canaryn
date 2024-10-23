@@ -1,16 +1,5 @@
 import { Link } from 'react-router-dom'
-import {
-  Button,
-  ListPagination,
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-  Spacer,
-  Text
-} from '@harnessio/canary'
+import { Button, Spacer, Text } from '@harnessio/canary'
 import { useListReposQuery, RepoRepositoryOutput, ListReposQueryQueryParams } from '@harnessio/code-service-client'
 import {
   PaddingListLayout,
@@ -22,7 +11,7 @@ import {
   NoSearchResults
 } from '@harnessio/playground'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
-import { usePagination } from '../../framework/hooks/usePagination'
+import { PageControls } from '../../components/Pagination'
 import Header from '../../components/Header'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
 
@@ -35,23 +24,19 @@ const sortOptions = [
 const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
 
 export default function ReposListPage() {
-  // hardcoded
-  const totalPages = 10
   const space = useGetSpaceURLParam()
 
   const { query, sort } = useCommonFilter<ListReposQueryQueryParams['sort']>()
 
-  const { isFetching, data } = useListReposQuery({
+  const { isFetching, data: repositories } = useListReposQuery({
     queryParams: { sort, query },
     space_ref: `${space}/+`
   })
-  const { content: repositories, headers: _pageResponseHeaders } = data || {}
-  const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
 
   const renderListContent = () => {
     if (isFetching) return <SkeletonList />
 
-    if (!repositories?.length) {
+    if (!repositories?.content?.length) {
       if (query) {
         return (
           <NoSearchResults
@@ -83,7 +68,7 @@ export default function ReposListPage() {
     return (
       <RepoList
         LinkComponent={LinkComponent}
-        repos={repositories?.map((repo: RepoRepositoryOutput) => {
+        repos={repositories?.content?.map((repo: RepoRepositoryOutput) => {
           return {
             id: repo.id,
             name: repo.identifier,
@@ -107,7 +92,7 @@ export default function ReposListPage() {
          * Show if repositories exist.
          * Additionally, show if query(search) is applied.
          */}
-        {(query || repositories?.length) && (
+        {(query || repositories?.content?.length) && (
           <>
             <Text size={5} weight={'medium'}>
               Repositories
@@ -126,41 +111,7 @@ export default function ReposListPage() {
         <Spacer size={5} />
         {renderListContent()}
         <Spacer size={8} />
-        {repositories?.length && (
-          <ListPagination.Root>
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious
-                    size="sm"
-                    href="#"
-                    onClick={() => currentPage > 1 && previousPage()}
-                    disabled={currentPage === 1}
-                  />
-                </PaginationItem>
-                {Array.from({ length: totalPages }, (_, index) => (
-                  <PaginationItem key={index}>
-                    <PaginationLink
-                      isActive={currentPage === index + 1}
-                      size="sm_icon"
-                      href="#"
-                      onClick={() => handleClick(index + 1)}>
-                      {index + 1}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
-                <PaginationItem>
-                  <PaginationNext
-                    size="sm"
-                    href="#"
-                    onClick={() => currentPage < totalPages && nextPage()}
-                    disabled={currentPage === totalPages}
-                  />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
-          </ListPagination.Root>
-        )}
+        {repositories?.content?.length && <PageControls totalPages={repositories?.headers?.['total']} />}
       </PaddingListLayout>
     </>
   )

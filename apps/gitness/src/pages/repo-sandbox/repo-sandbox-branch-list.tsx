@@ -1,19 +1,8 @@
 import { useEffect } from 'react'
 import { SkeletonList, NoData, BranchesList, Filter, useCommonFilter, SandboxLayout } from '@harnessio/playground'
-import {
-  Button,
-  ListPagination,
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-  Spacer,
-  Text
-} from '@harnessio/canary'
+import { Button, Spacer, Text } from '@harnessio/canary'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
-import { usePagination } from '../../framework/hooks/usePagination'
+import { PageControls } from '../../components/Pagination'
 import {
   useListBranchesQuery,
   RepoBranch,
@@ -33,12 +22,7 @@ const sortOptions = [
 
 export function RepoSandboxBranchesListPage() {
   // lack of data: total branches
-  // hardcoded
-  const totalPages = 10
-
   const repoRef = useGetRepoRef()
-
-  const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
   const { data: repoMetadata } = useFindRepositoryQuery({ repo_ref: repoRef })
 
   const { sort, query } = useCommonFilter<ListBranchesQueryQueryParams['sort']>()
@@ -49,7 +33,7 @@ export function RepoSandboxBranchesListPage() {
     isError
   } = useListBranchesQuery(
     {
-      queryParams: { page: currentPage, limit: 20, sort, query, order: orderSortDate.DESC, include_commit: true },
+      queryParams: { page: 1, limit: 20, sort, query, order: orderSortDate.DESC, include_commit: true },
       repo_ref: repoRef
     },
     {
@@ -64,14 +48,18 @@ export function RepoSandboxBranchesListPage() {
   })
 
   useEffect(() => {
-    if (brancheslistData?.length !== 0 && brancheslistData !== undefined) {
+    if (brancheslistData?.content?.length !== 0 && brancheslistData !== undefined) {
       mutate({
         body: {
-          requests: brancheslistData?.map(branch => ({ from: branch.name, to: repoMetadata?.default_branch })) || []
+          requests:
+            brancheslistData?.content?.map(branch => ({
+              from: branch.name,
+              to: repoMetadata?.content?.default_branch
+            })) || []
         }
       })
     }
-  }, [mutate, brancheslistData, repoMetadata?.default_branch])
+  }, [mutate, brancheslistData, repoMetadata?.content?.default_branch])
 
   const renderContent = (error?: ListBranchesErrorResponse) => {
     if (isLoading) {
@@ -86,7 +74,7 @@ export function RepoSandboxBranchesListPage() {
       )
     }
 
-    if (brancheslistData?.length === 0 || brancheslistData === undefined) {
+    if (brancheslistData?.content?.length === 0 || brancheslistData === undefined) {
       return (
         <div className="mt-40">
           <NoData
@@ -104,7 +92,7 @@ export function RepoSandboxBranchesListPage() {
 
     //get the data arr from behindAhead
     const behindAhead =
-      branchDivergence?.map(divergence => {
+      branchDivergence?.content?.map(divergence => {
         return {
           behind: divergence.behind,
           ahead: divergence.ahead
@@ -113,7 +101,7 @@ export function RepoSandboxBranchesListPage() {
 
     return (
       <BranchesList
-        branches={brancheslistData?.map((branch: RepoBranch, index) => {
+        branches={brancheslistData?.content?.map((branch: RepoBranch, index) => {
           const { ahead: branchAhead, behind: branchBehind } = behindAhead[index] || {}
           return {
             id: index,
@@ -127,7 +115,7 @@ export function RepoSandboxBranchesListPage() {
             behindAhead: {
               behind: branchBehind || 0,
               ahead: branchAhead || 0,
-              default: repoMetadata?.default_branch === branch.name
+              default: repoMetadata?.content?.default_branch === branch.name
             }
           }
         })}
@@ -154,40 +142,8 @@ export function RepoSandboxBranchesListPage() {
           <Spacer size={5} />
           {renderContent()}
           <Spacer size={8} />
-          {(brancheslistData?.length ?? 0) > 0 && (
-            <ListPagination.Root>
-              <Pagination>
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious
-                      size="sm"
-                      href="#"
-                      onClick={() => currentPage > 1 && previousPage()}
-                      disabled={currentPage === 1}
-                    />
-                  </PaginationItem>
-                  {Array.from({ length: totalPages }, (_, index) => (
-                    <PaginationItem key={index}>
-                      <PaginationLink
-                        isActive={currentPage === index + 1}
-                        size="sm_icon"
-                        href="#"
-                        onClick={() => handleClick(index + 1)}>
-                        {index + 1}
-                      </PaginationLink>
-                    </PaginationItem>
-                  ))}
-                  <PaginationItem>
-                    <PaginationNext
-                      size="sm"
-                      href="#"
-                      onClick={() => currentPage < totalPages && nextPage()}
-                      disabled={currentPage === totalPages}
-                    />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
-            </ListPagination.Root>
+          {(brancheslistData?.content?.length ?? 0) > 0 && (
+            <PageControls totalPages={brancheslistData?.headers?.['total']} />
           )}
         </SandboxLayout.Content>
       </SandboxLayout.Main>

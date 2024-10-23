@@ -1,25 +1,12 @@
 import { Link } from 'react-router-dom'
-import {
-  Button,
-  ListPagination,
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-  Spacer,
-  Text
-} from '@harnessio/canary'
+import { Button, Spacer, Text } from '@harnessio/canary'
 import { useListPipelinesQuery, TypesPipeline } from '@harnessio/code-service-client'
 import { PipelineList, MeterState, SandboxLayout, SkeletonList, Filter, useCommonFilter } from '@harnessio/playground'
 import { ExecutionState } from '../types'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
-import { usePagination } from '../framework/hooks/usePagination'
+import { PageControls } from '../components/Pagination'
 
 export default function SandboxPipelinesPage() {
-  // hardcoded
-  const totalPages = 10
   const repoRef = useGetRepoRef()
 
   const { query } = useCommonFilter()
@@ -31,11 +18,10 @@ export default function SandboxPipelinesPage() {
     },
     /* To enable mock data */
     {
-      placeholderData: [{ identifier: 'pipeline1' }, { identifier: 'pipeline2' }],
+      placeholderData: { content: [{ identifier: 'pipeline1' }, { identifier: 'pipeline2' }], headers: {} },
       enabled: true
     }
   )
-  const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
 
   const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
 
@@ -45,7 +31,7 @@ export default function SandboxPipelinesPage() {
     }
     return (
       <PipelineList
-        pipelines={pipelines?.map((item: TypesPipeline) => ({
+        pipelines={pipelines?.content?.map((item: TypesPipeline) => ({
           id: item?.identifier,
           status: item?.execution?.status,
           name: item?.identifier,
@@ -85,41 +71,7 @@ export default function SandboxPipelinesPage() {
           <Spacer size={5} />
           {renderListContent()}
           <Spacer size={8} />
-          {(pipelines?.length ?? 0) > 0 && (
-            <ListPagination.Root>
-              <Pagination>
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious
-                      size="sm"
-                      href="#"
-                      onClick={() => currentPage > 1 && previousPage()}
-                      disabled={currentPage === 1}
-                    />
-                  </PaginationItem>
-                  {Array.from({ length: totalPages }, (_, index) => (
-                    <PaginationItem key={index}>
-                      <PaginationLink
-                        isActive={currentPage === index + 1}
-                        size="sm_icon"
-                        href="#"
-                        onClick={() => handleClick(index + 1)}>
-                        {index + 1}
-                      </PaginationLink>
-                    </PaginationItem>
-                  ))}
-                  <PaginationItem>
-                    <PaginationNext
-                      size="sm"
-                      href="#"
-                      onClick={() => currentPage < totalPages && nextPage()}
-                      disabled={currentPage === totalPages}
-                    />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
-            </ListPagination.Root>
-          )}
+          {(pipelines?.content?.length ?? 0) > 0 && <PageControls totalPages={pipelines?.headers?.['total']} />}
         </SandboxLayout.Content>
       </SandboxLayout.Main>
     </>

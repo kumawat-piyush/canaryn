@@ -110,7 +110,7 @@ export default function PipelinesPage() {
         <Spacer size={5} />
         {renderListContent()}
         <Spacer size={8} />
-        {pipelinesExist && <PageControls totalPages={pipelines?.headers['total']} />}
+        {pipelinesExist && <PageControls totalPages={pipelines?.headers?.['total']} />}
       </PaddingListLayout>
     </>
   )

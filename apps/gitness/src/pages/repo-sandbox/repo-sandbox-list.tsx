@@ -1,22 +1,9 @@
-import {
-  Button,
-  ListActions,
-  ListPagination,
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-  SearchBox,
-  Spacer,
-  Text
-} from '@harnessio/canary'
+import { Button, ListActions, SearchBox, Spacer, Text } from '@harnessio/canary'
 import { useListReposQuery, RepoRepositoryOutput } from '@harnessio/code-service-client'
 import { SkeletonList, RepoList, SandboxLayout } from '@harnessio/playground'
 import { Link, useNavigate } from 'react-router-dom'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
-import { usePagination } from '../../framework/hooks/usePagination'
+import { PageControls } from '../../components/Pagination'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
@@ -26,13 +13,10 @@ const viewOptions = [{ name: 'View option 1' }, { name: 'View option 2' }]
 const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
 
 export default function ReposSandboxListPage() {
-  // hardcoded
-  const totalPages = 10
   const navigate = useNavigate()
   const space = useGetSpaceURLParam()
 
   const { isFetching, data } = useListReposQuery({ queryParams: {}, space_ref: `${space}/+` })
-  const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
 
   const renderListContent = () => {
     if (isFetching) {
@@ -84,41 +68,7 @@ export default function ReposSandboxListPage() {
           <Spacer size={5} />
           {renderListContent()}
           <Spacer size={8} />
-          {(data?.length ?? 0) > 0 && (
-            <ListPagination.Root>
-              <Pagination>
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious
-                      size="sm"
-                      href="#"
-                      onClick={() => currentPage > 1 && previousPage()}
-                      disabled={currentPage === 1}
-                    />
-                  </PaginationItem>
-                  {Array.from({ length: totalPages }, (_, index) => (
-                    <PaginationItem key={index}>
-                      <PaginationLink
-                        isActive={currentPage === index + 1}
-                        size="sm_icon"
-                        href="#"
-                        onClick={() => handleClick(index + 1)}>
-                        {index + 1}
-                      </PaginationLink>
-                    </PaginationItem>
-                  ))}
-                  <PaginationItem>
-                    <PaginationNext
-                      size="sm"
-                      href="#"
-                      onClick={() => currentPage < totalPages && nextPage()}
-                      disabled={currentPage === totalPages}
-                    />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
-            </ListPagination.Root>
-          )}
+          {(data?.content?.length ?? 0) > 0 && <PageControls totalPages={data?.headers?.['total']} />}
         </SandboxLayout.Content>
       </SandboxLayout.Main>
     </>

@@ -1,19 +1,7 @@
-import React from 'react'
-import {
-  Spacer,
-  Text,
-  ListPagination,
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationPrevious,
-  PaginationLink,
-  PaginationNext
-} from '@harnessio/canary'
+import { Spacer, Text } from '@harnessio/canary'
 import { BranchSelector, Filter, NoData, SandboxLayout, PullRequestCommits, SkeletonList } from '@harnessio/playground'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
-import { usePagination } from '../../framework/hooks/usePagination'
-
+import { PageControls } from '../../components/Pagination'
 import {
   TypesCommit,
   useFindRepositoryQuery,
@@ -27,8 +15,6 @@ const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { nam
 
 export default function RepoSandboxCommitsPage() {
   // lack of data: total commits
-  // hardcoded
-  const totalPages = 10
   const repoRef = useGetRepoRef()
 
   const { data: repository } = useFindRepositoryQuery({ repo_ref: repoRef })
@@ -37,14 +23,13 @@ export default function RepoSandboxCommitsPage() {
     repo_ref: repoRef,
     queryParams: { page: 0, limit: 10 }
   })
-  const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
 
   const [selectedBranch, setSelectedBranch] = useState<string>('')
 
   const { data: commitData, isFetching: isFetchingCommits } = useListCommitsQuery({
     repo_ref: repoRef,
 
-    queryParams: { page: currentPage, limit: 10, git_ref: normalizeGitRef(selectedBranch), include_stats: true }
+    queryParams: { page: 1, limit: 10, git_ref: normalizeGitRef(selectedBranch), include_stats: true }
   })
 
   // 🚨 API not supporting sort, so waiting for API changes
@@ -59,7 +44,7 @@ export default function RepoSandboxCommitsPage() {
 
   useEffect(() => {
     if (repository) {
-      setSelectedBranch(repository?.default_branch || '')
+      setSelectedBranch(repository?.content?.default_branch || '')
     }
   }, [repository])
 
@@ -103,7 +88,7 @@ export default function RepoSandboxCommitsPage() {
             {!isFetchingBranches && branches && (
               <BranchSelector
                 name={selectedBranch}
-                branchList={branches.map(item => ({
+                branchList={branches?.content?.map(item => ({
                   name: item.name || ''
                 }))}
                 selectBranch={branch => selectBranch(branch)}
@@ -115,40 +100,7 @@ export default function RepoSandboxCommitsPage() {
           <Spacer size={5} />
           {renderContent()}
           <Spacer size={8} />
-
-          <ListPagination.Root>
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious
-                    size="sm"
-                    href="#"
-                    onClick={() => currentPage > 1 && previousPage()}
-                    disabled={currentPage === 1}
-                  />
-                </PaginationItem>
-                {Array.from({ length: totalPages }, (_, index) => (
-                  <PaginationItem key={index}>
-                    <PaginationLink
-                      isActive={currentPage === index + 1}
-                      size="sm_icon"
-                      href="#"
-                      onClick={() => handleClick(index + 1)}>
-                      {index + 1}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
-                <PaginationItem>
-                  <PaginationNext
-                    size="sm"
-                    href="#"
-                    onClick={() => currentPage < totalPages && nextPage()}
-                    disabled={currentPage === totalPages}
-                  />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
-          </ListPagination.Root>
+          <PageControls totalPages={commitData?.headers?.['total']} />
         </SandboxLayout.Content>
       </SandboxLayout.Main>
     </>

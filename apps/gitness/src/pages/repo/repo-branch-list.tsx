@@ -1,18 +1,7 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { SkeletonList, NoData, PaddingListLayout, BranchesList, Filter, useCommonFilter } from '@harnessio/playground'
-import {
-  Button,
-  ListPagination,
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-  Spacer,
-  Text
-} from '@harnessio/canary'
+import { Button, Spacer, Text } from '@harnessio/canary'
 import {
   useListBranchesQuery,
   RepoBranch,
@@ -21,7 +10,7 @@ import {
   ListBranchesQueryQueryParams
 } from '@harnessio/code-service-client'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
-import { usePagination } from '../../framework/hooks/usePagination'
+import { PageControls } from '../../components/Pagination'
 import { orderSortDate } from '../../types'
 import { timeAgoFromISOTime } from '../pipeline-edit/utils/time-utils'
 import { NoSearchResults } from '../../../../../packages/playground/dist'
@@ -32,19 +21,13 @@ const sortOptions = [
 ]
 
 export function ReposBranchesListPage() {
-  // lack of data: total branches
-  // hardcoded
-  const totalPages = 10
-
   const repoRef = useGetRepoRef()
-
-  const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
   const { data: repoMetadata } = useFindRepositoryQuery({ repo_ref: repoRef })
 
   const { sort, query } = useCommonFilter<ListBranchesQueryQueryParams['sort']>()
 
   const { isLoading, data: branches } = useListBranchesQuery({
-    queryParams: { page: currentPage, limit: 20, sort, query, order: orderSortDate.DESC, include_commit: true },
+    queryParams: { page: 1, limit: 20, sort, query, order: orderSortDate.DESC, include_commit: true },
     repo_ref: repoRef
   })
 
@@ -53,19 +36,20 @@ export function ReposBranchesListPage() {
   })
 
   useEffect(() => {
-    if (branches?.length !== 0 && branches !== undefined) {
+    if (branches?.content?.length !== 0 && branches !== undefined) {
       mutate({
         body: {
-          requests: branches?.map(branch => ({ from: branch.name, to: repoMetadata?.default_branch })) || []
+          requests:
+            branches?.content?.map(branch => ({ from: branch.name, to: repoMetadata?.content?.default_branch })) || []
         }
       })
     }
-  }, [mutate, branches, repoMetadata?.default_branch])
+  }, [mutate, branches, repoMetadata?.content?.default_branch])
 
   const renderListContent = () => {
     if (isLoading) return <SkeletonList />
 
-    if (!branches?.length) {
+    if (!branches?.content?.length) {
       if (query) {
         return (
           <NoSearchResults
@@ -92,7 +76,7 @@ export function ReposBranchesListPage() {
 
     //get the data arr from behindAhead
     const behindAhead =
-      branchDivergence?.map(divergence => {
+      branchDivergence?.content?.map(divergence => {
         return {
           behind: divergence.behind,
           ahead: divergence.ahead
@@ -101,7 +85,7 @@ export function ReposBranchesListPage() {
 
     return (
       <BranchesList
-        branches={branches?.map((branch: RepoBranch, index) => {
+        branches={branches?.content?.map((branch: RepoBranch, index) => {
           const { ahead: branchAhead, behind: branchBehind } = behindAhead[index] || {}
           return {
             id: index,
@@ -115,7 +99,7 @@ export function ReposBranchesListPage() {
             behindAhead: {
               behind: branchBehind || 0,
               ahead: branchAhead || 0,
-              default: repoMetadata?.default_branch === branch.name
+              default: repoMetadata?.content?.default_branch === branch.name
             }
           }
         })}
@@ -123,7 +107,7 @@ export function ReposBranchesListPage() {
     )
   }
 
-  const branchesExist = (branches?.length ?? 0) > 0
+  const branchesExist = (branches?.content?.length ?? 0) > 0
 
   return (
     <PaddingListLayout spaceTop={false}>
@@ -151,41 +135,7 @@ export function ReposBranchesListPage() {
       <Spacer size={5} />
       {renderListContent()}
       <Spacer size={8} />
-      {branchesExist && (
-        <ListPagination.Root>
-          <Pagination>
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious
-                  size="sm"
-                  href="#"
-                  onClick={() => currentPage > 1 && previousPage()}
-                  disabled={currentPage === 1}
-                />
-              </PaginationItem>
-              {Array.from({ length: totalPages }, (_, index) => (
-                <PaginationItem key={index}>
-                  <PaginationLink
-                    isActive={currentPage === index + 1}
-                    size="sm_icon"
-                    href="#"
-                    onClick={() => handleClick(index + 1)}>
-                    {index + 1}
-                  </PaginationLink>
-                </PaginationItem>
-              ))}
-              <PaginationItem>
-                <PaginationNext
-                  size="sm"
-                  href="#"
-                  onClick={() => currentPage < totalPages && nextPage()}
-                  disabled={currentPage === totalPages}
-                />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-        </ListPagination.Root>
-      )}
+      {branchesExist && <PageControls totalPages={branches?.headers?.['total']} />}
     </PaddingListLayout>
   )
 }
