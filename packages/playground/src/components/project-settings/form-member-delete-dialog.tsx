@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -19,23 +19,18 @@ interface MemberProps {
 interface FormDeleteMemberDialogProps {
   member: MemberProps
   onClose: () => void
+  onDelete: () => void
+  isDeleting: boolean
+  deleteSuccess: boolean
 }
 
-export const FormDeleteMemberDialog: React.FC<FormDeleteMemberDialogProps> = ({ member, onClose }) => {
-  const [isDeleting, setIsDeleting] = useState(false)
-  const [deleteSuccess, setDeleteSuccess] = useState(false)
-  // Delete project handler
-  const handleDelete = () => {
-    setIsDeleting(true)
-    setTimeout(() => {
-      setIsDeleting(false)
-      setDeleteSuccess(true) // Mark deletion as successful
-      setTimeout(() => {
-        onClose() // Close the dialog
-      }, 2000)
-    }, 2000)
-  }
-
+export const FormDeleteMemberDialog: React.FC<FormDeleteMemberDialogProps> = ({
+  member,
+  onClose,
+  onDelete,
+  isDeleting,
+  deleteSuccess
+}) => {
   return (
     <AlertDialog open={true} onOpenChange={onClose}>
       <AlertDialogTrigger asChild></AlertDialogTrigger>
@@ -55,7 +50,7 @@ export const FormDeleteMemberDialog: React.FC<FormDeleteMemberDialogProps> = ({ 
               <Icon name="tick" size={14} />
             </Button>
           ) : (
-            <Button size="default" theme="error" className="self-start" onClick={handleDelete} disabled={isDeleting}>
+            <Button size="default" theme="error" className="self-start" onClick={onDelete} disabled={isDeleting}>
               {isDeleting ? 'Removing Member...' : 'Yes, remove Member'}
             </Button>
           )}
