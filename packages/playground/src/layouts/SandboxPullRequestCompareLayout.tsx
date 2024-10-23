@@ -276,7 +276,7 @@ const PullRequestAccordion: React.FC<{
             </AccordionTrigger>
             <AccordionContent>
               <div className="flex border-t w-full">
-                <div className="bg-transparent">
+                <div className="bg-transparent w-full">
                   {startingLine ? (
                     <div className="bg-[--diff-hunk-lineNumber--]">
                       <div className="w-full px-2 ml-16 py-1 font-mono ">{startingLine}</div>
@@ -286,7 +286,7 @@ const PullRequestAccordion: React.FC<{
                     data={header?.data}
                     fontsize={fontsize}
                     highlight={highlight}
-                    mode={DiffModeEnum.Split}
+                    mode={DiffModeEnum.Unified}
                     wrap={wrap}
                     addWidget
                     fileName={header?.title ?? ''}
