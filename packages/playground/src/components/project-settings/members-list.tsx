@@ -62,11 +62,10 @@ export const MembersList = ({ members }: PageProps) => {
     }, 2000)
   }
 
-  const handleRoleSave = (newRole: string) => {
+  const handleRoleSave = () => {
     dispatch({ type: 'START_SUBMITTING' })
 
     setTimeout(() => {
-      console.log('Updated role:', newRole)
       dispatch({ type: 'SUBMIT_SUCCESS' })
       setTimeout(() => {
         closeDialog('edit')
