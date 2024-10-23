@@ -1,16 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import {
-  Button,
-  ListPagination,
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-  Spacer,
-  Text
-} from '@harnessio/canary'
+import { Button, Spacer, Text } from '@harnessio/canary'
 import { useListPipelinesQuery, TypesPipeline } from '@harnessio/code-service-client'
 import {
   PipelineList,
@@ -24,13 +13,11 @@ import {
 } from '@harnessio/playground'
 import { ExecutionState } from '../types'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
-import { usePagination } from '../framework/hooks/usePagination'
+import { PageControls } from '../components/Pagination'
 import { PathParams } from '../RouteDefinitions'
 
 export default function PipelinesPage() {
   const { spaceId, repoId } = useParams<PathParams>()
-  // hardcoded
-  const totalPages = 10
   const repoRef = useGetRepoRef()
 
   const { query } = useCommonFilter()
@@ -42,18 +29,16 @@ export default function PipelinesPage() {
     },
     /* To enable mock data */
     {
-      placeholderData: [{ identifier: 'pipeline1' }, { identifier: 'pipeline2' }],
       enabled: true
     }
   )
-  const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
 
   const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
 
   const renderListContent = () => {
     if (isFetching) return <SkeletonList />
 
-    if (!pipelines?.length) {
+    if (!pipelines?.content?.length) {
       if (query) {
         return (
           <NoSearchResults
@@ -77,7 +62,7 @@ export default function PipelinesPage() {
 
     return (
       <PipelineList
-        pipelines={pipelines?.map((item: TypesPipeline) => ({
+        pipelines={pipelines?.content?.map((item: TypesPipeline) => ({
           id: item?.identifier,
           status: item?.execution?.status,
           name: item?.identifier,
@@ -96,7 +81,7 @@ export default function PipelinesPage() {
     )
   }
 
-  const pipelinesExist = (pipelines?.length ?? 0) > 0
+  const pipelinesExist = (pipelines?.content?.length ?? 0) > 0
 
   return (
     <>
@@ -125,41 +110,7 @@ export default function PipelinesPage() {
         <Spacer size={5} />
         {renderListContent()}
         <Spacer size={8} />
-        {pipelinesExist && (
-          <ListPagination.Root>
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious
-                    size="sm"
-                    href="#"
-                    onClick={() => currentPage > 1 && previousPage()}
-                    disabled={currentPage === 1}
-                  />
-                </PaginationItem>
-                {Array.from({ length: totalPages }, (_, index) => (
-                  <PaginationItem key={index}>
-                    <PaginationLink
-                      isActive={currentPage === index + 1}
-                      size="sm_icon"
-                      href="#"
-                      onClick={() => handleClick(index + 1)}>
-                      {index + 1}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
-                <PaginationItem>
-                  <PaginationNext
-                    size="sm"
-                    href="#"
-                    onClick={() => currentPage < totalPages && nextPage()}
-                    disabled={currentPage === totalPages}
-                  />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
-          </ListPagination.Root>
-        )}
+        {pipelinesExist && <PageControls totalPages={pipelines?.headers['total']} />}
       </PaddingListLayout>
     </>
   )
