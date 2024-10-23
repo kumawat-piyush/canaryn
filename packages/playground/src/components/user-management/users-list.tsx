@@ -181,9 +181,9 @@ export const UsersList = ({ users }: PageProps) => {
         </TableHeader>
         <TableBody>
           {users &&
-            users.map((user, index) => {
+            users.map(user => {
               return (
-                <TableRow key={index}>
+                <TableRow key={user.uid}>
                   {/* NAME */}
                   <TableCell className="content-center my-6">
                     <div className="flex items-center gap-4">
