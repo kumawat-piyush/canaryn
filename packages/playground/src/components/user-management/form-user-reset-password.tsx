@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   Spacer,
   AlertDialog,
@@ -20,23 +20,19 @@ interface UsersProps {
 
 interface FormResetPasswordrDialogProps {
   user: UsersProps | null
+  onReset: () => void
   onClose: () => void
+  isResetting: boolean
+  resetSuccess: boolean
 }
 
-export const FormResetPasswordDialog: React.FC<FormResetPasswordrDialogProps> = ({ user, onClose }) => {
-  const [isResetting, setIsResetting] = useState(false)
-  const [resetSuccess, setResetSuccess] = useState(false)
-  // Delete project handler
-  const handleReset = () => {
-    setIsResetting(true)
-    setTimeout(() => {
-      setIsResetting(false)
-      setResetSuccess(true) // Mark deletion as successful
-      setTimeout(() => {
-        onClose() // Close the dialog
-      }, 2000)
-    }, 2000)
-  }
+export const FormResetPasswordDialog: React.FC<FormResetPasswordrDialogProps> = ({
+  user,
+  onReset,
+  onClose,
+  isResetting,
+  resetSuccess
+}) => {
   return (
     <AlertDialog open={true} onOpenChange={onClose}>
       <AlertDialogTrigger asChild></AlertDialogTrigger>
@@ -57,7 +53,7 @@ export const FormResetPasswordDialog: React.FC<FormResetPasswordrDialogProps> = 
               <Icon name="tick" size={14} />
             </Button>
           ) : (
-            <Button size="default" theme="error" className="self-start" onClick={handleReset} disabled={isResetting}>
+            <Button size="default" theme="error" className="self-start" onClick={onReset} disabled={isResetting}>
               {isResetting ? 'Resetting Password...' : 'Yes, reset Password'}
             </Button>
           )}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   AlertDialog,
   AlertDialogContent,
@@ -21,28 +21,35 @@ import { FormFieldSet, MessageTheme } from '../..'
 import { InfoCircle } from '@harnessio/icons-noir'
 
 interface FormEditDialogProps {
+  isSubmitting: boolean
+  submitted: boolean
   user: { uid: string; email: string; display_name?: string }
   onSave: () => void
   onClose: () => void
 }
 
-export const FormUserEditDialog: React.FC<FormEditDialogProps> = ({ user, onSave, onClose }) => {
-  const newMemberSchema = z.object({
+export const FormUserEditDialog: React.FC<FormEditDialogProps> = ({
+  user,
+  onSave,
+  onClose,
+  isSubmitting,
+  submitted
+}) => {
+  const newUserSchema = z.object({
     userID: z.string().min(1, { message: 'Please provide a project name' }),
     email: z.string().min(1, { message: 'Please provide a valid email, ex: example@yourcompany.com' }),
     displayName: z.string().min(0, { message: 'optional' })
   })
 
-  type MemberFields = z.infer<typeof newMemberSchema>
+  type MemberFields = z.infer<typeof newUserSchema>
 
-  //member form handling
   const {
     handleSubmit,
     register,
     reset: resetNewMemberForm,
     formState: { errors, isValid, isDirty }
   } = useForm<MemberFields>({
-    resolver: zodResolver(newMemberSchema),
+    resolver: zodResolver(newUserSchema),
     mode: 'onChange',
     defaultValues: {
       userID: user.uid,
@@ -51,19 +58,10 @@ export const FormUserEditDialog: React.FC<FormEditDialogProps> = ({ user, onSave
     }
   })
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
-
-  // Form submit handler
+  // Form edit submit handler
   const onSubmit: SubmitHandler<MemberFields> = data => {
-    setIsSubmitting(true)
-    setTimeout(() => {
-      onSave()
-      setIsSubmitting(false)
-      setSubmitted(true)
-      resetNewMemberForm(data) // Reset to the current values
-      setTimeout(() => setSubmitted(false), 2000)
-    }, 2000)
+    onSave()
+    resetNewMemberForm(data) // Reset to the current values
   }
 
   return (

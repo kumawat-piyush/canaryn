@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import {
   Spacer,
@@ -22,23 +22,32 @@ interface UsersProps {
 interface FormResetPasswordrDialogProps {
   user: UsersProps
   onClose: () => void
+  onDelete: () => void
+  isDeleting: boolean
+  deleteSuccess: boolean
 }
 
 //Form Delete Member Dialog
-export const FormDeleteUserDialog: React.FC<FormResetPasswordrDialogProps> = ({ user, onClose }) => {
-  const [isDeleting, setIsDeleting] = useState(false)
-  const [deleteSuccess, setDeleteSuccess] = useState(false)
-  // Delete project handler
-  const handleDelete = () => {
-    setIsDeleting(true)
-    setTimeout(() => {
-      setIsDeleting(false)
-      setDeleteSuccess(true) // Mark deletion as successful
-      setTimeout(() => {
-        onClose() // Close the dialog
-      }, 2000)
-    }, 2000)
-  }
+export const FormDeleteUserDialog: React.FC<FormResetPasswordrDialogProps> = ({
+  user,
+  onClose,
+  onDelete,
+  isDeleting,
+  deleteSuccess
+}) => {
+  // const [isDeleting, setIsDeleting] = useState(false)
+  // const [deleteSuccess, setDeleteSuccess] = useState(false)
+  // // Delete project handler
+  // const handleDelete = () => {
+  //   setIsDeleting(true)
+  //   setTimeout(() => {
+  //     setIsDeleting(false)
+  //     setDeleteSuccess(true) // Mark deletion as successful
+  //     setTimeout(() => {
+  //       onClose() // Close the dialog
+  //     }, 2000)
+  //   }, 2000)
+  // }
   return (
     <AlertDialog open={true} onOpenChange={onClose}>
       <AlertDialogTrigger asChild></AlertDialogTrigger>
@@ -58,7 +67,7 @@ export const FormDeleteUserDialog: React.FC<FormResetPasswordrDialogProps> = ({ 
               <Icon name="tick" size={14} />
             </Button>
           ) : (
-            <Button size="default" theme="error" className="self-start" onClick={handleDelete} disabled={isDeleting}>
+            <Button size="default" theme="error" className="self-start" onClick={onDelete} disabled={isDeleting}>
               {isDeleting ? 'Removing User...' : 'Yes, remove User'}
             </Button>
           )}

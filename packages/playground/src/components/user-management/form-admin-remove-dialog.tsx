@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   Spacer,
   AlertDialog,
@@ -22,24 +22,19 @@ interface UsersProps {
 interface FormRemoveUserDialogProps {
   user: UsersProps | null
   onClose: () => void
+  onRemove: () => void
+  isRemoving: boolean
+  removeSuccess: boolean
 }
 
 //Form Remove Admin Dialog
-export const FormRemoveAdminDialog: React.FC<FormRemoveUserDialogProps> = ({ user, onClose }) => {
-  const [isRemoving, setIsRemoving] = useState(false)
-  const [removeSuccess, setRemoveSuccess] = useState(false)
-  // Delete project handler
-  const handleRemove = () => {
-    setIsRemoving(true)
-    setTimeout(() => {
-      setIsRemoving(false)
-      setRemoveSuccess(true) // Mark deletion as successful
-      setTimeout(() => {
-        onClose() // Close the dialog
-      }, 2000)
-    }, 2000)
-  }
-
+export const FormRemoveAdminDialog: React.FC<FormRemoveUserDialogProps> = ({
+  user,
+  onClose,
+  onRemove,
+  isRemoving,
+  removeSuccess
+}) => {
   return (
     <AlertDialog open={true} onOpenChange={onClose}>
       <AlertDialogTrigger asChild></AlertDialogTrigger>
@@ -63,9 +58,9 @@ export const FormRemoveAdminDialog: React.FC<FormRemoveUserDialogProps> = ({ use
               size="default"
               theme="error"
               className="self-start"
-              onClick={handleRemove}
+              onClick={onRemove}
               disabled={isRemoving || removeSuccess}>
-              {isRemoving ? 'Removing Admin...' : 'Yes, removed Admin'}
+              {isRemoving ? 'Removing admin...' : 'Yes, removed admin'}
             </Button>
           )}
         </AlertDialogFooter>
