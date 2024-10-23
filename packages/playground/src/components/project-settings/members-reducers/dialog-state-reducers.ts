@@ -41,7 +41,12 @@ type Action =
 export function dialogStateReducer(state: DialogState, action: Action): DialogState {
   switch (action.type) {
     case 'OPEN_DIALOG':
-      return { ...state, [`isDialog${capitalize(action.dialogType)}Open`]: true, editMember: action.member }
+      return {
+        ...state,
+        [`isDialog${capitalize(action.dialogType)}Open`]: true,
+        editMember: action.member,
+        deleteMember: action.member
+      }
     case 'CLOSE_DIALOG':
       return { ...state, [`isDialog${capitalize(action.dialogType)}Open`]: false, submitted: false }
     case 'START_SUBMITTING':
