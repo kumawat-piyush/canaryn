@@ -25,16 +25,6 @@ import { parseSpecificDiff } from './diff-utils'
 import { changedFileId, DIFF2HTML_CONFIG, normalizeGitFilePath } from './utils'
 import * as Diff2Html from 'diff2html'
 
-export interface TypesUser {
-  admin?: boolean
-  blocked?: boolean
-  created?: number
-  display_name?: string
-  email?: string
-  uid?: string
-  updated?: number
-}
-
 export const CreatePullRequest = () => {
   const createPullRequestMutation = useCreatePullReqMutation({})
   const { repoId, spaceId } = useParams<PathParams>()
