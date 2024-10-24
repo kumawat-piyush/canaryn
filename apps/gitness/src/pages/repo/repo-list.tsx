@@ -1,16 +1,5 @@
 import { Link } from 'react-router-dom'
-import {
-  Button,
-  ListPagination,
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-  Spacer,
-  Text
-} from '@harnessio/canary'
+import { Button, Spacer, Text } from '@harnessio/canary'
 import { useListReposQuery, RepoRepositoryOutput, ListReposQueryQueryParams } from '@harnessio/code-service-client'
 import {
   PaddingListLayout,
@@ -19,12 +8,16 @@ import {
   Filter,
   useCommonFilter,
   NoData,
-  NoSearchResults
+  NoSearchResults,
+  PaginationComponent
 } from '@harnessio/playground'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { usePagination } from '../../framework/hooks/usePagination'
 import Header from '../../components/Header'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
+import { useEffect } from 'react'
+import { useUpdateQueryParams } from '../../hooks/useUpdateQueryParams'
+import usePageResponseHeaders from '../../hooks/usePageResponseHeaders'
 
 const sortOptions = [
   { name: 'Created', value: 'created' },
@@ -35,17 +28,28 @@ const sortOptions = [
 const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
 
 export default function ReposListPage() {
-  // hardcoded
-  const totalPages = 10
   const space = useGetSpaceURLParam()
 
-  const { query, sort } = useCommonFilter<ListReposQueryQueryParams['sort']>()
-
-  const { isFetching, data: repositories } = useListReposQuery({
-    queryParams: { sort, query },
+  /* Query and Pagination */
+  const { query: currentQuery, sort } = useCommonFilter<ListReposQueryQueryParams['sort']>()
+  const { currentPage, handleClick, nextPage, previousPage } = usePagination()
+  const { page, updatePage, query, updateQuery } = useUpdateQueryParams()
+  const { isFetching, data } = useListReposQuery({
+    queryParams: { sort, query, page },
     space_ref: `${space}/+`
   })
-  const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
+  const { xTotalPages = 1 } = usePageResponseHeaders(data?.headers || {})
+
+  useEffect(() => {
+    updatePage(currentPage)
+  }, [currentPage])
+
+  useEffect(() => {
+    updateQuery(currentQuery || '')
+  }, [currentQuery])
+  /* */
+
+  const repositories = data?.content
 
   const renderListContent = () => {
     if (isFetching) return <SkeletonList />
@@ -126,39 +130,13 @@ export default function ReposListPage() {
         {renderListContent()}
         <Spacer size={8} />
         {repositories?.length && (
-          <ListPagination.Root>
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious
-                    size="sm"
-                    href="#"
-                    onClick={() => currentPage > 1 && previousPage()}
-                    disabled={currentPage === 1}
-                  />
-                </PaginationItem>
-                {Array.from({ length: totalPages }, (_, index) => (
-                  <PaginationItem key={index}>
-                    <PaginationLink
-                      isActive={currentPage === index + 1}
-                      size="sm_icon"
-                      href="#"
-                      onClick={() => handleClick(index + 1)}>
-                      {index + 1}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
-                <PaginationItem>
-                  <PaginationNext
-                    size="sm"
-                    href="#"
-                    onClick={() => currentPage < totalPages && nextPage()}
-                    disabled={currentPage === totalPages}
-                  />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
-          </ListPagination.Root>
+          <PaginationComponent
+            totalPages={xTotalPages}
+            currentPage={currentPage}
+            nextPage={nextPage}
+            previousPage={previousPage}
+            handleClick={handleClick}
+          />
         )}
       </PaddingListLayout>
     </>
