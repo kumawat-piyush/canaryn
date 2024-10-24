@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export const usePagination = (initialPage: number = 1, totalPages: number = 1) => {
+export const usePagination = (initialPage: number = 1) => {
   const [currentPage, setCurrentPage] = useState<number>(initialPage)
 
   const handleClick = (page: number) => {
@@ -14,9 +14,12 @@ export const usePagination = (initialPage: number = 1, totalPages: number = 1) =
   }
 
   const nextPage = () => {
-    if (currentPage < totalPages) {
-      handleClick(currentPage + 1)
-    }
+    /**
+     * Instead we will rely on "Next" button to be disable when currentPage equals to totalPages.
+     */
+    // if (currentPage < totalPages) {
+    handleClick(currentPage + 1)
+    // }
   }
 
   return {
