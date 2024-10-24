@@ -17,7 +17,6 @@ import Header from '../../components/Header'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
 import { useEffect } from 'react'
 import { useUpdateQueryParams } from '../../hooks/useUpdateQueryParams'
-import usePageResponseHeaders from '../../hooks/usePageResponseHeaders'
 
 const sortOptions = [
   { name: 'Created', value: 'created' },
@@ -32,16 +31,14 @@ export default function ReposListPage() {
 
   /* Query and Pagination */
   const { query: currentQuery, sort } = useCommonFilter<ListReposQueryQueryParams['sort']>()
-
-  const { currentPage, handleClick, nextPage, previousPage } = usePagination()
-
   const { page, updatePage, query, updateQuery } = useUpdateQueryParams()
 
   const { isFetching, data } = useListReposQuery({
     queryParams: { sort, query, page },
     space_ref: `${space}/+`
   })
-  const { xTotalPages = 1 } = usePageResponseHeaders(data?.headers || {})
+
+  const { totalPages, currentPage, handleClick, nextPage, previousPage } = usePagination(data?.headers || {})
 
   useEffect(() => {
     updatePage(currentPage)
@@ -134,7 +131,7 @@ export default function ReposListPage() {
         <Spacer size={8} />
         {repositories?.length && (
           <PaginationComponent
-            totalPages={xTotalPages}
+            totalPages={totalPages}
             currentPage={page}
             nextPage={nextPage}
             previousPage={previousPage}

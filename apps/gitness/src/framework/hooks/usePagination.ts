@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import usePageResponseHeaders from '../../hooks/usePageResponseHeaders'
 
-export const usePagination = (initialPage: number = 1) => {
+export const usePagination = (responseHeaders: HeadersInit, initialPage: number = 1) => {
+  const { xTotalPages: totalPages = 1 } = usePageResponseHeaders(responseHeaders)
   const [currentPage, setCurrentPage] = useState<number>(initialPage)
 
   const handleClick = (page: number) => {
@@ -14,15 +16,13 @@ export const usePagination = (initialPage: number = 1) => {
   }
 
   const nextPage = () => {
-    /**
-     * Instead we will rely on "Next" button to be disable when currentPage equals to totalPages.
-     */
-    // if (currentPage < totalPages) {
-    handleClick(currentPage + 1)
-    // }
+    if (currentPage < totalPages) {
+      handleClick(currentPage + 1)
+    }
   }
 
   return {
+    totalPages,
     currentPage,
     previousPage,
     nextPage,
