@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useReducer } from 'react'
 import { Spacer, Text, ListActions, SearchBox, Button } from '@harnessio/canary'
 import { SandboxLayout, SkeletonList, NoData } from '..'
 import { mockMemberData } from '../data/mockMembersData'
@@ -6,6 +6,12 @@ import { MembersList } from '../components/project-settings/members-list'
 import { PlaygroundListSettings } from '../settings/list-settings'
 import { PaginationComponent } from '../components/pagination'
 import { useNavigate } from 'react-router-dom'
+import {
+  dialogStateReducer,
+  initialDialogState
+} from '../components/project-settings/members-reducers/dialog-state-reducers'
+import { FormEditMemberDialog } from '../components/project-settings/form-member-edit-dialog'
+import { FormDeleteMemberDialog } from '../components/project-settings/form-member-delete-dialog'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
@@ -21,13 +27,77 @@ type MembersProps = {
 function SandboxSettingsProjectMembersPage() {
   const navigate = useNavigate()
   const [loadState, setLoadState] = useState('data-loaded')
+  const [dialogState, dispatch] = useReducer(dialogStateReducer, initialDialogState)
+
+  const openDialog = (dialogType: 'edit' | 'delete', member: MembersProps) => {
+    dispatch({ type: 'OPEN_DIALOG', dialogType, member })
+  }
+
+  const closeDialog = (dialogType: 'edit' | 'delete') => {
+    dispatch({ type: 'CLOSE_DIALOG', dialogType })
+  }
+
+  // Delete project handler
+  const handleDelete = () => {
+    dispatch({ type: 'START_DELETING' })
+
+    setTimeout(() => {
+      dispatch({ type: 'DELETE_SUCCESS' })
+      closeDialog('delete')
+      dispatch({ type: 'RESET_DELETE' })
+    }, 2000)
+  }
+
+  const handleRoleSave = () => {
+    dispatch({ type: 'START_SUBMITTING' })
+
+    setTimeout(() => {
+      dispatch({ type: 'SUBMIT_SUCCESS' })
+      closeDialog('edit')
+      dispatch({ type: 'RESET_SUBMIT' })
+    }, 2000)
+  }
 
   const renderMemberListContent = () => {
     switch (loadState) {
       case 'loading':
         return <SkeletonList />
       case 'data-loaded':
-        return <MembersList members={mockMemberData as MembersProps[]} />
+        return (
+          <>
+            <MembersList
+              onEdit={member => openDialog('edit', member)}
+              onDelete={member => openDialog('delete', member)}
+              members={mockMemberData as MembersProps[]}
+            />
+            {/* Delete Dialog */}
+            {dialogState.isDialogDeleteOpen && (
+              <FormDeleteMemberDialog
+                isDeleting={dialogState.isDeleting}
+                deleteSuccess={dialogState.deleteSuccess}
+                onDelete={handleDelete}
+                member={dialogState.deleteMember!}
+                onClose={() => {
+                  closeDialog('delete')
+                  dispatch({ type: 'RESET_DELETE' })
+                }}
+              />
+            )}
+            {/* Edit Dialog */}
+            {dialogState.isDialogEditOpen && dialogState.editMember && (
+              <FormEditMemberDialog
+                member={dialogState.editMember}
+                onSave={handleRoleSave}
+                onClose={() => {
+                  closeDialog('edit')
+                  dispatch({ type: 'RESET_SUBMIT' })
+                }}
+                isSubmitting={dialogState.isSubmitting}
+                submitted={dialogState.submitted}
+              />
+            )}
+          </>
+        )
       case 'no-search-matches':
         return (
           <>
