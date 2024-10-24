@@ -204,7 +204,7 @@ function PullRequestListPage() {
                 <Filter sortOptions={SortOptions} />
               </div>
               <Button variant="default" asChild>
-                <Link to={`/sandbox/spaces/${spaceId}/repos/${repoId}/pull-requests/create`}>New pull request</Link>
+                <Link to={`/sandbox/spaces/${spaceId}/repos/${repoId}/pull-requests/compare`}>New pull request</Link>
               </Button>
             </div>
           </>
