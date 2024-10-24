@@ -49,9 +49,9 @@ interface BranchProps {
 
 interface PageProps {
   branches: BranchProps[]
-  spaceId?: string
-  repoId?: string
-  defaultBranch?: string
+  spaceId: string
+  repoId: string
+  defaultBranch: string
 }
 
 export const BranchesList = ({ branches, spaceId, repoId, defaultBranch }: PageProps) => {
