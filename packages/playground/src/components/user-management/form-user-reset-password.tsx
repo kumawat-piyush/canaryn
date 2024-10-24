@@ -54,7 +54,7 @@ export const FormResetPasswordDialog: React.FC<FormResetPasswordrDialogProps> = 
             </Button>
           ) : (
             <Button size="default" theme="error" className="self-start" onClick={onReset} disabled={isResetting}>
-              {isResetting ? 'Resetting Password...' : 'Yes, reset Password'}
+              {isResetting ? 'Resetting password...' : 'Yes, reset password'}
             </Button>
           )}
         </AlertDialogFooter>

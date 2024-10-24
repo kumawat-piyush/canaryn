@@ -84,8 +84,8 @@ export const MembersList = ({ members, onDelete, onEdit }: PageProps) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {members.map((member, index) => (
-            <TableRow key={index}>
+          {members.map(member => (
+            <TableRow key={member.display_name}>
               {/* NAME */}
               <TableCell className="content-center my-6">
                 <div className="flex items-center gap-4">
