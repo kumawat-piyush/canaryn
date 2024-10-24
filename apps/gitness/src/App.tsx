@@ -386,6 +386,10 @@ export default function App() {
                 {
                   path: 'members',
                   element: <ProjectSettingsMemebersPage />
+                },
+                {
+                  path: 'create-new-member',
+                  element: <ProjectSettingsMemebersPage />
                 }
               ]
             }
