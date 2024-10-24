@@ -51,7 +51,7 @@ export const FormDeleteMemberDialog: React.FC<FormDeleteMemberDialogProps> = ({
             </Button>
           ) : (
             <Button size="default" theme="error" className="self-start" onClick={onDelete} disabled={isDeleting}>
-              {isDeleting ? 'Removing Member...' : 'Yes, remove Member'}
+              {isDeleting ? 'Removing member...' : 'Yes, remove member'}
             </Button>
           )}
         </AlertDialogFooter>
