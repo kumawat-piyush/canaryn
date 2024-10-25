@@ -22,14 +22,7 @@ import {
   DropdownMenuTrigger
 } from '@harnessio/canary'
 import { getInitials } from '../../utils/utils'
-
-interface MembersProps {
-  display_name: string
-  role: string
-  email: string
-  timestamp?: string
-  avatarUrl?: string
-}
+import { MembersProps } from './interfaces'
 
 interface PageProps {
   members: MembersProps[]
