@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { parse } from 'yaml'
 import { omit } from 'lodash-es'
 import { inputComponentFactory, InputType } from '@harnessio/playground'
@@ -76,6 +76,8 @@ export default function RunPipelineForm({
   }, [pipelineId, repoRef])
 
   const formDefinition = createFormFromPipelineInputs(pipeline)
+  const focusPath = formDefinition.inputs?.[0]?.path
+
   const additionalInput: IInputDefinition[] = [
     {
       label: 'Branch',
@@ -112,6 +114,16 @@ export default function RunPipelineForm({
         // TODO: error toast here ?
       })
   }
+
+  const formRef = useRef<HTMLDivElement | null>(null)
+  // NOTE: custom focus implementation
+  useEffect(() => {
+    if (formRef.current && focusPath) {
+      const firstEl = formRef.current?.querySelector(`input[name="${focusPath}"]`) as HTMLInputElement | null
+      firstEl?.focus()
+    }
+  }, [formRef, focusPath])
+
   if (loading || listBranchesLoading) {
     // TODO
     return <>'Loading...'</>
@@ -139,7 +151,7 @@ export default function RunPipelineForm({
           </DialogHeader>
           <DialogDescription>
             <Spacer size={6} />
-            <RenderForm className="space-y-4" factory={inputComponentFactory} inputs={formDefinition} />
+            <RenderForm ref={formRef} className="space-y-4" factory={inputComponentFactory} inputs={formDefinition} />
           </DialogDescription>
           <DialogFooter>
             <Button onClick={requestClose} className="text-primary" variant="outline">

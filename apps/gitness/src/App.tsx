@@ -57,6 +57,7 @@ import PullRequestChangesPage from './pages/pull-request/pull-request-changes-pa
 import { ProjectSettingsGeneralPage } from './pages/project-settings/project-settings-general-page'
 import { RepoSettingsGeneralPageContainer } from './pages/repo-sandbox/repo-settings-general-container'
 import { CreatePullRequest } from './pages/pull-request/pull-request-compare-page'
+import { ExitConfirmProvider } from './framework/context/ExitConfirmContext'
 
 import { RepoBranchSettingsRulesPageContainer } from './pages/repo-sandbox/repo-sandbox-branch-rules-container'
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
@@ -445,7 +446,9 @@ export default function App() {
       <ThemeProvider defaultTheme="dark">
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
-            <RouterProvider router={router} />
+            <ExitConfirmProvider>
+              <RouterProvider router={router} />
+            </ExitConfirmProvider>
           </TooltipProvider>
         </QueryClientProvider>
       </ThemeProvider>
