@@ -14,18 +14,10 @@ import {
 interface PaginationComponentProps {
   totalPages: number
   currentPage: number
-  previousPage: () => void
-  nextPage: () => void
-  handleClick: (totalPages: number) => void
+  goToPage: (pageNum: number) => void
 }
 
-export const PaginationComponent: React.FC<PaginationComponentProps> = ({
-  totalPages,
-  currentPage,
-  previousPage,
-  nextPage,
-  handleClick
-}) => {
+export const PaginationComponent: React.FC<PaginationComponentProps> = ({ totalPages, currentPage, goToPage }) => {
   const generatePaginationItems = () => {
     const paginationItems: React.ReactElement[] = []
     const siblings = 2 // Number of adjacent pages before and after the current page
@@ -33,7 +25,7 @@ export const PaginationComponent: React.FC<PaginationComponentProps> = ({
     // Always show first page
     paginationItems.push(
       <PaginationItem>
-        <PaginationLink size="sm_icon" href="#" onClick={() => handleClick(1)} isActive={currentPage === 1}>
+        <PaginationLink size="sm_icon" href="#" onClick={() => goToPage(1)} isActive={currentPage === 1}>
           1
         </PaginationLink>
       </PaginationItem>
@@ -51,7 +43,7 @@ export const PaginationComponent: React.FC<PaginationComponentProps> = ({
     for (let i = Math.max(2, currentPage - siblings); i <= Math.min(totalPages - 1, currentPage + siblings); i++) {
       paginationItems.push(
         <PaginationItem key={i}>
-          <PaginationLink isActive={currentPage === i} size="sm_icon" href="#" onClick={() => handleClick(i)}>
+          <PaginationLink isActive={currentPage === i} size="sm_icon" href="#" onClick={() => goToPage(i)}>
             {i}
           </PaginationLink>
         </PaginationItem>
@@ -71,7 +63,7 @@ export const PaginationComponent: React.FC<PaginationComponentProps> = ({
         <PaginationLink
           size="sm_icon"
           href="#"
-          onClick={() => handleClick(totalPages)}
+          onClick={() => goToPage(totalPages)}
           isActive={currentPage === totalPages}>
           {totalPages}
         </PaginationLink>
@@ -90,7 +82,7 @@ export const PaginationComponent: React.FC<PaginationComponentProps> = ({
             <PaginationPrevious
               size="sm"
               href="#"
-              onClick={() => currentPage > 1 && previousPage()}
+              onClick={() => currentPage > 1 && goToPage(currentPage - 1)}
               disabled={currentPage === 1}
             />
           </PaginationItem>
@@ -103,7 +95,7 @@ export const PaginationComponent: React.FC<PaginationComponentProps> = ({
             <PaginationNext
               size="sm"
               href="#"
-              onClick={() => currentPage < totalPages && nextPage()}
+              onClick={() => currentPage < totalPages && goToPage(currentPage + 1)}
               disabled={currentPage === totalPages}
             />
           </PaginationItem>

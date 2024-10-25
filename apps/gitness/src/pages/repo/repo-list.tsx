@@ -16,7 +16,6 @@ import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { usePagination } from '../../framework/hooks/usePagination'
 import Header from '../../components/Header'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
-import { useEffect } from 'react'
 
 const sortOptions = [
   { name: 'Created', value: 'created' },
@@ -39,11 +38,7 @@ export default function ReposListPage() {
     space_ref: `${space}/+`
   })
 
-  const { totalPages, currentPage, handleClick, nextPage, previousPage } = usePagination(data?.headers || {})
-
-  useEffect(() => {
-    setPage(currentPage) // move to goToPage
-  }, [currentPage])
+  const { totalPages } = usePagination(data?.headers || {})
 
   const repositories = data?.content
 
@@ -129,9 +124,7 @@ export default function ReposListPage() {
           <PaginationComponent
             totalPages={totalPages}
             currentPage={page}
-            nextPage={nextPage}
-            previousPage={previousPage}
-            handleClick={handleClick}
+            goToPage={(pageNum: number) => setPage(pageNum)}
           />
         )}
       </PaddingListLayout>
