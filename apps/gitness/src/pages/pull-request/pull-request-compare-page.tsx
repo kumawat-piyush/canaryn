@@ -193,8 +193,12 @@ export const CreatePullRequest = () => {
       .then(value => {
         setMergeabilty(value?.mergeable)
       })
-      .catch(() => {
-        setApiError('Error in merge check')
+      .catch(err => {
+        if (err.message !== "head branch doesn't contain any new commits.") {
+          setApiError('Error in merge check')
+        } else {
+          setApiError("head branch doesn't contain any new commits.")
+        }
         setMergeabilty(false)
       })
   }, [repoRef, diffApiPath])

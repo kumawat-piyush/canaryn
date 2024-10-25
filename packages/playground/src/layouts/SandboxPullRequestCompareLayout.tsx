@@ -133,27 +133,40 @@ const SandboxPullRequestCompare: React.FC<SandboxPullRequestCompareProps> = ({
                 handleBranchSelection() // Call when source branch is selected
               }}
             />
-            {isBranchSelected && ( // Only render this block if isBranchSelected is true
-              <Layout.Horizontal className="items-center gap-x-0">
-                {mergeability ? (
-                  <>
-                    <Icon name="success" size={12} />
-                    <Text className="text-success">Able to merge.</Text>
-                    <Text size={0} className="text-tertiary-background">
-                      These branches can be automatically merged.
-                    </Text>
-                  </>
-                ) : (
-                  <>
-                    <Icon name="fail" size={12} />
-                    <Text className="text-destructive">Can't be merged.</Text>
-                    <Text size={0} className="text-tertiary-background">
-                      You can still create the pull request.
-                    </Text>
-                  </>
-                )}
-              </Layout.Horizontal>
-            )}
+            {isBranchSelected &&
+              !isLoading && ( // Only render this block if isBranchSelected is true
+                <Layout.Horizontal className="items-center gap-x-0">
+                  {mergeability ? (
+                    <>
+                      <Icon name="success" size={12} />
+                      <Text className="text-success">Able to merge.</Text>
+                      <Text size={0} className="text-tertiary-background">
+                        These branches can be automatically merged.
+                      </Text>
+                    </>
+                  ) : (
+                    <>
+                      {apiError === "head branch doesn't contain any new commits." ? (
+                        <>
+                          <Icon name={'x-mark'} size={12} className="text-tertiary-background" />
+
+                          <Text size={0} className="text-tertiary-background">
+                            Head branch doesn't contain any new commits.
+                          </Text>
+                        </>
+                      ) : (
+                        <>
+                          <Icon name="fail" size={12} />
+                          <Text className="text-destructive">Can't be merged.</Text>
+                          <Text size={0} className="text-tertiary-background">
+                            You can still create the pull request.
+                          </Text>
+                        </>
+                      )}
+                    </>
+                  )}
+                </Layout.Horizontal>
+              )}
           </Layout.Horizontal>
         </Layout.Vertical>
         <Spacer size={3} />

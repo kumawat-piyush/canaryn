@@ -58,7 +58,7 @@ const PullRequestCompareForm = forwardRef<HTMLFormElement, PullRequestFormProps>
           </FormFieldSet.ControlGroup>
         </FormFieldSet.Root>
 
-        {apiError && (
+        {apiError && apiError !== "head branch doesn't contain any new commits." && (
           <Text size={1} className="text-destructive">
             {apiError?.toString()}
           </Text>
