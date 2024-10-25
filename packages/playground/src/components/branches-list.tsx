@@ -75,12 +75,7 @@ export const BranchesList = ({ branches, spaceId, repoId, defaultBranch }: PageP
                 New pull request
               </DropdownMenuItem>
             </Link>
-            <DropdownMenuItem className="cursor-pointer">
-              <DropdownMenuShortcut className="ml-0">
-                <Icon name="add-file" className="mr-2" />
-              </DropdownMenuShortcut>
-              Activity
-            </DropdownMenuItem>
+
             <DropdownMenuItem className="cursor-pointer">
               <DropdownMenuShortcut className="ml-0">
                 <Icon name="cog-6" className="mr-2" />
