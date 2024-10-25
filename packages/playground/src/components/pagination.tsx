@@ -18,7 +18,7 @@ interface PaginationComponentProps {
 }
 
 export const PaginationComponent: React.FC<PaginationComponentProps> = ({ totalPages, currentPage, goToPage }) => {
-  const generatePaginationItems = () => {
+  const generatePaginationItems = (): React.ReactElement[] => {
     const paginationItems: React.ReactElement[] = []
     const siblings = 2 // Number of adjacent pages before and after the current page
 
