@@ -29,11 +29,11 @@ function SandboxSettingsProjectMembersPage() {
   const [loadState, setLoadState] = useState('data-loaded')
   const [dialogState, dispatch] = useReducer(dialogStateReducer, initialDialogState)
 
-  const openDialog = (dialogType: DialogType.EDIT | DialogType.DELETE, member: MembersProps) => {
+  const openDialog = (dialogType: DialogType, member: MembersProps) => {
     dispatch({ type: ActionType.OPEN_DIALOG, dialogType, member })
   }
 
-  const closeDialog = (dialogType: DialogType.EDIT | DialogType.DELETE) => {
+  const closeDialog = (dialogType: DialogType) => {
     dispatch({ type: ActionType.CLOSE_DIALOG, dialogType })
   }
 
