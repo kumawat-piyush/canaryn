@@ -11,7 +11,9 @@ import {
   AlertDialogFooter,
   AlertDialogCancel,
   Button,
-  Icon
+  Icon,
+  Text,
+  Badge
 } from '@harnessio/canary'
 import { FormDeleterDialogProps } from './interfaces'
 
@@ -28,9 +30,15 @@ export const FormDeleteUserDialog: React.FC<FormDeleterDialogProps> = ({
       <AlertDialogTrigger asChild></AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure you want to remove "{user?.display_name}"?</AlertDialogTitle>
+          <AlertDialogTitle>
+            Are you absolutely sure you want to delete
+            <Badge type="admin" className="mx-2" variant="muted" disableHover={true}>
+              <Text>{user?.display_name}</Text>
+            </Badge>
+            ?
+          </AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently remove the user "{user?.display_name}" from the system.
+            This will permanently delete the user "{user?.display_name}" from the system.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <Spacer size={3} />
@@ -38,12 +46,12 @@ export const FormDeleteUserDialog: React.FC<FormDeleterDialogProps> = ({
           {!isDeleting && !deleteSuccess && <AlertDialogCancel onClick={onClose}>Cancel</AlertDialogCancel>}
           {deleteSuccess ? (
             <Button size="default" theme="success" className="self-start pointer-events-none">
-              Users removed&nbsp;&nbsp;
+              Users deleted&nbsp;&nbsp;
               <Icon name="tick" size={14} />
             </Button>
           ) : (
             <Button size="default" theme="error" className="self-start" onClick={onDelete} disabled={isDeleting}>
-              {isDeleting ? 'Removing user...' : 'Yes, remove user'}
+              {isDeleting ? 'Deleting user...' : 'Yes, delete user'}
             </Button>
           )}
         </AlertDialogFooter>

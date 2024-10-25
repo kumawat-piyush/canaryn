@@ -10,7 +10,9 @@ import {
   AlertDialogFooter,
   AlertDialogCancel,
   Button,
-  Icon
+  Icon,
+  Badge,
+  Text
 } from '@harnessio/canary'
 import { FormResetPasswordsDialogProps } from './interfaces'
 
@@ -26,7 +28,13 @@ export const FormResetPasswordDialog: React.FC<FormResetPasswordsDialogProps> = 
       <AlertDialogTrigger asChild></AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure you want to reset password for "{user?.display_name}"?</AlertDialogTitle>
+          <AlertDialogTitle>
+            Are you sure you want to reset password for
+            <Badge type="admin" className="mx-2" variant="muted" disableHover={true}>
+              <Text>{user?.display_name}</Text>
+            </Badge>
+            ?
+          </AlertDialogTitle>
           <AlertDialogDescription>
             This will send a password reset email to "{user?.display_name}" ({user?.uid}).
           </AlertDialogDescription>
