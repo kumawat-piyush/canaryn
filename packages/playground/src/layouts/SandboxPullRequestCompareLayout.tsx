@@ -29,11 +29,11 @@ export const formSchema = z.object({
   title: z.string().min(1, { message: 'Please provide a pull request title' }),
   description: z.string().min(1, { message: 'Please provide a description' })
 })
-export type FormFields = z.infer<typeof formSchema> // Automatically generate a type from the schema
+export type CompareFormFields = z.infer<typeof formSchema> // Automatically generate a type from the schema
 
 interface SandboxPullRequestCompareProps {
-  onFormSubmit: (data: FormFields) => void
-  onFormDraftSubmit: (data: FormFields) => void
+  onFormSubmit: (data: CompareFormFields) => void
+  onFormDraftSubmit: (data: CompareFormFields) => void
   onFormCancel: () => void
   apiError: string | null
   isLoading: boolean
@@ -76,7 +76,7 @@ const SandboxPullRequestCompare: React.FC<SandboxPullRequestCompareProps> = ({
     handleSubmit,
     reset,
     formState: { errors, isValid }
-  } = useForm<FormFields>({
+  } = useForm<CompareFormFields>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
     defaultValues: {

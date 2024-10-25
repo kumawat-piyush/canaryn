@@ -30,10 +30,7 @@ export const CreatePullRequest = () => {
   const { repoId, spaceId, diffRefs } = useParams<PathParams>()
   const [isBranchSelected, setIsBranchSelected] = useState<boolean>(diffRefs ? true : false) // State to track branch selection
 
-  // console.log(diffRefs)
-  const diffTargetBranch = diffRefs?.split('...')[0] || ''
-  const diffSourceBranch = diffRefs?.split('...')[1] || ''
-  // console.log(diffTargetBranch, diffSourceBranch)
+  const [diffTargetBranch, diffSourceBranch] = diffRefs ? diffRefs.split('...') : [undefined, undefined]
 
   const navigate = useNavigate()
   const [apiError, setApiError] = useState<string | null>(null)
@@ -46,8 +43,8 @@ export const CreatePullRequest = () => {
     commitRange
     //  setCommitRange  TODO: add commit view filter dropdown to manage different commits
   ] = useState(defaultCommitRange)
-  const targetRef = useMemo(() => selectedTargetBranch, [selectedTargetBranch, diffRefs])
-  const sourceRef = useMemo(() => selectedSourceBranch, [selectedSourceBranch, diffRefs])
+  const targetRef = useMemo(() => selectedTargetBranch, [selectedTargetBranch])
+  const sourceRef = useMemo(() => selectedSourceBranch, [selectedSourceBranch])
   const [cachedDiff, setCachedDiff] = useAtom(changesInfoAtom)
   const [mergeability, setMergeabilty] = useState<boolean>()
   const diffApiPath = useMemo(
@@ -197,7 +194,7 @@ export const CreatePullRequest = () => {
         setMergeabilty(value?.mergeable)
       })
       .catch(() => {
-        console.log('eerr')
+        setApiError('Error in merge check')
         setMergeabilty(false)
       })
   }, [repoRef, diffApiPath])
