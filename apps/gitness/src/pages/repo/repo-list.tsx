@@ -30,8 +30,8 @@ export default function ReposListPage() {
   const space = useGetSpaceURLParam()
 
   /* Query and Pagination */
-  const { query: currentQuery, sort } = useCommonFilter<ListReposQueryQueryParams['sort']>()
-  const [query, setQuery] = useQueryState('query', { defaultValue: currentQuery || '' })
+  const { query: currentQuery = '', sort } = useCommonFilter<ListReposQueryQueryParams['sort']>()
+  const [query, _] = useQueryState('query', { defaultValue: currentQuery })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
   const { isFetching, data } = useListReposQuery({
@@ -44,10 +44,6 @@ export default function ReposListPage() {
   useEffect(() => {
     setPage(currentPage) // move to goToPage
   }, [currentPage])
-
-  useEffect(() => {
-    setQuery(currentQuery || '')
-  }, [currentQuery])
 
   const repositories = data?.content
 
