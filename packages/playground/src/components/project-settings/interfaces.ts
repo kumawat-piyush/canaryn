@@ -44,3 +44,19 @@ export type Action =
   | { type: ActionType.START_DELETING }
   | { type: ActionType.DELETE_SUCCESS }
   | { type: ActionType.RESET_DELETE }
+
+export interface FormDeleteMemberDialogProps {
+  member: MembersProps
+  onClose: () => void
+  onDelete: () => void
+  isDeleting: boolean
+  deleteSuccess: boolean
+}
+
+export interface FormEditDialogProps {
+  member: { display_name: string; role: string }
+  onSave: (newRole: string) => void
+  onClose: () => void
+  isSubmitting: boolean
+  submitted: boolean
+}

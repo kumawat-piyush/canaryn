@@ -12,17 +12,7 @@ import {
   Icon,
   Spacer
 } from '@harnessio/canary'
-
-interface MemberProps {
-  display_name?: string
-}
-interface FormDeleteMemberDialogProps {
-  member: MemberProps
-  onClose: () => void
-  onDelete: () => void
-  isDeleting: boolean
-  deleteSuccess: boolean
-}
+import { FormDeleteMemberDialogProps } from './interfaces'
 
 export const FormDeleteMemberDialog: React.FC<FormDeleteMemberDialogProps> = ({
   member,

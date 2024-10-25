@@ -15,14 +15,7 @@ import { FormDeleteMemberDialog } from '../components/project-settings/form-memb
 import { DialogType, ActionType } from '../components/project-settings/interfaces'
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
-
-type MembersProps = {
-  display_name: string
-  role: string
-  email: string
-  avatarUrl?: string
-  timestamp?: string
-}
+import { MembersProps } from '../components/project-settings/interfaces'
 
 function SandboxSettingsProjectMembersPage() {
   const navigate = useNavigate()
