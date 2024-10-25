@@ -19,14 +19,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormFieldSet, MessageTheme } from '../..'
 import { InfoCircle } from '@harnessio/icons-noir'
-
-interface FormEditDialogProps {
-  isSubmitting: boolean
-  submitted: boolean
-  user: { uid: string; email: string; display_name?: string }
-  onSave: () => void
-  onClose: () => void
-}
+import { FormEditDialogProps } from './interfaces'
 
 export const FormUserEditDialog: React.FC<FormEditDialogProps> = ({
   user,

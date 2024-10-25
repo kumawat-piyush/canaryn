@@ -15,19 +15,10 @@ import { FormDeleteUserDialog } from '../components/user-management/form-user-de
 import { FormRemoveAdminDialog } from '../components/user-management/form-admin-remove-dialog'
 import { FormResetPasswordDialog } from '../components/user-management/form-user-reset-password'
 import { DialogActionType, DialogType } from '../components/user-management/interfaces'
+import { UsersProps } from '../components/user-management/interfaces'
+
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
-
-type UsersProps = {
-  admin: boolean
-  uid: string
-  display_name?: string | undefined // Add a default value of undefined
-  email: string
-  created: number // Update the type to number
-  updated?: number
-  avatarUrl?: string
-  blocked?: boolean
-}
 
 function SandboxSettingsUserManagementPage() {
   const navigate = useNavigate()

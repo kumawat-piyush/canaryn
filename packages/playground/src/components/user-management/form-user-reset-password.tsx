@@ -12,19 +12,7 @@ import {
   Button,
   Icon
 } from '@harnessio/canary'
-
-interface UsersProps {
-  uid: string
-  display_name?: string
-}
-
-interface FormResetPasswordrDialogProps {
-  user: UsersProps | null
-  onReset: () => void
-  onClose: () => void
-  isResetting: boolean
-  resetSuccess: boolean
-}
+import { FormResetPasswordrDialogProps } from './interfaces'
 
 export const FormResetPasswordDialog: React.FC<FormResetPasswordrDialogProps> = ({
   user,

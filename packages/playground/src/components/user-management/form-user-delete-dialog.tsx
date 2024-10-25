@@ -13,22 +13,10 @@ import {
   Button,
   Icon
 } from '@harnessio/canary'
-
-interface UsersProps {
-  uid: string
-  display_name?: string // Add a default value of undefined
-}
-
-interface FormResetPasswordrDialogProps {
-  user: UsersProps
-  onClose: () => void
-  onDelete: () => void
-  isDeleting: boolean
-  deleteSuccess: boolean
-}
+import { FormDeleterDialogProps } from './interfaces'
 
 //Form Delete Member Dialog
-export const FormDeleteUserDialog: React.FC<FormResetPasswordrDialogProps> = ({
+export const FormDeleteUserDialog: React.FC<FormDeleterDialogProps> = ({
   user,
   onClose,
   onDelete,
@@ -40,9 +28,9 @@ export const FormDeleteUserDialog: React.FC<FormResetPasswordrDialogProps> = ({
       <AlertDialogTrigger asChild></AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure to remove {user.display_name}?</AlertDialogTitle>
+          <AlertDialogTitle>Are you absolutely sure to remove {user?.display_name}?</AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently remove {user.display_name} in the system.
+            This will permanently remove {user?.display_name} in the system.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <Spacer size={3} />

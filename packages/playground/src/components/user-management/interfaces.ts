@@ -1,12 +1,12 @@
 export interface UsersProps {
+  admin: boolean
   uid: string
-  display_name?: string
+  display_name?: string | undefined
   email: string
   created: number
   updated?: number
   avatarUrl?: string
   blocked?: boolean
-  admin: boolean
 }
 
 export interface DialogState {
@@ -70,3 +70,35 @@ export type DialogAction =
   | { type: DialogActionType.RESET_SUBMIT }
   | { type: DialogActionType.RESET_REMOVE }
   | { type: DialogActionType.RESET_PASSWORD_RESET }
+
+export interface FormRemoveUserDialogProps {
+  user: UsersProps | null
+  onClose: () => void
+  onRemove: () => void
+  isRemoving: boolean
+  removeSuccess: boolean
+}
+
+export interface FormResetPasswordrDialogProps {
+  user: UsersProps | null
+  onReset: () => void
+  onClose: () => void
+  isResetting: boolean
+  resetSuccess: boolean
+}
+
+export interface FormDeleterDialogProps {
+  user: UsersProps | null
+  onClose: () => void
+  onDelete: () => void
+  isDeleting: boolean
+  deleteSuccess: boolean
+}
+
+export interface FormEditDialogProps {
+  isSubmitting: boolean
+  submitted: boolean
+  user: { uid: string; email: string; display_name?: string }
+  onSave: () => void
+  onClose: () => void
+}

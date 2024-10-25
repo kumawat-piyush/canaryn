@@ -12,20 +12,7 @@ import {
   Button,
   Icon
 } from '@harnessio/canary'
-
-interface UsersProps {
-  admin: boolean
-  uid: string
-  display_name?: string // Add a default value of undefined
-}
-
-interface FormRemoveUserDialogProps {
-  user: UsersProps | null
-  onClose: () => void
-  onRemove: () => void
-  isRemoving: boolean
-  removeSuccess: boolean
-}
+import { FormRemoveUserDialogProps } from './interfaces'
 
 //Form Remove Admin Dialog
 export const FormRemoveAdminDialog: React.FC<FormRemoveUserDialogProps> = ({
