@@ -21,19 +21,8 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger
 } from '@harnessio/canary'
-import { getInitials } from '../../utils/utils'
-import { timeAgo } from '../../utils/utils'
-
-interface UsersProps {
-  admin: boolean
-  uid: string
-  display_name?: string
-  email: string
-  created: number
-  updated?: number
-  avatarUrl?: string
-  blocked?: boolean
-}
+import { getInitials, timeAgo } from '../../utils/utils'
+import { UsersProps } from './interfaces'
 
 interface PageProps {
   users: UsersProps[]
