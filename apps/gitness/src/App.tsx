@@ -343,11 +343,7 @@ export default function App() {
                   children: [
                     { index: true, element: <PullRequestSandboxListPage /> },
                     {
-                      path: 'compare/:diffRefs*',
-                      element: <CreatePullRequest />
-                    },
-                    {
-                      path: 'compare',
+                      path: 'compare/:diffRefs*?',
                       element: <CreatePullRequest />
                     }
                   ]
