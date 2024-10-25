@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { parseAsInteger, useQueryState } from 'nuqs'
 import { Button, Spacer, Text } from '@harnessio/canary'
 import { useListReposQuery, RepoRepositoryOutput, ListReposQueryQueryParams } from '@harnessio/code-service-client'
 import {
@@ -16,7 +17,6 @@ import { usePagination } from '../../framework/hooks/usePagination'
 import Header from '../../components/Header'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
 import { useEffect } from 'react'
-import { useUpdateQueryParams } from '../../hooks/useUpdateQueryParams'
 
 const sortOptions = [
   { name: 'Created', value: 'created' },
@@ -31,7 +31,8 @@ export default function ReposListPage() {
 
   /* Query and Pagination */
   const { query: currentQuery, sort } = useCommonFilter<ListReposQueryQueryParams['sort']>()
-  const { page, updatePage, query, updateQuery } = useUpdateQueryParams()
+  const [query, setQuery] = useQueryState('query', { defaultValue: currentQuery || '' })
+  const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
   const { isFetching, data } = useListReposQuery({
     queryParams: { sort, query, page },
@@ -41,13 +42,12 @@ export default function ReposListPage() {
   const { totalPages, currentPage, handleClick, nextPage, previousPage } = usePagination(data?.headers || {})
 
   useEffect(() => {
-    updatePage(currentPage)
+    setPage(currentPage) // move to goToPage
   }, [currentPage])
 
   useEffect(() => {
-    updateQuery(currentQuery || '')
+    setQuery(currentQuery || '')
   }, [currentQuery])
-  /* */
 
   const repositories = data?.content
 
