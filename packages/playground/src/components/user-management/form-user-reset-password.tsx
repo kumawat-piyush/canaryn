@@ -12,9 +12,9 @@ import {
   Button,
   Icon
 } from '@harnessio/canary'
-import { FormResetPasswordrDialogProps } from './interfaces'
+import { FormResetPasswordsDialogProps } from './interfaces'
 
-export const FormResetPasswordDialog: React.FC<FormResetPasswordrDialogProps> = ({
+export const FormResetPasswordDialog: React.FC<FormResetPasswordsDialogProps> = ({
   user,
   onReset,
   onClose,

@@ -26,9 +26,9 @@ export const FormDeleteMemberDialog: React.FC<FormDeleteMemberDialogProps> = ({
       <AlertDialogTrigger asChild></AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure to remove {member.display_name}?</AlertDialogTitle>
+          <AlertDialogTitle>Are you absolutely sure to remove "{member.display_name}"?</AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently remove {member.display_name} in the project.
+            This will permanently remove "{member.display_name}" in the project.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <Spacer size={3} />
