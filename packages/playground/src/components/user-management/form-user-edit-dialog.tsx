@@ -70,14 +70,12 @@ export const FormUserEditDialog: React.FC<FormEditDialogProps> = ({
           <FormFieldSet.Root className="mb-0">
             {/* User ID */}
             <FormFieldSet.ControlGroup>
-              <FormFieldSet.Label htmlFor="userID" required>
-                <div className="flex content-center items-center">
-                  <Text className="font-normal text-primary/80">User ID</Text>
-                  <InfoCircle size="15" className="text-tertiary-background ml-3" />
-                  <Text size={1} className="text-tertiary-background ml-1">
-                    User ID cannot be changed once created
-                  </Text>
-                </div>
+              <FormFieldSet.Label className="flex content-center items-center" htmlFor="userID" required>
+                <Text className="font-normal text-primary/80">User ID</Text>
+                <InfoCircle size="15" className="text-tertiary-background ml-3" />
+                <Text size={1} className="text-tertiary-background ml-1">
+                  User ID cannot be changed once created
+                </Text>
               </FormFieldSet.Label>
               <Input
                 id="userID"

@@ -28,9 +28,9 @@ export const FormDeleteUserDialog: React.FC<FormDeleterDialogProps> = ({
       <AlertDialogTrigger asChild></AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure to remove "{user?.display_name}"?</AlertDialogTitle>
+          <AlertDialogTitle>Are you absolutely sure you want to remove "{user?.display_name}"?</AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently remove "{user?.display_name}" in the system.
+            This will permanently remove the user "{user?.display_name}" from the system.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <Spacer size={3} />
@@ -43,7 +43,7 @@ export const FormDeleteUserDialog: React.FC<FormDeleterDialogProps> = ({
             </Button>
           ) : (
             <Button size="default" theme="error" className="self-start" onClick={onDelete} disabled={isDeleting}>
-              {isDeleting ? 'Removing User...' : 'Yes, remove User'}
+              {isDeleting ? 'Removing User...' : 'Yes, remove user'}
             </Button>
           )}
         </AlertDialogFooter>

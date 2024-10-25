@@ -26,9 +26,9 @@ export const FormResetPasswordDialog: React.FC<FormResetPasswordsDialogProps> = 
       <AlertDialogTrigger asChild></AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure you want to reset password for {user?.display_name}?</AlertDialogTitle>
+          <AlertDialogTitle>Are you sure you want to reset password for "{user?.display_name}"?</AlertDialogTitle>
           <AlertDialogDescription>
-            This will send a password reset email to {user?.display_name} ({user?.uid}).
+            This will send a password reset email to "{user?.display_name}" ({user?.uid}).
           </AlertDialogDescription>
         </AlertDialogHeader>
         <Spacer size={3} />
