@@ -42,7 +42,9 @@ export const UsersList = ({ users, onDelete, onEdit, onRemoveAdmin, onResetPassw
             <Icon name="vertical-ellipsis" size={14} className="text-tertiary-background" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="shadow-sm py-2 bg-primary-background border border-gray-800 rounded-[10px] w-[180px]">
+        <DropdownMenuContent
+          className="shadow-sm py-2 bg-primary-background border border-gray-800 rounded-[10px] w-[180px]"
+          onCloseAutoFocus={event => event.preventDefault()}>
           <DropdownMenuGroup>
             <DropdownMenuItem
               className="cursor-pointer"

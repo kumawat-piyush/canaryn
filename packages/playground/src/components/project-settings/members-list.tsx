@@ -39,7 +39,10 @@ export const MembersList = ({ members, onDelete, onEdit }: PageProps) => {
             <Icon name="vertical-ellipsis" size={14} className="text-tertiary-background cursor-pointer" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="shadow-sm py-2 bg-primary-background border border-gray-800 rounded-[10px] w-[180px]">
+        <DropdownMenuContent
+          className="shadow-sm py-2 bg-primary-background border border-gray-800 rounded-[10px] w-[180px]"
+          onCloseAutoFocus={event => event.preventDefault()} // Prevent focus on hidden content
+        >
           <DropdownMenuGroup>
             <DropdownMenuItem className="cursor-pointer" onSelect={() => onEdit(member)}>
               <DropdownMenuShortcut className="ml-0">
