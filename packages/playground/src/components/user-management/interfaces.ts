@@ -79,7 +79,7 @@ export interface FormRemoveUserDialogProps {
   removeSuccess: boolean
 }
 
-export interface FormResetPasswordrDialogProps {
+export interface FormResetPasswordsDialogProps {
   user: UsersProps | null
   onReset: () => void
   onClose: () => void
