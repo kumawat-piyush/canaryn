@@ -13,12 +13,21 @@ import {
   PaginationNext,
   PaginationPrevious
 } from '@harnessio/canary'
-import { SandboxLayout, SkeletonList, NoData, MembersList } from '@harnessio/playground'
-import { useMembershipListQuery, TypesMembershipUser } from '@harnessio/code-service-client'
+
+import {
+  SandboxLayout,
+  SkeletonList,
+  NoData,
+  MembersList,
+  FormEditMemberDialog,
+  FormDeleteMemberDialog
+} from '@harnessio/playground'
+import { useMembershipListQuery, TypesMembershipUser, EnumMembershipRole } from '@harnessio/code-service-client'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { useNavigate } from 'react-router-dom'
 import { usePagination } from '../../framework/hooks/usePagination'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
+
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
 
@@ -30,8 +39,14 @@ const ProjectSettingsMemebersPage = () => {
   const navigate = useNavigate()
   const space_ref = useGetSpaceURLParam()
   const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
-
   const [totalMembers, setTotalMembers] = useState<number | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [dialogState, setDialogState] = useState({
+    isDialogEditOpen: false,
+    isDialogDeleteOpen: false,
+    selectedMember: null as { display_name: string; role: string } | null
+  })
 
   const { isLoading, data: members } = useMembershipListQuery(
     { space_ref: space_ref ?? '', queryParams: { page: currentPage, limit: 30 } },
@@ -45,6 +60,22 @@ const ProjectSettingsMemebersPage = () => {
       }
     }
   )
+
+  const handleDelete = () => {
+    setIsDeleting(true)
+    setTimeout(() => {
+      setIsDeleting(false)
+      setDialogState(prev => ({ ...prev, isDialogDeleteOpen: false, selectedMember: null }))
+    }, 2000)
+  }
+
+  const handleRoleSave = () => {
+    setIsSubmitting(true)
+    setTimeout(() => {
+      setIsSubmitting(false)
+      setDialogState(prev => ({ ...prev, isDialogEditOpen: false, selectedMember: null }))
+    }, 2000)
+  }
 
   const renderMemberListContent = () => {
     if (isLoading) return <SkeletonList />
@@ -65,20 +96,60 @@ const ProjectSettingsMemebersPage = () => {
     }
 
     return (
-      <MembersList
-        members={members.map((member: TypesMembershipUser) => ({
-          display_name: member.added_by?.display_name,
-          role: member.role,
-          email: member.added_by?.email,
-          avatarUrl: '',
-          timestamp: member.created ? timeAgoFromEpochTime(member.created) : 'no time available'
-        }))}
-      />
+      <>
+        <MembersList
+          members={members.map((member: TypesMembershipUser) => ({
+            display_name: member.principal?.display_name,
+            role: member.role as EnumMembershipRole | undefined,
+            email: member.added_by?.email,
+            avatarUrl: '',
+            timestamp: member.created ? timeAgoFromEpochTime(member.created) : 'no time available'
+          }))}
+          onEdit={member =>
+            setDialogState({
+              ...dialogState,
+              isDialogEditOpen: true,
+              selectedMember: {
+                display_name: member.display_name,
+                role: member.role === 'space_owner' ? 'Owner' : member.role
+              }
+            })
+          }
+          onDelete={member =>
+            setDialogState({
+              ...dialogState,
+              isDialogDeleteOpen: true,
+              selectedMember: member
+            })
+          }
+        />
+        {/* Delete Dialog */}
+        {dialogState.isDialogDeleteOpen && dialogState.selectedMember && (
+          <FormDeleteMemberDialog
+            isDeleting={isDeleting}
+            deleteSuccess={!isDeleting}
+            member={dialogState.selectedMember}
+            onDelete={handleDelete}
+            onClose={() => setDialogState(prev => ({ ...prev, isDialogDeleteOpen: false }))}
+          />
+        )}
+
+        {/* Edit Dialog */}
+        {dialogState.isDialogEditOpen && dialogState.selectedMember && (
+          <FormEditMemberDialog
+            isSubmitting={isSubmitting}
+            submitted={!isSubmitting}
+            member={dialogState.selectedMember}
+            onSave={handleRoleSave}
+            onClose={() => setDialogState(prev => ({ ...prev, isDialogEditOpen: false }))}
+          />
+        )}
+      </>
     )
   }
 
   const handleInviteClick = () => {
-    navigate('/sandbox/settings/project/create-new-member')
+    navigate(`${space_ref}/sandbox/settings/project/create-new-member`)
   }
 
   const membersExist = (members?.length ?? 0) > 0
