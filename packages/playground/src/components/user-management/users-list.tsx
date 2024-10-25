@@ -34,6 +34,7 @@ interface PageProps {
 
 // fix the edit form dialog and mock data and coressponding props
 export const UsersList = ({ users, onDelete, onEdit, onRemoveAdmin, onResetPassword }: PageProps) => {
+  //TODO: migrate actions component
   const moreActionsTooltip = ({ user }: { user: UsersProps }) => {
     return (
       <DropdownMenu>

@@ -31,6 +31,7 @@ interface PageProps {
 }
 
 export const MembersList = ({ members, onDelete, onEdit }: PageProps) => {
+  //TODO: migrate actions component
   const moreActionsTooltip = ({ member }: { member: MembersProps }) => {
     return (
       <DropdownMenu>
