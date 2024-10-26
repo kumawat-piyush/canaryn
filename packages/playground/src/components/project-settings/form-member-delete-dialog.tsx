@@ -29,14 +29,14 @@ export const FormDeleteMemberDialog: React.FC<FormDeleteMemberDialogProps> = ({
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Are you absolutely sure you want to remove
+            Are you absolutely sure you want to delete
             <Badge type="admin" className="mx-2" variant="muted" disableHover={true}>
               <Text>{member.display_name}</Text>
             </Badge>
             ?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently remove "{member.display_name}" in the project.
+            This will permanently delete "{member.display_name}" in the project.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <Spacer size={3} />
