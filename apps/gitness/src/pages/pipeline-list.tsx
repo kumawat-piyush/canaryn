@@ -82,8 +82,6 @@ export default function PipelinesPage() {
     )
   }
 
-  const pipelinesExist = (pipelines?.length ?? 0) > 0
-
   return (
     <>
       <PaddingListLayout spaceTop={false}>
@@ -92,7 +90,7 @@ export default function PipelinesPage() {
          * Show if pipelines exist.
          * Additionally, show if query(search) is applied.
          */}
-        {(query || pipelinesExist) && (
+        {(query || (pipelines?.length || 0) > 0) && (
           <>
             <Text size={5} weight={'medium'}>
               Pipelines
@@ -111,7 +109,7 @@ export default function PipelinesPage() {
         <Spacer size={5} />
         {renderListContent()}
         <Spacer size={8} />
-        {pipelinesExist && (
+        {totalPages > 1 && (
           <PaginationComponent
             totalPages={totalPages}
             currentPage={page}

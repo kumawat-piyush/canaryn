@@ -120,7 +120,7 @@ export default function ReposListPage() {
         <Spacer size={5} />
         {renderListContent()}
         <Spacer size={8} />
-        {repositories?.length && (
+        {totalPages > 1 && (
           <PaginationComponent
             totalPages={totalPages}
             currentPage={page}
