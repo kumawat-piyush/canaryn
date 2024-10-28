@@ -56,8 +56,11 @@ import { FileViewer } from './components/FileViewer'
 import { SandboxFileViewer } from './components/SandboxFileViewer'
 import PullRequestChangesPage from './pages/pull-request/pull-request-changes-page'
 import { ProjectSettingsGeneralPage } from './pages/project-settings/project-settings-general-page'
+import { FileEditor } from './components/FileEditor'
+import { ExplorerPathsProvider } from './framework/context/ExplorerPathsContext'
 import { RepoSettingsGeneralPageContainer } from './pages/repo-sandbox/repo-settings-general-container'
 import { CreatePullRequest } from './pages/pull-request/pull-request-compare-page'
+import { ExitConfirmProvider } from './framework/context/ExitConfirmContext'
 
 import { RepoBranchSettingsRulesPageContainer } from './pages/repo-sandbox/repo-sandbox-branch-rules-container'
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
@@ -101,11 +104,29 @@ export default function App() {
             },
             {
               path: 'code',
-              element: <RepoFiles />,
+              element: (
+                <ExplorerPathsProvider>
+                  <RepoFiles />
+                </ExplorerPathsProvider>
+              ),
               children: [
                 {
                   index: true,
                   element: <FileViewer />
+                },
+                {
+                  path: 'edit/:gitRef/~/:resourcePath*',
+                  element: <FileEditor />
+                },
+                {
+                  path: 'new/:gitRef/~/*',
+                  element: <FileEditor />,
+                  children: [
+                    {
+                      path: ':resourcePath*',
+                      element: <FileViewer />
+                    }
+                  ]
                 },
                 {
                   path: ':gitRef',
@@ -344,7 +365,7 @@ export default function App() {
                   children: [
                     { index: true, element: <PullRequestSandboxListPage /> },
                     {
-                      path: 'compare',
+                      path: 'compare/:diffRefs*?',
                       element: <CreatePullRequest />
                     }
                   ]
@@ -371,7 +392,13 @@ export default function App() {
                     },
                     {
                       path: 'rules',
-                      element: <RepoBranchSettingsRulesPageContainer />
+                      element: <RepoBranchSettingsRulesPageContainer />,
+                      children: [
+                        {
+                          path: ':identifier',
+                          element: <RepoBranchSettingsRulesPageContainer />
+                        }
+                      ]
                     }
                   ]
                 }
@@ -446,9 +473,11 @@ export default function App() {
       <ThemeProvider defaultTheme="dark">
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
-            <NuqsAdapter>
-              <RouterProvider router={router} />
-            </NuqsAdapter>
+            <ExitConfirmProvider>
+              <NuqsAdapter>
+                <RouterProvider router={router} />
+              </NuqsAdapter>
+            </ExitConfirmProvider>
           </TooltipProvider>
         </QueryClientProvider>
       </ThemeProvider>
