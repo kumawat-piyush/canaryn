@@ -8,23 +8,26 @@ export enum PageResponseHeader {
   xPrevPage = 'x-prev-page'
 }
 
-type PageResponseHeadersObject = Partial<Record<keyof typeof PageResponseHeader, number>>
+export interface PaginationHeaders {
+  total?: number | null
+  totalPages?: number | null
+  perPage?: number | null
+  nextPage?: number | null
+  prevPage?: number | null
+}
 
-function usePageResponseHeaders(headersInit: HeadersInit): PageResponseHeadersObject {
-  const [filteredHeaders, setFilteredHeaders] = useState<PageResponseHeadersObject>({})
+function usePageResponseHeaders(headersInit: HeadersInit): PaginationHeaders {
+  const [filteredHeaders, setFilteredHeaders] = useState<PaginationHeaders>({ total: null })
 
   useEffect(() => {
-    setFilteredHeaders(
-      (Object.keys(PageResponseHeader) as Array<keyof typeof PageResponseHeader>).reduce((acc, key) => {
-        const headerValue = new Map<string, string>(
-          headersInit instanceof Headers ? Array.from(headersInit.entries()) : Object.entries(headersInit)
-        ).get(PageResponseHeader[key])
-        if (headerValue) {
-          acc[key] = parseInt(headerValue, 10)
-        }
-        return acc
-      }, {} as PageResponseHeadersObject)
-    )
+    const headers = new Headers(headersInit)
+    setFilteredHeaders({
+      total: parseInt(headers.get(PageResponseHeader.xTotal) || '') || null,
+      totalPages: parseInt(headers.get(PageResponseHeader.xTotalPages) || '') || null,
+      perPage: parseInt(headers.get(PageResponseHeader.xPerPage) || '') || null,
+      nextPage: parseInt(headers.get(PageResponseHeader.xNextPage) || '') || null,
+      prevPage: parseInt(headers.get(PageResponseHeader.xPrevPage) || '') || null
+    })
   }, [headersInit])
 
   return filteredHeaders
