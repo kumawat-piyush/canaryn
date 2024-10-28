@@ -13,7 +13,7 @@ import {
   PaginationComponent
 } from '@harnessio/playground'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
-import usePageResponseHeaders from '../../hooks/usePageResponseHeaders'
+import { getPaginationHeaders } from '../../utils/page-utils'
 import Header from '../../components/Header'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
 
@@ -38,7 +38,7 @@ export default function ReposListPage() {
     space_ref: `${space}/+`
   })
 
-  const { totalPages } = usePageResponseHeaders(data?.headers || {})
+  const { totalPages } = getPaginationHeaders(data?.headers || {})
 
   const repositories = data?.content
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import usePageResponseHeaders from '../../hooks/usePageResponseHeaders'
+import usePageResponseHeaders from '../../utils/page-utils'
 
 interface Pagination {
   totalPages: number
