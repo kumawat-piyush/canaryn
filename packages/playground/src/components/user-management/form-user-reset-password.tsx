@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Spacer,
   AlertDialog,
@@ -18,7 +18,7 @@ import { PasswordCopyAction } from './password-copy-action'
 import { FormResetPasswordsDialogProps } from './interfaces'
 
 export const FormResetPasswordDialog: React.FC<FormResetPasswordsDialogProps> = ({ user, onClose }) => {
-  const [isConfirm, setIsConfirm] = React.useState(false)
+  const [isConfirm, setIsConfirm] = useState(false)
 
   return (
     <AlertDialog open={true} onOpenChange={onClose}>
