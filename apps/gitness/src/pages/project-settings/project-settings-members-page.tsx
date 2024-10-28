@@ -166,7 +166,7 @@ const ProjectSettingsMemebersPage = () => {
           Team
         </Text>
         <Text size={5} weight={'medium'} color="tertiaryBackground">
-          {totalMembers ? `${totalMembers} members` : ''}
+          , {totalMembers ? `${totalMembers} members` : ''}
         </Text>
         <Spacer size={6} />
         <ListActions.Root>
