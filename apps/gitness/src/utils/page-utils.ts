@@ -15,6 +15,10 @@ export const getPaginationHeaders = (
   nextPage?: number | null
   prevPage?: number | null
 } => {
+  /**
+   * HeadersInit is used to initialize a Headers object or to provide headers directly to functions like fetch,
+   * whereas Headers is the actual object that manages the headers after initialization.
+   */
   const headers = new Headers(headersInit)
   return {
     total: parseInt(headers.get(PageResponseHeader.xTotal) || '') || null,

@@ -1,6 +1,6 @@
 # Repository Query with Pagination and Filtering
 
-This example demonstrates querying a list of repositories with filtering and pagination using `useQueryState` for URL state management and `useListReposQuery` for fetching data. 
+This example demonstrates querying a list of repositories with filtering and pagination using `useQueryState` for URL state management and `useListReposQuery` for fetching data.
 The `useCommonFilter` hook provides default query parameters, while `getPaginationHeaders` extracts pagination metadata.
 
 ## Example Code
@@ -34,9 +34,9 @@ export default function RepositoryList({ space }: { space: string }) {
   return (
     <div>
       <h2>Repository List</h2>
-      {/* 
+      {/*
           Render repositories
-          ... 
+          ...
       */}
       <PaginationControls
         page={page}
@@ -47,3 +47,4 @@ export default function RepositoryList({ space }: { space: string }) {
     </div>
   )
 }
+```
