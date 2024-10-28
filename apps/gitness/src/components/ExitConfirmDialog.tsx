@@ -13,12 +13,12 @@ export type ExitConfirmDialogProps = ExitConfirmOptions & { open: boolean }
 
 export function ExitConfirmDialog({
   open,
-  title,
-  subtitle,
-  cancelText,
-  confirmText,
   onCancel,
-  onConfirm
+  onConfirm,
+  title = 'You have unsaved changes',
+  subtitle = 'Are you sure you want to leave this page without saving?',
+  confirmText = 'Leave',
+  cancelText = 'Stay'
 }: ExitConfirmDialogProps) {
   return (
     <Dialog

@@ -27,7 +27,7 @@ export default function PipelineEdit() {
     setCurrentBranch
   } = usePipelineDataContext()
 
-  const { confirm } = useExitPrompt({
+  const { confirmExit } = useExitPrompt({
     isDirty
   })
 
@@ -134,7 +134,7 @@ export default function PipelineEdit() {
           currentBranch={currentBranch}
           branches={branchesNames}
           branchesLoading={listBranchesLoading || fetchingPipelineFileContent}
-          onBranchChange={branch => confirm().then(confirmed => confirmed && setCurrentBranch(branch))}
+          onBranchChange={branch => confirmExit().then(confirmed => confirmed && setCurrentBranch(branch))}
           problems={problemsCount}
           togglePane={() => setPanelOpen(!panelOpen)}
         />

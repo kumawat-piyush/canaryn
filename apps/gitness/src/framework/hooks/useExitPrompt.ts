@@ -9,24 +9,17 @@ export interface UseExitPromptProps {
   cancelText?: string
 }
 
-export const useExitPrompt = ({
-  isDirty = false,
-  title = 'You have unsaved changes',
-  subtitle = 'Are you sure you want to leave this page without saving?',
-  confirmText = 'Leave',
-  cancelText = 'Stay'
-}: UseExitPromptProps & { isDirty?: boolean }) => {
+export const useExitPrompt = (props: UseExitPromptProps & { isDirty: boolean }) => {
+  const { isDirty, ...restExitPromptProps } = props
+
   const blocker = useBlocker(isDirty)
   const { show } = useExitConfirm()
 
-  const confirm = useCallback(() => {
+  const confirmExit = useCallback(() => {
     if (!isDirty) return Promise.resolve(true)
     return new Promise<boolean>(resolve => {
       show({
-        title,
-        subtitle,
-        confirmText,
-        cancelText,
+        ...restExitPromptProps,
         onConfirm: () => {
           resolve(true)
         },
@@ -35,12 +28,12 @@ export const useExitPrompt = ({
         }
       })
     })
-  }, [cancelText, confirmText, isDirty, show, subtitle, title])
+  }, [isDirty, show, restExitPromptProps])
 
   // handle route change
   useEffect(() => {
     if (blocker.state === 'blocked') {
-      confirm().then(result => {
+      confirmExit().then(result => {
         if (result) blocker.proceed()
         else blocker.reset()
       })
@@ -52,7 +45,6 @@ export const useExitPrompt = ({
     const onBeforeUnload = (e: Event) => {
       if (isDirty) {
         e.preventDefault()
-        return subtitle
       }
     }
 
@@ -61,9 +53,9 @@ export const useExitPrompt = ({
     return () => {
       window.removeEventListener('beforeunload', onBeforeUnload)
     }
-  }, [isDirty, subtitle])
+  }, [isDirty])
 
   return {
-    confirm
+    confirmExit
   }
 }

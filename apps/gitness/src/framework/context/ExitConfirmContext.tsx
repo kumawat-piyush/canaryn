@@ -6,16 +6,16 @@ export interface ExitConfirmOptions {
   subtitle?: string
   confirmText?: string
   cancelText?: string
-  onConfirm?: () => void
-  onCancel?: () => void
+  onConfirm: () => void
+  onCancel: () => void
 }
 
 export interface ExitConfirmContextType {
-  show: (options?: ExitConfirmOptions) => void
+  show: (options: ExitConfirmOptions) => void
 }
 
 export const ExitConfirmContext = createContext<ExitConfirmContextType>({
-  show: (_options?: ExitConfirmOptions) => undefined
+  show: (_options: ExitConfirmOptions) => undefined
 })
 
 export function ExitConfirmProvider({ children }: { children: React.ReactNode }) {
