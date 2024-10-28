@@ -13,9 +13,9 @@ import {
   PaginationComponent
 } from '@harnessio/playground'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
-import { getPaginationHeaders } from '../../utils/page-utils'
 import Header from '../../components/Header'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
+import { PageResponseHeader } from '../../types'
 
 const sortOptions = [
   { name: 'Created', value: 'created' },
@@ -38,9 +38,9 @@ export default function ReposListPage() {
     space_ref: `${space}/+`
   })
 
-  const { totalPages } = getPaginationHeaders(data?.headers || {})
+  const totalPages = parseInt(data?.headers?.get(PageResponseHeader.xTotalPages) || '')
 
-  const repositories = data?.content
+  const repositories = data?.body
 
   const renderListContent = () => {
     if (isFetching) return <SkeletonList />
@@ -122,7 +122,7 @@ export default function ReposListPage() {
         <Spacer size={8} />
         {repositories?.length && (
           <PaginationComponent
-            totalPages={totalPages ?? 1}
+            totalPages={totalPages}
             currentPage={page}
             goToPage={(pageNum: number) => setPage(pageNum)}
           />
