@@ -6,6 +6,7 @@ The `useCommonFilter` hook provides default query parameters, while `getPaginati
 ## Example Code
 
 ```typescript
+import { parseAsInteger, useQueryState } from 'nuqs'
 import { useListReposQuery } from '@harnessio/code-service-client'
 
 export default function RepositoryList({ space }: { space: string }) {
