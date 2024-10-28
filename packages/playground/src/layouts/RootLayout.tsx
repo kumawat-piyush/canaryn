@@ -169,6 +169,9 @@ export const RootLayout: React.FC<RootLayoutProps> = ({ currentUser }) => {
                 <NavLink to="/sandbox/repos/create">
                   <Navbar.Item text="Create repository" icon={<Icon name="repositories" size={12} />} />
                 </NavLink>
+                <NavLink to="/sandbox/repos/drone/pull-requests/compare">
+                  <Navbar.Item text="Create pull request" icon={<Icon name="pr-open" size={12} />} />
+                </NavLink>
                 <NavLink to="/sandbox/settings/account">
                   <Navbar.Item text="Account settings" icon={<Icon name="cog-6" size={12} />} />
                 </NavLink>
@@ -178,13 +181,21 @@ export const RootLayout: React.FC<RootLayoutProps> = ({ currentUser }) => {
               </Navbar.AccordionGroup>
             </Navbar.Content>
             <Navbar.Footer>
-              <NavLink to="/sandbox/settings/profile/general" className="p-2 hover:bg-tertiary">
-                <NavbarUser.Root
-                  username={currentUser ? currentUser.display_name : 'Steven M.'}
-                  isAdmin={currentUser ? currentUser.admin : false}
-                  url={currentUser ? undefined : '../images/user-avatar.svg'}
-                />{' '}
-              </NavLink>
+              <NavbarUser.Root
+                username={currentUser?.display_name || currentUser?.uid}
+                isAdmin={currentUser?.admin || false}
+                url={currentUser?.url || ''}
+                menuItems={[
+                  {
+                    key: 0,
+                    element: <Link to="/sandbox/settings/profile/general">Settings</Link>
+                  },
+                  {
+                    key: 1,
+                    element: <Link to="/logout">Log out</Link>
+                  }
+                ]}
+              />
             </Navbar.Footer>
           </Navbar.Root>
         )}

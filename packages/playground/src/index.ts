@@ -45,8 +45,10 @@ export * from './components/pipeline-studio/step-palette/step-palette-content'
 export * from './components/pipeline-studio/step-palette/step-palette-item'
 export * from './components/steps/harness-steps'
 export * from './components/steps/types'
+export * from './components/repo-settings/repo-settings-general/types'
 
 export * from './components/pipeline-studio/pipeline-studio-footer-bar/pipeline-studio-footer-bar'
+export * from './components/pipeline-studio/popover-commit-info'
 export * from './components/branches-list'
 export * from './components/divergence-gauge'
 
@@ -66,6 +68,7 @@ export * from './components/pagination'
 export * from './components/profile-settings/profile-settings-keys-list'
 export * from './components/profile-settings/profile-settings-tokens-list'
 export * from './components/profile-settings/types'
+export * from './components/project-settings/members-list'
 
 export * from './components/filter'
 export * from './components/copy-button'
@@ -104,8 +107,13 @@ export * from './pages/sandbox-settings-account-page'
 export * from './pages/sandbox-settings-account-keys-page'
 export * from './pages/sandbox-settings-account-general-page'
 export * from './pages/sandbox-repo-settings-page'
+export * from './pages/repo-settings-general-page'
+export * from './pages/repo-branch-settings-rules-page'
+export * from './components/repo-settings/repo-branch-settings-rules/types'
 
 export * from './pages/sandbox-repo-create-page'
+
+export * from './layouts/SandboxPullRequestCompareLayout'
 
 export * from './pages/sandbox-settings-project-page'
 export * from './pages/sandbox-settings-project-general-page'

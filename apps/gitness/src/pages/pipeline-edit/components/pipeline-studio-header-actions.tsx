@@ -1,11 +1,9 @@
-import { useParams, useNavigate } from 'react-router-dom'
-import { Button, DropdownMenuItem, SplitButton, Icon } from '@harnessio/canary'
-import {
-  OpenapiCommitFilesRequest,
-  useCommitFilesMutation,
-  useCreateExecutionMutation
-} from '@harnessio/code-service-client'
+import { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { Button, DropdownMenuItem, SplitButton } from '@harnessio/canary'
+import { OpenapiCommitFilesRequest, useCommitFilesMutation } from '@harnessio/code-service-client'
 import { PipelineParams, usePipelineDataContext } from '../context/PipelineStudioDataProvider'
+import RunPipelineDialog from '../../run-pipeline-dialog/run-pipeline-dialog'
 
 const PipelineStudioHeaderActions = (): JSX.Element => {
   const {
@@ -13,14 +11,17 @@ const PipelineStudioHeaderActions = (): JSX.Element => {
       pipelineData,
       pipelineFileContent,
       fetchingPipelineFileContent,
+      isInitialized,
       yamlRevision,
       isExistingPipeline,
-      isDirty
+      isDirty,
+      currentBranch
     },
     fetchPipelineFileContent
   } = usePipelineDataContext()
 
-  const navigate = useNavigate()
+  const [openRunPipeline, setOpenRunPipeline] = useState(false)
+
   const { repoId, spaceId } = useParams<PipelineParams>()
   const repoRef = `${spaceId}/${repoId}/+`
 
@@ -36,17 +37,17 @@ const PipelineStudioHeaderActions = (): JSX.Element => {
           sha: isExistingPipeline ? pipelineFileContent?.sha : ''
         }
       ],
-      branch: pipelineData?.default_branch || '',
+      branch: currentBranch,
       title: `${isExistingPipeline ? 'Updated' : 'Created'} pipeline ${pipelineData?.identifier}`, // TODO: check if pl is saved before edit
       message: ''
     }
 
     commitAsync({ repo_ref: repoRef, body: data })
       .then(() => {
+        fetchPipelineFileContent(currentBranch)
+
         if (execute) {
-          handleRun()
-        } else {
-          fetchPipelineFileContent?.()
+          setOpenRunPipeline(true)
         }
         // TODO: toast
       })
@@ -56,62 +57,54 @@ const PipelineStudioHeaderActions = (): JSX.Element => {
       })
   }
 
-  const { mutateAsync: createExecutionAsync, isLoading: isLoadingCreateExecution } = useCreateExecutionMutation({})
-
   const handleRun = (): void => {
-    createExecutionAsync({
-      pipeline_identifier: pipelineData?.identifier ?? '',
-      repo_ref: repoRef,
-      queryParams: { branch: pipelineData?.default_branch }
-    })
-      .then(response => {
-        const executionId = response.number
-        navigate(`../executions/${executionId}`)
-        // TODO: toast here ?
-      })
-      .catch(error => {
-        console.error(error)
-        // TODO: error toast here ?
-      })
+    setOpenRunPipeline(true)
   }
 
-  const renderActionButton = () => {
+  const renderActionButton = ({ disabled = false }: { disabled?: boolean }) => {
     return !isDirty ? (
-      <Button size="sm" onClick={handleRun} loading={isLoadingCreateExecution}>
+      <Button size="sm" onClick={handleRun} disabled={disabled}>
         Run
       </Button>
     ) : (
       <SplitButton
-        loading={isLoadingCreateExecution}
+        disabled={disabled}
         size="sm"
         onClick={() => handleSave(true)}
         dropdown={<>&gt;</>}
         menu={
           <>
-            <DropdownMenuItem onClick={() => handleSave(false)} disabled={isLoadingCreateExecution}>
+            <DropdownMenuItem onClick={() => handleSave(false)} disabled={disabled}>
               Save
             </DropdownMenuItem>
           </>
         }>
-        <Icon name="lightning" className="mr-2" /> Save and run
+        Save and Run
       </SplitButton>
     )
   }
 
   return (
     // NOTE: absolute positioning in the top right corner of the page
-    <div className="absolute right-0 top-0 w-fit">
-      <div className="flex items-center gap-x-3 h-14 px-4">
-        {!fetchingPipelineFileContent && (
-          <>
-            <Button variant="ghost" size="sm">
-              Settings
-            </Button>
-            {renderActionButton()}
-          </>
-        )}
+    <>
+      <div className="absolute right-0 top-0 w-fit">
+        <div className="flex items-center gap-x-3 h-14 px-4">
+          <Button variant="ghost" size="sm" disabled={!isInitialized || fetchingPipelineFileContent}>
+            Settings
+          </Button>
+          {renderActionButton({ disabled: !isInitialized || fetchingPipelineFileContent })}
+        </div>
       </div>
-    </div>
+      <RunPipelineDialog
+        open={openRunPipeline}
+        onClose={() => {
+          setOpenRunPipeline(false)
+        }}
+        pipelineId={pipelineData?.identifier}
+        branch={currentBranch}
+        toExecutions={'../executions'}
+      />
+    </>
   )
 }
 

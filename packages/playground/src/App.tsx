@@ -55,13 +55,21 @@ import { RepoSettingsCollaborationsPage } from './pages/repo-settings-collaborat
 import { RepoSettingsModerationPage } from './pages/repo-settings-moderation-page'
 import { RepoSettingsPlaceholderPage } from './pages/repo-settings-placeholder-page'
 import { SandboxSettingsAccountGeneralPage } from './pages/sandbox-settings-account-general-page'
+import { SandboxSettingsCreateNewMemberPage } from './pages/sandbox-settings-create-new-member-page'
+import { SandboxSettingsUserManagementPage } from './pages/sandbox-settings-user-management-page'
+import { SandboxSettingsCreateNewUserPage } from './pages/sandbox-settings-create-new-user-page'
 import { SignInPage } from './pages/signin-page'
+import { RepoBranchSettingsRulesPage } from './pages/repo-branch-settings-rules-page'
+import SandboxPullRequestComparePage from './pages/sandbox-pull-request-compare-page'
+import { mockBypassUserData, mockStatusChecks } from './pages/mocks/repo-branch-settings/mockData'
+import { BypassUsersList } from './components/repo-settings/repo-branch-settings-rules/types'
+import { currentUser } from './pages/mocks/mockCurrentUserData'
 
 const router = createBrowserRouter([
   // TEMPORARY LAYOUT SANDBOX
   {
     path: '/sandbox',
-    element: <SandboxRoot />,
+    element: <SandboxRoot currentUser={currentUser} />,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -89,6 +97,10 @@ const router = createBrowserRouter([
                 element: <SandboxRepoCodePage />
               },
               {
+                path: 'pull-requests/compare',
+                element: <SandboxPullRequestComparePage />
+              },
+              {
                 path: 'settings',
                 element: <SandboxRepoSettingsPage />,
                 children: [
@@ -107,6 +119,16 @@ const router = createBrowserRouter([
                   {
                     path: 'moderation',
                     element: <RepoSettingsModerationPage />
+                  },
+                  {
+                    path: 'rules',
+                    element: (
+                      <RepoBranchSettingsRulesPage
+                        handleRuleUpdate={noop}
+                        principals={mockBypassUserData as BypassUsersList[]}
+                        recentStatusChecks={mockStatusChecks}
+                      />
+                    )
                   },
                   {
                     path: '*',
@@ -199,6 +221,28 @@ const router = createBrowserRouter([
               {
                 path: 'members',
                 element: <SandboxSettingsProjectMembersPage />
+              },
+              {
+                path: 'create-new-member',
+                element: <SandboxSettingsCreateNewMemberPage />
+              }
+            ]
+          },
+          {
+            path: 'user-mamagement',
+            element: <SandboxSettingsProjectPage />,
+            children: [
+              {
+                index: true,
+                element: <Navigate to="users" />
+              },
+              {
+                path: 'users',
+                element: <SandboxSettingsUserManagementPage />
+              },
+              {
+                path: 'create-new-user',
+                element: <SandboxSettingsCreateNewUserPage />
               }
             ]
           }
@@ -216,7 +260,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <RootLayout />,
+    element: <RootLayout currentUser={currentUser} />,
     errorElement: <ErrorPage />,
     children: [
       // LANDING

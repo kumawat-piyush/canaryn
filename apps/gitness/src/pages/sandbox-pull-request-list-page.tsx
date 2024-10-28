@@ -11,13 +11,14 @@ import {
   Text,
   Button
 } from '@harnessio/canary'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { SkeletonList, PullRequestList, NoData, useCommonFilter, Filter, SandboxLayout } from '@harnessio/playground'
 import { ListPullReqQueryQueryParams, TypesPullReq, useListPullReqQuery } from '@harnessio/code-service-client'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
 import { usePagination } from '../framework/hooks/usePagination'
 import { timeAgoFromEpochTime } from './pipeline-edit/utils/time-utils'
 import { DropdownItemProps } from '../../../../packages/canary/dist/components/list-actions'
+import { PathParams } from '../RouteDefinitions'
 
 const SortOptions = [
   { name: 'Created', value: 'created' },
@@ -28,6 +29,7 @@ const SortOptions = [
 ] as const satisfies DropdownItemProps[]
 
 function PullRequestSandboxListPage() {
+  const { repoId, spaceId } = useParams<PathParams>()
   // hardcoded
   const totalPages = 10
   const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
@@ -104,14 +106,13 @@ function PullRequestSandboxListPage() {
           merger: {},
           stats: { commits: 1, files_changed: 1, additions: 1, deletions: 0, conversations: 2 },
           labels: [
-            { id: 1, key: 'P0', color: 'red', scope: 1, value_count: 0 },
+            { id: 1, key: 'P0', color: 'red', value_count: 0 },
             {
               id: 2,
               key: 'P1',
               color: 'red',
-              scope: 0,
+
               value_count: 5,
-              value_id: 5,
               value: 'asdsa',
               value_color: 'red'
             },
@@ -119,9 +120,7 @@ function PullRequestSandboxListPage() {
               id: 3,
               key: 'teststringssdsjakteststringssdsjakteststringssdsj',
               color: 'blue',
-              scope: 0,
               value_count: 1,
-              value_id: 2,
               value: 'teststringssdsjakteststringssdsjak',
               value_color: 'blue'
             }
@@ -189,7 +188,7 @@ function PullRequestSandboxListPage() {
               <Filter sortOptions={SortOptions} />
             </div>
             <Button variant="default" asChild>
-              <Link to="#">New pull request</Link>
+              <Link to={`/sandbox/spaces/${spaceId}/repos/${repoId}/pull-requests/compare`}>New pull request</Link>
             </Button>
           </div>
 

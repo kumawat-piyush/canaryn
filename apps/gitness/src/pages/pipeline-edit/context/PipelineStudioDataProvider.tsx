@@ -1,6 +1,5 @@
 import React, { createContext, useCallback, useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
-import { Skeleton } from '@harnessio/canary'
 import { useYamlEditorContext } from '@harnessio/yaml-editor'
 import { countProblems, monacoMarkers2Problems } from '../utils/problems-utils'
 import type { InlineActionArgsType } from '../utils/inline-actions'
@@ -11,6 +10,7 @@ import {
   deleteInArrayAction,
   injectInArrayAction,
   loadPipelineAction,
+  loadPipelineContentAction,
   setYamlRevisionAction,
   updateInArrayAction,
   updateState
@@ -33,19 +33,19 @@ export interface YamlRevision {
 
 interface PipelineStudioDataContextProps {
   state: DataReducerState
-
   setYamlRevision: (yamlRevision: YamlRevision) => void
   setAddStepIntention: (props: { path: string; position: InlineActionArgsType['position'] }) => void
   clearAddStepIntention: () => void
   setEditStepIntention: (props: { path: string }) => void
   clearEditStepIntention: () => void
   setCurrentStepFormDefinition: (data: TypesPlugin | null) => void
-  fetchPipelineFileContent?: () => void
+  fetchPipelineFileContent: (branch: string) => void
   requestYamlModifications: {
     injectInArray: (props: { path: string; position: 'last' | 'after' | 'before' | undefined; item: unknown }) => void
     updateInArray: (props: { path: string; item: unknown }) => void
     deleteInArray: (props: { path: string }) => void
   }
+  setCurrentBranch: (branch: string) => void
 }
 
 const PipelineStudioDataContext = createContext<PipelineStudioDataContextProps>({
@@ -56,6 +56,7 @@ const PipelineStudioDataContext = createContext<PipelineStudioDataContextProps>(
   setEditStepIntention: (_props: { path: string } | null) => undefined,
   clearEditStepIntention: () => undefined,
   setCurrentStepFormDefinition: (_data: TypesPlugin | null) => undefined,
+  fetchPipelineFileContent: (_branch: string) => undefined,
   requestYamlModifications: {
     injectInArray: (_props: {
       path: string
@@ -64,7 +65,8 @@ const PipelineStudioDataContext = createContext<PipelineStudioDataContextProps>(
     }) => undefined,
     updateInArray: (_props: { path: string; item: unknown }) => undefined,
     deleteInArray: (_props: { path: string }) => undefined
-  }
+  },
+  setCurrentBranch: (_branch: string) => undefined
 })
 
 const PipelineStudioDataProvider = ({ children }: React.PropsWithChildren) => {
@@ -94,8 +96,8 @@ const PipelineStudioDataProvider = ({ children }: React.PropsWithChildren) => {
   )
 
   const fetchPipelineFileContent = useCallback(
-    () => dispatch(loadPipelineAction({ pipelineId, repoRef })),
-    [pipelineId, repoRef]
+    (branch: string) => dispatch(loadPipelineContentAction({ branch, repoRef })),
+    [repoRef]
   )
 
   const setAddStepIntention = useCallback(
@@ -139,14 +141,9 @@ const PipelineStudioDataProvider = ({ children }: React.PropsWithChildren) => {
     [injectInArray, deleteInArray, updateInArray]
   )
 
-  if (state.fetchingPipelineData || state.fetchingPipelineFileContent) {
-    // TODO: improve loading indicator
-    return (
-      <div className="flex flex-col flex-1 gap-2 px-4 py-3 h-full items-center justify-center">
-        <Skeleton className="h-4 w-28" />
-        <Skeleton className="h-4 w-28" />
-      </div>
-    )
+  const setCurrentBranch = (branch: string) => {
+    dispatch(updateState({ currentBranch: branch }))
+    dispatch(loadPipelineContentAction({ branch, repoRef }))
   }
 
   return (
@@ -160,6 +157,7 @@ const PipelineStudioDataProvider = ({ children }: React.PropsWithChildren) => {
         clearEditStepIntention,
         setCurrentStepFormDefinition,
         fetchPipelineFileContent,
+        setCurrentBranch,
         //
         requestYamlModifications
       }}>

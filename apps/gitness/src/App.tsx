@@ -57,7 +57,10 @@ import PullRequestChangesPage from './pages/pull-request/pull-request-changes-pa
 import { ProjectSettingsGeneralPage } from './pages/project-settings/project-settings-general-page'
 import { FileEditor } from './components/FileEditor'
 import { ExplorerPathsProvider } from './framework/context/ExplorerPathsContext'
+import { RepoSettingsGeneralPageContainer } from './pages/repo-sandbox/repo-settings-general-container'
+import { CreatePullRequest } from './pages/pull-request/pull-request-compare-page'
 
+import { RepoBranchSettingsRulesPageContainer } from './pages/repo-sandbox/repo-sandbox-branch-rules-container'
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
 
 export default function App() {
@@ -212,7 +215,17 @@ export default function App() {
             },
             {
               path: 'settings',
-              element: <SandboxRepoSettingsPage />
+              element: <SandboxRepoSettingsPage />,
+              children: [
+                {
+                  index: true,
+                  element: <Navigate to="general" />
+                },
+                {
+                  path: 'general',
+                  element: <RepoSettingsGeneralPageContainer />
+                }
+              ]
             }
           ]
         },
@@ -347,7 +360,13 @@ export default function App() {
                 },
                 {
                   path: 'pull-requests',
-                  element: <PullRequestSandboxListPage />
+                  children: [
+                    { index: true, element: <PullRequestSandboxListPage /> },
+                    {
+                      path: 'compare/:diffRefs*?',
+                      element: <CreatePullRequest />
+                    }
+                  ]
                 },
                 {
                   path: 'webhooks',
@@ -359,7 +378,27 @@ export default function App() {
                 },
                 {
                   path: 'settings',
-                  element: <SandboxRepoSettingsPage />
+                  element: <SandboxRepoSettingsPage />,
+                  children: [
+                    {
+                      index: true,
+                      element: <Navigate to="general" />
+                    },
+                    {
+                      path: 'general',
+                      element: <RepoSettingsGeneralPageContainer />
+                    },
+                    {
+                      path: 'rules',
+                      element: <RepoBranchSettingsRulesPageContainer />,
+                      children: [
+                        {
+                          path: ':identifier',
+                          element: <RepoBranchSettingsRulesPageContainer />
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },

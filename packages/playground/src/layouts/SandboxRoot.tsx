@@ -172,16 +172,27 @@ export const SandboxRoot: React.FC<SandboxRootProps> = ({ currentUser }) => {
               <NavLink to="/sandbox/settings/project">
                 <Navbar.Item text="Project settings" icon={<Icon name="cog-6" size={12} />} />
               </NavLink>
+              <NavLink to="/sandbox/settings/user-mamagement">
+                <Navbar.Item text="User Management" icon={<Icon name="cog-6" size={12} />} />
+              </NavLink>
             </Navbar.AccordionGroup>
           </Navbar.Content>
           <Navbar.Footer>
-            <NavLink to="/sandbox/settings/profile/general" className="p-2 hover:bg-tertiary">
-              <NavbarUser.Root
-                username={currentUser ? currentUser.display_name : 'Steven M.'}
-                isAdmin={currentUser ? currentUser.admin : false}
-                url={currentUser ? undefined : '../images/user-avatar.svg'}
-              />
-            </NavLink>
+            <NavbarUser.Root
+              username={currentUser?.display_name || currentUser?.uid}
+              isAdmin={currentUser?.admin || false}
+              url={currentUser?.url || ''}
+              menuItems={[
+                {
+                  key: 0,
+                  element: <Link to="/sandbox/settings/profile/general">Settings</Link>
+                },
+                {
+                  key: 1,
+                  element: <Link to="/logout">Log out</Link>
+                }
+              ]}
+            />
           </Navbar.Footer>
         </Navbar.Root>
       </SandboxLayout.LeftPanel>
