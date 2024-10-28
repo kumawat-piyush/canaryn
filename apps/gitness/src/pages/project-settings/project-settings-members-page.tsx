@@ -48,6 +48,8 @@ const ProjectSettingsMemebersPage = () => {
       onSuccess: ({ body: members }) => {
         setTotalMembers(members.length) // Update total members count
       }
+      //TO DO: handle error
+      //const errorMessage = err?.message || 'An unknown error occurred.'
     }
   )
 
