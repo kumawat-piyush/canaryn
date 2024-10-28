@@ -1,16 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
-import {
-  Button,
-  ListPagination,
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-  Spacer,
-  Text
-} from '@harnessio/canary'
+import { parseAsInteger, useQueryState } from 'nuqs'
+import { Button, Spacer, Text } from '@harnessio/canary'
 import { useListPipelinesQuery, TypesPipeline } from '@harnessio/code-service-client'
 import {
   PipelineList,
@@ -20,33 +10,29 @@ import {
   Filter,
   useCommonFilter,
   NoData,
-  NoSearchResults
+  NoSearchResults,
+  PaginationComponent
 } from '@harnessio/playground'
-import { ExecutionState } from '../types'
+import { ExecutionState, PageResponseHeader } from '../types'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
-import { usePagination } from '../framework/hooks/usePagination'
 import { PathParams } from '../RouteDefinitions'
 
 export default function PipelinesPage() {
   const { spaceId, repoId } = useParams<PathParams>()
-  // hardcoded
-  const totalPages = 10
   const repoRef = useGetRepoRef()
 
   const { query } = useCommonFilter()
 
-  const { data: pipelines, isFetching } = useListPipelinesQuery(
-    {
-      repo_ref: repoRef,
-      queryParams: { page: 0, limit: 10, query: query?.trim(), latest: true }
-    },
-    /* To enable mock data */
-    {
-      placeholderData: [{ identifier: 'pipeline1' }, { identifier: 'pipeline2' }],
-      enabled: true
-    }
-  )
-  const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
+  const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
+
+  const { data, isFetching } = useListPipelinesQuery({
+    repo_ref: repoRef,
+    queryParams: { page, limit: 10, query: query?.trim(), latest: true }
+  })
+
+  const pipelines = data?.body
+
+  const totalPages = parseInt(data?.headers?.get(PageResponseHeader.xTotalPages) || '')
 
   const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
 
@@ -126,39 +112,11 @@ export default function PipelinesPage() {
         {renderListContent()}
         <Spacer size={8} />
         {pipelinesExist && (
-          <ListPagination.Root>
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious
-                    size="sm"
-                    href="#"
-                    onClick={() => currentPage > 1 && previousPage()}
-                    disabled={currentPage === 1}
-                  />
-                </PaginationItem>
-                {Array.from({ length: totalPages }, (_, index) => (
-                  <PaginationItem key={index}>
-                    <PaginationLink
-                      isActive={currentPage === index + 1}
-                      size="sm_icon"
-                      href="#"
-                      onClick={() => handleClick(index + 1)}>
-                      {index + 1}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
-                <PaginationItem>
-                  <PaginationNext
-                    size="sm"
-                    href="#"
-                    onClick={() => currentPage < totalPages && nextPage()}
-                    disabled={currentPage === totalPages}
-                  />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
-          </ListPagination.Root>
+          <PaginationComponent
+            totalPages={totalPages}
+            currentPage={page}
+            goToPage={(pageNum: number) => setPage(pageNum)}
+          />
         )}
       </PaddingListLayout>
     </>
