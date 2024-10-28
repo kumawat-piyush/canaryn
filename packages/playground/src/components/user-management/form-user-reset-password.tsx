@@ -17,13 +17,7 @@ import {
 import { PasswordCopyAction } from './password-copy-action'
 import { FormResetPasswordsDialogProps } from './interfaces'
 
-export const FormResetPasswordDialog: React.FC<FormResetPasswordsDialogProps> = ({
-  user,
-  // onReset,
-  onClose
-  // isResetting,
-  // resetSuccess
-}) => {
+export const FormResetPasswordDialog: React.FC<FormResetPasswordsDialogProps> = ({ user, onClose }) => {
   const [isConfirm, setIsConfirm] = React.useState(false)
 
   return (
