@@ -131,7 +131,3 @@ export default function ReposListPage() {
     </>
   )
 }
-
-/**
- * Small write up for adoption, sample code for calling hooks
- */
