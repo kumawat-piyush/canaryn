@@ -22,7 +22,12 @@ import {
   FormEditMemberDialog,
   FormDeleteMemberDialog
 } from '@harnessio/playground'
-import { useMembershipListQuery, TypesMembershipUser, EnumMembershipRole } from '@harnessio/code-service-client'
+import {
+  useMembershipListQuery,
+  TypesMembershipUser,
+  EnumMembershipRole,
+  MembershipListOkResponse
+} from '@harnessio/code-service-client'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { useNavigate } from 'react-router-dom'
 import { usePagination } from '../../framework/hooks/usePagination'
@@ -45,19 +50,17 @@ const ProjectSettingsMemebersPage = () => {
   const [dialogState, setDialogState] = useState({
     isDialogEditOpen: false,
     isDialogDeleteOpen: false,
-    selectedMember: null as { display_name: string; role: string } | null
+    selectedMember: null as { display_name: string; role: string; email: string } | null
   })
 
   const { isLoading, data: members } = useMembershipListQuery(
     { space_ref: space_ref ?? '', queryParams: { page: currentPage, limit: 30 } },
     {
-      onSuccess: data => {
+      onSuccess: (data: MembershipListOkResponse) => {
         setTotalMembers(data.length) // Update total members count
-        console.log(data)
-      },
-      onError: err => {
-        console.log(err)
       }
+      //TO DO: handle error
+      //const errorMessage = err?.message || 'An unknown error occurred.'
     }
   )
 
@@ -99,9 +102,9 @@ const ProjectSettingsMemebersPage = () => {
       <>
         <MembersList
           members={members.map((member: TypesMembershipUser) => ({
-            display_name: member.principal?.display_name,
-            role: member.role as EnumMembershipRole | undefined,
-            email: member.added_by?.email,
+            display_name: member.principal?.display_name ?? '',
+            role: member.role as EnumMembershipRole | string,
+            email: member.added_by?.email ?? '',
             avatarUrl: '',
             timestamp: member.created ? timeAgoFromEpochTime(member.created) : 'no time available'
           }))}
@@ -111,7 +114,8 @@ const ProjectSettingsMemebersPage = () => {
               isDialogEditOpen: true,
               selectedMember: {
                 display_name: member.display_name,
-                role: member.role === 'space_owner' ? 'Owner' : member.role
+                role: member.role === 'space_owner' ? 'Owner' : member.role,
+                email: member.email
               }
             })
           }
@@ -123,18 +127,18 @@ const ProjectSettingsMemebersPage = () => {
             })
           }
         />
-        {/* Delete Dialog */}
+        {/* TODO Delete Dialog: error & delete updated*/}
         {dialogState.isDialogDeleteOpen && dialogState.selectedMember && (
           <FormDeleteMemberDialog
             isDeleting={isDeleting}
             deleteSuccess={!isDeleting}
-            member={dialogState.selectedMember}
+            member={{ ...dialogState.selectedMember, email: dialogState.selectedMember.email }} // Add the 'email' property
             onDelete={handleDelete}
             onClose={() => setDialogState(prev => ({ ...prev, isDialogDeleteOpen: false }))}
           />
         )}
 
-        {/* Edit Dialog */}
+        {/* TODO: Edit Dialog: error & edit updated*/}
         {dialogState.isDialogEditOpen && dialogState.selectedMember && (
           <FormEditMemberDialog
             isSubmitting={isSubmitting}
