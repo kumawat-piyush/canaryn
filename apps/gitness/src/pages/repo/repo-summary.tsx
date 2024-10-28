@@ -20,7 +20,6 @@ import {
   useGetContentQuery,
   useFindRepositoryQuery,
   pathDetails,
-  RepoPathsDetailsOutput,
   GitPathDetails,
   OpenapiGetContentOutput,
   OpenapiContentInfo
@@ -40,7 +39,7 @@ export const RepoSummary: React.FC = () => {
 
   const { data: repository } = useFindRepositoryQuery({ repo_ref: repoRef })
 
-  const { data: branches } = useListBranchesQuery({
+  const { data } = useListBranchesQuery({
     repo_ref: repoRef,
     queryParams: { include_commit: false, sort: 'date', order: 'asc', limit: 20, page: 1, query: '' }
   })
@@ -49,7 +48,7 @@ export const RepoSummary: React.FC = () => {
 
   const { query } = useCommonFilter()
 
-  const branchList = branches?.map(item => ({
+  const branchList = data?.body?.map(item => ({
     name: item?.name
   }))
 
@@ -58,7 +57,7 @@ export const RepoSummary: React.FC = () => {
     queryParams: { include_commit: false, sort: 'date', order: 'asc', limit: 20, page: 1, query }
   })
 
-  const { branch_count, default_branch_commit_count, pull_req_summary, tag_count } = repoSummary || {}
+  const { branch_count, default_branch_commit_count, pull_req_summary, tag_count } = repoSummary?.body || {}
 
   const { data: readmeContent } = useGetContentQuery({
     path: 'README.md',
@@ -67,14 +66,16 @@ export const RepoSummary: React.FC = () => {
   })
 
   const decodedReadmeContent = useMemo(() => {
-    return decodeGitContent(readmeContent?.content?.data)
+    return decodeGitContent(readmeContent?.body?.content?.data)
   }, [readmeContent])
 
-  const { data: repoDetails } = useGetContentQuery({
+  const { data: repoDetailsData } = useGetContentQuery({
     path: '',
     repo_ref: repoRef,
     queryParams: { include_commit: true, git_ref: normalizeGitRef(selectedBranch) }
   })
+
+  const repoDetails = repoDetailsData?.body
 
   const repoEntryPathToFileTypeMap = useMemo((): Map<string, OpenapiGetContentOutput['type']> => {
     if (repoDetails?.content?.entries?.length === 0) return new Map()
@@ -97,7 +98,8 @@ export const RepoSummary: React.FC = () => {
         body: { paths: Array.from(repoEntryPathToFileTypeMap.keys()) },
         repo_ref: repoRef
       })
-        .then((response: RepoPathsDetailsOutput) => {
+        .then(res => {
+          const response = res?.body
           if (response?.details && response.details.length > 0) {
             setFiles(
               response.details.map(
@@ -127,7 +129,7 @@ export const RepoSummary: React.FC = () => {
 
   useEffect(() => {
     if (repository) {
-      setSelectedBranch(repository?.default_branch || '')
+      setSelectedBranch(repository?.body?.default_branch || '')
     }
   }, [repository])
 
@@ -177,7 +179,7 @@ export const RepoSummary: React.FC = () => {
                   <BranchSelector
                     name={selectedBranch}
                     branchList={branchList}
-                    selectBranch={branch => selectBranch(branch)}
+                    selectBranch={(branch: string) => selectBranch(branch)}
                   />
 
                   <Filter />
