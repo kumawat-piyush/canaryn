@@ -38,9 +38,9 @@ export default function ReposListPage() {
     space_ref: `${space}/+`
   })
 
-  const totalPages = parseInt(data?.headers?.get(PageResponseHeader.xTotalPages) || '')
-
   const repositories = data?.body
+
+  const totalPages = parseInt(data?.headers?.get(PageResponseHeader.xTotalPages) || '')
 
   const renderListContent = () => {
     if (isFetching) return <SkeletonList />
