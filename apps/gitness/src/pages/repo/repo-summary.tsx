@@ -39,7 +39,7 @@ export const RepoSummary: React.FC = () => {
 
   const { data: repository } = useFindRepositoryQuery({ repo_ref: repoRef })
 
-  const { data } = useListBranchesQuery({
+  const { data: { body: branches } = {} } = useListBranchesQuery({
     repo_ref: repoRef,
     queryParams: { include_commit: false, sort: 'date', order: 'asc', limit: 20, page: 1, query: '' }
   })
@@ -48,7 +48,7 @@ export const RepoSummary: React.FC = () => {
 
   const { query } = useCommonFilter()
 
-  const branchList = data?.body?.map(item => ({
+  const branchList = branches?.map(item => ({
     name: item?.name
   }))
 
@@ -69,13 +69,11 @@ export const RepoSummary: React.FC = () => {
     return decodeGitContent(readmeContent?.body?.content?.data)
   }, [readmeContent])
 
-  const { data: repoDetailsData } = useGetContentQuery({
+  const { data: { body: repoDetails } = {} } = useGetContentQuery({
     path: '',
     repo_ref: repoRef,
     queryParams: { include_commit: true, git_ref: normalizeGitRef(selectedBranch) }
   })
-
-  const repoDetails = repoDetailsData?.body
 
   const repoEntryPathToFileTypeMap = useMemo((): Map<string, OpenapiGetContentOutput['type']> => {
     if (repoDetails?.content?.entries?.length === 0) return new Map()

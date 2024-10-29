@@ -14,14 +14,12 @@ export default function SandboxPipelinesPage() {
   const [query, _] = useQueryState('query', { defaultValue: currentQuery || '' })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
-  const { data, isFetching } = useListPipelinesQuery({
+  const { data: { body: pipelines, headers } = {}, isFetching } = useListPipelinesQuery({
     repo_ref: repoRef,
     queryParams: { page, query, latest: true }
   })
 
-  const pipelines = data?.body
-
-  const totalPages = parseInt(data?.headers?.get(PageResponseHeader.xTotalPages) || '')
+  const totalPages = parseInt(headers?.get(PageResponseHeader.xTotalPages) || '')
 
   const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
 

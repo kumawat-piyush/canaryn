@@ -25,22 +25,20 @@ export function ReposBranchesListPage() {
   const repoRef = useGetRepoRef()
   const { spaceId, repoId } = useParams<PathParams>()
 
-  const { data: repoMetadata } = useFindRepositoryQuery({ repo_ref: repoRef })
+  const { data: { body: repoMetadata } = {} } = useFindRepositoryQuery({ repo_ref: repoRef })
 
   const { query: currentQuery, sort } = useCommonFilter<ListBranchesQueryQueryParams['sort']>()
 
   const [query, _] = useQueryState('query', { defaultValue: currentQuery || '' })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
-  const { isLoading, data } = useListBranchesQuery({
+  const { isLoading, data: { body: branches, headers } = {} } = useListBranchesQuery({
     queryParams: { page, sort, query, order: orderSortDate.DESC, include_commit: true },
     repo_ref: repoRef
   })
 
-  const branches = data?.body
-
-  const xNextPage = parseInt(data?.headers?.get(PageResponseHeader.xNextPage) || '')
-  const xPrevPage = parseInt(data?.headers?.get(PageResponseHeader.xPrevPage) || '')
+  const xNextPage = parseInt(headers?.get(PageResponseHeader.xNextPage) || '')
+  const xPrevPage = parseInt(headers?.get(PageResponseHeader.xPrevPage) || '')
 
   const { data: branchDivergence, mutate } = useCalculateCommitDivergenceMutation({
     repo_ref: repoRef
@@ -50,11 +48,11 @@ export function ReposBranchesListPage() {
     if (branches?.length !== 0 && branches !== undefined) {
       mutate({
         body: {
-          requests: branches?.map(branch => ({ from: branch.name, to: repoMetadata?.body?.default_branch })) || []
+          requests: branches?.map(branch => ({ from: branch.name, to: repoMetadata?.default_branch })) || []
         }
       })
     }
-  }, [mutate, branches, repoMetadata?.body?.default_branch])
+  }, [mutate, branches, repoMetadata?.default_branch])
 
   const renderListContent = () => {
     if (isLoading) return <SkeletonList />
@@ -95,7 +93,7 @@ export function ReposBranchesListPage() {
 
     return (
       <BranchesList
-        defaultBranch={repoMetadata?.body?.default_branch}
+        defaultBranch={repoMetadata?.default_branch}
         repoId={repoId}
         spaceId={spaceId}
         branches={branches?.map((branch: RepoBranch, index) => {
@@ -112,7 +110,7 @@ export function ReposBranchesListPage() {
             behindAhead: {
               behind: branchBehind || 0,
               ahead: branchAhead || 0,
-              default: repoMetadata?.body?.default_branch === branch.name
+              default: repoMetadata?.default_branch === branch.name
             }
           }
         })}

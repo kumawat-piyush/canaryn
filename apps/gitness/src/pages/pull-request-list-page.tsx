@@ -37,14 +37,12 @@ function PullRequestListPage() {
   const [query, _] = useQueryState('query', { defaultValue: currentQuery || '' })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
-  const { data, isFetching } = useListPullReqQuery({
+  const { data: { body: pullrequests, headers } = {}, isFetching } = useListPullReqQuery({
     repo_ref: repoRef,
     queryParams: { page, query, sort, limit: 20 }
   })
 
-  const pullrequests = data?.body
-
-  const totalPages = parseInt(data?.headers?.get(PageResponseHeader.xTotalPages) || '')
+  const totalPages = parseInt(headers?.get(PageResponseHeader.xTotalPages) || '')
 
   const renderListContent = () => {
     if (isFetching) {

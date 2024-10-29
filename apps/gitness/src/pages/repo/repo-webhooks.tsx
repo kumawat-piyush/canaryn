@@ -24,14 +24,12 @@ function RepoWebhooksListPage() {
   const [query, _] = useQueryState('query', { defaultValue: currentQuery || '' })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
-  const { data, isFetching } = useListWebhooksQuery({
+  const { data: { body: webhooks, headers } = {}, isFetching } = useListWebhooksQuery({
     repo_ref: repoRef,
     queryParams: { order: 'asc', page, query }
   })
 
-  const webhooks = data?.body
-
-  const totalPages = parseInt(data?.headers?.get(PageResponseHeader.xTotalPages) || '')
+  const totalPages = parseInt(headers?.get(PageResponseHeader.xTotalPages) || '')
 
   const renderListContent = () => {
     if (isFetching) return <SkeletonList />

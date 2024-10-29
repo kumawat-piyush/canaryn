@@ -38,12 +38,10 @@ function PullRequestSandboxListPage() {
 
   const { sort, query } = useCommonFilter<ListPullReqQueryQueryParams['sort']>()
 
-  const { data, isFetching } = useListPullReqQuery({
+  const { data: { body: pullrequests } = {}, isFetching } = useListPullReqQuery({
     repo_ref: repoRef,
     queryParams: { page: 0, limit: 20, query: query?.trim(), sort }
   })
-
-  const pullrequests = data?.body
 
   const renderListContent = () => {
     if (isFetching) {
