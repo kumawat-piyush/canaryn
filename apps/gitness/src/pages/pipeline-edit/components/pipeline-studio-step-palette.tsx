@@ -30,9 +30,7 @@ const PipelineStudioStepPalette = (props: PipelineStudioStepFormProps): JSX.Elem
   const [pluginsData, setPluginsData] = useState<TypesPlugin[]>([])
 
   // TODO: only 100 items
-  const { data } = useListPluginsQuery({ queryParams: { limit: 100, page: 1 } })
-
-  const pluginsResponse = data?.body
+  const { data: { body: pluginsResponse } = {} } = useListPluginsQuery({ queryParams: { limit: 100, page: 1 } })
 
   useEffect(() => {
     // TODO: Do not parse all plugins in advance  - check if its not needed (wrap inside try...catch)

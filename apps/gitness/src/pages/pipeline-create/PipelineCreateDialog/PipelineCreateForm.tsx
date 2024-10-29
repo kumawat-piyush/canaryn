@@ -43,9 +43,7 @@ export function PipelineCreateForm({ onCancel, onSubmit }: PipelineCreateFormPro
 
   const repoRef = useGetRepoRef()
 
-  const { data, isLoading } = useListBranchesQuery({ repo_ref: repoRef, queryParams: {} })
-
-  const branches = data?.body
+  const { data: { body: branches } = {}, isLoading } = useListBranchesQuery({ repo_ref: repoRef, queryParams: {} })
 
   const { watch, setValue, clearErrors, trigger } = form
 
