@@ -6,16 +6,22 @@ jobs:
   Lint:
     runs-on: ubuntu-22.04
     steps:
+      - name: Use pnpm
+        uses: pnpm/action-setup@v4
       - name: Lint
         run: pnpm lint
   Prettier:
     runs-on: ubuntu-22.04
     steps:
+      - name: Use pnpm
+        uses: pnpm/action-setup@v4
       - name: Prettier
         run: pnpm pretty
   Typecheck:
     runs-on: ubuntu-22.04
     steps:
+      - name: Use pnpm
+        uses: pnpm/action-setup@v4
       - name: Typecheck
         run: pnpm typecheck
   Build:
