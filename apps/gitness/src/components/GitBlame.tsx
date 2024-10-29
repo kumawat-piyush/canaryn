@@ -30,11 +30,11 @@ export default function GitBlame({ selectedBranch, themeConfig, codeContent, lan
   })
 
   useEffect(() => {
-    if (data) {
+    if (data?.body) {
       let fromLineNumber = 1
       const blameData: BlameItem[] = []
 
-      data.forEach(({ commit, lines }) => {
+      data?.body?.forEach(({ commit, lines }) => {
         const toLineNumber = fromLineNumber + (lines?.length || 0) - 1
 
         const authorInfo = {

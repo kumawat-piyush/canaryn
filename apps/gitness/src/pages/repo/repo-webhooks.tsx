@@ -21,7 +21,7 @@ function RepoWebhooksListPage() {
   const repoRef = useGetRepoRef()
 
   const { query: currentQuery } = useCommonFilter()
-  const [query, _] = useQueryState('query', { defaultValue: currentQuery })
+  const [query, _] = useQueryState('query', { defaultValue: currentQuery || '' })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
   const { data, isFetching } = useListWebhooksQuery({
