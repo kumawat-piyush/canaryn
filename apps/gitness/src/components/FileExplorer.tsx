@@ -59,7 +59,7 @@ export default function Explorer({ selectedBranch, repoDetails }: ExplorerProps)
         repo_ref: repoRef,
         queryParams: { include_commit: false, git_ref: normalizeGitRef(selectedBranch) }
       })
-      return response?.content?.entries || []
+      return response?.body?.content?.entries || []
     } catch (error) {
       console.error(`Error fetching contents for folder "${folderPath}":`, error)
       return []

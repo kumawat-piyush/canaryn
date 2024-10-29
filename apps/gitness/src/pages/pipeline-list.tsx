@@ -21,8 +21,8 @@ export default function PipelinesPage() {
   const { spaceId, repoId } = useParams<PathParams>()
   const repoRef = useGetRepoRef()
 
-  const { query } = useCommonFilter()
-
+  const { query: currentQuery } = useCommonFilter()
+  const [query, _] = useQueryState('query', { defaultValue: currentQuery })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
   const { data, isFetching } = useListPipelinesQuery({

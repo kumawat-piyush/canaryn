@@ -48,11 +48,13 @@ export const FileEditor: React.FC = () => {
   const [isCommitDialogOpen, setIsCommitDialogOpen] = useState(false)
   const navigate = useNavigate()
 
-  const { data: repoDetails } = useGetContentQuery({
+  const { data } = useGetContentQuery({
     path: fullResourcePath || '',
     repo_ref: repoRef,
     queryParams: { include_commit: true, git_ref: normalizeGitRef(gitRef || '') }
   })
+
+  const repoDetails = data?.body
 
   const themeConfig = useMemo(
     () => ({
