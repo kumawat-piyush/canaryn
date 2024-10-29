@@ -37,12 +37,12 @@ export const FileViewer: React.FC = () => {
   const { data: { body: repository } = {} } = useFindRepositoryQuery({ repo_ref: repoRef })
 
   useEffect(() => {
-    if (repository?.default_branch && !gitRef) {
-      setSelectedBranch(repository.default_branch)
+    if (repository && !gitRef) {
+      setSelectedBranch(repository?.default_branch || '')
     } else if (gitRef) {
       setSelectedBranch(gitRef)
     }
-  }, [repository?.default_branch, gitRef])
+  }, [repository, gitRef])
 
   const repoEntryPathToFileTypeMap = useMemo((): Map<string, OpenapiGetContentOutput['type']> => {
     if (repoDetails?.content?.entries?.length === 0) return new Map()
