@@ -132,7 +132,7 @@ export default function ExecutionsListPage() {
           setOpenRunPipeline(false)
         }}
         pipelineId={pipelineId}
-        branch={executions?.[0].source} // TODO: check this
+        branch={executions && executions.length > 0 ? executions[0].source : undefined} // TODO: check this
         toExecutions={'./executions'}
       />
     </>
