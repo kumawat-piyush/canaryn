@@ -136,9 +136,9 @@ export default function Explorer({ selectedBranch, repoDetails }: ExplorerProps)
           </Link>
         )
       } else {
-        return (
+        return itemPath ? (
           <FileExplorer.FolderItem
-            key={itemPath || idx.toString()}
+            key={itemPath}
             value={itemPath}
             link={fullPath}
             isActive={itemPath === fullResourcePath}
@@ -154,7 +154,7 @@ export default function Explorer({ selectedBranch, repoDetails }: ExplorerProps)
             }>
             {item.name}
           </FileExplorer.FolderItem>
-        )
+        ) : null
       }
     })
   }
