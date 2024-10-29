@@ -16,7 +16,7 @@ export default function SandboxPipelinesPage() {
 
   const { data, isFetching } = useListPipelinesQuery({
     repo_ref: repoRef,
-    queryParams: { page, query: query, latest: true }
+    queryParams: { page, query, latest: true }
   })
 
   const pipelines = data?.body
