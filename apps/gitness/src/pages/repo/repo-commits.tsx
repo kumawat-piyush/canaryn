@@ -27,23 +27,21 @@ export default function RepoCommitsPage() {
   const repoRef = useGetRepoRef()
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
   const { data: repository } = useFindRepositoryQuery({ repo_ref: repoRef })
-  const { data, isFetching: isFetchingBranches } = useListBranchesQuery({
+  const { data: { body: branches } = {}, isFetching: isFetchingBranches } = useListBranchesQuery({
     repo_ref: repoRef,
     queryParams: { page }
   })
 
-  const branches = data?.body
-
-  const xNextPage = parseInt(data?.headers?.get(PageResponseHeader.xNextPage) || '')
-  const xPrevPage = parseInt(data?.headers?.get(PageResponseHeader.xPrevPage) || '')
-
   const [selectedBranch, setSelectedBranch] = useState<string>('')
 
-  const { data: commitData, isFetching: isFetchingCommits } = useListCommitsQuery({
+  const { data: { body: commitData, headers } = {}, isFetching: isFetchingCommits } = useListCommitsQuery({
     repo_ref: repoRef,
 
     queryParams: { page, git_ref: normalizeGitRef(selectedBranch), include_stats: true }
   })
+
+  const xNextPage = parseInt(headers?.get(PageResponseHeader.xNextPage) || '')
+  const xPrevPage = parseInt(headers?.get(PageResponseHeader.xPrevPage) || '')
 
   // 🚨 API not supporting sort, so waiting for API changes
   // const { sort } = useCommonFilter()
@@ -68,7 +66,7 @@ export default function RepoCommitsPage() {
     if (isFetchingCommits) return <SkeletonList />
 
     // @ts-expect-error remove "@ts-expect-error" once CodeServiceClient Response for useListCommitsQuery is fixed
-    const commitsLists = commitData?.body?.commits
+    const commitsLists = commitData?.commits
     if (!commitsLists?.length) {
       return <NoData iconName="no-data-folder" title="No commits yet" description={['There are no commits yet.']} />
     }

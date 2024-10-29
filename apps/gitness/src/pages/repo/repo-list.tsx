@@ -33,14 +33,12 @@ export default function ReposListPage() {
   const [query, _] = useQueryState('query', { defaultValue: currentQuery })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
-  const { isFetching, data } = useListReposQuery({
+  const { isFetching, data: { body: repositories, headers } = {} } = useListReposQuery({
     queryParams: { sort, query, page },
     space_ref: `${space}/+`
   })
 
-  const repositories = data?.body
-
-  const totalPages = parseInt(data?.headers?.get(PageResponseHeader.xTotalPages) || '')
+  const totalPages = parseInt(headers?.get(PageResponseHeader.xTotalPages) || '')
 
   const renderListContent = () => {
     if (isFetching) return <SkeletonList />
