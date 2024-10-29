@@ -42,7 +42,7 @@ export default function ReposSandboxListPage() {
       data && (
         <RepoList
           LinkComponent={LinkComponent}
-          repos={data?.map((repo: RepoRepositoryOutput) => {
+          repos={data?.body?.map((repo: RepoRepositoryOutput) => {
             return {
               id: repo.id,
               name: repo.identifier,
@@ -84,7 +84,7 @@ export default function ReposSandboxListPage() {
           <Spacer size={5} />
           {renderListContent()}
           <Spacer size={8} />
-          {(data?.length ?? 0) > 0 && (
+          {(data?.body?.length ?? 0) > 0 && (
             <ListPagination.Root>
               <Pagination>
                 <PaginationContent>
