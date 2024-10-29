@@ -5,7 +5,7 @@ import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
 
 export default function PullRequestCommitsPage() {
   const repoRef = useGetRepoRef()
-  const { data: commitData, isFetching } = useListPullReqCommitsQuery({
+  const { data: { body: commitData } = {}, isFetching } = useListPullReqCommitsQuery({
     repo_ref: repoRef,
     pullreq_number: 1,
     queryParams: { page: 0, limit: 10 }

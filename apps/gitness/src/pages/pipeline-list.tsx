@@ -25,14 +25,12 @@ export default function PipelinesPage() {
   const [query, _] = useQueryState('query', { defaultValue: currentQuery || '' })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
-  const { data, isFetching } = useListPipelinesQuery({
+  const { data: { body: pipelines, headers } = {}, isFetching } = useListPipelinesQuery({
     repo_ref: repoRef,
     queryParams: { page, limit: 10, query: query?.trim(), latest: true }
   })
 
-  const pipelines = data?.body
-
-  const totalPages = parseInt(data?.headers?.get(PageResponseHeader.xTotalPages) || '')
+  const totalPages = parseInt(headers?.get(PageResponseHeader.xTotalPages) || '')
 
   const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
 
@@ -64,7 +62,7 @@ export default function PipelinesPage() {
     return (
       <PipelineList
         pipelines={pipelines?.map((item: TypesPipeline) => ({
-          id: item?.identifier,
+          id: item?.identifier || '',
           status: item?.execution?.status,
           name: item?.identifier,
           sha: item?.execution?.after,
