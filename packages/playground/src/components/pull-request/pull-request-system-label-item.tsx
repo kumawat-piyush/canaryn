@@ -22,7 +22,7 @@ const PullRequestSystemLabelItem: React.FC<PullRequestSystemLabelItemProps> = ({
               <AvatarFallback>
                 <Text size={1} color="tertiaryBackground">
                   {/* TODO: fix fallback string */}
-                  {getInitials((payload?.author as PayloadAuthor)?.display_name || '')}
+                  {getInitials(payload?.author?.display_name || '')}
                 </Text>
               </AvatarFallback>
             </Avatar>
@@ -31,18 +31,15 @@ const PullRequestSystemLabelItem: React.FC<PullRequestSystemLabelItemProps> = ({
           description: (
             <Text color="tertiaryBackground">
               {((payload?.payload?.payload as GeneralPayload)?.type as LabelActivity) === 'assign' ? (
-                <>applied </>
+                <>applied</>
               ) : (
                 <>
                   {((payload?.payload?.payload as GeneralPayload)?.type as LabelActivity) === 'reassign'
-                    ? 'reassigned '
-                    : 'removed '}
+                    ? 'reassigned'
+                    : 'removed'}
                 </>
-              )}
-              {/* changed title from
-              <span className="line-through">{(payload?.payload?.payload as GeneralPayload)?.old as string}</span> to
-              {(payload?.payload?.payload as GeneralPayload)?.new as string} */}
-              label{' '}
+              )}{' '}
+              label
             </Text>
           )
         }
