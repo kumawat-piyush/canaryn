@@ -42,7 +42,7 @@ export default function ReposSandboxListPage() {
       data && (
         <RepoList
           LinkComponent={LinkComponent}
-          repos={data?.body?.map((repo: RepoRepositoryOutput) => {
+          repos={data?.map((repo: RepoRepositoryOutput) => {
             return {
               id: repo.id,
               name: repo.identifier,
