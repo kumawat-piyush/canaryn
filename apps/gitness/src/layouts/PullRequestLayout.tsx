@@ -12,17 +12,17 @@ const PullRequestLayout: React.FC = () => {
   const { spaceId, repoId, pullRequestId } = useParams<PathParams>()
   const repoRef = useGetRepoRef()
   const prId = (pullRequestId && Number(pullRequestId)) || -1
-  const { data: pullRequestData, isFetching } = useGetPullReqQuery({
+  const { data: { body: pullRequestData } = {}, isFetching } = useGetPullReqQuery({
     repo_ref: repoRef,
     pullreq_number: prId
   })
   const pullRequestTab = useGetPullRequestTab({ spaceId, repoId, pullRequestId })
 
   useEffect(() => {
-    if (!isFetching && pullRequestData?.body) {
-      setPullRequest(pullRequestData.body)
+    if (!isFetching && pullRequestData) {
+      setPullRequest(pullRequestData)
     }
-  }, [pullRequestData?.body, isFetching])
+  }, [pullRequestData, isFetching])
   return (
     <>
       <Floating1ColumnLayout>
