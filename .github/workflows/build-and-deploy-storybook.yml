@@ -1,24 +1,24 @@
-name: Build, Lint, Test
+name: PR Checks
 on:
   push:
 
 jobs:
-  lint:
+  Lint:
     runs-on: ubuntu-22.04
     steps:
       - name: Lint
         run: pnpm lint
-  prettier:
+  Prettier:
     runs-on: ubuntu-22.04
     steps:
       - name: Prettier
         run: pnpm pretty
-  typecheck:
+  Typecheck:
     runs-on: ubuntu-22.04
     steps:
       - name: Typecheck
         run: pnpm typecheck
-  build:
+  Build:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
