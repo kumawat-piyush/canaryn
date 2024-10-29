@@ -37,13 +37,11 @@ export const SandboxFileViewer: React.FC = () => {
   const [loading, setLoading] = useState(false)
   console.log(subResourcePath)
 
-  const { data } = useGetContentQuery({
+  const { data: { body: repoDetails } = {} } = useGetContentQuery({
     path: fullResourcePath || '',
     repo_ref: repoRef,
     queryParams: { include_commit: true, git_ref: normalizeGitRef(gitRef || '') }
   })
-
-  const repoDetails = data?.body
 
   const repoEntryPathToFileTypeMap = useMemo((): Map<string, OpenapiGetContentOutput['type']> => {
     if (repoDetails?.content?.entries?.length === 0) return new Map()
@@ -75,10 +73,10 @@ export const SandboxFileViewer: React.FC = () => {
         body: { paths: Array.from(repoEntryPathToFileTypeMap.keys()) },
         repo_ref: repoRef
       })
-        .then(response => {
-          if (response?.body?.details && response.body.details.length > 0) {
+        .then(({ body: response }) => {
+          if (response?.details && response.details.length > 0) {
             setFiles(
-              response.body.details.map(
+              response.details.map(
                 (item: GitPathDetails) =>
                   ({
                     id: item?.path || '',
