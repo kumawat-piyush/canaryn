@@ -22,12 +22,7 @@ import {
   FormEditMemberDialog,
   FormDeleteMemberDialog
 } from '@harnessio/playground'
-import {
-  useMembershipListQuery,
-  TypesMembershipUser,
-  EnumMembershipRole,
-  MembershipListOkResponse
-} from '@harnessio/code-service-client'
+import { useMembershipListQuery, TypesMembershipUser, EnumMembershipRole } from '@harnessio/code-service-client'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { useNavigate } from 'react-router-dom'
 import { usePagination } from '../../framework/hooks/usePagination'
@@ -53,10 +48,10 @@ const ProjectSettingsMemebersPage = () => {
     selectedMember: null as { display_name: string; role: string; email: string } | null
   })
 
-  const { isLoading, data: members } = useMembershipListQuery(
+  const { isLoading, data: { body: members } = {} } = useMembershipListQuery(
     { space_ref: space_ref ?? '', queryParams: { page: currentPage, limit: 30 } },
     {
-      onSuccess: (data: MembershipListOkResponse) => {
+      onSuccess: ({ body: data }) => {
         setTotalMembers(data.length) // Update total members count
       }
       //TO DO: handle error
