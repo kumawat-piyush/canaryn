@@ -54,12 +54,12 @@ export default function Explorer({ selectedBranch, repoDetails }: ExplorerProps)
 
   const fetchFolderContents = async (folderPath: string): Promise<OpenapiContentInfo[]> => {
     try {
-      const response = await getContent({
+      const { body: response } = await getContent({
         path: folderPath,
         repo_ref: repoRef,
         queryParams: { include_commit: false, git_ref: normalizeGitRef(selectedBranch) }
       })
-      return response?.body?.content?.entries || []
+      return response?.content?.entries || []
     } catch (error) {
       console.error(`Error fetching contents for folder "${folderPath}":`, error)
       return []

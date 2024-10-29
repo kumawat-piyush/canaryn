@@ -28,23 +28,21 @@ export const FileViewer: React.FC = () => {
   const [loading, setLoading] = useState(false)
   const [selectedBranch, setSelectedBranch] = useState<string>(gitRef || '')
 
-  const { data } = useGetContentQuery({
+  const { data: { body: repoDetails } = {} } = useGetContentQuery({
     path: fullResourcePath || '',
     repo_ref: repoRef,
     queryParams: { include_commit: true, git_ref: normalizeGitRef(gitRef || '') }
   })
 
-  const repoDetails = data?.body
-
-  const { data: repository } = useFindRepositoryQuery({ repo_ref: repoRef })
+  const { data: { body: repository } = {} } = useFindRepositoryQuery({ repo_ref: repoRef })
 
   useEffect(() => {
-    if (repository?.body?.default_branch && !gitRef) {
-      setSelectedBranch(repository.body.default_branch)
+    if (repository?.default_branch && !gitRef) {
+      setSelectedBranch(repository.default_branch)
     } else if (gitRef) {
       setSelectedBranch(gitRef)
     }
-  }, [repository?.body?.default_branch, gitRef])
+  }, [repository?.default_branch, gitRef])
 
   const repoEntryPathToFileTypeMap = useMemo((): Map<string, OpenapiGetContentOutput['type']> => {
     if (repoDetails?.content?.entries?.length === 0) return new Map()
@@ -76,10 +74,10 @@ export const FileViewer: React.FC = () => {
         body: { paths: Array.from(repoEntryPathToFileTypeMap.keys()) },
         repo_ref: repoRef
       })
-        .then(response => {
-          if (response?.body?.details && response.body.details.length > 0) {
+        .then(({ body: response }) => {
+          if (response?.details && response.details.length > 0) {
             setFiles(
-              response.body.details.map(
+              response.details.map(
                 (item: GitPathDetails) =>
                   ({
                     id: item?.path || '',
