@@ -34,7 +34,8 @@ export default function RepoCommitsPage() {
 
   const branches = data?.body
 
-  const totalPages = parseInt(data?.headers?.get(PageResponseHeader.xTotalPages) || '')
+  const xNextPage = parseInt(data?.headers?.get(PageResponseHeader.xNextPage) || '')
+  const xPrevPage = parseInt(data?.headers?.get(PageResponseHeader.xPrevPage) || '')
 
   const [selectedBranch, setSelectedBranch] = useState<string>('')
 
@@ -109,9 +110,10 @@ export default function RepoCommitsPage() {
       <Spacer size={5} />
       {renderListContent()}
       <Spacer size={8} />
-      {totalPages > 1 && (
+      {(!isNaN(xNextPage) || !isNaN(xPrevPage)) && (
         <PaginationComponent
-          totalPages={totalPages}
+          nextPage={xNextPage}
+          previousPage={xPrevPage}
           currentPage={page}
           goToPage={(pageNum: number) => setPage(pageNum)}
         />

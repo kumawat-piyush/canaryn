@@ -148,7 +148,7 @@ export function ReposBranchesListPage() {
       <Spacer size={5} />
       {renderListContent()}
       <Spacer size={8} />
-      {xNextPage > 1 && (
+      {(!isNaN(xNextPage) || !isNaN(xPrevPage)) && (
         <PaginationComponent
           nextPage={xNextPage}
           previousPage={xPrevPage}
