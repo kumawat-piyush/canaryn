@@ -11,7 +11,6 @@ export default function PullRequestCommitsPage() {
     queryParams: { page: 0, limit: 10 }
   })
 
-  console.log()
   const renderContent = () => {
     if (isFetching) {
       return <SkeletonList />
