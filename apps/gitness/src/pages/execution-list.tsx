@@ -27,15 +27,18 @@ export default function ExecutionsListPage() {
   const [openRunPipeline, setOpenRunPipeline] = useState(false)
 
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
-  const { data, isFetching, error, isSuccess } = useListExecutionsQuery({
+  const {
+    data: { body: executions, headers } = {},
+    isFetching,
+    error,
+    isSuccess
+  } = useListExecutionsQuery({
     repo_ref: repoRef,
     pipeline_identifier: pipelineId || '',
     queryParams: { page }
   })
 
-  const executions = data?.body
-
-  const totalPages = parseInt(data?.headers?.get(PageResponseHeader.xTotalPages) || '')
+  const totalPages = parseInt(headers?.get(PageResponseHeader.xTotalPages) || '')
 
   const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
 
