@@ -10,7 +10,6 @@ export default function PullRequestCommitsPage() {
     pullreq_number: 1,
     queryParams: { page: 0, limit: 10 }
   })
-
   const renderContent = () => {
     if (isFetching) {
       return <SkeletonList />

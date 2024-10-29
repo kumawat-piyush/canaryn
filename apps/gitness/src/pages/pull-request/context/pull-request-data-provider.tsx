@@ -6,7 +6,6 @@ import {
   mergePullReqOp,
   RepoRepositoryOutput,
   TypesListCommitResponse,
-  TypesMergeResponse,
   TypesPullReq,
   TypesPullReqActivity,
   TypesPullReqStats,
@@ -109,7 +108,7 @@ interface PullRequestDataProviderProps {
 const PullRequestDataProvider: React.FC<PullRequestDataProviderProps> = ({ children }) => {
   const space = useGetSpaceURLParam() ?? ''
   const repoRef = useGetRepoRef()
-  const { data: repoMetadata } = useFindRepositoryQuery({ repo_ref: repoRef })
+  const { data: { body: repoMetadata } = {} } = useFindRepositoryQuery({ repo_ref: repoRef })
   const { pullRequestId, spaceId, repoId } = useParams<PathParams>()
   const pullRequestTab = useGetPullRequestTab({ spaceId, repoId, pullRequestId })
   //   const {
@@ -123,7 +122,7 @@ const PullRequestDataProvider: React.FC<PullRequestDataProviderProps> = ({ child
   //   } = useGetRepositoryMetadata()
 
   const {
-    data: pullReqData,
+    data: { body: pullReqData } = {},
     error: pullReqError,
     isFetching: pullReqLoading,
     refetch: refetchPullReq
@@ -174,7 +173,7 @@ const PullRequestDataProvider: React.FC<PullRequestDataProviderProps> = ({ child
   })
 
   const {
-    data: activities,
+    data: { body: activities } = {},
     isFetching: activitiesLoading,
     error: activitiesError,
     refetch: refetchActivities
@@ -324,7 +323,7 @@ const PullRequestDataProvider: React.FC<PullRequestDataProviderProps> = ({ child
         pullreq_number: Number(pullRequestId),
         body: { bypass_rules: true, dry_run: true, source_sha: pullReqMetadata?.source_sha }
       })
-        .then((res: TypesMergeResponse) => {
+        .then(({ body: res }) => {
           // if (isMounted.current) {
 
           if (res?.rule_violations?.length && res?.rule_violations?.length > 0) {
