@@ -67,12 +67,12 @@ export const FormEditMemberDialog: React.FC<FormEditDialogProps> = ({
   return (
     <AlertDialog open={true} onOpenChange={onClose}>
       <AlertDialogContent>
-        <AlertDialogHeader>
+        <AlertDialogHeader className="text-left">
           <AlertDialogTitle>Change Role</AlertDialogTitle>
         </AlertDialogHeader>
 
         {/* Accessibility: Add Description */}
-        <AlertDialogDescription>
+        <AlertDialogDescription className="text-left">
           Select a new role for the member and confirm to save the changes.
         </AlertDialogDescription>
         <form onSubmit={handleSubmit(onSubmit)}>
