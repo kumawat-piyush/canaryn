@@ -6,6 +6,7 @@ jobs:
   Lint:
     runs-on: ubuntu-22.04
     steps:
+      - uses: actions/checkout@v4
       - name: Use pnpm
         uses: pnpm/action-setup@v4
       - name: Lint
@@ -13,6 +14,7 @@ jobs:
   Prettier:
     runs-on: ubuntu-22.04
     steps:
+      - uses: actions/checkout@v4
       - name: Use pnpm
         uses: pnpm/action-setup@v4
       - name: Prettier
@@ -20,6 +22,7 @@ jobs:
   Typecheck:
     runs-on: ubuntu-22.04
     steps:
+      - uses: actions/checkout@v4
       - name: Use pnpm
         uses: pnpm/action-setup@v4
       - name: Typecheck
