@@ -14,8 +14,8 @@ import {
   Text,
   Icon
 } from '@harnessio/canary'
-import { PasswordCopyAction } from './password-copy-action'
 import { FormResetPasswordsDialogProps } from './interfaces'
+import { CommitCopyActions } from '../commit-copy-actions'
 
 export const FormResetPasswordDialog: React.FC<FormResetPasswordsDialogProps> = ({ user, onClose }) => {
   const [isConfirm, setIsConfirm] = useState(false)
@@ -44,7 +44,8 @@ export const FormResetPasswordDialog: React.FC<FormResetPasswordsDialogProps> = 
             {isConfirm && (
               <div className="grid grid-cols-10 gap-3 content-center mt-7">
                 <div className="col-span-9">
-                  <PasswordCopyAction password="EFQIOFC1973%" />
+                  {/* <PasswordCopyAction password="EFQIOFC1973%" /> */}
+                  <CommitCopyActions password="EFQIOFC1973%" />
                 </div>
                 <Icon name="success" className="mt-1 col-span-1" />
               </div>
