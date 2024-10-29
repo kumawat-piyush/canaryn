@@ -34,12 +34,12 @@ function PullRequestListPage() {
   const { repoId, spaceId } = useParams<PathParams>()
 
   const { sort, query: currentQuery } = useCommonFilter<ListPullReqQueryQueryParams['sort']>()
-  const [query, _] = useQueryState('query', { defaultValue: currentQuery })
+  const [query, _] = useQueryState('query', { defaultValue: currentQuery || '' })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
   const { data, isFetching } = useListPullReqQuery({
     repo_ref: repoRef,
-    queryParams: { page, query, sort, limit: 2 }
+    queryParams: { page, query, sort, limit: 20 }
   })
 
   const pullrequests = data?.body
