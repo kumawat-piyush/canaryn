@@ -56,13 +56,13 @@ const ExecutionLogs: React.FC = () => {
     return execution?.stages?.[stageIndex]?.steps?.[stepIndex]?.status as ExecutionState | undefined
   }, [execution, stageNum, stepNum])
 
-  const { data: initialExecutionData } = useFindExecutionQuery({
+  const { data: { body: initialExecutionData } = {} } = useFindExecutionQuery({
     pipeline_identifier: pipelineIdentifier,
     execution_number: executionNum,
     repo_ref: repoRef
   })
 
-  const { data: logs } = useViewLogsQuery(
+  const { data: { body: logs } = {} } = useViewLogsQuery(
     {
       pipeline_identifier: pipelineIdentifier,
       execution_number: executionNum,
@@ -80,8 +80,8 @@ const ExecutionLogs: React.FC = () => {
   })
 
   useEffect(() => {
-    setExecution(initialExecutionData?.body)
-  }, [initialExecutionData?.body])
+    setExecution(initialExecutionData)
+  }, [initialExecutionData])
 
   const onEvent = useCallback(
     (data: TypesExecution) => {
@@ -158,9 +158,7 @@ const ExecutionLogs: React.FC = () => {
             <StageExecution
               stage={stage as StageProps}
               logs={
-                isPipelineStillExecuting && currentStepStatus === ExecutionState.RUNNING
-                  ? streamedLogs
-                  : logs?.body || []
+                isPipelineStillExecuting && currentStepStatus === ExecutionState.RUNNING ? streamedLogs : logs || []
               }
               selectedStepIdx={stepNum > 0 ? stepNum - 1 : 0}
               onEdit={() => navigate('../edit')}
@@ -233,7 +231,7 @@ const ExecutionLogs: React.FC = () => {
           setOpenRunPipeline(false)
         }}
         pipelineId={pipelineIdentifier}
-        branch={initialExecutionData?.body?.source} // TODO: check this
+        branch={initialExecutionData?.source} // TODO: check this
         toExecutions={'../executions'}
       />
     </>
