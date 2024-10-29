@@ -3,9 +3,9 @@ import { isEqual } from 'lodash-es'
 import { useAtom, atom } from 'jotai'
 import {
   ChecksPullReqOkResponse,
+  ListCommitsOkResponse,
   mergePullReqOp,
   RepoRepositoryOutput,
-  TypesListCommitResponse,
   TypesPullReq,
   TypesPullReqActivity,
   TypesPullReqStats,
@@ -231,7 +231,7 @@ const PullRequestDataProvider: React.FC<PullRequestDataProviderProps> = ({ child
   }, [setPullReqMetadata, setPullReqActivities, setPullReqCommits, setPullReqStats])
 
   const {
-    data: commits,
+    data: { body: commits } = {},
     error: commitsError,
     refetch: refetchCommits
   } = useListCommitsQuery({
@@ -298,8 +298,7 @@ const PullRequestDataProvider: React.FC<PullRequestDataProviderProps> = ({ child
   ])
   useEffect(() => {
     if (commits && !isEqual(commits, pullReqCommits)) {
-      // @ts-expect-error remove "@ts-expect-error" once CodeServiceClient Response for useListCommitsQuery is fixed
-      setPullReqCommits(commits?.commits)
+      setPullReqCommits(commits)
     }
   }, [commits, pullReqCommits, setPullReqCommits])
 
@@ -450,7 +449,7 @@ const PullRequestDataProvider: React.FC<PullRequestDataProviderProps> = ({ child
 export const pullReqAtom = atom<TypesPullReq | undefined>(undefined)
 const pullReqStatsAtom = atom<TypesPullReqStats | undefined>(undefined)
 export const pullReqActivitiesAtom = atom<TypesPullReqActivity[] | undefined>(undefined)
-const pullReqCommitsAtom = atom<TypesListCommitResponse | undefined>(undefined)
+const pullReqCommitsAtom = atom<ListCommitsOkResponse | undefined>(undefined)
 
 const COMMITS_LIMIT = 500
 
