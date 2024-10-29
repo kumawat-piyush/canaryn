@@ -7,26 +7,26 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - name: Use pnpm
-        uses: pnpm/action-setup@v4
-      - name: Lint
-        run: pnpm lint
+      - uses: pnpm/action-setup@v4
+      - run: pnpm deps
+      - run: pnpm lint
+
   Prettier:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - name: Use pnpm
-        uses: pnpm/action-setup@v4
-      - name: Prettier
-        run: pnpm pretty
+      - uses: pnpm/action-setup@v4
+      - run: pnpm deps
+      - run: pnpm pretty
+
   Typecheck:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - name: Use pnpm
-        uses: pnpm/action-setup@v4
-      - name: Typecheck
-        run: pnpm typecheck
+      - uses: pnpm/action-setup@v4
+      - run: pnpm deps
+      - run: pnpm typecheck
+
   Build:
     runs-on: ubuntu-22.04
     steps:
