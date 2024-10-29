@@ -19,10 +19,10 @@ const PullRequestLayout: React.FC = () => {
   const pullRequestTab = useGetPullRequestTab({ spaceId, repoId, pullRequestId })
 
   useEffect(() => {
-    if (!isFetching && pullRequestData) {
-      setPullRequest(pullRequestData)
+    if (!isFetching && pullRequestData?.body) {
+      setPullRequest(pullRequestData.body)
     }
-  }, [pullRequestData, isFetching])
+  }, [pullRequestData?.body, isFetching])
   return (
     <>
       <Floating1ColumnLayout>
