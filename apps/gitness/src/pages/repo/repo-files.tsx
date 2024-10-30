@@ -217,7 +217,6 @@ export const RepoFiles: React.FC = () => {
   const fileText = useCallback(
     (file: string) => {
       const match = file.match(new RegExp(query))
-      debugger
       if (!match) {
         return (
           <Text>
