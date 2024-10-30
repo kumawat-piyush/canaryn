@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams, useNavigate, Outlet } from 'react-router-dom'
-import { BranchSelector, SandboxLayout } from '@harnessio/playground'
+import { BranchSelector, SandboxLayout, BranchListProps } from '@harnessio/playground'
 import {
   Button,
   ButtonGroup,
@@ -22,7 +22,6 @@ import {
   useGetContentQuery,
   getContent,
   useListPathsQuery,
-  ListBranchesOkResponse,
   OpenapiGetContentOutput
 } from '@harnessio/code-service-client'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
@@ -35,7 +34,7 @@ interface SidebarProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
   selectedBranch: string
   selectBranch: (branch: string) => void
-  branchList: ListBranchesOkResponse | undefined
+  branchList: BranchListProps[] | undefined
   navigateToNewFile: () => void
   navigateToFile: (file: string) => void
   query: string
@@ -63,28 +62,25 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
     return (
       <div className="flex flex-col gap-5">
         <div className="w-full grid grid-cols-[1fr] auto-cols-auto grid-flow-col gap-3 items-center">
-          <BranchSelector size="sm" name={selectedBranch} branchList={branchList} selectBranch={selectBranch} />
+          {branchList && (
+            <BranchSelector size="sm" name={selectedBranch} branchList={branchList} selectBranch={selectBranch} />
+          )}
           <ButtonGroup.Root
             spacing="0"
             className="shadow-border shadow-[inset_0_0_0_1px] rounded-md h-full overflow-hidden">
-            <Button
-              size="sm"
-              variant="ghost"
-              borderRadius="0"
-              className="border-l rounded-none p-0 w-8"
-              onClick={navigateToNewFile}>
+            <Button size="sm" variant="ghost" className="border-l rounded-none p-0 w-8" onClick={navigateToNewFile}>
               <Icon size={15} name="add-file" className="text-primary/80" />
             </Button>
           </ButtonGroup.Root>
         </div>
         <Popover open={isOpen} onOpenChange={setIsOpen}>
           <PopoverTrigger asChild>
-            <Button variant="outline" role="combobox" aria-expanded={isOpen} className="w-[250px] justify-between">
+            <Button variant="outline" role="combobox" aria-expanded={isOpen} className="justify-between">
               {'Search...'}
               <Icon name="chevron-down" size={12} className="chevron-down " />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-[600px] p-0">
+          <PopoverContent className="w-[600px] p-0" align="start">
             <Command>
               <CommandInput placeholder="Search files..." className="h-9" onInput={handleInputChange} value={query} />
               <CommandList>
@@ -150,10 +146,9 @@ export const RepoFiles: React.FC = () => {
     }
   })
 
-  const branchList =
-    branches?.body?.map(item => ({
-      name: item?.name || ''
-    })) || []
+  const branchList: BranchListProps[] | undefined = branches?.body?.map(item => ({
+    name: item?.name || ''
+  }))
 
   const { data: filesList } = useListPathsQuery({
     repo_ref: repoRef,

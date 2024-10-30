@@ -16,7 +16,8 @@ const defaultOptions: monaco.editor.IStandaloneEditorConstructionOptions = {
   scrollBeyondLastLine: false,
   padding: {
     top: 10
-  }
+  },
+  minimap: { enabled: false }
 }
 
 export interface CodeEditorProps<T> {
