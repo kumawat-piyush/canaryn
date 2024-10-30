@@ -14,7 +14,7 @@ import {
 } from '@harnessio/canary'
 import { Link } from 'react-router-dom'
 import noop from 'lodash-es/noop'
-import { SandboxLayout } from '../../dist'
+import { SandboxLayout } from '../index'
 
 const SectionList = ({ children }: { children: React.ReactNode }) => (
   <div className="flex flex-col gap-9 w-full">{children}</div>
