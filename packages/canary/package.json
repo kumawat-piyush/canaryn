@@ -10,7 +10,6 @@
     "build:css": "npx tailwindcss -i ./src/styles.css -o ./dist/styles.css",
     "lint": "eslint ./src",
     "pretty": "prettier --check ./src",
-    "typecheck": "tsc",
     "shadcn:update": "npx shadcn-ui@latest add -a -o -y",
     "prepublishOnly": "pnpm build",
     "pre-commit": "lint-staged"
