@@ -39,6 +39,7 @@ import { RepoSandboxSummaryList } from './pages/repo-sandbox/repo-sandbox-summar
 import CreateProject from './pages/create-project'
 import { CreateRepo } from './pages/repo/repo-create-page'
 import { PipelineCreate } from './pages/pipeline-create/pipeline-create'
+import { SandboxPipelineCreate } from './pages/pipeline-create/pipeline-create-sandbox'
 import RepoCommitsPage from './pages/repo/repo-commits'
 import RepoSandboxCommitsPage from './pages/repo-sandbox/repo-sandbox-commits'
 import { Execution } from './pages/execution/execution-details'
@@ -390,7 +391,7 @@ export default function App() {
                     },
                     {
                       path: 'create',
-                      element: <PipelineCreate />
+                      element: <SandboxPipelineCreate />
                     }
                   ]
                 },
