@@ -24,7 +24,7 @@ import {
 } from '@harnessio/playground'
 import { useMembershipListQuery, TypesMembershipUser, EnumMembershipRole } from '@harnessio/code-service-client'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { usePagination } from '../../framework/hooks/usePagination'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
 
@@ -36,7 +36,7 @@ const ProjectSettingsMemebersPage = () => {
   // lack of data: total members
   // hardcoded
   const totalPages = 10
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const space_ref = useGetSpaceURLParam()
   const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
   const [totalMembers, setTotalMembers] = useState<number | null>(null)
@@ -92,7 +92,7 @@ const ProjectSettingsMemebersPage = () => {
         </SandboxLayout.Main>
       )
     }
-
+    //add new member list : how to link to the new page
     return (
       <>
         <MembersList
@@ -147,9 +147,9 @@ const ProjectSettingsMemebersPage = () => {
     )
   }
 
-  const handleInviteClick = () => {
-    navigate(`${space_ref}/sandbox/settings/project/create-new-member`)
-  }
+  // const handleInviteClick = () => {
+  //   navigate(`${space_ref}/sandbox/settings/project/create-new-member`)
+  // }
 
   const membersExist = (members?.length ?? 0) > 0
 
@@ -171,9 +171,9 @@ const ProjectSettingsMemebersPage = () => {
           <ListActions.Right>
             <ListActions.Dropdown title="All Team Roles" items={filterOptions} />
             <ListActions.Dropdown title="Last added" items={sortOptions} />
-            <Button variant="default" onClick={handleInviteClick}>
-              Invite New Members
-            </Button>
+            <Link to={`/${space_ref}/sandbox/settings/project/create-new-member`}>
+              <Button variant="default">Invite New Members</Button>
+            </Link>
           </ListActions.Right>
         </ListActions.Root>
         <Spacer size={5} />

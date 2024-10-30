@@ -11,7 +11,8 @@ import {
   NewPasswordPage,
   OTPPage,
   SandboxRepoSettingsPage,
-  RepoSettingsPlaceholderPage
+  RepoSettingsPlaceholderPage,
+  SandboxSettingsCreateNewMemberPage
 } from '@harnessio/playground'
 import SnadboxRootWraper from './components/SandboxRootWrapper'
 import { TooltipProvider } from '@harnessio/canary'
@@ -389,7 +390,7 @@ export default function App() {
                 },
                 {
                   path: 'create-new-member',
-                  element: <ProjectSettingsMemebersPage />
+                  element: <SandboxSettingsCreateNewMemberPage />
                 }
               ]
             }
