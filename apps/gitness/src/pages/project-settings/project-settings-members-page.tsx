@@ -36,7 +36,6 @@ const ProjectSettingsMemebersPage = () => {
   // lack of data: total members
   // hardcoded
   const totalPages = 10
-  // const navigate = useNavigate()
   const space_ref = useGetSpaceURLParam()
   const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
   const [totalMembers, setTotalMembers] = useState<number | null>(null)
