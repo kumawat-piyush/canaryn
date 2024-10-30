@@ -25,8 +25,10 @@ import { SignUp } from './pages/signup'
 import PullRequestListPage from './pages/pull-request-list-page'
 import PullRequestSandboxListPage from './pages/sandbox-pull-request-list-page'
 import ExecutionsListPage from './pages/execution-list'
+import SandboxExecutionsListPage from './pages/sandbox-execution-list'
 import ReposListPage from './pages/repo/repo-list'
 import PullRequestLayout from './layouts/PullRequestLayout'
+import PullRequestSandboxLayout from './layouts/PullRequestSandboxLayout'
 import PullRequestCommitsPage from './pages/pull-request-commits-page'
 import RepoLayout from './layouts/RepoLayout'
 import PipelineEditPage from './pages/pipeline-edit/pipeline-edit'
@@ -46,6 +48,7 @@ import { ReposBranchesListPage } from './pages/repo/repo-branch-list'
 import { RepoSandboxBranchesListPage } from './pages/repo-sandbox/repo-sandbox-branch-list'
 import PullRequestDataProvider from './pages/pull-request/context/pull-request-data-provider'
 import PullRequestConversationPage from './pages/pull-request/pull-request-conversation-page'
+import SandboxPullRequestConversationPage from './pages/pull-request/sandbox-pull-request-conversation-page'
 import { RepoFiles } from './pages/repo/repo-files'
 import { RepoSandboxFiles } from './pages/repo-sandbox/repo-sandbox-files'
 import { SandboxRepoHeader } from './pages/repo-sandbox/repo-sandbox-header'
@@ -373,6 +376,21 @@ export default function App() {
                     {
                       index: true,
                       element: <SandboxPipelinesPage />
+                    },
+                    {
+                      path: ':pipelineId',
+                      children: [
+                        { index: true, element: <SandboxExecutionsListPage /> },
+                        { path: 'executions/:executionId', element: <Execution /> },
+                        {
+                          path: 'edit',
+                          element: <PipelineEditPage />
+                        }
+                      ]
+                    },
+                    {
+                      path: 'create',
+                      element: <PipelineCreate />
                     }
                   ]
                 },
@@ -390,6 +408,41 @@ export default function App() {
                     }
                   ]
                 },
+                {
+                  path: 'pull-requests/:pullRequestId',
+                  element: <PullRequestSandboxLayout />,
+                  children: [
+                    {
+                      index: true,
+                      element: <Navigate to="conversation" />
+                    },
+                    {
+                      path: 'conversation',
+                      element: (
+                        <PullRequestDataProvider>
+                          <SandboxPullRequestConversationPage />
+                        </PullRequestDataProvider>
+                      )
+                    },
+                    {
+                      path: 'commits',
+                      element: <PullRequestCommitsPage />
+                    },
+                    {
+                      path: 'changes',
+                      element: (
+                        <PullRequestDataProvider>
+                          <PullRequestChangesPage />
+                        </PullRequestDataProvider>
+                      )
+                    },
+                    {
+                      path: 'checks',
+                      element: <>Checks</>
+                    }
+                  ]
+                },
+
                 {
                   path: 'webhooks',
                   element: <RepoSandboxWebhooksListPage />
