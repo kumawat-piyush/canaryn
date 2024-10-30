@@ -11,7 +11,7 @@ interface SkeletonListProps {
   delay?: number
 }
 
-export const SkeletonList = ({ delay = 100 }: SkeletonListProps) => {
+export const SkeletonList = ({ delay = 300 }: SkeletonListProps) => {
   const listItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
   let startDelayTimer: number
@@ -26,7 +26,7 @@ export const SkeletonList = ({ delay = 100 }: SkeletonListProps) => {
   }, [])
 
   return (
-    <div className={cn('relative w-full h-full', { ['hidden']: !visible })}>
+    <div className={cn('relative w-full h-full transition-opacity', { ['opacity-0']: !visible })}>
       {listItems && listItems.length > 0 && (
         <StackedList.Root>
           {listItems.map((itm, itm_idx) => (
