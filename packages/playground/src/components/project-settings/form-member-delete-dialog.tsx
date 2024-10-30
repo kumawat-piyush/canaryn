@@ -27,8 +27,8 @@ export const FormDeleteMemberDialog: React.FC<FormDeleteMemberDialogProps> = ({
     <AlertDialog open={true} onOpenChange={onClose}>
       <AlertDialogTrigger asChild></AlertDialogTrigger>
       <AlertDialogContent>
-        <AlertDialogHeader className="text-left">
-          <AlertDialogTitle>
+        <AlertDialogHeader>
+          <AlertDialogTitle className="text-left">
             Are you absolutely sure you want to delete
             <Badge type="admin" className="mx-2" variant="muted" disableHover={true}>
               <Text>{member.display_name}</Text>
@@ -41,7 +41,11 @@ export const FormDeleteMemberDialog: React.FC<FormDeleteMemberDialogProps> = ({
         </AlertDialogHeader>
         <Spacer size={3} />
         <AlertDialogFooter>
-          {!isDeleting && !deleteSuccess && <AlertDialogCancel onClick={onClose}>Cancel</AlertDialogCancel>}
+          {!isDeleting && !deleteSuccess && (
+            <AlertDialogCancel onClick={onClose} className="mt-0">
+              Cancel
+            </AlertDialogCancel>
+          )}
           {deleteSuccess ? (
             <Button size="default" theme="success" className="self-start pointer-events-none flex gap-2">
               Member removed
