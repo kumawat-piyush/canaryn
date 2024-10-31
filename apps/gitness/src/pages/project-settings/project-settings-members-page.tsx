@@ -1,18 +1,5 @@
 import React, { useState } from 'react'
-import {
-  Spacer,
-  Text,
-  ListActions,
-  SearchBox,
-  Button,
-  PaginationContent,
-  ListPagination,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious
-} from '@harnessio/canary'
+import { Spacer, Text, ListActions, SearchBox, Button } from '@harnessio/canary'
 
 import {
   SandboxLayout,
@@ -20,24 +7,27 @@ import {
   NoData,
   MembersList,
   FormEditMemberDialog,
-  FormDeleteMemberDialog
+  FormDeleteMemberDialog,
+  useCommonFilter,
+  PaginationComponent
 } from '@harnessio/playground'
-import { useMembershipListQuery, TypesMembershipUser, EnumMembershipRole } from '@harnessio/code-service-client'
+import {
+  useMembershipListQuery,
+  TypesMembershipUser,
+  EnumMembershipRole,
+  MembershipListQueryQueryParams
+} from '@harnessio/code-service-client'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { Link } from 'react-router-dom'
-import { usePagination } from '../../framework/hooks/usePagination'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
+import { useQueryState, parseAsInteger } from 'nuqs'
+import { PageResponseHeader } from '../../types'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
 
-//TODO: Sort filter, not result data
 const ProjectSettingsMemebersPage = () => {
-  // lack of data: total members
-  // hardcoded
-  const totalPages = 10
   const space_ref = useGetSpaceURLParam()
-  const { currentPage, previousPage, nextPage, handleClick } = usePagination(1, totalPages)
   const [totalMembers, setTotalMembers] = useState<number | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
@@ -47,16 +37,21 @@ const ProjectSettingsMemebersPage = () => {
     selectedMember: null as { display_name: string; role: string; email: string } | null
   })
 
-  const { isLoading, data: { body: members } = {} } = useMembershipListQuery(
-    { space_ref: space_ref ?? '', queryParams: { page: currentPage, limit: 30 } },
+  const { sort, query: currentQuery } = useCommonFilter<MembershipListQueryQueryParams['sort']>()
+  const [query, _] = useQueryState('query', { defaultValue: currentQuery || '' })
+  const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
+
+  const { isLoading, data: { body: members, headers } = {} } = useMembershipListQuery(
+    { space_ref: space_ref ?? '', queryParams: { query, sort } },
     {
-      onSuccess: ({ body: data }: { body: TypesMembershipUser }) => {
-        setTotalMembers(data.length) // Update total members count
+      onSuccess: ({ body: members }) => {
+        setTotalMembers(members.length) // Update total members count
+        console.log(members.length)
       }
-      //TO DO: handle error
-      //const errorMessage = err?.message || 'An unknown error occurred.'
     }
   )
+
+  const totalPages = parseInt(headers?.get(PageResponseHeader.xTotalPages) || '')
 
   const handleDelete = () => {
     setIsDeleting(true)
@@ -145,8 +140,6 @@ const ProjectSettingsMemebersPage = () => {
     )
   }
 
-  const membersExist = (members?.length ?? 0) > 0
-
   return (
     <SandboxLayout.Main hasLeftPanel hasHeader hasSubHeader>
       <SandboxLayout.Content maxWidth="3xl">
@@ -173,40 +166,12 @@ const ProjectSettingsMemebersPage = () => {
         <Spacer size={5} />
         {renderMemberListContent()}
         <Spacer size={8} />
-        {membersExist && (
-          <ListPagination.Root>
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious
-                    size="sm"
-                    href="#"
-                    onClick={() => currentPage > 1 && previousPage()}
-                    disabled={currentPage === 1}
-                  />
-                </PaginationItem>
-                {Array.from({ length: totalPages }, (_, index) => (
-                  <PaginationItem key={index}>
-                    <PaginationLink
-                      isActive={currentPage === index + 1}
-                      size="sm_icon"
-                      href="#"
-                      onClick={() => handleClick(index + 1)}>
-                      {index + 1}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
-                <PaginationItem>
-                  <PaginationNext
-                    size="sm"
-                    href="#"
-                    onClick={() => currentPage < totalPages && nextPage()}
-                    disabled={currentPage === totalPages}
-                  />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
-          </ListPagination.Root>
+        {totalPages > 1 && (
+          <PaginationComponent
+            totalPages={totalPages}
+            currentPage={page}
+            goToPage={(pageNum: number) => setPage(pageNum)}
+          />
         )}
       </SandboxLayout.Content>
     </SandboxLayout.Main>
