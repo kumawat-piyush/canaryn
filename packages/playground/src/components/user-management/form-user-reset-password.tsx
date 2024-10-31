@@ -15,7 +15,7 @@ import {
   Icon
 } from '@harnessio/canary'
 import { FormResetPasswordsDialogProps } from './interfaces'
-import { CommitCopyActions } from '../commit-copy-actions'
+import { CopyButton } from '../copy-button'
 
 export const FormResetPasswordDialog: React.FC<FormResetPasswordsDialogProps> = ({ user, onClose }) => {
   const [isConfirm, setIsConfirm] = useState(false)
@@ -42,11 +42,14 @@ export const FormResetPasswordDialog: React.FC<FormResetPasswordsDialogProps> = 
               : `This will give you a new password to support "${user?.display_name}" (${user?.uid}) to reset the current
             password.`}
             {isConfirm && (
-              <div className="grid grid-cols-10 gap-3 content-center mt-7">
-                <div className="col-span-9">
-                  <CommitCopyActions password="EFQIOFC1973%" />
+              <div className="grid grid-cols-10 gap-3 items-center mt-7">
+                <div className="col-span-9 border-2 py-1 px-2 grid grid-cols-6 items-center rounded-md">
+                  <Text size={2} weight="medium" className="text-muted-foreground col-span-5">
+                    EFLSNKENJPOFIJ
+                  </Text>
+                  <CopyButton name="EFLSNKENJPOFIJ" className="col-span-1 justify-end" />
                 </div>
-                <Icon name="success" className="mt-1 col-span-1" />
+                <Icon name="success" className="items-center col-span-1" />
               </div>
             )}
           </AlertDialogDescription>
