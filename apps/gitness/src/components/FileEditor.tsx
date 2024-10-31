@@ -142,7 +142,6 @@ export const FileEditor: React.FC = () => {
         onSuccess={(_commitInfo, isNewBranch, newBranchName) => {
           if (!isNewBranch) navigate(`/${spaceId}/repos/${repoId}/code/${gitRef}/~/${fileResourcePath}`)
           else {
-            console.log(_commitInfo)
             navigate(
               `/sandbox/spaces/${spaceId}/repos/${repoId}/pull-requests/compare/${repoMetadata?.default_branch}...${newBranchName}`
             )
