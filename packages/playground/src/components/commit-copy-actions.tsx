@@ -12,7 +12,6 @@ export const CommitCopyActions = ({ sha }: { sha: string }) => {
     let timeoutId: number
     if (copied) {
       copy(sha)
-
       timeoutId = window.setTimeout(() => setCopied(false), 2500)
     }
     return () => {
