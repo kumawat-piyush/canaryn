@@ -16,9 +16,11 @@ import {
 } from '@harnessio/canary'
 import { FormResetPasswordsDialogProps } from './interfaces'
 import { CopyButton } from '../copy-button'
+import { generateAlphaNumericHash } from './utils'
 
 export const FormResetPasswordDialog: React.FC<FormResetPasswordsDialogProps> = ({ user, onClose }) => {
   const [isConfirm, setIsConfirm] = useState(false)
+  const password = generateAlphaNumericHash(10)
 
   return (
     <AlertDialog open={true} onOpenChange={onClose}>
@@ -45,9 +47,9 @@ export const FormResetPasswordDialog: React.FC<FormResetPasswordsDialogProps> = 
               <div className="grid grid-cols-10 gap-3 items-center mt-7">
                 <div className="col-span-9 border-2 py-1 px-2 grid grid-cols-6 items-center rounded-md">
                   <Text size={2} weight="medium" className="text-muted-foreground col-span-5">
-                    EFLSNKENJPOFIJ
+                    {password}
                   </Text>
-                  <CopyButton name="EFLSNKENJPOFIJ" className="col-span-1 justify-end" />
+                  <CopyButton name={password} className="col-span-1 justify-end" />
                 </div>
                 <Icon name="success" className="items-center col-span-1" />
               </div>
