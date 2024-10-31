@@ -50,7 +50,7 @@ const ProjectSettingsMemebersPage = () => {
   const { isLoading, data: { body: members } = {} } = useMembershipListQuery(
     { space_ref: space_ref ?? '', queryParams: { page: currentPage, limit: 30 } },
     {
-      onSuccess: ({ body: data }) => {
+      onSuccess: ({ body: data }: { body: TypesMembershipUser }) => {
         setTotalMembers(data.length) // Update total members count
       }
       //TO DO: handle error
@@ -91,7 +91,6 @@ const ProjectSettingsMemebersPage = () => {
         </SandboxLayout.Main>
       )
     }
-    //add new member list : how to link to the new page
     return (
       <>
         <MembersList
