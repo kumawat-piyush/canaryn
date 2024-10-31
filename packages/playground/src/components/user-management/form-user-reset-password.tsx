@@ -16,7 +16,7 @@ import {
 } from '@harnessio/canary'
 import { FormResetPasswordsDialogProps } from './interfaces'
 import { CopyButton } from '../copy-button'
-import { generateAlphaNumericHash } from './utils'
+import { generateAlphaNumericHash } from '../../utils/utils'
 
 export const FormResetPasswordDialog: React.FC<FormResetPasswordsDialogProps> = ({ user, onClose }) => {
   const [isConfirm, setIsConfirm] = useState(false)
