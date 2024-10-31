@@ -146,10 +146,6 @@ const ProjectSettingsMemebersPage = () => {
     )
   }
 
-  // const handleInviteClick = () => {
-  //   navigate(`${space_ref}/sandbox/settings/project/create-new-member`)
-  // }
-
   const membersExist = (members?.length ?? 0) > 0
 
   return (
