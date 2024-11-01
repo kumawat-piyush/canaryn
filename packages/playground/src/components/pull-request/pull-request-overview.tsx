@@ -193,10 +193,13 @@ const PullRequestOverview: React.FC<PullRequestOverviewProps> = ({
                           </Text>
                           <div className="flex">
                             {/* TODO: fix states on this on a comment like resolved and active */}
-                            <Text size={1} className="flex items-center gap-1 pr-2" color={'tertiaryBackground'}>
-                              Resolved
-                              <Icon size={14} name="chevron-down" />
-                            </Text>
+                            <PullRequestStatusSelect
+                              refetchActivities={refetchActivities}
+                              commentStatusPullReq={commentStatusPullReq}
+                              comment={{ commentItems: commentItems }}
+                              pullReqMetadata={pullReqMetadata}
+                              repoId={repoId}
+                            />
                             {/* TODO: add on click or other menu options */}
                             <Button size="sm" variant="ghost" className="rotate-90 px-2 py-1 ">
                               <Icon name="vertical-ellipsis" size={12} />
