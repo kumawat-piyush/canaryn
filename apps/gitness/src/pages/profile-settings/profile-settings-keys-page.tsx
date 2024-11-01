@@ -113,13 +113,11 @@ const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPagePro
                 {(!error || error.type !== 'keyFetch') && (
                   <>
                     <ProfileKeysList publicKeys={publicKeys} openAlertDeleteDialog={openAlertDeleteDialog} />
-                    {totalPages > 1 ? (
-                      <PaginationComponent
-                        totalPages={totalPages}
-                        currentPage={page}
-                        goToPage={(pageNum: number) => setPage(pageNum)}
-                      />
-                    ) : null}
+                    <PaginationComponent
+                      totalPages={totalPages}
+                      currentPage={page}
+                      goToPage={(pageNum: number) => setPage(pageNum)}
+                    />
                   </>
                 )}
                 {error && error.type === 'keyFetch' && (

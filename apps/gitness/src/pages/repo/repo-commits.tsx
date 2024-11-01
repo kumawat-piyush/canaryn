@@ -103,14 +103,12 @@ export default function RepoCommitsPage() {
       <Spacer size={5} />
       {renderListContent()}
       <Spacer size={8} />
-      {(!isNaN(xNextPage) || !isNaN(xPrevPage)) && (
-        <PaginationComponent
-          nextPage={xNextPage}
-          previousPage={xPrevPage}
-          currentPage={page}
-          goToPage={(pageNum: number) => setPage(pageNum)}
-        />
-      )}
+      <PaginationComponent
+        nextPage={xNextPage}
+        previousPage={xPrevPage}
+        currentPage={page}
+        goToPage={(pageNum: number) => setPage(pageNum)}
+      />
     </PaddingListLayout>
   )
 }
