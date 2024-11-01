@@ -8,25 +8,28 @@ const getRandomPercentageWidth = (min: number, max: number) => `${Math.floor(Mat
 const getRandomPixelWidth = (min: number, max: number) => `${Math.floor(Math.random() * (max - min + 1)) + min}px`
 
 interface SkeletonListProps {
-  delay?: number
+  className?: string
 }
 
-export const SkeletonList = ({ delay = 300 }: SkeletonListProps) => {
+export const SkeletonList = ({ className }: SkeletonListProps) => {
   const listItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-  let startDelayTimer: number
+  // do a first render with visible=false
   const [visible, setVisible] = useState(false)
+  // immediately re-render with visible=true to trigger the transition delay
   useEffect(() => {
-    startDelayTimer = setTimeout(() => {
-      setVisible(true)
-    }, delay)
-    return () => {
-      clearTimeout(startDelayTimer)
-    }
+    setVisible(true)
   }, [])
 
   return (
-    <div className={cn('relative w-full h-full transition-opacity', { ['opacity-0']: !visible })}>
+    <div
+      className={cn(
+        'relative w-full h-full transition-opacity duration-500 ease-in-out delay-500',
+        {
+          'opacity-0': !visible
+        },
+        className
+      )}>
       {listItems && listItems.length > 0 && (
         <StackedList.Root>
           {listItems.map((itm, itm_idx) => (
