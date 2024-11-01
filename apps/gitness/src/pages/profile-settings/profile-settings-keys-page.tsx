@@ -1,4 +1,5 @@
 import React from 'react'
+import { parseAsInteger, useQueryState } from 'nuqs'
 import { Spacer, Text, Button } from '@harnessio/canary'
 import {
   FormFieldSet,
@@ -8,24 +9,56 @@ import {
   ProfileTokensList,
   TokensList
 } from '@harnessio/playground'
-import { AlertDeleteParams } from './types'
+import { ListPublicKeyErrorResponse, useListPublicKeyQuery } from '@harnessio/code-service-client'
+import { AlertDeleteParams, ApiErrorType } from './types'
+import { PageResponseHeader } from '../../types'
+import { PaginationComponent } from '../../../../../packages/playground/dist'
 
 interface SandboxSettingsAccountKeysPageProps {
-  publicKeys: KeysList[]
   tokens: TokensList[]
+  setPublicKeys: React.Dispatch<React.SetStateAction<KeysList[]>>
   openTokenDialog: () => void
   openSshKeyDialog: () => void
   openAlertDeleteDialog: (data: AlertDeleteParams) => void
   error: { type: string; message: string } | null
+  setApiError: React.Dispatch<
+    React.SetStateAction<{
+      type: ApiErrorType
+      message: string
+    } | null>
+  >
 }
 const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPageProps> = ({
-  publicKeys,
   tokens,
+  setPublicKeys,
   openTokenDialog,
   openSshKeyDialog,
   openAlertDeleteDialog,
-  error
+  error,
+  setApiError
 }) => {
+  const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
+  const { data: { body: publicKeys = [], headers } = {} } = useListPublicKeyQuery(
+    {
+      queryParams: {
+        page,
+        sort: 'created',
+        order: 'asc'
+      }
+    },
+    {
+      onSuccess: ({ body: data }) => {
+        setPublicKeys(data)
+      },
+      onError: (error: ListPublicKeyErrorResponse) => {
+        const message = error.message || 'An unknown error occurred.'
+        setApiError({ type: ApiErrorType.KeyFetch, message: message })
+      }
+    }
+  )
+
+  const totalPages = parseInt(headers?.get(PageResponseHeader.xTotalPages) || '')
+
   return (
     <SandboxLayout.Main hasLeftPanel hasHeader hasSubHeader>
       <SandboxLayout.Content>
@@ -78,7 +111,16 @@ const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPagePro
             <FormFieldSet.ControlGroup>
               <>
                 {(!error || error.type !== 'keyFetch') && (
-                  <ProfileKeysList publicKeys={publicKeys} openAlertDeleteDialog={openAlertDeleteDialog} />
+                  <>
+                    <ProfileKeysList publicKeys={publicKeys} openAlertDeleteDialog={openAlertDeleteDialog} />
+                    {totalPages > 1 ? (
+                      <PaginationComponent
+                        totalPages={totalPages}
+                        currentPage={page}
+                        goToPage={(pageNum: number) => setPage(pageNum)}
+                      />
+                    ) : null}
+                  </>
                 )}
                 {error && error.type === 'keyFetch' && (
                   <>

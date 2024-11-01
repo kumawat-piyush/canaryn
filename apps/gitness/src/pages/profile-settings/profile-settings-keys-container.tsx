@@ -1,15 +1,12 @@
 import { SandboxSettingsAccountKeysPage } from './profile-settings-keys-page'
 import { useState } from 'react'
 import {
-  useListPublicKeyQuery,
-  ListPublicKeyQueryQueryParams,
   useCreateTokenMutation,
   CreateTokenErrorResponse,
   CreateTokenRequestBody,
   useCreatePublicKeyMutation,
   CreatePublicKeyRequestBody,
   CreatePublicKeyErrorResponse,
-  ListPublicKeyErrorResponse,
   useDeletePublicKeyMutation,
   useDeleteTokenMutation,
   DeleteTokenErrorResponse,
@@ -27,7 +24,7 @@ import { ApiErrorType, AlertDeleteParams } from './types'
 export const SettingsProfileKeysPage = () => {
   const CONVERT_DAYS_TO_NANO_SECONDS = 24 * 60 * 60 * 1000 * 1000000
 
-  const [publicKeys, setPublicKeys] = useState<KeysList[]>([])
+  const [, setPublicKeys] = useState<KeysList[]>([])
   const [tokens, setTokens] = useState<TokensList[]>([])
   const [openCreateTokenDialog, setCreateTokenDialog] = useState(false)
   const [openSuccessTokenDialog, setSuccessTokenDialog] = useState(false)
@@ -62,13 +59,6 @@ export const SettingsProfileKeysPage = () => {
     setAlertParams({ identifier, type })
   }
 
-  const queryParams: ListPublicKeyQueryQueryParams = {
-    page: 1,
-    limit: 30,
-    sort: 'created',
-    order: 'asc'
-  }
-
   useListTokensQuery(
     {},
     {
@@ -80,20 +70,6 @@ export const SettingsProfileKeysPage = () => {
       onError: (error: ListTokensErrorResponse) => {
         const message = error.message || 'An unknown error occurred.'
         setApiError({ type: ApiErrorType.TokenFetch, message: message })
-      }
-    }
-  )
-
-  useListPublicKeyQuery(
-    { queryParams },
-    {
-      onSuccess: ({ body: data }) => {
-        setPublicKeys(data)
-        setApiError(null)
-      },
-      onError: (error: ListPublicKeyErrorResponse) => {
-        const message = error.message || 'An unknown error occurred.'
-        setApiError({ type: ApiErrorType.KeyFetch, message: message })
       }
     }
   )
@@ -200,12 +176,13 @@ export const SettingsProfileKeysPage = () => {
   return (
     <>
       <SandboxSettingsAccountKeysPage
-        publicKeys={publicKeys}
+        setPublicKeys={setPublicKeys}
         tokens={tokens}
         openTokenDialog={openTokenDialog}
         openSshKeyDialog={openSshKeyDialog}
         openAlertDeleteDialog={openAlertDeleteDialog}
         error={apiError}
+        setApiError={setApiError}
       />
       <TokenCreateDialog
         open={openCreateTokenDialog}
