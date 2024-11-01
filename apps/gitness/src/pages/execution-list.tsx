@@ -30,7 +30,6 @@ export default function ExecutionsListPage() {
   const {
     data: { body: executions, headers } = {},
     isFetching,
-    error,
     isSuccess
   } = useListExecutionsQuery({
     repo_ref: repoRef,
@@ -83,9 +82,6 @@ export default function ExecutionsListPage() {
           />
         </>
       )
-    } else {
-      console.log({ error })
-      return <></>
     }
   }
 

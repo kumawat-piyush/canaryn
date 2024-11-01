@@ -27,7 +27,7 @@ export default function PipelinesPage() {
 
   const { data: { body: pipelines, headers } = {}, isFetching } = useListPipelinesQuery({
     repo_ref: repoRef,
-    queryParams: { page, limit: 10, query: query?.trim(), latest: true }
+    queryParams: { page, query, latest: true }
   })
 
   const totalPages = parseInt(headers?.get(PageResponseHeader.xTotalPages) || '')

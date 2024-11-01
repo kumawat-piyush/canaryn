@@ -39,7 +39,7 @@ function PullRequestListPage() {
 
   const { data: { body: pullrequests, headers } = {}, isFetching } = useListPullReqQuery({
     repo_ref: repoRef,
-    queryParams: { page, query, sort, limit: 20 }
+    queryParams: { page, query, sort }
   })
 
   const totalPages = parseInt(headers?.get(PageResponseHeader.xTotalPages) || '')
