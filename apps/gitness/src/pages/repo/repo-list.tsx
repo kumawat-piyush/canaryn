@@ -99,7 +99,7 @@ export default function ReposListPage() {
          * Show if repositories exist.
          * Additionally, show if query(search) is applied.
          */}
-        {(query || repositories?.length) && (
+        {(query || (repositories?.length || 0) > 0) && (
           <>
             <Text size={5} weight={'medium'}>
               Repositories
