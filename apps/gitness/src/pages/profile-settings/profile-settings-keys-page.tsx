@@ -7,58 +7,32 @@ import {
   ProfileKeysList,
   KeysList,
   ProfileTokensList,
-  TokensList
+  TokensList,
+  PaginationComponent
 } from '@harnessio/playground'
-import { ListPublicKeyErrorResponse, useListPublicKeyQuery } from '@harnessio/code-service-client'
-import { AlertDeleteParams, ApiErrorType } from './types'
+import { AlertDeleteParams } from './types'
 import { PageResponseHeader } from '../../types'
-import { PaginationComponent } from '../../../../../packages/playground/dist'
 
 interface SandboxSettingsAccountKeysPageProps {
+  publicKeys: KeysList[]
   tokens: TokensList[]
-  setPublicKeys: React.Dispatch<React.SetStateAction<KeysList[]>>
   openTokenDialog: () => void
   openSshKeyDialog: () => void
   openAlertDeleteDialog: (data: AlertDeleteParams) => void
   error: { type: string; message: string } | null
-  setApiError: React.Dispatch<
-    React.SetStateAction<{
-      type: ApiErrorType
-      message: string
-    } | null>
-  >
+  headers?: Headers
 }
 const SandboxSettingsAccountKeysPage: React.FC<SandboxSettingsAccountKeysPageProps> = ({
+  publicKeys,
   tokens,
-  setPublicKeys,
   openTokenDialog,
   openSshKeyDialog,
   openAlertDeleteDialog,
   error,
-  setApiError
+  headers
 }) => {
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
-  const { data: { body: publicKeys = [], headers } = {} } = useListPublicKeyQuery(
-    {
-      queryParams: {
-        page,
-        sort: 'created',
-        order: 'asc'
-      }
-    },
-    {
-      onSuccess: ({ body: data }) => {
-        setPublicKeys(data)
-      },
-      onError: (error: ListPublicKeyErrorResponse) => {
-        const message = error.message || 'An unknown error occurred.'
-        setApiError({ type: ApiErrorType.KeyFetch, message: message })
-      }
-    }
-  )
-
   const totalPages = parseInt(headers?.get(PageResponseHeader.xTotalPages) || '')
-
   return (
     <SandboxLayout.Main hasLeftPanel hasHeader hasSubHeader>
       <SandboxLayout.Content>

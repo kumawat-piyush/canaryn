@@ -1,12 +1,15 @@
-import { SandboxSettingsAccountKeysPage } from './profile-settings-keys-page'
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import {
+  useListPublicKeyQuery,
+  ListPublicKeyQueryQueryParams,
   useCreateTokenMutation,
   CreateTokenErrorResponse,
   CreateTokenRequestBody,
   useCreatePublicKeyMutation,
   CreatePublicKeyRequestBody,
   CreatePublicKeyErrorResponse,
+  ListPublicKeyErrorResponse,
   useDeletePublicKeyMutation,
   useDeleteTokenMutation,
   DeleteTokenErrorResponse,
@@ -14,23 +17,25 @@ import {
   useListTokensQuery,
   ListTokensErrorResponse
 } from '@harnessio/code-service-client'
+import { TokensList, KeysList, DeleteTokenAlertDialog } from '@harnessio/playground'
+import { SandboxSettingsAccountKeysPage } from './profile-settings-keys-page'
 import { TokenCreateDialog } from './token-create/token-create-dialog'
 import { TokenFormType } from './token-create/token-create-form'
 import { SshKeyCreateDialog } from './ssh-key-create/ssh-key-create-dialog'
 import { TokenSuccessDialog } from './token-create/token-success-dialog'
-import { TokensList, KeysList, DeleteTokenAlertDialog } from '@harnessio/playground'
 import { ApiErrorType, AlertDeleteParams } from './types'
 
 export const SettingsProfileKeysPage = () => {
   const CONVERT_DAYS_TO_NANO_SECONDS = 24 * 60 * 60 * 1000 * 1000000
 
-  const [, setPublicKeys] = useState<KeysList[]>([])
+  const [publicKeys, setPublicKeys] = useState<KeysList[]>([])
   const [tokens, setTokens] = useState<TokensList[]>([])
   const [openCreateTokenDialog, setCreateTokenDialog] = useState(false)
   const [openSuccessTokenDialog, setSuccessTokenDialog] = useState(false)
   const [saveSshKeyDialog, setSshKeyDialog] = useState(false)
   const [isAlertDeleteDialogOpen, setIsAlertDeleteDialogOpen] = useState(false)
   const [alertParams, setAlertParams] = useState<AlertDeleteParams | null>(null)
+  const [searchParams] = useSearchParams()
 
   const [apiError, setApiError] = useState<{
     type: ApiErrorType
@@ -59,7 +64,13 @@ export const SettingsProfileKeysPage = () => {
     setAlertParams({ identifier, type })
   }
 
-  useListTokensQuery(
+  const queryParams: ListPublicKeyQueryQueryParams = {
+    page: parseInt(searchParams.get('page') || ''),
+    sort: 'created',
+    order: 'asc'
+  }
+
+  const { data: { headers } = {} } = useListTokensQuery(
     {},
     {
       onSuccess: ({ body: data }) => {
@@ -70,6 +81,20 @@ export const SettingsProfileKeysPage = () => {
       onError: (error: ListTokensErrorResponse) => {
         const message = error.message || 'An unknown error occurred.'
         setApiError({ type: ApiErrorType.TokenFetch, message: message })
+      }
+    }
+  )
+
+  useListPublicKeyQuery(
+    { queryParams },
+    {
+      onSuccess: ({ body: data }) => {
+        setPublicKeys(data)
+        setApiError(null)
+      },
+      onError: (error: ListPublicKeyErrorResponse) => {
+        const message = error.message || 'An unknown error occurred.'
+        setApiError({ type: ApiErrorType.KeyFetch, message: message })
       }
     }
   )
@@ -176,13 +201,13 @@ export const SettingsProfileKeysPage = () => {
   return (
     <>
       <SandboxSettingsAccountKeysPage
-        setPublicKeys={setPublicKeys}
+        publicKeys={publicKeys}
         tokens={tokens}
         openTokenDialog={openTokenDialog}
         openSshKeyDialog={openSshKeyDialog}
         openAlertDeleteDialog={openAlertDeleteDialog}
         error={apiError}
-        setApiError={setApiError}
+        headers={headers}
       />
       <TokenCreateDialog
         open={openCreateTokenDialog}
