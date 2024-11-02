@@ -11,7 +11,6 @@ import {
   Avatar,
   AvatarImage,
   AvatarFallback,
-  Badge,
   Button,
   DropdownMenu,
   DropdownMenuContent,
@@ -19,7 +18,12 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
+  Select,
+  SelectValue,
+  SelectItem,
+  SelectTrigger,
+  SelectContent
 } from '@harnessio/canary'
 import { getInitials } from '../../utils/utils'
 import { MembersProps } from './interfaces'
@@ -73,8 +77,7 @@ export const MembersList = ({ members, onDelete, onEdit }: PageProps) => {
           <TableRow>
             <TableHead className="text-primary">Name</TableHead>
             <TableHead className="text-primary">Role</TableHead>
-            <TableHead className="text-primary">Email</TableHead>
-            {<TableHead className="text-right text-primary">Date added</TableHead>}
+            <TableHead className="text-primary col-span-2">Email</TableHead>
             <TableHead>
               <></>
             </TableHead>
@@ -82,7 +85,7 @@ export const MembersList = ({ members, onDelete, onEdit }: PageProps) => {
         </TableHeader>
         <TableBody>
           {members.map(member => (
-            <TableRow key={member.display_name}>
+            <TableRow key={member.email}>
               {/* NAME */}
               <TableCell className="content-center my-6">
                 <div className="flex items-center gap-4">
@@ -97,19 +100,6 @@ export const MembersList = ({ members, onDelete, onEdit }: PageProps) => {
                   </Text>
                 </div>
               </TableCell>
-              {/* ROLE */}
-              <TableCell className="content-center my-6">
-                <div className="flex gap-1.5 items-center">
-                  <Text size={2} wrap="nowrap" truncate className="text-tertiary-background">
-                    <Badge
-                      variant="outline"
-                      size="xs"
-                      className="rounded-full font-normal text-xs p-2 h-5 text-tertiary-background text-center m-auto bg-tertiary-background/10">
-                      {member.role}
-                    </Badge>
-                  </Text>
-                </div>
-              </TableCell>
               {/* EMAIL */}
               <TableCell className="content-center my-6">
                 <div className="flex gap-1.5">
@@ -118,16 +108,33 @@ export const MembersList = ({ members, onDelete, onEdit }: PageProps) => {
                   </Text>
                 </div>
               </TableCell>
-              {/* DATE ADDED */}
-              {member.timestamp && (
-                <TableCell className="content-center">
-                  <div className="flex gap-1.5 items-center justify-end">
-                    <Text wrap="nowrap" size={1} truncate className="text-tertiary-background text-right">
-                      {member.timestamp}
-                    </Text>
-                  </div>
-                </TableCell>
-              )}
+              {/* ROLE */}
+              <TableCell className="content-center my-6">
+                <div className="flex gap-1.5 items-center">
+                  {/* <Select>
+                    <SelectTrigger>
+                      <Text size={2} wrap="nowrap" truncate className="text-tertiary-background">
+                        {member.role}
+                      </Text>
+                    </SelectTrigger>
+                    <SelectContent>
+                      <DropdownMenuItem>Owner</DropdownMenuItem>
+                      <DropdownMenuItem>Member</DropdownMenuItem>
+                    </SelectContent>
+                  </Select> */}
+                  <Select defaultValue={member.role} onValueChange={newRole => onEdit({ ...member, role: newRole })}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select Role" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Contributor">Contributor</SelectItem>
+                      <SelectItem value="Reader">Reader</SelectItem>
+                      <SelectItem value="Executor">Executor</SelectItem>
+                      <SelectItem value="Owner">Owner</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </TableCell>
               <TableCell className="content-center my-6">
                 <div className="flex gap-1.5 items-center justify-end">{moreActionsTooltip({ member })}</div>
               </TableCell>
@@ -138,3 +145,5 @@ export const MembersList = ({ members, onDelete, onEdit }: PageProps) => {
     </>
   )
 }
+//delete column - yeah
+//Remove micro manage
