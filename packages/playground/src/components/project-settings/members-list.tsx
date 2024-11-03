@@ -76,8 +76,8 @@ export const MembersList = ({ members, onDelete, onEdit }: PageProps) => {
         <TableHeader>
           <TableRow>
             <TableHead className="text-primary">Name</TableHead>
+            <TableHead className="text-primary">Email</TableHead>
             <TableHead className="text-primary">Role</TableHead>
-            <TableHead className="text-primary col-span-2">Email</TableHead>
             <TableHead>
               <></>
             </TableHead>
@@ -110,8 +110,7 @@ export const MembersList = ({ members, onDelete, onEdit }: PageProps) => {
               </TableCell>
               {/* ROLE */}
               <TableCell className="content-center my-6">
-                <div className="flex gap-1.5 items-center">
-                  {/* <Select>
+                {/* <Select>
                     <SelectTrigger>
                       <Text size={2} wrap="nowrap" truncate className="text-tertiary-background">
                         {member.role}
@@ -122,18 +121,36 @@ export const MembersList = ({ members, onDelete, onEdit }: PageProps) => {
                       <DropdownMenuItem>Member</DropdownMenuItem>
                     </SelectContent>
                   </Select> */}
-                  <Select defaultValue={member.role} onValueChange={newRole => onEdit({ ...member, role: newRole })}>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select Role" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Contributor">Contributor</SelectItem>
-                      <SelectItem value="Reader">Reader</SelectItem>
-                      <SelectItem value="Executor">Executor</SelectItem>
-                      <SelectItem value="Owner">Owner</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+
+                <Select defaultValue={member.role} onValueChange={newRole => onEdit({ ...member, role: newRole })}>
+                  <SelectTrigger className="w-[150px] border-0 justify-start" iconClassName="flex-shrink-0">
+                    <SelectValue className="flex-1 basis-[70%] grow-0" placeholder="Select Role" />
+                  </SelectTrigger>
+                  <SelectContent className="w-[300px]">
+                    <SelectItem value="Owner">
+                      <Text className="text-left inline-block w-full">Owner</Text>
+                      <Text className="text-muted-foreground inline-block w-full mt-1.5">
+                        Admin-level access to all resources.
+                      </Text>
+                    </SelectItem>
+                    <SelectItem value="Contributor">
+                      <Text className="text-left inline-block w-full">Contributor</Text>
+                      <Text className="text-muted-foreground inline-block w-full mt-1.5">
+                        Can view, comment, and edit resources.
+                      </Text>
+                    </SelectItem>
+                    <SelectItem value="Reader">
+                      <Text className="text-left inline-block w-full">Reader</Text>
+                      <Text className="text-muted-foreground inline-block w-full mt-1.5">Can view and comment.</Text>
+                    </SelectItem>
+                    <SelectItem value="Executor">
+                      <Text className="text-left inline-block w-full">Executor</Text>
+                      <Text className="text-muted-foreground inline-block w-full mt-1.5">
+                        Can view but cannot make changes or leave comments.
+                      </Text>
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
               </TableCell>
               <TableCell className="content-center my-6">
                 <div className="flex gap-1.5 items-center justify-end">{moreActionsTooltip({ member })}</div>
