@@ -1,7 +1,7 @@
 import React from 'react'
 import { Tabs, TabsList, TabsTrigger } from '@harnessio/canary'
 import { SandboxLayout } from '..'
-import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 
 function SandboxRepoSinglePage() {
   const location = useLocation()

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Spacer, ListActions, SearchBox, Button, Text } from '@harnessio/canary'
 import { Link } from 'react-router-dom'
-import { PaddingListLayout } from '../layouts/PaddingListLayout'
 import { PullRequestList } from '../components/pull-request/pull-request-list'
 import { PaginationComponent } from '../components/pagination'
 
