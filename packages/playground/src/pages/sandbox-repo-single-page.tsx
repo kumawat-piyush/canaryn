@@ -4,7 +4,6 @@ import { SandboxLayout } from '..'
 import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom'
 
 function SandboxRepoSinglePage() {
-  const { repoId } = useParams<{ repoId: string }>()
   const location = useLocation()
   const activeTab = location.pathname.split('/').pop() || 'summary'
 

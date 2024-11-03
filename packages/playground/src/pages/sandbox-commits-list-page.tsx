@@ -3,7 +3,6 @@ import CommitsList from '../components/commits-list'
 import { SkeletonList } from '../components/loaders/skeleton-list'
 import { NoData } from '../components/no-data'
 import PlaygroundCommitsSettings from '../settings/commits-settings'
-import { PaddingListLayout } from '../layouts/PaddingListLayout'
 import { PaginationComponent } from '../components/pagination'
 
 import { ListActions, Spacer, Text } from '@harnessio/canary'

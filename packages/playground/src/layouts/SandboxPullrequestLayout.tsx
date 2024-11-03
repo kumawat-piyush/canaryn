@@ -3,7 +3,6 @@ import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { PullRequestHeader } from '../components/pull-request/pull-request-conversation-header'
 import { Badge, Icon, Spacer, Tabs, TabsList, TabsTrigger } from '@harnessio/canary'
-import { Floating1ColumnLayout } from './Floating1ColumnLayout'
 import { SandboxLayout } from '..'
 
 const mockedPullRequest = {
