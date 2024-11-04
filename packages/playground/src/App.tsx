@@ -150,7 +150,7 @@ const router = createBrowserRouter([
               },
               {
                 path: 'webhooks/create',
-                element: <RepoWebhooksCreatePage />
+                element: <RepoWebhooksCreatePage onFormSubmit={noop} onFormCancel={noop} isLoading={false} />
               },
               {
                 path: 'pipelines',
@@ -447,7 +447,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'webhooks/create',
-            element: <RepoWebhooksCreatePage />
+            element: <RepoWebhooksCreatePage onFormSubmit={noop} onFormCancel={noop} isLoading={false} />
           },
           {
             path: 'commits',
