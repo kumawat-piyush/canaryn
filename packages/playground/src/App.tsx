@@ -211,6 +211,10 @@ const router = createBrowserRouter([
                   },
                   {
                     path: 'rules',
+                    element: <RepoSettingsGeneralPlaygroundContainer />
+                  },
+                  {
+                    path: 'rules/create',
                     element: (
                       <RepoBranchSettingsRulesPage
                         handleRuleUpdate={noop}
