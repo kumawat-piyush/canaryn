@@ -6,7 +6,6 @@ import {
   SkeletonList,
   NoData,
   MembersList,
-  FormEditMemberDialog,
   FormDeleteMemberDialog,
   useCommonFilter,
   PaginationComponent,
@@ -16,7 +15,8 @@ import {
   useMembershipListQuery,
   TypesMembershipUser,
   EnumMembershipRole,
-  MembershipListQueryQueryParams
+  MembershipListQueryQueryParams,
+  useMembershipUpdateMutation
 } from '@harnessio/code-service-client'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { Link } from 'react-router-dom'
@@ -35,14 +35,18 @@ const ProjectSettingsMemebersPage = () => {
   const [dialogState, setDialogState] = useState({
     isDialogEditOpen: false,
     isDialogDeleteOpen: false,
-    selectedMember: null as { display_name: string; role: string; email: string } | null
+    selectedMember: null as { display_name: string; role: string; email: string; uid: string } | null
   })
 
   const { sort, query: currentQuery } = useCommonFilter<MembershipListQueryQueryParams['sort']>()
   const [query, _] = useQueryState('query', { defaultValue: currentQuery || '' })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
-  const { isLoading, data: { body: members, headers } = {} } = useMembershipListQuery(
+  const {
+    isLoading,
+    data: { headers } = {},
+    refetch
+  } = useMembershipListQuery(
     { space_ref: space_ref ?? '', queryParams: { query, sort } },
     {
       onSuccess: ({ body: members }) => {
@@ -61,12 +65,21 @@ const ProjectSettingsMemebersPage = () => {
     }, 2000)
   }
 
-  const handleRoleSave = () => {
-    setIsSubmitting(true)
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setDialogState(prev => ({ ...prev, isDialogEditOpen: false, selectedMember: null }))
-    }, 2000)
+  // API call function using useMembershipUpdateMutation
+  const { mutate: updateRole } = useMembershipUpdateMutation(
+    { space_ref },
+    {
+      onSuccess: () => {
+        refetch()
+      },
+      onError: error => {
+        console.error('Error updating membership role:', error)
+      }
+    }
+  )
+
+  const handleRoleChange = (user_uid: string, role: EnumMembershipRole) => {
+    updateRole({ user_uid, body: { role } })
   }
 
   const renderMemberListContent = () => {
@@ -91,10 +104,11 @@ const ProjectSettingsMemebersPage = () => {
         <MembersList
           members={members.map((member: TypesMembershipUser) => ({
             display_name: member.principal?.display_name ?? '',
-            role: member.role as EnumMembershipRole | string,
+            role: member.role === 'space_owner' ? 'Owner' : (member.role ?? ''), // Ensure role is always a string
             email: member.added_by?.email ?? '',
             avatarUrl: '',
-            timestamp: member.created ? timeAgoFromEpochTime(member.created) : 'no time available'
+            timestamp: member.created ? timeAgoFromEpochTime(member.created) : 'No time available',
+            uid: member.principal?.uid ?? ''
           }))}
           onEdit={(member: MembersProps) =>
             setDialogState({
@@ -115,25 +129,18 @@ const ProjectSettingsMemebersPage = () => {
             })
           }
         />
-        {/* TODO Delete Dialog: error & delete updated*/}
+        {/* TODO Delete Dialog: error & delete updated */}
         {dialogState.isDialogDeleteOpen && dialogState.selectedMember && (
           <FormDeleteMemberDialog
             isDeleting={isDeleting}
             deleteSuccess={!isDeleting}
-            member={{ ...dialogState.selectedMember, email: dialogState.selectedMember.email }} // Add the 'email' property
+            member={{
+              ...dialogState.selectedMember,
+              email: dialogState.selectedMember.email,
+              uid: dialogState.selectedMember.uid // Add the 'uid' property
+            }}
             onDelete={handleDelete}
             onClose={() => setDialogState(prev => ({ ...prev, isDialogDeleteOpen: false }))}
-          />
-        )}
-
-        {/* TODO: Edit Dialog: error & edit updated*/}
-        {dialogState.isDialogEditOpen && dialogState.selectedMember && (
-          <FormEditMemberDialog
-            isSubmitting={isSubmitting}
-            submitted={!isSubmitting}
-            member={dialogState.selectedMember}
-            onSave={handleRoleSave}
-            onClose={() => setDialogState(prev => ({ ...prev, isDialogEditOpen: false }))}
           />
         )}
       </>
