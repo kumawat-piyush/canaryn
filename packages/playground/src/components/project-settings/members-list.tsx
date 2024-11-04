@@ -150,5 +150,3 @@ export const MembersList = ({ members, onDelete, onEdit }: PageProps) => {
     </>
   )
 }
-//delete column - yeah
-//Remove micro manage
