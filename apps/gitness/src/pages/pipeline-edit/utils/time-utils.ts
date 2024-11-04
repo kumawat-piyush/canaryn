@@ -4,40 +4,22 @@
  * @param timestamp
  * @returns formatted duration string
  */
-export const timeAgoFromISOTime = (timestamp: string): string => {
+export const timeAgoFromISOTime = (timestamp: string, useRelativeTime?: boolean): string => {
   const date = new Date(timestamp)
   const now = new Date()
 
   const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000)
+  const diffInDays = diffInSeconds / (3600 * 24)
 
-  const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
-
-  if (diffInSeconds < 60) {
-    return rtf.format(-diffInSeconds, 'second')
+  if (useRelativeTime) {
+    if (diffInDays <= 2) {
+      return formatRelativeTime(diffInSeconds)
+    } else {
+      return date.toLocaleDateString('en', { dateStyle: 'medium' })
+    }
+  } else {
+    return formatRelativeTime(diffInSeconds)
   }
-
-  const diffInMinutes = Math.floor(diffInSeconds / 60)
-  if (diffInMinutes < 60) {
-    return rtf.format(-diffInMinutes, 'minute')
-  }
-
-  const diffInHours = Math.floor(diffInMinutes / 60)
-  if (diffInHours < 24) {
-    return rtf.format(-diffInHours, 'hour')
-  }
-
-  const diffInDays = Math.floor(diffInHours / 24)
-  if (diffInDays < 30) {
-    return rtf.format(-diffInDays, 'day')
-  }
-
-  const diffInMonths = Math.floor(diffInDays / 30)
-  if (diffInMonths < 12) {
-    return rtf.format(-diffInMonths, 'month')
-  }
-
-  const diffInYears = Math.floor(diffInMonths / 12)
-  return rtf.format(-diffInYears, 'year')
 }
 
 /**
@@ -46,12 +28,24 @@ export const timeAgoFromISOTime = (timestamp: string): string => {
  * @param timestamp
  * @returns formatted duration string
  */
-export const timeAgoFromEpochTime = (timestamp: number): string => {
+export const timeAgoFromEpochTime = (timestamp: number, useRelativeTime?: boolean): string => {
   const now = Date.now()
-
-  // Convert the difference from milliseconds to seconds
   const diffInSeconds = Math.floor((now - timestamp) / 1000)
+  const diffInDays = diffInSeconds / (3600 * 24)
 
+  if (useRelativeTime) {
+    if (diffInDays <= 2) {
+      return formatRelativeTime(diffInSeconds)
+    } else {
+      const date = new Date(timestamp)
+      return date.toLocaleDateString('en', { dateStyle: 'medium' })
+    }
+  } else {
+    return formatRelativeTime(diffInSeconds)
+  }
+}
+
+const formatRelativeTime = (diffInSeconds: number): string => {
   const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
 
   if (diffInSeconds < 60) {
