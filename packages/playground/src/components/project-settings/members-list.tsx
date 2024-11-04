@@ -110,18 +110,6 @@ export const MembersList = ({ members, onDelete, onEdit }: PageProps) => {
               </TableCell>
               {/* ROLE */}
               <TableCell className="content-center my-6">
-                {/* <Select>
-                    <SelectTrigger>
-                      <Text size={2} wrap="nowrap" truncate className="text-tertiary-background">
-                        {member.role}
-                      </Text>
-                    </SelectTrigger>
-                    <SelectContent>
-                      <DropdownMenuItem>Owner</DropdownMenuItem>
-                      <DropdownMenuItem>Member</DropdownMenuItem>
-                    </SelectContent>
-                  </Select> */}
-
                 <Select defaultValue={member.role} onValueChange={newRole => onEdit({ ...member, role: newRole })}>
                   <SelectTrigger className="w-[150px] border-0 justify-start" iconClassName="flex-shrink-0">
                     <SelectValue className="flex-1 basis-[70%] grow-0" placeholder="Select Role" />
