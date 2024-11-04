@@ -35,7 +35,7 @@ export const UsersList = ({ users }: PageProps) => {
           <TableHead className="text-primary">Name</TableHead>
           <TableHead className="text-primary">Role</TableHead>
           <TableHead className="text-primary">Email</TableHead>
-          {users[0]?.timestamp && <TableHead className="text-right text-primary">Date added</TableHead>}
+          <TableHead className="text-right text-primary">Date added</TableHead>
           <TableHead>
             <></>
           </TableHead>
