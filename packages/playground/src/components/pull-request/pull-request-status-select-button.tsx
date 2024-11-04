@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@harnessio/canary'
 import { useEmitCodeCommentStatus } from './hooks/useEmitCodeCommentStatus'
 import { CodeCommentState, CommentItem, TypesPullReq, TypesPullReqActivity } from './interfaces'
@@ -34,8 +34,23 @@ export const PullRequestStatusSelect: React.FC<CodeCommentStatusSelectProps> = (
   commentStatusPullReq,
   refetchActivities
 }) => {
-  const [parentComment, setParentComment] = useState(commentItems[0])
-  const [codeCommentStatus, setCodeCommentStatus] = useState(parentComment?.payload?.resolved ? 'Resolved' : 'Active')
+  const [parentComment, setParentComment] = useState<CommentItem<TypesPullReqActivity> | undefined>(undefined)
+  const [codeCommentStatus, setCodeCommentStatus] = useState<string>('Active')
+
+  // Memoize parentComment and codeCommentStatus based on commentItems
+  const { initialParentComment, initialStatus } = useMemo(() => {
+    const firstComment = commentItems[0]
+    const status = firstComment?.payload?.resolved ? 'Resolved' : 'Active'
+    return { initialParentComment: firstComment, initialStatus: status }
+  }, [commentItems])
+
+  // Set initial state for parentComment and codeCommentStatus
+  useEffect(() => {
+    if (initialParentComment) {
+      setParentComment(initialParentComment)
+      setCodeCommentStatus(initialStatus)
+    }
+  }, [initialParentComment, initialStatus])
 
   const emitCodeCommentStatus = useEmitCodeCommentStatus({
     id: parentComment?.id,
