@@ -46,7 +46,6 @@ const ProjectSettingsMemebersPage = () => {
     {
       onSuccess: ({ body: members }) => {
         setTotalMembers(members.length) // Update total members count
-        console.log(members.length)
       }
     }
   )
