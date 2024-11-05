@@ -4,21 +4,17 @@
  * @param timestamp
  * @returns formatted duration string
  */
-export const timeAgoFromISOTime = (timestamp: string, useRelativeTime?: boolean): string => {
+export const timeAgoFromISOTime = (timestamp: string, maxDiff: number = 2): string => {
   const date = new Date(timestamp)
   const now = new Date()
 
   const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000)
   const diffInDays = diffInSeconds / (3600 * 24)
 
-  if (useRelativeTime) {
-    if (diffInDays <= 2) {
-      return formatRelativeTime(diffInSeconds)
-    } else {
-      return date.toLocaleDateString('en', { dateStyle: 'medium' })
-    }
-  } else {
+  if (diffInDays <= maxDiff) {
     return formatRelativeTime(diffInSeconds)
+  } else {
+    return date.toLocaleDateString('en', { dateStyle: 'medium' })
   }
 }
 
@@ -28,20 +24,16 @@ export const timeAgoFromISOTime = (timestamp: string, useRelativeTime?: boolean)
  * @param timestamp
  * @returns formatted duration string
  */
-export const timeAgoFromEpochTime = (timestamp: number, useRelativeTime?: boolean): string => {
+export const timeAgoFromEpochTime = (timestamp: number, maxDiff: number = 2): string => {
   const now = Date.now()
   const diffInSeconds = Math.floor((now - timestamp) / 1000)
   const diffInDays = diffInSeconds / (3600 * 24)
 
-  if (useRelativeTime) {
-    if (diffInDays <= 2) {
-      return formatRelativeTime(diffInSeconds)
-    } else {
-      const date = new Date(timestamp)
-      return date.toLocaleDateString('en', { dateStyle: 'medium' })
-    }
-  } else {
+  if (diffInDays <= maxDiff) {
     return formatRelativeTime(diffInSeconds)
+  } else {
+    const date = new Date(timestamp)
+    return date.toLocaleDateString('en', { dateStyle: 'medium' })
   }
 }
 

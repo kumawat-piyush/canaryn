@@ -215,7 +215,7 @@ const ExecutionLogs: React.FC = () => {
             {execution?.created && (
               <Layout.Vertical gap="space-y-1">
                 <Text className="text-sm text-muted-foreground">Started</Text>
-                <span className="text-white">{timeAgoFromEpochTime(execution.created, true)}</span>
+                <span className="text-white">{timeAgoFromEpochTime(execution.created)}</span>
               </Layout.Vertical>
             )}
           </Layout.Horizontal>
