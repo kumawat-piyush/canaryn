@@ -90,6 +90,7 @@ export default function SandboxExecutionsListPage() {
     <>
       <SandboxLayout.Main hasHeader hasLeftPanel>
         <SandboxLayout.Content>
+          <Spacer size={10} />
           <Text size={5} weight={'medium'}>
             Executions
           </Text>
