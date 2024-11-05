@@ -14,7 +14,7 @@ import {
   RepoSettingsPlaceholderPage,
   SandboxSettingsCreateNewMemberPage
 } from '@harnessio/playground'
-import SnadboxRootWraper from './components/SandboxRootWrapper'
+import SandboxRootWrapper from './components/SandboxRootWrapper'
 import { TooltipProvider } from '@harnessio/canary'
 import { queryClient } from './framework/queryClient'
 import PipelineListPage from './pages/pipeline-list'
@@ -94,10 +94,9 @@ export default function App() {
       path: '/new-password',
       element: <NewPasswordPage />
     },
-
     {
       path: '/',
-      element: <SnadboxRootWraper />,
+      element: <SandboxRootWrapper />,
       children: [
         {
           index: true,
@@ -360,7 +359,7 @@ export default function App() {
     },
     {
       path: ':spaceId/sandbox',
-      element: <SnadboxRootWraper />,
+      element: <SandboxRootWrapper />,
       children: [
         {
           path: 'settings',
