@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { parseAsInteger, useQueryState } from 'nuqs'
 import { TypesExecution, useListExecutionsQuery } from '@harnessio/code-service-client'
 import { ListActions, SearchBox, Spacer, Text, Button } from '@harnessio/canary'
@@ -31,7 +31,6 @@ export default function SandboxExecutionsListPage() {
   const {
     data: { body: executions, headers } = {},
     isFetching,
-    error,
     isSuccess
   } = useListExecutionsQuery({
     repo_ref: repoRef,
@@ -84,9 +83,6 @@ export default function SandboxExecutionsListPage() {
           />
         </>
       )
-    } else {
-      console.log({ error })
-      return <></>
     }
   }
 
@@ -94,7 +90,6 @@ export default function SandboxExecutionsListPage() {
     <>
       <SandboxLayout.Main hasHeader hasLeftPanel>
         <SandboxLayout.Content>
-          <Spacer size={10} />
           <Text size={5} weight={'medium'}>
             Executions
           </Text>

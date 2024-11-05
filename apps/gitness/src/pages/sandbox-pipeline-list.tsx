@@ -74,7 +74,6 @@ export default function SandboxPipelinesPage() {
               <Link to="create">Create Pipeline</Link>
             </Button>
           </div>
-
           <Spacer size={5} />
           {renderListContent()}
           <Spacer size={8} />
