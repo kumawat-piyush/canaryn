@@ -160,7 +160,7 @@ export const SandboxRoot: React.FC<SandboxRootProps> = ({ currentUser, currentSp
               menuItems={[
                 {
                   key: 0,
-                  element: <Link to="/sandbox/settings/profile/general">Settings</Link>
+                  element: <Link to="/settings/general">Settings</Link>
                 },
                 {
                   key: 1,

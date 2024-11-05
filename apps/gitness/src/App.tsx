@@ -322,8 +322,35 @@ export default function App() {
               ]
             },
             {
-              path: 'create-project',
+              path: 'create',
               element: <CreateProject />
+            },
+            {
+              path: ':spaceId/settings',
+              element: <SandboxRootWrapper />,
+              children: [
+                {
+                  element: <SandboxSettingsProjectPage />,
+                  children: [
+                    {
+                      index: true,
+                      element: <Navigate to="general" />
+                    },
+                    {
+                      path: 'general',
+                      element: <ProjectSettingsGeneralPage />
+                    },
+                    {
+                      path: 'members',
+                      element: <ProjectSettingsMemebersPage />
+                    },
+                    {
+                      path: 'create-new-member',
+                      element: <SandboxSettingsCreateNewMemberPage />
+                    }
+                  ]
+                }
+              ]
             },
             {
               path: ':spaceId/repos/create',
@@ -336,7 +363,6 @@ export default function App() {
           element: <SandboxSettings />,
           children: [
             {
-              path: 'profile',
               element: <SandboxSettingsAccountPage />,
               children: [
                 {
@@ -350,40 +376,6 @@ export default function App() {
                 {
                   path: 'keys',
                   element: <SettingsProfileKeysPage />
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      path: ':spaceId/sandbox',
-      element: <SandboxRootWrapper />,
-      children: [
-        {
-          path: 'settings',
-          element: <SandboxSettings />,
-          children: [
-            {
-              path: 'project',
-              element: <SandboxSettingsProjectPage />,
-              children: [
-                {
-                  index: true,
-                  element: <Navigate to="general" />
-                },
-                {
-                  path: 'general',
-                  element: <ProjectSettingsGeneralPage />
-                },
-                {
-                  path: 'members',
-                  element: <ProjectSettingsMemebersPage />
-                },
-                {
-                  path: 'create-new-member',
-                  element: <SandboxSettingsCreateNewMemberPage />
                 }
               ]
             }
