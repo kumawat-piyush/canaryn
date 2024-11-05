@@ -16,35 +16,38 @@ interface NavbarItem {
 
 interface SandboxRootProps {
   currentUser: TypesUser | undefined
+  currentSpaceId: string | undefined
 }
 
-export const SandboxRoot: React.FC<SandboxRootProps> = ({ currentUser }) => {
+export const SandboxRoot: React.FC<SandboxRootProps> = ({ currentUser, currentSpaceId }) => {
   const [showMore, setShowMore] = useState<boolean>(false)
 
   const primaryMenuItems = [
     {
       text: 'Repositories',
       icon: <Icon name="repositories" size={12} />,
-      to: '/repos'
+      to: `/spaces/${currentSpaceId}/repos`
     },
     {
       text: 'Pipelines',
       icon: <Icon name="pipelines" size={12} />,
-      to: '/pipelines'
+      to: `/spaces/${currentSpaceId}/pipelines`
     },
     {
       text: 'Executions',
       icon: <Icon name="cog-6" size={12} />,
-      to: '/executions'
-    },
-    {
-      text: 'Featured Flags',
-      icon: <Icon name="featured-flags" size={12} />,
-      to: '/feature-flags'
+      to: `/spaces/${currentSpaceId}/executions`
     }
   ]
 
   const initialPinnedMenuItems: NavbarItem[] = [
+    {
+      id: 3,
+      title: 'Featured Flags',
+      iconName: 'featured-flags',
+      description: 'Toggle Featured Flags',
+      to: '/feature-flags'
+    },
     {
       id: 4,
       title: 'Chaos Engineering',

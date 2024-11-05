@@ -22,7 +22,6 @@ import SandboxPipelinesPage from './pages/sandbox-pipeline-list'
 import { SignIn } from './pages/signin'
 import { SignUp } from './pages/signup'
 import PullRequestSandboxListPage from './pages/sandbox-pull-request-list-page'
-import ExecutionsListPage from './pages/execution-list'
 import SandboxExecutionsListPage from './pages/sandbox-execution-list'
 import PullRequestSandboxLayout from './layouts/PullRequestSandboxLayout'
 import PullRequestCommitsPage from './pages/pull-request-commits-page'
@@ -288,19 +287,14 @@ export default function App() {
               ]
             },
             // Pipelines (OUTSIDE REPOS)
-            //
-            /**
-             * 🚨 Root level pipelines will be disabled 🚨
-             * Pipelines will only be part of repos for now
-             */
             {
-              path: 'pipelines',
-              element: <PipelineListPage />
+              path: ':spaceId/pipelines',
+              element: <SandboxPipelinesPage />
             },
             // Executions (OUTSIDE REPOS)
             {
-              path: 'executions',
-              element: <ExecutionsListPage />
+              path: ':spaceId/executions',
+              element: <SandboxExecutionsListPage />
             },
             {
               path: ':spaceId/repos/:repoId',
