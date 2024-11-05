@@ -15,7 +15,7 @@ import { PageResponseHeader } from '../types'
 import { Link, useParams } from 'react-router-dom'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
 import { PathParams } from '../RouteDefinitions'
-import { getLabel } from '../utils/execution-utils'
+import { getExecutionStatus, getLabel } from '../utils/execution-utils'
 import RunPipelineDialog from './run-pipeline-dialog/run-pipeline-dialog'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
@@ -52,7 +52,7 @@ export default function SandboxExecutionsListPage() {
           <ExecutionList
             executions={executions?.map((item: TypesExecution) => ({
               id: item?.number && `executions/${item.number}`,
-              status: item?.status,
+              status: getExecutionStatus(item?.status),
               success: item?.status,
               name: item?.message || item?.title,
               sha: item?.after?.slice(0, 6),
