@@ -11,7 +11,7 @@ import {
   PaginationPrevious
 } from '@harnessio/canary'
 
-interface PaginationComponentProps {
+export interface PaginationComponentProps {
   currentPage: number
   goToPage: (pageNum: number) => void
   totalPages?: number
