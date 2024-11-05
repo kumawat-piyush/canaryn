@@ -27,6 +27,8 @@ import useSpaceSSE from '../../framework/hooks/useSpaceSSE'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { useLogs } from '../../framework/hooks/useLogs'
 import RunPipelineDialog from '../run-pipeline-dialog/run-pipeline-dialog'
+import { createAndDownloadLogsBlob, getLogsText } from '../pipeline-edit/utils/common-utils'
+import copy from 'clipboard-copy'
 
 const ExecutionLogs: React.FC = () => {
   const navigate = useNavigate()
@@ -133,6 +135,18 @@ const ExecutionLogs: React.FC = () => {
       .catch()
   }
 
+  const emptyLogsPlaceholder = [
+    {
+      pos: 0,
+      out: 'No Logs Found\n',
+      time: 0
+    }
+  ]
+
+  const onStepNav = (stepId: number) => {
+    setStepNum(stepId)
+  }
+
   return (
     <>
       <div className="absolute right-0 top-0 w-fit">
@@ -162,6 +176,24 @@ const ExecutionLogs: React.FC = () => {
               }
               selectedStepIdx={stepNum > 0 ? stepNum - 1 : 0}
               onEdit={() => navigate('../edit')}
+              onDownload={() =>
+                createAndDownloadLogsBlob(
+                  isPipelineStillExecuting && currentStepStatus === ExecutionState.RUNNING
+                    ? streamedLogs
+                    : logs || emptyLogsPlaceholder,
+                  'logs'
+                )
+              }
+              onCopy={() =>
+                copy(
+                  getLogsText(
+                    isPipelineStillExecuting && currentStepStatus === ExecutionState.RUNNING
+                      ? streamedLogs
+                      : logs || emptyLogsPlaceholder
+                  )
+                )
+              }
+              onStepNav={onStepNav}
             />
           )}
         </div>
