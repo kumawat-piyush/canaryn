@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import { Spacer, Text, ListActions, SearchBox, Button } from '@harnessio/canary'
-import pluralize from 'pluralize'
+import { useState, useCallback } from 'react'
+import { Spacer, Text, ListActions, SearchBox, Button, Alert } from '@harnessio/canary'
+import debounce from 'lodash-es/debounce'
+
 import {
   SandboxLayout,
   SkeletonList,
@@ -9,14 +10,15 @@ import {
   FormDeleteMemberDialog,
   useCommonFilter,
   PaginationComponent,
-  MembersProps
+  Filter
 } from '@harnessio/playground'
 import {
   useMembershipListQuery,
   TypesMembershipUser,
   EnumMembershipRole,
   MembershipListQueryQueryParams,
-  useMembershipUpdateMutation
+  useMembershipUpdateMutation,
+  useMembershipDeleteMutation
 } from '@harnessio/code-service-client'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { Link } from 'react-router-dom'
@@ -25,47 +27,63 @@ import { useQueryState, parseAsInteger } from 'nuqs'
 import { PageResponseHeader } from '../../types'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
-const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
+const SortOptions = [
+  { name: 'Name', value: 'name' },
+  { name: 'Created', value: 'created' }
+]
 
 const ProjectSettingsMemebersPage = () => {
   const space_ref = useGetSpaceURLParam()
-  const [totalMembers, setTotalMembers] = useState<number>(0)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isDeleting, setIsDeleting] = useState(false)
+
+  //state management
+  const [totalMembers, setTotalMembers] = useState<number | null>(null)
+  const [members, setMembers] = useState<TypesMembershipUser[]>([]) // unified state for members
   const [dialogState, setDialogState] = useState({
     isDialogEditOpen: false,
     isDialogDeleteOpen: false,
-    selectedMember: null as { display_name: string; role: string; email: string; uid: string } | null
+    selectedMember: null as {
+      display_name: string
+      role: string
+      email: string
+      uid: string
+    } | null
   })
 
   const { sort, query: currentQuery } = useCommonFilter<MembershipListQueryQueryParams['sort']>()
-  const [query, _] = useQueryState('query', { defaultValue: currentQuery || '' })
+  const [query, setQuery] = useQueryState('query', {
+    defaultValue: currentQuery || ''
+  })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
+
+  const [apiError, setApiError] = useState<string | null>(null)
+  const [searchTerm, setSearchTerm] = useState(query) // not used
+
+  // Define the query parameters for useMembershipListQuery
+  const queryParams: MembershipListQueryQueryParams = {
+    query,
+    order: 'asc',
+    sort,
+    page,
+    limit: 30
+  }
 
   const {
     isLoading,
     data: { headers } = {},
     refetch
   } = useMembershipListQuery(
-    { space_ref: space_ref ?? '', queryParams: { query, sort } },
+    { space_ref: space_ref ?? '', queryParams: queryParams },
     {
-      onSuccess: ({ body: members }) => {
-        setTotalMembers(members.length) // Update total members count
+      onSuccess: ({ body: membersData }) => {
+        setMembers(membersData) // Update members state
+        setTotalMembers(membersData.length) // Update total members count
       }
     }
   )
 
   const totalPages = parseInt(headers?.get(PageResponseHeader.xTotalPages) || '')
 
-  const handleDelete = () => {
-    setIsDeleting(true)
-    setTimeout(() => {
-      setIsDeleting(false)
-      setDialogState(prev => ({ ...prev, isDialogDeleteOpen: false, selectedMember: null }))
-    }, 2000)
-  }
-
-  // API call function using useMembershipUpdateMutation
+  // edit api call
   const { mutate: updateRole } = useMembershipUpdateMutation(
     { space_ref },
     {
@@ -73,18 +91,83 @@ const ProjectSettingsMemebersPage = () => {
         refetch()
       },
       onError: error => {
-        console.error('Error updating membership role:', error)
+        //no design nere
+        alert('Error updating membership role: ' + error.message)
       }
     }
   )
 
-  const handleRoleChange = (user_uid: string, role: EnumMembershipRole) => {
-    updateRole({ user_uid, body: { role } })
+  // delete api call
+  const {
+    isLoading: deleteLoading,
+    mutate: deleteMember,
+    isSuccess: deleteSuccess
+  } = useMembershipDeleteMutation(
+    { space_ref: space_ref, user_uid: dialogState.selectedMember?.uid ?? '' },
+    {
+      onSuccess: () => {
+        refetch()
+        setDialogState(prev => ({
+          ...prev,
+          isDialogDeleteOpen: false,
+          selectedMember: null
+        })) // Close dialog on success
+      },
+      onError: error => {
+        //no design here
+        alert('Error deleting membership role: ' + error.message)
+      }
+    }
+  )
+
+  const handleDelete = () => {
+    if (dialogState.selectedMember?.uid) {
+      deleteMember({ user_uid: dialogState.selectedMember.uid })
+    }
+  }
+
+  const handleRoleChange = (user_uid: string, newRole: EnumMembershipRole) => {
+    const owners = members.filter(member => (member.role as EnumMembershipRole) === 'space_owner')
+    const isOnlyOwner = owners.length === 1
+    const isCurrentUserOwner = owners.some(member => member.principal?.uid === user_uid)
+
+    // Check if the current user is the only owner and is trying to change their role
+    if (isOnlyOwner && isCurrentUserOwner && newRole !== 'space_owner') {
+      setApiError('Cannot change role. At least one owner is required.')
+      return
+    }
+
+    // Proceed with the role change if validation passes
+    updateRole({ user_uid, body: { role: newRole } })
+  }
+
+  // Debounce the search term change to avoid frequent updates
+  const debouncedSetQuery = useCallback(
+    debounce(term => setQuery(term), 300), // 300 ms debounce delay
+    [setQuery]
+  )
+
+  // Update search term on input change and debounce the API call
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newTerm = event.target.value
+    setSearchTerm(newTerm)
+    debouncedSetQuery(newTerm)
   }
 
   const renderMemberListContent = () => {
     if (isLoading) return <SkeletonList />
     if (!members?.length) {
+      if (query) {
+        return (
+          <NoData
+            iconName="no-search-magnifying-glass"
+            title="No search results"
+            description={['Check your spelling and filter options,', 'or search for a different keyword.']}
+            primaryButton={{ label: 'Clear search' }}
+            secondaryButton={{ label: 'Clear filters' }}
+          />
+        )
+      }
       return (
         //add this layout to target the content in the center of the page without header and subheader
         <SandboxLayout.Main hasLeftPanel>
@@ -110,18 +193,8 @@ const ProjectSettingsMemebersPage = () => {
             timestamp: member.created ? timeAgoFromEpochTime(member.created) : 'No time available',
             uid: member.principal?.uid ?? ''
           }))}
-          onEdit={(member: MembersProps) =>
-            setDialogState({
-              ...dialogState,
-              isDialogEditOpen: true,
-              selectedMember: {
-                display_name: member.display_name,
-                role: member.role === 'space_owner' ? 'Owner' : member.role,
-                email: member.email
-              }
-            })
-          }
-          onDelete={(member: MembersProps) =>
+          onEdit={member => handleRoleChange(member.uid, member.role as EnumMembershipRole)}
+          onDelete={member =>
             setDialogState({
               ...dialogState,
               isDialogDeleteOpen: true,
@@ -129,11 +202,10 @@ const ProjectSettingsMemebersPage = () => {
             })
           }
         />
-        {/* TODO Delete Dialog: error & delete updated */}
         {dialogState.isDialogDeleteOpen && dialogState.selectedMember && (
           <FormDeleteMemberDialog
-            isDeleting={isDeleting}
-            deleteSuccess={!isDeleting}
+            isDeleting={deleteLoading}
+            deleteSuccess={deleteSuccess}
             member={{
               ...dialogState.selectedMember,
               email: dialogState.selectedMember.email,
@@ -151,21 +223,22 @@ const ProjectSettingsMemebersPage = () => {
     <SandboxLayout.Main hasLeftPanel hasHeader hasSubHeader>
       <SandboxLayout.Content maxWidth="3xl">
         <Spacer size={10} />
+        {apiError && <Alert className="">{apiError}</Alert>}
         <Text size={5} weight={'medium'}>
           Team
         </Text>
         <Text size={5} weight={'medium'} color="tertiaryBackground">
-          {totalMembers ? `, ${totalMembers} ${pluralize('member', totalMembers)}` : ''}
+          , {totalMembers ? `${totalMembers} members` : ''}
         </Text>
         <Spacer size={6} />
         <ListActions.Root>
           <ListActions.Left>
-            <SearchBox.Root placeholder="Search Members" />
+            <SearchBox.Root placeholder="Search Members" handleChange={handleInputChange} defaultValue={searchTerm} />
           </ListActions.Left>
           <ListActions.Right>
             <ListActions.Dropdown title="All Team Roles" items={filterOptions} />
-            <ListActions.Dropdown title="Last added" items={sortOptions} />
-            <Link to={`/spaces/${space_ref}/settings/members/create`}>
+            <Filter showSearch={false} sortOptions={SortOptions} />
+            <Link to={`/${space_ref}/sandbox/settings/project/create-new-member`}>
               <Button variant="default">Invite New Members</Button>
             </Link>
           </ListActions.Right>
