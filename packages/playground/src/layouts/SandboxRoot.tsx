@@ -57,10 +57,10 @@ export const SandboxRoot: React.FC<SandboxRootProps> = ({ currentUser, currentSp
     },
     {
       id: 12,
-      title: 'Environment',
+      title: 'Environments',
       iconName: 'environment',
       description: 'Manage your environments',
-      to: '/environment'
+      to: '/environments'
     },
     {
       id: 13,
@@ -150,39 +150,6 @@ export const SandboxRoot: React.FC<SandboxRootProps> = ({ currentUser, currentSp
                   )}
                 </NavLink>
               ))}
-            </Navbar.AccordionGroup>
-            {/* Sandboxed new layout examples */}
-            <Navbar.AccordionGroup title="Layout Sandbox">
-              <NavLink to="/sandbox/landing">
-                <Navbar.Item text="Landing" icon={<Icon name="harness" size={12} />} />
-              </NavLink>
-              <NavLink to="/sandbox/repos">
-                <Navbar.Item text="Repo List" icon={<Icon name="repositories" size={12} />} />
-              </NavLink>
-              <NavLink to="/sandbox/repos/drone/summary">
-                <Navbar.Item
-                  text="Repo&nbsp;&nbsp;/&nbsp;&nbsp;Summary"
-                  icon={<Icon name="repositories" size={12} />}
-                />
-              </NavLink>
-              <NavLink to="/sandbox/repos/drone/code">
-                <Navbar.Item text="Repo&nbsp;&nbsp;/&nbsp;&nbsp;Code" icon={<Icon name="repositories" size={12} />} />
-              </NavLink>
-              <NavLink to="/sandbox/executions">
-                <Navbar.Item text="Executions" icon={<Icon name="cog-6" size={12} />} />
-              </NavLink>
-              <NavLink to="/sandbox/repos/create">
-                <Navbar.Item text="Create repository" icon={<Icon name="repositories" size={12} />} />
-              </NavLink>
-              <NavLink to="/sandbox/settings/account">
-                <Navbar.Item text="Account settings" icon={<Icon name="cog-6" size={12} />} />
-              </NavLink>
-              <NavLink to="/sandbox/settings/project">
-                <Navbar.Item text="Project settings" icon={<Icon name="cog-6" size={12} />} />
-              </NavLink>
-              <NavLink to="/sandbox/settings/user-mamagement">
-                <Navbar.Item text="User Management" icon={<Icon name="cog-6" size={12} />} />
-              </NavLink>
             </Navbar.AccordionGroup>
           </Navbar.Content>
           <Navbar.Footer>

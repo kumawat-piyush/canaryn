@@ -397,8 +397,8 @@ export default function App() {
       element: <EmptyPage pathName="Chaos Engineering" />
     },
     {
-      path: 'environment',
-      element: <EmptyPage pathName="Environment" />
+      path: 'environments',
+      element: <EmptyPage pathName="Environments" />
     },
     {
       path: 'secrets',
