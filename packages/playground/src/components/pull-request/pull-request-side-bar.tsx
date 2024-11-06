@@ -174,7 +174,6 @@ const PullRequestSideBar = (props: PullRequestSideBarProps) => {
                       value={display_name}
                       onSelect={() => {
                         if (display_name) {
-                          // navigateToFile(file)
                           addReviewers?.(id)
                           setIsOpen(false)
                           refetchReviewers?.()
