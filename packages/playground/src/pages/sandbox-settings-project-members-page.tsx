@@ -102,7 +102,7 @@ function SandboxSettingsProjectMembersPage() {
   }
 
   const handleInviteClick = () => {
-    navigate('/sandbox/settings/project/create-new-member')
+    navigate('/sandbox/settings/project/members/create')
   }
 
   return (
