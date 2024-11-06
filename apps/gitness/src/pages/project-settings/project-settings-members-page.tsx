@@ -153,13 +153,6 @@ const ProjectSettingsMemebersPage = () => {
     setSearchTerm(newTerm)
     debouncedSetQuery(newTerm)
   }
-  //useCommonFilter
-
-  //sort api integration
-  // const handleSortChange = (newSort: string) => {
-  //   setSortMember(newSort as MembershipListQueryQueryParams['sort'])
-  //   refetch()
-  // }
 
   const renderMemberListContent = () => {
     if (isLoading) return <SkeletonList />
