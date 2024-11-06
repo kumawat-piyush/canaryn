@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { Spacer, Text, ListActions, SearchBox, Button, Alert } from '@harnessio/canary'
+import { Spacer, Text, ListActions, SearchBox, Button } from '@harnessio/canary'
 import debounce from 'lodash-es/debounce'
 
 import {
@@ -25,6 +25,7 @@ import { Link } from 'react-router-dom'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
 import { useQueryState, parseAsInteger } from 'nuqs'
 import { PageResponseHeader } from '../../types'
+import { DialogState } from './types'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const SortOptions = [
@@ -35,18 +36,9 @@ const SortOptions = [
 const ProjectSettingsMemebersPage = () => {
   const space_ref = useGetSpaceURLParam()
 
-  //state management
-  const [totalMembers, setTotalMembers] = useState<number | null>(null)
-  const [members, setMembers] = useState<TypesMembershipUser[]>([]) // unified state for members
-  const [dialogState, setDialogState] = useState({
-    isDialogEditOpen: false,
+  const [dialogState, setDialogState] = useState<DialogState>({
     isDialogDeleteOpen: false,
-    selectedMember: null as {
-      display_name: string
-      role: string
-      email: string
-      uid: string
-    } | null
+    selectedMember: null
   })
 
   const { sort, query: currentQuery } = useCommonFilter<MembershipListQueryQueryParams['sort']>()
@@ -54,8 +46,6 @@ const ProjectSettingsMemebersPage = () => {
     defaultValue: currentQuery || ''
   })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
-
-  const [apiError, setApiError] = useState<string | null>(null)
 
   // Define the query parameters for useMembershipListQuery
   const queryParams: MembershipListQueryQueryParams = {
@@ -68,27 +58,16 @@ const ProjectSettingsMemebersPage = () => {
 
   const {
     isLoading,
-    data: { headers } = {},
+    data: { body: membersData, headers } = {},
     refetch
-  } = useMembershipListQuery(
-    { space_ref: space_ref ?? '', queryParams: queryParams },
-    {
-      onSuccess: ({ body: membersData }) => {
-        setMembers(membersData) // Update members state
-        setTotalMembers(membersData.length) // Update total members count
-      }
-    }
-  )
+  } = useMembershipListQuery({ space_ref: space_ref ?? '', queryParams: queryParams })
 
   const totalPages = parseInt(headers?.get(PageResponseHeader.xTotalPages) || '')
 
   // edit api call
-  const { mutate: updateRole } = useMembershipUpdateMutation(
+  const { mutateAsync: updateRole } = useMembershipUpdateMutation(
     { space_ref },
     {
-      onSuccess: () => {
-        refetch()
-      },
       onError: error => {
         //no design nere
         alert('Error updating membership role: ' + error.message)
@@ -99,19 +78,11 @@ const ProjectSettingsMemebersPage = () => {
   // delete api call
   const {
     isLoading: deleteLoading,
-    mutate: deleteMember,
+    mutateAsync: deleteMember,
     isSuccess: deleteSuccess
   } = useMembershipDeleteMutation(
     { space_ref: space_ref, user_uid: dialogState.selectedMember?.uid ?? '' },
     {
-      onSuccess: () => {
-        refetch()
-        setDialogState(prev => ({
-          ...prev,
-          isDialogDeleteOpen: false,
-          selectedMember: null
-        })) // Close dialog on success
-      },
       onError: error => {
         //no design here
         alert('Error deleting membership role: ' + error.message)
@@ -119,25 +90,32 @@ const ProjectSettingsMemebersPage = () => {
     }
   )
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (dialogState.selectedMember?.uid) {
-      deleteMember({ user_uid: dialogState.selectedMember.uid })
+      await deleteMember({ user_uid: dialogState.selectedMember.uid })
+      refetch()
+      setDialogState(prev => ({
+        ...prev,
+        isDialogDeleteOpen: false,
+        selectedMember: null
+      }))
     }
   }
 
-  const handleRoleChange = (user_uid: string, newRole: EnumMembershipRole) => {
-    const owners = members.filter(member => (member.role as EnumMembershipRole) === 'space_owner')
+  const handleRoleChange = async (user_uid: string, newRole: EnumMembershipRole) => {
+    const owners = membersData?.filter(member => (member.role as EnumMembershipRole) === 'space_owner') ?? []
     const isOnlyOwner = owners.length === 1
     const isCurrentUserOwner = owners.some(member => member.principal?.uid === user_uid)
 
     // Check if the current user is the only owner and is trying to change their role
     if (isOnlyOwner && isCurrentUserOwner && newRole !== 'space_owner') {
-      setApiError('Cannot change role. At least one owner is required.')
+      alert('Cannot change role. At least one owner is required.')
       return
     }
 
     // Proceed with the role change if validation passes
-    updateRole({ user_uid, body: { role: newRole } })
+    await updateRole({ user_uid, body: { role: newRole } })
+    refetch()
   }
 
   // Debounce the search term change to avoid frequent updates
@@ -155,7 +133,7 @@ const ProjectSettingsMemebersPage = () => {
 
   const renderMemberListContent = () => {
     if (isLoading) return <SkeletonList />
-    if (!members?.length) {
+    if (!membersData?.length) {
       if (query) {
         return (
           <NoData
@@ -184,7 +162,7 @@ const ProjectSettingsMemebersPage = () => {
     return (
       <>
         <MembersList
-          members={members.map((member: TypesMembershipUser) => ({
+          members={membersData.map((member: TypesMembershipUser) => ({
             display_name: member.principal?.display_name ?? '',
             role: member.role === 'space_owner' ? 'Owner' : (member.role ?? ''), // Ensure role is always a string
             email: member.added_by?.email ?? '',
@@ -222,12 +200,11 @@ const ProjectSettingsMemebersPage = () => {
     <SandboxLayout.Main hasLeftPanel hasHeader hasSubHeader>
       <SandboxLayout.Content maxWidth="3xl">
         <Spacer size={10} />
-        {apiError && <Alert className="">{apiError}</Alert>}
         <Text size={5} weight={'medium'}>
           Team
         </Text>
         <Text size={5} weight={'medium'} color="tertiaryBackground">
-          , {totalMembers ? `${totalMembers} members` : ''}
+          , {membersData?.length ?? ''} members
         </Text>
         <Spacer size={6} />
         <ListActions.Root>
