@@ -56,7 +56,6 @@ const ProjectSettingsMemebersPage = () => {
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
   const [apiError, setApiError] = useState<string | null>(null)
-  const [searchTerm, setSearchTerm] = useState(query) // not used
 
   // Define the query parameters for useMembershipListQuery
   const queryParams: MembershipListQueryQueryParams = {
@@ -150,7 +149,7 @@ const ProjectSettingsMemebersPage = () => {
   // Update search term on input change and debounce the API call
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newTerm = event.target.value
-    setSearchTerm(newTerm)
+    setQuery(newTerm)
     debouncedSetQuery(newTerm)
   }
 
@@ -233,7 +232,7 @@ const ProjectSettingsMemebersPage = () => {
         <Spacer size={6} />
         <ListActions.Root>
           <ListActions.Left>
-            <SearchBox.Root placeholder="Search Members" handleChange={handleInputChange} defaultValue={searchTerm} />
+            <SearchBox.Root placeholder="Search Members" handleChange={handleInputChange} defaultValue={query} />
           </ListActions.Left>
           <ListActions.Right>
             <ListActions.Dropdown title="All Team Roles" items={filterOptions} />
