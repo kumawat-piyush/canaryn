@@ -223,18 +223,23 @@ export const RepoSandboxFiles: React.FC = () => {
 
   const fileText = useCallback(
     (file: string) => {
-      const matchIndex = file.toLowerCase().indexOf(query.toLowerCase())
-      if (matchIndex === -1) {
-        return <Text>{file}</Text>
+      const match = file.match(new RegExp(query))
+      if (!match) {
+        return (
+          <Text>
+            <span>{file}</span>
+          </Text>
+        )
       }
+      const matchIndex = match?.index || 0
       const startText = file.slice(0, matchIndex)
       const matchedText = file.slice(matchIndex, matchIndex + query.length)
       const endText = file.slice(matchIndex + query.length)
       return (
         <Text>
-          {startText}
-          <mark>{matchedText}</mark>
-          {endText}
+          {startText ? <span>{startText}</span> : null}
+          {matchedText ? <mark>{matchedText}</mark> : null}
+          {endText ? <span>{endText}</span> : null}
         </Text>
       )
     },
