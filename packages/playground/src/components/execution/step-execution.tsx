@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger, Input, Button, Text, ScrollArea, SearchBox } from '@harnessio/canary'
+import { Tabs, TabsContent, TabsList, TabsTrigger, Button, Text, ScrollArea, SearchBox } from '@harnessio/canary'
 import { Copy, Edit, Download } from '@harnessio/icons-noir'
 import ConsoleLogs from './console-logs'
 import { Layout } from '../layout/layout'
