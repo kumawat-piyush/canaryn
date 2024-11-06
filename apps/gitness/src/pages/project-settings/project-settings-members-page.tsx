@@ -62,7 +62,7 @@ const ProjectSettingsMemebersPage = () => {
   const queryParams: MembershipListQueryQueryParams = {
     query,
     order: 'asc',
-    sort,
+    sort: sortMember,
     page,
     limit: 30
   }
@@ -152,6 +152,12 @@ const ProjectSettingsMemebersPage = () => {
     const newTerm = event.target.value
     setSearchTerm(newTerm)
     debouncedSetQuery(newTerm)
+  }
+
+  //sort api integration
+  const handleSortChange = (newSort: string) => {
+    setSortMember(newSort as MembershipListQueryQueryParams['sort'])
+    refetch()
   }
 
   const renderMemberListContent = () => {
