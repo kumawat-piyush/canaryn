@@ -60,20 +60,20 @@ export const CreateNewMemberPage = () => {
   })
 
   // Mutation hook for adding a member
-  const { mutate: addMember } = useMembershipAddMutation(
+  const {
+    mutate: addMember,
+    isSuccess,
+    isLoading
+  } = useMembershipAddMutation(
     { space_ref },
     {
       onSuccess: () => {
-        console.log('Member added successfully')
-        setSubmitted(true)
-        setTimeout(() => {
-          setSubmitted(false)
-          navigate(`/${space_ref}/sandbox/settings/project/members`, { replace: true })
-        }, 2000)
+        setIsSubmitting(isLoading)
+        setSubmitted(isSuccess)
+        navigate(`/${space_ref}/settings/members`, { replace: true })
       },
       onError: error => {
         alert('Error adding member: ' + error.message)
-        setIsSubmitting(false)
       }
     }
   )
@@ -86,7 +86,7 @@ export const CreateNewMemberPage = () => {
 
   const handleCancel = () => {
     resetNewMemberForm()
-    navigate(`/${space_ref}/sandbox/settings/project/members`, { replace: true })
+    navigate(`/${space_ref}/settings/members`, { replace: true })
   }
 
   const newMemberRoleValue = watch('role')
