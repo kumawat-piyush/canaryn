@@ -238,7 +238,7 @@ const ProjectSettingsMemebersPage = () => {
           <ListActions.Right>
             <ListActions.Dropdown title="All Team Roles" items={filterOptions} />
             <Filter showSearch={false} sortOptions={SortOptions} />
-            <Link to={`/${space_ref}/sandbox/settings/project/create-new-member`}>
+            <Link to={`/${space_ref}/settings/project/create-new-member`}>
               <Button variant="default">Invite New Members</Button>
             </Link>
           </ListActions.Right>
