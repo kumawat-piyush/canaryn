@@ -61,6 +61,7 @@ import { ExplorerPathsProvider } from './framework/context/ExplorerPathsContext'
 import { Logout } from './pages/logout'
 import { UserManagementPageContainer } from './user-management/user-management-container'
 import PipelineLayout from './layouts/PipelineStudioLayout'
+import { SandboxPipelineCreate } from './pages/pipeline-create/pipeline-create-sandbox'
 
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
 
@@ -112,7 +113,7 @@ export default function App() {
           children: [
             {
               path: 'create',
-              element: <PipelineCreate />
+              element: <SandboxPipelineCreate />
             },
             {
               path: ':pipelineId',
