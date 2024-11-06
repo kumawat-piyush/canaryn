@@ -70,10 +70,11 @@ export const CreateNewMemberPage = () => {
       onSuccess: () => {
         setIsSubmitting(isLoading)
         setSubmitted(isSuccess)
-        navigate(`/${space_ref}/settings/members`, { replace: true })
+        navigate(`/spaces/${space_ref}/settings/members`, { replace: true })
       },
       onError: error => {
         alert('Error adding member: ' + error.message)
+        setIsSubmitting(false)
       }
     }
   )
@@ -86,7 +87,7 @@ export const CreateNewMemberPage = () => {
 
   const handleCancel = () => {
     resetNewMemberForm()
-    navigate(`/${space_ref}/settings/members`, { replace: true })
+    navigate(`/spaces/${space_ref}/settings/members`, { replace: true })
   }
 
   const newMemberRoleValue = watch('role')
