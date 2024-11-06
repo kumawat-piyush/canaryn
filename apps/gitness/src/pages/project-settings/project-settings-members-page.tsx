@@ -62,7 +62,7 @@ const ProjectSettingsMemebersPage = () => {
   const queryParams: MembershipListQueryQueryParams = {
     query,
     order: 'asc',
-    sort: sortMember,
+    sort,
     page,
     limit: 30
   }
@@ -153,12 +153,13 @@ const ProjectSettingsMemebersPage = () => {
     setSearchTerm(newTerm)
     debouncedSetQuery(newTerm)
   }
+  //useCommonFilter
 
   //sort api integration
-  const handleSortChange = (newSort: string) => {
-    setSortMember(newSort as MembershipListQueryQueryParams['sort'])
-    refetch()
-  }
+  // const handleSortChange = (newSort: string) => {
+  //   setSortMember(newSort as MembershipListQueryQueryParams['sort'])
+  //   refetch()
+  // }
 
   const renderMemberListContent = () => {
     if (isLoading) return <SkeletonList />
