@@ -34,7 +34,6 @@ import { RepoSandboxSummaryList } from './pages/repo-sandbox/repo-sandbox-summar
 import CreateProject from './pages/create-project'
 import { CreateRepo } from './pages/repo/repo-create-page'
 import { PipelineCreate } from './pages/pipeline-create/pipeline-create'
-import { SandboxPipelineCreate } from './pages/pipeline-create/pipeline-create-sandbox'
 import RepoSandboxCommitsPage from './pages/repo-sandbox/repo-sandbox-commits'
 import { Execution } from './pages/execution/execution-details'
 import RepoSandboxWebhooksListPage from './pages/repo-sandbox/repo-sandbox-webhooks'
@@ -61,6 +60,8 @@ import { RepoBranchSettingsRulesPageContainer } from './pages/repo-sandbox/repo-
 import { ExplorerPathsProvider } from './framework/context/ExplorerPathsContext'
 import { Logout } from './pages/logout'
 import { UserManagementPageContainer } from './user-management/user-management-container'
+import PipelineLayout from './layouts/PipelineStudioLayout'
+
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
 
 export default function App() {
@@ -104,6 +105,27 @@ export default function App() {
         {
           index: true,
           element: <LandingPage />
+        },
+        {
+          path: 'spaces/:spaceId/repos/:repoId/pipelines',
+          element: <PipelineLayout />,
+          children: [
+            {
+              path: 'create',
+              element: <PipelineCreate />
+            },
+            {
+              path: ':pipelineId',
+              children: [
+                { index: true, element: <SandboxExecutionsListPage /> },
+                {
+                  path: 'edit',
+                  element: <PipelineEditPage />
+                },
+                { path: 'executions/:executionId', element: <Execution /> }
+              ]
+            }
+          ]
         },
         {
           path: 'spaces',
@@ -173,21 +195,6 @@ export default function App() {
                     {
                       index: true,
                       element: <SandboxPipelinesPage />
-                    },
-                    {
-                      path: ':pipelineId',
-                      children: [
-                        { index: true, element: <SandboxExecutionsListPage /> },
-                        { path: 'executions/:executionId', element: <Execution /> },
-                        {
-                          path: 'edit',
-                          element: <PipelineEditPage />
-                        }
-                      ]
-                    },
-                    {
-                      path: 'create',
-                      element: <SandboxPipelineCreate />
                     }
                   ]
                 },
