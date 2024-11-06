@@ -20,7 +20,7 @@ export function getBreadcrumbMatchers(pathname: string) {
     pathname
   )
 
-  const isExcludedProjectRoute = ['/spaces/create-project'].find(route => {
+  const isExcludedProjectRoute = ['/spaces/create'].find(route => {
     return matchPath(
       {
         path: route,

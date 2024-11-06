@@ -64,8 +64,8 @@ export default function Breadcrumbs() {
 
       items.push({
         label: 'Create Project',
-        key: '/spaces/create-project',
-        path: '/spaces/create-project',
+        key: '/spaces/create',
+        path: '/spaces/create',
         value: ''
       })
       return { items, selectedValue: space, placeholder: 'Select space' }
@@ -73,8 +73,10 @@ export default function Breadcrumbs() {
   }, [spaces, space, isProjectRoute])
 
   const reposBreadcrumbProps = useMemo((): BreadcrumbDropdownProps | undefined => {
-    if (isRepoRoute && repos) {
-      const items = repos.map(repo => ({
+    let items: BreadcrumbDropdownProps['items'] | undefined = []
+
+    if (isRepoRoute) {
+      items = repos?.map(repo => ({
         key: repo.identifier as string,
         label: repo.identifier as string,
         path: `/spaces/${space}/repos/${repo.identifier}`,
@@ -82,7 +84,7 @@ export default function Breadcrumbs() {
       }))
 
       if (hasMoreRepos) {
-        items.push({
+        items?.push({
           label: 'View all',
           key: `/spaces/${space}/repos`,
           path: `/spaces/${space}/repos`,
@@ -98,7 +100,7 @@ export default function Breadcrumbs() {
         value: repoId as string
       }
 
-      return { items, selectedItem, placeholder: 'Select repository' }
+      return { items: items ?? [], selectedItem, placeholder: 'Select repository' }
     }
   }, [repos, repoId, isRepoRoute, space])
 
