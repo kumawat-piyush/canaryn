@@ -151,6 +151,13 @@ export const SandboxRoot: React.FC<SandboxRootProps> = ({ currentUser, currentSp
                 </NavLink>
               ))}
             </Navbar.AccordionGroup>
+            <Navbar.Group>
+              <NavLink to={`/spaces/${currentSpaceId}/settings`}>
+                {({ isActive }) => (
+                  <Navbar.Item text="Project Settings" icon={<Icon name="cog-6" size={12} />} active={isActive} />
+                )}
+              </NavLink>
+            </Navbar.Group>
           </Navbar.Content>
           <Navbar.Footer>
             <NavbarUser.Root
