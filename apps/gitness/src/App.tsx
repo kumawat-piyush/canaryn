@@ -116,7 +116,7 @@ export default function App() {
               children: [
                 {
                   index: true,
-                  element: <RepoSandboxSummaryList />
+                  element: <Navigate to="summary" replace />
                 },
                 {
                   path: 'summary',
