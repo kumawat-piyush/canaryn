@@ -85,7 +85,15 @@ export const PipelineList = ({ pipelines, LinkComponent }: PageProps) => {
                 <StackedList.Field
                   label
                   secondary
-                  title={pipeline.meter ? <Meter.Root data={pipeline.meter} /> : pipeline.timestamp}
+                  title={
+                    pipeline.meter ? (
+                      <Meter.Root data={pipeline.meter} />
+                    ) : pipeline.timestamp ? (
+                      `Created ${pipeline.timestamp}`
+                    ) : (
+                      ''
+                    )
+                  }
                   right
                 />
               </StackedList.Item>

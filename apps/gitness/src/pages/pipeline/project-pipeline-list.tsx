@@ -15,6 +15,7 @@ import {
 import { PageResponseHeader } from '../../types'
 import { getExecutionStatus } from '../../utils/execution-utils'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
+import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
 
 export default function ProjectPipelinesPage() {
   const spaceId = useGetSpaceURLParam()
@@ -78,7 +79,7 @@ export default function ProjectPipelinesPage() {
             name: item?.identifier,
             sha: item?.execution?.after,
             description: item?.execution?.message,
-            timestamp: item?.created
+            timestamp: item?.created ? timeAgoFromEpochTime(item.created) : ''
             /**
              * Add when pipeline contains execution data as well
              */
