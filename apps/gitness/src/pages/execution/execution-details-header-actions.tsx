@@ -22,10 +22,14 @@ const ExecutionDetailsHeaderActions = (props: isPipelineStillExecutingProps): JS
     repo_ref: repoRef
   })
 
-  const handleAbort = (): void => {
-    cancelExecution({})
-      .then(() => {})
-      .catch()
+  const handleAbort = async () => {
+    try {
+      await cancelExecution({})
+    } catch (ex) {
+      console.error(ex)
+      // TODO: toast?
+    }
+    // TODO: toast?
   }
 
   return (
