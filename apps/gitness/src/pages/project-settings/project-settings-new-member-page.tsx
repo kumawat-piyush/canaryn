@@ -135,7 +135,6 @@ export const CreateNewMemberPage = () => {
                     <Button variant="ghost">
                       <Text>{selectedMember || 'Select New Member'}</Text>
                     </Button>
-                    {/* <Icon name="chevron-down" className="mr-2" /> */}
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent style={{ width: 'var(--radix-dropdown-menu-trigger-width)' }}>
