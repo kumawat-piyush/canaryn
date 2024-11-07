@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Button,
   ButtonGroup,
-  Input,
+  DropdownMenu,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   Spacer,
   Text,
   Icon,
@@ -18,7 +23,7 @@ import {
 import { SandboxLayout, FormFieldSet } from '@harnessio/playground'
 import { useNavigate } from 'react-router-dom'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
-import { useMembershipAddMutation, EnumMembershipRole } from '@harnessio/code-service-client'
+import { useMembershipAddMutation, EnumMembershipRole, useListPrincipalsQuery } from '@harnessio/code-service-client'
 
 // Define form schema for new member
 const newMemberSchema = z.object({
@@ -42,6 +47,7 @@ export const CreateNewMemberPage = () => {
   const navigate = useNavigate()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [selectedMember, setSelectedMember] = useState<string>('') // State to hold selected member
 
   const {
     register,
@@ -56,6 +62,16 @@ export const CreateNewMemberPage = () => {
     defaultValues: {
       memberName: '',
       role: ''
+    }
+  })
+
+  // Fetch available members
+  // This type in custom hook show: array type but not work here. we can only use string to get api data
+  const { data: { body: usersData } = {} } = useListPrincipalsQuery({
+    queryParams: {
+      page: 1,
+      limit: 20,
+      type: 'user'
     }
   })
 
@@ -85,6 +101,12 @@ export const CreateNewMemberPage = () => {
     addMember({ body: { user_uid: data.memberName, role: data.role as EnumMembershipRole } })
   }
 
+  // Handle member selection
+  const handleMemberSelect = (uid: string, display_name: string) => {
+    setSelectedMember(display_name)
+    setValue('memberName', uid, { shouldValidate: true })
+  }
+
   const handleCancel = () => {
     resetNewMemberForm()
     navigate(`/spaces/${space_ref}/settings/members`, { replace: true })
@@ -107,12 +129,36 @@ export const CreateNewMemberPage = () => {
               <FormFieldSet.Label htmlFor="memberName" required>
                 New Member Name
               </FormFieldSet.Label>
-              <Input
-                id="memberName"
-                {...register('memberName')}
-                placeholder="Enter Member name"
-                disabled={isSubmitting}
-              />
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <div className="flex justify-between border rounded-md items-center">
+                    <Button variant="ghost">
+                      <Text>{selectedMember || 'Select New Member'}</Text>
+                    </Button>
+                    {/* <Icon name="chevron-down" className="mr-2" /> */}
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent style={{ width: 'var(--radix-dropdown-menu-trigger-width)' }}>
+                  <DropdownMenuLabel>
+                    {usersData?.length !== 0 ? (
+                      'Available users'
+                    ) : (
+                      <Text color="tertiaryBackground">No available users</Text>
+                    )}
+                  </DropdownMenuLabel>
+                  {usersData && <DropdownMenuSeparator />}
+                  {usersData &&
+                    usersData.map(user => (
+                      <DropdownMenuItem
+                        key={user.uid}
+                        onSelect={() => handleMemberSelect(user.uid ?? '', user.display_name ?? '')}>
+                        {user.display_name}
+                      </DropdownMenuItem>
+                    ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+              {/* Register the field for validation */}
+              <input type="hidden" {...register('memberName', { required: 'Please select a member' })} />
               {errors.memberName && (
                 <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
                   {errors.memberName.message}

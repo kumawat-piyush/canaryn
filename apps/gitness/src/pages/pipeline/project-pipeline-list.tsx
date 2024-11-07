@@ -1,7 +1,8 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { parseAsInteger, useQueryState } from 'nuqs'
 import { Button, Spacer, Text } from '@harnessio/canary'
-import { TypesPipeline, useListSpacePipelinesQuery } from '@harnessio/code-service-client'
+import { TypesPipeline, useListPipelinesQuery } from '@harnessio/code-service-client'
 import {
   PipelineList,
   SandboxLayout,
@@ -22,7 +23,7 @@ export default function ProjectPipelinesPage() {
   const [query, setQuery] = useDebouncedQueryState('query')
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
-  const { data: { body: pipelines, headers } = {}, isFetching } = useListSpacePipelinesQuery(
+  const { data: { body: pipelines, headers } = {}, isFetching } = useListPipelinesQuery(
     {
       space_ref: spaceId || '',
       queryParams: { page, query }
