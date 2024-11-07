@@ -4,17 +4,15 @@ import { Button, Spacer, Text } from '@harnessio/canary'
 import { TypesPipeline, useListSpacePipelinesQuery } from '@harnessio/code-service-client'
 import {
   PipelineList,
-  MeterState,
   SandboxLayout,
   SkeletonList,
   Filter,
   useCommonFilter,
-  ExecutionState,
   NoData,
-  NoSearchResults
+  NoSearchResults,
+  PaginationComponent
 } from '@harnessio/playground'
 import { PageResponseHeader } from '../../types'
-import { PaginationComponent } from '@harnessio/playground'
 import { getExecutionStatus } from '../../utils/execution-utils'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 
@@ -80,13 +78,16 @@ export default function ProjectPipelinesPage() {
             name: item?.identifier,
             sha: item?.execution?.after,
             description: item?.execution?.message,
-            timestamp: item?.created,
-            meter: [
-              {
-                id: item?.execution?.number,
-                state: item?.execution?.status === ExecutionState.SUCCESS ? MeterState.Success : MeterState.Error
-              }
-            ]
+            timestamp: item?.created
+            /**
+             * Add when pipeline contains execution data as well
+             */
+            // meter: [
+            //         {
+            //           id: item?.execution?.number,
+            //           state: getMeterState(item?.execution?.status)
+            //         }
+            //       ]
           }))}
           LinkComponent={LinkComponent}
         />

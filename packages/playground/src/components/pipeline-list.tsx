@@ -17,7 +17,7 @@ interface Pipeline {
   sha?: string
   description?: string
   version?: string
-  timestamp: string
+  timestamp?: string
   meter?: {
     id: string
     state: MeterState

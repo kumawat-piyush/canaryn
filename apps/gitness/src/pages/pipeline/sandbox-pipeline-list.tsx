@@ -4,19 +4,17 @@ import { Button, Spacer, Text } from '@harnessio/canary'
 import { useListPipelinesQuery, TypesPipeline } from '@harnessio/code-service-client'
 import {
   PipelineList,
-  MeterState,
   SandboxLayout,
   SkeletonList,
   Filter,
   useCommonFilter,
-  ExecutionState,
   NoData,
-  NoSearchResults
+  NoSearchResults,
+  PaginationComponent
 } from '@harnessio/playground'
 import { PageResponseHeader } from '../../types'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
-import { PaginationComponent } from '@harnessio/playground'
-import { getExecutionStatus } from '../../utils/execution-utils'
+import { getExecutionStatus, getMeterState } from '../../utils/execution-utils'
 
 export default function SandboxPipelinesPage() {
   const repoRef = useGetRepoRef()
@@ -82,7 +80,7 @@ export default function SandboxPipelinesPage() {
             meter: [
               {
                 id: item?.execution?.number,
-                state: item?.execution?.status === ExecutionState.SUCCESS ? MeterState.Success : MeterState.Error
+                state: getMeterState(item?.execution?.status)
               }
             ]
           }))}
