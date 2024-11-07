@@ -32,7 +32,7 @@ export interface Branch {
 export interface CreateBranchDialogProps {
   open: boolean
   onClose: () => void
-  onSubmit: (formValues: ICreateBranchForm) => Promise<void>
+  onSubmit: (formValues: ICreateBranchForm) => void
   isLoadingBranches: boolean
   isSaving: boolean
   branches?: Array<Branch>
