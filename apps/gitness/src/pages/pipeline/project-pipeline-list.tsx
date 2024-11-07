@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { parseAsInteger, useQueryState } from 'nuqs'
 import { Button, Spacer, Text } from '@harnessio/canary'
-import { useListPipelinesQuery, TypesPipeline } from '@harnessio/code-service-client'
+import { TypesPipeline, useListSpacePipelinesQuery } from '@harnessio/code-service-client'
 import {
   PipelineList,
   MeterState,
@@ -13,22 +13,24 @@ import {
   NoData,
   NoSearchResults
 } from '@harnessio/playground'
-import { PageResponseHeader } from '../types'
-import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
-import { PaginationComponent } from '../../../../packages/playground/dist'
-import { getExecutionStatus } from '../utils/execution-utils'
+import { PageResponseHeader } from '../../types'
+import { PaginationComponent } from '@harnessio/playground'
+import { getExecutionStatus } from '../../utils/execution-utils'
+import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 
-export default function SandboxPipelinesPage() {
-  const repoRef = useGetRepoRef()
-
+export default function ProjectPipelinesPage() {
+  const spaceId = useGetSpaceURLParam()
   const { query: currentQuery } = useCommonFilter()
   const [query, _] = useQueryState('query', { defaultValue: currentQuery || '' })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
-  const { data: { body: pipelines, headers } = {}, isFetching } = useListPipelinesQuery({
-    repo_ref: repoRef,
-    queryParams: { page, query, latest: true }
-  })
+  const { data: { body: pipelines, headers } = {}, isFetching } = useListSpacePipelinesQuery(
+    {
+      space_ref: spaceId || '',
+      queryParams: { page, query }
+    },
+    { enabled: !!spaceId }
+  )
 
   const totalPages = parseInt(headers?.get(PageResponseHeader.xTotalPages) || '')
 
