@@ -405,7 +405,7 @@ export default function App() {
         },
 
         {
-          path: 'create-new-user',
+          path: 'users/create',
           element: <CreateNewUserContainer />
         }
       ]
