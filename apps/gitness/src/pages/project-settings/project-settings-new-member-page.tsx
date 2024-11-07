@@ -45,8 +45,6 @@ const roleOptions = [
 export const CreateNewMemberPage = () => {
   const space_ref = useGetSpaceURLParam()
   const navigate = useNavigate()
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
   const [selectedMember, setSelectedMember] = useState<string>('') // State to hold selected member
 
   const {
@@ -78,26 +76,23 @@ export const CreateNewMemberPage = () => {
   // Mutation hook for adding a member
   const {
     mutate: addMember,
-    isSuccess,
-    isLoading
+    isSuccess: submitted,
+    isLoading: isSubmitting
   } = useMembershipAddMutation(
     { space_ref },
     {
       onSuccess: () => {
-        setIsSubmitting(isLoading)
-        setSubmitted(isSuccess)
+        resetNewMemberForm()
         navigate(`/spaces/${space_ref}/settings/members`, { replace: true })
       },
       onError: error => {
         alert('Error adding member: ' + error.message)
-        setIsSubmitting(false)
       }
     }
   )
 
   // Form submit handler
   const onSubmit: SubmitHandler<NewMemberFields> = data => {
-    setIsSubmitting(true)
     addMember({ body: { user_uid: data.memberName, role: data.role as EnumMembershipRole } })
   }
 
