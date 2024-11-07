@@ -16,7 +16,7 @@ import { PageResponseHeader } from '../../types'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { getExecutionStatus, getMeterState } from '../../utils/execution-utils'
 
-export default function SandboxPipelinesPage() {
+export default function RepoPipelinesPage() {
   const repoRef = useGetRepoRef()
 
   const { query: currentQuery } = useCommonFilter()

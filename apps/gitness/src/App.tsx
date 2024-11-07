@@ -17,8 +17,7 @@ import {
 import SandboxRootWrapper from './components/SandboxRootWrapper'
 import { TooltipProvider } from '@harnessio/canary'
 import { queryClient } from './framework/queryClient'
-import PipelineListPage from './pages/pipeline/pipeline-list'
-import SandboxPipelinesPage from './pages/pipeline/sandbox-pipeline-list'
+import RepoPipelinesPage from './pages/pipeline/repo-pipeline-list'
 import ProjectPipelinesPage from './pages/pipeline/project-pipeline-list'
 import { SignIn } from './pages/signin'
 import { SignUp } from './pages/signup'
@@ -196,7 +195,7 @@ export default function App() {
                   children: [
                     {
                       index: true,
-                      element: <SandboxPipelinesPage />
+                      element: <RepoPipelinesPage />
                     }
                   ]
                 },
@@ -304,7 +303,16 @@ export default function App() {
             // Pipelines (OUTSIDE REPOS)
             {
               path: ':spaceId/pipelines',
-              element: <ProjectPipelinesPage />
+              children: [
+                {
+                  index: true,
+                  element: <ProjectPipelinesPage />
+                },
+                {
+                  path: ':pipelineId',
+                  element: <SandboxExecutionsListPage />
+                }
+              ]
             },
             // Executions (OUTSIDE REPOS)
             {
@@ -321,7 +329,7 @@ export default function App() {
                 },
                 {
                   path: 'pipelines',
-                  element: <PipelineListPage />
+                  element: <RepoPipelinesPage />
                 },
                 {
                   path: 'pipelines/:pipelineId/edit',
