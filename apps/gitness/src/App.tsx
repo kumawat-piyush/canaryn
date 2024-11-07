@@ -25,14 +25,12 @@ import PullRequestSandboxListPage from './pages/sandbox-pull-request-list-page'
 import SandboxExecutionsListPage from './pages/sandbox-execution-list'
 import PullRequestSandboxLayout from './layouts/PullRequestSandboxLayout'
 import PullRequestCommitsPage from './pages/pull-request-commits-page'
-import RepoLayout from './layouts/RepoLayout'
 import PipelineEditPage from './pages/pipeline-edit/pipeline-edit'
 import { LandingPage } from './pages/landing-page'
 import { AppProvider } from './framework/context/AppContext'
 import { RepoSandboxSummaryList } from './pages/repo-sandbox/repo-sandbox-summary'
 import CreateProject from './pages/create-project'
 import { CreateRepo } from './pages/repo/repo-create-page'
-import { PipelineCreate } from './pages/pipeline-create/pipeline-create'
 import RepoSandboxCommitsPage from './pages/repo-sandbox/repo-sandbox-commits'
 import { Execution } from './pages/execution/execution-details'
 import RepoSandboxWebhooksListPage from './pages/repo-sandbox/repo-sandbox-webhooks'
@@ -320,32 +318,6 @@ export default function App() {
               element: <SandboxExecutionsListPage />
             },
             {
-              path: ':spaceId/repos/:repoId',
-              element: <RepoLayout />,
-              children: [
-                {
-                  index: true,
-                  element: <>Repos list</>
-                },
-                {
-                  path: 'pipelines',
-                  element: <RepoPipelinesPage />
-                },
-                {
-                  path: 'pipelines/:pipelineId/edit',
-                  element: <PipelineEditPage />
-                },
-                {
-                  path: 'pipelines/create',
-                  element: <PipelineCreate />
-                },
-                {
-                  path: 'pipelines/:pipelineId/executions/:executionId',
-                  element: <div>Execution page</div>
-                }
-              ]
-            },
-            {
               path: 'create',
               element: <CreateProject />
             },
@@ -407,12 +379,10 @@ export default function App() {
             }
           ]
         },
-
         {
           path: 'users',
           element: <UserManagementPageContainer />
         },
-
         {
           path: 'users/create',
           element: <CreateNewUserContainer />
