@@ -2,21 +2,22 @@ import { parseAsInteger, useQueryState } from 'nuqs'
 import { Spacer, Text, Button } from '@harnessio/canary'
 import { Link, useParams } from 'react-router-dom'
 import {
-  PaddingListLayout,
   SkeletonList,
   PullRequestList,
   NoData,
   useCommonFilter,
   Filter,
-  NoSearchResults
+  NoSearchResults,
+  SandboxLayout
 } from '@harnessio/playground'
 import { ListPullReqQueryQueryParams, TypesPullReq, useListPullReqQuery } from '@harnessio/code-service-client'
 import { timeAgoFromEpochTime } from './pipeline-edit/utils/time-utils'
 import { DropdownItemProps } from '../../../../packages/canary/dist/components/list-actions'
 import { PathParams } from '../RouteDefinitions'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
-import { PaginationComponent } from '../../../../packages/playground/dist'
+import { PaginationComponent } from '@harnessio/playground'
 import { PageResponseHeader } from '../types'
+import { useDebouncedQueryState } from '../hooks/useQuery'
 
 const SortOptions = [
   { name: 'Created', value: 'created' },
@@ -28,13 +29,13 @@ const SortOptions = [
 
 const colorArr = ['mint', 'yellow', 'red', 'blue', 'purple']
 
-function PullRequestListPage() {
+export default function PullRequestListPage() {
   const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
   const repoRef = useGetRepoRef()
   const { repoId, spaceId } = useParams<PathParams>()
 
-  const { sort, query: currentQuery } = useCommonFilter<ListPullReqQueryQueryParams['sort']>()
-  const [query, _] = useQueryState('query', { defaultValue: currentQuery || '' })
+  const { sort } = useCommonFilter<ListPullReqQueryQueryParams['sort']>()
+  const [query, setQuery] = useDebouncedQueryState({ queryKey: 'query' })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
   const { data: { body: pullrequests, headers } = {}, isFetching } = useListPullReqQuery({
@@ -55,8 +56,7 @@ function PullRequestListPage() {
             iconName="no-search-magnifying-glass"
             title="No search results"
             description={['Check your spelling and filter options,', 'or search for a different keyword.']}
-            primaryButton={{ label: 'Clear search' }}
-            secondaryButton={{ label: 'Clear filters' }}
+            primaryButton={{ label: 'Clear search', onClick: () => setQuery('') }}
           />
         )
       }
@@ -100,43 +100,33 @@ function PullRequestListPage() {
     )
   }
 
-  const pullRequestsExist = (pullrequests?.length ?? 0) > 0
-
   return (
     <>
-      <PaddingListLayout spaceTop={false}>
-        <Spacer size={2} />
-        {/**
-         * Show if pull requests exist.
-         * Additionally, show if query(search) is applied.
-         */}
-        {(query || pullRequestsExist) && (
-          <>
-            <Text size={5} weight={'medium'}>
-              Pull Requests
-            </Text>
-            <Spacer size={6} />
-            <div className="flex justify-between gap-5 items-center">
-              <div className="flex-1">
-                <Filter sortOptions={SortOptions} />
-              </div>
-              <Button variant="default" asChild>
-                <Link to={`/spaces/${spaceId}/repos/${repoId}/pull-requests/compare/`}>New pull request</Link>
-              </Button>
+      <SandboxLayout.Main hasHeader hasSubHeader hasLeftPanel>
+        <SandboxLayout.Content>
+          <Spacer size={10} />
+          <Text size={5} weight={'medium'}>
+            Pull Requests
+          </Text>
+          <Spacer size={6} />
+          <div className="flex justify-between gap-5">
+            <div className="flex-1">
+              <Filter sortOptions={SortOptions} />
             </div>
-          </>
-        )}
-        <Spacer size={5} />
-        {renderListContent()}
-        <Spacer size={8} />
-        <PaginationComponent
-          totalPages={totalPages}
-          currentPage={page}
-          goToPage={(pageNum: number) => setPage(pageNum)}
-        />
-      </PaddingListLayout>
+            <Button variant="default" asChild>
+              <Link to={`/spaces/${spaceId}/repos/${repoId}/pull-requests/compare/`}>New pull request</Link>
+            </Button>
+          </div>
+          <Spacer size={5} />
+          {renderListContent()}
+          <Spacer size={8} />
+          <PaginationComponent
+            totalPages={totalPages}
+            currentPage={page}
+            goToPage={(pageNum: number) => setPage(pageNum)}
+          />
+        </SandboxLayout.Content>
+      </SandboxLayout.Main>
     </>
   )
 }
-
-export default PullRequestListPage

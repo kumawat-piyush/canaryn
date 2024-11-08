@@ -59,34 +59,23 @@ export default function RepoPipelinesPage() {
       )
     }
     return (
-      <>
-        <div className="flex justify-between gap-5">
-          <div className="flex-1">
-            <Filter />
-          </div>
-          <Button variant="default" asChild>
-            <Link to="create">Create Pipeline</Link>
-          </Button>
-        </div>
-        <Spacer size={5} />
-        <PipelineList
-          pipelines={pipelines?.map((item: TypesPipeline) => ({
-            id: item?.identifier || '',
-            status: getExecutionStatus(item?.execution?.status),
-            name: item?.identifier,
-            sha: item?.execution?.after,
-            description: item?.execution?.message,
-            timestamp: item?.created,
-            meter: [
-              {
-                id: item?.execution?.number,
-                state: getMeterState(item?.execution?.status)
-              }
-            ]
-          }))}
-          LinkComponent={LinkComponent}
-        />
-      </>
+      <PipelineList
+        pipelines={pipelines?.map((item: TypesPipeline) => ({
+          id: item?.identifier || '',
+          status: getExecutionStatus(item?.execution?.status),
+          name: item?.identifier,
+          sha: item?.execution?.after,
+          description: item?.execution?.message,
+          timestamp: item?.created,
+          meter: [
+            {
+              id: item?.execution?.number,
+              state: getMeterState(item?.execution?.status)
+            }
+          ]
+        }))}
+        LinkComponent={LinkComponent}
+      />
     )
   }
 
@@ -99,6 +88,15 @@ export default function RepoPipelinesPage() {
             Pipelines
           </Text>
           <Spacer size={6} />
+          <div className="flex justify-between gap-5">
+            <div className="flex-1">
+              <Filter />
+            </div>
+            <Button variant="default" asChild>
+              <Link to="create">Create Pipeline</Link>
+            </Button>
+          </div>
+          <Spacer size={5} />
           {renderListContent()}
           <Spacer size={8} />
           <PaginationComponent

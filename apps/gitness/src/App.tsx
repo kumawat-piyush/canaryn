@@ -21,7 +21,7 @@ import RepoPipelinesPage from './pages/pipeline/repo-pipeline-list'
 import ProjectPipelinesPage from './pages/pipeline/project-pipeline-list'
 import { SignIn } from './pages/signin'
 import { SignUp } from './pages/signup'
-import PullRequestSandboxListPage from './pages/sandbox-pull-request-list-page'
+import PullRequestListPage from './pages/pull-request-list-page'
 import RepoExecutionListPage from './pages/execution/repo-execution-list'
 import PullRequestSandboxLayout from './layouts/PullRequestSandboxLayout'
 import PullRequestCommitsPage from './pages/pull-request-commits-page'
@@ -204,7 +204,7 @@ export default function App() {
                 {
                   path: 'pull-requests',
                   children: [
-                    { index: true, element: <PullRequestSandboxListPage /> },
+                    { index: true, element: <PullRequestListPage /> },
                     {
                       path: 'compare/:diffRefs*?',
                       element: <CreatePullRequest />
