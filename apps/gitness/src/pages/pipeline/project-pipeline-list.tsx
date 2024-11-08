@@ -86,7 +86,7 @@ export default function ProjectPipelinesPage() {
 
   return (
     <>
-      <SandboxLayout.Main hasHeader hasSubHeader hasLeftPanel>
+      <SandboxLayout.Main hasHeader hasLeftPanel>
         <SandboxLayout.Content>
           <Spacer size={10} />
           <Text size={5} weight={'medium'}>
