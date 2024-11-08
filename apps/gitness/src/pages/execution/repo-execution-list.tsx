@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { parseAsInteger, useQueryState } from 'nuqs'
 import { TypesExecution, useListExecutionsQuery } from '@harnessio/code-service-client'
-import { ListActions, SearchBox, Spacer, Text, Button } from '@harnessio/canary'
+import { ListActions, Spacer, Text, Button } from '@harnessio/canary'
 import {
   ExecutionList,
   SkeletonList,
@@ -51,7 +51,11 @@ export default function RepoExecutionListPage() {
           <>
             <ListActions.Root>
               <ListActions.Left>
-                <SearchBox.Root placeholder="Search executions" />
+                {/**
+                 * @TODO enable this when execution list api supports querying
+                 */}
+                {/* <SearchBox.Root placeholder="Search executions" /> */}
+                <></>
               </ListActions.Left>
               <ListActions.Right>
                 <div className="flex gap-x-4">
