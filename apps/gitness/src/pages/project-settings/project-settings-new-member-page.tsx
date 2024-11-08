@@ -151,7 +151,7 @@ export const CreateNewMemberPage = () => {
                           key={user.uid}
                           onSelect={() => handleMemberSelect(user.uid ?? '', user.display_name ?? '')}>
                           {user.display_name}
-                          <div className="w-4">{isSelected && <Icon name="tick" size={12} />}</div>
+                          <div className="w-4 h-4">{isSelected && <Icon name="tick" size={12} />}</div>
                         </DropdownMenuItem>
                       )
                     })}
