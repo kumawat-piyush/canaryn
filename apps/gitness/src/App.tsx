@@ -34,7 +34,7 @@ import { CreateRepo } from './pages/repo/repo-create-page'
 import RepoSandboxCommitsPage from './pages/repo-sandbox/repo-sandbox-commits'
 import { Execution } from './pages/execution/execution-details'
 import RepoSandboxWebhooksListPage from './pages/webhooks/repo-webhook-list'
-import { RepoSandboxBranchesListPage } from './pages/repo-sandbox/repo-sandbox-branch-list'
+import { RepoBranchesListPage } from './pages/repo/repo-branch-list'
 import PullRequestDataProvider from './pages/pull-request/context/pull-request-data-provider'
 import SandboxPullRequestConversationPage from './pages/pull-request/sandbox-pull-request-conversation-page'
 import { RepoSandboxFiles } from './pages/repo-sandbox/repo-sandbox-files'
@@ -262,7 +262,7 @@ export default function App() {
                 },
                 {
                   path: 'branches',
-                  element: <RepoSandboxBranchesListPage />
+                  element: <RepoBranchesListPage />
                 },
                 {
                   path: 'settings',
