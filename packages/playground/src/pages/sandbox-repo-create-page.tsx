@@ -77,8 +77,6 @@ const SandboxRepoCreatePage: React.FC<SandboxRepoCreatePageProps> = ({
   const gitignoreValue = watch('gitignore')
   const licenseValue = watch('license')
 
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
-
   const handleSelectChange = (fieldName: keyof FormFields, value: string) => {
     setValue(fieldName, value, { shouldValidate: true })
   }
@@ -90,7 +88,6 @@ const SandboxRepoCreatePage: React.FC<SandboxRepoCreatePageProps> = ({
   useEffect(() => {
     if (isSuccess === true) {
       reset()
-      setIsSubmitted(true)
     }
   }, [isSuccess])
 
@@ -235,21 +232,14 @@ const SandboxRepoCreatePage: React.FC<SandboxRepoCreatePageProps> = ({
             <FormFieldSet.Root>
               <FormFieldSet.ControlGroup>
                 <ButtonGroup.Root>
-                  {!isSubmitted ? (
-                    <>
-                      <Button type="submit" size="sm" disabled={!isValid || isLoading}>
-                        {!isLoading ? 'Create repository' : 'Creating repository...'}
-                      </Button>
-                      <Button type="button" variant="outline" size="sm" onClick={handleCancel}>
-                        Cancel
-                      </Button>
-                    </>
-                  ) : (
-                    <Button variant="ghost" type="button" size="sm" theme="success" className="pointer-events-none">
-                      Repository created&nbsp;&nbsp;
-                      <Icon name="tick" size={14} />
+                  <>
+                    <Button type="submit" size="sm" disabled={!isValid || isLoading}>
+                      {!isLoading ? 'Create repository' : 'Creating repository...'}
                     </Button>
-                  )}
+                    <Button type="button" variant="outline" size="sm" onClick={handleCancel}>
+                      Cancel
+                    </Button>
+                  </>
                 </ButtonGroup.Root>
               </FormFieldSet.ControlGroup>
             </FormFieldSet.Root>
