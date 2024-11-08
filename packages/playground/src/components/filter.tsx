@@ -14,8 +14,8 @@ const Filter = <S,>({ showSort, sortOptions, showSearch = true }: FilterProps) =
   const { sort, query, handleSearch, handleDropdownChange } = useCommonFilter<S>()
   return (
     <ListActions.Root>
-      <ListActions.Left>
-        {showSearch && (
+      {showSearch && (
+        <ListActions.Left>
           <SearchBox.Root
             width="full"
             className="max-w-96"
@@ -23,8 +23,8 @@ const Filter = <S,>({ showSort, sortOptions, showSearch = true }: FilterProps) =
             handleChange={debounce((e: React.ChangeEvent<HTMLInputElement>) => handleSearch(e), 300)}
             placeholder="Search"
           />
-        )}
-      </ListActions.Left>
+        </ListActions.Left>
+      )}
       {showSort && (
         <ListActions.Right>
           {!isEmpty(sortOptions) && (
