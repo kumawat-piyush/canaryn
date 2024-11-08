@@ -7,7 +7,6 @@ import {
   SandboxLayout,
   SkeletonList,
   Filter,
-  useCommonFilter,
   NoData,
   NoSearchResults,
   PaginationComponent
@@ -16,11 +15,11 @@ import { PageResponseHeader } from '../../types'
 import { getExecutionStatus } from '../../utils/execution-utils'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
+import { useQuery } from '../../hooks/useQuery'
 
 export default function ProjectPipelinesPage() {
   const spaceId = useGetSpaceURLParam()
-  useCommonFilter()
-  const [query, setQuery] = useQueryState('query', { defaultValue: '' })
+  const [query, setQuery] = useQuery()
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
   const { data: { body: pipelines, headers } = {}, isFetching } = useListSpacePipelinesQuery(

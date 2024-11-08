@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ListActions, SearchBox } from '@harnessio/canary'
 import { useCommonFilter } from '../hooks/useCommonFilter'
-import { debounce, isEmpty } from 'lodash-es'
+import { isEmpty } from 'lodash-es'
 import { DropdownItemProps } from '@harnessio/canary/dist/components/list-actions'
 
 interface FilterProps {
@@ -12,6 +12,17 @@ interface FilterProps {
 
 const Filter = <S,>({ showSort, sortOptions, showSearch = true }: FilterProps) => {
   const { sort, query, handleSearch, handleDropdownChange } = useCommonFilter<S>()
+  const [value, setValue] = useState<string>()
+
+  useEffect(() => {
+    setValue(query || '')
+  }, [query])
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e?.target?.value)
+    handleSearch(e)
+  }
+
   return (
     <ListActions.Root>
       {showSearch && (
@@ -19,8 +30,8 @@ const Filter = <S,>({ showSort, sortOptions, showSearch = true }: FilterProps) =
           <SearchBox.Root
             width="full"
             className="max-w-96"
-            defaultValue={query}
-            handleChange={debounce((e: React.ChangeEvent<HTMLInputElement>) => handleSearch(e), 300)}
+            value={value}
+            handleChange={handleInputChange}
             placeholder="Search"
           />
         </ListActions.Left>
