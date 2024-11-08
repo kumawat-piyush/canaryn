@@ -39,7 +39,7 @@ import PullRequestDataProvider from './pages/pull-request/context/pull-request-d
 import SandboxPullRequestConversationPage from './pages/pull-request/sandbox-pull-request-conversation-page'
 import { RepoSandboxFiles } from './pages/repo-sandbox/repo-sandbox-files'
 import { SandboxRepoHeader } from './pages/repo-sandbox/repo-sandbox-header'
-import ReposSandboxListPage from './pages/repo-sandbox/repo-sandbox-list'
+import ReposListPage from './pages/repo-sandbox/repo-list'
 import RepoSandboxLayout from './layouts/RepoSandboxLayout'
 import { SettingsProfileGeneralPage } from './pages/profile-settings/profile-settings-general-container'
 import { SettingsProfileKeysPage } from './pages/profile-settings/profile-settings-keys-container'
@@ -132,7 +132,7 @@ export default function App() {
           children: [
             {
               path: ':spaceId/repos',
-              element: <ReposSandboxListPage />
+              element: <ReposListPage />
             },
             {
               path: ':spaceId/repos/:repoId',
