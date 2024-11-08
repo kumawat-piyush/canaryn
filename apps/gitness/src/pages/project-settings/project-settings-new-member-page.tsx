@@ -143,13 +143,18 @@ export const CreateNewMemberPage = () => {
                   </DropdownMenuLabel>
                   {usersData && <DropdownMenuSeparator />}
                   {usersData &&
-                    usersData.map(user => (
-                      <DropdownMenuItem
-                        key={user.uid}
-                        onSelect={() => handleMemberSelect(user.uid ?? '', user.display_name ?? '')}>
-                        {user.display_name}
-                      </DropdownMenuItem>
-                    ))}
+                    usersData.map(user => {
+                      const isSelected = user.uid === selectedMember
+                      return (
+                        <DropdownMenuItem
+                          className="flex justify-between"
+                          key={user.uid}
+                          onSelect={() => handleMemberSelect(user.uid ?? '', user.display_name ?? '')}>
+                          {user.display_name}
+                          <div className="w-4">{isSelected && <Icon name="tick" size={12} />}</div>
+                        </DropdownMenuItem>
+                      )
+                    })}
                 </DropdownMenuContent>
               </DropdownMenu>
               {/* Register the field for validation */}
