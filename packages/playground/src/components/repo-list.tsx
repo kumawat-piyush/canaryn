@@ -5,6 +5,7 @@ import { SkeletonList } from './loaders/skeleton-list'
 import { NoSearchResults } from './no-search-results'
 import { PaginationComponent, PaginationComponentProps } from './pagination'
 import { PaddingListLayout } from '../layouts/PaddingListLayout'
+import { DropdownItemProps } from '@harnessio/canary/dist/components/list-actions'
 
 export interface Repo {
   name: string
@@ -19,7 +20,11 @@ export interface Repo {
 export interface PageProps {
   repos?: Repo[]
   loading?: boolean
+  sortOptions?: DropdownItemProps[]
+  handleSortChange?: (newSort: DropdownItemProps) => void
   searchTerm?: string
+  handleCreateRepo?: () => void
+  handleSearchTermChange?: (newTerm: string) => void
   paginationProps?: PaginationComponentProps
   LinkComponent: React.ComponentType<{ to: string; children: React.ReactNode }>
 }
@@ -56,7 +61,15 @@ const Title = ({ title, isPrivate }: { title: string; isPrivate: boolean }) => (
   </div>
 )
 
-export function RepoList({ repos, LinkComponent, loading, searchTerm, paginationProps }: PageProps) {
+export function RepoList({
+  repos,
+  LinkComponent,
+  loading,
+  searchTerm,
+  paginationProps,
+  handleSearchTermChange,
+  handleCreateRepo
+}: PageProps) {
   if (repos?.length === 0) {
     if (searchTerm) {
       return (
@@ -93,11 +106,13 @@ export function RepoList({ repos, LinkComponent, loading, searchTerm, pagination
         <Spacer size={6} />
         <ListActions.Root>
           <ListActions.Left>
-            <SearchBox.Root placeholder="Search repositories" />
+            <SearchBox.Root placeholder="Search repositories" onSearch={handleSearchTermChange} value={searchTerm} />
           </ListActions.Left>
           <ListActions.Right>
             <ListActions.Dropdown title="Sort" items={sortOptions} />
-            <Button variant="default">Create repository</Button>
+            <Button variant="default" onClick={handleCreateRepo}>
+              Create repository
+            </Button>
           </ListActions.Right>
         </ListActions.Root>
         <Spacer size={5} />
