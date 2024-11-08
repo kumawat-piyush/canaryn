@@ -46,13 +46,13 @@ export const CreateNewMemberPage = () => {
   const space_ref = useGetSpaceURLParam()
   const navigate = useNavigate()
   const [selectedMember, setSelectedMember] = useState<string>('') // State to hold selected member
+  const [apiError, setApiError] = useState<string | null>(null)
 
   const {
-    register,
     handleSubmit,
     setValue,
     reset: resetNewMemberForm,
-    formState: { errors, isValid },
+    formState: { errors },
     watch
   } = useForm<NewMemberFields>({
     resolver: zodResolver(newMemberSchema),
@@ -82,11 +82,12 @@ export const CreateNewMemberPage = () => {
     { space_ref },
     {
       onSuccess: () => {
+        setApiError(null)
         resetNewMemberForm()
         navigate(`/spaces/${space_ref}/settings/members`, { replace: true })
       },
       onError: error => {
-        alert('Error adding member: ' + error.message)
+        setApiError(error.message ?? null)
       }
     }
   )
@@ -152,7 +153,6 @@ export const CreateNewMemberPage = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
               {/* Register the field for validation */}
-              <input type="hidden" {...register('memberName', { required: 'Please select a member' })} />
               {errors.memberName && (
                 <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
                   {errors.memberName.message}
@@ -186,13 +186,15 @@ export const CreateNewMemberPage = () => {
                 </FormFieldSet.Message>
               )}
             </FormFieldSet.ControlGroup>
-
+            {apiError && (
+              <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>{apiError}</FormFieldSet.Message>
+            )}
             {/* Action Buttons */}
             <FormFieldSet.ControlGroup>
               <ButtonGroup.Root>
                 {!submitted ? (
                   <>
-                    <Button size="sm" type="submit" disabled={!isValid || isSubmitting}>
+                    <Button size="sm" type="submit" loading={isSubmitting}>
                       {isSubmitting ? 'Inviting...' : 'Invite New Member'}
                     </Button>
                     <Button size="sm" variant="outline" onClick={handleCancel} disabled={isSubmitting}>
