@@ -89,7 +89,7 @@ const SandboxPullRequestCompare: React.FC<SandboxPullRequestCompareProps> = ({
   useEffect(() => {
     if (commitData && commitData.length > 0) {
       reset({
-        title: commitData[commitData.length - 1].title,
+        title: commitData[commitData.length - 1]?.title,
         description: ''
       })
     }

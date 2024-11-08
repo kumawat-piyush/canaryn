@@ -235,7 +235,7 @@ export default function SandboxPullRequestConversationPage() {
               addReviewers={noop}
               usersList={undefined}
               // repoMetadata={undefined}
-              pullRequestMetadata={{ source_sha: pullReqMetadata?.source_sha as string }}
+              pullRequestMetadata={undefined}
               processReviewDecision={processReviewDecision}
               refetchReviewers={noop}
               handleDelete={noop}
