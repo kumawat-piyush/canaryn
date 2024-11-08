@@ -11,13 +11,13 @@ import {
   SandboxLayout
 } from '@harnessio/playground'
 import { ListPullReqQueryQueryParams, TypesPullReq, useListPullReqQuery } from '@harnessio/code-service-client'
-import { timeAgoFromEpochTime } from './pipeline-edit/utils/time-utils'
-import { DropdownItemProps } from '../../../../packages/canary/dist/components/list-actions'
-import { PathParams } from '../RouteDefinitions'
-import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
+import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
+import { DropdownItemProps } from '../../../../../packages/canary/dist/components/list-actions'
+import { PathParams } from '../../RouteDefinitions'
+import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { PaginationComponent } from '@harnessio/playground'
-import { PageResponseHeader } from '../types'
-import { useDebouncedQueryState } from '../hooks/useQuery'
+import { PageResponseHeader } from '../../types'
+import { useDebouncedQueryState } from '../../hooks/useQuery'
 
 const SortOptions = [
   { name: 'Created', value: 'created' },
