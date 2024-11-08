@@ -22,7 +22,7 @@ import ProjectPipelinesPage from './pages/pipeline/project-pipeline-list'
 import { SignIn } from './pages/signin'
 import { SignUp } from './pages/signup'
 import PullRequestSandboxListPage from './pages/sandbox-pull-request-list-page'
-import SandboxExecutionsListPage from './pages/sandbox-execution-list'
+import RepoExecutionListPage from './pages/execution/repo-execution-list'
 import PullRequestSandboxLayout from './layouts/PullRequestSandboxLayout'
 import PullRequestCommitsPage from './pages/pull-request-commits-page'
 import PipelineEditPage from './pages/pipeline-edit/pipeline-edit'
@@ -116,7 +116,7 @@ export default function App() {
             {
               path: ':pipelineId',
               children: [
-                { index: true, element: <SandboxExecutionsListPage /> },
+                { index: true, element: <RepoExecutionListPage /> },
                 {
                   path: 'edit',
                   element: <PipelineEditPage />
@@ -308,14 +308,14 @@ export default function App() {
                 },
                 {
                   path: ':pipelineId',
-                  element: <SandboxExecutionsListPage />
+                  element: <RepoExecutionListPage />
                 }
               ]
             },
             // Executions (OUTSIDE REPOS)
             {
               path: ':spaceId/executions',
-              element: <SandboxExecutionsListPage />
+              element: <RepoExecutionListPage />
             },
             {
               path: 'create',
