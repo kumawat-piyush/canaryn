@@ -2,16 +2,18 @@ import { useQueryState } from 'nuqs'
 import { useCallback, useEffect, useState } from 'react'
 import { debounce } from 'lodash-es'
 
-export function useDebouncedQueryState({
-  queryKey,
-  defaultValue = '',
-  delay = 300
-}: {
-  queryKey: string
+interface DebouncedQueryStateProps {
+  key: string
   defaultValue?: string
   delay?: number
-}): [string, (value: string) => void] {
-  const [query, setQuery] = useQueryState(queryKey, { defaultValue })
+}
+
+export function useDebouncedQueryState({
+  key,
+  defaultValue = '',
+  delay = 300
+}: DebouncedQueryStateProps): [string, (value: string) => void] {
+  const [query, setQuery] = useQueryState(key, { defaultValue })
   const [debouncedQuery, setDebouncedQuery] = useState(query)
 
   const debouncedSetQuery = useCallback(

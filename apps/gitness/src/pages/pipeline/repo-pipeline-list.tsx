@@ -14,11 +14,11 @@ import {
 import { PageResponseHeader } from '../../types'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { getExecutionStatus, getMeterState } from '../../utils/execution-utils'
-import { useDebouncedQueryState } from '../../hooks/useQuery'
+import { useDebouncedQueryState } from '../../hooks/useDebouncedQueryState'
 
 export default function RepoPipelinesPage() {
   const repoRef = useGetRepoRef()
-  const [query, setQuery] = useDebouncedQueryState({ queryKey: 'query' })
+  const [query, setQuery] = useDebouncedQueryState({ key: 'query' })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
   const { data: { body: pipelines, headers } = {}, isFetching } = useListPipelinesQuery(

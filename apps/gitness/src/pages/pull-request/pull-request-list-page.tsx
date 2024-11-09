@@ -17,7 +17,7 @@ import { PathParams } from '../../RouteDefinitions'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { PaginationComponent } from '@harnessio/playground'
 import { PageResponseHeader } from '../../types'
-import { useDebouncedQueryState } from '../../hooks/useQuery'
+import { useDebouncedQueryState } from '../../hooks/useDebouncedQueryState'
 
 const SortOptions = [
   { name: 'Created', value: 'created' },
@@ -35,7 +35,7 @@ export default function PullRequestListPage() {
   const { repoId, spaceId } = useParams<PathParams>()
 
   const { sort } = useCommonFilter<ListPullReqQueryQueryParams['sort']>()
-  const [query, setQuery] = useDebouncedQueryState({ queryKey: 'query' })
+  const [query, setQuery] = useDebouncedQueryState({ key: 'query' })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
   const { data: { body: pullrequests, headers } = {}, isFetching } = useListPullReqQuery({

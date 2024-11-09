@@ -15,7 +15,7 @@ import {
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
 import { PageResponseHeader } from '../../types'
-import { useDebouncedQueryState } from '../../hooks/useQuery'
+import { useDebouncedQueryState } from '../../hooks/useDebouncedQueryState'
 
 const sortOptions = [
   { name: 'Created', value: 'created' },
@@ -31,7 +31,7 @@ export default function ReposListPage() {
 
   /* Query and Pagination */
   const { sort } = useCommonFilter<ListReposQueryQueryParams['sort']>()
-  const [query, setQuery] = useDebouncedQueryState({ queryKey: 'query' })
+  const [query, setQuery] = useDebouncedQueryState({ key: 'query' })
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
   const {
