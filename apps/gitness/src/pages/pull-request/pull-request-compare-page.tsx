@@ -260,7 +260,7 @@ export const CreatePullRequest = () => {
             text: item.filePath,
             data: item.raw,
             title: item.filePath,
-            lang: item.filePath.split('.')[1],
+            lang: item.filePath.split('.')?.[1],
             addedLines: item.addedLines,
             removedLines: item.deletedLines,
             isBinary: item.isBinary,
