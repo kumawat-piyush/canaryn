@@ -63,14 +63,11 @@ export const CreateNewMemberPage = () => {
   })
 
   const { data: { body: usersData } = {} } = useListPrincipalsQuery({
+    // api call shows the array type but if we dont use the string type it will throw error
     queryParams: { page: 1, limit: 20, type: 'user' }
   })
 
-  const {
-    mutate: addMember,
-    isSuccess: submitted,
-    isLoading: isSubmitting
-  } = useMembershipAddMutation(
+  const { mutate: addMember, isLoading: isSubmitting } = useMembershipAddMutation(
     { space_ref },
     {
       onSuccess: () => {
@@ -198,20 +195,14 @@ export const CreateNewMemberPage = () => {
             {/* Action Buttons */}
             <FormFieldSet.ControlGroup>
               <ButtonGroup.Root>
-                {!submitted ? (
-                  <>
-                    <Button size="sm" type="submit" loading={isSubmitting}>
-                      {isSubmitting ? 'Inviting...' : 'Invite New Member'}
-                    </Button>
-                    <Button size="sm" variant="outline" onClick={handleCancel} disabled={isSubmitting}>
-                      Cancel
-                    </Button>
-                  </>
-                ) : (
-                  <Button variant="ghost" size="sm" theme="success" className="pointer-events-none">
-                    Saved <Icon name="tick" size={14} />
+                <>
+                  <Button size="sm" type="submit" loading={isSubmitting}>
+                    {isSubmitting ? 'Inviting...' : 'Invite New Member'}
                   </Button>
-                )}
+                  <Button size="sm" variant="outline" onClick={handleCancel} disabled={isSubmitting}>
+                    Cancel
+                  </Button>
+                </>
               </ButtonGroup.Root>
             </FormFieldSet.ControlGroup>
           </FormFieldSet.Root>
