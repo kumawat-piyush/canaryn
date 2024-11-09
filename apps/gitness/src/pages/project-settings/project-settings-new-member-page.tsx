@@ -52,7 +52,6 @@ export const CreateNewMemberPage = () => {
     setValue,
     reset: resetNewMemberForm,
     formState: { errors },
-    watch,
     reset
   } = useForm<NewMemberFields>({
     resolver: zodResolver(newMemberSchema),
@@ -96,8 +95,6 @@ export const CreateNewMemberPage = () => {
     resetNewMemberForm()
     navigate(`/spaces/${space_ref}/settings/members`, { replace: true })
   }
-
-  const newMemberRoleValue = watch('role')
 
   useEffect(() => {
     reset() // Reset form on page load
@@ -171,21 +168,24 @@ export const CreateNewMemberPage = () => {
               <FormFieldSet.Label htmlFor="role" required>
                 Role
               </FormFieldSet.Label>
-              <Select
-                value={newMemberRoleValue}
-                onValueChange={value => setValue('role', value, { shouldValidate: true })}
-                disabled={isSubmitting}>
-                <SelectTrigger id="role">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent>
-                  {roleOptions.map(role => (
-                    <SelectItem key={role.value} value={role.value}>
-                      {role.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Controller
+                control={control}
+                name="role"
+                render={({ field }) => (
+                  <Select value={field.value} onValueChange={field.onChange} disabled={isSubmitting}>
+                    <SelectTrigger id="role">
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {roleOptions.map(role => (
+                        <SelectItem key={role.value} value={role.value}>
+                          {role.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
+              />
               {errors.role && (
                 <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
                   {errors.role.message}
