@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useState, useEffect } from 'react'
+import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -31,10 +31,8 @@ const newMemberSchema = z.object({
   role: z.string().min(1, { message: 'Please select a role for the new member' })
 })
 
-// TypeScript types for form fields
 type NewMemberFields = z.infer<typeof newMemberSchema>
 
-// Role options as string values, compatible with the API
 const roleOptions = [
   { label: 'Owner', value: 'space_owner' },
   { label: 'Reader', value: 'reader' },
@@ -45,15 +43,17 @@ const roleOptions = [
 export const CreateNewMemberPage = () => {
   const space_ref = useGetSpaceURLParam()
   const navigate = useNavigate()
-  const [selectedMember, setSelectedMember] = useState<string>('') // State to hold selected member
+  const [selectedMember, setSelectedMember] = useState<string>('') // State to hold selected member UID
   const [apiError, setApiError] = useState<string | null>(null)
 
   const {
+    control,
     handleSubmit,
     setValue,
     reset: resetNewMemberForm,
     formState: { errors },
-    watch
+    watch,
+    reset
   } = useForm<NewMemberFields>({
     resolver: zodResolver(newMemberSchema),
     mode: 'onChange',
@@ -63,17 +63,10 @@ export const CreateNewMemberPage = () => {
     }
   })
 
-  // Fetch available members
-  // This type in custom hook show: array type but not work here. we can only use string to get api data
   const { data: { body: usersData } = {} } = useListPrincipalsQuery({
-    queryParams: {
-      page: 1,
-      limit: 20,
-      type: 'user'
-    }
+    queryParams: { page: 1, limit: 20, type: 'user' }
   })
 
-  // Mutation hook for adding a member
   const {
     mutate: addMember,
     isSuccess: submitted,
@@ -86,20 +79,16 @@ export const CreateNewMemberPage = () => {
         resetNewMemberForm()
         navigate(`/spaces/${space_ref}/settings/members`, { replace: true })
       },
-      onError: error => {
-        setApiError(error.message ?? null)
-      }
+      onError: error => setApiError(error.message ?? null)
     }
   )
 
-  // Form submit handler
   const onSubmit: SubmitHandler<NewMemberFields> = data => {
     addMember({ body: { user_uid: data.memberName, role: data.role as EnumMembershipRole } })
   }
 
-  // Handle member selection
-  const handleMemberSelect = (uid: string, display_name: string) => {
-    setSelectedMember(display_name)
+  const handleMemberSelect = (uid: string) => {
+    setSelectedMember(uid)
     setValue('memberName', uid, { shouldValidate: true })
   }
 
@@ -109,6 +98,10 @@ export const CreateNewMemberPage = () => {
   }
 
   const newMemberRoleValue = watch('role')
+
+  useEffect(() => {
+    reset() // Reset form on page load
+  }, [reset])
 
   return (
     <SandboxLayout.Main hasLeftPanel hasHeader hasSubHeader>
@@ -125,39 +118,47 @@ export const CreateNewMemberPage = () => {
               <FormFieldSet.Label htmlFor="memberName" required>
                 New Member Name
               </FormFieldSet.Label>
-              <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <div className="flex justify-between border rounded-md items-center">
-                    <Button variant="ghost">
-                      <Text>{selectedMember || 'Select New Member'}</Text>
-                    </Button>
-                  </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent style={{ width: 'var(--radix-dropdown-menu-trigger-width)' }}>
-                  <DropdownMenuLabel>
-                    {usersData?.length !== 0 ? (
-                      'Available users'
-                    ) : (
-                      <Text color="tertiaryBackground">No available users</Text>
-                    )}
-                  </DropdownMenuLabel>
-                  {usersData && <DropdownMenuSeparator />}
-                  {usersData &&
-                    usersData.map(user => {
-                      const isSelected = user.uid === selectedMember
-                      return (
+              <Controller
+                control={control}
+                name="memberName"
+                render={({ field }) => (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
+                      <div className="flex justify-between border rounded-md items-center">
+                        <Button variant="ghost">
+                          <Text>
+                            {selectedMember
+                              ? usersData?.find(user => user.uid === selectedMember)?.display_name
+                              : 'Select New Member'}
+                          </Text>
+                        </Button>
+                      </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent style={{ width: 'var(--radix-dropdown-menu-trigger-width)' }}>
+                      <DropdownMenuLabel>
+                        {usersData?.length ? (
+                          'Available users'
+                        ) : (
+                          <Text color="tertiaryBackground">No available users</Text>
+                        )}
+                      </DropdownMenuLabel>
+                      {usersData && <DropdownMenuSeparator />}
+                      {usersData?.map(user => (
                         <DropdownMenuItem
                           className="flex justify-between"
                           key={user.uid}
-                          onSelect={() => handleMemberSelect(user.uid ?? '', user.display_name ?? '')}>
+                          onSelect={() => {
+                            field.onChange(user.uid)
+                            handleMemberSelect(user.uid ?? '')
+                          }}>
                           {user.display_name}
-                          <div className="w-4 h-4">{isSelected && <Icon name="tick" size={12} />}</div>
+                          {selectedMember === user.uid && <Icon name="tick" size={12} className="ml-2" />}
                         </DropdownMenuItem>
-                      )
-                    })}
-                </DropdownMenuContent>
-              </DropdownMenu>
-              {/* Register the field for validation */}
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                )}
+              />
               {errors.memberName && (
                 <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
                   {errors.memberName.message}
