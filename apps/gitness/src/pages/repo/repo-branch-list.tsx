@@ -30,7 +30,7 @@ export function RepoBranchesListPage() {
   const { data: { body: repoMetadata } = {} } = useFindRepositoryQuery({ repo_ref: repoRef })
 
   const { sort } = useCommonFilter<ListBranchesQueryQueryParams['sort']>()
-  const [query, setQuery] = useDebouncedQueryState({ key: 'query' })
+  const [query, setQuery] = useDebouncedQueryState('query')
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
   const { isLoading, data: { body: branches, headers } = {} } = useListBranchesQuery({

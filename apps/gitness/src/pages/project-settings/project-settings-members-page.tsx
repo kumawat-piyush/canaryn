@@ -41,7 +41,7 @@ const ProjectSettingsMemebersPage = () => {
     selectedMember: null
   })
   const { sort } = useCommonFilter<MembershipListQueryQueryParams['sort']>()
-  const [query, setQuery] = useDebouncedQueryState({ key: 'query' })
+  const [query, setQuery] = useDebouncedQueryState('query')
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
   const {

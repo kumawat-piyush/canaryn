@@ -21,7 +21,7 @@ import { useDebouncedQueryState } from '../../hooks/useDebouncedQueryState'
 export default function RepoWebhooksListPage() {
   const queryClient = useQueryClient()
   const repoRef = useGetRepoRef()
-  const [query, setQuery] = useDebouncedQueryState({ key: 'query' })
+  const [query, setQuery] = useDebouncedQueryState('query')
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
   const [isDeleteWebhookDialogOpen, setIsDeleteWebhookDialogOpen] = useState(false)

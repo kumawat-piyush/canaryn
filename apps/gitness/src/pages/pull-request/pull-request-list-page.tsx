@@ -35,7 +35,7 @@ export default function PullRequestListPage() {
   const { repoId, spaceId } = useParams<PathParams>()
 
   const { sort } = useCommonFilter<ListPullReqQueryQueryParams['sort']>()
-  const [query, setQuery] = useDebouncedQueryState({ key: 'query' })
+  const [query, setQuery] = useDebouncedQueryState('query')
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
   const { data: { body: pullrequests, headers } = {}, isFetching } = useListPullReqQuery({
