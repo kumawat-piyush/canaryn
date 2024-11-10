@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, Outlet, useParams } from 'react-router-dom'
 import { Badge, Icon, Spacer } from '@harnessio/canary'
-import { Floating1ColumnLayout, PullRequestHeader } from '@harnessio/playground'
+import { Floating1ColumnLayout, PullRequestHeader } from '@harnessio/fragments'
 import { TypesPullReq, useGetPullReqQuery } from '@harnessio/code-service-client'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
 import { PathParams } from '../RouteDefinitions'

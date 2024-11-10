@@ -11,10 +11,10 @@ import {
   WebhooksList,
   NoSearchResults,
   DeleteTokenAlertDialog
-} from '@harnessio/playground'
+} from '@harnessio/fragments'
 import { useListWebhooksQuery, useDeleteWebhookMutation } from '@harnessio/code-service-client'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
-import { PaginationComponent } from '@harnessio/playground'
+import { PaginationComponent } from '@harnessio/fragments'
 import { PageResponseHeader } from '../../types'
 import { useDebouncedQueryState } from '../../hooks/useDebouncedQueryState'
 

@@ -1,4 +1,4 @@
-import { SandboxCreatePipelinePage } from '@harnessio/playground'
+import { SandboxCreatePipelinePage } from '@harnessio/fragments'
 import CreatePipelineDialog from './PipelineCreateDialog/PipelineCreateDialog'
 import { useState } from 'react'
 

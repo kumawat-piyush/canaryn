@@ -8,7 +8,7 @@ import {
   PaginationComponent,
   PullRequestCommits,
   SkeletonList
-} from '@harnessio/playground'
+} from '@harnessio/fragments'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 
 import {

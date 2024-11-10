@@ -25,7 +25,7 @@ import {
   MarkdownViewer,
   Filter,
   useCommonFilter
-} from '@harnessio/playground'
+} from '@harnessio/fragments'
 import {
   useListBranchesQuery,
   useSummaryQuery,

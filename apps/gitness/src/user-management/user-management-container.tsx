@@ -1,4 +1,4 @@
-import { SandboxSettingsUserManagementPage, useCommonFilter } from '@harnessio/playground'
+import { SandboxSettingsUserManagementPage, useCommonFilter } from '@harnessio/fragments'
 import {
   useAdminListUsersQuery,
   useAdminUpdateUserMutation,

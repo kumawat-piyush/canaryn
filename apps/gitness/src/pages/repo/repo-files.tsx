@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams, useNavigate, Outlet } from 'react-router-dom'
-import { BranchSelector, SandboxLayout, BranchListProps } from '@harnessio/playground'
+import { BranchSelector, SandboxLayout, BranchListProps } from '@harnessio/fragments'
 import {
   Button,
   ButtonGroup,

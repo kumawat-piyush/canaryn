@@ -14,7 +14,7 @@ import {
   ToggleGroup,
   ToggleGroupItem
 } from '@harnessio/canary'
-import { SandboxLayout } from '@harnessio/playground'
+import { SandboxLayout } from '@harnessio/fragments'
 import { useFindRepositoryQuery, useGetContentQuery } from '@harnessio/code-service-client'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
 import {

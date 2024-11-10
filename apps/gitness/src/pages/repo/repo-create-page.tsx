@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { SandboxRepoCreatePage, FormFields } from '@harnessio/playground'
+import { SandboxRepoCreatePage, FormFields } from '@harnessio/fragments'
 import { useNavigate } from 'react-router-dom'
 
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'

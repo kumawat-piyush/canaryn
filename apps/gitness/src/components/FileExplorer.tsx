@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
-import { FileExplorer } from '@harnessio/playground'
+import { FileExplorer } from '@harnessio/fragments'
 import { OpenapiContentInfo, getContent, OpenapiGetContentOutput } from '@harnessio/code-service-client'
 import { normalizeGitRef } from '../utils/git-utils'
 import { PathParams } from '../RouteDefinitions'

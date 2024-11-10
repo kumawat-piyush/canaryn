@@ -8,7 +8,7 @@ import {
   RuleDataType,
   DeleteTokenAlertDialog,
   AlertDeleteDialog
-} from '@harnessio/playground'
+} from '@harnessio/fragments'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import {

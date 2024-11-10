@@ -7,12 +7,12 @@ import {
   SandboxSettings,
   SandboxSettingsAccountPage,
   SandboxSettingsProjectPage,
-  ForgotPasswordPage,
-  NewPasswordPage,
-  OTPPage,
+  // ForgotPasswordPage,
+  // NewPasswordPage,
+  // OTPPage,
   SandboxRepoSettingsPage,
   RepoSettingsPlaceholderPage
-} from '@harnessio/playground'
+} from '@harnessio/fragments'
 import SandboxRootWrapper from './components/SandboxRootWrapper'
 import { TooltipProvider } from '@harnessio/canary'
 import { queryClient } from './framework/queryClient'
@@ -85,18 +85,18 @@ export default function App() {
       path: '/signup',
       element: <SignUp />
     },
-    {
-      path: '/forgot',
-      element: <ForgotPasswordPage />
-    },
-    {
-      path: '/otp',
-      element: <OTPPage />
-    },
-    {
-      path: '/new-password',
-      element: <NewPasswordPage />
-    },
+    // {
+    //   path: '/forgot',
+    //   element: <ForgotPasswordPage />
+    // },
+    // {
+    //   path: '/otp',
+    //   element: <OTPPage />
+    // },
+    // {
+    //   path: '/new-password',
+    //   element: <NewPasswordPage />
+    // },
     {
       path: '/',
       element: <SandboxRootWrapper />,

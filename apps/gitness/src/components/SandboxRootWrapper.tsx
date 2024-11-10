@@ -1,4 +1,4 @@
-import { SandboxRoot } from '@harnessio/playground'
+import { SandboxRoot } from '@harnessio/fragments'
 import { useAppContext } from '../framework/context/AppContext'
 import { useGetSpaceURLParam } from '../framework/hooks/useGetSpaceParam'
 

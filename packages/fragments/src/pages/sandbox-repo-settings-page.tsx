@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { PlaygroundListSettings } from '../settings/list-settings'
+import { PlaygroundListSettings } from '../components/list-settings'
 import { SandboxLayout } from '../index'
 import { Navbar, Spacer } from '@harnessio/canary'
 import { NavLink, Outlet } from 'react-router-dom'

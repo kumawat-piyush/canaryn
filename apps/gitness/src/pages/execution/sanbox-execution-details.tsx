@@ -19,7 +19,7 @@ import {
   getStepId,
   parseStageStepId,
   ExecutionState
-} from '@harnessio/playground'
+} from '@harnessio/fragments'
 import { PathParams } from '../../RouteDefinitions'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { SSEEvent } from '../../types'

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { SandboxPullRequestCompare, SkeletonList } from '@harnessio/playground'
+import { SandboxPullRequestCompare, SkeletonList } from '@harnessio/fragments'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   CreateRepositoryErrorResponse,
