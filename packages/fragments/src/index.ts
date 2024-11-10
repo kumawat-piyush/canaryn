@@ -17,10 +17,12 @@ export * from './components/layout/top-bar-widget'
 export * from './layouts/PaddingListLayout'
 export * from './layouts/Floating1ColumnLayout'
 export * from './components/loaders/skeleton-list'
-export * from './layouts/RootLayout'
+export * as SandboxLayout from './layouts/SandboxLayout'
+
+export * from './components/webhooks/types'
+export * from './components/repo-settings/repo-branch-settings-rules/types'
 export * from './components/repo-list'
 export * from './components/repo-clone/clone-repo-dialog'
-export { default as RepoLayout } from './layouts/RepoLayout'
 
 export * from './components/execution-list'
 
@@ -81,13 +83,6 @@ export * from './components/copy-button'
 export * from './components/profile-settings/delete-alert-dialog'
 export * from './components/alert-delete-dialog'
 
-export * from './pages/signin-page'
-export * from './pages/forgot-password-page'
-export * from './pages/signup-page'
-export * from './pages/create-project-page'
-export * from './pages/create-pipeline-page'
-export * from './pages/new-password-page'
-export * from './pages/otp-page'
 export * from './utils/utils'
 
 export * as ShaBadge from './components/sha-badge'
@@ -107,34 +102,7 @@ export * from './hooks/useCommonFilter'
 
 export * as FormFieldSet from './components/form-field-set'
 
-// SANDBOX LAYOUTS
-export * as SandboxLayout from './layouts/SandboxLayout'
-export * from './pages/sandbox-repo-create-page'
-export * from './pages/sandbox-settings-account-page'
-export * from './pages/sandbox-settings-account-keys-page'
-export * from './pages/sandbox-settings-account-general-page'
-export * from './pages/sandbox-repo-settings-page'
-export * from './pages/repo-settings-general-page'
-export * from './pages/repo-branch-settings-rules-page'
-export * from './pages/repo-webhooks-create-page'
-export * from './components/webhooks/types'
-export * from './pages/sandbox-create-pipeline-page'
-export * from './components/repo-settings/repo-branch-settings-rules/types'
-
-export * from './pages/sandbox-repo-create-page'
-export * from './pages/repo-settings-placeholder-page'
-
-export * from './layouts/SandboxPullRequestCompareLayout'
-
-export * from './pages/sandbox-settings-project-page'
-export * from './pages/sandbox-settings-project-general-page'
-export * from './pages/sandbox-settings-project-members-page'
-export * from './pages/sandbox-settings-create-new-member-page'
-export * from './pages/sandbox-settings-user-management-page'
-export * from './pages/sandbox-settings-create-new-user-page'
 export * from './components/user-management/reset-password-dialog'
-export * from './layouts/SandboxRoot'
-export * from './layouts/SandboxSettings'
 export * from './configs/canary-outlets'
 
 // ENUMS

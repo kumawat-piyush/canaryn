@@ -1,9 +1,9 @@
 import { Navbar, Icon, NavbarProjectChooser, NavbarUser, IconProps } from '@harnessio/canary'
 import React, { useState } from 'react'
 import { Outlet, NavLink, useLocation, Link } from 'react-router-dom'
-import { MoreSubmenu } from '../components/more-submenu'
+import { MoreSubmenu } from '../../../../packages/fragments/src/components/more-submenu'
 import { navbarSubmenuData } from '../data/mockNavbarSubmenuData'
-import { TypesUser } from './types'
+import { TypesUser } from '../../../../packages/fragments/src/layouts/types'
 
 interface NavbarItem {
   id: number
