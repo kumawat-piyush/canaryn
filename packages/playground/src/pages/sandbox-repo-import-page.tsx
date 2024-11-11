@@ -11,7 +11,7 @@ export function SandboxRepoImportPage({ isLoading = false }: { isLoading?: boole
   }
 
   const handleFormCancel = () => {
-    navigate('../repos')
+    navigate('../')
   }
   return (
     <>
