@@ -27,18 +27,18 @@ import PullRequestCommitsPage from './pages/pull-request-commits-page'
 import PipelineEditPage from './pages/pipeline-edit/pipeline-edit'
 import { LandingPage } from './pages/landing-page'
 import { AppProvider } from './framework/context/AppContext'
-import { RepoSandboxSummaryList } from './pages/repo-sandbox/repo-sandbox-summary'
+import { RepoSummaryList } from './pages/repo/repo-summary'
 import CreateProject from './pages/create-project'
 import { CreateRepo } from './pages/repo/repo-create-page'
-import RepoSandboxCommitsPage from './pages/repo-sandbox/repo-sandbox-commits'
+import RepoCommitsPage from './pages/repo/repo-commits'
 import { Execution } from './pages/execution/execution-details'
 import RepoSandboxWebhooksListPage from './pages/webhooks/repo-webhook-list'
 import { RepoBranchesListPage } from './pages/repo/repo-branch-list'
 import PullRequestDataProvider from './pages/pull-request/context/pull-request-data-provider'
 import SandboxPullRequestConversationPage from './pages/pull-request/sandbox-pull-request-conversation-page'
-import { RepoSandboxFiles } from './pages/repo-sandbox/repo-sandbox-files'
-import { SandboxRepoHeader } from './pages/repo-sandbox/repo-sandbox-header'
-import ReposListPage from './pages/repo-sandbox/repo-list'
+import { RepoFiles } from './pages/repo/repo-files'
+import { SandboxRepoHeader } from './pages/repo/repo-header'
+import ReposListPage from './pages/repo/repo-list'
 import RepoSandboxLayout from './layouts/RepoSandboxLayout'
 import { SettingsProfileGeneralPage } from './pages/profile-settings/profile-settings-general-container'
 import { SettingsProfileKeysPage } from './pages/profile-settings/profile-settings-keys-container'
@@ -46,19 +46,19 @@ import { SandboxFileViewer } from './components/SandboxFileViewer'
 import PullRequestChangesPage from './pages/pull-request/pull-request-changes-page'
 import { ProjectSettingsGeneralPage } from './pages/project-settings/project-settings-general-page'
 import { FileEditor } from './components/FileEditor'
-import { RepoSettingsGeneralPageContainer } from './pages/repo-sandbox/repo-settings-general-container'
+import { RepoSettingsGeneralPageContainer } from './pages/repo/repo-settings-general-container'
 import { CreatePullRequest } from './pages/pull-request/pull-request-compare-page'
 import { ExitConfirmProvider } from './framework/context/ExitConfirmContext'
 import { ProjectSettingsMemebersPage } from './pages/project-settings/project-settings-members-page'
 import { EmptyPage } from './pages/empty-page'
 import { CreateWebhookContainer } from './pages/webhooks/create-webhook-container'
-import { RepoBranchSettingsRulesPageContainer } from './pages/repo-sandbox/repo-sandbox-branch-rules-container'
+import { RepoBranchSettingsRulesPageContainer } from './pages/repo/repo-branch-rules-container'
 import { ExplorerPathsProvider } from './framework/context/ExplorerPathsContext'
 import { Logout } from './pages/logout'
-import { UserManagementPageContainer } from './user-management/user-management-container'
+import { UserManagementPageContainer } from './pages/user-management/user-management-container'
 import PipelineLayout from './layouts/PipelineStudioLayout'
 import { SandboxPipelineCreate } from './pages/pipeline-create/pipeline-create-sandbox'
-import { CreateNewUserContainer } from './user-management/create-new-user-container'
+import { CreateNewUserContainer } from './pages/user-management/create-new-user-container'
 import { CreateNewMemberPage } from './pages/project-settings/project-settings-new-member-page'
 
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
@@ -144,13 +144,13 @@ export default function App() {
                 },
                 {
                   path: 'summary',
-                  element: <RepoSandboxSummaryList />
+                  element: <RepoSummaryList />
                 },
                 {
                   path: 'code',
                   element: (
                     <ExplorerPathsProvider>
-                      <RepoSandboxFiles />
+                      <RepoFiles />
                     </ExplorerPathsProvider>
                   ),
                   children: [
@@ -199,7 +199,7 @@ export default function App() {
                 },
                 {
                   path: 'commits',
-                  element: <RepoSandboxCommitsPage />
+                  element: <RepoCommitsPage />
                 },
                 {
                   path: 'pull-requests',
