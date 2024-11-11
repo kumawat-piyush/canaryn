@@ -39,10 +39,10 @@ import PullRequestConversationPage from './pages/pull-request/pull-request-conve
 import { RepoFiles } from './pages/repo/repo-files'
 import { RepoHeader } from './pages/repo/repo-header'
 import ReposListPage from './pages/repo/repo-list'
-import RepoSandboxLayout from './layouts/RepoSandboxLayout'
+import RepoLayout from './layouts/RepoLayout'
 import { SettingsProfileGeneralPage } from './pages/profile-settings/profile-settings-general-container'
 import { SettingsProfileKeysPage } from './pages/profile-settings/profile-settings-keys-container'
-import { SandboxFileViewer } from './components/SandboxFileViewer'
+import { FileViewer } from './components/FileViewer'
 import PullRequestChangesPage from './pages/pull-request/pull-request-changes-page'
 import { ProjectSettingsGeneralPage } from './pages/project-settings/project-settings-general-page'
 import { FileEditor } from './components/FileEditor'
@@ -136,7 +136,7 @@ export default function App() {
             },
             {
               path: ':spaceId/repos/:repoId',
-              element: <RepoSandboxLayout />,
+              element: <RepoLayout />,
               children: [
                 {
                   index: true,
@@ -156,7 +156,7 @@ export default function App() {
                   children: [
                     {
                       index: true,
-                      element: <SandboxFileViewer />
+                      element: <FileViewer />
                     },
                     {
                       path: 'edit/:gitRef/~/:resourcePath*',
@@ -168,21 +168,21 @@ export default function App() {
                       children: [
                         {
                           path: ':resourcePath*',
-                          element: <SandboxFileViewer />
+                          element: <FileViewer />
                         }
                       ]
                     },
                     {
                       path: ':gitRef',
-                      element: <SandboxFileViewer />,
+                      element: <FileViewer />,
                       children: [
                         {
                           index: true,
-                          element: <SandboxFileViewer />
+                          element: <FileViewer />
                         },
                         {
                           path: '~/:resourcePath*',
-                          element: <SandboxFileViewer />
+                          element: <FileViewer />
                         }
                       ]
                     }
