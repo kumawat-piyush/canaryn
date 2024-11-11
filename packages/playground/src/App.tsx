@@ -66,7 +66,7 @@ import { SandboxSettingsAccountGeneralPage } from './pages/sandbox-settings-acco
 import { SandboxSettingsCreateNewMemberPage } from './pages/sandbox-settings-create-new-member-page'
 import { SandboxSettingsUserManagementPage } from './pages/sandbox-settings-user-management-page'
 import { SandboxSettingsCreateNewUserPage } from './pages/sandbox-settings-create-new-user-page'
-import { SignInPage } from './pages/signin-page'
+import { SignInPage } from './components/signin-page'
 import { RepoBranchSettingsRulesPage } from './pages/repo-branch-settings-rules-page'
 import SandboxPullRequestComparePage from './pages/sandbox-pull-request-compare-page'
 import { mockBypassUserData, mockStatusChecks } from './pages/mocks/repo-branch-settings/mockData'
