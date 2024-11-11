@@ -1,9 +1,9 @@
 import React from 'react'
 import { noop } from 'lodash-es'
-import { SandboxPullRequestCompare } from '../layouts/SandboxPullRequestCompareLayout'
 import { mockCommitData } from '../data/mockCommitData'
 import { mockBranchList } from '../data/mockBranchList'
 import { mockDiffData } from '../data/mockDiffData'
+import { SandboxPullRequestCompare } from '@harnessio/fragments'
 
 const SandboxPullRequestComparePage = () => {
   return (

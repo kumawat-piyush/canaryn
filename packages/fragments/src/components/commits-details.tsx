@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CommitsDetails() {
+export function CommitsDetails() {
   return (
     <div>
       <p>Commits details</p>

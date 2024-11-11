@@ -11,13 +11,9 @@ import {
   StackedList,
   IconProps
 } from '@harnessio/canary'
-import { Summary } from '../components/repo-summary'
-import { RepoSummaryPanel } from '../components/repo-summary-panel'
-import { BranchSelector } from '../components/branch-chooser'
 import { mockFiles } from '../data/mockSummaryFiiles'
-import { SandboxLayout } from '..'
 import { PlaygroundSandboxLayoutSettings } from '../settings/sandbox-settings'
-import { CloneRepoDialog } from '../components/repo-clone/clone-repo-dialog'
+import { BranchSelector, CloneRepoDialog, RepoSummaryPanel, SandboxLayout, Summary } from '@harnessio/fragments'
 
 const mockSummaryDetails: { id: string; name: string; count: number; iconName: IconProps['name'] }[] = [
   {

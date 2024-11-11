@@ -30,27 +30,32 @@ import { PipelineStudio, getNodesFromPipelineYaml } from '@harnessio/unified-pip
 import { ILanguageFeaturesService } from 'monaco-editor/esm/vs/editor/common/services/languageFeatures.js'
 import { OutlineModel } from 'monaco-editor/esm/vs/editor/contrib/documentSymbols/browser/outlineModel.js'
 import { StandaloneServices } from 'monaco-editor/esm/vs/editor/standalone/browser/standaloneServices.js'
-import { Container } from '../components/layout/container'
-import { Topbar } from '../components/layout/topbar'
-import { VisualYamlToggle, VisualYamlValue } from '../components/pipeline-studio/visual-yaml-toggle'
-import { PipelineStudioToolbarActions } from '../components/pipeline-studio/pipeline-studio-toolbar-actions'
-import { PipelineStudioFooterBar } from '../components/pipeline-studio/pipeline-studio-footer-bar/pipeline-studio-footer-bar'
 import pipeline from '../assets/pipeline.yaml'
-// import pipelineV0 from '../assets/pipelineV0.yaml'
-import { themes } from '../assets/monacoTheme'
-import { Problems } from '../components/pipeline-studio/problems'
-import { problemsMock } from '../assets/problemsMock'
-import { InlineActionArgsType, getInlineActions } from '../assets/inlineActions'
 import unifiedSchema from '../assets/unifiedSchema.json'
-import { StepForm } from '../components/pipeline-studio/step-form/step-form'
-import { StepFormSection } from '../components/pipeline-studio/step-form/step-form-section'
-import { StepsPalette } from '../components/pipeline-studio/step-palette/step-palette'
-import { StepPaletteFilters } from '../components/pipeline-studio/step-palette/step-palette-filters'
-import { StepsPaletteContent } from '../components/pipeline-studio/step-palette/step-palette-content'
-import { StepsPaletteItem } from '../components/pipeline-studio/step-palette/step-palette-item'
-import { stepPaletteItems } from '../assets/stepPaletteItems'
 import { inputComponentFactory } from '../components/form-inputs/factory/factory'
-import { runStepFormDefinition } from '../components/steps/run-step'
+
+import {
+  Container,
+  PipelineStudioFooterBar,
+  PipelineStudioToolbarActions,
+  Problems,
+  StepForm,
+  StepFormSection,
+  StepPaletteFilters,
+  StepsPalette,
+  StepsPaletteContent,
+  StepsPaletteItem,
+  Topbar,
+  VisualYamlToggle,
+  VisualYamlValue,
+  themes,
+  problemsMock,
+  InlineActionArgsType,
+  getInlineActions,
+  stepPaletteItems,
+  runStepFormDefinition
+} from '@harnessio/fragments'
+// import pipelineV0 from '../assets/pipelineV0.yaml'
 
 MonacoGlobals.set({
   ILanguageFeaturesService,

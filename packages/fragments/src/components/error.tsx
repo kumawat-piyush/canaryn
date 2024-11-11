@@ -2,7 +2,7 @@ import { Button, Spacer, SpotlightsBG, Text } from '@harnessio/canary'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function Error() {
+export function Error() {
   return (
     <SpotlightsBG.Root className="h-screen">
       <SpotlightsBG.Content>

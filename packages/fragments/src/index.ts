@@ -83,6 +83,20 @@ export * from './components/copy-button'
 export * from './components/profile-settings/delete-alert-dialog'
 export * from './components/alert-delete-dialog'
 
+export * from './components/commits-details'
+export * from './components/commits-list'
+export * from './components/error'
+
+// STEPS
+export * from './components/steps/run-step'
+export * from './components/steps/action-step'
+export * from './components/steps/approval-step'
+export * from './components/steps/background-step'
+export * from './components/steps/barrier-step'
+export * from './components/steps/harness-steps'
+export * from './components/steps/queue-step'
+export * from './components/steps/run-test-step'
+
 export * from './utils/utils'
 
 export * as ShaBadge from './components/sha-badge'
@@ -96,6 +110,36 @@ export * from './components/execution/stage-execution'
 export * from './components/contact-card'
 export * from './constants/ExecutionConstants'
 export * from './components/execution/execution-tree-utils'
+
+export * from './components/project-settings/members-reducers/dialog-state-reducers'
+export * from './components/profile-settings/token-create-dialog'
+export * from './components/profile-settings/ssh-key-create-dialog'
+
+export * from './components/pull-request/pull-request-changes'
+export * from './components/pull-request/pull-request-checks'
+export * from './components/pull-request/pull-request-comment-box'
+export * from './components/pull-request/pull-request-commits'
+export * from './components/pull-request/pull-request-compare-button'
+export * from './components/pull-request/pull-request-compare-form'
+export * from './components/pull-request/pull-request-conversation-header'
+export * from './components/pull-request/pull-request-description-box'
+export * from './components/pull-request/pull-request-diff-viewer'
+export * from './components/pull-request/pull-request-filters'
+export * from './components/pull-request/pull-request-line-title'
+export * from './components/pull-request/pull-request-list'
+export * from './components/pull-request/pull-request-overview'
+export * from './components/pull-request/pull-request-panel'
+export * from './components/pull-request/pull-request-side-bar'
+export * from './components/pull-request/pull-request-status-select-button'
+export * from './components/pull-request/pull-request-system-comments'
+export * from './components/pull-request/pull-request-system-label-item'
+export * from './components/pull-request/pull-request-system-merge'
+export * from './components/pull-request/pull-request-system-reviewer-add'
+export * from './components/pull-request/pull-request-system-reviewer-delete'
+export * from './components/pull-request/pull-request-system-title'
+export * from './components/pull-request/pull-request-timeline-item'
+
+// export * from './components/execution/execution-details' // BREAKS because it has mock data
 
 // HOOKS
 export * from './hooks/useCommonFilter'
@@ -121,7 +165,6 @@ export * from './pages/sandbox-settings-account-page'
 export * from './pages/sandbox-settings-project-page'
 export * from './pages/sandbox-settings-create-new-user-page'
 export * from './pages/sandbox-settings-user-management-page'
-export * from './pages/sandbox-repo-settings-page'
 export * from './pages/sandbox-create-pipeline-page'
 export * from './pages/sandbox-repo-create-page'
 export * from './pages/create-project-page'
@@ -129,3 +172,12 @@ export * from './pages/repo-settings-placeholder-page'
 export * from './pages/repo-branch-settings-rules-page'
 export * from './pages/repo-settings-general-page'
 export * from './pages/repo-webhooks-create-page'
+
+// DATA (should not be here)
+export * from './data/mockNavbarSubmenuData'
+
+// ASSETS (check if these should be here)
+export * from './assets/inlineActions'
+export * from './assets/monacoTheme'
+export * from './assets/problemsMock'
+export * from './assets/stepPaletteItems'

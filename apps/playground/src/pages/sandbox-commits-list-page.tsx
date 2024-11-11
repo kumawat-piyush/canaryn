@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
-import CommitsList from '../components/commits-list'
-import { SkeletonList } from '../components/loaders/skeleton-list'
-import { NoData } from '../components/no-data'
 import PlaygroundCommitsSettings from '../settings/commits-settings'
-import { PaginationComponent } from '../components/pagination'
 
 import { ListActions, Spacer, Text } from '@harnessio/canary'
-import { BranchSelector } from '../components/branch-chooser'
 import { mockRepos } from '../data/mockReposData'
 import { Link } from 'react-router-dom'
 import { noop } from 'lodash-es'
-import { SandboxLayout } from '..'
+import {
+  BranchSelector,
+  CommitsList,
+  NoData,
+  PaginationComponent,
+  SandboxLayout,
+  SkeletonList
+} from '@harnessio/fragments'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
@@ -40,7 +42,7 @@ export default function SandboxCommitsListPage() {
   const renderContent = () => {
     switch (loadState) {
       case 'data-loaded':
-        return <CommitsList repos={mockRepos} LinkComponent={LinkComponent} />
+        return <CommitsList commits={mockRepos} LinkComponent={LinkComponent} />
       case 'loading':
         return <SkeletonList />
 

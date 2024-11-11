@@ -15,8 +15,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@harnessio/canary'
-import { SandboxLayout, FormFieldSet } from '..'
-import { MessageTheme } from '../components/form-field-set'
+import { SandboxLayout, FormFieldSet, MessageTheme } from '@harnessio/fragments'
 import { useNavigate } from 'react-router-dom'
 
 // Define form schema for Project Settings

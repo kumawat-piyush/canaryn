@@ -1,6 +1,6 @@
 import React from 'react'
-import { SandboxLayout } from '../index'
 import LandingPage from './landing-page'
+import { SandboxLayout } from '@harnessio/fragments'
 
 function SandboxLandingPage() {
   return (

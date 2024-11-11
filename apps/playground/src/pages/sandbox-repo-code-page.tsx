@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { noop, pick } from 'lodash-es'
 import { Spacer, ListActions, Button, Text, Icon, ButtonGroup, SearchBox } from '@harnessio/canary'
-import { Summary } from '../components/repo-summary'
-import { BranchSelector } from '../components/branch-chooser'
 import { mockFiles } from '../data/mockSummaryFiiles'
-import { SandboxLayout, FileExplorer } from '..'
 import { PlaygroundSandboxLayoutSettings } from '../settings/sandbox-settings'
 import { Link } from 'react-router-dom'
+import { BranchSelector, FileExplorer, SandboxLayout, Summary } from '@harnessio/fragments'
 
 const mockBranchList = [
   {

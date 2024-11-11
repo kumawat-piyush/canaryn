@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import { Spacer, Text, Button } from '@harnessio/canary'
-import { FormFieldSet, SandboxLayout } from '..'
-import { ProfileKeysList } from '../components/profile-settings/profile-settings-keys-list'
-import { ProfileTokensList } from '../components/profile-settings/profile-settings-tokens-list'
 import { mockKeys } from './mocks/profile-settings/mockKeyList'
 import { mockTokens } from './mocks/profile-settings/mockTokensList'
-import { TokenCreateDialog } from '../components/profile-settings/token-create-dialog'
-import { SshKeyCreateDialog } from '../components/profile-settings/ssh-key-create-dialog'
-import { DeleteTokenAlertDialog } from '..'
+import {
+  DeleteTokenAlertDialog,
+  FormFieldSet,
+  ProfileKeysList,
+  ProfileTokensList,
+  SandboxLayout,
+  SshKeyCreateDialog,
+  TokenCreateDialog
+} from '@harnessio/fragments'
 
 function SandboxSettingsAccountKeysPage() {
   const [openCreateTokenDialog, setCreateTokenDialog] = useState(false)

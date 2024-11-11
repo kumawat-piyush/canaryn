@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { Text, Spacer, ListActions, Button, SearchBox } from '@harnessio/canary'
-import { PipelineList } from '../components/pipeline-list'
-import { PaginationComponent } from '../components/pagination'
+import {
+  NoData,
+  NoSearchResults,
+  PaddingListLayout,
+  PaginationComponent,
+  PipelineList,
+  SkeletonList
+} from '@harnessio/fragments'
 
-import { PaddingListLayout } from '../layouts/PaddingListLayout'
-import { SkeletonList } from '../components/loaders/skeleton-list'
-import { NoSearchResults } from '../components/no-search-results'
-import { NoData } from '../components/no-data'
 import { PlaygroundListSettings } from '../settings/list-settings'
 import { Link } from 'react-router-dom'
 import { mockPipelines } from '../data/mockPipelinesData'

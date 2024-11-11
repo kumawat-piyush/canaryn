@@ -2,7 +2,7 @@ import { Navbar, Icon, NavbarProjectChooser, NavbarUser, IconProps } from '@harn
 import React, { useState } from 'react'
 import { Outlet, NavLink, useLocation, Link } from 'react-router-dom'
 import { MoreSubmenu } from '../../../../packages/fragments/src/components/more-submenu'
-import { navbarSubmenuData } from '../data/mockNavbarSubmenuData'
+import { navbarSubmenuData } from '@harnessio/fragments'
 import { TypesUser } from '../../../../packages/fragments/src/layouts/types'
 
 interface NavbarItem {

@@ -13,13 +13,13 @@ interface Repo {
 }
 
 interface PageProps {
-  repos?: Repo[]
+  commits?: Repo[]
   LinkComponent: React.ComponentType<{ to: string; children: React.ReactNode }>
 }
 
 const Title = ({ title }: { title: string }) => <>{title}</>
 
-export default function RepoList({ repos, LinkComponent }: PageProps) {
+export function CommitsList({ commits: repos, LinkComponent }: PageProps) {
   return (
     <>
       {repos && repos.length > 0 && (

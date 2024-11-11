@@ -1,4 +1,4 @@
-import { ExecutionState } from '../components/execution/types'
+import { ExecutionState } from '@harnessio/fragments'
 
 export const mockPipelines = [
   {

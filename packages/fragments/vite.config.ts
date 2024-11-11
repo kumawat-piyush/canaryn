@@ -25,7 +25,11 @@ export default defineConfig({
     yaml({}),
     dts({
       outDir: 'dist',
-      tsconfigPath: './tsconfig.json'
+      tsconfigPath: './tsconfig.json',
+      beforeWriteFile: (filePath, content) => ({
+        filePath: filePath.replace('src/', ''),
+        content
+      })
     }),
     monacoEditorPlugin.default({ customWorkers: [{ entry: 'monaco-yaml/yaml.worker', label: 'yaml' }] })
   ],

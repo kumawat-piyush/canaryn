@@ -12,7 +12,7 @@ import {
   AIPrompt,
   IconProps
 } from '@harnessio/canary'
-import { Floating1ColumnLayout } from '../layouts/Floating1ColumnLayout'
+import { Floating1ColumnLayout } from '@harnessio/fragments'
 import { Link } from 'react-router-dom'
 import noop from 'lodash-es/noop'
 

@@ -1,9 +1,8 @@
 // RepoLayout.tsx
 import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
-import { PullRequestHeader } from '../components/pull-request/pull-request-conversation-header'
+import { PullRequestHeader, SandboxLayout } from '@harnessio/fragments'
 import { Badge, Icon, Spacer, Tabs, TabsList, TabsTrigger } from '@harnessio/canary'
-import { SandboxLayout } from '..'
 
 const mockedPullRequest = {
   number: 1,

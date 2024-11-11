@@ -1,4 +1,4 @@
-import { RepoSettingsGeneralPage } from './repo-settings-general-page'
+import { RepoSettingsGeneralPage } from '@harnessio/fragments'
 import { mockRepoData } from './mocks/repo-settings/mockRepoData'
 import { noop } from 'lodash-es'
 import { branchRules } from './mocks/repo-settings/mockRulesData'

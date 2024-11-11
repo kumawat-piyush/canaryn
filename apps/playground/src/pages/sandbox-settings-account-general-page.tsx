@@ -3,8 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, ButtonGroup, Input, Spacer, Text, Icon, Avatar, AvatarImage, AvatarFallback } from '@harnessio/canary'
-import { SandboxLayout, FormFieldSet } from '..'
-import { MessageTheme } from '../components/form-field-set'
+import { FormFieldSet, MessageTheme, SandboxLayout } from '@harnessio/fragments'
 
 // Define form schemas
 const profileSchema = z.object({

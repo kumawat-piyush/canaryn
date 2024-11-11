@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import { Spacer, ListActions, Button, SearchBox, Text } from '@harnessio/canary'
-import { NoData } from '../components/no-data'
-import { NoSearchResults } from '../components/no-search-results'
-import { SkeletonList } from '../components/loaders/skeleton-list'
-import { PaginationComponent } from '../components/pagination'
 import { PlaygroundListSettings } from '../settings/list-settings'
 import { mockWebhooks } from '../data/mockWebhooksData'
 import { Link } from 'react-router-dom'
-import { WebhooksList } from '../components/webhook-list'
-import { SandboxLayout } from '..'
+import {
+  NoData,
+  NoSearchResults,
+  PaginationComponent,
+  SandboxLayout,
+  SkeletonList,
+  WebhooksList
+} from '@harnessio/fragments'
+import { noop } from 'lodash-es'
 
 function SandboxRepoWebhooksListPage() {
   const [loadState, setLoadState] = useState('data-loaded')
@@ -18,7 +21,7 @@ function SandboxRepoWebhooksListPage() {
   const renderListContent = () => {
     switch (loadState) {
       case 'data-loaded':
-        return <WebhooksList webhooks={mockWebhooks} LinkComponent={LinkComponent} />
+        return <WebhooksList webhooks={mockWebhooks} LinkComponent={LinkComponent} openDeleteWebhookDialog={noop} />
       case 'loading':
         return <SkeletonList />
       case 'no-search-matches':

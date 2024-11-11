@@ -1,5 +1,4 @@
-import { Execution } from '../../../components/execution-list'
-import { ExecutionState } from '../../../components/execution/types'
+import { Execution, ExecutionState } from '@harnessio/fragments'
 
 export const mockExecutions: Execution[] = [
   {

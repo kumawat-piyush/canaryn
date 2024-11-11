@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Text, Spacer, ListActions, SearchBox } from '@harnessio/canary'
-import { ExecutionList } from '../components/execution-list'
-import { PaginationComponent } from '../components/pagination'
-import { SkeletonList } from '../components/loaders/skeleton-list'
-import { NoSearchResults } from '../components/no-search-results'
-import { NoData } from '../components/no-data'
 import { PlaygroundListSettings } from '../settings/list-settings'
-import { SandboxLayout } from '..'
 import { mockExecutions } from './mocks/execution/mockExecutionList'
+import {
+  ExecutionList,
+  NoData,
+  NoSearchResults,
+  PaginationComponent,
+  SandboxLayout,
+  SkeletonList
+} from '@harnessio/fragments'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]

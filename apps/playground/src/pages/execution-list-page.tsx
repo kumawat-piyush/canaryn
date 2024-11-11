@@ -2,14 +2,16 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { noop } from 'lodash-es'
 import { Text, Spacer, ListActions, SearchBox } from '@harnessio/canary'
-import { ExecutionList } from '../components/execution-list'
-import { PaginationComponent } from '../components/pagination'
-import { PaddingListLayout } from '../layouts/PaddingListLayout'
-import { SkeletonList } from '../components/loaders/skeleton-list'
-import { NoSearchResults } from '../components/no-search-results'
-import { NoData } from '../components/no-data'
+import {
+  ExecutionList,
+  PaginationComponent,
+  PaddingListLayout,
+  SkeletonList,
+  NoSearchResults,
+  NoData,
+  TopBarWidget
+} from '@harnessio/fragments'
 import { PlaygroundListSettings } from '../settings/list-settings'
-import { TopBarWidget } from '../components/layout/top-bar-widget'
 import { mockProjects } from '../data/mockProjects'
 import { mockExecutions } from './mocks/execution/mockExecutionList'
 

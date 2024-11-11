@@ -1,5 +1,5 @@
 import React from 'react'
-import PlaygroundSettingsMenu from './menu'
+import PlaygroundSettingsMenu from './settings-menu'
 
 interface SettingsProps {
   loadState: string

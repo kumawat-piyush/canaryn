@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
 import { noop } from 'lodash-es'
-import { Home } from '../components/home'
 import PlaygroundLandingSettings from '../settings/landing-settings'
-import { SignInPage } from '../pages/signin-page'
 import { useNavigate } from 'react-router-dom'
-import { SignUpPage } from './signup-page'
 import { ForgotPasswordPage } from './forgot-password-page'
 import { OTPPage } from './otp-page'
 import { NewPasswordPage } from './new-password-page'
 import { mockProjects } from '../data/mockProjects'
-import { CreateProjectPage } from './create-project-page'
+import { CreateProjectPage, SignInPage, SignUpPage } from '@harnessio/fragments'
+import { Home } from './home'
 
 export default function LandingPage() {
   const [loadState, setLoadState] = useState('home-auth')

@@ -16,7 +16,7 @@ import {
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Floating1ColumnLayout } from '../layouts/Floating1ColumnLayout'
+import { Floating1ColumnLayout } from '@harnessio/fragments'
 import { noop } from 'lodash-es'
 
 interface PageProps {

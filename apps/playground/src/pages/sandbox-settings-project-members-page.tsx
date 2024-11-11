@@ -1,21 +1,23 @@
 import React, { useState, useReducer } from 'react'
 import { Spacer, Text, ListActions, SearchBox, Button } from '@harnessio/canary'
-import { SandboxLayout, SkeletonList, NoData } from '..'
 import { mockMemberData } from '../data/mockMembersData'
-import { MembersList } from '../components/project-settings/members-list'
 import { PlaygroundListSettings } from '../settings/list-settings'
-import { PaginationComponent } from '../components/pagination'
 import { useNavigate } from 'react-router-dom'
 import {
+  DialogType,
+  FormDeleteMemberDialog,
+  MembersList,
+  MembersProps,
+  NoData,
+  PaginationComponent,
+  SandboxLayout,
+  SkeletonList,
   dialogStateReducer,
   initialDialogState
-} from '../components/project-settings/members-reducers/dialog-state-reducers'
+} from '@harnessio/fragments'
 
-import { FormDeleteMemberDialog } from '../components/project-settings/form-member-delete-dialog'
-import { DialogType, ActionType } from '../components/project-settings/interfaces'
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
-import { MembersProps } from '../components/project-settings/interfaces'
 
 function SandboxSettingsProjectMembersPage() {
   const navigate = useNavigate()

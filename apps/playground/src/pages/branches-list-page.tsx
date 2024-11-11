@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
-import { BranchesList } from '../components/branches-list'
-import { SkeletonList } from '../components/loaders/skeleton-list'
-import { NoData } from '../components/no-data'
-import { PaddingListLayout } from '../layouts/PaddingListLayout'
+import {
+  BranchesList,
+  SkeletonList,
+  NoData,
+  PaddingListLayout,
+  PaginationComponent,
+  CreateBranchDialog
+} from '@harnessio/fragments'
 import { Button, ListActions, SearchBox, Spacer, Text } from '@harnessio/canary'
-import { PaginationComponent } from '../components/pagination'
 import PlaygroundBranchesSettings from '../settings/branches-settings'
 import { mockBranchData } from '../data/mockBranchData'
-import { CreateBranchDialog } from '../components/create-branch-dialog'
 import { noop } from 'lodash-es'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]

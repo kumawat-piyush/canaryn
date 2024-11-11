@@ -1,21 +1,21 @@
 import React from 'react'
-import PlaygroundSettingsMenu from './menu'
+import PlaygroundSettingsMenu from './settings-menu'
 
 interface SettingsProps {
   loadState: string
   setLoadState: (state: string) => void
 }
 
-const BranchesSettings = ({ loadState, setLoadState }: SettingsProps) => {
+const CommitsSettings = ({ loadState, setLoadState }: SettingsProps) => {
   const settingsOptions = [
     { key: 'data-loaded', label: 'Data loaded' },
     { key: 'loading', label: 'Loading' },
-    { key: 'no-data', label: 'No branches yet' }
+    { key: 'no-data', label: 'No data' }
   ]
 
   return (
     <PlaygroundSettingsMenu
-      title="Branches page states"
+      title="Commits page states"
       options={settingsOptions}
       loadState={loadState}
       setLoadState={setLoadState}
@@ -23,4 +23,4 @@ const BranchesSettings = ({ loadState, setLoadState }: SettingsProps) => {
   )
 }
 
-export default BranchesSettings
+export default CommitsSettings

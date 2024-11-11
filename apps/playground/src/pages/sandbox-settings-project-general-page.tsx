@@ -18,8 +18,7 @@ import {
   AlertDialogFooter,
   AlertDialogCancel
 } from '@harnessio/canary'
-import { SandboxLayout, FormFieldSet } from '..'
-import { MessageTheme } from '../components/form-field-set'
+import { FormFieldSet, MessageTheme, SandboxLayout } from '@harnessio/fragments'
 
 // Define form schema for Project Settings
 const projectSettingsSchema = z.object({

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import PlaygroundPullRequestChangesSettings from '../settings/pull-request-changes-settings'
-import { SkeletonList } from '../components/loaders/skeleton-list'
-import { NoData } from '../components/no-data'
+import { FileViewGauge, NoData, PullRequestChanges, SkeletonList } from '@harnessio/fragments'
 import {
   ListActions,
   Spacer,
@@ -16,8 +15,6 @@ import {
   RadioGroupItem,
   RadioGroup
 } from '@harnessio/canary'
-import { PullRequestChanges } from '../components/pull-request/pull-request-changes'
-import { FileViewGauge } from '..'
 import { mockDiffData } from '../data/mockDiffData'
 
 interface FilterViewProps {

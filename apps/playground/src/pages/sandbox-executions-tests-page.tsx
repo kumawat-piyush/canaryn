@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, Spacer } from '@harnessio/canary'
-import { SandboxLayout } from '../index'
+import { SandboxLayout } from '@harnessio/fragments'
 
 function SandboxExecutionTestsPage() {
   return (

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { RepoList } from '../components/repo-list'
 import {
   Text,
   Spacer,
@@ -17,8 +16,8 @@ import {
 } from '@harnessio/canary'
 import { Link } from 'react-router-dom'
 import { mockRepos } from '../data/mockReposData'
-import { SandboxLayout } from '../index'
 import { PlaygroundSandboxLayoutSettings } from '../settings/sandbox-settings'
+import { RepoList, SandboxLayout } from '@harnessio/fragments'
 
 const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
 const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]

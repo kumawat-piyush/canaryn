@@ -171,6 +171,9 @@ importers:
       '@harnessio/forms':
         specifier: workspace:*
         version: link:../../packages/forms
+      '@harnessio/fragments':
+        specifier: workspace:*
+        version: link:../../packages/fragments
       '@harnessio/icons-noir':
         specifier: workspace:*
         version: link:../../packages/icons-noir

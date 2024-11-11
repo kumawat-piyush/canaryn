@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import PullRequestChecks from '../components/pull-request/pull-request-checks'
+// import PullRequestChecks from '../components/pull-request/pull-request-checks'
 import PlaygroundPullRequestChecksSettings from '../settings/pull-request-checks-settings'
-import { SkeletonList } from '../components/loaders/skeleton-list'
-import { NoData } from '../components/no-data'
+import { SkeletonList, NoData } from '@harnessio/fragments'
 
 export default function PullRequestChecksPage() {
   const [loadState, setLoadState] = useState('loading') // Change to data-loaded when component work is finished
@@ -10,7 +9,8 @@ export default function PullRequestChecksPage() {
   const renderContent = () => {
     switch (loadState) {
       case 'data-loaded':
-        return <PullRequestChecks />
+        // return <PullRequestChecks />
+        return null
       case 'loading':
         return <SkeletonList />
       case 'no-data':
