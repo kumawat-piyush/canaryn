@@ -109,7 +109,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'import',
-            element: <SandboxRepoImportPage />
+            element: <SandboxRepoImportPage handleImportRepo={noop} />
           },
           {
             path: ':repoId',
