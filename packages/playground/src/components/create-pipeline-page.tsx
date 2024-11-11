@@ -14,7 +14,6 @@ import {
 } from '@harnessio/canary'
 import { Floating1ColumnLayout } from '../layouts/Floating1ColumnLayout'
 import { Link } from 'react-router-dom'
-import noop from 'lodash-es/noop'
 
 const SectionList = ({ children }: { children: React.ReactNode }) => (
   <div className="flex flex-col gap-9 w-full">{children}</div>
@@ -30,7 +29,7 @@ type Template = {
 }
 
 interface CreatePipelinePageProps {
-  onClickStartFromScratch?: () => void
+  onClickStartFromScratch: () => void
 }
 
 const TemplateSection = () => {
@@ -162,7 +161,7 @@ const ResourceSectionList = ({ sections }: { sections: ResourceSectionData[] }) 
   </>
 )
 
-export function CreatePipelinePage({ onClickStartFromScratch = noop }: CreatePipelinePageProps) {
+export function CreatePipelinePage({ onClickStartFromScratch }: CreatePipelinePageProps) {
   const resourceSections: ResourceSectionData[] = [
     {
       title: 'Documentation',

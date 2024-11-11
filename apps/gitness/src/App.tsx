@@ -307,6 +307,10 @@ export default function App() {
                   element: <ProjectPipelinesPage />
                 },
                 {
+                  path: 'create',
+                  element: <PipelineCreate />
+                },
+                {
                   path: ':pipelineId',
                   element: <RepoExecutionListPage />
                 }
