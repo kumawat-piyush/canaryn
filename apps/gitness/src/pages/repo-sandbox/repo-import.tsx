@@ -5,10 +5,8 @@ import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 export const RepoImportContainer = () => {
   const spaceId = useGetSpaceURLParam()
   const { mutateAsync: importRepo, isLoading: importingRepo } = useImportRepositoryMutation({})
-  console.log(spaceId)
 
   const handleImportRepo = async (data: ImportRepoFormType) => {
-    console.log(data)
     const body: ImportRepositoryRequestBody = {
       identifier: data.identifier,
       description: data.description,
