@@ -9,7 +9,6 @@ import {
   SelectTrigger,
   SelectValue,
   Text,
-  Icon,
   Checkbox,
   Spacer
 } from '@harnessio/canary'
@@ -32,7 +31,7 @@ const importRepoFormSchema = z.object({
 
 export type ImportRepoFormType = z.infer<typeof importRepoFormSchema>
 
-export function SandboxRepoImportPage() {
+export function SandboxRepoImportPage({ isLoading = false }: { isLoading?: boolean }) {
   const {
     register,
     handleSubmit,
@@ -56,8 +55,6 @@ export function SandboxRepoImportPage() {
   })
 
   const providerValue = watch('provider')
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const providerOptions = [
     `Github`,
@@ -163,7 +160,6 @@ export function SandboxRepoImportPage() {
                       onCheckedChange={checked => setValue('authorization', checked)}
                     />
                   }
-                  // id={`${event.id}`}
                   id="authorization"
                   label="Requires Authorization"
                   className="min-h-8 mt-0 flex items-center"
@@ -241,8 +237,8 @@ export function SandboxRepoImportPage() {
                     <Button type="button" variant="outline" size="sm" onClick={handleCancel}>
                       Cancel
                     </Button>
-                    <Button type="submit" size="sm" disabled={isSubmitting}>
-                      {!isSubmitting ? 'Import Repository' : 'Importing...'}
+                    <Button type="submit" size="sm" disabled={isLoading}>
+                      {!isLoading ? 'Import Repository' : 'Importing...'}
                     </Button>
                   </>
                 </ButtonGroup.Root>
