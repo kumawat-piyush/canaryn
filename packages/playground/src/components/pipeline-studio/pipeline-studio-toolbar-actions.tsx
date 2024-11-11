@@ -1,6 +1,6 @@
 import React from 'react'
 import { ToggleGroup, ToggleGroupItem } from '@harnessio/canary'
-import { Copy, Download, EditPencil } from '@harnessio/icons-noir'
+import { Download, EditPencil } from '@harnessio/icons-noir'
 import { CopyButton } from '../copy-button'
 
 export interface PipelineStudioToolbarActionsProps {
