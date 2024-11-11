@@ -57,9 +57,9 @@ import { ExplorerPathsProvider } from './framework/context/ExplorerPathsContext'
 import { Logout } from './pages/logout'
 import { UserManagementPageContainer } from './pages/user-management/user-management-container'
 import PipelineLayout from './layouts/PipelineStudioLayout'
-import { SandboxPipelineCreate } from './pages/pipeline-create/pipeline-create-sandbox'
 import { CreateNewUserContainer } from './pages/user-management/create-new-user-container'
 import { CreateNewMemberPage } from './pages/project-settings/project-settings-new-member-page'
+import { PipelineCreate } from './pages/pipeline-create/pipeline-create'
 
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
 
@@ -111,7 +111,7 @@ export default function App() {
           children: [
             {
               path: 'create',
-              element: <SandboxPipelineCreate />
+              element: <PipelineCreate />
             },
             {
               path: ':pipelineId',
