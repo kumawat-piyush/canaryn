@@ -35,7 +35,7 @@ import { Execution } from './pages/execution/execution-details'
 import RepoSandboxWebhooksListPage from './pages/webhooks/repo-webhook-list'
 import { RepoBranchesListPage } from './pages/repo/repo-branch-list'
 import PullRequestDataProvider from './pages/pull-request/context/pull-request-data-provider'
-import SandboxPullRequestConversationPage from './pages/pull-request/sandbox-pull-request-conversation-page'
+import PullRequestConversationPage from './pages/pull-request/pull-request-conversation-page'
 import { RepoFiles } from './pages/repo/repo-files'
 import { SandboxRepoHeader } from './pages/repo/repo-header'
 import ReposListPage from './pages/repo/repo-list'
@@ -223,7 +223,7 @@ export default function App() {
                       path: 'conversation',
                       element: (
                         <PullRequestDataProvider>
-                          <SandboxPullRequestConversationPage />
+                          <PullRequestConversationPage />
                         </PullRequestDataProvider>
                       )
                     },
