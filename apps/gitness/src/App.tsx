@@ -13,7 +13,7 @@ import {
   SandboxRepoSettingsPage,
   RepoSettingsPlaceholderPage
 } from '@harnessio/playground'
-import SandboxRootWrapper from './components/SandboxRootWrapper'
+import RootWrapper from './components/RootWrapper'
 import { TooltipProvider } from '@harnessio/canary'
 import { queryClient } from './framework/queryClient'
 import RepoPipelinesPage from './pages/pipeline/repo-pipeline-list'
@@ -22,7 +22,7 @@ import { SignIn } from './pages/signin'
 import { SignUp } from './pages/signup'
 import PullRequestListPage from './pages/pull-request/pull-request-list-page'
 import RepoExecutionListPage from './pages/execution/repo-execution-list'
-import PullRequestSandboxLayout from './layouts/PullRequestSandboxLayout'
+import PullRequestLayout from './layouts/PullRequestLayout'
 import PullRequestCommitsPage from './pages/pull-request-commits-page'
 import PipelineEditPage from './pages/pipeline-edit/pipeline-edit'
 import { LandingPage } from './pages/landing-page'
@@ -32,12 +32,12 @@ import CreateProject from './pages/create-project'
 import { CreateRepo } from './pages/repo/repo-create-page'
 import RepoCommitsPage from './pages/repo/repo-commits'
 import { Execution } from './pages/execution/execution-details'
-import RepoSandboxWebhooksListPage from './pages/webhooks/repo-webhook-list'
+import RepoWebhooksListPage from './pages/webhooks/repo-webhook-list'
 import { RepoBranchesListPage } from './pages/repo/repo-branch-list'
 import PullRequestDataProvider from './pages/pull-request/context/pull-request-data-provider'
 import PullRequestConversationPage from './pages/pull-request/pull-request-conversation-page'
 import { RepoFiles } from './pages/repo/repo-files'
-import { SandboxRepoHeader } from './pages/repo/repo-header'
+import { RepoHeader } from './pages/repo/repo-header'
 import ReposListPage from './pages/repo/repo-list'
 import RepoSandboxLayout from './layouts/RepoSandboxLayout'
 import { SettingsProfileGeneralPage } from './pages/profile-settings/profile-settings-general-container'
@@ -99,7 +99,7 @@ export default function App() {
     },
     {
       path: '/',
-      element: <SandboxRootWrapper />,
+      element: <RootWrapper />,
       children: [
         {
           index: true,
@@ -128,7 +128,7 @@ export default function App() {
         },
         {
           path: 'spaces',
-          element: <SandboxRepoHeader />,
+          element: <RepoHeader />,
           children: [
             {
               path: ':spaceId/repos',
@@ -213,7 +213,7 @@ export default function App() {
                 },
                 {
                   path: 'pull-requests/:pullRequestId',
-                  element: <PullRequestSandboxLayout />,
+                  element: <PullRequestLayout />,
                   children: [
                     {
                       index: true,
@@ -248,7 +248,7 @@ export default function App() {
 
                 {
                   path: 'webhooks',
-                  element: <RepoSandboxWebhooksListPage />
+                  element: <RepoWebhooksListPage />
                 },
                 {
                   path: 'webhooks/create',
@@ -323,7 +323,7 @@ export default function App() {
             },
             {
               path: ':spaceId/settings',
-              element: <SandboxRootWrapper />,
+              element: <RootWrapper />,
               children: [
                 {
                   element: <SandboxSettingsProjectPage />,
