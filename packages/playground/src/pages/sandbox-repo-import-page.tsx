@@ -31,7 +31,13 @@ const importRepoFormSchema = z.object({
 
 export type ImportRepoFormType = z.infer<typeof importRepoFormSchema>
 
-export function SandboxRepoImportPage({ isLoading = false }: { isLoading?: boolean }) {
+export function SandboxRepoImportPage({
+  isLoading,
+  handleImportRepo
+}: {
+  isLoading?: boolean
+  handleImportRepo: (data: ImportRepoFormType) => void
+}) {
   const {
     register,
     handleSubmit,
@@ -79,7 +85,7 @@ export function SandboxRepoImportPage({ isLoading = false }: { isLoading?: boole
   }
 
   const handleFormSubmit: SubmitHandler<ImportRepoFormType> = data => {
-    console.log(data)
+    handleImportRepo(data)
     reset()
   }
 

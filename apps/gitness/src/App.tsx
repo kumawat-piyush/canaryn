@@ -60,6 +60,7 @@ import PipelineLayout from './layouts/PipelineStudioLayout'
 import { SandboxPipelineCreate } from './pages/pipeline-create/pipeline-create-sandbox'
 import { CreateNewUserContainer } from './user-management/create-new-user-container'
 import { CreateNewMemberPage } from './pages/project-settings/project-settings-new-member-page'
+import { RepoImportContainer } from './pages/repo-sandbox/repo-import'
 
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
 
@@ -321,6 +322,7 @@ export default function App() {
               path: 'create',
               element: <CreateProject />
             },
+
             {
               path: ':spaceId/settings',
               element: <SandboxRootWrapper />,
@@ -353,6 +355,10 @@ export default function App() {
             {
               path: ':spaceId/repos/create',
               element: <CreateRepo />
+            },
+            {
+              path: ':spaceId/repos/import',
+              element: <RepoImportContainer />
             }
           ]
         },
