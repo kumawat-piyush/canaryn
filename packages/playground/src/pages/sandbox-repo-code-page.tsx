@@ -7,6 +7,7 @@ import { mockFiles } from '../data/mockSummaryFiiles'
 import { SandboxLayout, FileExplorer } from '..'
 import { PlaygroundSandboxLayoutSettings } from '../settings/sandbox-settings'
 import { Link } from 'react-router-dom'
+import { SearchFiles } from '../components/search-files'
 
 const mockBranchList = [
   {
@@ -66,6 +67,18 @@ const sidebarItems = [
   { id: 40, type: 'file', name: 'nginx.conf' }
 ]
 
+const filesListItems = [
+  'index.html',
+  'App.js',
+  'README.md',
+  'package-1239568483438.json',
+  'webpack.config.js',
+  'babel.config.js',
+  'tsconfig.json',
+  'prettier.config.js',
+  'Dockerfile'
+]
+
 // Move sidebar function to playground components
 function Sidebar() {
   return (
@@ -83,7 +96,7 @@ function Sidebar() {
           </Button>
         </ButtonGroup.Root>
       </div>
-      <SearchBox.Root width="full" placeholder="Search" />
+      <SearchFiles navigateToFile={noop} filesList={filesListItems} />
       <FileExplorer.Root onValueChange={noop} value={[]}>
         {/* 2 nested levels of identical data for demo purposes */}
         {sidebarItems.map(itm =>
