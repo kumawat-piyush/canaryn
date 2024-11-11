@@ -157,7 +157,7 @@ export function SandboxRepoImportPage({ isLoading = false }: { isLoading?: boole
                       {...register('authorization')}
                       id="authorization"
                       checked={watch('authorization')}
-                      onCheckedChange={checked => setValue('authorization', checked)}
+                      onCheckedChange={(checked: boolean) => setValue('authorization', checked)}
                     />
                   }
                   id="authorization"
@@ -171,7 +171,7 @@ export function SandboxRepoImportPage({ isLoading = false }: { isLoading?: boole
                       {...register('pipelines')}
                       id="pipelines"
                       checked={watch('pipelines')}
-                      onCheckedChange={checked => setValue('pipelines', checked)}
+                      onCheckedChange={(checked: boolean) => setValue('pipelines', checked)}
                     />
                   }
                   // id={`${event.id}`}
