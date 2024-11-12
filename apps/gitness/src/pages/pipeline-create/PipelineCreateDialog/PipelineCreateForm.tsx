@@ -50,6 +50,14 @@ export function PipelineCreateForm({ onCancel, onSubmit }: PipelineCreateFormPro
 
   const { watch, setValue, clearErrors, trigger } = form
 
+  const branch = watch('branch')
+
+  useEffect(() => {
+    if (repositoryData?.default_branch) {
+      setValue('branch', repositoryData?.default_branch)
+    }
+  }, [repositoryData?.default_branch, setValue])
+
   useEffect(() => {
     const subscription = watch((value, { name }) => {
       if (name === 'name') {
@@ -99,20 +107,22 @@ export function PipelineCreateForm({ onCancel, onSubmit }: PipelineCreateFormPro
       <FormField
         control={form.control}
         name="branch"
+        key={branch}
         render={({ field }) => (
           <FormItem>
             <FormLabel className="text-primary">Branch*</FormLabel>
-            <Select
-              disabled={isLoading || loadingRepoData || !branches?.length}
-              onValueChange={field.onChange}
-              defaultValue={field.value}>
+            <Select disabled={isLoading || loadingRepoData} onValueChange={field.onChange} defaultValue={field.value}>
               <FormControl className="text-primary">
                 <SelectTrigger>
                   <SelectValue placeholder="Select a branch" />
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                {branches?.map(branch => <SelectItem value={branch?.name as string}>{branch?.name}</SelectItem>)}
+                {branches?.map(branch => (
+                  <SelectItem key={branch?.name} value={branch?.name as string}>
+                    {branch?.name}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
             <FormMessage />
