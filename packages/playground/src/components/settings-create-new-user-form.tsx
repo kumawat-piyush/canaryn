@@ -16,7 +16,7 @@ const newUserSchema = z.object({
 
 export type NewUserFields = z.infer<typeof newUserSchema>
 
-function SandboxSettingsCreateNewUserPage({
+function SettingsCreateNewUserForm({
   handleCreateUser,
   isLoading,
   apiError
@@ -137,4 +137,4 @@ function SandboxSettingsCreateNewUserPage({
   )
 }
 
-export { SandboxSettingsCreateNewUserPage }
+export { SettingsCreateNewUserForm }

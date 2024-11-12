@@ -6,7 +6,7 @@ import {
   ThemeProvider,
   SandboxSettings,
   SandboxSettingsAccountPage,
-  SandboxSettingsProjectPage,
+  SettingsProjectNav,
   ForgotPasswordPage,
   NewPasswordPage,
   OTPPage,
@@ -330,7 +330,7 @@ export default function App() {
               element: <RootWrapper />,
               children: [
                 {
-                  element: <SandboxSettingsProjectPage />,
+                  element: <SettingsProjectNav />,
                   children: [
                     {
                       index: true,
