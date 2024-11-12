@@ -8,7 +8,7 @@
     "watch:css": "pnpm build:css --watch",
     "preinstall": "npx only-allow pnpm",
     "watch": "vite",
-    "build": "vite build",
+    "build": "pnpm build:css && vite build",
     "build:watch": "vite build --watch",
     "prepublishOnly": "pnpm build",
     "lint": "eslint ./src",

@@ -12,7 +12,7 @@ import {
   OTPPage,
   RepoSettingsPage,
   RepoSettingsPlaceholderPage
-} from '@harnessio/playground'
+} from '@harnessio/fragments'
 import RootWrapper from './components/RootWrapper'
 import { TooltipProvider } from '@harnessio/canary'
 import { queryClient } from './framework/queryClient'

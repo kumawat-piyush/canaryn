@@ -4,7 +4,7 @@ import {
   BranchRuleId,
   PatternsButtonType,
   MergeStrategy
-} from '@harnessio/playground'
+} from '@harnessio/fragments'
 import {
   EnumRuleState,
   OpenapiRuleDefinition,

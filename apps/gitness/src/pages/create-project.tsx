@@ -5,7 +5,7 @@ import {
   OpenapiCreateSpaceRequest,
   CreateSpaceErrorResponse
 } from '@harnessio/code-service-client'
-import { CreateProjectPage } from '@harnessio/playground'
+import { CreateProjectPage } from '@harnessio/fragments'
 import { useAppContext } from '../framework/context/AppContext'
 
 export default function CreateProject() {

@@ -10,7 +10,7 @@ import {
   NoSearchResults,
   PaginationComponent,
   SandboxLayout
-} from '@harnessio/playground'
+} from '@harnessio/fragments'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
 import { PageResponseHeader } from '../../types'

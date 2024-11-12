@@ -12,7 +12,7 @@ import {
   AlertDialogFooter,
   AlertDialogCancel
 } from '@harnessio/canary'
-import { FormFieldSet } from '@harnessio/playground'
+import { FormFieldSet } from '@harnessio/fragments'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'

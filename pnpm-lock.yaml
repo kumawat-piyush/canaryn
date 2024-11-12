@@ -32,9 +32,6 @@ importers:
       '@harnessio/fragments':
         specifier: workspace:*
         version: link:../../packages/fragments
-      '@harnessio/playground':
-        specifier: workspace:*
-        version: link:../../packages/playground
       '@harnessio/unified-pipeline':
         specifier: workspace:*
         version: link:../../packages/unified-pipeline

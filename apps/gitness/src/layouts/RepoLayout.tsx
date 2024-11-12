@@ -1,5 +1,5 @@
 import React from 'react'
-import { SandboxLayout } from '@harnessio/playground'
+import { SandboxLayout } from '@harnessio/fragments'
 import { NavLink, Outlet } from 'react-router-dom'
 
 const RepoLayout: React.FC = () => {

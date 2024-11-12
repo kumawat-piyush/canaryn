@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { TypesPullReq, TypesRepository, useChecksPullReqQuery } from '@harnessio/code-service-client'
-import { ExecutionState } from '@harnessio/playground'
+import { ExecutionState } from '@harnessio/fragments'
 import { determineStatusMessage, generateStatusSummary } from '../utils'
 import pluralize from 'pluralize'
 interface Check {
