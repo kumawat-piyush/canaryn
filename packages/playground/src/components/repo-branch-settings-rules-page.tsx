@@ -18,7 +18,7 @@ import { repoBranchSettingsFormSchema } from './repo-settings/repo-branch-settin
 import {
   RepoBranchSettingsFormFields,
   BypassUsersList,
-  ActionType,
+  BranchRulesActionType,
   MergeStrategy
 } from './repo-settings/repo-branch-settings-rules/types'
 import { NavLink } from 'react-router-dom'
@@ -102,7 +102,7 @@ export const RepoBranchSettingsRulesPage: React.FC<RepoBranchSettingsRulesPagePr
       })
 
       dispatch({
-        type: ActionType.SET_INITIAL_RULES,
+        type: BranchRulesActionType.SET_INITIAL_RULES,
         payload: preSetRuleData?.rules?.map(rule => ({
           id: rule.id,
           checked: rule.checked || false,
