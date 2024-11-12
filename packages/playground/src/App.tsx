@@ -62,7 +62,7 @@ import { RepoSettingsGeneralPlaygroundContainer } from './pages/repo-settings-ge
 import { RepoSettingsCollaborationsPage } from './pages/repo-settings-collaborations-page'
 import { RepoSettingsModerationPage } from './pages/repo-settings-moderation-page'
 import { RepoSettingsPlaceholderPage } from './pages/repo-settings-placeholder-page'
-import { SandboxSettingsAccountGeneralPage } from './pages/sandbox-settings-account-general-page'
+import { SettingsAccountGeneralPage } from './pages/settings-account-general-page'
 import { SandboxSettingsCreateNewMemberPage } from './pages/sandbox-settings-create-new-member-page'
 import { SandboxSettingsUserManagementPage } from './pages/sandbox-settings-user-management-page'
 import { SandboxSettingsCreateNewUserPage } from './pages/sandbox-settings-create-new-user-page'
@@ -314,7 +314,7 @@ const router = createBrowserRouter([
               },
               {
                 path: 'general',
-                element: <SandboxSettingsAccountGeneralPage />
+                element: <SettingsAccountGeneralPage />
               },
               {
                 path: 'keys',
