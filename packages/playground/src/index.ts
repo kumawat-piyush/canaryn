@@ -110,7 +110,7 @@ export * as FormFieldSet from './components/form-field-set'
 // SANDBOX LAYOUTS
 export * as SandboxLayout from './layouts/SandboxLayout'
 export * from './components/settings-account-page'
-export * from './pages/sandbox-repo-settings-page'
+export * from './pages/repo-settings-page'
 export * from './components/repo-settings-general-page'
 // export * from './pages/repo-settings-general-page'
 

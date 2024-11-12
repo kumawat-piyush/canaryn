@@ -4,7 +4,7 @@ import { SandboxLayout } from '../index'
 import { Navbar, Spacer } from '@harnessio/canary'
 import { NavLink, Outlet } from 'react-router-dom'
 
-const navItems = [
+export const navItems = [
   {
     id: 0,
     groupTitle: null,
@@ -79,7 +79,7 @@ function SettingsContent() {
   )
 }
 
-function SandboxRepoSettingsPage() {
+export function RepoSettingsPage() {
   const [loadState, setLoadState] = useState('data-loaded')
 
   return (
@@ -97,5 +97,3 @@ function SandboxRepoSettingsPage() {
     </SandboxLayout.Main>
   )
 }
-
-export { SandboxRepoSettingsPage, navItems }

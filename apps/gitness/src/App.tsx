@@ -10,7 +10,7 @@ import {
   ForgotPasswordPage,
   NewPasswordPage,
   OTPPage,
-  SandboxRepoSettingsPage,
+  RepoSettingsPage,
   RepoSettingsPlaceholderPage
 } from '@harnessio/playground'
 import RootWrapper from './components/RootWrapper'
@@ -266,7 +266,7 @@ export default function App() {
                 },
                 {
                   path: 'settings',
-                  element: <SandboxRepoSettingsPage />,
+                  element: <RepoSettingsPage />,
                   children: [
                     {
                       index: true,
