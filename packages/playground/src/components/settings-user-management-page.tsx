@@ -20,7 +20,7 @@ const sortOptions = [
   { name: 'Last Modified', value: 'updated' }
 ]
 
-function SettingsUserManagementPage({
+export function SettingsUserManagementPage({
   userData,
   handleUpdateUser,
   handleDeleteUser,
@@ -193,5 +193,3 @@ function SettingsUserManagementPage({
     </SandboxLayout.Main>
   )
 }
-
-export { SettingsUserManagementPage }

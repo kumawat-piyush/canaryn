@@ -63,13 +63,13 @@ import { RepoSettingsPage } from './components/repo-settings/repo-settings-page'
 import { RepoSettingsGeneralPlaygroundContainer } from './pages/repo-settings-general-page-playground-container'
 import { RepoSettingsCollaborationsPage } from './pages/repo-settings-collaborations-page'
 import { RepoSettingsModerationPage } from './pages/repo-settings-moderation-page'
-import { RepoSettingsPlaceholderPage } from './pages/repo-settings-placeholder-page'
+import { RepoSettingsPlaceholderPage } from './components/repo-settings/repo-settings-placeholder'
 import { SettingsAccountGeneralPage } from './pages/settings-account-general-page'
 // import { SandboxSettingsCreateNewMemberPage } from './pages/sandbox-settings-create-new-member-page'
-import { SandboxSettingsUserManagementPage } from './pages/sandbox-settings-user-management-page'
-import { SandboxSettingsCreateNewUserPage } from './pages/sandbox-settings-create-new-user-page'
+import { SettingsUserManagementPage } from './components/settings-user-management-page'
+import { SettingsCreateNewUserForm } from './components/settings-create-new-user-form'
 import { SignInPage } from './components/signin-page'
-import { RepoBranchSettingsRulesPage } from './pages/repo-branch-settings-rules-page'
+import { RepoBranchSettingsRulesPage } from './components/repo-branch-settings-rules-page'
 import SandboxPullRequestComparePage from './pages/sandbox-pull-request-compare-page'
 import { mockBypassUserData, mockStatusChecks } from './pages/mocks/repo-branch-settings/mockData'
 import { BypassUsersList } from './components/repo-settings/repo-branch-settings-rules/types'
@@ -358,7 +358,7 @@ const router = createBrowserRouter([
       {
         path: 'users',
         element: (
-          <SandboxSettingsUserManagementPage
+          <SettingsUserManagementPage
             userData={mockUsersData}
             handleDeleteUser={noop}
             handleUpdatePassword={noop}
@@ -373,7 +373,7 @@ const router = createBrowserRouter([
 
       {
         path: 'users/create',
-        element: <SandboxSettingsCreateNewUserPage handleCreateUser={noop} isLoading={false} apiError={null} />
+        element: <SettingsCreateNewUserForm handleCreateUser={noop} isLoading={false} apiError={null} />
       }
     ]
   },
