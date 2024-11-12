@@ -5,7 +5,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import {
   ThemeProvider,
   SandboxSettings,
-  SandboxSettingsAccountPage,
+  SettingsAccountPage,
   SettingsProjectNav,
   ForgotPasswordPage,
   NewPasswordPage,
@@ -365,7 +365,7 @@ export default function App() {
           element: <SandboxSettings />,
           children: [
             {
-              element: <SandboxSettingsAccountPage />,
+              element: <SettingsAccountPage />,
               children: [
                 {
                   index: true,

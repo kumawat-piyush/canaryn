@@ -51,7 +51,7 @@ import { SandboxExecutionTestsPage } from './pages/sandbox-executions-tests-page
 import { SandboxExecutionSecurityTestsPage } from './pages/sandbox-executions-security-tests-page'
 import { SandboxExecutionSecretsPage } from './pages/sandbox-executions-secrets-page'
 import { SandboxSettings } from './layouts/SandboxSettings'
-import { SandboxSettingsAccountPage } from './pages/sandbox-settings-account-page'
+import { SettingsAccountPage } from './components/settings-account-page'
 import { SandboxSettingsAccountKeysPage } from './pages/sandbox-settings-account-keys-page'
 import { SandboxSettingsProjectPage } from './pages/sandbox-settings-project-page'
 import { SandboxSettingsProjectGeneralPage } from './pages/sandbox-settings-project-general-page'
@@ -306,7 +306,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: 'account',
-            element: <SandboxSettingsAccountPage />,
+            element: <SettingsAccountPage />,
             children: [
               {
                 index: true,
