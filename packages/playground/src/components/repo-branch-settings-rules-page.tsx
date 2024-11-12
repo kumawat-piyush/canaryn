@@ -10,17 +10,17 @@ import {
   BranchSettingsRuleBypassListField,
   BranchSettingsRuleEditPermissionsField,
   BranchSettingsRuleListField
-} from '../components/repo-settings/repo-branch-settings-rules/repo-branch-settings-rules-fields'
-import { branchSettingsReducer } from '../components/repo-settings/repo-branch-settings-rules/reducers/repo-branch-settings-reducer'
+} from './repo-settings/repo-branch-settings-rules/repo-branch-settings-rules-fields'
+import { branchSettingsReducer } from './repo-settings/repo-branch-settings-rules/reducers/repo-branch-settings-reducer'
 import { FormFieldSet } from '../index'
-import { branchRules } from '../components/repo-settings/repo-branch-settings-rules/repo-branch-settings-rules-data'
-import { repoBranchSettingsFormSchema } from '../components/repo-settings/repo-branch-settings-rules/repo-branch-settings-rules-schema'
+import { branchRules } from './repo-settings/repo-branch-settings-rules/repo-branch-settings-rules-data'
+import { repoBranchSettingsFormSchema } from './repo-settings/repo-branch-settings-rules/repo-branch-settings-rules-schema'
 import {
   RepoBranchSettingsFormFields,
   BypassUsersList,
   ActionType,
   MergeStrategy
-} from '../components/repo-settings/repo-branch-settings-rules/types'
+} from './repo-settings/repo-branch-settings-rules/types'
 import { NavLink } from 'react-router-dom'
 
 type BranchSettingsErrors = {

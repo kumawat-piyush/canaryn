@@ -113,8 +113,11 @@ export * as SandboxLayout from './layouts/SandboxLayout'
 export * from './components/settings-account-page'
 export * from './pages/sandbox-settings-account-general-page'
 export * from './pages/sandbox-repo-settings-page'
-export * from './pages/repo-settings-general-page'
-export * from './pages/repo-branch-settings-rules-page'
+export * from './components/repo-settings-general-page'
+// export * from './pages/repo-settings-general-page'
+
+export * from './components/repo-branch-settings-rules-page'
+// export * from './pages/repo-branch-settings-rules-page'
 
 export * from './components/repo-webhooks-create-page'
 // export * from './pages/repo-webhooks-create-page'
