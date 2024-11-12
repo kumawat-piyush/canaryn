@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { PlaygroundListSettings } from '../settings/list-settings'
+import React from 'react'
 import { SandboxLayout } from '../index'
 import { Navbar, Spacer } from '@harnessio/canary'
 import { NavLink, Outlet } from 'react-router-dom'
@@ -80,8 +79,6 @@ function SettingsContent() {
 }
 
 export function RepoSettingsPage() {
-  const [loadState, setLoadState] = useState('data-loaded')
-
   return (
     <SandboxLayout.Main hasHeader hasSubHeader hasLeftPanel>
       <Spacer size={10} />
@@ -93,7 +90,6 @@ export function RepoSettingsPage() {
           <SettingsContent />
         </SandboxLayout.Column>
       </SandboxLayout.Columns>
-      <PlaygroundListSettings loadState={loadState} setLoadState={setLoadState} />
     </SandboxLayout.Main>
   )
 }
