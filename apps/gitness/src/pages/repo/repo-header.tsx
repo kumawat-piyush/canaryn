@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import { SandboxLayout } from '@harnessio/fragments'
+import { SandboxLayout } from '@harnessio/views'
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs'
 
 const RepoHeader: React.FC = () => {

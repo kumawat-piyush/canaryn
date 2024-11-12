@@ -1,4 +1,4 @@
-import { NoData } from '@harnessio/fragments'
+import { NoData } from '@harnessio/views'
 import { useNavigate } from 'react-router-dom'
 
 export const EmptyPage = ({ pathName }: { pathName: string }) => {

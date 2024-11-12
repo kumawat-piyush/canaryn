@@ -1,4 +1,4 @@
-import { RootLayout } from '@harnessio/fragments'
+import { RootLayout } from '@harnessio/views'
 import { useAppContext } from '../framework/context/AppContext'
 
 const RootLayoutWrapper = () => {

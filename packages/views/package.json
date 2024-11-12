@@ -1,7 +1,7 @@
 {
-  "name": "@harnessio/fragments",
+  "name": "@harnessio/views",
   "version": "0.0.1",
-  "description": "Harness Unified Pipeline UI Fragments",
+  "description": "Harness Unified Pipeline UI views",
   "scripts": {
     "dev": "run-p watch:css watch",
     "build:css": "npx tailwindcss -i ./src/styles.css -o ./public/styles.css",

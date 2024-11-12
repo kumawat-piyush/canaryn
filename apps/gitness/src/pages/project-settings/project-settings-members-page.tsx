@@ -12,7 +12,7 @@ import {
   Filter,
   MembersProps,
   NoSearchResults
-} from '@harnessio/fragments'
+} from '@harnessio/views'
 import {
   useMembershipListQuery,
   TypesMembershipUser,

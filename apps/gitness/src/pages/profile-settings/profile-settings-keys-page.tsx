@@ -9,7 +9,7 @@ import {
   ProfileTokensList,
   TokensList,
   PaginationComponent
-} from '@harnessio/fragments'
+} from '@harnessio/views'
 import { AlertDeleteParams } from './types'
 import { PageResponseHeader } from '../../types'
 

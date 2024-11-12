@@ -1,5 +1,5 @@
 import { useYamlEditorContext } from '@harnessio/yaml-editor'
-import { NoProblemsFound, Problems } from '@harnessio/fragments'
+import { NoProblemsFound, Problems } from '@harnessio/views'
 import { usePipelineDataContext } from '../context/PipelineStudioDataProvider'
 
 export function PipelineStudioProblemsPanel(): JSX.Element {

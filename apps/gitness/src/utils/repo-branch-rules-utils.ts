@@ -1,10 +1,4 @@
-import {
-  Rule,
-  RepoBranchSettingsFormFields,
-  BranchRuleId,
-  PatternsButtonType,
-  MergeStrategy
-} from '@harnessio/fragments'
+import { Rule, RepoBranchSettingsFormFields, BranchRuleId, PatternsButtonType, MergeStrategy } from '@harnessio/views'
 import {
   EnumRuleState,
   OpenapiRuleDefinition,

@@ -1,4 +1,4 @@
-import { CreatePipelinePage } from '@harnessio/fragments'
+import { CreatePipelinePage } from '@harnessio/views'
 import CreatePipelineDialog from './PipelineCreateDialog/PipelineCreateDialog'
 import { useState } from 'react'
 

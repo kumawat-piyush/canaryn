@@ -38,7 +38,7 @@ export default defineConfig({
     copyPublicDir: false,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'fragments',
+      name: 'views',
       fileName: 'index',
       formats: ['es']
     },

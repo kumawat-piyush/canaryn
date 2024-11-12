@@ -4,7 +4,7 @@ import {
   generateAlphaNumericHash,
   ResetPasswordDialog,
   NewUserFields
-} from '@harnessio/fragments'
+} from '@harnessio/views'
 import { AdminCreateUserRequestBody, useAdminCreateUserMutation } from '@harnessio/code-service-client'
 
 export const CreateNewUserContainer = () => {

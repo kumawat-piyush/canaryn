@@ -10,12 +10,12 @@ import {
   NoSearchResults,
   PaginationComponent,
   SandboxLayout
-} from '@harnessio/fragments'
+} from '@harnessio/views'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
 import { PageResponseHeader } from '../../types'
 import { useDebouncedQueryState } from '../../hooks/useDebouncedQueryState'
-import { RepoList } from '@harnessio/fragments'
+import { RepoList } from '@harnessio/views'
 
 const sortOptions = [
   { name: 'Created', value: 'created' },
