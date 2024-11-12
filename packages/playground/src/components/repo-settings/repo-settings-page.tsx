@@ -1,5 +1,5 @@
 import React from 'react'
-import { SandboxLayout } from '../index'
+import { SandboxLayout } from '../../index'
 import { Navbar, Spacer } from '@harnessio/canary'
 import { NavLink, Outlet } from 'react-router-dom'
 

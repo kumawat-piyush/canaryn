@@ -57,7 +57,7 @@ import { SandboxSettingsProjectPage } from './pages/sandbox-settings-project-pag
 import { SandboxSettingsProjectGeneralPage } from './pages/sandbox-settings-project-general-page'
 import { SandboxSettingsProjectMembersPage } from './pages/sandbox-settings-project-members-page'
 import { SandboxRepoCreatePage } from './pages/sandbox-repo-create-page'
-import { RepoSettingsPage } from './components/repo-settings-page'
+import { RepoSettingsPage } from './components/repo-settings/repo-settings-page'
 import { RepoSettingsGeneralPlaygroundContainer } from './pages/repo-settings-general-page-playground-container'
 import { RepoSettingsCollaborationsPage } from './pages/repo-settings-collaborations-page'
 import { RepoSettingsModerationPage } from './pages/repo-settings-moderation-page'

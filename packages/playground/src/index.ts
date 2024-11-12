@@ -110,8 +110,8 @@ export * as FormFieldSet from './components/form-field-set'
 // SANDBOX LAYOUTS
 export * as SandboxLayout from './layouts/SandboxLayout'
 export * from './components/settings-account-page'
-export * from './components/repo-settings-page'
-export * from './components/repo-settings-general-page'
+export * from './components/repo-settings/repo-settings-page'
+export * from './components/repo-settings/repo-settings-general-page'
 // export * from './pages/repo-settings-general-page'
 
 export * from './components/repo-branch-settings-rules-page'
@@ -127,7 +127,7 @@ export * from './components/repo-settings/repo-branch-settings-rules/types'
 export * from './components/repo-create-form'
 // export * from './pages/sandbox-repo-create-page'
 
-export * from './components/repo-settings-placeholder'
+export * from './components/repo-settings/repo-settings-placeholder'
 // export * from './pages/repo-settings-placeholder-page'
 
 export * from './layouts/SandboxPullRequestCompareLayout'
