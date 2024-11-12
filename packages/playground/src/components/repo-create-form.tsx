@@ -22,7 +22,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import { FormFieldSet } from '../index'
-import { MessageTheme } from '../components/form-field-set'
+import { MessageTheme } from './form-field-set'
 
 // Define the form schema with optional fields for gitignore and license
 const formSchema = z.object({
