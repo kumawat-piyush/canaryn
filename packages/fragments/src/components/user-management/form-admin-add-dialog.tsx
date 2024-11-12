@@ -58,7 +58,7 @@ export const FormAddAdminDialog: React.FC<FormRemoveUserDialogProps> = ({
               theme="error"
               className="self-start"
               onClick={() => {
-                updateUserAdmin(user?.uid, true)
+                updateUserAdmin(user?.uid ?? '', true)
                 onRemove()
               }}
               disabled={isRemoving || removeSuccess}>

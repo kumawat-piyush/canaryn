@@ -49,12 +49,7 @@ const PullRequestSystemComments: React.FC<SystemCommentProps> = ({ commentItems,
   switch (type) {
     case CommentType.MERGE:
       return (
-        <PullRequestSystemMergeItem
-          payload={payload}
-          isLast={isLast}
-          avatarUrl={AvatarUrl}
-          pullReqMetadata={pullReqMetadata}
-        />
+        <PullRequestSystemMergeItem payload={payload} isLast={isLast} avatarUrl="" pullReqMetadata={pullReqMetadata} />
       )
     case CommentType.REVIEW_SUBMIT:
       return (
