@@ -4,7 +4,6 @@ import { Button, Spacer, Text } from '@harnessio/canary'
 import { useListReposQuery, RepoRepositoryOutput, ListReposQueryQueryParams } from '@harnessio/code-service-client'
 import {
   SkeletonList,
-  RepoList,
   Filter,
   useCommonFilter,
   NoData,
@@ -16,6 +15,7 @@ import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
 import { PageResponseHeader } from '../../types'
 import { useDebouncedQueryState } from '../../hooks/useDebouncedQueryState'
+import { RepoList } from '@harnessio/fragments'
 
 const sortOptions = [
   { name: 'Created', value: 'created' },
