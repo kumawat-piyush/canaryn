@@ -16,7 +16,7 @@ import {
   useZodForm
 } from '@harnessio/canary'
 import { z } from 'zod'
-import { useListBranchesQuery } from '@harnessio/code-service-client'
+import { useFindRepositoryQuery, useListBranchesQuery } from '@harnessio/code-service-client'
 import { CreateFormType } from '../../../types'
 import { useGetRepoRef } from '../../../framework/hooks/useGetRepoPath'
 
@@ -32,18 +32,21 @@ const createPipelineSchema = z.object({
 })
 
 export function PipelineCreateForm({ onCancel, onSubmit }: PipelineCreateFormProps) {
+  const repoRef = useGetRepoRef()
+
+  const { data: { body: branches } = {}, isLoading } = useListBranchesQuery({ repo_ref: repoRef, queryParams: {} })
+  const { data: { body: repositoryData } = {}, isLoading: loadingRepoData } = useFindRepositoryQuery({
+    repo_ref: repoRef
+  })
+
   const form = useZodForm({
     schema: createPipelineSchema,
     defaultValues: {
       name: '',
-      branch: 'main',
+      branch: repositoryData?.default_branch || 'main',
       yamlPath: ''
     }
   })
-
-  const repoRef = useGetRepoRef()
-
-  const { data: { body: branches } = {}, isLoading } = useListBranchesQuery({ repo_ref: repoRef, queryParams: {} })
 
   const { watch, setValue, clearErrors, trigger } = form
 
@@ -99,7 +102,10 @@ export function PipelineCreateForm({ onCancel, onSubmit }: PipelineCreateFormPro
         render={({ field }) => (
           <FormItem>
             <FormLabel className="text-primary">Branch*</FormLabel>
-            <Select disabled={isLoading || !branches?.length} onValueChange={field.onChange} defaultValue={field.value}>
+            <Select
+              disabled={isLoading || loadingRepoData || !branches?.length}
+              onValueChange={field.onChange}
+              defaultValue={field.value}>
               <FormControl className="text-primary">
                 <SelectTrigger>
                   <SelectValue placeholder="Select a branch" />
