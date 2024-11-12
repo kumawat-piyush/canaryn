@@ -52,7 +52,7 @@ import { SandboxExecutionSecurityTestsPage } from './pages/sandbox-executions-se
 import { SandboxExecutionSecretsPage } from './pages/sandbox-executions-secrets-page'
 import { SandboxSettings } from './layouts/SandboxSettings'
 import { SettingsAccountPage } from './components/settings-account-page'
-import { SandboxSettingsAccountKeysPage } from './pages/sandbox-settings-account-keys-page'
+import { SettingsAccountKeysPage } from './pages/settings-account-keys-page'
 import { SandboxSettingsProjectPage } from './pages/sandbox-settings-project-page'
 import { SandboxSettingsProjectGeneralPage } from './pages/sandbox-settings-project-general-page'
 import { SandboxSettingsProjectMembersPage } from './pages/sandbox-settings-project-members-page'
@@ -318,7 +318,7 @@ const router = createBrowserRouter([
               },
               {
                 path: 'keys',
-                element: <SandboxSettingsAccountKeysPage />
+                element: <SettingsAccountKeysPage />
               }
             ]
           },
