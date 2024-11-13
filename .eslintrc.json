@@ -43,6 +43,7 @@
     "tailwindcss/no-custom-classname": "warn",
     "tailwindcss/no-contradicting-classname": "error",
     "@typescript-eslint/consistent-type-imports": "error",
+    "import/no-unresolved": "off",
     "react/prop-types": "warn",
     "react/react-in-jsx-scope": "off"
   },
