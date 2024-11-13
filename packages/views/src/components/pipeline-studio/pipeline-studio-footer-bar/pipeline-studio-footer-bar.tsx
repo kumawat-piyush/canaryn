@@ -1,6 +1,5 @@
 import React from 'react'
 import { Icon } from '@harnessio/canary'
-import { XmarkCircle, WarningTriangle } from '@harnessio/icons-noir'
 
 import {
   Popover,
@@ -50,11 +49,11 @@ const PipelineStudioFooterBar: React.FC<PipelineStudioFooterBarProps> = (props: 
           }}
           className="flex gap-2 cursor-pointer hover:bg-primary/10 h-full px-2 py-1.5 rounded-md ease-in-out duration-150">
           <div className="flex items-center gap-1.5">
-            <XmarkCircle className="text-tertiary-background" />
+            <Icon name="fail" className="text-tertiary-background" />
             <span className="text-[12px] text-primary">{props.problems.error}</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <WarningTriangle className="text-tertiary-background" />
+            <Icon name="triangle-warning" className="text-tertiary-background" />
             <span className="text-[12px] text-primary">{props.problems.warning}</span>
           </div>
           <div className="flex items-center gap-1.5">
