@@ -90,19 +90,19 @@ export const PullRequestHeader: React.FC<PullRequestTitleProps> = ({
                   {stats?.commits} {stats?.commits === 1 ? 'commit' : 'commits'}
                 </span>
                 <span>into</span>
-                <Link to={`/spaces/${spaceId}/repos/${repoId}/code/${target_branch}`}>
-                  <Button variant="secondary" size="xs">
+                <Button variant="secondary" size="xs" asChild>
+                  <Link to={`/spaces/${spaceId}/repos/${repoId}/code/${target_branch}`}>
                     <Icon name="branch" size={12} className="text-tertiary-background mr-1" />
                     {target_branch}
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
                 <span>from</span>
-                <Link to={`/spaces/${spaceId}/repos/${repoId}/code/${source_branch}`}>
-                  <Button variant="secondary" size="xs">
+                <Button asChild variant="secondary" size="xs">
+                  <Link to={`/spaces/${spaceId}/repos/${repoId}/code/${source_branch}`}>
                     <Icon name="branch" size={12} className="text-tertiary-background mr-1" />
                     {source_branch}
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
                 <span>&nbsp;|&nbsp;</span>
                 <span className="time">{formattedTime}</span>
               </Text>
