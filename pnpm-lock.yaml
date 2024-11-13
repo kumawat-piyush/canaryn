@@ -757,9 +757,6 @@ importers:
       '@harnessio/forms':
         specifier: workspace:*
         version: link:../forms
-      '@harnessio/icons-noir':
-        specifier: workspace:*
-        version: link:../icons-noir
       '@harnessio/unified-pipeline':
         specifier: workspace:*
         version: link:../unified-pipeline
