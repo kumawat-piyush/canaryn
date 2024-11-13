@@ -4,6 +4,7 @@ import { Slot } from '@radix-ui/react-slot'
 import { cn } from '@/lib/utils'
 import { cva } from 'class-variance-authority'
 
+// eslint-disable-next-line tailwindcss/no-contradicting-classname
 const headingVariants = cva('text-base', {
   variants: {
     align: {

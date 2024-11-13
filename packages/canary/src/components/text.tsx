@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-contradicting-classname */
 import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
 

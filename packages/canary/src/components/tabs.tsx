@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as TabsPrimitive from '@radix-ui/react-tabs'
-import { VariantProps, cva } from 'class-variance-authority'
+import type { VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
 import { cn } from '../lib/utils'
 
 const tabsListVariants = cva('inline-flex items-center text-muted-foreground', {
@@ -68,11 +69,11 @@ const Tabs = React.forwardRef<React.ElementRef<typeof TabsPrimitive.Root>, TabsP
     <TabsPrimitive.Root ref={ref} {...props}>
       <TabsContext.Provider value={{ variant }}>
         {variant === 'tabnav' ? (
-          <div className="relative w-full grid grid-flow-col grid-cols-[auto_1fr] items-end">
+          <div className="relative grid w-full grid-flow-col grid-cols-[auto_1fr] items-end">
             {children}
-            <div className="h-[36px] border-b border-border-background" />
-            <div className="absolute right-full w-[9999px] h-[36px] border-b border-border-background" />
-            <div className="absolute left-full w-[9999px] h-[36px] border-b border-border-background" />
+            <div className="border-border-background h-[36px] border-b" />
+            <div className="border-border-background absolute right-full h-[36px] w-[9999px] border-b" />
+            <div className="border-border-background absolute left-full h-[36px] w-[9999px] border-b" />
           </div>
         ) : (
           children
@@ -81,6 +82,7 @@ const Tabs = React.forwardRef<React.ElementRef<typeof TabsPrimitive.Root>, TabsP
     </TabsPrimitive.Root>
   )
 )
+Tabs.displayName = 'Tabs'
 
 interface TabsListProps
   extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>,
