@@ -24,9 +24,9 @@ import {
   useCommonFilter,
   SandboxLayout,
   CloneRepoDialog,
-  generateAlphaNumericHash
+  generateAlphaNumericHash,
+  SearchFiles
 } from '@harnessio/views'
-import { SearchFiles } from '@harnessio/playground'
 import {
   useListBranchesQuery,
   useSummaryQuery,

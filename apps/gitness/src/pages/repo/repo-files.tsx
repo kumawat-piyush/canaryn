@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useParams, useNavigate, Outlet } from 'react-router-dom'
-import { BranchSelector, SandboxLayout, BranchListProps } from '@harnessio/views'
+import { BranchSelector, SandboxLayout, BranchListProps, SearchFiles } from '@harnessio/views'
 import { Button, ButtonGroup, Icon } from '@harnessio/canary'
-import { SearchFiles } from '@harnessio/playground'
 import {
   useListBranchesQuery,
   useFindRepositoryQuery,

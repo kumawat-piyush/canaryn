@@ -19,7 +19,7 @@ import {
 } from '@harnessio/canary'
 import { timeAgoFromISOTime } from '../pages/pipeline-edit/utils/time-utils'
 import { MarkdownViewer, PipelineStudioToolbarActions, TopDetails, TopTitle } from '@harnessio/views'
-import { OpenapiGetContentOutput } from '@harnessio/code-service-client'
+import { OpenapiGetContentOutput, useFindRepositoryQuery } from '@harnessio/code-service-client'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
 import { useNavigate, useParams } from 'react-router-dom'
 import { PathParams } from '../RouteDefinitions'
