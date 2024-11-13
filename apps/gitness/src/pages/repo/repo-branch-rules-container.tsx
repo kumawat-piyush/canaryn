@@ -50,8 +50,7 @@ export const RepoBranchSettingsRulesPageContainer = () => {
   )
 
   const { data: { body: principals } = {}, error: principalsError } = useListPrincipalsQuery({
-    // @ts-expect-error : BE issue - not implemnted
-    queryParams: { page: 1, limit: 100, type: 'user' }
+    queryParams: { page: 1, limit: 100, type: ['user'] }
   })
 
   const { data: { body: recentStatusChecks } = {}, error: statusChecksError } = useListStatusCheckRecentQuery({
