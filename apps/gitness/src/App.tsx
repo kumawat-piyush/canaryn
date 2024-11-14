@@ -60,6 +60,10 @@ import PipelineLayout from './layouts/PipelineStudioLayout'
 import { CreateNewUserContainer } from './pages/user-management/create-new-user-container'
 import { CreateNewMemberPage } from './pages/project-settings/project-settings-new-member-page'
 import { PipelineCreate } from './pages/pipeline-create/pipeline-create'
+import { en } from './lang/en'
+import { fr } from './lang/fr'
+
+import { IntlProvider, FormattedMessage, FormattedNumber, intl } from 'react-intl'
 
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
 
@@ -463,19 +467,36 @@ export default function App() {
     }
   ])
 
+  const getLocaleData = (locale: string) => {
+    switch (locale) {
+      case 'fr':
+        return fr
+      default:
+        return en
+    }
+  }
+
+  // const locale = 'fr'
+  const language = (navigator.languages && navigator.languages[0]) || navigator.language || 'en'
+  const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0]
+  const locale = languageWithoutRegionCode || language || 'en'
+
+  console.log('language', locale)
   return (
-    <AppProvider>
-      <ThemeProvider defaultTheme="dark">
-        <QueryClientProvider client={queryClient}>
-          <TooltipProvider>
-            <ExitConfirmProvider>
-              <NuqsAdapter>
-                <RouterProvider router={router} />
-              </NuqsAdapter>
-            </ExitConfirmProvider>
-          </TooltipProvider>
-        </QueryClientProvider>
-      </ThemeProvider>
-    </AppProvider>
+    <IntlProvider locale={locale} defaultLocale="en" messages={getLocaleData(locale)}>
+      <AppProvider>
+        <ThemeProvider defaultTheme="light">
+          <QueryClientProvider client={queryClient}>
+            <TooltipProvider>
+              <ExitConfirmProvider>
+                <NuqsAdapter>
+                  <RouterProvider router={router} />
+                </NuqsAdapter>
+              </ExitConfirmProvider>
+            </TooltipProvider>
+          </QueryClientProvider>
+        </ThemeProvider>
+      </AppProvider>
+    </IntlProvider>
   )
 }

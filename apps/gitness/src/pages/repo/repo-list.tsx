@@ -16,6 +16,7 @@ import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'
 import { PageResponseHeader } from '../../types'
 import { useDebouncedQueryState } from '../../hooks/useDebouncedQueryState'
 import { RepoList } from '@harnessio/views'
+import { FormattedMessage } from 'react-intl'
 
 const sortOptions = [
   { name: 'Created', value: 'created' },
@@ -127,7 +128,8 @@ export default function ReposListPage() {
           {(query || repositoriesExist) && (
             <>
               <Text size={5} weight={'medium'}>
-                Repositories
+                {/* Repositories */}
+                <FormattedMessage id="repository" />
               </Text>
               <Spacer size={6} />
               <div className="flex justify-between gap-5">
