@@ -1,5 +1,5 @@
 import React from 'react'
-import type { IconProps } from './icon';
+import type { IconProps } from './icon'
 import { Icon } from './icon'
 
 function Root({ children }: { children: React.ReactNode }) {
