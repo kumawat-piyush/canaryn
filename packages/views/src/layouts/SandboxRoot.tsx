@@ -5,6 +5,7 @@ import { Icon, IconProps, Navbar, NavbarProjectChooser, NavbarUser } from '@harn
 import { MoreSubmenu } from '../components/more-submenu'
 import { navbarSubmenuData } from '../data/mockNavbarSubmenuData'
 import { TypesUser } from './types'
+import { ModeToggle } from '../components/mode-toggle'
 
 interface NavbarItem {
   id: number
@@ -170,6 +171,11 @@ export const SandboxRoot: React.FC<SandboxRootProps> = ({ currentUser, currentSp
               </Navbar.Group>
             </Navbar.Content>
           )}
+          <Navbar.Content>
+            <Navbar.Group>
+              <ModeToggle />
+            </Navbar.Group>
+          </Navbar.Content>
           <Navbar.Footer>
             <NavbarUser.Root
               username={currentUser?.display_name || currentUser?.uid}
