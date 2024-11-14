@@ -26,7 +26,7 @@ type ExecutionDetail = {
 const getStatusIcon = (status: Status): React.ReactElement => {
   switch (status) {
     case Status.IN_PROGRESS:
-      return <CanaryIcon size={16} name="running" className="animate-spin text-warning" />
+      return <CanaryIcon size={16} name="running" className="text-warning animate-spin" />
     case Status.SUCCESS:
       return <CanaryIcon name="success" size={16} />
     case Status.FAILED:
@@ -163,7 +163,7 @@ const Tree = forwardRef<HTMLDivElement, TreeViewProps>(
           direction
         }}>
         <div className={cn('size-full', className)}>
-          <ScrollArea ref={ref} className="h-full relative px-2" dir={dir as Direction}>
+          <ScrollArea ref={ref} className="relative h-full px-2" dir={dir as Direction}>
             <AccordionPrimitive.Root
               {...props}
               type="multiple"
@@ -216,7 +216,7 @@ const Folder = forwardRef<HTMLDivElement, FolderProps & React.HTMLAttributes<HTM
     const { direction, handleExpand, expendedItems, indicator, setExpendedItems, openIcon, closeIcon } = useTree()
 
     return (
-      <AccordionPrimitive.Item {...props} value={value} className="relative overflow-hidden h-full w-full">
+      <AccordionPrimitive.Item {...props} value={value} className="relative size-full overflow-hidden">
         <AccordionPrimitive.Trigger
           className={cn(`flex items-center gap-1 text-sm rounded-md w-full pb-1.5`, className, {
             'rounded-md': isSelect && isSelectable,
@@ -227,20 +227,20 @@ const Folder = forwardRef<HTMLDivElement, FolderProps & React.HTMLAttributes<HTM
           onClick={() => handleExpand(value)}>
           <div className="mt-1 pt-1">
             {expendedItems?.includes(value)
-              ? (openIcon ?? <CanaryIcon name="chevron-down" className="h-4 w-4" height={12} />)
-              : (closeIcon ?? <CanaryIcon name="chevron-right" className="h-4 w-4" height={12} />)}
+              ? (openIcon ?? <CanaryIcon name="chevron-down" className="size-4" height={12} />)
+              : (closeIcon ?? <CanaryIcon name="chevron-right" className="size-4" height={12} />)}
           </div>
-          <div className="flex items-baseline justify-between w-full mt-1 mr-1">
+          <div className="mr-1 mt-1 flex w-full items-baseline justify-between">
             <div className="flex items-baseline">
-              <div className="flex self-center mr-1">{getStatusIcon(status)}</div>
-              <span className="ml-1 font-normal text-sm">
+              <div className="mr-1 flex self-center">{getStatusIcon(status)}</div>
+              <span className="ml-1 text-sm font-normal">
                 {element}&nbsp;<span className="text-muted-foreground">({React.Children.count(children)})</span>
               </span>
             </div>
             <span className="text-muted-foreground">{duration ?? '--'}</span>
           </div>
         </AccordionPrimitive.Trigger>
-        <AccordionPrimitive.Content className="text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down relative overflow-hidden h-full">
+        <AccordionPrimitive.Content className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down relative h-full overflow-hidden text-sm">
           {element && indicator && <TreeIndicator aria-hidden="true" />}
           <AccordionPrimitive.Root
             dir={direction}
@@ -307,10 +307,10 @@ const File = forwardRef<
             handleSelect?.(value)
             selectItem(value)
           }}>
-          <div className="flex items-baseline justify-between w-full">
+          <div className="flex w-full items-baseline justify-between">
             <div className="flex items-baseline">
-              <div className="flex self-center h-4 w-4 mr-1">{getStatusIcon(status)}</div>
-              <span className="ml-1 font-normal text-sm">{children}</span>
+              <div className="mr-1 flex size-4 self-center">{getStatusIcon(status)}</div>
+              <span className="ml-1 text-sm font-normal">{children}</span>
             </div>
             <span className="text-muted-foreground">{duration ?? '--'}</span>
           </div>
@@ -369,7 +369,7 @@ const CollapseButton = forwardRef<
     return (
       <button
         // variant={'ghost'}
-        className="h-8 w-fit p-1 absolute bottom-1 right-2"
+        className="absolute bottom-1 right-2 h-8 w-fit p-1"
         onClick={expendedItems && expendedItems.length > 0 ? closeAll : () => expendAllTree(elements)}
         ref={ref}
         {...props}>

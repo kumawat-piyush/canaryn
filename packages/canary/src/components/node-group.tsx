@@ -36,7 +36,7 @@ function Icon({
           className
         )}>
         {simpleNodeIcon ? (
-          <div className="w-[4px] h-[4px] bg-primary rounded-[1px] shadow-sm shadow-primary/10" />
+          <div className="bg-primary shadow-primary/10 size-[4px] rounded-[1px] shadow-sm" />
         ) : (
           <>{children}</>
         )}
