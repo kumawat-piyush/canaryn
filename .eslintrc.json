@@ -52,7 +52,10 @@
     "jsx-a11y/no-static-element-interactions": "warn",
     "jsx-a11y/no-autofocus": "warn",
     "@typescript-eslint/consistent-type-imports": "warn",
-    "jsx-a11y/tabindex-no-positive": "warn"
+    "jsx-a11y/tabindex-no-positive": "warn",
+    "react/jsx-key": "warn",
+    "react/no-unescaped-entities": "warn",
+    "react/display-name": "warn"
   },
   "ignorePatterns": ["**/dist/**"]
 }
