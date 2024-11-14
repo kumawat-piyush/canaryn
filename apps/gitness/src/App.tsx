@@ -61,7 +61,7 @@ import { CreateNewUserContainer } from './pages/user-management/create-new-user-
 import { CreateNewMemberPage } from './pages/project-settings/project-settings-new-member-page'
 import { PipelineCreate } from './pages/pipeline-create/pipeline-create'
 
-const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
+// const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
 
 export default function App() {
   new CodeServiceAPIClient({
