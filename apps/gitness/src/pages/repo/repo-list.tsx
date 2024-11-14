@@ -34,7 +34,7 @@ const sortOptions = [
 const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
 
 export default function ReposListPage() {
-  const space = useGetSpaceURLParam()
+  const space = useGetSpaceURLParam() ?? ''
   const navigate = useNavigate()
 
   /* Query and Pagination */
