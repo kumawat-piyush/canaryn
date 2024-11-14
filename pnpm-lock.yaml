@@ -470,6 +470,9 @@ importers:
       '@harnessio/unified-pipeline':
         specifier: workspace:*
         version: link:../unified-pipeline
+      '@harnessio/views':
+        specifier: workspace:*
+        version: link:../views
       '@harnessio/yaml-editor':
         specifier: workspace:*
         version: link:../yaml-editor

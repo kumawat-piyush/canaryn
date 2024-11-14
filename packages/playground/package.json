@@ -48,6 +48,7 @@
     "@git-diff-view/react": "^0.0.16",
     "@git-diff-view/shiki": "^0.0.16",
     "@harnessio/canary": "workspace:*",
+    "@harnessio/views": "workspace:*",
     "@harnessio/forms": "workspace:*",
     "@harnessio/unified-pipeline": "workspace:*",
     "@harnessio/yaml-editor": "workspace:*",
