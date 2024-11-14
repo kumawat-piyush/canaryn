@@ -142,7 +142,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}>
         {variant === 'split' && dropdown ? (
           <>
-            <div className="flex pl-2.5 pr-1 py-0.5 items-center">{_children}</div>
+            <div className="flex items-center py-0.5 pl-2.5 pr-1">{_children}</div>
             {dropdown}
           </>
         ) : (

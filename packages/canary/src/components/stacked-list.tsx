@@ -21,16 +21,13 @@ const listItemVariants = cva(
   }
 )
 
-const listFieldVariants = cva(
-  'flex flex-1 flex-col items-stretch justify-center gap-1 text-sm',
-  {
-    variants: {
-      right: {
-        true: 'items-end'
-      }
+const listFieldVariants = cva('flex flex-1 flex-col items-stretch justify-center gap-1 text-sm', {
+  variants: {
+    right: {
+      true: 'items-end'
     }
   }
-)
+})
 
 interface ListItemProps extends React.ComponentProps<'div'>, VariantProps<typeof listItemVariants> {
   thumbnail?: React.ReactNode
