@@ -12,7 +12,6 @@
     "build:watch": "vite build --watch",
     "prepublishOnly": "pnpm build",
     "lint": "eslint ./src",
-    "pretty": "prettier --check ./src",
     "pre-commit": "lint-staged",
     "typecheck": "tsc"
   },
