@@ -9,7 +9,8 @@ import {
   NoData,
   NoSearchResults,
   PaginationComponent,
-  SandboxLayout
+  SandboxLayout,
+  SampleComponent
 } from '@harnessio/views'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { timeAgoFromEpochTime } from '../pipeline-edit/utils/time-utils'

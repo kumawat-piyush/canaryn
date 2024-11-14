@@ -1,3 +1,4 @@
+export * from './components/stateful-view'
 export * from './components/repo-summary-panel'
 export * from './components/branch-chooser'
 export * from './components/search-files'
