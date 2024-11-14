@@ -5,7 +5,8 @@ import { useMembershipSpacesQuery } from '@harnessio/code-service-client'
 export function StatefulPage() {
   const { setCount } = useDataStore()
 
-  // set data from API response
+  // we can set data from API response
+  // and zustand manages updates + rerendering
   useMembershipSpacesQuery(
     { queryParams: {} },
     {
@@ -16,4 +17,10 @@ export function StatefulPage() {
   )
 
   return <SampleComponent useDataStore={useDataStore} />
+
+  /* Alternative API which hides store contract, but makes the props MUCH more verbose
+  const { count, setCount, incrementCount } = useDataStore()
+  
+  return <SampleComponent count={count} setCount={setCount} incrementCount={incrementCount} />
+  */
 }
