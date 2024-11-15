@@ -1,6 +1,5 @@
 import { ReactElement, useEffect, useRef } from 'react'
 import type { Attributes } from 'react'
-import type { IGlobalValidationConfig } from '../../types/types'
 import {
   useForm,
   FormProvider,

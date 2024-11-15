@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { ScrollArea } from '@radix-ui/react-scroll-area'
 import { cn } from '../lib/utils'
 import * as AccordionPrimitive from '@radix-ui/react-accordion'

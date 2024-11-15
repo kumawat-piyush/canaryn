@@ -1,4 +1,5 @@
 import { cn } from '@harnessio/canary'
+import { memo } from 'react'
 
 const Container = {
   Root: function Root({
@@ -33,7 +34,7 @@ const Container = {
     )
   },
 
-  Sidebar: React.memo(function Header({ children }: { children: React.ReactNode }) {
+  Sidebar: memo(function Header({ children }: { children: React.ReactNode }) {
     return <div className="flex h-screen">{children}</div>
   }),
 
