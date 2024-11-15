@@ -290,7 +290,7 @@ export const RepoSummaryList: React.FC = () => {
                           }
                           title="Edit"
                           size="sm">
-                          <Icon name="edit-pen" className="w-5 h-5 text-foreground" />
+                          <Icon name="edit-pen" className="text-foreground h-5 w-5" />
                         </ToggleGroupItem>
                       </ToggleGroup>
                     }
