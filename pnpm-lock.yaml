@@ -99,6 +99,9 @@ importers:
       '@eslint/js':
         specifier: ^9.9.0
         version: 9.9.1
+      '@formatjs/cli':
+        specifier: ^6.3.8
+        version: 6.3.8(@vue/compiler-core@3.4.31)
       '@testing-library/dom':
         specifier: ^10.4.0
         version: 10.4.0
@@ -1180,6 +1183,9 @@ importers:
       react-hook-form:
         specifier: 7.53.0
         version: 7.53.0(react@18.3.1)
+      react-intl:
+        specifier: ^6.8.7
+        version: 6.8.7(react@18.3.1)(typescript@5.5.3)
       react-keywords:
         specifier: ^1.0.0
         version: 1.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2687,6 +2693,37 @@ packages:
 
   '@floating-ui/utils@0.2.3':
     resolution: {integrity: sha512-XGndio0l5/Gvd6CLIABvsav9HHezgDFFhDfHk1bvLfr9ni8dojqLSvBbotJEjmIwNHL7vK4QzBJTdBRoB+c1ww==}
+
+  '@formatjs/cli@6.3.8':
+    resolution: {integrity: sha512-zXUkIdPE+L+nu5A6mgEsIuB5tX369C7FnqR1aRHj33zvj/G5fwuyJZiavZCdR/XAvDWflKza6/pMVC91fNlR/w==}
+    engines: {node: '>= 16'}
+    hasBin: true
+    peerDependencies:
+      '@glimmer/env': ^0.1.7
+      '@glimmer/reference': ^0.91.1 || ^0.92.0
+      '@glimmer/syntax': ^0.92.0
+      '@glimmer/validator': ^0.92.0
+      '@vue/compiler-core': ^3.4.0
+      content-tag: ^2.0.1
+      ember-template-recast: ^6.1.4
+      vue: ^3.4.0
+    peerDependenciesMeta:
+      '@glimmer/env':
+        optional: true
+      '@glimmer/reference':
+        optional: true
+      '@glimmer/syntax':
+        optional: true
+      '@glimmer/validator':
+        optional: true
+      '@vue/compiler-core':
+        optional: true
+      content-tag:
+        optional: true
+      ember-template-recast:
+        optional: true
+      vue:
+        optional: true
 
   '@formatjs/ecma402-abstract@2.2.3':
     resolution: {integrity: sha512-aElGmleuReGnk2wtYOzYFmNWYoiWWmf1pPPCYg0oiIQSJj0mjc4eUfzUXaSOJ4S8WzI/cLqnCTWjqz904FT2OQ==}
@@ -11943,6 +11980,10 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
 
   '@floating-ui/utils@0.2.3': {}
+
+  '@formatjs/cli@6.3.8(@vue/compiler-core@3.4.31)':
+    optionalDependencies:
+      '@vue/compiler-core': 3.4.31
 
   '@formatjs/ecma402-abstract@2.2.3':
     dependencies:

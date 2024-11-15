@@ -25,6 +25,7 @@ import { CopyButton } from './copy-button'
 import { DivergenceGauge } from './divergence-gauge'
 import { CommitCopyActions } from './commit-copy-actions'
 import { Link } from 'react-router-dom'
+import { IntlShape } from 'react-intl'
 
 interface BranchProps {
   id: number
@@ -52,9 +53,11 @@ interface PageProps {
   spaceId?: string
   repoId?: string
   defaultBranch?: string
+  intl: IntlShape
 }
 
-export const BranchesList = ({ branches, spaceId, repoId, defaultBranch }: PageProps) => {
+export const BranchesList = ({ branches, spaceId, repoId, defaultBranch, intl }: PageProps) => {
+  console.log(intl)
   const moreActionsTooltip = (branchInfo: BranchProps) => {
     return (
       <DropdownMenu>
@@ -96,7 +99,7 @@ export const BranchesList = ({ branches, spaceId, repoId, defaultBranch }: PageP
     <Table variant="asStackedList">
       <TableHeader>
         <TableRow>
-          <TableHead>Branch</TableHead>
+          <TableHead> {intl.formatMessage({ id: 'branch' })}</TableHead>
           <TableHead>Updated</TableHead>
           {branches[0]?.checks?.done && branches[0]?.checks?.total && branches[0]?.checks?.status && (
             <TableHead>Check status</TableHead>

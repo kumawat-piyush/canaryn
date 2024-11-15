@@ -17,6 +17,7 @@ import { NoSearchResults, PaginationComponent } from '@harnessio/views'
 import { PathParams } from '../../RouteDefinitions'
 import CreateBranchDialog from './repo-branch-create'
 import { useDebouncedQueryState } from '../../hooks/useDebouncedQueryState'
+import { useIntl } from 'react-intl'
 
 const sortOptions = [
   { name: 'Date', value: 'date' },
@@ -24,6 +25,8 @@ const sortOptions = [
 ]
 
 export function RepoBranchesListPage() {
+  const intl = useIntl()
+  console.log('obj', intl)
   const repoRef = useGetRepoRef()
   const { spaceId, repoId } = useParams<PathParams>()
   const [isCreateBranchDialogOpen, setCreateBranchDialogOpen] = useState(false)
@@ -101,6 +104,7 @@ export function RepoBranchesListPage() {
         defaultBranch={repoMetadata?.default_branch}
         repoId={repoId}
         spaceId={spaceId}
+        intl={intl}
         branches={branches?.map((branch: TypesBranchExtended, index) => {
           const { ahead: branchAhead, behind: branchBehind } = behindAhead[index] || {}
           return {

@@ -1,0 +1,10 @@
+{
+  "repository": {
+    "defaultMessage": "Repository",
+    "description": "The word 'repository' in English"
+  },
+  "branch": {
+    "defaultMessage": "This is a new branch",
+    "description": "The word 'branch' in English"
+  }
+}
