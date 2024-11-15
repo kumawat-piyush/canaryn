@@ -42,7 +42,7 @@
     "tailwindcss/classnames-order": "warn",
     "tailwindcss/no-contradicting-classname": "error",
     "import/no-unresolved": "off",
-    "react/prop-types": "warn",
+    "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
 
     "jsx-a11y/click-events-have-key-events": "warn",

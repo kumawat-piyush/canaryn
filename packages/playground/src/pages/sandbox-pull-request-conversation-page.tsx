@@ -230,7 +230,7 @@ export default function SandboxPullRequestConversationPage() {
         </SandboxLayout.Column>
 
         <SandboxLayout.Column>
-          <SandboxLayout.Content className="pl-0 pr-0">
+          <SandboxLayout.Content className="px-0">
             <PullRequestSideBar
               addReviewers={noop}
               usersList={undefined}

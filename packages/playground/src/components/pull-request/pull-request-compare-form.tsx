@@ -62,4 +62,6 @@ const PullRequestCompareForm = forwardRef<HTMLFormElement, PullRequestFormProps>
   }
 )
 
+PullRequestCompareForm.displayName = 'PullRequestCompareForm'
+
 export default PullRequestCompareForm

@@ -1,4 +1,3 @@
-import React from 'react'
 import { cn, useFormField } from '@harnessio/canary'
 
 export const InputError = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(

@@ -7,7 +7,7 @@ export default function Error() {
     <SpotlightsBG.Root className="h-screen">
       <SpotlightsBG.Content>
         <Text size={6} weight="bold" align="center">
-          Oops, we can't find it!
+          Oops, we can&apos;t find it!
         </Text>
         <Spacer size={1} />
         <Text size={3} align="center" className="text-tertiary-background">

@@ -12,7 +12,7 @@ import {
   StackedList,
   Text
 } from '@harnessio/canary'
-import React from 'react'
+
 import { Link } from 'react-router-dom'
 
 export enum WebhookState {
@@ -49,7 +49,7 @@ const Title = ({ title, enabled }: { title: string; enabled: boolean }) => {
           </Text>
         </Badge>
       ) : (
-        <Badge variant="outline" size="xs" className="text-tertiary-background rounded-full">
+        <Badge variant="outline" size="xs" className="rounded-full text-tertiary-background">
           <Text size={1} className="text-inherit">
             {WebhookState.DISABLED}
           </Text>
@@ -64,7 +64,7 @@ const Action = ({ id, openDeleteWebhookDialog }: { id: number; openDeleteWebhook
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="xs">
-          <Icon name="vertical-ellipsis" size={14} className="text-tertiary-background cursor-pointer" />
+          <Icon name="vertical-ellipsis" size={14} className="cursor-pointer text-tertiary-background" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -83,13 +83,13 @@ const Action = ({ id, openDeleteWebhookDialog }: { id: number; openDeleteWebhook
           </Link>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-            className="text-destructive cursor-pointer"
+            className="cursor-pointer text-destructive"
             onClick={e => {
               e.stopPropagation()
               openDeleteWebhookDialog(id)
             }}>
             <DropdownMenuShortcut className="ml-0">
-              <Icon name="trash" className="text-destructive mr-2" />
+              <Icon name="trash" className="mr-2 text-destructive" />
             </DropdownMenuShortcut>
             Delete webhook
           </DropdownMenuItem>
@@ -105,7 +105,7 @@ export const WebhooksList = ({ webhooks, LinkComponent, openDeleteWebhookDialog 
       {webhooks && webhooks.length > 0 && (
         <StackedList.Root>
           {webhooks.map((webhook, webhook_idx) => (
-            <LinkComponent to={`create/${webhook.id.toString()}`}>
+            <LinkComponent key={webhook.id} to={`create/${webhook.id.toString()}`}>
               <StackedList.Item key={webhook.display_name} isLast={webhooks.length - 1 === webhook_idx}>
                 <StackedList.Field
                   title={<Title title={webhook.display_name} enabled={webhook.enabled} />}

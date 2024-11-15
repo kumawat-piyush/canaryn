@@ -77,6 +77,8 @@ export function MarkdownViewer({
     <div
       // className="bg-foreground"
       // className={cx(css.main, className, { [css.withMaxHeight]: maxHeight && (maxHeight as number) > 0 })}
+      role="button"
+      tabIndex={0}
       onClick={interceptClickEventOnViewerContainer}
       style={{ maxHeight: maxHeight }}
       ref={ref}>

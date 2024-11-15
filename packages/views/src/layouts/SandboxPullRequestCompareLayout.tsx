@@ -167,7 +167,7 @@ const SandboxPullRequestCompare: React.FC<SandboxPullRequestCompareProps> = ({
                       ) : (
                         <>
                           <Icon name="fail" size={12} />
-                          <Text className="text-destructive">Can't be merged.</Text>
+                          <Text className="text-destructive">can&apos;t be merged.</Text>
                           <Text size={0} className="text-tertiary-background">
                             You can still create the pull request.
                           </Text>

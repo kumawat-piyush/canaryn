@@ -1,5 +1,3 @@
-import React from 'react'
-
 const StepsPalette = {
   Root: function Root({ children }: { children: React.ReactNode }) {
     return <div className="flex h-full flex-col overflow-hidden">{children}</div>
@@ -10,7 +8,7 @@ const StepsPalette = {
   },
 
   Title: function Title({ children }: { children: React.ReactNode }) {
-    return <div className="text-accent-foreground mb-3 text-lg">{children}</div>
+    return <div className="mb-3 text-lg text-accent-foreground">{children}</div>
   }
 }
 

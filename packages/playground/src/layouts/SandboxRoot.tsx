@@ -133,7 +133,7 @@ export const SandboxRoot: React.FC<SandboxRootProps> = ({ currentUser, currentSp
                   {({ isActive }) => <Navbar.Item key={idx} text={item.text} icon={item.icon} active={isActive} />}
                 </NavLink>
               ))}
-              <div onClick={() => (!showMore ? handleMore() : null)}>
+              <div role="button" tabIndex={0} onClick={() => (!showMore ? handleMore() : null)}>
                 <Navbar.Item text="More" icon={<Icon name="ellipsis" size={12} />} />
               </div>
             </Navbar.Group>
@@ -162,7 +162,7 @@ export const SandboxRoot: React.FC<SandboxRootProps> = ({ currentUser, currentSp
           {currentUser?.admin && (
             <Navbar.Content>
               <Navbar.Group>
-                <NavLink to={`/users`} className="hover:bg-primary/5 rounded-md p-2">
+                <NavLink to={`/users`} className="rounded-md p-2 hover:bg-primary/5">
                   {({ isActive }) => (
                     <Navbar.Item text="User Management" icon={<Icon name="account" size={12} />} active={isActive} />
                   )}

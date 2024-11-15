@@ -11,7 +11,7 @@ import {
   TabsTrigger,
   Topbar
 } from '@harnessio/canary'
-import React from 'react'
+
 import { NavLink, Outlet, useParams } from 'react-router-dom'
 
 const RepoExecutionLayout: React.FC = () => {
@@ -24,7 +24,7 @@ const RepoExecutionLayout: React.FC = () => {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink className="text-primary font-medium" href="/">
+                <BreadcrumbLink className="font-medium text-primary" href="/">
                   {repoId}
                 </BreadcrumbLink>
               </BreadcrumbItem>
