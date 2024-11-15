@@ -1,6 +1,7 @@
-import { memo, useEffect, useState } from 'react'
+import { memo } from 'react'
 import { Button, Card, Input, NodeGroup, Text } from '@harnessio/canary'
 import cx from 'classnames'
+import React from 'react'
 interface TimelineItemProps {
   header: {
     avatar?: React.ReactNode
@@ -67,10 +68,8 @@ const PullRequestTimelineItem: React.FC<TimelineItemProps> = ({
   titleClassName
   // currentUser
 }) => {
-  const [comment, setComment] = useState<string>('')
-  useEffect(() => {
-    setComment('')
-  }, [handleSaveComment])
+  const [comment, setComment] = React.useState<string>('')
+
   return (
     <NodeGroup.Root>
       <NodeGroup.Icon className={cx({ 'border-transparent': hideIconBorder })}>{icon}</NodeGroup.Icon>
