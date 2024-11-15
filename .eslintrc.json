@@ -39,7 +39,6 @@
   },
   "plugins": ["@typescript-eslint", "tailwindcss", "react", "react-hooks", "import", "prettier"],
   "rules": {
-    "tailwindcss/classnames-order": "warn",
     "tailwindcss/no-contradicting-classname": "error",
     "import/no-unresolved": "off",
     "react/prop-types": "off",
@@ -59,7 +58,7 @@
 
     "@typescript-eslint/no-explicit-any": "warn",
 
-    "tailwindcss/no-custom-classname": "off"
+    "tailwindcss/no-custom-classname": "warn"
   },
   "ignorePatterns": ["**/dist/**"]
 }
