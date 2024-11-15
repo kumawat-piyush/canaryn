@@ -485,7 +485,7 @@ export default function App() {
   return (
     <IntlProvider locale={locale} defaultLocale="en" messages={getLocaleData(locale)}>
       <AppProvider>
-        <ThemeProvider defaultTheme="light">
+        <ThemeProvider>
           <QueryClientProvider client={queryClient}>
             <TooltipProvider>
               <ExitConfirmProvider>
