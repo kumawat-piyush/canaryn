@@ -3,8 +3,12 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuTrigger
-, Icon, Text, Button, ButtonGroup } from '@harnessio/canary'
+  DropdownMenuTrigger,
+  Icon,
+  Text,
+  Button,
+  ButtonGroup
+} from '@harnessio/canary'
 import { CompareFormFields } from '../../layouts/SandboxPullRequestCompareLayout'
 
 interface PullRequestCompareButtonProps {

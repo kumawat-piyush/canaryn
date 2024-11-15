@@ -1,6 +1,14 @@
 import { useCallback } from 'react'
 import { Plus } from 'lucide-react'
-import { Controller, useFieldArray , InputComponent, InputProps , AnyFormikValue, IInputDefinition , RenderInputs } from '@harnessio/forms'
+import {
+  Controller,
+  useFieldArray,
+  InputComponent,
+  InputProps,
+  AnyFormikValue,
+  IInputDefinition,
+  RenderInputs
+} from '@harnessio/forms'
 import { Button, FormField, FormItem, Icon } from '@harnessio/canary'
 import { InputType } from './types'
 import InputLabel from './common/InputLabel'

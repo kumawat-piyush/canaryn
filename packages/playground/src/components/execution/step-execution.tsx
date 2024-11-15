@@ -52,11 +52,7 @@ const StepExecutionToolbar: React.FC<
         <Button variant="outline" size="icon" className="rounded-none" onClick={onEdit}>
           <Icon name="x-mark" className="size-4" />
         </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          className="rounded-l-none border-l-0"
-          onClick={onDownload}>
+        <Button variant="outline" size="icon" className="rounded-l-none border-l-0" onClick={onDownload}>
           <Icon name="x-mark" className="size-4" />
         </Button>
       </div>

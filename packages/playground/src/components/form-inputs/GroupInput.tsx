@@ -38,7 +38,7 @@ function GroupInputInternal(props: InputProps<AnyFormikValue>): JSX.Element {
     <Accordion
       type="single"
       collapsible
-      className="w-full bg-muted/30 px-3"
+      className="bg-muted/30 w-full px-3"
       // onValueChange={value => setIsOpen(!!value)}
     >
       <AccordionItem value={'group'} className="border-b-0">

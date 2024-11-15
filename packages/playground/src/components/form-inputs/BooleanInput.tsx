@@ -1,4 +1,4 @@
-import type { UseFormReturn , AnyFormikValue } from '@harnessio/forms'
+import type { UseFormReturn, AnyFormikValue } from '@harnessio/forms'
 import { InputType } from './types'
 import { FormControl, FormField, FormItem, Switch } from '@harnessio/canary'
 import { InputComponent, InputProps } from '@harnessio/forms'
