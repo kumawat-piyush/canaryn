@@ -42,7 +42,7 @@ export const RepoSummaryPanel = ({ ...props }: PageProps) => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem className="flex gap-1.5 items-center" onClick={onAddDescription}>
+            <DropdownMenuItem className="flex items-center gap-1.5" onClick={onAddDescription}>
               <Icon name="plus" size={12} className="text-tertiary-background" />
               <Text>Add description</Text>
             </DropdownMenuItem>
