@@ -143,6 +143,7 @@ const PullRequestOverview: React.FC<PullRequestOverviewProps> = ({
             if (isSystemComment(commentItems)) {
               return (
                 <PullRequestSystemComments
+                  key={index}
                   commentItems={commentItems}
                   isLast={activityBlocks.length - 1 === index}
                   pullReqMetadata={pullReqMetadata}

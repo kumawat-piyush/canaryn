@@ -1,4 +1,3 @@
-import React from 'react'
 import cx from 'classnames'
 
 function isElement(node: React.ReactNode): node is React.ReactElement {

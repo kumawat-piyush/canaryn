@@ -73,6 +73,7 @@ function ListInputInternal(props: InputProps<AnyFormikValue, ListInputConfig>): 
                       <div className={rowClass} style={rowStyle}>
                         {inputConfig?.inputs.map(rowInput => (
                           <InputLabel
+                            key={rowInput.label}
                             label={rowInput.label}
                             required={rowInput.required}
                             description={rowInput.description}

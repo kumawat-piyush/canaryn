@@ -29,7 +29,7 @@ export const PullRequestCommits = ({ ...props }: CommitProps) => {
   return (
     <>
       {entries.map(([date, commitData], node_idx) => (
-        <NodeGroup.Root>
+        <NodeGroup.Root key={date}>
           <NodeGroup.Icon simpleNodeIcon />
           <NodeGroup.Title>{date && <Text color="tertiaryBackground">Commits on {date}</Text>}</NodeGroup.Title>
           <NodeGroup.Content>

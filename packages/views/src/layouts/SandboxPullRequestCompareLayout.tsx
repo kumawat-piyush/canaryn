@@ -116,7 +116,7 @@ const SandboxPullRequestCompare: React.FC<SandboxPullRequestCompareProps> = ({
         <Spacer size={2} />
         <Layout.Vertical>
           <Text size={2} as="p" className="text-primary/80">
-            Choose two branches to see what's changed or to start a new pull request. If you need to, you can also
+            Choose two branches to see what&apos;s changed or to start a new pull request. If you need to, you can also
             compare across forks or learn more about diff comparisons.
           </Text>
           <Layout.Horizontal className="text-tertiary-background items-center">
@@ -161,7 +161,7 @@ const SandboxPullRequestCompare: React.FC<SandboxPullRequestCompareProps> = ({
                           <Icon name={'x-mark'} size={12} className="text-tertiary-background" />
 
                           <Text size={0} className="text-tertiary-background">
-                            Head branch doesn't contain any new commits.
+                            Head branch doesn&apos;t contain any new commits.
                           </Text>
                         </>
                       ) : (

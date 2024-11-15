@@ -52,6 +52,8 @@ export function MoreSubmenu({ showMore, handleMore, onPinItem, pinnedItems }: Mo
 
                   return (
                     <div
+                      role="button"
+                      tabIndex={0}
                       key={`${group.groupId}-${item.id}`}
                       onMouseEnter={() => setHoveredItemId(item.id)}
                       onMouseLeave={() => setHoveredItemId(null)}
