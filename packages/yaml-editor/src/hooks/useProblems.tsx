@@ -10,7 +10,7 @@ export const useProblems: UseProblems = ({ monacoRef }): void => {
   useEffect(() => {
     let handle: monaco.IDisposable
 
-    let timeoutHandle = setTimeout(() => {
+    const timeoutHandle = setTimeout(() => {
       const editor = monacoRef.current?.editor
 
       if (!editor) return
