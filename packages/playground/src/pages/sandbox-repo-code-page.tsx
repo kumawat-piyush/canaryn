@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { noop, pick } from 'lodash-es'
 import { Spacer, ListActions, Button, Text, Icon, ButtonGroup } from '@harnessio/canary'
 import { Summary } from '../components/repo-summary'

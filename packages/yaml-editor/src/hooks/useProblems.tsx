@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect } from 'react'
+import { RefObject, useEffect } from 'react'
 import * as monaco from 'monaco-editor'
 import { useYamlEditorContext } from '../components/YamlProvider'
 

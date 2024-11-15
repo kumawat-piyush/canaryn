@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import rehypeSanitize from 'rehype-sanitize'
-import React, { useCallback, useMemo, useRef, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { isEmpty } from 'lodash-es'
 // import cx from 'classnames'
 // import { getCodeString } from 'rehype-rewrite'

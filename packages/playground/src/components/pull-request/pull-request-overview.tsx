@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { Avatar, AvatarFallback, Button, Icon, Text } from '@harnessio/canary'
 import {
   CommentItem,

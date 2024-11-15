@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Icon } from '@harnessio/canary'
 import { CheckCircle } from 'lucide-react'
 

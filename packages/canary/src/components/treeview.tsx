@@ -2,7 +2,7 @@ import { ScrollArea } from '@radix-ui/react-scroll-area'
 import { cn } from '../lib/utils'
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
 import { Icon as CanaryIcon } from '../components/icon'
-import React, { createContext, forwardRef, useCallback, useContext, useEffect, useState } from 'react'
+import { createContext, forwardRef, useCallback, useContext, useEffect, useState } from 'react'
 
 /**
  * @TODO remove this from treeview component

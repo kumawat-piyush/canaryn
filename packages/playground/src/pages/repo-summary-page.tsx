@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { noop, pick } from 'lodash-es'
 import {
   Spacer,

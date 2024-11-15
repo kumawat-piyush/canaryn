@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { BranchSelector, Layout, NoData, PullRequestCommits, SandboxLayout } from '..'
 import {
   Accordion,

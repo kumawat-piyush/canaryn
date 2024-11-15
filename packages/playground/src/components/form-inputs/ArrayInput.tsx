@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 import { Plus } from 'lucide-react'
 import { Controller, useFieldArray } from '@harnessio/forms'
 import { Button, FormField, FormItem, Icon } from '@harnessio/canary'

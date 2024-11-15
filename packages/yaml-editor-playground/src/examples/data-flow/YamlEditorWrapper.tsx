@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { ThemeDefinition, YamlEditor } from '@harnessio/yaml-editor'
 import { useDataContext } from './DataProvider'
 import unifiedSchema from '../../configurations/schema/unified.json'

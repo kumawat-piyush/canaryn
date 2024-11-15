@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import { forwardRef } from 'react'
 import { SubmitHandler, FieldErrors, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form'
 import { z } from 'zod'
 import { Input, Textarea, Text } from '@harnessio/canary'

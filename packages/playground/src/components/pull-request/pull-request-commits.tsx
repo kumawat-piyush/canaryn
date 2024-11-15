@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { TypesCommit } from './interfaces'
 import { formatDate, getInitials } from '../../utils/utils'
 import { StackedList, Text, NodeGroup, Avatar, AvatarFallback } from '@harnessio/canary'

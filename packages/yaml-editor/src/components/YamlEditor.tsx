@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as monaco from 'monaco-editor'
 import Editor, { Monaco, useMonaco } from '@monaco-editor/react'
 import { loader } from '@monaco-editor/react'

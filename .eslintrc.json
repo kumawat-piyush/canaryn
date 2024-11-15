@@ -45,18 +45,21 @@
     "react/prop-types": "warn",
     "react/react-in-jsx-scope": "off",
 
-    "tailwindcss/no-custom-classname": "off",
-    "import/default": "off",
-    "jsx-a11y/anchor-is-valid": "warn",
     "jsx-a11y/click-events-have-key-events": "warn",
-    "jsx-a11y/no-static-element-interactions": "warn",
     "jsx-a11y/no-autofocus": "warn",
-    "@typescript-eslint/consistent-type-imports": "warn",
-    "jsx-a11y/tabindex-no-positive": "warn",
-    "react/jsx-key": "warn",
-    "react/no-unescaped-entities": "warn",
-    "react/display-name": "warn",
-    "@typescript-eslint/no-unused-vars": "warn"
+
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
+
+    "@typescript-eslint/no-explicit-any": "warn",
+
+    "tailwindcss/no-custom-classname": "off"
   },
   "ignorePatterns": ["**/dist/**"]
 }

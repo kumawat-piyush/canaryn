@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Button, Card, Input, NodeGroup, Text } from '@harnessio/canary'
 import cx from 'classnames'
 interface TimelineItemProps {

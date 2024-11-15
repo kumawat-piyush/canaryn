@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import * as monaco from 'monaco-editor'
 import { useMonaco, loader, DiffEditor, MonacoDiffEditor, Monaco } from '@monaco-editor/react'
 import { useTheme } from '../hooks/useTheme'

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import cx from 'classnames'
 import { Handle, Position, type NodeProps, Node } from 'reactflow'
 import { Icon } from '@harnessio/canary'

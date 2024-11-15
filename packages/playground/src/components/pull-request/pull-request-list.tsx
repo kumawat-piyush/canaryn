@@ -1,5 +1,5 @@
 import { Badge, cn, Icon, StackedList, Text } from '@harnessio/canary'
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import cx from 'classnames'
 import { getPrState } from './utils'
 import { IconType } from './interfaces'

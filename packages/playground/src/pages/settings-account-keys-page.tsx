@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Spacer, Text, Button } from '@harnessio/canary'
 import { FormFieldSet, SandboxLayout } from '..'
 import { ProfileKeysList } from '../components/profile-settings/profile-settings-keys-list'
