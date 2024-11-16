@@ -290,7 +290,7 @@ export const RepoSummaryList: React.FC = () => {
                           }
                           title="Edit"
                           size="sm">
-                          <Icon name="edit-pen" className="text-foreground h-5 w-5" />
+                          <Icon name="edit-pen" className="text-foreground size-5" />
                         </ToggleGroupItem>
                       </ToggleGroup>
                     }
@@ -332,7 +332,6 @@ export const RepoSummaryList: React.FC = () => {
                     iconName: 'open-pr'
                   }
                 ]}
-                onAddDescription={() => {}}
                 description={repository?.description}
               />
             </SandboxLayout.Content>

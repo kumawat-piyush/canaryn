@@ -1,7 +1,6 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import { Button, Card, Input, NodeGroup, Text } from '@harnessio/canary'
 import cx from 'classnames'
-import React from 'react'
 interface TimelineItemProps {
   header: {
     avatar?: React.ReactNode
@@ -68,7 +67,7 @@ const PullRequestTimelineItem: React.FC<TimelineItemProps> = ({
   titleClassName
   // currentUser
 }) => {
-  const [comment, setComment] = React.useState<string>('')
+  const [comment, setComment] = useState<string>('')
 
   return (
     <NodeGroup.Root>
@@ -84,7 +83,7 @@ const PullRequestTimelineItem: React.FC<TimelineItemProps> = ({
             {content}
             {/* TODO: will have to eventually implement a commenting and reply system similiar to gitness */}
             {!hideReply && (
-              <div className="flex items-center gap-3 border-t px-4 py-4">
+              <div className="flex items-center gap-3 border-t p-4">
                 {header.length > 0 && header[0].avatar}
                 <Input
                   value={comment}

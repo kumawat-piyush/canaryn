@@ -22,7 +22,7 @@ interface PageProps {
   title: string
   details: DetailsProps[]
   timestamp?: string
-  onAddDescription: () => void
+  onAddDescription?: () => void
   description?: string
 }
 
