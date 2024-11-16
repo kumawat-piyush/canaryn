@@ -1,4 +1,4 @@
-import create from 'zustand'
+import { create } from 'zustand'
 import {
   ChecksPullReqOkResponse,
   ListCommitsOkResponse,
@@ -10,9 +10,15 @@ import {
   mergePullReqOp,
   commentStatusPullReq as apiCommentStatusPullReq
 } from '@harnessio/code-service-client'
-import { ExecutionState } from '@harnessio/playground'
+import { ExecutionState } from '@harnessio/views'
 import { CodeCommentState, PullRequestState } from '../types/types'
 
+export const codeOwnersNotFoundMessage = 'CODEOWNERS file not found'
+export const codeOwnersNotFoundMessage2 = `path "CODEOWNERS" not found`
+export const codeOwnersNotFoundMessage3 = `failed to find node 'CODEOWNERS' in 'main': failed to get tree node: failed to ls file: path "CODEOWNERS" not found`
+export const oldCommitRefetchRequired = 'A newer commit is available. Only the latest commit can be merged.'
+export const prMergedRefetchRequired = 'Pull request already merged'
+export const POLLING_INTERVAL = 10000
 interface PullReqChecksDecisionProps {
   overallStatus: ExecutionState | undefined
   count: {
@@ -45,7 +51,8 @@ interface PullRequestDataState {
   pullReqStats: TypesPullReqStats | undefined
   pullReqCommits: ListCommitsOkResponse | undefined
   pullReqActivities: TypesPullReqActivity[] | undefined
-  loading: boolean // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  loading: boolean
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error: any
   pullReqChecksDecision: PullReqChecksDecisionProps
   showEditDescription: boolean
@@ -145,9 +152,8 @@ export const usePullRequestDataStore = create<PullRequestDataState>((set, get) =
   refetchPullReq: () => {},
   retryOnErrorFunc: () => {},
   dryMerge: () => {
-    const { repoMetadata, pullReqMetadata, refetchPullReq, setRuleViolationArr } = get()
+    const { repoMetadata, pullReqMetadata, refetchPullReq } = get()
     const isClosed = pullReqMetadata?.state === PullRequestState.CLOSED
-    console.log('dryMerge2', isClosed, repoMetadata?.path, pullReqMetadata?.state)
     if (!isClosed && repoMetadata?.path !== undefined && pullReqMetadata?.state !== PullRequestState.MERGED) {
       mergePullReqOp({
         repo_ref: `${repoMetadata?.path}/+`,
@@ -157,22 +163,90 @@ export const usePullRequestDataStore = create<PullRequestDataState>((set, get) =
         .then(({ body: res }) => {
           if (res?.rule_violations?.length && res?.rule_violations?.length > 0) {
             console.log('ruleViolations', res.rule_violations)
+            const updatedData = {
+              ruleViolation: res?.rule_violations?.length > 0,
+              ruleViolationArr:
+                res?.rule_violations?.length > 0 ? { data: { rule_violations: res.rule_violations } } : undefined,
+              requiresCommentApproval: res.requires_comment_resolution ?? false,
+              atLeastOneReviewerRule: res.requires_no_change_requests ?? false,
+              reqCodeOwnerApproval: res.requires_code_owners_approval ?? false,
+              minApproval: res.minimum_required_approvals_count ?? 0,
+              reqCodeOwnerLatestApproval: res.requires_code_owners_approval_latest ?? false,
+              minReqLatestApproval: res.minimum_required_approvals_count_latest ?? 0,
+              conflictingFiles: res.conflict_files,
+              PRStateLoading: false,
+              commentsLoading: false,
+              commentsInfoData: {
+                header: '',
+                content: undefined,
+                status: ''
+              }
+            }
             set({
               prPanelData: {
-                ...get().prPanelData,
-                ruleViolation: true,
-                ruleViolationArr: { data: { rule_violations: res.rule_violations } }
+                ...updatedData
               }
             })
           } else {
-            set({ prPanelData: { ...get().prPanelData, ruleViolation: false, ruleViolationArr: undefined } })
+            const updatedData = {
+              ruleViolation: false,
+              ruleViolationArr: undefined,
+              requiresCommentApproval: res.requires_comment_resolution ?? false,
+              atLeastOneReviewerRule: res.requires_no_change_requests ?? false,
+              reqCodeOwnerApproval: res.requires_code_owners_approval ?? false,
+              minApproval: res.minimum_required_approvals_count ?? 0,
+              reqCodeOwnerLatestApproval: res.requires_code_owners_approval_latest ?? false,
+              minReqLatestApproval: res.minimum_required_approvals_count_latest ?? 0,
+              conflictingFiles: res.conflict_files,
+              PRStateLoading: false,
+              commentsLoading: false,
+              commentsInfoData: {
+                header: '',
+                content: undefined,
+                status: ''
+              }
+            }
+            set({ prPanelData: { ...updatedData } })
           }
         })
         .catch(err => {
           if (err.status === 422) {
-            setRuleViolationArr(err)
+            const updatedData = {
+              ruleViolation: true,
+              ruleViolationArr: err,
+              requiresCommentApproval: err.requires_comment_resolution ?? false,
+              atLeastOneReviewerRule: err.requires_no_change_requests ?? false,
+              reqCodeOwnerApproval: err.requires_code_owners_approval ?? false,
+              minApproval: err.minimum_required_approvals_count ?? 0,
+              reqCodeOwnerLatestApproval: err.requires_code_owners_approval_latest ?? false,
+              minReqLatestApproval: err.minimum_required_approvals_count_latest ?? 0,
+              conflictingFiles: err.conflict_files,
+              PRStateLoading: false,
+              commentsLoading: false,
+              commentsInfoData: {
+                header: '',
+                content: undefined,
+                status: ''
+              }
+            }
+            set({
+              prPanelData: {
+                ...updatedData
+              }
+            })
           } else if (err.status === 400) {
             refetchPullReq()
+          } else if (
+            err.message === codeOwnersNotFoundMessage ||
+            err.message === codeOwnersNotFoundMessage2 ||
+            err.message === codeOwnersNotFoundMessage3 ||
+            err.status === 423 // resource locked (merge / dry-run already ongoing)
+          ) {
+            return
+            // } else if (pullRequestSection !== PullRequestSection.CONVERSATION) {
+            //   return
+          } else {
+            // showError(getErrorMessage(err))
           }
         })
         .finally(() => {
@@ -238,6 +312,3 @@ export const usePullRequestDataStore = create<PullRequestDataState>((set, get) =
   setPullReqStats: stats => set({ pullReqStats: stats }),
   updateState: newState => set(newState)
 }))
-
-// Export the store
-export default usePullRequestDataStore

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { usePullRequestDataStore } from '../stores/pull-request-store'
 import { useGetSpaceURLParam } from '../../../framework/hooks/useGetSpaceParam'
 import { useGetRepoRef } from '../../../framework/hooks/useGetRepoPath'
@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import { PathParams } from '../../../RouteDefinitions'
 import useGetPullRequestTab, { PullRequestTab } from '../../../hooks/useGetPullRequestTab'
 import {
+  TypesPullReq,
   useFindRepositoryQuery,
   useGetPullReqQuery,
   useListCommitsQuery,
@@ -17,12 +18,7 @@ import { SSEEvent } from '../../../types'
 import useSpaceSSE from '../../../framework/hooks/useSpaceSSE'
 import { extractSpecificViolations } from '../utils'
 import { isEqual } from 'lodash-es'
-export const codeOwnersNotFoundMessage = 'CODEOWNERS file not found'
-export const codeOwnersNotFoundMessage2 = `path "CODEOWNERS" not found`
-export const codeOwnersNotFoundMessage3 = `failed to find node 'CODEOWNERS' in 'main': failed to get tree node: failed to ls file: path "CODEOWNERS" not found`
-export const oldCommitRefetchRequired = 'A newer commit is available. Only the latest commit can be merged.'
-export const prMergedRefetchRequired = 'Pull request already merged'
-export const POLLING_INTERVAL = 10000
+
 const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const space = useGetSpaceURLParam() ?? ''
   const repoRef = useGetRepoRef()
@@ -38,8 +34,7 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     prPanelData,
     setResolvedCommentArr,
     setPullReqMetadata,
-    setPullReqStats,
-    pullReqStats,
+
     setRepoMetadata
   } = store
 
@@ -53,6 +48,7 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     pullreq_number: Number(pullRequestId),
     queryParams: {}
   })
+
   const {
     data: { body: activities } = {},
     isFetching: activitiesLoading,
@@ -76,22 +72,33 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     repo_ref: repoRef
   })
   const pullReqChecksDecision = usePRChecksDecision({ repoMetadata, pullReqMetadata: pullReqData })
-  useSpaceSSE({
-    space,
-    events: [SSEEvent.PULLREQ_UPDATED],
-    onEvent: data => {
+  const handleEvent = useCallback(
+    (data: TypesPullReq) => {
       if (data && String(data?.number) === pullRequestId) {
         refetchPullReq()
       }
-    }
+    },
+    [pullRequestId, refetchPullReq]
+  )
+  useSpaceSSE({
+    space,
+    events: [SSEEvent.PULLREQ_UPDATED],
+    onEvent: handleEvent,
+    shouldRun: !!(space && pullRequestId) // Ensure shouldRun is true only when space and pullRequestId are valid
   })
   useEffect(() => {
     if (repoMetadata) {
       setRepoMetadata(repoMetadata)
     }
   }, [repoMetadata, setRepoMetadata])
-  useEffect(
-    () => {
+  useEffect(() => {
+    const hasChanges =
+      !isEqual(store.pullReqMetadata, pullReqData) ||
+      !isEqual(store.pullReqStats, pullReqData?.stats) ||
+      !isEqual(store.pullReqCommits, commits) ||
+      !isEqual(store.pullReqActivities, activities)
+
+    if (hasChanges) {
       store.updateState({
         repoMetadata,
         setPullReqMetadata,
@@ -134,30 +141,28 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           ruleViolationArr: undefined
         }
       })
-    },
-    [
-      // repoMetadata,
-      // pullReqData,
-      // commits,
-      // activities,
-      // pullReqLoading,
-      // activitiesLoading,
-      // pullReqError,
-      // activitiesError,
-      // commitsError,
-      // pullReqChecksDecision,
-      // refetchActivities,
-      // refetchCommits,
-      // refetchPullReq
-    ]
-  )
+    }
+  }, [
+    repoMetadata,
+    pullReqData,
+    commits,
+    activities,
+    pullReqLoading,
+    activitiesLoading,
+    pullReqError,
+    activitiesError,
+    commitsError,
+    pullReqChecksDecision,
+    refetchActivities,
+    refetchCommits,
+    refetchPullReq
+  ])
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      console.log(pullReqMetadata, pullRequestTab, repoRef)
       if (pullReqMetadata?.source_sha && pullRequestTab === PullRequestTab.CONVERSATION && repoRef) {
-        console.log('dryMerge', pullReqMetadata)
         dryMerge()
+        console.log(prPanelData, 22222)
       }
     }, 10000) // Poll every 10 seconds
 
@@ -186,7 +191,6 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   useEffect(() => {
     const ruleViolationArr = prPanelData.ruleViolationArr
-    console.log('ruleViolationArr', ruleViolationArr, prPanelData)
     if (ruleViolationArr) {
       const requireResCommentRule = extractSpecificViolations(ruleViolationArr, 'pullreq.comments.require_resolve_all')
       if (requireResCommentRule) {
@@ -194,26 +198,6 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       }
     }
   }, [prPanelData.ruleViolationArr])
-
-  useEffect(() => {
-    if (pullReqData && !isEqual(pullReqMetadata, pullReqData)) {
-      if (
-        !pullReqMetadata ||
-        (pullReqMetadata &&
-          (pullReqMetadata.merge_base_sha !== pullReqData.merge_base_sha ||
-            pullReqMetadata.source_sha !== pullReqData.source_sha))
-      ) {
-        refetchCommits()
-      }
-
-      setPullReqMetadata(pullReqData)
-
-      if (!isEqual(pullReqStats, pullReqData.stats)) {
-        setPullReqStats(pullReqData.stats)
-        refetchActivities()
-      }
-    }
-  }, [pullReqData, pullReqMetadata, pullReqStats, refetchActivities, refetchCommits])
 
   return <>{children}</>
 }

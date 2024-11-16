@@ -89,7 +89,6 @@ export default function PullRequestConversationPage() {
     queryParams: {}
   })
   const [changesLoading, setChangesLoading] = useState(true)
-  console.log(reviewers, codeOwners)
   const [activities, setActivities] = useState(activityData)
   const approvedEvaluations = reviewers?.filter(evaluation => evaluation.review_decision === 'approved')
   const latestApprovalArr = approvedEvaluations?.filter(
@@ -177,22 +176,22 @@ export default function PullRequestConversationPage() {
         console.error('Failed to save comment:', error)
       })
   }
-  console.log(
-    'cp',
-    approvedEvaluations,
-    prPanelData?.atLeastOneReviewerRule,
-    prPanelData?.reqCodeOwnerApproval,
-    prPanelData?.minApproval,
-    prPanelData?.reqCodeOwnerLatestApproval,
-    prPanelData?.minReqLatestApproval,
-    codeOwnerChangeReqEntries,
-    codeOwnerPendingEntries,
-    latestCodeOwnerApprovalArr,
-    latestApprovalArr,
-    codeOwnerApprovalEntries,
-    changeReqReviewer,
-    changeReqEvaluations
-  )
+  // console.log(
+  //   'cp',
+  //   approvedEvaluations,
+  //   prPanelData?.atLeastOneReviewerRule,
+  //   prPanelData?.reqCodeOwnerApproval,
+  //   prPanelData?.minApproval,
+  //   prPanelData?.reqCodeOwnerLatestApproval,
+  //   prPanelData?.minReqLatestApproval,
+  //   codeOwnerChangeReqEntries,
+  //   codeOwnerPendingEntries,
+  //   latestCodeOwnerApprovalArr,
+  //   latestApprovalArr,
+  //   codeOwnerApprovalEntries,
+  //   changeReqReviewer,
+  //   changeReqEvaluations
+  // )
   const changesInfo = extractInfoForCodeOwnerContent({
     approvedEvaluations,
     reqNoChangeReq: prPanelData?.atLeastOneReviewerRule,
@@ -306,7 +305,7 @@ export default function PullRequestConversationPage() {
               commentsInfo={prPanelData?.commentsInfoData}
               ruleViolation={prPanelData.ruleViolation}
               checks={pullReqChecksDecision?.data?.checks}
-              PRStateLoading={prPanelData?.PRStateLoading }
+              PRStateLoading={prPanelData?.PRStateLoading}
               // TODO: TypesPullReq is null for someone: vardan will look into why swagger is doing this
               pullReqMetadata={pullReqMetadata ? pullReqMetadata : undefined}
               // TODO: add dry merge check into pr context
@@ -382,7 +381,7 @@ export default function PullRequestConversationPage() {
           </SandboxLayout.Content>
         </SandboxLayout.Column>
         <SandboxLayout.Column>
-          <SandboxLayout.Content className="pl-0 pr-0">
+          <SandboxLayout.Content className="px-0">
             <PullRequestSideBar
               addReviewers={handleAddReviewer}
               usersList={principals?.map(user => ({ id: user.id, display_name: user.display_name, uid: user.uid }))}
