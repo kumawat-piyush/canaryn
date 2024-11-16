@@ -57,7 +57,6 @@ interface PageProps {
 }
 
 export const BranchesList = ({ branches, spaceId, repoId, defaultBranch, intl }: PageProps) => {
-  console.log(intl)
   const moreActionsTooltip = (branchInfo: BranchProps) => {
     return (
       <DropdownMenu>

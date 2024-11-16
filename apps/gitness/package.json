@@ -20,7 +20,7 @@
     "preinstall": "npx only-allow pnpm",
     "pre-commit": "lint-staged",
     "test": "vitest",
-    "compile:lang": "formatjs compile src/lang/en.json --ast --out-file dist/lang/en.json"
+    "compile:lang": "formatjs compile-folder src/lang --ast dist/lang"
   },
   "dependencies": {
     "@harnessio/canary": "workspace:*",

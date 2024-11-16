@@ -2,5 +2,9 @@
   "repository": {
     "defaultMessage": "Dépôt",
     "description": "The word 'repository' in French"
+  },
+  "branch": {
+    "defaultMessage": "Ceci est une nouvelle branche",
+    "description": "The word 'branch' in French"
   }
 }

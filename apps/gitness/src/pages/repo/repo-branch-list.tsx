@@ -26,7 +26,6 @@ const sortOptions = [
 
 export function RepoBranchesListPage() {
   const intl = useIntl()
-  console.log('obj', intl)
   const repoRef = useGetRepoRef()
   const { spaceId, repoId } = useParams<PathParams>()
   const [isCreateBranchDialogOpen, setCreateBranchDialogOpen] = useState(false)

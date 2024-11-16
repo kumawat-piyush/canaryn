@@ -60,16 +60,16 @@ import PipelineLayout from './layouts/PipelineStudioLayout'
 import { CreateNewUserContainer } from './pages/user-management/create-new-user-container'
 import { CreateNewMemberPage } from './pages/project-settings/project-settings-new-member-page'
 import { PipelineCreate } from './pages/pipeline-create/pipeline-create'
-// import { en } from './lang/en'
-// import { fr } from './lang/fr'
-import en from '../dist/lang/en.json'
 
-import { IntlProvider, FormattedMessage, FormattedNumber, intl } from 'react-intl'
+import en from '../dist/lang/en.json'
+import fr from '../dist/lang/fr.json'
+
+import { IntlProvider } from 'react-intl'
 
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
 
 export default function App() {
-  console.log(en)
+  console.log(fr)
   new CodeServiceAPIClient({
     urlInterceptor: (url: string) => `${BASE_URL_PREFIX}${url}`,
     responseInterceptor: (response: Response) => {
