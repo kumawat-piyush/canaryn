@@ -8,4 +8,20 @@ trailingComma: none
 bracketSpacing: true
 bracketSameLine: true
 arrowParens: avoid
-plugins: ['prettier-plugin-tailwindcss']
+plugins: ['prettier-plugin-tailwindcss', '@ianvs/prettier-plugin-sort-imports']
+importOrder:
+  [
+    '',
+    '^(react/(.*)$)|^(react$)|^(react-dom(.*)$)|^react-(.*)',
+    '',
+    '<BUILTIN_MODULES>',
+    '',
+    '<THIRD_PARTY_MODULES>',
+    '',
+    '@harnessio(.*)$',
+    '',
+    '^[.]'
+  ]
+importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy']
+importOrderTypeScriptVersion: '5.0.0'
+importOrderCaseSensitive: false
