@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { produce } from 'immer'
 import {
   ChecksPullReqOkResponse,
   ListCommitsOkResponse,
@@ -19,6 +20,7 @@ export const codeOwnersNotFoundMessage3 = `failed to find node 'CODEOWNERS' in '
 export const oldCommitRefetchRequired = 'A newer commit is available. Only the latest commit can be merged.'
 export const prMergedRefetchRequired = 'Pull request already merged'
 export const POLLING_INTERVAL = 10000
+
 interface PullReqChecksDecisionProps {
   overallStatus: ExecutionState | undefined
   count: {
@@ -52,7 +54,6 @@ interface PullRequestDataState {
   pullReqCommits: ListCommitsOkResponse | undefined
   pullReqActivities: TypesPullReqActivity[] | undefined
   loading: boolean
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error: any
   pullReqChecksDecision: PullReqChecksDecisionProps
   showEditDescription: boolean
@@ -107,7 +108,12 @@ interface PullRequestDataState {
 
 export const usePullRequestDataStore = create<PullRequestDataState>((set, get) => ({
   repoMetadata: undefined,
-  setRepoMetadata: metadata => set({ repoMetadata: metadata }),
+  setRepoMetadata: metadata =>
+    set(
+      produce(draft => {
+        draft.repoMetadata = metadata
+      })
+    ),
   pullReqMetadata: undefined,
   pullReqStats: undefined,
   pullReqCommits: undefined,
@@ -139,14 +145,18 @@ export const usePullRequestDataStore = create<PullRequestDataState>((set, get) =
     }
   },
   showEditDescription: false,
-  setShowEditDescription: show => set({ showEditDescription: show }),
+  setShowEditDescription: show =>
+    set(
+      produce(draft => {
+        draft.showEditDescription = show
+      })
+    ),
   setRuleViolationArr: arr =>
-    set(state => ({
-      prPanelData: {
-        ...state.prPanelData,
-        ruleViolationArr: arr
-      }
-    })),
+    set(
+      produce(draft => {
+        draft.prPanelData.ruleViolationArr = arr
+      })
+    ),
   refetchActivities: () => {},
   refetchCommits: () => {},
   refetchPullReq: () => {},
@@ -161,99 +171,98 @@ export const usePullRequestDataStore = create<PullRequestDataState>((set, get) =
         body: { bypass_rules: true, dry_run: true, source_sha: pullReqMetadata?.source_sha }
       })
         .then(({ body: res }) => {
-          if (res?.rule_violations?.length && res?.rule_violations?.length > 0) {
-            console.log('ruleViolations', res.rule_violations)
-            const updatedData = {
-              ruleViolation: res?.rule_violations?.length > 0,
-              ruleViolationArr:
-                res?.rule_violations?.length > 0 ? { data: { rule_violations: res.rule_violations } } : undefined,
-              requiresCommentApproval: res.requires_comment_resolution ?? false,
-              atLeastOneReviewerRule: res.requires_no_change_requests ?? false,
-              reqCodeOwnerApproval: res.requires_code_owners_approval ?? false,
-              minApproval: res.minimum_required_approvals_count ?? 0,
-              reqCodeOwnerLatestApproval: res.requires_code_owners_approval_latest ?? false,
-              minReqLatestApproval: res.minimum_required_approvals_count_latest ?? 0,
-              conflictingFiles: res.conflict_files,
-              PRStateLoading: false,
-              commentsLoading: false,
-              commentsInfoData: {
-                header: '',
-                content: undefined,
-                status: ''
-              }
-            }
-            set({
-              prPanelData: {
-                ...updatedData
+          set(
+            produce(draft => {
+              if (res?.rule_violations?.length && res?.rule_violations?.length > 0) {
+                draft.prPanelData = {
+                  ruleViolation: true,
+                  ruleViolationArr: { data: { rule_violations: res.rule_violations } },
+                  requiresCommentApproval: res.requires_comment_resolution ?? false,
+                  atLeastOneReviewerRule: res.requires_no_change_requests ?? false,
+                  reqCodeOwnerApproval: res.requires_code_owners_approval ?? false,
+                  minApproval: res.minimum_required_approvals_count ?? 0,
+                  reqCodeOwnerLatestApproval: res.requires_code_owners_approval_latest ?? false,
+                  minReqLatestApproval: res.minimum_required_approvals_count_latest ?? 0,
+                  conflictingFiles: res.conflict_files,
+                  PRStateLoading: false,
+                  commentsLoading: false,
+                  commentsInfoData: {
+                    header: '',
+                    content: undefined,
+                    status: ''
+                  }
+                }
+              } else {
+                draft.prPanelData = {
+                  ruleViolation: false,
+                  ruleViolationArr: undefined,
+                  requiresCommentApproval: res.requires_comment_resolution ?? false,
+                  atLeastOneReviewerRule: res.requires_no_change_requests ?? false,
+                  reqCodeOwnerApproval: res.requires_code_owners_approval ?? false,
+                  minApproval: res.minimum_required_approvals_count ?? 0,
+                  reqCodeOwnerLatestApproval: res.requires_code_owners_approval_latest ?? false,
+                  minReqLatestApproval: res.minimum_required_approvals_count_latest ?? 0,
+                  conflictingFiles: res.conflict_files,
+                  PRStateLoading: false,
+                  commentsLoading: false,
+                  commentsInfoData: {
+                    header: '',
+                    content: undefined,
+                    status: ''
+                  }
+                }
               }
             })
-          } else {
-            const updatedData = {
-              ruleViolation: false,
-              ruleViolationArr: undefined,
-              requiresCommentApproval: res.requires_comment_resolution ?? false,
-              atLeastOneReviewerRule: res.requires_no_change_requests ?? false,
-              reqCodeOwnerApproval: res.requires_code_owners_approval ?? false,
-              minApproval: res.minimum_required_approvals_count ?? 0,
-              reqCodeOwnerLatestApproval: res.requires_code_owners_approval_latest ?? false,
-              minReqLatestApproval: res.minimum_required_approvals_count_latest ?? 0,
-              conflictingFiles: res.conflict_files,
-              PRStateLoading: false,
-              commentsLoading: false,
-              commentsInfoData: {
-                header: '',
-                content: undefined,
-                status: ''
-              }
-            }
-            set({ prPanelData: { ...updatedData } })
-          }
+          )
         })
         .catch(err => {
-          if (err.status === 422) {
-            const updatedData = {
-              ruleViolation: true,
-              ruleViolationArr: err,
-              requiresCommentApproval: err.requires_comment_resolution ?? false,
-              atLeastOneReviewerRule: err.requires_no_change_requests ?? false,
-              reqCodeOwnerApproval: err.requires_code_owners_approval ?? false,
-              minApproval: err.minimum_required_approvals_count ?? 0,
-              reqCodeOwnerLatestApproval: err.requires_code_owners_approval_latest ?? false,
-              minReqLatestApproval: err.minimum_required_approvals_count_latest ?? 0,
-              conflictingFiles: err.conflict_files,
-              PRStateLoading: false,
-              commentsLoading: false,
-              commentsInfoData: {
-                header: '',
-                content: undefined,
-                status: ''
-              }
-            }
-            set({
-              prPanelData: {
-                ...updatedData
+          set(
+            produce(draft => {
+              if (err.status === 422) {
+                draft.prPanelData = {
+                  ruleViolation: true,
+                  ruleViolationArr: err,
+                  requiresCommentApproval: err.requires_comment_resolution ?? false,
+                  atLeastOneReviewerRule: err.requires_no_change_requests ?? false,
+                  reqCodeOwnerApproval: err.requires_code_owners_approval ?? false,
+                  minApproval: err.minimum_required_approvals_count ?? 0,
+                  reqCodeOwnerLatestApproval: err.requires_code_owners_approval_latest ?? false,
+                  minReqLatestApproval: err.minimum_required_approvals_count_latest ?? 0,
+                  conflictingFiles: err.conflict_files,
+                  PRStateLoading: false,
+                  commentsLoading: false,
+                  commentsInfoData: {
+                    header: '',
+                    content: undefined,
+                    status: ''
+                  }
+                }
+              } else if (err.status === 400) {
+                refetchPullReq()
+              } else if (
+                err.message === codeOwnersNotFoundMessage ||
+                err.message === codeOwnersNotFoundMessage2 ||
+                err.message === codeOwnersNotFoundMessage3 ||
+                err.status === 423 // resource locked (merge / dry-run already ongoing)
+              ) {
+                return
               }
             })
-          } else if (err.status === 400) {
-            refetchPullReq()
-          } else if (
-            err.message === codeOwnersNotFoundMessage ||
-            err.message === codeOwnersNotFoundMessage2 ||
-            err.message === codeOwnersNotFoundMessage3 ||
-            err.status === 423 // resource locked (merge / dry-run already ongoing)
-          ) {
-            return
-            // } else if (pullRequestSection !== PullRequestSection.CONVERSATION) {
-            //   return
-          } else {
-            // showError(getErrorMessage(err))
-          }
+          )
         })
         .finally(() => {
-          set({ prPanelData: { ...get().prPanelData, PRStateLoading: false } })
+          set(
+            produce(draft => {
+              draft.prPanelData.PRStateLoading = false
+            })
+          )
         })
     } else if (pullReqMetadata?.state === PullRequestState.MERGED) {
-      set({ prPanelData: { ...get().prPanelData, PRStateLoading: false } })
+      set(
+        produce(draft => {
+          draft.prPanelData.PRStateLoading = false
+        })
+      )
     }
   },
   prPanelData: {
@@ -297,18 +306,40 @@ export const usePullRequestDataStore = create<PullRequestDataState>((set, get) =
       return undefined
     }
   },
-  setCommentsInfoData: info => {
-    set({ prPanelData: { ...get().prPanelData, commentsInfoData: info } })
-  },
+  setCommentsInfoData: info =>
+    set(
+      produce(draft => {
+        draft.prPanelData.commentsInfoData = info
+      })
+    ),
   setResolvedCommentArr: resolvedCommentArr =>
-    set(state => ({
-      prPanelData: {
-        ...state.prPanelData,
-        resolvedCommentArr
-      }
-    })),
-  setCommentsLoading: loading => set({ prPanelData: { ...get().prPanelData, commentsLoading: loading } }),
-  setPullReqMetadata: metadata => set({ pullReqMetadata: metadata }),
-  setPullReqStats: stats => set({ pullReqStats: stats }),
-  updateState: newState => set(newState)
+    set(
+      produce(draft => {
+        draft.prPanelData.resolvedCommentArr = resolvedCommentArr
+      })
+    ),
+  setCommentsLoading: loading =>
+    set(
+      produce(draft => {
+        draft.prPanelData.commentsLoading = loading
+      })
+    ),
+  setPullReqMetadata: metadata =>
+    set(
+      produce(draft => {
+        draft.pullReqMetadata = metadata
+      })
+    ),
+  setPullReqStats: stats =>
+    set(
+      produce(draft => {
+        draft.pullReqStats = stats
+      })
+    ),
+  updateState: newState =>
+    set(
+      produce(draft => {
+        Object.assign(draft, newState)
+      })
+    )
 }))
