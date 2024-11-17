@@ -24,6 +24,10 @@ import { CopyButton } from './copy-button'
 import { DivergenceGauge } from './divergence-gauge'
 import { CommitCopyActions } from './commit-copy-actions'
 import { Link } from 'react-router-dom'
+// import i18n from '../i18n/i18n'
+import { useTranslation } from 'react-i18next'
+
+// export const i18nextotherlib = i18n
 
 interface BranchProps {
   id: number
@@ -54,6 +58,7 @@ interface PageProps {
 }
 
 export const BranchesList = ({ branches, spaceId, repoId, defaultBranch }: PageProps) => {
+  const { t } = useTranslation()
   const moreActionsTooltip = (branchInfo: BranchProps) => {
     return (
       <DropdownMenu>
@@ -71,7 +76,8 @@ export const BranchesList = ({ branches, spaceId, repoId, defaultBranch }: PageP
                 <DropdownMenuShortcut className="ml-0">
                   <Icon name="pr-open" className="mr-2" />
                 </DropdownMenuShortcut>
-                New pull request
+                {/* New pull request */}
+                {t('Welcome to React')}
               </DropdownMenuItem>
             </Link>
             <DropdownMenuItem title="Coming soon" className="cursor-pointer">

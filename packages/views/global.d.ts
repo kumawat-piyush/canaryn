@@ -22,3 +22,16 @@ declare module 'monaco-editor/esm/vs/editor/standalone/browser/standaloneService
     get: (id: unknown) => { documentSymbolProvider: unknown }
   }
 }
+
+// import en from './src/i18n/en'
+
+// const resources = {
+//   en
+// } as const
+
+// declare module './src/i18n/i18n' {
+//   interface CustomTypeOptions {
+//     resources: typeof resources
+//     // returnNull: false;
+//   }
+// }

@@ -61,6 +61,7 @@ import { CreateNewUserContainer } from './pages/user-management/create-new-user-
 import { CreateNewMemberPage } from './pages/project-settings/project-settings-new-member-page'
 import { PipelineCreate } from './pages/pipeline-create/pipeline-create'
 import { RepoImportContainer } from './pages/repo/repo-import-container'
+import './i18n'
 
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
 
