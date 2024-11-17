@@ -133,7 +133,7 @@ export * from './layouts/FullWidth2ColumnLayout'
 export { ExecutionState } from './components/execution/types'
 
 // translation-engine
-import i18n from './i18n/i18n'
-export const i18next = i18n
+// import i18n from './i18n/i18n'
+// export const i18next = i18n
 
-// export * from './i18n/i18n'
+export * from './i18n/i18n'

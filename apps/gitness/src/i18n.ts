@@ -10,7 +10,7 @@ i18n
   .init({
     // fallbackLng: 'en',
     debug: true,
-    lng: 'en',
+    lng: 'fr',
 
     interpolation: {
       escapeValue: false
@@ -18,7 +18,7 @@ i18n
   })
 
 i18n.on('languageChanged', lng => {
-  i18next.changeLanguage('en')
+  i18next.changeLanguage('fr')
 })
 
 export default i18n

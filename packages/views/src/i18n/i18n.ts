@@ -7,7 +7,7 @@ const resources = {
   en: { translation: en },
   fr: { translation: fr }
 }
-const i18next = createInstance({
+export const i18next = createInstance({
   resources,
   // fallbackLng: 'en',
   // lng: 'fr',
@@ -18,4 +18,4 @@ const i18next = createInstance({
 i18next.use(initReactI18next)
 i18next.init()
 
-export default i18next
+// export default i18next
