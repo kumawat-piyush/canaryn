@@ -34,8 +34,11 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     prPanelData,
     setResolvedCommentArr,
     setPullReqMetadata,
-
-    setRepoMetadata
+    setPullReqStats,
+    pullReqStats,
+    setRepoMetadata,
+    setPullReqCommits,
+    pullReqCommits
   } = store
 
   const {
@@ -92,6 +95,36 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   }, [repoMetadata, setRepoMetadata])
   useEffect(() => {
+    if (pullReqData && !isEqual(pullReqMetadata, pullReqData)) {
+      if (
+        !pullReqMetadata ||
+        (pullReqMetadata &&
+          (pullReqMetadata.merge_base_sha !== pullReqData.merge_base_sha ||
+            pullReqMetadata.source_sha !== pullReqData.source_sha))
+      ) {
+        refetchCommits()
+      }
+
+      setPullReqMetadata(pullReqData)
+
+      if (!isEqual(pullReqStats, pullReqData.stats)) {
+        console.log('pullReqData.stats', pullReqData.stats)
+
+        setPullReqStats(pullReqData.stats)
+        refetchActivities()
+      }
+    }
+  }, [
+    pullReqData,
+    pullReqMetadata,
+    setPullReqMetadata,
+    setPullReqStats,
+    pullReqStats,
+    refetchActivities,
+    refetchCommits
+  ])
+
+  useEffect(() => {
     const hasChanges =
       !isEqual(store.pullReqMetadata, pullReqData) ||
       !isEqual(store.pullReqStats, pullReqData?.stats) ||
@@ -99,6 +132,7 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       !isEqual(store.pullReqActivities, activities)
 
     if (hasChanges) {
+      setResolvedCommentArr(undefined)
       store.updateState({
         repoMetadata,
         setPullReqMetadata,
@@ -122,23 +156,9 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           }
         },
         prPanelData: {
-          conflictingFiles: undefined,
-          requiresCommentApproval: false,
-          atLeastOneReviewerRule: false,
-          reqCodeOwnerApproval: false,
-          minApproval: 0,
-          reqCodeOwnerLatestApproval: false,
-          minReqLatestApproval: 0,
+          ...prPanelData,
           resolvedCommentArr: undefined,
-          PRStateLoading: false,
-          ruleViolation: false,
-          commentsLoading: false,
-          commentsInfoData: {
-            header: '',
-            content: undefined,
-            status: ''
-          },
-          ruleViolationArr: undefined
+          commentsInfoData: prPanelData?.commentsInfoData
         }
       })
     }
@@ -152,17 +172,19 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     pullReqError,
     activitiesError,
     commitsError,
+    prPanelData,
     pullReqChecksDecision,
     refetchActivities,
     refetchCommits,
-    refetchPullReq
+    refetchPullReq,
+    setCommentsInfoData,
+    setResolvedCommentArr
   ])
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (pullReqMetadata?.source_sha && pullRequestTab === PullRequestTab.CONVERSATION && repoRef) {
         dryMerge()
-        console.log(prPanelData, 22222)
       }
     }, 10000) // Poll every 10 seconds
 
@@ -177,18 +199,34 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   useEffect(() => {
     const resolvedComments = prPanelData.requiresCommentApproval && !prPanelData.resolvedCommentArr?.params
+    console.log(resolvedComments, 11111)
     if (resolvedComments) {
       setCommentsInfoData({ header: 'All comments are resolved', content: undefined, status: 'success' })
     } else {
+      const unresolvedCount = prPanelData.resolvedCommentArr?.params || 0 // Ensure a default value
+
       setCommentsInfoData({
         header: 'Unresolved comments',
-        content: `There are ${prPanelData.resolvedCommentArr?.params} unresolved comments`,
+        content: `There are ${unresolvedCount} unresolved comments`,
         status: 'failed'
       })
     }
     setCommentsLoading(false)
-  }, [prPanelData.requiresCommentApproval, prPanelData.resolvedCommentArr?.params])
-
+  }, [
+    dryMerge,
+    prPanelData.resolvedCommentArr,
+    prPanelData.requiresCommentApproval,
+    prPanelData.resolvedCommentArr?.params,
+    setCommentsInfoData,
+    setCommentsLoading,
+    setResolvedCommentArr,
+    prPanelData.ruleViolationArr
+  ])
+  useEffect(() => {
+    if (commits && !isEqual(commits, pullReqCommits)) {
+      setPullReqCommits(commits)
+    }
+  }, [commits, pullReqCommits, setPullReqCommits])
   useEffect(() => {
     const ruleViolationArr = prPanelData.ruleViolationArr
     if (ruleViolationArr) {
@@ -197,7 +235,8 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         setResolvedCommentArr(requireResCommentRule[0])
       }
     }
-  }, [prPanelData.ruleViolationArr])
+  }, [prPanelData.ruleViolationArr, pullReqMetadata, repoMetadata, prPanelData.ruleViolation])
+  console.log(prPanelData.commentsInfoData, prPanelData, 22222)
 
   return <>{children}</>
 }

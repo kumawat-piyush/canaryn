@@ -9,7 +9,8 @@ import {
   TypesPullReqStats,
   TypesRuleViolations,
   mergePullReqOp,
-  commentStatusPullReq as apiCommentStatusPullReq
+  commentStatusPullReq as apiCommentStatusPullReq,
+  TypesListCommitResponse
 } from '@harnessio/code-service-client'
 import { ExecutionState } from '@harnessio/views'
 import { CodeCommentState, PullRequestState } from '../types/types'
@@ -52,6 +53,7 @@ interface PullRequestDataState {
   pullReqMetadata: TypesPullReq | undefined
   pullReqStats: TypesPullReqStats | undefined
   pullReqCommits: ListCommitsOkResponse | undefined
+  setPullReqCommits: (commits: TypesListCommitResponse) => void
   pullReqActivities: TypesPullReqActivity[] | undefined
   loading: boolean
   error: any
@@ -328,6 +330,12 @@ export const usePullRequestDataStore = create<PullRequestDataState>((set, get) =
     set(
       produce(draft => {
         draft.pullReqMetadata = metadata
+      })
+    ),
+  setPullReqCommits: commits =>
+    set(
+      produce(draft => {
+        draft.pullReqMetadata = commits
       })
     ),
   setPullReqStats: stats =>

@@ -1,29 +1,6 @@
-import { useState } from 'react'
-import cx from 'classnames'
-import {
-  Button,
-  Avatar,
-  AvatarFallback,
-  Icon,
-  Text,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuShortcut,
-  DropdownMenuTrigger,
-  PopoverContent,
-  PopoverTrigger,
-  Popover,
-  CommandInput,
-  Command,
-  CommandList,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem
-} from '@harnessio/canary'
 import { EnumPullReqReviewDecision, PullReqReviewDecision } from './interfaces'
-import { getInitials } from '../../utils/utils'
+import ReviewersHeader from './pull-request-reviewers-header'
+import ReviewersList from './pull-request-reviewers-list'
 
 interface PullRequestSideBarProps {
   reviewers?: {
@@ -56,6 +33,7 @@ const PullRequestSideBar = (props: PullRequestSideBarProps) => {
     currentUserId
   } = props
 
+<<<<<<< HEAD
   const ReviewerItem = ({
     reviewer,
     reviewDecision,
@@ -196,11 +174,18 @@ const PullRequestSideBar = (props: PullRequestSideBarProps) => {
     )
   }
 
+=======
+>>>>>>> 049551d8 (feat: [pipe-20916]: fix states and rerender issues)
   return (
     <div>
       <div className="flex flex-col gap-3">
-        <ReviewersHeader />
-        <ReviewersList />
+        <ReviewersHeader usersList={usersList} addReviewers={addReviewers} refetchReviewers={refetchReviewers} />
+        <ReviewersList
+          reviewers={reviewers}
+          pullRequestMetadata={pullRequestMetadata}
+          processReviewDecision={processReviewDecision}
+          handleDelete={handleDelete}
+        />
       </div>
     </div>
   )
