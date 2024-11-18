@@ -77,6 +77,7 @@ export interface PullRequestDataState {
   setPullReqCommits: (commits: TypesListCommitResponse) => void
   pullReqActivities: TypesPullReqActivity[] | undefined
   loading: boolean
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error: any
   pullReqChecksDecision: PullReqChecksDecisionProps
   showEditDescription: boolean

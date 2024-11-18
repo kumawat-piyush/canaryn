@@ -82,7 +82,7 @@ const ReviewerItem = ({
           </Text>
         </AvatarFallback>
       </Avatar>
-      <div className="reviewerName truncate">{reviewer?.display_name}</div>
+      <div className="truncate">{reviewer?.display_name}</div>
       <div className="grow"></div>
 
       {updatedReviewDecision === PullReqReviewDecision.outdated ? (

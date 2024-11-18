@@ -204,7 +204,7 @@ export default function PullRequestChangesPage() {
         active={''}
         loading={loadingReviewers}
         currentUser={currentUser ?? {}}
-        pullRequestMetadata={pullReqMetadata}
+        pullRequestMetadata={pullReqMetadata ? pullReqMetadata : undefined}
         reviewers={reviewers}
         submitReview={submitReview}
         refetchReviewers={refetchReviewers}

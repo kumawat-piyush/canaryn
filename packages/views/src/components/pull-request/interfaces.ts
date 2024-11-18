@@ -135,10 +135,7 @@ export interface TypesLabelPullReqAssignmentInfo {
   value_count?: number
   value_id?: number | null
 }
-
 export type EnumLabelColor =
-  | 'accent'
-  | 'background'
   | 'blue'
   | 'brown'
   | 'cyan'
@@ -150,8 +147,6 @@ export type EnumLabelColor =
   | 'pink'
   | 'purple'
   | 'red'
-  | 'stroke'
-  | 'text'
   | 'violet'
   | 'yellow'
 
