@@ -1,14 +1,13 @@
+import { ExecutionState } from '../execution/types'
 import {
-  ChecksPullReqOkResponse,
-  ListCommitsOkResponse,
   RepoRepositoryOutput,
   TypesListCommitResponse,
   TypesPullReq,
   TypesPullReqActivity,
+  TypesPullReqChecks,
   TypesPullReqStats,
   TypesRuleViolations
-} from '@harnessio/code-service-client'
-import { ExecutionState } from '@harnessio/views'
+} from './interfaces'
 
 export interface PullReqCount {
   error: number
@@ -45,7 +44,7 @@ export interface PullReqChecksDecisionProps {
   overallStatus: ExecutionState | undefined
   count: PullReqCount
   error: unknown
-  data: ChecksPullReqOkResponse | undefined
+  data: TypesPullReqChecks | undefined
   color: string
   background: string
   message: string
@@ -74,7 +73,7 @@ export interface PullRequestDataState {
   setRepoMetadata: (metadata: RepoRepositoryOutput) => void
   pullReqMetadata: TypesPullReq | undefined
   pullReqStats: TypesPullReqStats | undefined
-  pullReqCommits: ListCommitsOkResponse | undefined
+  pullReqCommits: TypesListCommitResponse | undefined
   setPullReqCommits: (commits: TypesListCommitResponse) => void
   pullReqActivities: TypesPullReqActivity[] | undefined
   loading: boolean

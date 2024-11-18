@@ -5,6 +5,25 @@ export enum PRCommentFilterType {
   RESOLVED_COMMENTS = 'resolvedComments',
   UNRESOLVED_COMMENTS = 'unresolvedComments'
 }
+
+export interface TypesListCommitResponse {
+  commits?: TypesCommit[] | null
+  rename_details?: TypesRenameDetails[] | null
+  total_commits?: number
+}
+
+export interface TypesPullReqChecks {
+  checks?: TypesPullReqCheck[] | null
+  commit_sha?: string
+}
+
+export interface TypesRenameDetails {
+  commit_sha_after?: string
+  commit_sha_before?: string
+  new_path?: string
+  old_path?: string
+}
+
 export type EnumPullReqReviewDecision = 'approved' | 'changereq' | 'pending' | 'reviewed' | 'outdated'
 
 export enum orderSortDate {

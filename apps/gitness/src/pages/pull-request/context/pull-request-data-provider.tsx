@@ -136,7 +136,7 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       store.updateState({
         repoMetadata,
         setPullReqMetadata,
-        pullReqMetadata: pullReqData,
+        pullReqMetadata: pullReqData ? pullReqData : undefined,
         pullReqStats: pullReqData?.stats,
         pullReqCommits: commits,
         pullReqActivities: activities,
@@ -162,6 +162,7 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         }
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     repoMetadata,
     pullReqData,
@@ -189,12 +190,14 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }, 10000) // Poll every 10 seconds
 
     return () => clearInterval(intervalId)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pullReqMetadata?.source_sha, pullRequestTab, repoRef])
 
   useEffect(() => {
     if (repoRef && pullReqData?.source_sha) {
       dryMerge()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [repoRef, pullReqData?.source_sha, pullRequestTab])
 
   useEffect(() => {
@@ -235,6 +238,7 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         setResolvedCommentArr(requireResCommentRule[0])
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prPanelData.ruleViolationArr, pullReqMetadata, repoMetadata, prPanelData.ruleViolation])
   console.log(prPanelData.commentsInfoData, prPanelData, 22222)
 
