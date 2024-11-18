@@ -58,6 +58,7 @@ const ReviewerItem = ({
               className="cursor-pointer text-red-400 hover:text-red-400 focus:text-red-400"
               onSelect={() => {
                 handleDelete?.(reviewer?.id ?? 0)
+                // TODO: handle error if cant delete reviewers
               }}>
               <DropdownMenuShortcut className="ml-0">
                 <Icon name="trash" className="mr-2 text-red-400" />

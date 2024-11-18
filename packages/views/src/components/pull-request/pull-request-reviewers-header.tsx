@@ -47,6 +47,7 @@ const ReviewersHeader = ({ usersList, addReviewers, refetchReviewers }: Reviewer
                     onSelect={() => {
                       if (display_name) {
                         addReviewers?.(id)
+                        // TODO: handle error if cant add reviewers
                         setIsOpen(false)
                         refetchReviewers?.()
                       }
