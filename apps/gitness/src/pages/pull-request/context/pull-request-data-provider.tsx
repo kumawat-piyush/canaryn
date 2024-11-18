@@ -108,8 +108,6 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       setPullReqMetadata(pullReqData)
 
       if (!isEqual(pullReqStats, pullReqData.stats)) {
-        console.log('pullReqData.stats', pullReqData.stats)
-
         setPullReqStats(pullReqData.stats)
         refetchActivities()
       }
@@ -202,7 +200,6 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   useEffect(() => {
     const resolvedComments = prPanelData.requiresCommentApproval && !prPanelData.resolvedCommentArr?.params
-    console.log(resolvedComments, 11111)
     if (resolvedComments) {
       setCommentsInfoData({ header: 'All comments are resolved', content: undefined, status: 'success' })
     } else {
@@ -240,7 +237,6 @@ const PullRequestDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prPanelData.ruleViolationArr, pullReqMetadata, repoMetadata, prPanelData.ruleViolation])
-  console.log(prPanelData.commentsInfoData, prPanelData, 22222)
 
   return <>{children}</>
 }

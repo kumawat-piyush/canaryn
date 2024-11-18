@@ -176,22 +176,7 @@ export default function PullRequestConversationPage() {
         console.error('Failed to save comment:', error)
       })
   }
-  // console.log(
-  //   'cp',
-  //   approvedEvaluations,
-  //   prPanelData?.atLeastOneReviewerRule,
-  //   prPanelData?.reqCodeOwnerApproval,
-  //   prPanelData?.minApproval,
-  //   prPanelData?.reqCodeOwnerLatestApproval,
-  //   prPanelData?.minReqLatestApproval,
-  //   codeOwnerChangeReqEntries,
-  //   codeOwnerPendingEntries,
-  //   latestCodeOwnerApprovalArr,
-  //   latestApprovalArr,
-  //   codeOwnerApprovalEntries,
-  //   changeReqReviewer,
-  //   changeReqEvaluations
-  // )
+
   const changesInfo = extractInfoForCodeOwnerContent({
     approvedEvaluations,
     reqNoChangeReq: prPanelData?.atLeastOneReviewerRule,
