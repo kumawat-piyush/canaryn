@@ -1,112 +1,14 @@
 import { create } from 'zustand'
 import { produce } from 'immer'
-import {
-  ChecksPullReqOkResponse,
-  ListCommitsOkResponse,
-  RepoRepositoryOutput,
-  TypesPullReq,
-  TypesPullReqActivity,
-  TypesPullReqStats,
-  TypesRuleViolations,
-  mergePullReqOp,
-  commentStatusPullReq as apiCommentStatusPullReq,
-  TypesListCommitResponse
-} from '@harnessio/code-service-client'
-import { ExecutionState } from '@harnessio/views'
+import { mergePullReqOp, commentStatusPullReq as apiCommentStatusPullReq } from '@harnessio/code-service-client'
 import { CodeCommentState, PullRequestState } from '../types/types'
-
+import { PullRequestDataState } from './interfaces'
 export const codeOwnersNotFoundMessage = 'CODEOWNERS file not found'
 export const codeOwnersNotFoundMessage2 = `path "CODEOWNERS" not found`
 export const codeOwnersNotFoundMessage3 = `failed to find node 'CODEOWNERS' in 'main': failed to get tree node: failed to ls file: path "CODEOWNERS" not found`
 export const oldCommitRefetchRequired = 'A newer commit is available. Only the latest commit can be merged.'
 export const prMergedRefetchRequired = 'Pull request already merged'
 export const POLLING_INTERVAL = 10000
-
-interface PullReqChecksDecisionProps {
-  overallStatus: ExecutionState | undefined
-  count: {
-    error: number
-    failure: number
-    pending: number
-    running: number
-    success: number
-    skipped: number
-    killed: number
-  }
-  error: unknown
-  data: ChecksPullReqOkResponse | undefined
-  color: string
-  background: string
-  message: string
-  summaryText: string
-  checkInfo: {
-    title: string
-    content: string
-    color: string
-    status: string
-  }
-}
-
-interface PullRequestDataState {
-  repoMetadata: RepoRepositoryOutput | undefined
-  setRepoMetadata: (metadata: RepoRepositoryOutput) => void
-  pullReqMetadata: TypesPullReq | undefined
-  pullReqStats: TypesPullReqStats | undefined
-  pullReqCommits: ListCommitsOkResponse | undefined
-  setPullReqCommits: (commits: TypesListCommitResponse) => void
-  pullReqActivities: TypesPullReqActivity[] | undefined
-  loading: boolean
-  error: any
-  pullReqChecksDecision: PullReqChecksDecisionProps
-  showEditDescription: boolean
-  setShowEditDescription: (show: boolean) => void
-  setRuleViolationArr: (arr: { data: { rule_violations: TypesRuleViolations[] } } | undefined) => void
-  refetchActivities: () => void
-  refetchCommits: () => void
-  refetchPullReq: () => void
-  retryOnErrorFunc: () => void
-  dryMerge: () => void
-  prPanelData: {
-    conflictingFiles: string[] | undefined
-    requiresCommentApproval: boolean
-    atLeastOneReviewerRule: boolean
-    reqCodeOwnerApproval: boolean
-    minApproval: number
-    reqCodeOwnerLatestApproval: boolean
-    minReqLatestApproval: number
-    resolvedCommentArr?: { params: number[] }
-    PRStateLoading: boolean
-    ruleViolation: boolean
-    commentsLoading: boolean
-    commentsInfoData: { header: string; content?: string | undefined; status: string }
-    ruleViolationArr:
-      | {
-          data: {
-            rule_violations: TypesRuleViolations[]
-          }
-        }
-      | undefined
-  }
-  updateCommentStatus: (
-    repoId: string,
-    pullReqNumber: number,
-    commentId: number,
-    status: string,
-    refetchActivities: () => void
-  ) => Promise<TypesPullReqActivity | undefined>
-  setCommentsInfoData: (info: { header: string; content?: string; status: string }) => void
-  setCommentsLoading: (loading: boolean) => void
-  setResolvedCommentArr: (
-    resolvedCommentArr:
-      | {
-          params: number[]
-        }
-      | undefined
-  ) => void
-  setPullReqMetadata: (metadata: TypesPullReq | undefined) => void
-  setPullReqStats: (stats: TypesPullReqStats | undefined) => void
-  updateState: (newState: Partial<PullRequestDataState>) => void
-}
 
 export const usePullRequestDataStore = create<PullRequestDataState>((set, get) => ({
   repoMetadata: undefined,
