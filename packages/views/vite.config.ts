@@ -4,6 +4,7 @@ import monacoEditorPlugin from 'vite-plugin-monaco-editor'
 import dts from 'vite-plugin-dts'
 import { resolve } from 'path'
 import yaml from '@rollup/plugin-yaml'
+import { lingui } from '@lingui/vite-plugin'
 
 const external = [
   'react',
@@ -20,8 +21,12 @@ const external = [
 export default defineConfig({
   define: { 'process.env.NODE_ENV': '"production"' },
   plugins: [
-    react(),
+    // react(),
+    react({
+      plugins: [['@lingui/swc-plugin', {}]] // Add the SWC plugin for Lingui
+    }),
     yaml({}),
+    lingui(),
     dts({
       outDir: 'dist',
       tsconfigPath: './tsconfig.json',
@@ -30,6 +35,7 @@ export default defineConfig({
         content
       })
     }),
+    // @ts-expect-error: @TODO: Fix  this. Should be removed, added to enable typecheck
     monacoEditorPlugin.default({ customWorkers: [{ entry: 'monaco-yaml/yaml.worker', label: 'yaml' }] })
   ],
   build: {

@@ -61,8 +61,16 @@ import { CreateNewUserContainer } from './pages/user-management/create-new-user-
 import { CreateNewMemberPage } from './pages/project-settings/project-settings-new-member-page'
 import { PipelineCreate } from './pages/pipeline-create/pipeline-create'
 import { RepoImportContainer } from './pages/repo/repo-import-container'
+import { I18nProvider } from '@lingui/react'
+import { i18n } from '@lingui/core'
+import { defaultLocale, dynamicActivate } from './i18n'
+import { useEffect } from 'react'
+import { messages } from './locales/en.js'
 
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
+
+i18n.load('en', messages)
+i18n.activate('en')
 
 export default function App() {
   new CodeServiceAPIClient({
@@ -470,17 +478,19 @@ export default function App() {
 
   return (
     <AppProvider>
-      <ThemeProvider defaultTheme="dark">
-        <QueryClientProvider client={queryClient}>
-          <TooltipProvider>
-            <ExitConfirmProvider>
-              <NuqsAdapter>
-                <RouterProvider router={router} />
-              </NuqsAdapter>
-            </ExitConfirmProvider>
-          </TooltipProvider>
-        </QueryClientProvider>
-      </ThemeProvider>
+      <I18nProvider i18n={i18n}>
+        <ThemeProvider defaultTheme="dark">
+          <QueryClientProvider client={queryClient}>
+            <TooltipProvider>
+              <ExitConfirmProvider>
+                <NuqsAdapter>
+                  <RouterProvider router={router} />
+                </NuqsAdapter>
+              </ExitConfirmProvider>
+            </TooltipProvider>
+          </QueryClientProvider>
+        </ThemeProvider>
+      </I18nProvider>
     </AppProvider>
   )
 }

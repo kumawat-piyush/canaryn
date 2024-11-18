@@ -15,7 +15,9 @@
     "preinstall": "npx only-allow pnpm",
     "pre-commit": "lint-staged",
     "test": "vitest",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "messages:extract": "lingui extract",
+    "messages:compile": "lingui compile"
   },
   "dependencies": {
     "@harnessio/canary": "workspace:*",
@@ -25,6 +27,10 @@
     "@harnessio/views": "workspace:*",
     "@harnessio/yaml-editor": "workspace:*",
     "@hookform/resolvers": "^3.6.0",
+    "@lingui/conf": "^4.14.0",
+    "@lingui/core": "^4.14.0",
+    "@lingui/macro": "^4.14.0",
+    "@lingui/react": "^4.14.0",
     "@tanstack/react-query": "4.36.1",
     "clipboard-copy": "^3.1.0",
     "clsx": "^2.1.1",
@@ -45,6 +51,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@lingui/cli": "^4.14.0",
+    "@lingui/swc-plugin": "^4.1.0",
+    "@lingui/vite-plugin": "^4.14.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^13.4.0",
     "@types/event-source-polyfill": "^1.0.0",

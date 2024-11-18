@@ -24,6 +24,7 @@ import { CopyButton } from './copy-button'
 import { DivergenceGauge } from './divergence-gauge'
 import { CommitCopyActions } from './commit-copy-actions'
 import { Link } from 'react-router-dom'
+import { t } from '@lingui/macro'
 
 interface BranchProps {
   id: number
@@ -71,14 +72,14 @@ export const BranchesList = ({ branches, spaceId, repoId, defaultBranch }: PageP
                 <DropdownMenuShortcut className="ml-0">
                   <Icon name="pr-open" className="mr-2" />
                 </DropdownMenuShortcut>
-                New pull request
+                {t`New pull request`}
               </DropdownMenuItem>
             </Link>
             <DropdownMenuItem title="Coming soon" className="cursor-pointer">
               <DropdownMenuShortcut className="ml-0">
                 <Icon name="cog-6" className="mr-2" />
               </DropdownMenuShortcut>
-              View Rules
+              {t`View Rules`}
             </DropdownMenuItem>
             <DropdownMenuItem title="Coming soon" className="cursor-pointer">
               <DropdownMenuShortcut className="ml-0">

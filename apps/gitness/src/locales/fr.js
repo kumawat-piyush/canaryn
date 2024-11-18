@@ -1,0 +1,1 @@
+/*eslint-disable*/module.exports={messages:JSON.parse("{\"+B6zlh\":\"Nouvelle demande de tirage\",\"cfI+LL\":\"View Rules\"}")};
