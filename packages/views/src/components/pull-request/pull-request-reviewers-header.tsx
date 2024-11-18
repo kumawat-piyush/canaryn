@@ -15,12 +15,13 @@ import {
 } from '@harnessio/canary'
 
 interface ReviewersHeaderProps {
-  usersList?: { display_name?: string; id?: number }[]
+  usersList?: { display_name?: string; id?: number; uid?: string }[]
   addReviewers?: (id?: number) => void
   refetchReviewers: () => void
+  currentUserId?: string
 }
 
-const ReviewersHeader = ({ usersList, addReviewers, refetchReviewers }: ReviewersHeaderProps) => {
+const ReviewersHeader = ({ usersList, addReviewers, refetchReviewers, currentUserId }: ReviewersHeaderProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -40,21 +41,23 @@ const ReviewersHeader = ({ usersList, addReviewers, refetchReviewers }: Reviewer
             <CommandList>
               <CommandEmpty>No users found.</CommandEmpty>
               <CommandGroup>
-                {usersList?.map(({ display_name, id }, idx: number) => (
-                  <CommandItem
-                    key={idx}
-                    value={display_name}
-                    onSelect={() => {
-                      if (display_name) {
-                        addReviewers?.(id)
-                        // TODO: handle error if cant add reviewers
-                        setIsOpen(false)
-                        refetchReviewers?.()
-                      }
-                    }}>
-                    {display_name}
-                  </CommandItem>
-                ))}
+                {usersList?.map(({ display_name, id, uid }, idx: number) => {
+                  if (uid === currentUserId) return null
+                  return (
+                    <CommandItem
+                      key={idx}
+                      value={uid}
+                      onSelect={() => {
+                        if (display_name) {
+                          addReviewers?.(id)
+                          setIsOpen(false)
+                          refetchReviewers?.()
+                        }
+                      }}>
+                      {display_name}
+                    </CommandItem>
+                  )
+                })}
               </CommandGroup>
             </CommandList>
           </Command>
