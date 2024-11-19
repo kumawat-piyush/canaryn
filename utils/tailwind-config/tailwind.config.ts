@@ -1,8 +1,7 @@
-import tailwindcssAnimate from 'tailwindcss-animate'
+import type { Config } from 'tailwindcss/types/config'
 
 export default {
   darkMode: ['class'],
-  content: ['./src/**/*.{ts,tsx}'],
   prefix: '',
   theme: {
     container: {
@@ -118,19 +117,19 @@ export default {
         'accordion-up': 'accordion-up 0.2s ease-out'
       }
     }
-  },
-  plugins: [
-    tailwindcssAnimate,
-    function ({ addUtilities }) {
-      addUtilities({
-        '.tabnav-active': {
-          boxShadow:
-            'inset 0 1px 0 0 hsl(var(--border-background)), inset 1px 0 0 0 hsl(var(--border-background)), inset -1px 0 0 0 hsl(var(--border-background))'
-        },
-        '.tabnav-inactive': {
-          boxShadow: 'inset 0 -1px 0 0 hsl(var(--border-background))'
-        }
-      })
-    }
-  ]
-}
+  }
+  // plugins: [
+  //   tailwindcssAnimate,
+  //   function ({ addUtilities }) {
+  //     addUtilities({
+  //       '.tabnav-active': {
+  //         boxShadow:
+  //           'inset 0 1px 0 0 hsl(var(--border-background)), inset 1px 0 0 0 hsl(var(--border-background)), inset -1px 0 0 0 hsl(var(--border-background))'
+  //       },
+  //       '.tabnav-inactive': {
+  //         boxShadow: 'inset 0 -1px 0 0 hsl(var(--border-background))'
+  //       }
+  //     })
+  //   }
+  // ]
+} as Omit<Config, 'content'>

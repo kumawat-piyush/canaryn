@@ -90,6 +90,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@harnessio/tailwind-config": "workspace:*",
+    "@harnessio/helpers": "workspace:*",
     "@testing-library/react": "^13.4.0",
     "@types/jest": "^27.5.2",
     "@types/lodash-es": "^4.17.12",

@@ -1,0 +1,13 @@
+{
+  "name": "@harnessio/helpers",
+  "version": "1.0.0",
+  "description": "Common helper functions for monorepo",
+  "main": "index.ts",
+  "type": "module",
+  "dependencies": {
+    "@harnessio/tailwind-config": "workspace:*"
+  },
+  "devDependencies": {
+    "deepmerge": "^4.3.1"
+  }
+}

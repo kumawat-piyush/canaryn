@@ -1,0 +1,10 @@
+{
+  "name": "@harnessio/tailwind-config",
+  "version": "1.0.0",
+  "description": "Base tailwind configuration that can be used across monorepo",
+  "files": [
+    "global.css"
+  ],
+  "main": "tailwind.config.ts",
+  "private": true
+}
