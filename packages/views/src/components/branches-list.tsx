@@ -100,22 +100,34 @@ export const BranchesList = ({ branches, spaceId, repoId, defaultBranch, intl }:
         <TableRow>
           <TableHead>
             {intl.formatMessage(
-              { id: 'branch' },
               {
-                Link: chunks => <Link to="/">{chunks}</Link>,
-                name: 'Sans'
+                id: 'branch-new',
+                defaultMessage: `{count, plural,  =0 {No branches} one {# branch} other {# branches}} in your repo`
+              },
+              {
+                count: branches.length
               }
             )}
             {/* <FormattedMessage
-              id="branch"
+              id="branch-new"
+              defaultMessage="{count, plural, =0 {No branches} one {# branch} two {# branches} few {# branches} many {# branches} other {# branches}} {br} in your repo}"
               values={{
                 Link: chunks => <Link to="/">{chunks}</Link>,
-                name: 'Sans'
+                name: 'Johnny',
+                count: 5
               }}
             /> */}
           </TableHead>
           <TableHead>
-            <Link to="/">Updated</Link>
+            <Link to="/">
+              <FormattedMessage
+                id="updated"
+                defaultMessage="Updated {br} Message"
+                values={{
+                  br: _chunks => <br />
+                }}
+              />
+            </Link>
           </TableHead>
           {branches[0]?.checks?.done && branches[0]?.checks?.total && branches[0]?.checks?.status && (
             <TableHead>Check status</TableHead>

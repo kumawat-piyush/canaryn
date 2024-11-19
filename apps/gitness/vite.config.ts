@@ -5,7 +5,19 @@ import monacoEditorPlugin from 'vite-plugin-monaco-editor'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react(),
+    // react(),
+    react({
+      plugins: [
+        [
+          '@swc/plugin-formatjs',
+          {
+            removeDefaultMessage: false,
+            idInterpolationPattern: '[sha512:contenthash:base64:6]',
+            ast: true
+          }
+        ]
+      ]
+    }),
     monacoEditorPlugin.default({ customWorkers: [{ entry: 'monaco-yaml/yaml.worker', label: 'yaml' }] })
   ],
   server: {
