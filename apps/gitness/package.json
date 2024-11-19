@@ -13,7 +13,6 @@
     "pretty": "prettier --check ./src",
     "preview": "vite preview",
     "preinstall": "npx only-allow pnpm",
-    "pre-commit": "lint-staged",
     "test": "vitest",
     "typecheck": "tsc"
   },
@@ -66,11 +65,5 @@
     "vite": "^5.4.1",
     "vite-plugin-monaco-editor": "^1.1.0",
     "vitest": "^2.1.2"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint ./src --fix",
-      "prettier ./src --write"
-    ]
   }
 }

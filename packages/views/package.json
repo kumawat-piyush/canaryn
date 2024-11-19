@@ -11,7 +11,6 @@
     "prepublishOnly": "pnpm build",
     "lint": "eslint ./src",
     "pretty": "prettier --check ./src",
-    "pre-commit": "lint-staged",
     "typecheck": "tsc"
   },
   "private": false,
@@ -103,11 +102,5 @@
   },
   "peerDependencies": {
     "react-router-dom": "^6.26.0"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint ./src --fix",
-      "prettier ./src --write"
-    ]
   }
 }

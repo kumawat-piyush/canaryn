@@ -12,7 +12,6 @@
     "pretty": "prettier --check ./src",
     "shadcn:update": "npx shadcn-ui@latest add -a -o -y",
     "prepublishOnly": "pnpm build",
-    "pre-commit": "lint-staged",
     "typecheck": "tsc"
   },
   "module": "./dist/index.js",
@@ -111,11 +110,5 @@
     "vite": "^5.3.1",
     "vite-plugin-dts": "^3.9.1",
     "vite-plugin-svgr": "^4.2.0"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint ./src --fix",
-      "prettier ./src --write"
-    ]
   }
 }

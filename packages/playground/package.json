@@ -13,8 +13,7 @@
     "build-for-standalone": "NODE_ENV=production vite build --config vite.config.standalone.ts",
     "prepublishOnly": "pnpm build",
     "lint": "eslint ./src",
-    "pretty": "prettier --check ./src",
-    "pre-commit": "lint-staged"
+    "pretty": "prettier --check ./src"
   },
   "private": false,
   "type": "module",
@@ -107,11 +106,5 @@
   },
   "peerDependencies": {
     "react-router-dom": "^6.26.0"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint ./src --fix",
-      "prettier ./src --write"
-    ]
   }
 }
