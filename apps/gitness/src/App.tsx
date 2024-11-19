@@ -60,16 +60,33 @@ import PipelineLayout from './layouts/PipelineStudioLayout'
 import { CreateNewUserContainer } from './pages/user-management/create-new-user-container'
 import { CreateNewMemberPage } from './pages/project-settings/project-settings-new-member-page'
 import { PipelineCreate } from './pages/pipeline-create/pipeline-create'
+import { useState, useEffect } from 'react'
+import { loadLocaleData } from './i18n'
 
-import en from '../dist/lang/en.json'
-import fr from '../dist/lang/fr.json'
+// import en from '../dist/lang/en.json'
+// import fr from '../dist/lang/fr.json'
 
 import { IntlProvider } from 'react-intl'
 
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
 
 export default function App() {
-  console.log(fr)
+  const [messages, setMessages] = useState(null)
+  const [locale, setLocale] = useState('en')
+
+  useEffect(() => {
+    async function loadMessages() {
+      const localeMessages = await loadLocaleData(locale)
+      setMessages(localeMessages)
+    }
+    loadMessages()
+  }, [locale])
+
+  if (!messages) {
+    return <div>Loading translations...</div>
+  }
+  // console.log(fr)
+
   new CodeServiceAPIClient({
     urlInterceptor: (url: string) => `${BASE_URL_PREFIX}${url}`,
     responseInterceptor: (response: Response) => {
@@ -470,7 +487,7 @@ export default function App() {
   ])
 
   return (
-    <IntlProvider locale="en" messages={en}>
+    <IntlProvider locale="en" messages={messages}>
       <AppProvider>
         <ThemeProvider>
           <QueryClientProvider client={queryClient}>

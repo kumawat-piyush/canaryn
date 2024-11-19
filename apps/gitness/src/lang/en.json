@@ -4,7 +4,7 @@
     "description": "The word 'repository' in English"
   },
   "branch": {
-    "defaultMessage": "This is a new branch",
+    "defaultMessage": "This is a {name} <Link>branch</Link>",
     "description": "The word 'branch' in English"
   }
 }

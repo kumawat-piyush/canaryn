@@ -25,7 +25,7 @@ import { CopyButton } from './copy-button'
 import { DivergenceGauge } from './divergence-gauge'
 import { CommitCopyActions } from './commit-copy-actions'
 import { Link } from 'react-router-dom'
-import { IntlShape } from 'react-intl'
+import { IntlShape, FormattedMessage } from 'react-intl'
 
 interface BranchProps {
   id: number
@@ -98,8 +98,25 @@ export const BranchesList = ({ branches, spaceId, repoId, defaultBranch, intl }:
     <Table variant="asStackedList">
       <TableHeader>
         <TableRow>
-          <TableHead> {intl.formatMessage({ id: 'branch' })}</TableHead>
-          <TableHead>Updated</TableHead>
+          <TableHead>
+            {intl.formatMessage(
+              { id: 'branch' },
+              {
+                Link: chunks => <Link to="/">{chunks}</Link>,
+                name: 'Sans'
+              }
+            )}
+            {/* <FormattedMessage
+              id="branch"
+              values={{
+                Link: chunks => <Link to="/">{chunks}</Link>,
+                name: 'Sans'
+              }}
+            /> */}
+          </TableHead>
+          <TableHead>
+            <Link to="/">Updated</Link>
+          </TableHead>
           {branches[0]?.checks?.done && branches[0]?.checks?.total && branches[0]?.checks?.status && (
             <TableHead>Check status</TableHead>
           )}
