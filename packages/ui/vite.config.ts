@@ -1,43 +1,44 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import dts from 'vite-plugin-dts'
-import { resolve } from 'path'
+import path, { resolve } from 'path'
 import svgr from 'vite-plugin-svgr'
-import tsConfigPaths from 'vite-tsconfig-paths'
 
-const external = ['react', 'react-hook-form']
+const external = ['react', 'react-dom', 'lodash-es', 'react-hook-form']
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), dts({ rollupTypes: true }), svgr({ include: '**/*.svg' }), tsConfigPaths()],
+  define: { 'process.env.NODE_ENV': '"production"' },
+  plugins: [
+    react(),
+    dts({
+      outDir: 'dist',
+      tsconfigPath: './tsconfig.app.json',
+      beforeWriteFile: (filePath, content) => ({
+        filePath: filePath.replace('src/', ''),
+        content
+      })
+    }),
+    svgr({
+      include: '**/*.svg'
+    })
+  ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src')
+    }
+  },
   build: {
+    sourcemap: true,
+    copyPublicDir: false,
     lib: {
-      entry: {
-        components: resolve(__dirname, 'src/components/index.ts'),
-        views: resolve(__dirname, 'src/views/index.ts'),
-        index: resolve(__dirname, 'src/index.ts')
-      },
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'canary',
+      fileName: 'index',
       formats: ['es']
     },
     rollupOptions: {
       external: external
-    }
-  },
-  test: {
-    environment: 'jsdom',
-    setupFiles: ['./config/vitest-setup.ts'],
-    globals: true,
-    coverage: {
-      provider: 'istanbul',
-      include: ['src'],
-      exclude: ['src/index.ts', 'src/components/index.ts', 'src/views/index.ts', 'src/**/*.test.*', 'src/utils/cn.ts'],
-      extension: ['ts', 'js', 'tsx', 'jsx']
-      // thresholds: {
-      //   branches: 80,
-      //   lines: 80,
-      //   functions: 80,
-      //   statements: 80
-      // }
     }
   }
 })
