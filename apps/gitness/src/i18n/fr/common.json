@@ -1,0 +1,10 @@
+{
+  "Summary": "Résumé",
+  "Commits": "Commits",
+  "Branches": "Branches",
+  "Pipeline": "Pipeline",
+  "Pull Requests": "Requêtes de tirage",
+  "Webhooks": "Webhooks",
+  "Settings": "Paramètres",
+  "Files": "Fichiers"
+}

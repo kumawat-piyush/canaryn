@@ -15,7 +15,8 @@
     "preinstall": "npx only-allow pnpm",
     "pre-commit": "lint-staged",
     "test": "vitest",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "extract": "i18next 'src/**/*.{js,jsx,ts,tsx}'"
   },
   "dependencies": {
     "@harnessio/canary": "workspace:*",
@@ -29,8 +30,11 @@
     "clipboard-copy": "^3.1.0",
     "clsx": "^2.1.1",
     "diff2html": "3.4.22",
+    "eslint-plugin-i18next": "5.0.0-0",
     "event-source-polyfill": "^1.0.22",
     "i18next": "^23.16.5",
+    "i18next-http-backend": "^2.6.2",
+    "i18next-resources-to-backend": "^1.2.1",
     "jotai": "^2.6.3",
     "lang-map": "^0.4.0",
     "lodash-es": "^4.17.21",

@@ -61,7 +61,8 @@ import { CreateNewUserContainer } from './pages/user-management/create-new-user-
 import { CreateNewMemberPage } from './pages/project-settings/project-settings-new-member-page'
 import { PipelineCreate } from './pages/pipeline-create/pipeline-create'
 import { RepoImportContainer } from './pages/repo/repo-import-container'
-import './i18n'
+import i18n from './i18n/i18n'
+import { I18nextProvider } from 'react-i18next'
 
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
 
@@ -471,17 +472,19 @@ export default function App() {
 
   return (
     <AppProvider>
-      <ThemeProvider defaultTheme="dark">
-        <QueryClientProvider client={queryClient}>
-          <TooltipProvider>
-            <ExitConfirmProvider>
-              <NuqsAdapter>
-                <RouterProvider router={router} />
-              </NuqsAdapter>
-            </ExitConfirmProvider>
-          </TooltipProvider>
-        </QueryClientProvider>
-      </ThemeProvider>
+      <I18nextProvider i18n={i18n}>
+        <ThemeProvider defaultTheme="dark">
+          <QueryClientProvider client={queryClient}>
+            <TooltipProvider>
+              <ExitConfirmProvider>
+                <NuqsAdapter>
+                  <RouterProvider router={router} />
+                </NuqsAdapter>
+              </ExitConfirmProvider>
+            </TooltipProvider>
+          </QueryClientProvider>
+        </ThemeProvider>
+      </I18nextProvider>
     </AppProvider>
   )
 }
