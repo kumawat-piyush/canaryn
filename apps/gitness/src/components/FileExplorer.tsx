@@ -91,7 +91,8 @@ export default function Explorer({ selectedBranch, repoDetails }: ExplorerProps)
           <FileExplorer.FileItem
             key={itemPath || idx.toString()}
             isActive={itemPath === fullResourcePath}
-            link={fullPath}>
+            link={fullPath}
+          >
             {item.name}
           </FileExplorer.FileItem>
         ) : (
@@ -99,7 +100,8 @@ export default function Explorer({ selectedBranch, repoDetails }: ExplorerProps)
             <FileExplorer.FileItem
               key={itemPath || idx.toString()}
               isActive={itemPath === fullResourcePath}
-              link={fullPath}>
+              link={fullPath}
+            >
               {item.name}
             </FileExplorer.FileItem>
           </Link>
@@ -119,7 +121,8 @@ export default function Explorer({ selectedBranch, repoDetails }: ExplorerProps)
                 handleOpenFoldersChange={handleOpenFoldersChange}
                 openFolderPaths={openFolderPaths}
               />
-            }>
+            }
+          >
             {item.name}
           </FileExplorer.FolderItem>
         )
@@ -163,7 +166,8 @@ export default function Explorer({ selectedBranch, repoDetails }: ExplorerProps)
             handleOpenFoldersChange(value)
           }
         }}
-        value={openFolderPaths}>
+        value={openFolderPaths}
+      >
         {contents && renderEntries(contents, folderPath)}
       </FileExplorer.Root>
     )
@@ -231,7 +235,8 @@ export default function Explorer({ selectedBranch, repoDetails }: ExplorerProps)
           handleOpenFoldersChange(value)
         }
       }}
-      value={openFolderPaths}>
+      value={openFolderPaths}
+    >
       {isRootLoading ? (
         <div>Loading...</div>
       ) : rootError ? (

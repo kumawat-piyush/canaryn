@@ -31,7 +31,8 @@ export const SplitButton = React.forwardRef<HTMLButtonElement, SplitButtonProps>
         asChild
         variant={variant}
         {...others}
-        ref={ref}>
+        ref={ref}
+      >
         <div>
           <Button
             loading={loading}
@@ -39,13 +40,15 @@ export const SplitButton = React.forwardRef<HTMLButtonElement, SplitButtonProps>
             variant={variant}
             onClick={onClick}
             {...others}
-            className="pointer-events-auto rounded-none border-none">
+            className="pointer-events-auto rounded-none border-none"
+          >
             {children}
           </Button>
           <Button
             disabled={disabled}
             asChild
-            className={cn(buttonVariants({ variant }), 'm-0 h-full rounded-none border-none p-0 shadow-none')}>
+            className={cn(buttonVariants({ variant }), 'm-0 h-full rounded-none border-none p-0 shadow-none')}
+          >
             <span>|</span>
           </Button>
           <DropdownMenu>
@@ -54,7 +57,8 @@ export const SplitButton = React.forwardRef<HTMLButtonElement, SplitButtonProps>
                 variant={variant}
                 disabled={disabled}
                 {...others}
-                className="pointer-events-auto rounded-none border-none px-2 shadow-none">
+                className="pointer-events-auto rounded-none border-none px-2 shadow-none"
+              >
                 {CanaryOutletFactory.getOutlet(CanaryOutletName.SPLIT_ICON, {
                   variant,
                   loading,

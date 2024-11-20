@@ -61,7 +61,8 @@ export const FormAddAdminDialog: React.FC<FormRemoveUserDialogProps> = ({
                 updateUserAdmin(user?.uid as string, true)
                 onRemove()
               }}
-              disabled={isRemoving || removeSuccess}>
+              disabled={isRemoving || removeSuccess}
+            >
               {isRemoving ? 'Adding admin...' : 'Yes, add admin'}
             </Button>
           )}

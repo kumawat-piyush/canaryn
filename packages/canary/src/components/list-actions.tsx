@@ -38,7 +38,8 @@ function Dropdown({ title, items, onChange, selectedValue }: DropdownProps) {
           size={2}
           className={cn('text-primary/80', {
             ['font-bold']: selectedValue
-          })}>
+          })}
+        >
           {title}
         </Text>
         <Icon name="chevron-down" size={12} className="chevron-down" />

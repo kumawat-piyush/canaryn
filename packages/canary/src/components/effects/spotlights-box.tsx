@@ -90,7 +90,8 @@ function Root({ highlightTop = '', highlightBottom = '', logo, logoSize = 84, ch
     <div
       className="border-primary/5 group relative h-[220px] w-full cursor-pointer overflow-hidden rounded-lg border duration-150 ease-in-out"
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}>
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <canvas
         ref={canvasRef}
         width="100%"

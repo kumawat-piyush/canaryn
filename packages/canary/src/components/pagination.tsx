@@ -62,7 +62,8 @@ const PaginationPrevious = ({ disabled, className, ...props }: React.ComponentPr
       { 'text-tertiary-background pointer-events-none cursor-default opacity-40 hover:bg-transparent': disabled },
       className
     )}
-    {...props}>
+    {...props}
+  >
     <Icon name="arrow-long" size={12} className="text-tertiary-background rotate-180" />
     <span>Previous</span>
   </PaginationLink>
@@ -78,7 +79,8 @@ const PaginationNext = ({ disabled, className, ...props }: React.ComponentProps<
       { 'text-tertiary-background pointer-events-none cursor-default opacity-40 hover:bg-transparent': disabled },
       className
     )}
-    {...props}>
+    {...props}
+  >
     <span>Next</span>
     <Icon name="arrow-long" size={12} />
   </PaginationLink>
@@ -89,7 +91,8 @@ const PaginationEllipsis = ({ className, ...props }: React.ComponentProps<'span'
   <span
     aria-hidden
     className={cn('bg-tertiary flex h-7 w-7 items-center justify-center rounded-full text-sm font-normal', className)}
-    {...props}>
+    {...props}
+  >
     <DotsHorizontalIcon className="size-4" />
     <span className="sr-only">More pages</span>
   </span>

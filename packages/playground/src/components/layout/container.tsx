@@ -29,7 +29,8 @@ const Container = {
             'h-full': hFull
           },
           className
-        )}>
+        )}
+      >
         {children}
       </div>
     )

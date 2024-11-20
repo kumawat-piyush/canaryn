@@ -49,7 +49,8 @@ export const ProfileKeysList: React.FC<PageProps> = ({ publicKeys, openAlertDele
                   className="flex cursor-pointer items-center justify-end gap-1.5"
                   onClick={() => {
                     openAlertDeleteDialog({ identifier: key.identifier!, type: 'key' })
-                  }}>
+                  }}
+                >
                   <Icon name="trash" size={14} className="text-tertiary-background" />
                 </div>
               </TableCell>

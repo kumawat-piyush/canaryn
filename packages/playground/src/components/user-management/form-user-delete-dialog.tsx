@@ -61,7 +61,8 @@ export const FormDeleteUserDialog: React.FC<FormDeleterDialogProps> = ({
                 handleDeleteUser(user!.uid!)
                 onDelete()
               }}
-              disabled={isDeleting}>
+              disabled={isDeleting}
+            >
               {isDeleting ? 'Deleting user...' : 'Yes, delete user'}
             </Button>
           )}

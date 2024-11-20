@@ -101,7 +101,8 @@ const PullRequestTimelineItem: React.FC<TimelineItemProps> = ({
                   onClick={() => {
                     handleSaveComment?.(comment, parentCommentId)
                     setComment('')
-                  }}>
+                  }}
+                >
                   Reply
                 </Button>
               </div>

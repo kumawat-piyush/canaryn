@@ -236,7 +236,8 @@ const PullRequestDiffViewer = ({
                       onClick={() => {
                         onClose()
                         valRef.current = ''
-                      }}>
+                      }}
+                    >
                       cancel
                     </button>
                     <button
@@ -257,7 +258,8 @@ const PullRequestDiffViewer = ({
                             valRef.current = ''
                           })
                         }
-                      }}>
+                      }}
+                    >
                       submit
                     </button>
                   </div>

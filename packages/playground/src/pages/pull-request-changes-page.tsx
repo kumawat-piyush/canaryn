@@ -156,7 +156,8 @@ const FilterSortViewDropdowns: React.FC<FilterViewProps> = ({ active }) => {
                 </DropdownMenuGroup>
               </DropdownMenuContent>
             </DropdownMenu>
-          }>
+          }
+        >
           {mockApprovalItems[index].title}
         </Button>
       </ListActions.Right>

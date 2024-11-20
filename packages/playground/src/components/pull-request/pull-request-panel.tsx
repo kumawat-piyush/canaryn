@@ -233,7 +233,8 @@ const PullRequestPanel = ({
                           </DropdownMenuGroup>
                         </DropdownMenuContent>
                       </DropdownMenu>
-                    }>
+                    }
+                  >
                     Squash and merge
                   </Button>
                 </Layout.Horizontal>

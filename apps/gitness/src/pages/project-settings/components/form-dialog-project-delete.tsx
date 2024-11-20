@@ -116,7 +116,8 @@ export const FormDialogProjectDelete = ({
                   theme="error"
                   className="self-start"
                   onClick={handleDelete}
-                  disabled={!typeCheck(verificationCheck) || isDeleting}>
+                  disabled={!typeCheck(verificationCheck) || isDeleting}
+                >
                   {isDeleting ? 'Deleting project...' : 'Yes, delete project'}
                 </Button>
               )}

@@ -90,7 +90,8 @@ function SandboxRepoSummaryPage() {
         hasLeftPanel
         hasLeftSubPanel={loadState.includes('sub')}
         hasHeader
-        hasSubHeader>
+        hasSubHeader
+      >
         <SandboxLayout.Columns columnWidths="1fr 220px">
           <SandboxLayout.Column>
             <SandboxLayout.Content>

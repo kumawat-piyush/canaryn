@@ -71,7 +71,8 @@ export const MembersList = ({ members, onDelete, onEdit }: PageProps) => {
             <TableCell className="my-6 content-center">
               <Select
                 value={member.role}
-                onValueChange={newRole => onEdit({ ...member, role: transformValue(newRole) })}>
+                onValueChange={newRole => onEdit({ ...member, role: transformValue(newRole) })}
+              >
                 <SelectTrigger className="w-[150px] justify-start space-x-2 border-0" iconClassName="flex-shrink-0">
                   <SelectValue className="flex-1 grow-0 basis-[70%]" placeholder="Select Role">
                     {/* //the data from api call is lowerCase */}

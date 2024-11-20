@@ -99,7 +99,8 @@ function ListInputInternal(props: InputProps<AnyFormikValue, ListInputConfig>): 
                             onClick={() => {
                               remove(idx)
                             }}
-                            disabled={readonly}>
+                            disabled={readonly}
+                          >
                             <Icon name="trash" />
                           </button>
                         </div>

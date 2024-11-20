@@ -74,7 +74,8 @@ const PaginationItems: React.FC<PaginationItemsProps> = ({ totalPages, currentPa
         size="sm_icon"
         href="#"
         onClick={() => goToPage(totalPages)}
-        isActive={currentPage === totalPages}>
+        isActive={currentPage === totalPages}
+      >
         {totalPages}
       </PaginationLink>
     </PaginationItem>

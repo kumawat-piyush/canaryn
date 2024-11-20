@@ -63,7 +63,8 @@ const PullRequestMergeSection = ({
                     // }}
                     // className="pl-1 pr-1 text-blue-500 cursor-pointer">
 
-                    className="px-1 text-blue-500">
+                    className="px-1 text-blue-500"
+                  >
                     {/* {getString('commandLine')} */}
                     command line
                   </span>
@@ -89,7 +90,8 @@ const PullRequestMergeSection = ({
               <Text
                 size={1}
                 weight="normal"
-                color={'tertiaryBackground'}>{`Conflicting files (${conflictingFiles?.length || 0})`}</Text>
+                color={'tertiaryBackground'}
+              >{`Conflicting files (${conflictingFiles?.length || 0})`}</Text>
             </StackedList.Item>
             {!isEmpty(conflictingFiles) &&
               conflictingFiles?.map((file, idx) => (

@@ -49,13 +49,15 @@ export const YamlEditorWrapper: React.FC<React.PropsWithChildren> = () => {
         <button
           onClick={() => {
             setYamlRevision({ yaml: stageApproval })
-          }}>
+          }}
+        >
           Update yaml
         </button>
         <button
           onClick={() => {
             setShowYamlEditor(!showYamlEditor)
-          }}>
+          }}
+        >
           Toggle mount
         </button>
       </div>

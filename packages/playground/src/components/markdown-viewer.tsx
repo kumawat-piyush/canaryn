@@ -83,7 +83,8 @@ export function MarkdownViewer({
       tabIndex={0}
       onClick={interceptClickEventOnViewerContainer}
       style={{ maxHeight: maxHeight }}
-      ref={ref}>
+      ref={ref}
+    >
       <MarkdownPreview
         source={source}
         className="prose prose-invert !bg-background !max-w-full"

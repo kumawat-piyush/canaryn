@@ -40,7 +40,8 @@ const LineTitle: React.FC<Omit<HeaderProps, 'title' | 'data' | 'lang'>> = ({ tex
         tabIndex={0}
         onClick={e => {
           e.preventDefault()
-        }}>
+        }}
+      >
         <CopyButton name={text} className="text-tertiary-background" />
       </div>
       {numAdditions != null && numAdditions > 0 && (

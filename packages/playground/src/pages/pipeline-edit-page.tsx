@@ -182,7 +182,8 @@ const StepFormPanel = (): JSX.Element => {
       // onValuesChange={values => {
       //   // console.log(values)
       // }}
-      validateAfterFirstSubmit={true}>
+      validateAfterFirstSubmit={true}
+    >
       {rootForm => (
         <StepForm.Root>
           <StepForm.Header>
@@ -309,7 +310,8 @@ export default function PipelineEditPage() {
         open={!!drawerOpen}
         onOpenChange={open => {
           if (!open) setDrawerOpen(undefined)
-        }}>
+        }}
+      >
         <SheetContent className="p-0">{renderSheetContent()}</SheetContent>
       </Sheet>
     ),

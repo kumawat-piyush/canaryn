@@ -96,7 +96,8 @@ const PullRequestCheckSection = ({ checkData, checksInfo, spaceId, repoId }: Pul
                     {check.check.status !== ExecutionState.PENDING && (
                       <Link
                         to={`/${spaceId}/repos/${repoId}/pipelines/${check.check.identifier}/executions/${(check.check.payload?.data as ExecutionPayloadType).execution_number}`}
-                        replace>
+                        replace
+                      >
                         <Text size={1} color="tertiaryBackground">
                           Details
                         </Text>

@@ -41,7 +41,8 @@ export const PullRequestCommits = ({ ...props }: CommitProps) => {
                   <StackedList.Item
                     className="hover:bg-transparent"
                     key={commit.sha}
-                    isLast={commitData.length - 1 === repo_idx}>
+                    isLast={commitData.length - 1 === repo_idx}
+                  >
                     <StackedList.Field
                       title={
                         <div className="flex flex-col">

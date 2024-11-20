@@ -76,7 +76,8 @@ const Progress = React.forwardRef<React.ElementRef<typeof ProgressPrimitive.Root
     <ProgressPrimitive.Root
       ref={ref}
       className={cn(progressVariants({ variant, size, rounded, rotated }), className)}
-      {...props}>
+      {...props}
+    >
       <ProgressPrimitive.Indicator
         className={cn(
           'h-full w-full flex-1 transition-all',

@@ -26,7 +26,8 @@ function SandboxSettingsPage() {
                     logo={'harness'}
                     logoSize={64}
                     highlightTop={'#262930'}
-                    highlightBottom={'#262930'}>
+                    highlightBottom={'#262930'}
+                  >
                     <SpotlightsBox.Content>
                       <Text size={3}>Account</Text>
                     </SpotlightsBox.Content>
@@ -37,7 +38,8 @@ function SandboxSettingsPage() {
                     logo={'harness'}
                     logoSize={64}
                     highlightTop={'#262930'}
-                    highlightBottom={'#262930'}>
+                    highlightBottom={'#262930'}
+                  >
                     <SpotlightsBox.Content>
                       <Text size={3}>Project</Text>
                     </SpotlightsBox.Content>

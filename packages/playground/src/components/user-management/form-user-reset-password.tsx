@@ -73,7 +73,8 @@ export const FormResetPasswordDialog: React.FC<FormResetPasswordsDialogProps> = 
               onClick={() => {
                 handleResetPassword()
                 setIsConfirm(true)
-              }}>
+              }}
+            >
               Confirm
             </Button>
           )}

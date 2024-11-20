@@ -26,7 +26,8 @@ export function ExitConfirmDialog({
       open={open}
       onOpenChange={open => {
         if (!open) onCancel?.()
-      }}>
+      }}
+    >
       <DialogContent className="bg-primary-background border-border max-w-[500px]">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>

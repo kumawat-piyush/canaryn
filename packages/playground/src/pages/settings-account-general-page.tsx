@@ -182,7 +182,8 @@ export function SettingsAccountGeneralPage() {
                   <Button
                     size="sm"
                     type="submit"
-                    disabled={!isProfileValid || isProfileSubmitting || !Object.keys(profileDirtyFields).length}>
+                    disabled={!isProfileValid || isProfileSubmitting || !Object.keys(profileDirtyFields).length}
+                  >
                     {isProfileSubmitting ? 'Updating...' : 'Update profile'}
                   </Button>
                 ) : (

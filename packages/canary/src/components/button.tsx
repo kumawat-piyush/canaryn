@@ -128,7 +128,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className={cn(buttonVariants({ variant, padding, borderRadius, className }), 'h-full')}
             ref={ref}
             disabled={disabled || loading}
-            {...props}>
+            {...props}
+          >
             {_children}
           </Comp>
         </div>
@@ -140,7 +141,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(buttonVariants({ variant, size, theme, padding, borderRadius, className }))}
         ref={ref}
         disabled={disabled || loading}
-        {...props}>
+        {...props}
+      >
         {variant === 'split' && dropdown ? (
           <>
             <div className="flex items-center py-0.5 pl-2.5 pr-1">{_children}</div>

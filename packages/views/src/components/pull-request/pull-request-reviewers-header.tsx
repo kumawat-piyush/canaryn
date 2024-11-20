@@ -52,7 +52,8 @@ const ReviewersHeader = ({ usersList, addReviewers, currentUserId }: ReviewersHe
                           addReviewers?.(id)
                           setIsOpen(false)
                         }
-                      }}>
+                      }}
+                    >
                       {display_name}
                     </CommandItem>
                   )

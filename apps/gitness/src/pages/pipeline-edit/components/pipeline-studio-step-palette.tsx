@@ -55,7 +55,8 @@ const PipelineStudioStepPalette = (props: PipelineStudioStepFormProps): JSX.Elem
                   }
 
                   requestClose()
-                }}>
+                }}
+              >
                 <StepsPaletteItem.Left>
                   <Icon name="harness-plugin" size={36} />
                 </StepsPaletteItem.Left>
@@ -85,7 +86,8 @@ const PipelineStudioStepPalette = (props: PipelineStudioStepFormProps): JSX.Elem
                     }
                   })
                   setStepDrawerOpen(StepDrawer.Form)
-                }}>
+                }}
+              >
                 <StepsPaletteItem.Left>
                   <Icon name="harness-plugin" size={36} />
                 </StepsPaletteItem.Left>
@@ -114,7 +116,8 @@ const PipelineStudioStepPalette = (props: PipelineStudioStepFormProps): JSX.Elem
                   } else {
                     //TODO: TOAST HERE
                   }
-                }}>
+                }}
+              >
                 <StepsPaletteItem.Left>
                   <Icon name="harness-plugin" size={36} />
                 </StepsPaletteItem.Left>

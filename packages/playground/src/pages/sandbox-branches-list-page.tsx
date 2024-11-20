@@ -101,7 +101,8 @@ export default function SandboxBranchesListPage() {
               variant="default"
               onClick={() => {
                 setBranchDialogOpen(true)
-              }}>
+              }}
+            >
               Create Branch
             </Button>
           </ListActions.Right>

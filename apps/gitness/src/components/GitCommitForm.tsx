@@ -154,7 +154,8 @@ export function GitCommitForm({
                 onValueChange={value => {
                   dryRun(value as CommitToGitRefOption, form.getValues().fileName)
                   field.onChange(value)
-                }}>
+                }}
+              >
                 <FormFieldSet.Option
                   control={<RadioGroupItem value={CommitToGitRefOption.DIRECTLY} id="directly" />}
                   id="directly"

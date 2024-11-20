@@ -41,7 +41,8 @@ const ExtendedInput = React.forwardRef<HTMLInputElement, ExtendedInputProps>(
               'rounded-l-md',
               leftStyle ? 'bg-muted border-r' : '-mr-3',
               leftClassName
-            )}>
+            )}
+          >
             {left}
           </div>
         )}
@@ -53,7 +54,8 @@ const ExtendedInput = React.forwardRef<HTMLInputElement, ExtendedInputProps>(
               'rounded-r-md',
               rightStyle ? 'bg-muted border-l' : '-ml-3',
               rightClassName
-            )}>
+            )}
+          >
             {right}
           </div>
         )}

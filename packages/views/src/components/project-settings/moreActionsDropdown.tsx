@@ -30,7 +30,8 @@ export const moreActionsDropdown = ({ member, onDelete }: moreActionsProps) => {
         <DropdownMenuGroup>
           <DropdownMenuItem
             className="cursor-pointer px-3 text-red-400 hover:text-red-400 focus:text-red-400"
-            onSelect={() => onDelete(member)}>
+            onSelect={() => onDelete(member)}
+          >
             Remove member
           </DropdownMenuItem>
         </DropdownMenuGroup>

@@ -95,7 +95,8 @@ export const FormEditMemberDialog: React.FC<FormEditDialogProps> = ({
               <Select
                 {...register('role', { required: 'Please select a role' })}
                 value={newMemberRoleValue}
-                onValueChange={value => setValue('role', value, { shouldValidate: true, shouldDirty: true })}>
+                onValueChange={value => setValue('role', value, { shouldValidate: true, shouldDirty: true })}
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select Role" />
                 </SelectTrigger>
@@ -131,7 +132,8 @@ export const FormEditMemberDialog: React.FC<FormEditDialogProps> = ({
                       type="button"
                       size="sm"
                       theme="success"
-                      className="pointer-events-none flex h-9 gap-2">
+                      className="pointer-events-none flex h-9 gap-2"
+                    >
                       Saved
                       <Icon name="tick" size={14} />
                     </Button>

@@ -95,7 +95,8 @@ export const PullRequestChangesFilter: React.FC<FilterViewProps> = ({
         disabled={isActiveUserPROwner}
         onClick={() => {
           submitReview?.(itm.method as PullReqReviewDecision)
-        }}>
+        }}
+      >
         <RadioGroup className="flex items-start gap-2">
           <RadioGroupItem value="false" className="text-tertiary-background mt-1 h-3 w-3" />
           <div className="flex flex-col">
@@ -153,7 +154,8 @@ export const PullRequestChangesFilter: React.FC<FilterViewProps> = ({
                   <DropdownMenuGroup>{dropdownMenuItems}</DropdownMenuGroup>
                 </DropdownMenuContent>
               </DropdownMenu>
-            }>
+            }
+          >
             {approveState === PullReqReviewDecision.approve ? approvalItems[0].title : getApprovalState(approveState)}
           </Button>
         )}

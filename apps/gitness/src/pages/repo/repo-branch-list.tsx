@@ -150,7 +150,8 @@ export function RepoBranchesListPage() {
             variant="default"
             onClick={() => {
               setCreateBranchDialogOpen(true)
-            }}>
+            }}
+          >
             Create branch
           </Button>
         </div>

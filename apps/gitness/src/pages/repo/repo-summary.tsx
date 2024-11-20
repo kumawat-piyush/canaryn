@@ -260,7 +260,8 @@ export const RepoSummaryList: React.FC = () => {
                           key={'create-file'}
                           onClick={() => {
                             navigate(`/spaces/${spaceId}/repos/${repoId}/code/new/${gitRef || selectedBranch}/~/`)
-                          }}>
+                          }}
+                        >
                           + Create New File
                         </DropdownMenuItem>
                       </DropdownMenuContent>
@@ -291,7 +292,8 @@ export const RepoSummaryList: React.FC = () => {
                             )
                           }
                           title="Edit"
-                          size="sm">
+                          size="sm"
+                        >
                           <Icon name="edit-pen" className="text-foreground size-5" />
                         </ToggleGroupItem>
                       </ToggleGroup>

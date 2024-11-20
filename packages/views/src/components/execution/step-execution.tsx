@@ -58,7 +58,8 @@ const StepExecutionToolbar: React.FC<
           variant="outline"
           size="icon"
           className="rounded-bl-none rounded-tl-none border-l-0"
-          onClick={onDownload}>
+          onClick={onDownload}
+        >
           <Icon name="download" className="h-4 w-4" />
         </Button>
       </div>

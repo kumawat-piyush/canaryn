@@ -164,7 +164,8 @@ export default function RunPipelineForm({
 
         runPipeline({ branch, inputsValues })
       }}
-      validateAfterFirstSubmit={true}>
+      validateAfterFirstSubmit={true}
+    >
       {rootForm => (
         <>
           <DialogHeader>

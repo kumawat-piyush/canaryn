@@ -153,7 +153,8 @@ export const PipelineStudioStepForm = (props: PipelineStudioStepFormProps): JSX.
 
         requestClose()
       }}
-      validateAfterFirstSubmit={true}>
+      validateAfterFirstSubmit={true}
+    >
       {rootForm => (
         <StepForm.Root>
           <StepForm.Header>
@@ -185,7 +186,8 @@ export const PipelineStudioStepForm = (props: PipelineStudioStepFormProps): JSX.
                 onClick={() => {
                   requestYamlModifications.deleteInArray({ path: editStepIntention.path })
                   requestClose()
-                }}>
+                }}
+              >
                 <Icon name="trash" />
               </Button>
             )}

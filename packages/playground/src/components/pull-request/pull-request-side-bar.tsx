@@ -90,7 +90,8 @@ const PullRequestSideBar = (props: PullRequestSideBarProps) => {
                 className="cursor-pointer text-red-400 hover:text-red-400 focus:text-red-400"
                 onSelect={() => {
                   handleDelete?.(reviewer?.id ?? 0)
-                }}>
+                }}
+              >
                 <DropdownMenuShortcut className="ml-0">
                   <Icon name="trash" className="mr-2 text-red-400" />
                 </DropdownMenuShortcut>
@@ -106,7 +107,8 @@ const PullRequestSideBar = (props: PullRequestSideBarProps) => {
         <Avatar
           className={cx('h-7 w-7 rounded-full', {
             'p-0': updatedReviewDecision !== PullReqReviewDecision.changeReq
-          })}>
+          })}
+        >
           <AvatarFallback>
             <Text size={1} color="tertiaryBackground">
               {getInitials(reviewer?.display_name || '')}
@@ -180,7 +182,8 @@ const PullRequestSideBar = (props: PullRequestSideBarProps) => {
                           setIsOpen(false)
                           refetchReviewers?.()
                         }
-                      }}>
+                      }}
+                    >
                       {display_name}
                     </CommandItem>
                   ))}

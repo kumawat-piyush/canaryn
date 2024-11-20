@@ -57,7 +57,8 @@ const AccordionTrigger = React.forwardRef<React.ElementRef<typeof AccordionPrimi
           },
           className
         )}
-        {...props}>
+        {...props}
+      >
         {leftChevron && !hideChevron && (
           <Icon
             name="chevron-down"
@@ -84,7 +85,8 @@ const AccordionContent = React.forwardRef<
   <AccordionPrimitive.Content
     ref={ref}
     className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm"
-    {...props}>
+    {...props}
+  >
     <div className={cn('pb-4 pt-0', className)}>{children}</div>
   </AccordionPrimitive.Content>
 ))

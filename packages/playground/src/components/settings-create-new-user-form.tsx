@@ -125,7 +125,8 @@ function SettingsCreateNewUserForm({
                     onClick={() => {
                       navigate('../users')
                     }}
-                    disabled={isLoading}>
+                    disabled={isLoading}
+                  >
                     Cancel
                   </Button>
                 </>

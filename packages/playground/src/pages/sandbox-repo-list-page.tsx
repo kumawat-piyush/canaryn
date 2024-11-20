@@ -54,7 +54,8 @@ function SandboxRepoListPage() {
         hasHeader
         hasLeftPanel
         hasLeftSubPanel={loadState.includes('sub')}
-        fullWidth={loadState.includes('full')}>
+        fullWidth={loadState.includes('full')}
+      >
         <SandboxLayout.Content>
           <Spacer size={10} />
           <Text size={5} weight={'medium'}>

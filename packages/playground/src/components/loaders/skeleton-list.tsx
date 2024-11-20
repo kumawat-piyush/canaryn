@@ -30,7 +30,8 @@ export const SkeletonList = ({ className }: SkeletonListProps) => {
           'opacity-0': !visible
         },
         className
-      )}>
+      )}
+    >
       {listItems && listItems.length > 0 && (
         <StackedList.Root>
           {listItems.map((itm, itm_idx) => (

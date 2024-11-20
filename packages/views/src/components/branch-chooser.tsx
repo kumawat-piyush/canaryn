@@ -44,7 +44,8 @@ export const BranchSelector = ({ ...props }: PageProps) => {
             'bg-background': prefix,
             'border-border': prefix,
             'border-2': prefix
-          })}>
+          })}
+        >
           {prefix ? null : <Icon name="branch" size={12} className="text-tertiary-background min-w-[12px]" />}
           <Text as="p" align="left" className="text-primary/90 w-full truncate">
             {prefix ? `${prefix}: ${name}` : name}

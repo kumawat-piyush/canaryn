@@ -107,7 +107,8 @@ export default function PipelineEdit() {
             clearEditStepIntention()
             setFormStep(null)
           }
-        }}>
+        }}
+      >
         <SheetContent onOpenAutoFocus={e => e.preventDefault()} hideCloseButton={true} className="p-0 sm:max-w-lg">
           {renderSheetContent()}
         </SheetContent>

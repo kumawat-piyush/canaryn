@@ -97,7 +97,8 @@ export function CreateBranchDialog({
                   <Select
                     disabled={isLoadingBranches || !branches?.length}
                     onValueChange={field.onChange}
-                    defaultValue={field.value}>
+                    defaultValue={field.value}
+                  >
                     <FormControl className="text-primary">
                       <SelectTrigger>
                         <SelectValue placeholder="Select a branch" />

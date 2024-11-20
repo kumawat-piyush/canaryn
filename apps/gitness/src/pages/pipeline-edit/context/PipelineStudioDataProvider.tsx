@@ -160,7 +160,8 @@ const PipelineStudioDataProvider = ({ children }: React.PropsWithChildren) => {
         fetchPipelineFileContent,
         setCurrentBranch,
         requestYamlModifications
-      }}>
+      }}
+    >
       {children}
     </PipelineStudioDataContext.Provider>
   )

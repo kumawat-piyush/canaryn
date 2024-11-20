@@ -43,7 +43,8 @@ function SelectInputInternal(props: InputProps<AnyFormikValue, SelectInputConfig
                 value={field.value}
                 onValueChange={value => {
                   field.onChange(value)
-                }}>
+                }}
+              >
                 <SelectTrigger ref={field.ref}>
                   <SelectValue placeholder={placeholder} />
                 </SelectTrigger>

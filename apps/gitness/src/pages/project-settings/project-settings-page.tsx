@@ -193,7 +193,8 @@ export const ProjectSettingsPage = ({
                           : isSaveButtonDisabled
                             ? 'cursor-not-allowed opacity-50'
                             : 'cursor-pointer'
-                      }`}>
+                      }`}
+                    >
                       {isUpdating ? 'Saving...' : 'Save changes'}
                     </Button>
                     <Button
@@ -201,7 +202,8 @@ export const ProjectSettingsPage = ({
                       variant="outline"
                       type="button"
                       onClick={handleCancel}
-                      disabled={isCancelDisabled}>
+                      disabled={isCancelDisabled}
+                    >
                       Cancel
                     </Button>
                   </>

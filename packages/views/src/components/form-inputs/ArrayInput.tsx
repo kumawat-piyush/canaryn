@@ -69,7 +69,8 @@ function ArrayInputInternal(props: InputProps<AnyFormikValue, ArrayInputConfig>)
                             onClick={() => {
                               remove(idx)
                             }}
-                            disabled={readonly}>
+                            disabled={readonly}
+                          >
                             <Icon name="trash" />
                           </button>
                         </div>

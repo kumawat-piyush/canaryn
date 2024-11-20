@@ -66,7 +66,8 @@ export default function RepoExecutionListPage() {
                     variant="default"
                     onClick={() => {
                       setOpenRunPipeline(true)
-                    }}>
+                    }}
+                  >
                     Run
                   </Button>
                   <Button variant="default" asChild>

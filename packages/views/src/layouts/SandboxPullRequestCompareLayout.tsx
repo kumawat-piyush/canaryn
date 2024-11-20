@@ -261,9 +261,8 @@ const SandboxPullRequestCompare: React.FC<SandboxPullRequestCompareProps> = ({
                 {/* Content for Changes */}
                 <Spacer size={5} />
                 <Text
-                  size={
-                    2
-                  }>{`Showing ${diffStats.files_changed || 0} changed files with ${diffStats.additions || 0} additions and ${diffStats.deletions || 0} deletions `}</Text>
+                  size={2}
+                >{`Showing ${diffStats.files_changed || 0} changed files with ${diffStats.additions || 0} additions and ${diffStats.deletions || 0} deletions `}</Text>
                 <Spacer size={3} />
                 {diffData?.map((item, index) => (
                   <>

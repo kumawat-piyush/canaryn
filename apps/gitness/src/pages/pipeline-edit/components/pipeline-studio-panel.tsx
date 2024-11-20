@@ -31,7 +31,8 @@ export const PipelineStudioPanel = (): JSX.Element => {
             }}
             variant="ghost"
             size="sm"
-            className="mx-2 px-2">
+            className="mx-2 px-2"
+          >
             <Icon name="x-mark" />
           </Button>
         </div>

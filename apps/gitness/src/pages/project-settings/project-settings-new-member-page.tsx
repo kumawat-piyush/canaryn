@@ -147,7 +147,8 @@ export const CreateNewMemberPage = () => {
                           onSelect={() => {
                             field.onChange(user.uid)
                             handleMemberSelect(user.uid ?? '')
-                          }}>
+                          }}
+                        >
                           {user.display_name}
                           {selectedMember === user.uid && <Icon name="tick" size={12} className="ml-2" />}
                         </DropdownMenuItem>

@@ -68,7 +68,8 @@ export const BranchesList = ({ branches, spaceId, repoId, defaultBranch }: PageP
           <DropdownMenuGroup>
             <Link
               replace
-              to={`/spaces/${spaceId}/repos/${repoId}/pull-requests/compare/${defaultBranch}...${branchInfo.name}`}>
+              to={`/spaces/${spaceId}/repos/${repoId}/pull-requests/compare/${defaultBranch}...${branchInfo.name}`}
+            >
               <DropdownMenuItem className="cursor-pointer">
                 <DropdownMenuShortcut className="ml-0">
                   <Icon name="pr-open" className="mr-2" />
@@ -162,7 +163,8 @@ export const BranchesList = ({ branches, spaceId, repoId, defaultBranch }: PageP
                       <Badge
                         variant="outline"
                         size="xs"
-                        className="text-tertiary-background m-auto h-5 rounded-full p-2 text-center text-xs font-normal">
+                        className="text-tertiary-background m-auto h-5 rounded-full p-2 text-center text-xs font-normal"
+                      >
                         Default
                       </Badge>
                     ) : (

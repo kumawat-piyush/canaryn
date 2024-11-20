@@ -31,7 +31,8 @@ const PullRequestCommentSection = ({ commentsInfo, handleAction }: PullRequestMe
               handleAction?.()
             }}
             className="pr-2"
-            size={1}>
+            size={1}
+          >
             View
           </Text>
         )}

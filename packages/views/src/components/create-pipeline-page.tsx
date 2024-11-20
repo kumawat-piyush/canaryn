@@ -72,7 +72,8 @@ const TemplateSection = () => {
               logo={template.logoName}
               logoSize={template.logoSize}
               highlightTop={template.highlightTop}
-              highlightBottom={template.highlightBottom}>
+              highlightBottom={template.highlightBottom}
+            >
               <SpotlightsBox.Content>
                 <Text size={3}>{template.title}</Text>
               </SpotlightsBox.Content>
@@ -211,7 +212,8 @@ export function CreatePipelinePage({ onClickStartFromScratch = noop }: CreatePip
             <Button onClick={onClickStartFromScratch} variant="outline" size="sm" borderRadius="full">
               Start from scratch
             </Button>
-          }>
+          }
+        >
           <Input
             placeholder="Start by describing your project goals or key requirements..."
             className="flex-grow rounded-full border-none pl-4"

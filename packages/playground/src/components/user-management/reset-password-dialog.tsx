@@ -45,7 +45,8 @@ export const ResetPasswordDialog = ({
             onClick={() => {
               onClose()
               navigate('../users')
-            }}>
+            }}
+          >
             Close
           </Button>
         </AlertDialogFooter>

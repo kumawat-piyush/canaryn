@@ -342,7 +342,8 @@ const PullRequestChangesSection = ({
                 <StackedList.Item
                   isHeader
                   disableHover
-                  className="text-tertiary-background cursor-default !bg-transparent px-0">
+                  className="text-tertiary-background cursor-default !bg-transparent px-0"
+                >
                   <StackedList.Field title={<HeaderItem header="Code" />} />
                   <StackedList.Field title={<HeaderItem header="Owners" />} />
                   <StackedList.Field title={<HeaderItem header="Changes requested by" />} />

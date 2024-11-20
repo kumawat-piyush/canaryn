@@ -163,7 +163,8 @@ export const FileViewer: React.FC = () => {
                             color="tertiaryBackground"
                             className={cn('hover:text-foreground', {
                               'text-primary': index === pathParts?.length - 1
-                            })}>
+                            })}
+                          >
                             {path.path}
                           </Text>
                         </Link>

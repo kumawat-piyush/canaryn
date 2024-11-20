@@ -38,7 +38,8 @@ export function YamlEditorContextProvider({ children }: React.PropsWithChildren)
         editor: monacoEditor,
         setEditor: setMonacoEditor,
         updateCursorPosition
-      }}>
+      }}
+    >
       {children}
     </YamlEditorContext.Provider>
   )

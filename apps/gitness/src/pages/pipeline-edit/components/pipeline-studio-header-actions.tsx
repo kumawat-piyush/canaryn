@@ -80,7 +80,8 @@ const PipelineStudioHeaderActions = (): JSX.Element => {
               Save
             </DropdownMenuItem>
           </>
-        }>
+        }
+      >
         Save and Run
       </SplitButton>
     )

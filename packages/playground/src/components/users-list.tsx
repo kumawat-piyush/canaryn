@@ -61,7 +61,8 @@ export const UsersList = ({ users }: PageProps) => {
                         <Badge
                           variant="outline"
                           size="xs"
-                          className="bg-tertiary-background/10 text-tertiary-background m-auto ml-2 h-5 rounded-full p-2 text-center text-xs font-normal">
+                          className="bg-tertiary-background/10 text-tertiary-background m-auto ml-2 h-5 rounded-full p-2 text-center text-xs font-normal"
+                        >
                           {user.role}
                         </Badge>
                       )}

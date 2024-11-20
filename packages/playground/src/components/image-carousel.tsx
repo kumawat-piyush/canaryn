@@ -30,7 +30,8 @@ const ImageCarousel = (props: ImageCarouselProps) => {
       onOpenChange={() => {
         setIsOpen(false)
         setZoomLevel(1)
-      }}>
+      }}
+    >
       <DialogContent className="border-border bg-primary-background h-[600px] max-w-[800px]">
         <DialogHeader>
           <DialogTitle>
@@ -60,7 +61,8 @@ const ImageCarousel = (props: ImageCarouselProps) => {
                       setZoomLevel(zoomLevel + ZOOM_INC_DEC_LEVEL)
                     }
                   }}
-                  title="Zoom in">
+                  title="Zoom in"
+                >
                   +
                 </Button>
 
@@ -71,7 +73,8 @@ const ImageCarousel = (props: ImageCarouselProps) => {
                       setZoomLevel(zoomLevel - ZOOM_INC_DEC_LEVEL)
                     }
                   }}
-                  title="Zoom out">
+                  title="Zoom out"
+                >
                   -
                 </Button>
               </div>

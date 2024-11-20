@@ -50,7 +50,8 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
           'bg-secondary h-4 w-4 rounded-sm p-2',
           { ['cursor-pointer']: !disableUp },
           { ['cursor-not-allowed']: disableUp }
-        )}>
+        )}
+      >
         <div>
           <Icon name="x-mark" />
         </div>
@@ -65,7 +66,8 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
           'bg-secondary h-4 w-4 rounded-sm p-2',
           { ['cursor-pointer']: !disableDown },
           { ['cursor-not-allowed']: disableDown }
-        )}>
+        )}
+      >
         <div>
           <Icon name="x-mark" />
         </div>

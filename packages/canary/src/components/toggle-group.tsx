@@ -36,7 +36,8 @@ const ToggleGroup = React.forwardRef<React.ElementRef<typeof ToggleGroupPrimitiv
         }),
         className
       )}
-      {...props}>
+      {...props}
+    >
       <ToggleGroupContext.Provider value={{ variant, size }}>{children}</ToggleGroupContext.Provider>
     </ToggleGroupPrimitive.Root>
   )
@@ -61,7 +62,8 @@ const ToggleGroupItem = React.forwardRef<React.ElementRef<typeof ToggleGroupPrim
           }),
           className
         )}
-        {...props}>
+        {...props}
+      >
         {children}
       </ToggleGroupPrimitive.Item>
     )

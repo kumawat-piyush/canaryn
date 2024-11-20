@@ -120,7 +120,8 @@ export const Summary = ({ ...props }: PageProps) => {
                     direction="horizontal"
                     verticalAlign="center"
                     spacing="1.5"
-                    className="cursor-pointer">
+                    className="cursor-pointer"
+                  >
                     {file.type === SummaryItemType.File ? (
                       <Icon name="file" size={14} className="text-tertiary-background" />
                     ) : (

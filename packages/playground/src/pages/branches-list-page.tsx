@@ -96,7 +96,8 @@ export default function BranchesListPage() {
             variant="default"
             onClick={() => {
               setBranchDialogOpen(true)
-            }}>
+            }}
+          >
             Create Branch
           </Button>
         </ListActions.Right>

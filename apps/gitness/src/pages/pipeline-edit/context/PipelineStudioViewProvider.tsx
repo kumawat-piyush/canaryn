@@ -45,7 +45,8 @@ const PipelineStudioViewProvider = ({ children }: React.PropsWithChildren) => {
         setPanelOpen: setPanelVisible,
         stepDrawerOpen,
         setStepDrawerOpen
-      }}>
+      }}
+    >
       {children}
     </PipelineStudioViewContext.Provider>
   )

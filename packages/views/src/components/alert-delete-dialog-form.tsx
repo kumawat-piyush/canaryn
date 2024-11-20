@@ -66,7 +66,8 @@ export const AlertDeleteDialogForm = ({
             className="self-start"
             variant="destructive"
             disabled={isLoading || verification != 'DELETE'}
-            onClick={handleDelete}>
+            onClick={handleDelete}
+          >
             {isLoading ? `Deleting ${type}...` : `Yes, delete ${type}`}
           </Button>
         </ButtonGroup.Root>

@@ -42,7 +42,8 @@ export function SettingsAccountKeysPage() {
                   type="button"
                   variant="outline"
                   className="text-primary"
-                  onClick={() => setCreateTokenDialog(true)}>
+                  onClick={() => setCreateTokenDialog(true)}
+                >
                   Add new token
                 </Button>
               </span>

@@ -137,7 +137,8 @@ export const BranchSettingsRuleTargetPatternsField: React.FC<FieldProps> = ({ se
                       </DropdownMenuGroup>
                     </DropdownMenuContent>
                   </DropdownMenu>
-                }>
+                }
+              >
                 {selectedOption}
               </Button>
             }
@@ -160,7 +161,8 @@ export const BranchSettingsRuleTargetPatternsField: React.FC<FieldProps> = ({ se
               variant="outline"
               theme={pattern.option === PatternsButtonType.INCLUDE ? 'success' : 'destructive'}
               key={pattern.pattern}
-              className="m-1 inline-flex">
+              className="m-1 inline-flex"
+            >
               {pattern.pattern}
               <button className="ml-2" onClick={() => handleRemovePattern(pattern.pattern)}>
                 <Icon name="x-mark" size={12} className="text-current" />
@@ -242,7 +244,8 @@ export const BranchSettingsRuleBypassListField: React.FC<FieldProps & { bypassOp
                   key={option.id}
                   onCheckedChange={() => handleCheckboxChange(option.id)}
                   checked={selectedBypassUsers.includes(option.id)}
-                  onSelect={event => event.preventDefault()}>
+                  onSelect={event => event.preventDefault()}
+                >
                   {option.display_name}
                 </DropdownMenuCheckboxItem>
               )
@@ -363,7 +366,8 @@ export const BranchSettingsRuleListField: React.FC<{
                         key={checks}
                         checked={rules[index].selectOptions?.includes(checks)}
                         onCheckedChange={() => handleSelectChangeForRule(rule.id, checks)}
-                        onSelect={e => e.preventDefault()}>
+                        onSelect={e => e.preventDefault()}
+                      >
                         {checks}
                       </DropdownMenuCheckboxItem>
                     )

@@ -85,7 +85,8 @@ export const PullRequestHeader: React.FC<PullRequestTitleProps> = ({
               <Text
                 size={2}
                 className="text-tertiary-background inline-flex flex-wrap items-center gap-1"
-                weight="normal">
+                weight="normal"
+              >
                 <span className="text-primary">{author?.display_name || author?.email || ''}</span>
                 <span>{merged ? 'merged' : ' wants to merge'}</span>
                 <span className="text-primary">

@@ -47,7 +47,8 @@ const HeaderTitle = ({
         className={cx('flex items-center gap-2', {
           'text-white': headerFilter === 'open',
           'text-tertiary-background': headerFilter === 'closed'
-        })}>
+        })}
+      >
         <Icon size={16} name="pr-open" />
         <Text
           color={headerFilter === 'open' ? 'primary' : headerFilter === 'closed' ? 'tertiaryBackground' : undefined}
@@ -56,7 +57,8 @@ const HeaderTitle = ({
             '!text-tertiary-background': headerFilter === 'closed'
           })}
           size={2}
-          truncate>
+          truncate
+        >
           122 Open
         </Text>
       </div>
@@ -67,7 +69,8 @@ const HeaderTitle = ({
         className={cx('flex items-center gap-2', {
           'text-white': headerFilter === 'closed',
           'text-tertiary-background': headerFilter === 'open'
-        })}>
+        })}
+      >
         <Icon size={12} name="tick" />
         <Text
           className={cx('flex items-center gap-2', {
@@ -75,7 +78,8 @@ const HeaderTitle = ({
             'text-tertiary-background': headerFilter === 'open'
           })}
           size={2}
-          truncate>
+          truncate
+        >
           8,128 Closed
         </Text>
       </div>
@@ -217,13 +221,15 @@ export function PullRequestList({ pullRequests, LinkComponent }: PageProps) {
         <StackedList.Root>
           <StackedList.Item isHeader disableHover>
             <StackedList.Field
-              title={<HeaderTitle headerFilter={headerFilter} setHeaderFilter={setHeaderFilter} />}></StackedList.Field>
+              title={<HeaderTitle headerFilter={headerFilter} setHeaderFilter={setHeaderFilter} />}
+            ></StackedList.Field>
           </StackedList.Item>
           {filteredData?.map((pullRequest, pullRequest_idx) => (
             <LinkComponent key={pullRequest.sha} to={pullRequest.number?.toString() || ''}>
               <StackedList.Item
                 key={`${pullRequest.name}-${pullRequest_idx}`}
-                isLast={filteredData.length - 1 === pullRequest_idx}>
+                isLast={filteredData.length - 1 === pullRequest_idx}
+              >
                 {pullRequest.number && (
                   <>
                     <StackedList.Field
