@@ -39,6 +39,8 @@
   },
   "homepage": "https://github.com/harness/canary",
   "dependencies": {
+    "@harnessio/canary": "workspace:*",
+    "@harnessio/code-service-client": "3.2.1-beta.1",
     "@hookform/resolvers": "^3.6.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
