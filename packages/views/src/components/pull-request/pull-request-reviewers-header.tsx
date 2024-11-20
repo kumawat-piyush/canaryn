@@ -1,17 +1,18 @@
 import { useState } from 'react'
+
 import {
   Button,
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
   Icon,
-  Text,
   Popover,
   PopoverContent,
   PopoverTrigger,
-  Command,
-  CommandInput,
-  CommandList,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem
+  Text
 } from '@harnessio/canary'
 
 interface ReviewersHeaderProps {

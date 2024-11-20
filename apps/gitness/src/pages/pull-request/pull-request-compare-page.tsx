@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
-import { SandboxPullRequestCompare, SkeletonList } from '@harnessio/views'
 import { useNavigate, useParams } from 'react-router-dom'
+
 import {
   CreateRepositoryErrorResponse,
   useCreatePullReqMutation,
@@ -15,15 +15,19 @@ import {
   useDiffStatsQuery,
   useGetPullReqByBranchesQuery
 } from '@harnessio/code-service-client'
-import { PathParams } from '../../RouteDefinitions'
-import { changesInfoAtom, DiffFileEntry, DiffViewerExchangeState, FormFields } from './types/types'
-import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
-import { normalizeGitRef } from '../../utils/git-utils'
+
+import * as Diff2Html from 'diff2html'
 import { useAtom } from 'jotai'
 import { compact, isEqual } from 'lodash-es'
+
+import { SandboxPullRequestCompare, SkeletonList } from '@harnessio/views'
+
+import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
+import { PathParams } from '../../RouteDefinitions'
+import { normalizeGitRef } from '../../utils/git-utils'
 import { parseSpecificDiff } from './diff-utils'
+import { changesInfoAtom, DiffFileEntry, DiffViewerExchangeState, FormFields } from './types/types'
 import { changedFileId, DIFF2HTML_CONFIG, normalizeGitFilePath } from './utils'
-import * as Diff2Html from 'diff2html'
 
 export const CreatePullRequest = () => {
   const createPullRequestMutation = useCreatePullReqMutation({})

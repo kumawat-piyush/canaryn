@@ -1,28 +1,33 @@
 import { useEffect, useRef, useState } from 'react'
-import { BranchSelector, Layout, NoData, PullRequestCommits, SandboxLayout } from '..'
+import { useForm } from 'react-hook-form'
+
+import { DiffModeEnum } from '@git-diff-view/react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
   Button,
+  Icon,
+  Spacer,
   StackedList,
   Tabs,
   TabsContent,
-  TabsList
+  TabsList,
+  Text
 } from '@harnessio/canary'
-import { Icon, Spacer, Text } from '@harnessio/canary'
-import { z } from 'zod'
-import PullRequestCompareForm from '../components/pull-request/pull-request-compare-form'
-import TabTriggerItem from '../components/TabsTriggerItem'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import PullRequestCompareButton from '../components/pull-request/pull-request-compare-button'
-import { TypesCommit } from '../components/pull-request/interfaces'
-import PullRequestDiffViewer from '../components/pull-request/pull-request-diff-viewer'
-import { DiffModeEnum } from '@git-diff-view/react'
-import { parseStartingLineIfOne } from '../components/pull-request/utils'
+
+import { BranchSelector, Layout, NoData, PullRequestCommits, SandboxLayout } from '..'
 import { useDiffConfig } from '../components/pull-request/hooks/useDiffConfig'
+import { TypesCommit } from '../components/pull-request/interfaces'
+import PullRequestCompareButton from '../components/pull-request/pull-request-compare-button'
+import PullRequestCompareForm from '../components/pull-request/pull-request-compare-form'
+import PullRequestDiffViewer from '../components/pull-request/pull-request-diff-viewer'
+import { parseStartingLineIfOne } from '../components/pull-request/utils'
+import TabTriggerItem from '../components/TabsTriggerItem'
 import { TypesDiffStats } from './types'
 import { useNavigate } from 'react-router-dom'
 

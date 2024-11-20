@@ -1,8 +1,11 @@
-import { Button, Input, ButtonGroup } from '@harnessio/canary'
-import { FormFieldSet } from '../index'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+
 import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+
+import { Button, ButtonGroup, Input } from '@harnessio/canary'
+
+import { FormFieldSet } from '../index'
 
 const alertDeleteSchema = z.object({
   verification: z.string().min(1, { message: 'To confirm, please type "DELETE".' })

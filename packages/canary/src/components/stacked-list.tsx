@@ -1,8 +1,9 @@
 import * as React from 'react'
-import { Slot, Slottable } from '@radix-ui/react-slot'
 
 import { cn } from '@/lib/utils'
+import { Slot, Slottable } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
+
 import { Icon } from './icon'
 
 const listItemVariants = cva(

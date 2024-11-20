@@ -1,6 +1,8 @@
 import { useState } from 'react'
-import { Icon } from '@harnessio/canary'
+
 import { CheckCircle } from 'lucide-react'
+
+import { Icon } from '@harnessio/canary'
 
 export type ProblemSeverity = 'error' | 'warning' | 'info'
 

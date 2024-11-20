@@ -1,5 +1,7 @@
-import { useCallback, useState, createContext, useContext } from 'react'
+import { createContext, useCallback, useContext, useState } from 'react'
+
 import type { editor } from 'monaco-editor'
+
 export interface YamlEditorContextInterface {
   markers: editor.IMarker[]
   setMarkers: (markets: editor.IMarker[]) => void

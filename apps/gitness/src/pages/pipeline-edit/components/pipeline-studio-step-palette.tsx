@@ -8,6 +8,7 @@ import {
   harnessSteps,
   harnessStepGroups
 } from '@harnessio/views'
+
 import { usePipelineDataContext } from '../context/PipelineStudioDataProvider'
 import { StepDrawer, usePipelineViewContext } from '../context/PipelineStudioViewProvider'
 import { StepSource } from '../context/data-store/types'

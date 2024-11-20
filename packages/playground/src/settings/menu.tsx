@@ -1,12 +1,12 @@
 import {
-  Text,
   Button,
   DropdownMenu,
-  DropdownMenuTrigger,
-  Icon,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  Icon,
+  Text
 } from '@harnessio/canary'
 
 interface PlaygroundSettingsOption {

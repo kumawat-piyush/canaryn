@@ -1,4 +1,8 @@
 import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Badge,
   Icon,
   Table,
   TableBody,
@@ -6,12 +10,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-  Text,
-  Avatar,
-  AvatarImage,
-  AvatarFallback,
-  Badge
+  Text
 } from '@harnessio/canary'
+
 import { getInitials } from '../utils/utils'
 
 interface UsersProps {

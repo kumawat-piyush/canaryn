@@ -6,8 +6,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   Button,
-  Text,
-  Spacer
+  Spacer,
+  Text
 } from '@harnessio/canary'
 
 interface DeleteTokenAlertDialogProps {

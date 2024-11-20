@@ -1,7 +1,9 @@
+import { isEmpty } from 'lodash-es'
+
 import { AccordionContent, AccordionItem, AccordionTrigger, Icon, StackedList, Text } from '@harnessio/canary'
 
-import { LineTitle, LineDescription } from '../pull-request-line-title'
-import { isEmpty } from 'lodash-es'
+import { LineDescription, LineTitle } from '../pull-request-line-title'
+
 interface PullRequestMergeSectionProps {
   unchecked: boolean
   mergeable: boolean

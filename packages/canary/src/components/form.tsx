@@ -1,11 +1,20 @@
 import * as React from 'react'
+import {
+  Controller,
+  FormProvider,
+  useForm,
+  useFormContext,
+  type ControllerProps,
+  type FieldPath,
+  type FieldValues,
+  type SubmitHandler,
+  type UseFormReturn
+} from 'react-hook-form'
+
+import { Label } from '@/components/label'
+import { cn } from '@/lib/utils'
 import type * as LabelPrimitive from '@radix-ui/react-label'
 import { Slot } from '@radix-ui/react-slot'
-import type { ControllerProps, FieldPath, FieldValues, UseFormReturn, SubmitHandler } from 'react-hook-form'
-import { Controller, FormProvider, useFormContext, useForm } from 'react-hook-form'
-
-import { cn } from '@/lib/utils'
-import { Label } from '@/components/label'
 
 interface ZodFormProps<T extends FieldValues> {
   form: UseFormReturn<T>

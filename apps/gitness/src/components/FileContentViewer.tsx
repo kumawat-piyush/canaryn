@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
-import { CodeEditor } from '@harnessio/yaml-editor'
+import { useNavigate, useParams } from 'react-router-dom'
+
 import { noop } from 'lodash-es'
-import { themes } from '../pages/pipeline-edit/theme/monaco-theme'
-import { decodeGitContent, filenameToLanguage, formatBytes, getTrimmedSha, GitCommitAction } from '../utils/git-utils'
+
 import {
   Button,
   ButtonGroup,
@@ -17,15 +17,18 @@ import {
   ToggleGroup,
   ToggleGroupItem
 } from '@harnessio/canary'
-import { timeAgoFromISOTime } from '../pages/pipeline-edit/utils/time-utils'
-import { MarkdownViewer, PipelineStudioToolbarActions, TopDetails, TopTitle } from '@harnessio/views'
 import { OpenapiGetContentOutput, useFindRepositoryQuery } from '@harnessio/code-service-client'
-import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
-import { useNavigate, useParams } from 'react-router-dom'
-import { PathParams } from '../RouteDefinitions'
+import { MarkdownViewer, PipelineStudioToolbarActions, TopDetails, TopTitle } from '@harnessio/views'
+import { CodeEditor } from '@harnessio/yaml-editor'
+
 import { useDownloadRawFile } from '../framework/hooks/useDownloadRawFile'
-import GitCommitDialog from './GitCommitDialog'
+import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
+import { themes } from '../pages/pipeline-edit/theme/monaco-theme'
+import { timeAgoFromISOTime } from '../pages/pipeline-edit/utils/time-utils'
+import { PathParams } from '../RouteDefinitions'
+import { decodeGitContent, filenameToLanguage, formatBytes, getTrimmedSha, GitCommitAction } from '../utils/git-utils'
 import GitBlame from './GitBlame'
+import GitCommitDialog from './GitCommitDialog'
 
 interface FileContentViewerProps {
   repoContent?: OpenapiGetContentOutput

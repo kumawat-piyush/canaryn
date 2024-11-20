@@ -1,18 +1,21 @@
-import {
-  Spacer,
-  Text,
-  Section,
-  ResourceBox,
-  Button,
-  Icon,
-  SpotlightsBox,
-  ButtonGroup,
-  Input,
-  AIPrompt,
-  IconProps
-} from '@harnessio/canary'
 import { Link } from 'react-router-dom'
+
 import noop from 'lodash-es/noop'
+
+import {
+  AIPrompt,
+  Button,
+  ButtonGroup,
+  Icon,
+  IconProps,
+  Input,
+  ResourceBox,
+  Section,
+  Spacer,
+  SpotlightsBox,
+  Text
+} from '@harnessio/canary'
+
 import { SandboxLayout } from '../index'
 
 const SectionList = ({ children }: { children: React.ReactNode }) => (

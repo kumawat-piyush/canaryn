@@ -1,12 +1,12 @@
 import {
-  Text,
-  Icon,
   Button,
+  cn,
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-  cn
+  DropdownMenuTrigger,
+  Icon,
+  Text
 } from '@harnessio/canary'
 
 export interface BranchListProps {

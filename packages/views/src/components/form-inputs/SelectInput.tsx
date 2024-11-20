@@ -8,11 +8,11 @@ import {
   SelectTrigger,
   SelectValue
 } from '@harnessio/canary'
-import { InputComponent, InputProps } from '@harnessio/forms'
-import type { AnyFormikValue } from '@harnessio/forms'
+import { InputComponent, InputProps, type AnyFormikValue } from '@harnessio/forms'
+
+import { InputError } from './common/InputError'
 import InputLabel from './common/InputLabel'
 import InputWrapper from './common/InputWrapper'
-import { InputError } from './common/InputError'
 import { InputType } from './types'
 
 export interface SelectOption {

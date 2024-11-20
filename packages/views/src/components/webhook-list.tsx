@@ -1,19 +1,19 @@
+import { Link } from 'react-router-dom'
+
 import {
   Badge,
+  Button,
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
   DropdownMenuGroup,
+  DropdownMenuItem,
   DropdownMenuSeparator,
-  Button,
   DropdownMenuShortcut,
+  DropdownMenuTrigger,
   Icon,
   StackedList,
   Text
 } from '@harnessio/canary'
-
-import { Link } from 'react-router-dom'
 
 export enum WebhookState {
   DISABLED = 'Disabled',

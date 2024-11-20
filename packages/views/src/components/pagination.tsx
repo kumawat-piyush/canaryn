@@ -1,12 +1,13 @@
 import { noop } from 'lodash-es'
+
 import {
   ListPagination,
   Pagination,
   PaginationContent,
+  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
-  PaginationEllipsis,
   PaginationPrevious
 } from '@harnessio/canary'
 

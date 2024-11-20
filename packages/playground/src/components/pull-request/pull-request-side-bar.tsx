@@ -1,29 +1,32 @@
 import { useState } from 'react'
+
 import cx from 'classnames'
+
 import {
-  Button,
   Avatar,
   AvatarFallback,
-  Icon,
-  Text,
+  Button,
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
+  Icon,
+  Popover,
   PopoverContent,
   PopoverTrigger,
-  Popover,
-  CommandInput,
-  Command,
-  CommandList,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem
+  Text
 } from '@harnessio/canary'
-import { EnumPullReqReviewDecision, PullReqReviewDecision } from './interfaces'
+
 import { getInitials } from '../../utils/utils'
+import { EnumPullReqReviewDecision, PullReqReviewDecision } from './interfaces'
 
 interface PullRequestSideBarProps {
   reviewers?: {

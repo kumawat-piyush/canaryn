@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import {
   Badge,
   Button,
@@ -18,6 +19,7 @@ import {
   Text,
   Textarea
 } from '@harnessio/canary'
+
 import { FormFieldSet, MessageTheme } from '../../../index'
 import { branchRules } from './repo-branch-settings-rules-data'
 import {

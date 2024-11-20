@@ -1,23 +1,25 @@
+import { upperFirst } from 'lodash-es'
+
 import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-  Text,
-  Avatar,
-  AvatarImage,
-  AvatarFallback,
-  Select,
-  SelectValue,
-  SelectItem,
-  SelectTrigger,
-  SelectContent
+  Text
 } from '@harnessio/canary'
+
 import { getInitials } from '../../utils/utils'
 import { MembersProps } from './interfaces'
-import { upperFirst } from 'lodash-es'
 import { moreActionsDropdown } from './moreActionsDropdown'
 import { transformValue } from './utils'
 

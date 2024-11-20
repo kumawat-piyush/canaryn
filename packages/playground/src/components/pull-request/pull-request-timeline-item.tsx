@@ -1,6 +1,9 @@
-import { useEffect, memo, useState } from 'react'
-import { Button, Card, Input, NodeGroup, Text } from '@harnessio/canary'
+import { memo, useEffect, useState } from 'react'
+
 import cx from 'classnames'
+
+import { Button, Card, Input, NodeGroup, Text } from '@harnessio/canary'
+
 interface TimelineItemProps {
   header: {
     avatar?: React.ReactNode

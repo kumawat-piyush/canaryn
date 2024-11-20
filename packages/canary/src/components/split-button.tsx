@@ -1,8 +1,10 @@
 import * as React from 'react'
-import { type ButtonProps, Button, buttonVariants } from './button'
-import { cn } from '@/lib/utils'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from './dropdown-menu'
+
 import { CanaryOutletFactory, CanaryOutletName } from '@/lib/CanaryOutletFactory'
+import { cn } from '@/lib/utils'
+
+import { Button, buttonVariants, type ButtonProps } from './button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from './dropdown-menu'
 
 export interface SplitButtonProps extends Omit<ButtonProps, 'asChild'> {
   menu?: React.ReactNode

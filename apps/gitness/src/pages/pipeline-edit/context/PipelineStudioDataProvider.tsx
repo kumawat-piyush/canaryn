@@ -1,10 +1,11 @@
 import { createContext, useCallback, useContext, useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
+
 import { useYamlEditorContext } from '@harnessio/yaml-editor'
 import { countProblems, monacoMarkers2Problems } from '../utils/problems-utils'
 import type { InlineActionArgsType } from '../utils/inline-actions'
+
 import useThunkReducer from '../../../hooks/useThunkReducer'
-import { DataReducer, initialState } from './data-store/reducer'
 import {
   deleteInArrayAction,
   injectInArrayAction,
@@ -20,6 +21,7 @@ import {
   EditStepIntentionActionPayload,
   StepType
 } from './data-store/types'
+import { DataReducer, initialState } from './data-store/reducer'
 
 // TODO: temp interface for params
 export interface PipelineParams extends Record<string, string> {

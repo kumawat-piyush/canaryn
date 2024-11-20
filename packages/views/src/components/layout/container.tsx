@@ -1,5 +1,6 @@
-import { cn } from '@harnessio/canary'
 import { memo } from 'react'
+
+import { cn } from '@harnessio/canary'
 
 const Container = {
   Root: function Root({

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ZOOM_INC_DEC_LEVEL } from '../utils/utils'
+
 import {
   Button,
   Carousel,
@@ -9,6 +9,8 @@ import {
   DialogHeader,
   DialogTitle
 } from '@harnessio/canary'
+
+import { ZOOM_INC_DEC_LEVEL } from '../utils/utils'
 
 interface ImageCarouselProps {
   isOpen: boolean

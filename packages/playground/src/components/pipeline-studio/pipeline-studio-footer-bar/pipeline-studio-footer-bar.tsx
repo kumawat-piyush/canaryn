@@ -1,4 +1,5 @@
 import {
+  Icon,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -6,9 +7,9 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
-  Icon
+  SelectValue
 } from '@harnessio/canary'
+
 import { PopoverCommitInfo } from '../popover-commit-info'
 
 interface PipelineStudioFooterBarProps {

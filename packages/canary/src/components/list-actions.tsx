@@ -1,8 +1,9 @@
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './dropdown-menu'
-import { Text } from './text'
-import { Icon } from './icon'
-import { CheckIcon } from '@radix-ui/react-icons'
 import { cn } from '@/lib/utils'
+import { CheckIcon } from '@radix-ui/react-icons'
+
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './dropdown-menu'
+import { Icon } from './icon'
+import { Text } from './text'
 
 interface DropdownItemProps {
   name: string

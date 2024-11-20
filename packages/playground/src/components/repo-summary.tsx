@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 import {
   Avatar,
   AvatarFallback,
@@ -16,7 +18,6 @@ import {
 } from '@harnessio/canary'
 
 import { getInitials } from '../utils/utils'
-import { useNavigate } from 'react-router-dom'
 import { CommitCopyActions } from './commit-copy-actions'
 
 export enum SummaryItemType {

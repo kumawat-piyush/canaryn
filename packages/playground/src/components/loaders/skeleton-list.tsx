@@ -1,5 +1,6 @@
-import { cn, Skeleton, StackedList } from '@harnessio/canary'
 import { useEffect, useState } from 'react'
+
+import { cn, Skeleton, StackedList } from '@harnessio/canary'
 
 // Helper function to generate random percentage width within a range
 const getRandomPercentageWidth = (min: number, max: number) => `${Math.floor(Math.random() * (max - min + 1)) + min}%`

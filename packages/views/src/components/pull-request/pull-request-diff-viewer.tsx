@@ -1,10 +1,12 @@
-import { DiffModeEnum, DiffFile, DiffView, DiffViewProps, SplitSide } from '@git-diff-view/react'
-import { Card, Input, Text } from '@harnessio/canary'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+
+import { DiffFile, DiffModeEnum, DiffView, DiffViewProps, SplitSide } from '@git-diff-view/react'
+import { DiffBlock } from 'diff2html/lib/types'
+import { debounce } from 'lodash-es'
 import { OverlayScrollbars } from 'overlayscrollbars'
 
-import { debounce } from 'lodash-es'
-import { DiffBlock } from 'diff2html/lib/types'
+import { Card, Input, Text } from '@harnessio/canary'
+
 import constants from './constants'
 
 const TextArea = ({ onChange }: { onChange: (v: string) => void }) => {

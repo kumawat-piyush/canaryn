@@ -1,6 +1,8 @@
-import { SandboxLayout } from '../../index'
-import { Navbar, Spacer } from '@harnessio/canary'
 import { NavLink, Outlet } from 'react-router-dom'
+
+import { Navbar, Spacer } from '@harnessio/canary'
+
+import { SandboxLayout } from '../../index'
 
 export const navItems = [
   {

@@ -1,6 +1,6 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, cn, Icon, Text } from '@harnessio/canary'
-
 import { Link } from 'react-router-dom'
+
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, cn, Icon, Text } from '@harnessio/canary'
 
 interface ItemProps {
   children: React.ReactNode

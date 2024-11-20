@@ -1,12 +1,15 @@
 import { useEffect } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
-import { FileExplorer } from '@harnessio/views'
-import { OpenapiContentInfo, getContent, OpenapiGetContentOutput } from '@harnessio/code-service-client'
-import { normalizeGitRef } from '../utils/git-utils'
-import { PathParams } from '../RouteDefinitions'
+
 import { useQuery, useQueryClient } from '@tanstack/react-query'
+
+import { getContent, OpenapiContentInfo, OpenapiGetContentOutput } from '@harnessio/code-service-client'
+import { FileExplorer } from '@harnessio/views'
+
 import { useOpenFolderPaths } from '../framework/context/ExplorerPathsContext'
 import { useGetRepoRef } from '../framework/hooks/useGetRepoPath'
+import { PathParams } from '../RouteDefinitions'
+import { normalizeGitRef } from '../utils/git-utils'
 
 interface ExplorerProps {
   selectedBranch: string

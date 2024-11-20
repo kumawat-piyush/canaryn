@@ -2,17 +2,18 @@ import { useEffect, useMemo, useState } from 'react'
 import { parse } from 'yaml'
 import { get } from 'lodash-es'
 import { Button } from '@harnessio/canary'
-import {
-  IFormDefinition,
-  RenderForm,
-  RootForm,
-  getTransformers,
-  inputTransformValues,
-  outputTransformValues,
-  useZodValidationResolver
-} from '@harnessio/forms'
+
 import { Icon } from '@harnessio/canary'
 import { listGlobalTemplates } from '@harnessio/code-service-client'
+import {
+  getTransformers,
+  IFormDefinition,
+  inputTransformValues,
+  outputTransformValues,
+  RenderForm,
+  RootForm,
+  useZodValidationResolver
+} from '@harnessio/forms'
 import {
   StepForm,
   StepFormSection,
@@ -24,6 +25,7 @@ import {
   GROUP_IDENTIFIER,
   PARALLEL_IDENTIFIER
 } from '@harnessio/views'
+
 import { usePipelineDataContext } from '../context/PipelineStudioDataProvider'
 import { addNameInput, apiInput2IInputDefinition } from '../utils/step-form-utils'
 import { StepSource } from '../context/data-store/types'

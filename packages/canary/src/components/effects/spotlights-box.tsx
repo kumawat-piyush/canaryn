@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import type { IconProps } from '../icon'
-import { Icon } from '../icon'
+
+import { Icon, type IconProps } from '../icon'
 
 interface PageProps {
   children: React.ReactNode

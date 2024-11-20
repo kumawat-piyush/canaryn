@@ -1,8 +1,10 @@
 import { useMemo } from 'react'
-import { TypesCommit } from './interfaces'
+
+import { Avatar, AvatarFallback, NodeGroup, StackedList, Text } from '@harnessio/canary'
+
 import { formatDate, getInitials } from '../../utils/utils'
-import { StackedList, Text, NodeGroup, Avatar, AvatarFallback } from '@harnessio/canary'
 import { CommitCopyActions } from '../commit-copy-actions'
+import { TypesCommit } from './interfaces'
 
 interface CommitProps {
   data?: TypesCommit[]

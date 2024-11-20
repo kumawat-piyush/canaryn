@@ -1,4 +1,4 @@
-import { ToggleGroup, ToggleGroupItem, Icon } from '@harnessio/canary'
+import { Icon, ToggleGroup, ToggleGroupItem } from '@harnessio/canary'
 
 export type VisualYamlValue = 'visual' | 'yaml'
 

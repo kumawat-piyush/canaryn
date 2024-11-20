@@ -1,16 +1,18 @@
+import { useNavigate } from 'react-router-dom'
+
 import {
   AlertDialog,
-  AlertDialogTrigger,
   AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
   AlertDialogDescription,
   AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
   Button,
   Input,
   Text
 } from '@harnessio/canary'
-import { useNavigate } from 'react-router-dom'
+
 import { CopyButton } from '../copy-button'
 
 export const ResetPasswordDialog = ({

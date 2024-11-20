@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
+
 import cx from 'classnames'
-import { Button, Text, Icon } from '@harnessio/canary'
-import { StepExecution, StepProps } from './step-execution'
+
+import { Button, Icon, Text } from '@harnessio/canary'
+
 import { Layout } from '../layout/layout'
+import { StepExecution, StepProps } from './step-execution'
 import { LivelogLine } from './types'
 
 export interface StageProps {

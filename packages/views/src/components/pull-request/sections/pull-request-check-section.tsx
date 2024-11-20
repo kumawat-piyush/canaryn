@@ -1,3 +1,7 @@
+import { Link } from 'react-router-dom'
+
+import { isEmpty } from 'lodash-es'
+
 import {
   AccordionContent,
   AccordionItem,
@@ -9,12 +13,10 @@ import {
   Text
 } from '@harnessio/canary'
 
-import { isEmpty } from 'lodash-es'
-import { EnumCheckStatus, TypesPullReqCheck } from '../interfaces'
-import { ExecutionState } from '../../execution/types'
 import { timeDistance } from '../../../utils/utils'
+import { ExecutionState } from '../../execution/types'
+import { EnumCheckStatus, TypesPullReqCheck } from '../interfaces'
 import { LineDescription, LineTitle } from '../pull-request-line-title'
-import { Link } from 'react-router-dom'
 
 interface ExecutionPayloadType {
   execution_number: number

@@ -1,5 +1,17 @@
+import { Link } from 'react-router-dom'
+
 import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Badge,
   Button,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
   Icon,
   Table,
   TableBody,
@@ -7,23 +19,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-  Text,
-  Avatar,
-  AvatarImage,
-  AvatarFallback,
-  Badge,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuShortcut,
-  DropdownMenuTrigger
+  Text
 } from '@harnessio/canary'
+
 import { getInitials } from '../utils/utils'
+import { CommitCopyActions } from './commit-copy-actions'
 import { CopyButton } from './copy-button'
 import { DivergenceGauge } from './divergence-gauge'
-import { CommitCopyActions } from './commit-copy-actions'
-import { Link } from 'react-router-dom'
 
 interface BranchProps {
   id: number

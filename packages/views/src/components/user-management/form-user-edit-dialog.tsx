@@ -1,20 +1,23 @@
+import { SubmitHandler, useForm } from 'react-hook-form'
+
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+
 import {
   AlertDialog,
   AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogFooter,
-  AlertDialogDescription,
   Button,
+  ButtonGroup,
+  Icon,
   Input,
   Spacer,
-  Icon,
-  ButtonGroup,
   Text
 } from '@harnessio/canary'
-import { z } from 'zod'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+
 import { FormFieldSet, MessageTheme } from '../..'
 import { FormEditDialogProps } from './interfaces'
 

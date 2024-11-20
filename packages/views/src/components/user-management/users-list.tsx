@@ -1,15 +1,7 @@
 import {
-  Icon,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-  Text,
   Avatar,
-  AvatarImage,
   AvatarFallback,
+  AvatarImage,
   Badge,
   Button,
   DropdownMenu,
@@ -18,8 +10,17 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
+  Icon,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Text
 } from '@harnessio/canary'
+
 import { getInitials, timeAgo } from '../../utils/utils'
 import { UsersProps } from './interfaces'
 

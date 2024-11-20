@@ -1,21 +1,23 @@
 import { useState } from 'react'
-import { RepoList } from '../components/repo-list'
+import { Link } from 'react-router-dom'
+
 import {
-  Text,
-  Spacer,
+  Button,
   ListActions,
   ListPagination,
-  Button,
-  SearchBox,
   Pagination,
   PaginationContent,
-  PaginationItem,
-  PaginationPrevious,
-  PaginationLink,
   PaginationEllipsis,
-  PaginationNext
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  SearchBox,
+  Spacer,
+  Text
 } from '@harnessio/canary'
-import { Link } from 'react-router-dom'
+
+import { RepoList } from '../components/repo-list'
 import { mockRepos } from '../data/mockReposData'
 import { SandboxLayout } from '../index'
 import { PlaygroundSandboxLayoutSettings } from '../settings/sandbox-settings'

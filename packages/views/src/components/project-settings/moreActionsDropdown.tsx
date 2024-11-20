@@ -1,12 +1,13 @@
 import {
-  Icon,
   Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
+  Icon
 } from '@harnessio/canary'
+
 import { MembersProps } from './interfaces'
 
 interface moreActionsProps {

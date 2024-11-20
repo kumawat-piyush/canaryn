@@ -1,5 +1,6 @@
-import { Icon, Text, Button, cn, IconProps } from '@harnessio/canary'
 import { NavLink } from 'react-router-dom'
+
+import { Button, cn, Icon, IconProps, Text } from '@harnessio/canary'
 
 export interface NoDataProps {
   title: string

@@ -1,5 +1,7 @@
 import { ReactNode } from 'react'
+
 import { File, Folder, type TreeViewElement } from '@harnessio/canary'
+
 import type { ExecutionTreeProps } from './execution-tree'
 
 interface RenderTreeElementProps {

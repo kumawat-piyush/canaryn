@@ -1,8 +1,11 @@
-import { Badge, cn, Icon, StackedList, Text } from '@harnessio/canary'
 import { useMemo, useState } from 'react'
+
 import cx from 'classnames'
-import { getPrState } from './utils'
+
+import { Badge, cn, Icon, StackedList, Text } from '@harnessio/canary'
+
 import { IconType } from './interfaces'
+import { getPrState } from './utils'
 
 interface PullRequestProps {
   is_draft?: boolean

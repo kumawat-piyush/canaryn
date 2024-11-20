@@ -1,13 +1,16 @@
 import { useState } from 'react'
-import { noop, pick } from 'lodash-es'
-import { Spacer, ListActions, Button, Text, Icon, ButtonGroup } from '@harnessio/canary'
-import { Summary } from '../components/repo-summary'
-import { BranchSelector } from '../components/branch-chooser'
-import { mockFiles } from '../data/mockSummaryFiiles'
-import { SandboxLayout, FileExplorer } from '..'
-import { PlaygroundSandboxLayoutSettings } from '../settings/sandbox-settings'
 import { Link } from 'react-router-dom'
+
+import { noop, pick } from 'lodash-es'
+
+import { Button, ButtonGroup, Icon, ListActions, Spacer, Text } from '@harnessio/canary'
+
+import { FileExplorer, SandboxLayout } from '..'
+import { BranchSelector } from '../components/branch-chooser'
+import { Summary } from '../components/repo-summary'
 import { SearchFiles } from '../components/search-files'
+import { mockFiles } from '../data/mockSummaryFiiles'
+import { PlaygroundSandboxLayoutSettings } from '../settings/sandbox-settings'
 
 const mockBranchList = [
   {

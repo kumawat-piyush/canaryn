@@ -1,13 +1,13 @@
 import {
+  Button,
   DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuShortcut,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  Icon,
-  Button,
-  DropdownMenuGroup
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+  Icon
 } from '@harnessio/canary'
 
 export const RepoSettingsToolTip = ({

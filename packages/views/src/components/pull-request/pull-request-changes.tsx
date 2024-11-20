@@ -1,3 +1,5 @@
+import { DiffModeEnum } from '@git-diff-view/react'
+
 import {
   Accordion,
   AccordionContent,
@@ -11,11 +13,10 @@ import {
   Text
 } from '@harnessio/canary'
 
-import PullRequestDiffViewer from './pull-request-diff-viewer'
-import { useDiffConfig } from './hooks/useDiffConfig'
-import { DiffModeEnum } from '@git-diff-view/react'
-import { parseStartingLineIfOne } from './utils'
 import { CopyButton } from '../copy-button'
+import { useDiffConfig } from './hooks/useDiffConfig'
+import PullRequestDiffViewer from './pull-request-diff-viewer'
+import { parseStartingLineIfOne } from './utils'
 
 interface HeaderProps {
   text: string

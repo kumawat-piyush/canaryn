@@ -1,18 +1,20 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useParams, useNavigate, Outlet } from 'react-router-dom'
-import { BranchSelector, SandboxLayout, BranchListProps, SearchFiles } from '@harnessio/views'
+import { Outlet, useNavigate, useParams } from 'react-router-dom'
+
 import { Button, ButtonGroup, Icon } from '@harnessio/canary'
 import {
-  useListBranchesQuery,
+  getContent,
+  OpenapiGetContentOutput,
   useFindRepositoryQuery,
   useGetContentQuery,
-  getContent,
-  useListPathsQuery,
-  OpenapiGetContentOutput
+  useListBranchesQuery,
+  useListPathsQuery
 } from '@harnessio/code-service-client'
+import { BranchListProps, BranchSelector, SandboxLayout, SearchFiles } from '@harnessio/views'
+
+import Explorer from '../../components/FileExplorer'
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
 import { PathParams } from '../../RouteDefinitions'
-import Explorer from '../../components/FileExplorer'
 import { FILE_SEPERATOR, normalizeGitRef } from '../../utils/git-utils'
 
 interface SidebarProps {

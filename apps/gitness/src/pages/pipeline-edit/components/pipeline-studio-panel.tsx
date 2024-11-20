@@ -1,7 +1,8 @@
-import { Badge, Button, Tabs, TabsContent, TabsList, TabsTrigger, Icon } from '@harnessio/canary'
-import { PipelineStudioProblemsPanel } from './pipeline-studio-problems-panel'
+import { Badge, Button, Icon, Tabs, TabsContent, TabsList, TabsTrigger } from '@harnessio/canary'
+
 import { usePipelineDataContext } from '../context/PipelineStudioDataProvider'
 import { usePipelineViewContext } from '../context/PipelineStudioViewProvider'
+import { PipelineStudioProblemsPanel } from './pipeline-studio-problems-panel'
 
 export const PipelineStudioPanel = (): JSX.Element => {
   const {

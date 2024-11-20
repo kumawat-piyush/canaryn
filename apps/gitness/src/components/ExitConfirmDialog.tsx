@@ -7,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle
 } from '@harnessio/canary'
+
 import { ExitConfirmOptions } from '../framework/context/ExitConfirmContext'
 
 export type ExitConfirmDialogProps = ExitConfirmOptions & { open: boolean }

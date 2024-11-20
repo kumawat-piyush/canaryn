@@ -1,4 +1,4 @@
-import { cn, Text, Label as ShadLabel, RadioGroupItem, Checkbox } from '@harnessio/canary'
+import { Checkbox, cn, RadioGroupItem, Label as ShadLabel, Text } from '@harnessio/canary'
 
 interface CompProps {
   children: React.ReactNode

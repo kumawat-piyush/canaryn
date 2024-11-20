@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+
 import { Section, Spacer, SpotlightsBox, Text } from '@harnessio/canary'
+
 import { SandboxLayout } from '..'
 import { PlaygroundSandboxLayoutSettings } from '../settings/sandbox-settings'
-import { Link } from 'react-router-dom'
 
 function SandboxSettingsPage() {
   const [loadState, setLoadState] = useState('sub-float')

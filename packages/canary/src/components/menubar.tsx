@@ -1,24 +1,25 @@
 import * as React from 'react'
+
+import { cn } from '@/lib/utils'
 import { CheckIcon, ChevronRightIcon, DotFilledIcon } from '@radix-ui/react-icons'
 import {
-  Item,
-  Portal,
-  Menu,
-  Group,
-  Separator,
-  Label,
-  ItemIndicator,
-  RadioItem,
-  RadioGroup,
   CheckboxItem,
+  Content,
+  Group,
+  Item,
+  ItemIndicator,
+  Label,
+  Menu,
+  Portal,
+  RadioGroup,
+  RadioItem,
   Root,
+  Separator,
   Sub,
-  Trigger,
-  SubTrigger,
   SubContent,
-  Content
+  SubTrigger,
+  Trigger
 } from '@radix-ui/react-menubar'
-import { cn } from '@/lib/utils'
 
 const Menubar = React.forwardRef<React.ElementRef<typeof Root>, React.ComponentPropsWithoutRef<typeof Root>>(
   ({ className, ...props }, ref) => (
