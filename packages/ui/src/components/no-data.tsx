@@ -1,9 +1,11 @@
-import { IconProps, Icon } from './icon'
-import { Text } from './text'
-import { Button } from './button'
-import { cn } from '../utils/cn'
-import { NavLink } from 'react-router-dom'
 import React from 'react'
+import { NavLink } from 'react-router-dom'
+
+import { cn } from '../utils/cn'
+import { Button } from './button'
+import { Icon, IconProps } from './icon'
+import { Text } from './text'
+
 export interface NoDataProps {
   title: string
   iconName?:
@@ -46,7 +48,8 @@ export const NoData: React.FC<NoDataProps> = ({
     <div
       className={cn('flex h-full w-full flex-col place-content-center place-items-center gap-4', {
         'py-20 pb-24': insideTabView
-      })}>
+      })}
+    >
       {iconName && <Icon name={iconName as IconProps['name']} size={iconSize} />}
       <div className="flex flex-col place-content-center place-items-center gap-2.5">
         <Text size={5} weight="medium">

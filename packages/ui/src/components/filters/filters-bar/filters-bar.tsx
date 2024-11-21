@@ -1,9 +1,9 @@
 import { Icon } from '../../icon'
-import { FilterOption, SortOption, SortDirection } from '../types'
-import { UseFiltersReturn } from '../use-filters'
-import Sorts from './sorts'
-import Filters from './filters'
 import FilterTrigger from '../filter-trigger'
+import { FilterOption, SortDirection, SortOption } from '../types'
+import { UseFiltersReturn } from '../use-filters'
+import Filters from './filters'
+import Sorts from './sorts'
 
 interface FiltersBarProps {
   filterOptions: FilterOption[]
@@ -121,7 +121,8 @@ const FiltersBar = ({
               onClick={() => {
                 handleResetAll()
                 handleClearSavedFilters()
-              }}>
+              }}
+            >
               <Icon className="rotate-45" name="plus" size={12} />
               Reset
             </button>
@@ -130,7 +131,8 @@ const FiltersBar = ({
           {hasUnsavedChanges && (
             <button
               className="text-14 text-foreground-4 hover:text-foreground-1 flex items-center gap-x-1.5"
-              onClick={handleSaveFilters}>
+              onClick={handleSaveFilters}
+            >
               Save
             </button>
           )}

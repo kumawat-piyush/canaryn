@@ -1,4 +1,5 @@
 import * as React from 'react'
+
 import { cn } from '../utils/cn'
 
 export interface BaseInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -39,7 +40,8 @@ const ExtendedInput = React.forwardRef<HTMLInputElement, ExtendedInputProps>(
               'rounded-l',
               leftStyle ? 'bg-muted border-r' : '-mr-3',
               leftClassName
-            )}>
+            )}
+          >
             {left}
           </div>
         )}
@@ -51,7 +53,8 @@ const ExtendedInput = React.forwardRef<HTMLInputElement, ExtendedInputProps>(
               'rounded-r',
               rightStyle ? 'bg-muted border-l' : '-ml-3',
               rightClassName
-            )}>
+            )}
+          >
             {right}
           </div>
         )}

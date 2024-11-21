@@ -1,9 +1,11 @@
 import { useState } from 'react'
+
+import { DropdownMenuItem } from '@components/dropdown-menu'
+import { Icon } from '@components/icon'
+import { Input } from '@components/input'
+
 import { FilterValue } from '../../types'
 import { UseFiltersReturn } from '../../use-filters'
-import { DropdownMenuItem } from '@components/dropdown-menu'
-import { Input } from '@components/input'
-import { Icon } from '@components/icon'
 
 interface TextFilterProps {
   filter: FilterValue
@@ -59,7 +61,8 @@ const Text = ({ filter, onUpdateFilter }: TextFilterProps) => {
             onClick={e => {
               e.stopPropagation()
               handleClear()
-            }}>
+            }}
+          >
             <Icon className="rotate-45" name="plus" size={10} />
           </button>
         )}

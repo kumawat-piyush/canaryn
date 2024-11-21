@@ -1,10 +1,11 @@
 import { DropdownMenuCheckboxItem, DropdownMenuItem } from '@components/dropdown-menu'
 import { Icon } from '@components/icon'
 import { Input } from '@components/input'
+import { cn } from '@utils/cn'
+
 import { CheckboxFilterOption, FilterValue } from '../../types'
 import { UseFiltersReturn } from '../../use-filters'
 import { getFilteredOptions } from '../../utils'
-import { cn } from '@utils/cn'
 
 interface CheckboxFilterProps {
   filter: FilterValue
@@ -27,7 +28,8 @@ const Checkbox = ({ filter, filterOption, onUpdateFilter, searchQueries, handleS
               {
                 'px-1': !!filter.selectedValues.length
               }
-            )}>
+            )}
+          >
             <div className="flex flex-1 flex-wrap items-center gap-1">
               {!!filter.selectedValues.length &&
                 filter.selectedValues.map(value => {
@@ -40,7 +42,8 @@ const Checkbox = ({ filter, filterOption, onUpdateFilter, searchQueries, handleS
                         onClick={() => {
                           const newValues = filter.selectedValues.filter(v => v !== value)
                           onUpdateFilter(filter.type, newValues)
-                        }}>
+                        }}
+                      >
                         <Icon className="rotate-45" name="plus" size={10} />
                       </button>
                     </div>
@@ -67,7 +70,8 @@ const Checkbox = ({ filter, filterOption, onUpdateFilter, searchQueries, handleS
                 onClick={() => {
                   onUpdateFilter(filter.type, [])
                   handleSearchChange?.(filter.type, '', 'filters')
-                }}>
+                }}
+              >
                 <Icon className="rotate-45" name="plus" size={12} />
               </button>
             )}
@@ -89,7 +93,8 @@ const Checkbox = ({ filter, filterOption, onUpdateFilter, searchQueries, handleS
                   : [...filter.selectedValues, option.value]
                 onUpdateFilter(filter.type, newValues)
               }}
-              key={option.value}>
+              key={option.value}
+            >
               {option.label}
             </DropdownMenuCheckboxItem>
           ))}

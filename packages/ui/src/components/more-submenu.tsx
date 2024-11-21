@@ -1,9 +1,10 @@
-import { Sheet, SheetContent, SheetTitle } from './sheet'
-import { Icon } from './icon'
-import { Spacer } from './spacer'
+import { NavLink } from 'react-router-dom'
+
 import { Navbar } from '.'
 import { navbarSubmenuData } from '../data/navbarSubmenuData'
-import { NavLink } from 'react-router-dom'
+import { Icon } from './icon'
+import { Sheet, SheetContent, SheetTitle } from './sheet'
+import { Spacer } from './spacer'
 
 interface MoreSubmenuProps {
   showMore: boolean
@@ -17,7 +18,8 @@ export function MoreSubmenu({ showMore, handleMore }: MoreSubmenuProps) {
         className="inset-y-0 left-[220px] z-40 h-screen w-[328px] bg-transparent p-0"
         side="left"
         onClick={handleMore}
-        modal={false}>
+        modal={false}
+      >
         <SheetTitle className="sr-only">More Menu</SheetTitle>
         <Navbar.Root className="w-[328px]" isSubMenu>
           <Navbar.Content>

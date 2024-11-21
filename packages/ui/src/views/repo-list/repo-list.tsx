@@ -1,8 +1,9 @@
 import React from 'react'
+
 import { Badge } from '../../components/badge'
-import * as StackedList from '../../components/stacked-list'
 import { Icon } from '../../components/icon'
 import { NoData } from '../../components/no-data'
+import * as StackedList from '../../components/stacked-list'
 import { Repository } from './types'
 
 export interface PageProps {

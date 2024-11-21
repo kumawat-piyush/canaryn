@@ -1,7 +1,7 @@
 import * as React from 'react'
+import { DayPicker, type DateRange } from 'react-day-picker'
+
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
-import { DayPicker } from 'react-day-picker'
-import type { DateRange } from 'react-day-picker'
 
 import { cn } from '../utils/cn'
 import { buttonVariants } from './button'

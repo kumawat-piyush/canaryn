@@ -1,16 +1,15 @@
+import { useEffect, useState } from 'react'
+
+import { cn } from '../../../utils/cn'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../../dropdown-menu'
 import { Icon } from '../../icon'
-import { cn } from '../../../utils/cn'
-
-import type { FilterValue, FilterOption, FilterSearchQueries, CheckboxFilterOption, FilterAction } from '../types'
-
+import type { CheckboxFilterOption, FilterAction, FilterOption, FilterSearchQueries, FilterValue } from '../types'
+import { UseFiltersReturn } from '../use-filters'
+import { getFilterDisplayValue, getFilteredOptions } from '../utils'
 import Calendar from './filter-variants/calendar'
 import Checkbox from './filter-variants/checkbox'
-import Text from './filter-variants/text'
 import Number from './filter-variants/number'
-import { getFilterDisplayValue, getFilteredOptions } from '../utils'
-import { useEffect, useState } from 'react'
-import { UseFiltersReturn } from '../use-filters'
+import Text from './filter-variants/text'
 
 const renderFilterValues = (
   filter: FilterValue,
@@ -99,7 +98,8 @@ const Filters = ({
         className={cn('w-[276px] p-0', {
           'w-max': filterOption.type === 'calendar'
         })}
-        align="start">
+        align="start"
+      >
         <div className="flex items-center justify-between px-3 py-2.5">
           <div className="flex w-full items-center justify-between gap-x-2">
             <div className="flex items-center gap-x-2">
@@ -114,7 +114,8 @@ const Filters = ({
                   {filterOption.conditions?.map(condition => (
                     <DropdownMenuItem
                       onSelect={() => handleUpdateCondition?.(filter.type, condition.value)}
-                      key={condition.value}>
+                      key={condition.value}
+                    >
                       {condition.label}
                     </DropdownMenuItem>
                   ))}
@@ -133,7 +134,8 @@ const Filters = ({
               <DropdownMenuContent align="start">
                 <DropdownMenuItem
                   className="focus:text-foreground-danger focus:bg-transparent focus:outline-none"
-                  onSelect={() => handleRemoveFilter?.(filter.type)}>
+                  onSelect={() => handleRemoveFilter?.(filter.type)}
+                >
                   <button className="text-14 text-foreground-4 hover:text-foreground-danger flex items-center gap-x-1.5 transition-colors duration-200">
                     <Icon name="trash" size={12} />
                     Delete filter

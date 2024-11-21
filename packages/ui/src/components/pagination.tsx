@@ -1,7 +1,7 @@
 import * as React from 'react'
+
 import { cn } from '../utils/cn'
-import type { ButtonProps } from './button'
-import { buttonVariants } from './button'
+import { buttonVariants, type ButtonProps } from './button'
 import { Icon } from './icon'
 
 const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (
@@ -62,7 +62,8 @@ const PaginationPrevious = ({ disabled, className, ...props }: React.ComponentPr
       { 'text-foreground-7 pointer-events-none cursor-default': disabled },
       className
     )}
-    {...props}>
+    {...props}
+  >
     <Icon name="arrow-long" size={12} className="rotate-180" />
     <span>Previous</span>
   </PaginationLink>
@@ -79,7 +80,8 @@ const PaginationNext = ({ disabled, className, ...props }: React.ComponentProps<
       { 'text-foreground-7 pointer-events-none cursor-default': disabled },
       className
     )}
-    {...props}>
+    {...props}
+  >
     <span>Next</span>
     <Icon name="arrow-long" size={12} />
   </PaginationLink>
@@ -93,7 +95,8 @@ const PaginationEllipsis = ({ className, ...props }: React.ComponentProps<'span'
       'text-12 bg-background-2 flex h-7 w-7 items-center justify-center rounded-full font-normal',
       className
     )}
-    {...props}>
+    {...props}
+  >
     ...
     <span className="sr-only">More pages</span>
   </span>

@@ -126,7 +126,8 @@ const FilterTrigger = ({
                 onClick={e => {
                   e.preventDefault()
                   onSearchChange(type, '', 'menu')
-                }}>
+                }}
+              >
                 <Icon className="rotate-45" name="plus" size={12} />
               </button>
             </div>

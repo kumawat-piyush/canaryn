@@ -1,10 +1,11 @@
-import type { FormEventHandler, InputHTMLAttributes } from 'react'
-import { useEffect } from 'react'
-import { Input } from './input'
-import { Icon } from './icon'
-import { Text } from './text'
-import { cn } from '../utils/cn'
+import { useEffect, type FormEventHandler, type InputHTMLAttributes } from 'react'
+
 import { noop } from 'lodash-es'
+
+import { cn } from '../utils/cn'
+import { Icon } from './icon'
+import { Input } from './input'
+import { Text } from './text'
 
 enum TextSize {
   'text-[12px]' = 0,

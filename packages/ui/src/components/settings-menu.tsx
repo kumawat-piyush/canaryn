@@ -1,9 +1,10 @@
-import { Sheet, SheetContent, SheetTitle } from './sheet'
-import { Icon } from './icon'
-import { Navbar } from '.'
-import { Spacer } from './spacer'
 import { NavLink } from 'react-router-dom'
+
+import { Navbar } from '.'
 import { settingsMenuData } from '../data/systemAdminSubmenuData'
+import { Icon } from './icon'
+import { Sheet, SheetContent, SheetTitle } from './sheet'
+import { Spacer } from './spacer'
 
 interface SystemAdminMenuProps {
   showSystemAdmin: boolean
@@ -17,7 +18,8 @@ export const SettingsMenu = ({ showSystemAdmin, handleSystemAdmin }: SystemAdmin
         className="inset-y-0 left-[220px] z-40 h-screen w-[364px] bg-transparent p-0"
         side="left"
         onClick={handleSystemAdmin}
-        modal={false}>
+        modal={false}
+      >
         <SheetTitle className="sr-only">System Administration menu</SheetTitle>
         <Navbar.Root className="w-[364px]" isSubMenu>
           <Navbar.Content>

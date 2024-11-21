@@ -1,18 +1,17 @@
+import { useEffect, useState } from 'react'
+
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@components/dropdown-menu'
 import { Icon } from '@components/icon'
 import { Input } from '@components/input'
-
+import { closestCenter, DndContext } from '@dnd-kit/core'
 import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import type { SortDirection, FilterSearchQueries, SortOption, SortValue, FilterAction } from '../types'
+import { cn } from '@utils/cn'
 
 import useDragAndDrop from '../../../hooks/use-drag-and-drop'
-import { DndContext, closestCenter } from '@dnd-kit/core'
-
-import { getSortTriggerLabel } from '../utils'
-import { useState, useEffect } from 'react'
+import type { FilterAction, FilterSearchQueries, SortDirection, SortOption, SortValue } from '../types'
 import { UseFiltersReturn } from '../use-filters'
-import { cn } from '@utils/cn'
+import { getSortTriggerLabel } from '../utils'
 
 interface SortableItemProps {
   id: string
@@ -50,7 +49,8 @@ const SortableItem = ({
           <div
             className="hover:bg-background-3 cursor-grab rounded p-1 active:cursor-grabbing"
             {...attributes}
-            {...listeners}>
+            {...listeners}
+          >
             <Icon className="text-icons-1" name="grid-dots" size={12} />
           </div>
 
@@ -63,7 +63,8 @@ const SortableItem = ({
               {sortOptions.map(option => (
                 <DropdownMenuItem
                   onSelect={() => onUpdateSort?.(index, { ...sort, type: option.value })}
-                  key={option.value}>
+                  key={option.value}
+                >
                   {option.label}
                 </DropdownMenuItem>
               ))}
@@ -79,7 +80,8 @@ const SortableItem = ({
               {sortDirections.map(direction => (
                 <DropdownMenuItem
                   onSelect={() => onUpdateSort?.(index, { ...sort, direction: direction.value })}
-                  key={direction.value}>
+                  key={direction.value}
+                >
                   {direction.label}
                 </DropdownMenuItem>
               ))}
@@ -93,7 +95,8 @@ const SortableItem = ({
             onClick={e => {
               e.preventDefault()
               onRemoveSort?.(index)
-            }}>
+            }}
+          >
             <Icon className="rotate-45" name="plus" size={12} />
           </button>
         </DropdownMenuItem>
@@ -167,7 +170,8 @@ const Sorts = ({
         <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCenter}>
           <SortableContext
             items={activeSorts.map((_, index) => getItemId(index))}
-            strategy={verticalListSortingStrategy}>
+            strategy={verticalListSortingStrategy}
+          >
             <div className="flex flex-col gap-y-2.5">
               {activeSorts.map((sort, index) => (
                 <SortableItem
@@ -212,7 +216,8 @@ const Sorts = ({
                         onClick={e => {
                           e.preventDefault()
                           handleSearchChange('sort', '', 'menu')
-                        }}>
+                        }}
+                      >
                         <Icon className="rotate-45" name="plus" size={12} />
                       </button>
                     </DropdownMenuItem>
@@ -228,7 +233,8 @@ const Sorts = ({
                     .map(option => (
                       <DropdownMenuItem
                         onSelect={() => handleSortChange({ type: option.value, direction: 'desc' })}
-                        key={option.value}>
+                        key={option.value}
+                      >
                         {option.label}
                       </DropdownMenuItem>
                     ))}
@@ -245,10 +251,12 @@ const Sorts = ({
 
           <DropdownMenuItem
             className="focus:text-foreground-danger p-0 focus:bg-transparent focus:outline-none"
-            asChild>
+            asChild
+          >
             <button
               className="text-14 text-foreground-4 hover:text-foreground-danger flex items-center gap-x-1.5 transition-colors duration-200"
-              onClick={handleResetSorts}>
+              onClick={handleResetSorts}
+            >
               <Icon name="trash" size={12} />
               Delete sort
             </button>

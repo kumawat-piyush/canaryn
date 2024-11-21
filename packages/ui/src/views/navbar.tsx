@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { IconProps, Icon } from '../components/icon'
+
 import { Button } from '../components/button'
+import { Icon, IconProps } from '../components/icon'
+import { Navbar as NavbarComp, NavbarProjectChooser, NavbarUser } from '../components/index'
 import { Text } from '../components/text'
-import { NavbarUser } from '../components/index'
-import { Navbar as NavbarComp, NavbarProjectChooser } from '../components/index'
 import { TypesUser } from './layouts/types'
 
 const NavBarLink = (item: NavbarItem | NavbarItemStatic) => {
@@ -168,7 +168,8 @@ export const Navbar = ({ showMore, showSystemAdmin, handleMore, handleSystemAdmi
             size="sm"
             padding="sm"
             variant="gradient-border"
-            gradientType="ai-button">
+            gradientType="ai-button"
+          >
             <Icon className="mr-1.5" name="sparks" size={12} />
             Make with AI
           </Button>

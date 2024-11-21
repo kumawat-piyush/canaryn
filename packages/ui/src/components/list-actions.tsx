@@ -1,9 +1,11 @@
 import React from 'react'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './dropdown-menu'
-import { Text } from './text'
-import { Icon } from './icon'
+
 import { CheckIcon } from '@radix-ui/react-icons'
+
 import { cn } from '../utils/cn'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './dropdown-menu'
+import { Icon } from './icon'
+import { Text } from './text'
 
 interface DropdownItemProps {
   name: string
@@ -38,7 +40,8 @@ function Dropdown({ title, items, onChange, selectedValue }: DropdownProps) {
           size={2}
           className={cn('text-primary/80', {
             ['font-bold']: selectedValue
-          })}>
+          })}
+        >
           {title}
         </Text>
         <Icon name="chevron-down" size={12} className="chevron-down" />

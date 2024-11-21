@@ -1,37 +1,38 @@
-import { useState, useEffect } from 'react'
-import { RepoList } from './repo-list'
-import {
-  Text,
-  Spacer,
-  ListActions,
-  ListPagination,
-  Button,
-  SearchBox,
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationPrevious,
-  PaginationLink,
-  PaginationEllipsis,
-  PaginationNext
-} from '../../components/index'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { mockRepos } from './mockRepoData'
-import { SandboxLayout } from '../index'
+
+import { formatDistanceToNow } from 'date-fns'
+
 // import { PlaygroundSandboxLayoutSettings } from '../settings/sandbox-settings'
 import {
   Filters,
   FiltersBar,
   type FilterCondition,
   type FilterOption,
+  type FilterValue,
   type SortDirection,
   type SortOption,
-  type FilterValue,
   type SortValue
 } from '../../components/filters'
-
 import useFilters from '../../components/filters/use-filters'
-import { formatDistanceToNow } from 'date-fns'
+import {
+  Button,
+  ListActions,
+  ListPagination,
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  SearchBox,
+  Spacer,
+  Text
+} from '../../components/index'
+import { SandboxLayout } from '../index'
+import { mockRepos } from './mockRepoData'
+import { RepoList } from './repo-list'
 
 export const BASIC_CONDITIONS: FilterCondition[] = [
   { label: 'is', value: 'is' },
@@ -470,7 +471,8 @@ function SandboxRepoListPage() {
         hasHeader
         hasLeftPanel
         hasLeftSubPanel={loadState.includes('sub')}
-        fullWidth={loadState.includes('full')}>
+        fullWidth={loadState.includes('full')}
+      >
         <SandboxLayout.Content>
           <Spacer size={10} />
           <Text size={5} weight={'medium'}>

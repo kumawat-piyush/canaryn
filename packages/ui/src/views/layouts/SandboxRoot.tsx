@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { SandboxLayout } from '../index'
 import { Outlet } from 'react-router-dom'
-import { Navbar } from '../navbar'
+
 import { MoreSubmenu } from '../../components/more-submenu'
-import type { TypesUser } from './types'
 import { SettingsMenu } from '../../components/settings-menu'
+import { SandboxLayout } from '../index'
+import { Navbar } from '../navbar'
+import type { TypesUser } from './types'
 
 interface SandboxRootProps {
   currentUser: TypesUser | undefined

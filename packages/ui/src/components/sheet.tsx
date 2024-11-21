@@ -1,10 +1,11 @@
 import * as React from 'react'
+
 import * as SheetPrimitive from '@radix-ui/react-dialog'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '../utils/cn'
-import { Icon } from './icon'
 import { Button } from './button'
+import { Icon } from './icon'
 
 const Sheet = SheetPrimitive.Root
 
@@ -94,7 +95,8 @@ const SheetContent = React.forwardRef<React.ElementRef<typeof SheetPrimitive.Con
         {!hideCloseButton && (
           <SheetPrimitive.Close
             asChild
-            className="absolute right-[0.1875rem] top-2 flex items-center justify-center transition-colors disabled:pointer-events-none">
+            className="absolute right-[0.1875rem] top-2 flex items-center justify-center transition-colors disabled:pointer-events-none"
+          >
             <Button className="text-icons-4 hover:text-icons-2" variant="custom" size="icon" onClick={handleClose}>
               <Icon name="close" size={16} />
               <span className="sr-only">Close</span>

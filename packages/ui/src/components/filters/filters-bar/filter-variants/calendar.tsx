@@ -1,9 +1,10 @@
 import { useState } from 'react'
+
+import { cn } from '../../../../utils/cn'
 import { Calendar as UICalendar, type CalendarDateRange } from '../../../calendar'
 import { Input } from '../../../input'
 import { FilterValue } from '../../types'
 import { UseFiltersReturn } from '../../use-filters'
-import { cn } from '../../../../utils/cn'
 
 interface CalendarProps {
   filter: FilterValue
