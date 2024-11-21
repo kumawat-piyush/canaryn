@@ -11,8 +11,7 @@ import {
   NewPasswordPage,
   OTPPage,
   RepoSettingsPage,
-  RepoSettingsPlaceholderPage,
-  Root
+  RepoSettingsPlaceholderPage
 } from '@harnessio/views'
 import RootWrapper from './components/RootWrapper'
 import { TooltipProvider } from '@harnessio/canary'
