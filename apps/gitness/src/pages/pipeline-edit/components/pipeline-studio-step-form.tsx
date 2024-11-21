@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
-import { parse } from 'yaml'
-import { get } from 'lodash-es'
-import { Button } from '@harnessio/canary'
 
-import { Icon } from '@harnessio/canary'
+import { get } from 'lodash-es'
+import { parse } from 'yaml'
+
+import { Button, Icon } from '@harnessio/canary'
 import { listGlobalTemplates } from '@harnessio/code-service-client'
 import {
   getTransformers,
@@ -15,21 +15,21 @@ import {
   useZodValidationResolver
 } from '@harnessio/forms'
 import {
-  StepForm,
-  StepFormSection,
-  inputComponentFactory,
-  TEMPLATE_STEP_IDENTIFIER,
   getHarnessStepDefinition,
-  InputType,
   getHarnessStepIdentifier,
   GROUP_IDENTIFIER,
-  PARALLEL_IDENTIFIER
+  inputComponentFactory,
+  InputType,
+  PARALLEL_IDENTIFIER,
+  StepForm,
+  StepFormSection,
+  TEMPLATE_STEP_IDENTIFIER
 } from '@harnessio/views'
 
-import { usePipelineDataContext } from '../context/PipelineStudioDataProvider'
-import { addNameInput, apiInput2IInputDefinition } from '../utils/step-form-utils'
 import { StepSource } from '../context/data-store/types'
+import { usePipelineDataContext } from '../context/PipelineStudioDataProvider'
 import { StepDefinitionType } from '../types/api-types'
+import { addNameInput, apiInput2IInputDefinition } from '../utils/step-form-utils'
 
 interface PipelineStudioStepFormProps {
   requestClose: () => void

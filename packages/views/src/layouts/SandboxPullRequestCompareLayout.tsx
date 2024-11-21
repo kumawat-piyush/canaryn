@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import { DiffModeEnum } from '@git-diff-view/react'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -29,7 +30,6 @@ import PullRequestDiffViewer from '../components/pull-request/pull-request-diff-
 import { parseStartingLineIfOne } from '../components/pull-request/utils'
 import TabTriggerItem from '../components/TabsTriggerItem'
 import { TypesDiffStats } from './types'
-import { useNavigate } from 'react-router-dom'
 
 export const formSchema = z.object({
   title: z.string().min(1, { message: 'Please provide a pull request title' }),

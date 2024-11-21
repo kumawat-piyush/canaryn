@@ -1,25 +1,24 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import {
-  CreateRepositoryErrorResponse,
-  useCreatePullReqMutation,
-  OpenapiCreatePullReqRequest,
-  TypesBranchExtended,
-  useListBranchesQuery,
-  useFindRepositoryQuery,
-  useListCommitsQuery,
-  TypesCommit,
-  useRawDiffQuery,
-  mergeCheck,
-  useDiffStatsQuery,
-  useGetPullReqByBranchesQuery
-} from '@harnessio/code-service-client'
-
 import * as Diff2Html from 'diff2html'
 import { useAtom } from 'jotai'
 import { compact, isEqual } from 'lodash-es'
 
+import {
+  CreateRepositoryErrorResponse,
+  mergeCheck,
+  OpenapiCreatePullReqRequest,
+  TypesBranchExtended,
+  TypesCommit,
+  useCreatePullReqMutation,
+  useDiffStatsQuery,
+  useFindRepositoryQuery,
+  useGetPullReqByBranchesQuery,
+  useListBranchesQuery,
+  useListCommitsQuery,
+  useRawDiffQuery
+} from '@harnessio/code-service-client'
 import { SandboxPullRequestCompare, SkeletonList } from '@harnessio/views'
 
 import { useGetRepoRef } from '../../framework/hooks/useGetRepoPath'
