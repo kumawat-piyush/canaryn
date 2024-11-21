@@ -1,7 +1,7 @@
-import { SandboxRoot } from '@harnessio/views'
+// import { SandboxRoot } from '@harnessio/views'
 import { useAppContext } from '../framework/context/AppContext'
 import { useGetSpaceURLParam } from '../framework/hooks/useGetSpaceParam'
-// import { SandboxRoot } from '@harnessio/ui/views'
+import { SandboxRoot } from '@harnessio/ui/views'
 
 const RootWrapper = () => {
   const { currentUser, spaces } = useAppContext()
@@ -9,7 +9,7 @@ const RootWrapper = () => {
 
   return (
     <>
-      <SandboxRoot currentUser={currentUser} currentSpaceId={spaceId || spaces?.[0]?.identifier} />
+      <SandboxRoot currentUser={currentUser} />
     </>
   )
 }
