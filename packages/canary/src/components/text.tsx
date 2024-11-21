@@ -12,7 +12,7 @@ const textVariants = cva('text-base', {
       right: 'text-right'
     },
     size: {
-      0: 'text-tiny',
+      0: 'text-12',
       1: 'text-xs',
       2: 'text-sm',
       3: 'text-base',
@@ -33,7 +33,7 @@ const textVariants = cva('text-base', {
       both: ''
     },
     truncate: {
-      true: 'truncate text-nowrap'
+      true: 'truncate'
     },
     weight: {
       normal: 'font-normal',
@@ -42,11 +42,10 @@ const textVariants = cva('text-base', {
       bold: 'font-bold'
     },
     color: {
-      primary: 'text-primary',
-      secondary: 'text-secondary',
+      primary: 'text-foreground-1',
+      secondary: 'text-foreground-9',
       tertiary: 'text-tertiary',
-      tertiaryBackground: 'text-tertiary-background',
-      foreground: 'text-foreground'
+      tertiaryBackground: 'text-tertiary-background'
     },
     wrap: {
       wrap: 'text-wrap',
@@ -99,7 +98,7 @@ interface TextProps extends React.ComponentProps<'span'> {
   /**
    * Sets the color property.
    */
-  color?: 'primary' | 'secondary' | 'tertiary' | 'tertiaryBackground' | 'foreground'
+  color?: 'primary' | 'secondary' | 'tertiary' | 'tertiaryBackground'
 
   /**
    * Controls the wrapping behavior of the text.
