@@ -13,8 +13,8 @@ import {
   AccordionTrigger,
   Button,
   Icon,
-  Spacer,
   ListActions,
+  Spacer,
   StackedList,
   Tabs,
   TabsContent,
@@ -38,7 +38,10 @@ export const formSchema = z.object({
 })
 export type CompareFormFields = z.infer<typeof formSchema> // Automatically generate a type from the schema
 
-export const DiffModeOptions = [{name: 'Split', value: 'Split'}, {name: 'Unified', value: 'Unified'}]
+export const DiffModeOptions = [
+  { name: 'Split', value: 'Split' },
+  { name: 'Unified', value: 'Unified' }
+]
 interface SandboxPullRequestCompareProps {
   onFormSubmit: (data: CompareFormFields) => void
   onFormDraftSubmit: (data: CompareFormFields) => void
@@ -272,9 +275,8 @@ const SandboxPullRequestCompare: React.FC<SandboxPullRequestCompareProps> = ({
                 <ListActions.Root>
                   <ListActions.Left>
                     <Text
-                      size={
-                        2
-                      }>{`Showing ${diffStats.files_changed || 0} changed files with ${diffStats.additions || 0} additions and ${diffStats.deletions || 0} deletions `}</Text>
+                      size={2}
+                    >{`Showing ${diffStats.files_changed || 0} changed files with ${diffStats.additions || 0} additions and ${diffStats.deletions || 0} deletions `}</Text>
                   </ListActions.Left>
                   <ListActions.Right>
                     <ListActions.Dropdown
@@ -341,7 +343,7 @@ const LineTitle: React.FC<Omit<HeaderProps, 'title' | 'data' | 'lang'>> = ({ tex
 
 const PullRequestAccordion: React.FC<{
   header?: HeaderProps
-  data?: string,
+  data?: string
   diffMode: DiffModeEnum
 }> = ({ header, diffMode }) => {
   const { highlight, wrap, fontsize } = useDiffConfig()

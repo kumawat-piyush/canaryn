@@ -26,7 +26,7 @@ interface HeaderProps {
 }
 
 interface DataProps {
-  data: HeaderProps[],
+  data: HeaderProps[]
   diffMode: DiffModeEnum
 }
 
@@ -124,15 +124,15 @@ const PullRequestAccordion: React.FC<{
 
 export function PullRequestChanges({ data, diffMode }: DataProps) {
   return (
-      <div className="flex flex-col gap-4">
-        {data.map((item, index) => (
-          <PullRequestAccordion
-            key={`item?.title ? ${item?.title}-${index} : ${index}`}
-            header={item}
-            data={item?.data}
-            diffMode={diffMode}
-            />
-            ))}
-      </div>
+    <div className="flex flex-col gap-4">
+      {data.map((item, index) => (
+        <PullRequestAccordion
+          key={`item?.title ? ${item?.title}-${index} : ${index}`}
+          header={item}
+          data={item?.data}
+          diffMode={diffMode}
+        />
+      ))}
+    </div>
   )
 }

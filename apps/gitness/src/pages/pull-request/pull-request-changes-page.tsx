@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
+import { DiffModeEnum } from '@git-diff-view/react'
 import * as Diff2Html from 'diff2html'
 import { useAtom } from 'jotai'
 import { compact, isEqual } from 'lodash-es'
@@ -23,7 +24,6 @@ import { PullRequestChangesFilter } from './pull-request-changes-filter'
 import { usePullRequestDataStore } from './stores/pull-request-store'
 import { changesInfoAtom, DiffFileEntry, DiffViewerExchangeState, PullReqReviewDecision } from './types/types'
 import { changedFileId, DIFF2HTML_CONFIG, normalizeGitFilePath } from './utils'
-import { DiffModeEnum } from '@git-diff-view/react'
 
 export default function PullRequestChangesPage() {
   const { pullReqMetadata, refetchPullReq, refetchActivities } = usePullRequestDataStore(state => ({

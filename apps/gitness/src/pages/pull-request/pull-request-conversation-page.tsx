@@ -24,14 +24,14 @@ import {
   useReviewerListPullReqQuery
 } from '@harnessio/code-service-client'
 import {
+  extractInfoFromRuleViolationArr,
   PullRequestCommentBox,
   PullRequestFilters,
   PullRequestOverview,
   PullRequestPanel,
   PullRequestSideBar,
   SandboxLayout,
-  SkeletonList,
-  extractInfoFromRuleViolationArr
+  SkeletonList
 } from '@harnessio/views'
 
 import { useAppContext } from '../../framework/context/AppContext'
@@ -95,7 +95,7 @@ export default function PullRequestConversationPage() {
     pullreq_number: prId,
     queryParams: {}
   })
-  
+
   const [changesLoading, setChangesLoading] = useState(true)
   const [showDeleteBranchButton, setShowDeleteBranchButton] = useState(false)
   const [showRestoreBranchButton, setShowRestoreBranchButton] = useState(false)
@@ -106,22 +106,28 @@ export default function PullRequestConversationPage() {
     saveBranch({
       repo_ref: repoRef,
       body: { name: pullReqMetadata?.source_branch, target: pullReqMetadata?.source_sha, bypass_rules: false }
-    }).then(res => {
-      if (res.body.name) {
-        setErrorMsg('')
-        setShowRestoreBranchButton(false)
-        setShowDeleteBranchButton(true)
-      }
-    }).catch(err => {
-      setErrorMsg(err.message)
     })
+      .then(res => {
+        if (res.body.name) {
+          setErrorMsg('')
+          setShowRestoreBranchButton(false)
+          setShowDeleteBranchButton(true)
+        }
+      })
+      .catch(err => {
+        setErrorMsg(err.message)
+      })
   }
-  const {data: { body: sourceBranch} = {}, error: branchError, refetch: refetchBranch} = useGetBranchQuery({
+  const {
+    data: { body: sourceBranch } = {},
+    error: branchError,
+    refetch: refetchBranch
+  } = useGetBranchQuery({
     repo_ref: repoRef,
     branch_name: pullReqMetadata?.source_branch || '',
-    queryParams: {include_checks: true, include_rules: true}
+    queryParams: { include_checks: true, include_rules: true }
   })
-  const {mutateAsync: deleteBranch} = useDeleteBranchMutation({
+  const { mutateAsync: deleteBranch } = useDeleteBranchMutation({
     repo_ref: repoRef,
     branch_name: pullReqMetadata?.source_branch || '',
     queryParams: { dry_run_rules: true }
@@ -132,13 +138,15 @@ export default function PullRequestConversationPage() {
     deleteBranch({
       repo_ref: repoRef,
       branch_name: pullReqMetadata?.source_branch || '',
-      queryParams: { bypass_rules:true, dry_run_rules: false }
-    }).then(() => {
-      refetchBranch()
-      setErrorMsg('')
-    }).catch(err => {
-      setErrorMsg(err.message)
+      queryParams: { bypass_rules: true, dry_run_rules: false }
     })
+      .then(() => {
+        refetchBranch()
+        setErrorMsg('')
+      })
+      .catch(err => {
+        setErrorMsg(err.message)
+      })
   }
 
   useEffect(() => {
@@ -161,7 +169,6 @@ export default function PullRequestConversationPage() {
       }
     }
   }, [sourceBranch, pullReqMetadata?.merged, pullReqMetadata?.closed])
-
 
   useEffect(() => {
     if (branchError) {

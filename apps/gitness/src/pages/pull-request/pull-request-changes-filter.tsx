@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 
+// import { FileViewGauge } from '@harnessio/views'
+import { DiffModeEnum } from '@git-diff-view/react'
+
 import {
   Button,
   DropdownMenu,
@@ -14,14 +17,11 @@ import {
   Text
 } from '@harnessio/canary'
 import { EnumPullReqReviewDecision } from '@harnessio/code-service-client'
+import { DiffModeOptions } from '@harnessio/views'
 
 import { approvalItems, determineOverallDecision, getApprovalItems, getApprovalStateTheme } from './diff-utils'
 import { ApprovalItem, ButtonEnum, FilterViewProps, PullReqReviewDecision } from './types/types'
 import { processReviewDecision } from './utils'
-
-// import { FileViewGauge } from '@harnessio/views'
-import { DiffModeEnum } from '@git-diff-view/react';
-import { DiffModeOptions } from '@harnessio/views'
 
 // const filesViewed = {
 //   total: 3,
@@ -115,7 +115,7 @@ export const PullRequestChangesFilter: React.FC<FilterViewProps> = ({
 
   const itemsToRender = getApprovalItems(approveState, approvalItems)
   const dropdownMenuItems = renderDropdownMenuItems(itemsToRender)
-    const handleDiffModeChange = (value: string) => {
+  const handleDiffModeChange = (value: string) => {
     setDiffMode(value === 'Split' ? DiffModeEnum.Split : DiffModeEnum.Unified)
   }
   return (
