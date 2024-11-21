@@ -101,7 +101,7 @@ export default function App() {
     },
     {
       path: '/v2',
-      element: <SandboxRoot currentUser={{}} currentSpaceId="" />
+      element: <SandboxRoot currentUser={{}} />
     },
     {
       path: '/',

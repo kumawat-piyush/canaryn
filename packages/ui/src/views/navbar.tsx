@@ -1,8 +1,10 @@
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import type { IconProps } from '@harnessio/canary'
-import { Navbar as NavbarComp, Icon, NavbarProjectChooser, NavbarUser, Button, Text } from '@harnessio/canary'
-import type { TypesUser } from './layouts/types'
+import { IconProps, Icon } from '../components/icon'
+import { Button } from '../components/button'
+import { Text } from '../components/text'
+import { Navbar as NavbarComp, NavbarProjectChooser } from '../components/index'
+import { TypesUser } from './layouts/types'
 
 const NavBarLink = (item: NavbarItem | NavbarItemStatic) => {
   return (
