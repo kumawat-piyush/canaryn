@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from 'clsx'
 import { createTailwindMerge, getDefaultConfig, mergeConfigs } from 'tailwind-merge'
-import tailwindConfig from '../../tailwind.config'
+import tailwindConfig from '../../tailwind'
 
 const customTwMerge = createTailwindMerge(getDefaultConfig, config =>
   mergeConfigs<'font-size'>(config, {

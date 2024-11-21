@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { IconProps, Icon } from '../components/icon'
 import { Button } from '../components/button'
 import { Text } from '../components/text'
+import { NavbarUser } from '../components/index'
 import { Navbar as NavbarComp, NavbarProjectChooser } from '../components/index'
 import { TypesUser } from './layouts/types'
 
@@ -174,7 +175,7 @@ export const Navbar = ({ showMore, showSystemAdmin, handleMore, handleSystemAdmi
         </div>
       </NavbarComp.Content>
 
-      {/* <NavbarComp.Footer>
+      <NavbarComp.Footer>
         <NavbarUser.Root
           username={currentUser?.display_name || currentUser?.uid || ''}
           email={currentUser?.email}
@@ -190,7 +191,7 @@ export const Navbar = ({ showMore, showSystemAdmin, handleMore, handleSystemAdmi
             }
           ]}
         />
-      </NavbarComp.Footer> */}
+      </NavbarComp.Footer>
     </NavbarComp.Root>
   )
 }

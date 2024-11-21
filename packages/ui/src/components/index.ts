@@ -1,4 +1,4 @@
-import { Navbar } from '@harnessio/canary'
+import { Navbar, NavbarUser } from '@harnessio/canary'
 
 export * from './alert'
 export * from './icon'
@@ -6,5 +6,6 @@ export * from './button'
 export * from './more-submenu'
 export * from './settings-menu'
 export * from './sheet'
+export * as NavbarUser from './navbar-user'
 export * as Navbar from './navbar'
 export * as NavbarProjectChooser from './navbar-project-chooser'
