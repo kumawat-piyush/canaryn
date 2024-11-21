@@ -17,7 +17,7 @@ import {
 } from '@harnessio/canary'
 import { z } from 'zod'
 import { GitCommitFormType } from '../types'
-import { FormFieldSet, Layout } from '@harnessio/views'
+import { FormFieldSetOption, Layout } from '@harnessio/views'
 import { UsererrorError } from '@harnessio/code-service-client'
 import { useRuleViolationCheck } from '../framework/hooks/useRuleViolationCheck'
 import { UseFormReturn } from 'react-hook-form'
@@ -152,7 +152,7 @@ export function GitCommitForm({
                   dryRun(value as CommitToGitRefOption, form.getValues().fileName)
                   field.onChange(value)
                 }}>
-                <FormFieldSet.Option
+                <FormFieldSetOption
                   control={<RadioGroupItem value={CommitToGitRefOption.DIRECTLY} id="directly" />}
                   id="directly"
                   label={`Commit to ${defaultBranch} directly`}
@@ -165,7 +165,7 @@ export function GitCommitForm({
                       : "Some rules don't allow you to commit directly"}
                   </Text>
                 )}
-                <FormFieldSet.Option
+                <FormFieldSetOption
                   control={<RadioGroupItem value={CommitToGitRefOption.NEW_BRANCH} id="new-branch" />}
                   id="new-branch"
                   label="Create a new branch for this commit and start a pull request"

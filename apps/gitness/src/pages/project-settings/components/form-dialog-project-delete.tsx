@@ -12,7 +12,15 @@ import {
   AlertDialogFooter,
   AlertDialogCancel
 } from '@harnessio/canary'
-import { FormFieldSet } from '@harnessio/views'
+import {
+  FormFieldSetRoot,
+  FormFieldSetLegend,
+  FormFieldSetSubLegend,
+  FormFieldSetControlGroup,
+  FormFieldSetLabel,
+  FormFieldSetMessage,
+  MessageTheme
+} from '@harnessio/views'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -63,13 +71,13 @@ export const FormDialogProjectDelete = ({
   }, [isDeleteSuccess])
 
   return (
-    <FormFieldSet.Root box shaded>
-      <FormFieldSet.Legend>Delete project</FormFieldSet.Legend>
-      <FormFieldSet.SubLegend>
+    <FormFieldSetRoot box shaded>
+      <FormFieldSetLegend>Delete project</FormFieldSetLegend>
+      <FormFieldSetSubLegend>
         This will permanently delete this project and all associated data. All repositories in it will also be deleted.
         This action cannot be undone.
-      </FormFieldSet.SubLegend>
-      <FormFieldSet.ControlGroup>
+      </FormFieldSetSubLegend>
+      <FormFieldSetControlGroup>
         <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <AlertDialogTrigger asChild>
             <Button size="sm" theme="error" className="self-start" onClick={() => setIsDialogOpen(true)}>
@@ -84,17 +92,17 @@ export const FormDialogProjectDelete = ({
                 also be deleted. This action cannot be undone.
               </AlertDialogDescription>
               {/* input delete verification */}
-              <FormFieldSet.Label htmlFor="verification" required>
+              <FormFieldSetLabel htmlFor="verification" required>
                 To confirm this, type “DELETE”
-              </FormFieldSet.Label>
+              </FormFieldSetLabel>
               <Input id="verification" {...register('verification')} placeholder="" />
               {errors.verification && (
-                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
+                <FormFieldSetMessage theme={MessageTheme.ERROR}>
                   {errors.verification.message?.toString()}
-                </FormFieldSet.Message>
+                </FormFieldSetMessage>
               )}
               {deleteError && (
-                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>{deleteError}</FormFieldSet.Message>
+                <FormFieldSetMessage theme={MessageTheme.ERROR}>{deleteError}</FormFieldSetMessage>
               )}
             </AlertDialogHeader>
             <AlertDialogFooter>
@@ -121,7 +129,7 @@ export const FormDialogProjectDelete = ({
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
-      </FormFieldSet.ControlGroup>
-    </FormFieldSet.Root>
+      </FormFieldSetControlGroup>
+    </FormFieldSetRoot>
   )
 }

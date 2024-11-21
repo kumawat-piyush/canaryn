@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Button, ButtonGroup, Input, Spacer, Text, Icon } from '@harnessio/canary'
-import { SandboxLayout, FormFieldSet } from '@harnessio/views'
+import {
+  SandboxLayout,
+  FormFieldSetRoot,
+  FormFieldSetControlGroup,
+  FormFieldSetLabel,
+  FormFieldSetMessage,
+  FormFieldSetSeparator,
+  MessageTheme
+} from '@harnessio/views'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -128,12 +136,12 @@ export const ProjectSettingsPage = ({
         </Text>
         <Spacer size={6} />
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormFieldSet.Root>
+          <FormFieldSetRoot>
             {/* PROJECT NAME */}
-            <FormFieldSet.ControlGroup>
-              <FormFieldSet.Label htmlFor="identifier" required>
+            <FormFieldSetControlGroup>
+              <FormFieldSetLabel htmlFor="identifier" required>
                 Project Name
-              </FormFieldSet.Label>
+              </FormFieldSetLabel>
               <Input
                 value={spaceData?.identifier}
                 id="identifier"
@@ -144,17 +152,17 @@ export const ProjectSettingsPage = ({
                 //wait for the api call to update the project name
               />
               {errors.identifier && (
-                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
+                <FormFieldSetMessage theme={MessageTheme.ERROR}>
                   {errors.identifier.message?.toString()}
-                </FormFieldSet.Message>
+                </FormFieldSetMessage>
               )}
-            </FormFieldSet.ControlGroup>
+            </FormFieldSetControlGroup>
 
             {/* IDENTIFIER/DESCRIPTION */}
-            <FormFieldSet.ControlGroup>
-              <FormFieldSet.Label htmlFor="description" required>
+            <FormFieldSetControlGroup>
+              <FormFieldSetLabel htmlFor="description" required>
                 Description
-              </FormFieldSet.Label>
+              </FormFieldSetLabel>
               <Input
                 value={prodescription}
                 id="description"
@@ -163,20 +171,16 @@ export const ProjectSettingsPage = ({
                 onChange={handleDescriptionInputChange}
               />
               {errors.description && (
-                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>
+                <FormFieldSetMessage theme={MessageTheme.ERROR}>
                   {errors.description.message?.toString()}
-                </FormFieldSet.Message>
+                </FormFieldSetMessage>
               )}
-              {updateError && (
-                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>{updateError}</FormFieldSet.Message>
-              )}
-              {deleteError && (
-                <FormFieldSet.Message theme={FormFieldSet.MessageTheme.ERROR}>{deleteError}</FormFieldSet.Message>
-              )}
-            </FormFieldSet.ControlGroup>
+              {updateError && <FormFieldSetMessage theme={MessageTheme.ERROR}>{updateError}</FormFieldSetMessage>}
+              {deleteError && <FormFieldSetMessage theme={MessageTheme.ERROR}>{deleteError}</FormFieldSetMessage>}
+            </FormFieldSetControlGroup>
 
             {/*BUTTON CONTROL: SAVE & CANCEL*/}
-            <FormFieldSet.ControlGroup type="button">
+            <FormFieldSetControlGroup type="button">
               <ButtonGroup.Root>
                 {!submitted ? (
                   <>
@@ -209,13 +213,13 @@ export const ProjectSettingsPage = ({
                   </Button>
                 )}
               </ButtonGroup.Root>
-            </FormFieldSet.ControlGroup>
-          </FormFieldSet.Root>
+            </FormFieldSetControlGroup>
+          </FormFieldSetRoot>
         </form>
 
-        <FormFieldSet.Root>
-          <FormFieldSet.Separator />
-        </FormFieldSet.Root>
+        <FormFieldSetRoot>
+          <FormFieldSetSeparator />
+        </FormFieldSetRoot>
 
         {/* DELETE PROJECT */}
         <FormDialogProjectDelete

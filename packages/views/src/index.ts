@@ -58,7 +58,7 @@ export * from './components/form-inputs/common/InputError'
 export * from './components/form-inputs/common/InputLabel'
 // eslint-disable-next-line import/export
 export * from './components/form-inputs/common/InputWrapper'
-export * from './components/form-field-set'
+// export * from './components/form-field-set'
 export * from './components/webhook-list'
 export * from './components/pagination'
 export * from './components/profile-settings/profile-settings-keys-list'
@@ -114,7 +114,21 @@ export * from './components/mode-toggle'
 // HOOKS
 export * from './hooks/useCommonFilter'
 
-export * as FormFieldSet from './components/form-field-set'
+// Form Components
+export {
+  Root as FormFieldSetRoot,
+  Legend as FormFieldSetLegend,
+  SubLegend as FormFieldSetSubLegend,
+  Item as FormFieldSetItem,
+  Label as FormFieldSetLabel,
+  ControlGroup as FormFieldSetControlGroup,
+  Caption as FormFieldSetCaption,
+  Message as FormFieldSetMessage,
+  Option as FormFieldSetOption,
+  Separator as FormFieldSetSeparator,
+  Spacer as FormFieldSetSpacer,
+  MessageTheme
+} from './components/form-field-set'
 
 // SANDBOX LAYOUTS
 export * as SandboxLayout from './layouts/SandboxLayout'
