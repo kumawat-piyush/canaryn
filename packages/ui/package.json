@@ -9,8 +9,11 @@
     ".": {
       "import": "./dist/index.js"
     },
+    "./styles": "./dist/styles.css",
+    "./components": "./dist/components.js",
+    "./views": "./dist/views.js",
     "./tailwind.config": "./tailwind.config.js",
-    "./styles": "./dist/styles.css"
+    "./styles.css": "./dist/style.css"
   },
   "scripts": {
     "dev": "npm-run-all -p build:watch build:css -- --watch",
