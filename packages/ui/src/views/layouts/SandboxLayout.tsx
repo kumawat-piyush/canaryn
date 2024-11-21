@@ -1,4 +1,4 @@
-import { cn } from '@harnessio/canary'
+import { cn } from "@utils/cn";
 
 interface ColumnsProps {
   children: React.ReactNode

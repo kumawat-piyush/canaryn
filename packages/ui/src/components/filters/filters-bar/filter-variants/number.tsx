@@ -1,7 +1,9 @@
 import { useState } from 'react'
-import { Input, Icon, DropdownMenuItem } from '@harnessio/canary'
 import { FilterValue } from '../../types'
 import { UseFiltersReturn } from '../../use-filters'
+import { DropdownMenuItem } from '@components/dropdown-menu'
+import { Input } from '@components/input'
+import { Icon } from '@components/icon'
 
 interface NumberFilterProps {
   filter: FilterValue

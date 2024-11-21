@@ -1,10 +1,13 @@
-import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import { SandboxRepoListPage } from '@harnessio/ui/views'
+
+import './App.css'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <SandboxRepoListPage />,
   },
 ]);
 

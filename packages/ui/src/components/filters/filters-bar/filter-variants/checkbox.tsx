@@ -1,7 +1,10 @@
-import { cn, DropdownMenuCheckboxItem, DropdownMenuItem, Icon, Input } from '@harnessio/canary'
+import { DropdownMenuCheckboxItem, DropdownMenuItem } from '@components/dropdown-menu'
+import { Icon } from '@components/icon'
+import { Input } from '@components/input'
 import { CheckboxFilterOption, FilterValue } from '../../types'
 import { UseFiltersReturn } from '../../use-filters'
 import { getFilteredOptions } from '../../utils'
+import { cn } from '@utils/cn'
 
 interface CheckboxFilterProps {
   filter: FilterValue

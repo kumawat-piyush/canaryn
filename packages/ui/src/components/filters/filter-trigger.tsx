@@ -1,14 +1,9 @@
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@components/dropdown-menu'
+import { Icon } from '@components/icon'
+import { Input } from '@components/input'
+
 import { FilterOption, SortOption } from './types'
 import { UseFiltersReturn } from './use-filters'
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  Icon,
-  Input
-} from '@harnessio/canary'
 
 interface BaseFilterTriggerProps {
   type: 'filter' | 'sort'

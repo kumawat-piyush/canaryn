@@ -1,5 +1,3 @@
-import { ListActions, ListPagination, Navbar, NavbarUser } from '@harnessio/canary'
-
 export * from './alert'
 export * from './icon'
 export * from './button'
@@ -9,6 +7,7 @@ export * from './sheet'
 export * from './text'
 export * from './spacer'
 export * from './pagination'
+export * from './badge'
 export * as ListActions from './list-actions'
 export * as ListPagination from './list-pagination'
 export * as SearchBox from './search-box'

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Badge } from '@harnessio/canary'
-import { StackedList } from '../../components/index'
+import { Badge } from '../../components/badge'
+import * as StackedList from '../../components/stacked-list'
 import { Icon } from '../../components/icon'
 import { NoData } from '../../components/no-data'
 import { Repository } from './types'

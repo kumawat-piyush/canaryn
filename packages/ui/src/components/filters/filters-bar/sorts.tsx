@@ -1,12 +1,6 @@
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  Input,
-  Icon,
-  cn,
-  DropdownMenuTrigger
-} from '@harnessio/canary'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@components/dropdown-menu'
+import { Icon } from '@components/icon'
+import { Input } from '@components/input'
 
 import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
@@ -18,6 +12,7 @@ import { DndContext, closestCenter } from '@dnd-kit/core'
 import { getSortTriggerLabel } from '../utils'
 import { useState, useEffect } from 'react'
 import { UseFiltersReturn } from '../use-filters'
+import { cn } from '@utils/cn'
 
 interface SortableItemProps {
   id: string
