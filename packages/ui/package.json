@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "private": false,
   "type": "module",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "exports": {
     "./components": "./dist/components.js",
     "./views": "./dist/views.js",
@@ -40,7 +40,6 @@
   "homepage": "https://github.com/harness/canary",
   "dependencies": {
     "@harnessio/canary": "workspace:*",
-    "@harnessio/code-service-client": "3.2.1-beta.1",
     "@hookform/resolvers": "^3.6.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
@@ -80,6 +79,7 @@
     "react-day-picker": "^8.10.1",
     "react-hook-form": "^7.53.0",
     "react-resizable-panels": "^2.0.19",
+    "react-router-dom": "^6.26.0",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
