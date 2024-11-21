@@ -23,6 +23,7 @@ import { PullRequestChangesFilter } from './pull-request-changes-filter'
 import { usePullRequestDataStore } from './stores/pull-request-store'
 import { changesInfoAtom, DiffFileEntry, DiffViewerExchangeState, PullReqReviewDecision } from './types/types'
 import { changedFileId, DIFF2HTML_CONFIG, normalizeGitFilePath } from './utils'
+import { DiffModeEnum } from '@git-diff-view/react'
 
 export default function PullRequestChangesPage() {
   const { pullReqMetadata, refetchPullReq, refetchActivities } = usePullRequestDataStore(state => ({
@@ -38,6 +39,7 @@ export default function PullRequestChangesPage() {
     commitRange
     //  setCommitRange  TODO: add commit view filter dropdown to manage different commits
   ] = useState(defaultCommitRange)
+  const [diffMode, setDiffMode] = useState<DiffModeEnum>(DiffModeEnum.Split)
   const targetRef = useMemo(() => pullReqMetadata?.merge_base_sha, [pullReqMetadata?.merge_base_sha])
   const sourceRef = useMemo(() => pullReqMetadata?.source_sha, [pullReqMetadata?.source_sha])
   const [diffs, setDiffs] = useState<DiffFileEntry[]>()
@@ -197,6 +199,7 @@ export default function PullRequestChangesPage() {
             lang: item.filePath.split('.')[1]
           })) || []
         }
+        diffMode={diffMode}
       />
     )
   }
@@ -211,6 +214,8 @@ export default function PullRequestChangesPage() {
         reviewers={reviewers}
         submitReview={submitReview}
         refetchReviewers={refetchReviewers}
+        diffMode={diffMode}
+        setDiffMode={setDiffMode}
       />
       <Spacer aria-setsize={5} />
 

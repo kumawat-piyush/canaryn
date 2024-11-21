@@ -14,6 +14,7 @@ import {
   Button,
   Icon,
   Spacer,
+  ListActions,
   StackedList,
   Tabs,
   TabsContent,
@@ -37,6 +38,7 @@ export const formSchema = z.object({
 })
 export type CompareFormFields = z.infer<typeof formSchema> // Automatically generate a type from the schema
 
+export const DiffModeOptions = [{name: 'Split', value: 'Split'}, {name: 'Unified', value: 'Unified'}]
 interface SandboxPullRequestCompareProps {
   onFormSubmit: (data: CompareFormFields) => void
   onFormDraftSubmit: (data: CompareFormFields) => void
@@ -113,6 +115,10 @@ const SandboxPullRequestCompare: React.FC<SandboxPullRequestCompareProps> = ({
 
   const handleBranchSelection = () => {
     setIsBranchSelected(true) // Update state when a branch is selected
+  }
+  const [diffMode, setDiffMode] = useState<DiffModeEnum>(DiffModeEnum.Split)
+  const handleDiffModeChange = (value: string) => {
+    setDiffMode(value === 'Split' ? DiffModeEnum.Split : DiffModeEnum.Unified)
   }
 
   return (
@@ -263,6 +269,22 @@ const SandboxPullRequestCompare: React.FC<SandboxPullRequestCompareProps> = ({
                 <Text
                   size={2}
                 >{`Showing ${diffStats.files_changed || 0} changed files with ${diffStats.additions || 0} additions and ${diffStats.deletions || 0} deletions `}</Text>
+                <ListActions.Root>
+                  <ListActions.Left>
+                    <Text
+                      size={
+                        2
+                      }>{`Showing ${diffStats.files_changed || 0} changed files with ${diffStats.additions || 0} additions and ${diffStats.deletions || 0} deletions `}</Text>
+                  </ListActions.Left>
+                  <ListActions.Right>
+                    <ListActions.Dropdown
+                      selectedValue={diffMode === DiffModeEnum.Split ? 'Split' : 'Unified'}
+                      onChange={handleDiffModeChange}
+                      title={diffMode === DiffModeEnum.Split ? 'Split' : 'Unified'}
+                      items={DiffModeOptions}
+                    />
+                  </ListActions.Right>
+                </ListActions.Root>
                 <Spacer size={3} />
                 {diffData?.map((item, index) => (
                   <>
@@ -271,6 +293,7 @@ const SandboxPullRequestCompare: React.FC<SandboxPullRequestCompareProps> = ({
                       key={`item?.title ? ${item?.title}-${index} : ${index}`}
                       header={item}
                       data={item?.data}
+                      diffMode={diffMode}
                     />
                   </>
                 ))}
@@ -318,8 +341,9 @@ const LineTitle: React.FC<Omit<HeaderProps, 'title' | 'data' | 'lang'>> = ({ tex
 
 const PullRequestAccordion: React.FC<{
   header?: HeaderProps
-  data?: string
-}> = ({ header }) => {
+  data?: string,
+  diffMode: DiffModeEnum
+}> = ({ header, diffMode }) => {
   const { highlight, wrap, fontsize } = useDiffConfig()
   const startingLine =
     parseStartingLineIfOne(header?.data ?? '') !== null ? parseStartingLineIfOne(header?.data ?? '') : null
@@ -343,7 +367,7 @@ const PullRequestAccordion: React.FC<{
                     data={header?.data}
                     fontsize={fontsize}
                     highlight={highlight}
-                    mode={DiffModeEnum.Unified}
+                    mode={diffMode}
                     wrap={wrap}
                     addWidget
                     fileName={header?.title ?? ''}

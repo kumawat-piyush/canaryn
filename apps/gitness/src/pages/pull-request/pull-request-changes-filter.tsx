@@ -20,6 +20,8 @@ import { ApprovalItem, ButtonEnum, FilterViewProps, PullReqReviewDecision } from
 import { processReviewDecision } from './utils'
 
 // import { FileViewGauge } from '@harnessio/views'
+import { DiffModeEnum } from '@git-diff-view/react';
+import { DiffModeOptions } from '@harnessio/views'
 
 // const filesViewed = {
 //   total: 3,
@@ -32,7 +34,9 @@ export const PullRequestChangesFilter: React.FC<FilterViewProps> = ({
   pullRequestMetadata,
   reviewers,
   submitReview,
-  refetchReviewers
+  refetchReviewers,
+  diffMode,
+  setDiffMode
 }) => {
   // const filterOptions = [{ name: 'Filter option 1' }, { name: 'Filter option 2' }, { name: 'Filter option 3' }]
   // const sortOptions = [{ name: 'Sort option 1' }, { name: 'Sort option 2' }, { name: 'Sort option 3' }]
@@ -111,6 +115,9 @@ export const PullRequestChangesFilter: React.FC<FilterViewProps> = ({
 
   const itemsToRender = getApprovalItems(approveState, approvalItems)
   const dropdownMenuItems = renderDropdownMenuItems(itemsToRender)
+    const handleDiffModeChange = (value: string) => {
+    setDiffMode(value === 'Split' ? DiffModeEnum.Split : DiffModeEnum.Unified)
+  }
   return (
     <ListActions.Root>
       <ListActions.Left>
@@ -118,6 +125,12 @@ export const PullRequestChangesFilter: React.FC<FilterViewProps> = ({
         {/* <ListActions.Dropdown title="All commits" items={filterOptions} />
         <ListActions.Dropdown title="File filter" items={sortOptions} />
         <ListActions.Dropdown title="View" items={viewOptions} /> */}
+        <ListActions.Dropdown
+          selectedValue={diffMode === DiffModeEnum.Split ? 'Split' : 'Unified'}
+          onChange={handleDiffModeChange}
+          title={diffMode === DiffModeEnum.Split ? 'Split' : 'Unified'}
+          items={DiffModeOptions}
+        />
       </ListActions.Left>
       <ListActions.Right>
         {/* <FileViewGauge.Root>

@@ -74,7 +74,7 @@ export const CreatePullRequest = () => {
       enabled: targetRef !== undefined && sourceRef !== undefined && cachedDiff.path !== path
     }
   )
-
+  
   useEffect(
     function updateCacheWhenDiffDataArrives() {
       if (path && rawDiff && typeof rawDiff === 'string') {
@@ -141,6 +141,14 @@ export const CreatePullRequest = () => {
     memorizedState
   ])
   const { data: { body: repoMetadata } = {} } = useFindRepositoryQuery({ repo_ref: repoRef })
+
+  useEffect(() => {
+    if((!diffTargetBranch || !diffSourceBranch) && repoMetadata?.default_branch) {
+      setSelectedTargetBranch(diffTargetBranch ?? repoMetadata?.default_branch)
+      setSelectedSourceBranch(diffSourceBranch ?? repoMetadata?.default_branch)
+    }
+  },[repoMetadata])
+  
   const handleSubmit = (data: FormFields, isDraft: boolean) => {
     const pullRequestBody: OpenapiCreatePullReqRequest = {
       description: data.description,
