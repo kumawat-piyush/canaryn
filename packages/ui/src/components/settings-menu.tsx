@@ -1,6 +1,9 @@
-import { Icon, Navbar, Sheet, SheetContent, Spacer, SheetTitle } from '@harnessio/canary'
+import { Sheet, SheetContent, SheetTitle } from './sheet'
+import { Icon } from './icon'
+import { Navbar } from '.'
+import { Spacer } from './spacer'
 import { NavLink } from 'react-router-dom'
-import { settingsMenuData } from '../data/mockSystemAsminMenuData'
+import { settingsMenuData } from '../data/systemAdminSubmenuData'
 
 interface SystemAdminMenuProps {
   showSystemAdmin: boolean

@@ -1,5 +1,8 @@
-import { Navbar, Sheet, SheetContent, Icon, Spacer, SheetTitle } from '@harnessio/canary'
-import { navbarSubmenuData } from '../views/layouts/navbarSubmenuData'
+import { Sheet, SheetContent, SheetTitle } from './sheet'
+import { Icon } from './icon'
+import { Spacer } from './spacer'
+import { Navbar } from '.'
+import { navbarSubmenuData } from '../data/navbarSubmenuData'
 import { NavLink } from 'react-router-dom'
 
 interface MoreSubmenuProps {
