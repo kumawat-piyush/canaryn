@@ -33,7 +33,7 @@ export default defineConfig({
     copyPublicDir: false,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'canary',
+      name: 'ui',
       fileName: 'index',
       formats: ['es']
     },
