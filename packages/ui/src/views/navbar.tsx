@@ -174,7 +174,7 @@ export const Navbar = ({ showMore, showSystemAdmin, handleMore, handleSystemAdmi
         </div>
       </NavbarComp.Content>
 
-      <NavbarComp.Footer>
+      {/* <NavbarComp.Footer>
         <NavbarUser.Root
           username={currentUser?.display_name || currentUser?.uid || ''}
           email={currentUser?.email}
@@ -190,7 +190,7 @@ export const Navbar = ({ showMore, showSystemAdmin, handleMore, handleSystemAdmi
             }
           ]}
         />
-      </NavbarComp.Footer>
+      </NavbarComp.Footer> */}
     </NavbarComp.Root>
   )
 }
