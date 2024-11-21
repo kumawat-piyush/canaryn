@@ -3,8 +3,8 @@ module.exports = {
   presets: [
     require('@harnessio/canary/tailwind.config'),
     require('@harnessio/unified-pipeline/tailwind.config'),
-    require('@harnessio/views/tailwind.config'),
-    require('@harnessio/ui/tailwind.config')
+    require('@harnessio/views/tailwind.config')
+    // require('@harnessio/ui/tailwind.config')
   ],
   content: [
     'node_modules/@harnessio/unified-pipeline/src/**/*.{ts,tsx}',

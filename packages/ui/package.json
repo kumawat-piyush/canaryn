@@ -13,7 +13,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build  && pnpm build:css",
+    "build:css": "npx tailwindcss -i ./src/styles.css -o ./dist/styles.css",
     "build:watch": "vite build --watch --emptyOutDir=false",
     "lint": "eslint ./src",
     "pretty": "prettier --check ./src",
