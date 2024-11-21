@@ -33,7 +33,7 @@ import RepoWebhooksListPage from './pages/repo-webhooks-page'
 import SandboxRepoWebhooksListPage from './pages/sandbox-repo-webhooks-list-page'
 import { RepoWebhooksCreatePage } from './components/repo-webhooks-create-page'
 import { CreatePipelinePage } from './components/create-pipeline-page'
-import { SandboxRoot } from './layouts/SandboxRoot'
+// import { SandboxRoot } from './layouts/SandboxRoot'
 import { SandboxRepo } from './layouts/SandboxRepo'
 import { SandboxRepoListPage } from './pages/sandbox-repo-list-page'
 import { SandboxRepoSummaryPage } from './pages/sandbox-repo-summary-page'
@@ -77,6 +77,7 @@ import { mockUsersData } from './data/mockUsersData'
 import { gitIgnoreOptions, licenseOptions } from './data/mockCreateRepoData'
 import { SandboxRepoImportPage } from './pages/sandbox-repo-import-page'
 import SandboxPullRequestLayout from './layouts/SandboxPullrequestLayout'
+import { SandboxRoot } from '@harnessio/ui/views'
 
 const router = createBrowserRouter([
   // TEMPORARY LAYOUT SANDBOX
