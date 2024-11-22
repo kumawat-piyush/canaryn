@@ -1,15 +1,18 @@
+import React from 'react'
+
 import { noop } from 'lodash-es'
+
+import { ListPagination } from './index'
 import {
   Pagination,
   PaginationContent,
+  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
-  PaginationEllipsis,
   PaginationPrevious
 } from './pagination'
-import { ListPagination } from './index'
-import React from 'react'
+
 interface PaginationComponentProps {
   currentPage: number
   goToPage: (pageNum: number) => void
@@ -73,7 +76,8 @@ const PaginationItems: React.FC<PaginationItemsProps> = ({ totalPages, currentPa
         size="sm_icon"
         href="#"
         onClick={() => goToPage(totalPages)}
-        isActive={currentPage === totalPages}>
+        isActive={currentPage === totalPages}
+      >
         {totalPages}
       </PaginationLink>
     </PaginationItem>

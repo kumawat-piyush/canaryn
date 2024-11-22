@@ -1,20 +1,22 @@
-import { useState, useEffect } from 'react'
-import { RepoList } from './repo-list'
-import { Text, Spacer, ListActions, Button, SearchBox, PaginationComponent } from '../../components/index'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { SandboxLayout } from '../index'
+
+import { formatDistanceToNow } from 'date-fns'
+
 import {
   Filters,
   FiltersBar,
   type FilterCondition,
   type FilterOption,
+  type FilterValue,
   type SortDirection,
   type SortOption,
-  type FilterValue,
   type SortValue
 } from '../../components/filters'
 import useFilters from '../../components/filters/use-filters'
-import { formatDistanceToNow } from 'date-fns'
+import { Button, ListActions, PaginationComponent, SearchBox, Spacer, Text } from '../../components/index'
+import { SandboxLayout } from '../index'
+import { RepoList } from './repo-list'
 import { RepoListProps } from './types'
 
 export const BASIC_CONDITIONS: FilterCondition[] = [
