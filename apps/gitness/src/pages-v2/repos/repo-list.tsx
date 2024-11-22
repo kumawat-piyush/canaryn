@@ -1,23 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useCallback, useMemo } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import { parseAsInteger, useQueryState } from 'nuqs'
-import { Button, Spacer, Text } from '@harnessio/ui/components'
-import {
-  useListReposQuery,
-  RepoRepositoryOutput,
-  ListReposQueryQueryParams,
-  ListReposOkResponse
-} from '@harnessio/code-service-client'
-// import {
-//   SkeletonList,
-//   Filter,
-//   useCommonFilter,
-//   NoData,
-//   NoSearchResults,
-//   PaginationComponent,
-//   SandboxLayout
-// } from '@harnessio/ui/views'
+import { useListReposQuery, ListReposOkResponse } from '@harnessio/code-service-client'
+import { RepositoryType } from '@harnessio/ui/views'
 import { SandboxRepoListPage } from '@harnessio/ui/views'
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
 import { timeAgoFromEpochTime } from '../../pages/pipeline-edit/utils/time-utils'
@@ -25,35 +10,19 @@ import { PageResponseHeader } from '../../types'
 import { useDebouncedQueryState } from '../../hooks/useDebouncedQueryState'
 import useSpaceSSE from '../../framework/hooks/useSpaceSSE'
 import { SSEEvent } from '../../types'
-import { create } from 'lodash-es'
-
-const sortOptions = [
-  { name: 'Created', value: 'created' },
-  { name: 'Identifier', value: 'identifier' },
-  { name: 'Updated', value: 'updated' }
-]
-
-const LinkComponent = ({ to, children }: { to: string; children: React.ReactNode }) => <Link to={to}>{children}</Link>
 
 export default function ReposListPage() {
   const space = useGetSpaceURLParam() ?? ''
-  const navigate = useNavigate()
 
   /* Query and Pagination */
   // const { sort } = useCommonFilter<ListReposQueryQueryParams['sort']>()
-  const [query, setQuery] = useDebouncedQueryState('query')
+  const [query] = useDebouncedQueryState('query')
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
-  const [repos, setRepos] = useState([])
+  const [repos, setRepos] = useState<RepositoryType[] | null>(null)
 
-  const {
-    isFetching,
-    data: { body: repositories, headers } = {},
-    isError,
-    error,
-    refetch
-  } = useListReposQuery(
+  const { data: { body: repositories, headers } = {}, refetch } = useListReposQuery(
     {
-      queryParams: {},
+      queryParams: { page, query },
       space_ref: `${space}/+`
     },
     { retry: false }
@@ -70,12 +39,12 @@ export default function ReposListPage() {
         forks: repo.num_forks || 0,
         pulls: repo.num_pulls || 0,
         timestamp: repo.updated ? timeAgoFromEpochTime(repo.updated) : '',
-        createdAt: repo.created || '',
+        createdAt: repo.created || 0,
         importing: !!repo.importing
       }))
       setRepos(transformedRepos)
     } else {
-      setRepos([])
+      setRepos(null)
     }
   }, [repositories])
 
@@ -169,7 +138,13 @@ export default function ReposListPage() {
   //   }
 
   //   const repositoriesExist = (repositories?.length || 0) > 0
-  //   console.log('repositories', repositories)
 
-  return <SandboxRepoListPage repositories={repos} />
+  return (
+    <SandboxRepoListPage
+      repositories={repos}
+      totalPages={totalPages}
+      currentPage={page}
+      setPage={(pageNum: number) => setPage(pageNum)}
+    />
+  )
 }

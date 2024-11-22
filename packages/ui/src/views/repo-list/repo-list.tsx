@@ -3,10 +3,10 @@ import { Badge } from '../../components/badge'
 import * as StackedList from '../../components/stacked-list'
 import { Icon } from '../../components/icon'
 import { NoData } from '../../components/no-data'
-import { Repository } from './types'
+import { RepositoryType } from './types'
 
 export interface PageProps {
-  repos?: Repository[]
+  repos?: RepositoryType[]
   LinkComponent: React.ComponentType<{ to: string; children: React.ReactNode }>
   handleResetFilters?: () => void
   hasActiveFilters?: boolean
