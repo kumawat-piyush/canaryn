@@ -38,7 +38,9 @@ import PullRequestDataProvider from './pages/pull-request/context/pull-request-d
 import PullRequestConversationPage from './pages/pull-request/pull-request-conversation-page'
 import { RepoFiles } from './pages/repo/repo-files'
 import { RepoHeader } from './pages/repo/repo-header'
-import ReposListPage from './pages/repo/repo-list'
+// import ReposListPage from './pages/repo/repo-list'
+import ReposListPage from './pages-v2/repos/repo-list'
+
 import RepoLayout from './layouts/RepoLayout'
 import { SettingsProfileGeneralPage } from './pages/profile-settings/profile-settings-general-container'
 import { SettingsProfileKeysPage } from './pages/profile-settings/profile-settings-keys-container'
@@ -105,7 +107,7 @@ export default function App() {
       children: [
         {
           path: ':spaceId/repos',
-          element: <SandboxRepoListPage />
+          element: <ReposListPage />
         }
       ]
     },

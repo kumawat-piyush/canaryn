@@ -13,7 +13,8 @@ import {
   PaginationPrevious,
   PaginationLink,
   PaginationEllipsis,
-  PaginationNext
+  PaginationNext,
+  PaginationComponent
 } from '../../components/index'
 import { Link } from 'react-router-dom'
 import { mockRepos } from './mockRepoData'
@@ -116,7 +117,8 @@ const SORT_DIRECTIONS: SortDirection[] = [
   { label: 'Descending', value: 'desc' }
 ]
 
-function SandboxRepoListPage() {
+function SandboxRepoListPage({ repositories = mockRepos }) {
+  console.log('repositories', repositories)
   const [loadState, setLoadState] = useState('float')
 
   // State for storing saved filters and sorts
@@ -232,7 +234,7 @@ function SandboxRepoListPage() {
    *   - Supports 'is' and 'is not' conditions
    *   - Ignores empty filters or is_empty/is_not_empty conditions
    */
-  const filteredRepos = mockRepos.filter(repo => {
+  const filteredRepos = repositories.filter(repo => {
     if (filterHandlers.activeFilters.length === 0) return true
 
     return filterHandlers.activeFilters.every(filter => {
@@ -501,45 +503,13 @@ function SandboxRepoListPage() {
             hasActiveFilters={filterHandlers.activeFilters.length > 0}
           />
           <Spacer size={8} />
-          {loadState === 'data-loaded' && (
-            <ListPagination.Root>
-              <Pagination>
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious size="sm" href="#" />
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink isActive size="sm_icon" href="#">
-                      1
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink size="sm_icon" href="#">
-                      2
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink size="sm_icon" href="#">
-                      <PaginationEllipsis />
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink size="sm_icon" href="#">
-                      4
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink size="sm_icon" href="#">
-                      5
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationNext size="sm" href="#" />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
-            </ListPagination.Root>
-          )}
+          <PaginationComponent
+            totalPages={10}
+            nextPage={() => {}}
+            previousPage={() => {}}
+            currentPage={1}
+            goToPage={page => {}}
+          />
 
           {/* <PlaygroundSandboxLayoutSettings loadState={loadState} setLoadState={setLoadState} /> */}
         </SandboxLayout.Content>
