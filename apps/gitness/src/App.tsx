@@ -108,7 +108,7 @@ export default function App() {
       children: [
         {
           path: ':spaceId/repos',
-          element: <SandboxRepoListPage />
+          element: <ReposListPage />
         }
       ]
     },
