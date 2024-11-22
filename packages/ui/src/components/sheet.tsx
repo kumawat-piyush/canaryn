@@ -89,7 +89,7 @@ const SheetContent = React.forwardRef<React.ElementRef<typeof SheetPrimitive.Con
     ref
   ) => (
     <SheetPortal>
-      <SheetOverlay modal={modal} className={overlayClassName} handleClose={handleClose ?? props.onClick} />
+      <SheetOverlay modal={modal} className={overlayClassName} handleClose={handleClose} />
       <SheetPrimitive.Content ref={ref} className={cn(sheetVariants({ side }), className)} {...props}>
         {children}
         {!hideCloseButton && (
