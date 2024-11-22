@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+
 import { parseAsInteger, useQueryState } from 'nuqs'
-import { useListReposQuery, ListReposOkResponse } from '@harnessio/code-service-client'
-import { RepositoryType } from '@harnessio/ui/views'
-import { SandboxRepoListPage } from '@harnessio/ui/views'
+
+import { ListReposOkResponse, useListReposQuery } from '@harnessio/code-service-client'
+import { RepositoryType, SandboxRepoListPage } from '@harnessio/ui/views'
+
 import { useGetSpaceURLParam } from '../../framework/hooks/useGetSpaceParam'
-import { timeAgoFromEpochTime } from '../../pages/pipeline-edit/utils/time-utils'
-import { PageResponseHeader } from '../../types'
-import { useDebouncedQueryState } from '../../hooks/useDebouncedQueryState'
 import useSpaceSSE from '../../framework/hooks/useSpaceSSE'
-import { SSEEvent } from '../../types'
+import { useDebouncedQueryState } from '../../hooks/useDebouncedQueryState'
+import { timeAgoFromEpochTime } from '../../pages/pipeline-edit/utils/time-utils'
+import { PageResponseHeader, SSEEvent } from '../../types'
 
 export default function ReposListPage() {
   const space = useGetSpaceURLParam() ?? ''
