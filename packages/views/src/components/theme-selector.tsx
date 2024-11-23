@@ -2,16 +2,6 @@ import { useMemo } from 'react'
 import { Moon, Sun, SunMoon } from 'lucide-react'
 
 import {
-  Button,
-  cn,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  Icon,
   Label,
   Select,
   SelectContent,
@@ -23,7 +13,6 @@ import {
   SelectValue
 } from '@harnessio/canary'
 import { ColorType, ContrastType, FullTheme, ModeType, useTheme } from './theme-provider'
-import { FormFieldSet } from '..'
 
 function getModeColorContrastFromFullTheme(theme: string) {
   const modeColorContrast = theme.split('-')
@@ -47,68 +36,9 @@ export function ThemeSelector() {
 
   return (
     <div className="flex w-full items-center space-x-5">
-      {/* <div>
-        <FormFieldSet.Label>Mode</FormFieldSet.Label>
-        <div className="w-fit rounded-md border">
-          <div className="flex items-center justify-center space-x-3 p-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon">
-                  {mode === 'light' && <Sun className="size-[1.2rem]" />}
-                  {mode === 'dark' && <Moon className="size-[1.2rem]" />}
-                  {mode === 'system' && <SunMoon className="size-[1.2rem]" />}
-                  <span className="sr-only">Toggle theme</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme(`light-${color}-${contrast}`)}>Light</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme(`dark-${color}-${contrast}`)}>Dark</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme(`system-${color}-${contrast}`)}>System</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </div>
-      </div> */}
-
       <ModeSelect setTheme={setTheme} mode={mode} color={color} contrast={contrast} />
       <ColorSelect setTheme={setTheme} mode={mode} color={color} contrast={contrast} />
       <ContrastSelect setTheme={setTheme} mode={mode} color={color} contrast={contrast} />
-
-      {/* <div>
-        <FormFieldSet.Label>Color</FormFieldSet.Label>
-        <div className="w-fit rounded-md border">
-          <div className="flex items-center justify-center space-x-3 p-2">
-            {colorsToRender.map(colorToRender => (
-              <ColorButton
-                key={colorToRender}
-                mode={mode}
-                color={colorToRender}
-                contrast={contrast}
-                selectedColor={color}
-                setTheme={setTheme}
-              />
-            ))}
-          </div>
-        </div>
-      </div> */}
-
-      {/* <div>
-        <FormFieldSet.Label>Contrast</FormFieldSet.Label>
-        <div className="w-fit rounded-md border">
-          <div className="flex items-center justify-center space-x-3 p-2">
-            <select
-              className="p-2 focus:outline-none focus:ring-0"
-              value={contrast}
-              onChange={e => setTheme(`${mode}-${color}-${e.target.value as ContrastType}`)}>
-              {contrastsToRender.map(contrastOption => (
-                <option key={contrastOption} value={contrastOption} className="capitalize">
-                  {contrastOption}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </div> */}
     </div>
   )
 }
@@ -212,54 +142,3 @@ function ContrastSelect({
     </div>
   )
 }
-
-// function ColorButton({
-//   mode,
-//   color,
-//   contrast,
-//   selectedColor,
-//   setTheme
-// }: {
-//   mode: ModeType
-//   color: ColorType
-//   contrast: ContrastType
-//   title?: string
-//   selectedColor: ColorType
-//   setTheme: (theme: FullTheme) => void
-// }) {
-//   return (
-//     <>
-//       <button
-//         onClick={() => setTheme(`${mode}-${color}-${contrast}`)}
-//         title={color}
-//         className={cn(
-//           'flex items-center justify-center rounded-full border text-white',
-//           selectedColor === color ? 'p-2' : 'p-4',
-//           getTailwindColorClass(color)
-//         )}>
-//         {selectedColor === color && <Icon name="tick" size={16} />}
-//       </button>
-//     </>
-//   )
-// }
-
-// const getTailwindColorClass = (color: ColorType) => {
-//   switch (color) {
-//     case 'blue':
-//       return 'bg-blue-600'
-//     case 'green':
-//       return 'bg-green-600'
-//     case 'orange':
-//       return 'bg-orange-600'
-//     case 'red':
-//       return 'bg-red-600'
-//     case 'violet':
-//       return 'bg-violet-600'
-//     case 'yellow':
-//       return 'bg-yellow-600'
-//     case 'zinc':
-//       return 'bg-zinc-600'
-//     default:
-//       return 'bg-black'
-//   }
-// }
