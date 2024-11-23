@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import { Avatar, AvatarFallback, AvatarImage, Button, ButtonGroup, Icon, Input, Spacer, Text } from '@harnessio/canary'
-import { FormFieldSet, getInitials, ModeToggle, SandboxLayout, SkeletonList } from '@harnessio/views'
+import { FormFieldSet, getInitials, SandboxLayout, SkeletonList } from '@harnessio/views'
 
 const profileSchema = z.object({
   name: z.string().min(1, { message: 'Please provide your name' }),
@@ -155,7 +155,9 @@ const SettingsAccountGeneralPage: React.FC<SettingsAccountGeneralPageProps> = ({
         <form onSubmit={handleProfileSubmit(onProfileSubmit)}>
           <FormFieldSet.Root>
             {/* PERSONAL INFORMATION */}
-            <FormFieldSet.Legend className="flex justify-center">Personal information</FormFieldSet.Legend>
+            <FormFieldSet.Legend className="flex justify-center dark-orange-standard:justify-left">
+              Personal information
+            </FormFieldSet.Legend>
             <FormFieldSet.ControlGroup className="flex w-auto flex-row items-center justify-center gap-x-6">
               <Avatar size="80" className="bg-primary/[0.02] h-20 w-20 rounded-full shadow-md">
                 <AvatarImage src="/images/anon.jpg" />
@@ -215,11 +217,6 @@ const SettingsAccountGeneralPage: React.FC<SettingsAccountGeneralPageProps> = ({
                   {profileErrors.email.message?.toString()}
                 </FormFieldSet.Message>
               )}
-            </FormFieldSet.ControlGroup>
-
-            <FormFieldSet.ControlGroup>
-              <FormFieldSet.Label>Theme</FormFieldSet.Label>
-              <ModeToggle />
             </FormFieldSet.ControlGroup>
 
             {error && error.type === 'profile' && (

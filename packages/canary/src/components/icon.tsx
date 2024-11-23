@@ -29,6 +29,7 @@ import CloudMining from '../icons/cloud-mining.svg'
 import Cog6 from '../icons/cog-6.svg'
 import Comments from '../icons/comments.svg'
 import Connectors from '../icons/connectors-icon.svg'
+import Contrast from '../icons/contrast.svg'
 import CreateWorkspace from '../icons/create-workspace.svg'
 import Download from '../icons/download.svg'
 import Edit from '../icons/edit.svg'
@@ -207,7 +208,8 @@ const IconNameMap = {
   'green-tick': GreenTick,
   'cancel-grey': CancelGrey,
   'harness-logo-text': HarnessLogoText,
-  account: Account
+  account: Account,
+  contrast: Contrast
   // fork: Fork
 } satisfies Record<string, React.FunctionComponent<React.SVGProps<SVGSVGElement>>>
 
