@@ -1,7 +1,5 @@
 import { useMemo } from 'react'
 
-import { Moon, Sun, SunMoon } from 'lucide-react'
-
 import {
   Label,
   Select,
