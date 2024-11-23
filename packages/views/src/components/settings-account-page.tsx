@@ -19,6 +19,9 @@ function SettingsAccountPage() {
             <NavLink to={`keys`}>
               <TabsTrigger value="keys">Keys and Tokens</TabsTrigger>
             </NavLink>
+            <NavLink to={`theme`}>
+              <TabsTrigger value="theme">Theme</TabsTrigger>
+            </NavLink>
           </TabsList>
         </Tabs>
       </SandboxLayout.SubHeader>
