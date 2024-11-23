@@ -66,6 +66,7 @@ import { CreateNewUserContainer } from './pages/user-management/create-new-user-
 import { UserManagementPageContainer } from './pages/user-management/user-management-container'
 import { CreateWebhookContainer } from './pages/webhooks/create-webhook-container'
 import RepoWebhooksListPage from './pages/webhooks/repo-webhook-list'
+import { SettingsProfileThemePage } from './pages/profile-settings/profile-settings-theme-container'
 
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
 

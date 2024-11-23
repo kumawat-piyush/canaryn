@@ -104,6 +104,7 @@ import Unpin from '../icons/unpin.svg'
 import VerticalEllipsis from '../icons/vertical-ellipsis.svg'
 import XMark from '../icons/x-mark.svg'
 
+import Contrast from '../icons/contrast.svg'
 // import Fork from '../icons/fork.svg'
 
 const IconNameMap = {
