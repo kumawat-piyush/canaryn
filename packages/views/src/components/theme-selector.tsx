@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+
 import { Moon, Sun, SunMoon } from 'lucide-react'
 
 import {
@@ -12,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@harnessio/canary'
+
 import { ColorType, ContrastType, FullTheme, ModeType, useTheme } from './theme-provider'
 
 function getModeColorContrastFromFullTheme(theme: string) {
@@ -61,7 +63,8 @@ function ModeSelect({
         value={mode}
         onValueChange={(mode: ModeType) => {
           setTheme(`${mode}-${color}-${contrast}`)
-        }}>
+        }}
+      >
         <SelectTrigger>
           <SelectValue placeholder="Select a theme mode" />
         </SelectTrigger>
@@ -93,7 +96,8 @@ function ColorSelect({
         value={color}
         onValueChange={(color: ColorType) => {
           setTheme(`${mode}-${color}-${contrast}`)
-        }}>
+        }}
+      >
         <SelectTrigger>
           <SelectValue placeholder="Select a color theme" />
         </SelectTrigger>
@@ -129,7 +133,8 @@ function ContrastSelect({
         value={contrast}
         onValueChange={(contrast: ContrastType) => {
           setTheme(`${mode}-${color}-${contrast}`)
-        }}>
+        }}
+      >
         <SelectTrigger>
           <SelectValue placeholder="Select a theme contrast" />
         </SelectTrigger>
