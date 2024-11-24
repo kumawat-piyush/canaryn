@@ -447,6 +447,11 @@ const SandboxRepoListPage: React.FC<RepoListProps> = ({ repositories, totalPages
     handleSearch(e)
   }
 
+  const handleResetQuery = () => {
+    setValue('')
+    handleSearch({ target: { value: '' } } as React.ChangeEvent<HTMLInputElement>)
+  }
+
   return (
     <>
       <SandboxLayout.Main hasLeftPanel>
@@ -484,6 +489,8 @@ const SandboxRepoListPage: React.FC<RepoListProps> = ({ repositories, totalPages
             LinkComponent={LinkComponent}
             handleResetFilters={filterHandlers.handleResetFilters}
             hasActiveFilters={filterHandlers.activeFilters.length > 0}
+            query={query ?? ''}
+            handleResetQuery={handleResetQuery}
           />
           <Spacer size={8} />
           <PaginationComponent totalPages={totalPages} currentPage={currentPage} goToPage={page => setPage(page)} />
