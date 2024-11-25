@@ -48,7 +48,7 @@ export const Navbar = ({
   if (!showNavbar) return null
 
   return (
-    <NavbarSkeleton.Root className="fixed inset-y-0 left-0 z-50 overflow-hidden max-md:hidden">
+    <NavbarSkeleton.Root className="fixed bg-background inset-y-0 left-0 z-50 overflow-hidden max-md:hidden">
       <NavbarSkeleton.Header>
         <NavbarProjectChooser.Root
           logo={
