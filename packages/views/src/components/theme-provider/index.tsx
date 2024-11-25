@@ -1,33 +1,13 @@
 import { useEffect } from 'react'
 
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
-
-export type ModeType = 'dark' | 'light' | 'system'
-export type ColorType = 'std' | 'tri' | 'pnd'
-export type ContrastType = 'standard' | 'low' | 'high'
-export type FullTheme = `${ModeType}-${ColorType}-${ContrastType}`
-
-type ThemeState = {
-  theme: FullTheme
-  setTheme: (theme: FullTheme) => void
-}
-
-const useThemeStore = create<ThemeState>()(
-  persist(
-    set => ({
-      theme: 'system-std-standard', // Default theme
-      setTheme: (newTheme: FullTheme) => set({ theme: newTheme })
-    }),
-    {
-      name: 'canary-ui-theme' // LocalStorage key
-    }
-  )
-)
+import { useThemeStore } from './hooks/use-theme-store'
+import { FullTheme, ModeType } from './types'
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const theme = useThemeStore(state => state.theme)
-  const setTheme = useThemeStore(state => state.setTheme)
+  const { theme, setTheme } = useThemeStore(state => ({
+    theme: state.theme,
+    setTheme: state.setTheme
+  }))
 
   useEffect(() => {
     const root = window.document.documentElement
@@ -56,11 +36,4 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [theme, setTheme])
 
   return <>{children}</>
-}
-
-export const useTheme = () => {
-  const theme = useThemeStore(state => state.theme)
-  const setTheme = useThemeStore(state => state.setTheme)
-
-  return { theme, setTheme }
 }

@@ -1,5 +1,4 @@
 import { useMemo } from 'react'
-
 import {
   Label,
   Select,
@@ -12,7 +11,8 @@ import {
   SelectValue
 } from '@harnessio/canary'
 
-import { ColorType, ContrastType, FullTheme, ModeType, useTheme } from './theme-provider'
+import { ColorType, ContrastType, FullTheme, ModeType } from './theme-provider/types'
+import { useTheme } from './theme-provider/hooks/use-theme'
 
 function getModeColorContrastFromFullTheme(theme: string) {
   const modeColorContrast = theme.split('-')
