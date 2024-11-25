@@ -13,18 +13,18 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const root = window.document.documentElement
 
     const getMediaQuery = () => window.matchMedia('(prefers-color-scheme: dark)')
-    const [base, color, contrast] = theme.split('-') as [ModeType, ColorType, ContrastType]
+    const [mode, color, contrast] = theme.split('-') as [ModeType, ColorType, ContrastType]
 
     // Compute the effective theme based on system preference if set to "system"
-    const effectiveBase = base === ModeType.System ? (getMediaQuery().matches ? ModeType.Dark : ModeType.Light) : base
-    const effectiveTheme: FullTheme = `${effectiveBase}-${color}-${contrast}`
+    const effectiveMode = mode === ModeType.System ? (getMediaQuery().matches ? ModeType.Dark : ModeType.Light) : mode
+    const effectiveTheme: FullTheme = `${effectiveMode}-${color}-${contrast}`
 
     root.className = '' // Clear existing classes
     root.classList.add(effectiveTheme) // Apply the computed theme class
 
     const updateSystemTheme = () => {
       if (theme.startsWith(ModeType.System)) {
-        setTheme(`${getMediaQuery().matches ? ModeType.Dark : ModeType.Light}-${color}-${contrast}` as FullTheme)
+        setTheme(`${effectiveMode}-${color}-${contrast}` as FullTheme)
       }
     }
 
