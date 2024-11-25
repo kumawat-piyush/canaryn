@@ -1,4 +1,3 @@
-import { useQueryState } from 'nuqs'
 import { create } from 'zustand'
 
 import { ListReposOkResponse } from '@harnessio/code-service-client'

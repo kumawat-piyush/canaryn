@@ -13,7 +13,7 @@ import { useRepoStore } from './stores/repo-store'
 
 export default function ReposListPage() {
   const space = useGetSpaceURLParam() ?? ''
-  const { /*repositories, totalPages,*/ setRepositories, page, setPage } = useRepoStore()
+  const { setRepositories, page, setPage } = useRepoStore()
 
   /* Query and Pagination */
   const [query] = useDebouncedQueryState('query')
@@ -59,13 +59,5 @@ export default function ReposListPage() {
     shouldRun: isRepoStillImporting
   })
 
-  return (
-    <SandboxRepoListPage
-      // repositories={repositories}
-      // totalPages={totalPages}
-      // currentPage={page}
-      // setPage={(pageNum: number) => setQueryPage(pageNum)}
-      useRepoStore={useRepoStore}
-    />
-  )
+  return <SandboxRepoListPage useRepoStore={useRepoStore} />
 }
