@@ -40,7 +40,7 @@ import ProjectPipelinesPage from './pages/pipeline/project-pipeline-list'
 import RepoPipelinesPage from './pages/pipeline/repo-pipeline-list'
 import { SettingsProfileGeneralPage } from './pages/profile-settings/profile-settings-general-container'
 import { SettingsProfileKeysPage } from './pages/profile-settings/profile-settings-keys-container'
-import { SettingsProfileThemePage } from './pages/profile-settings/profile-settings-theme-container'
+import { SettingsAccountThemePage } from './pages/profile-settings/profile-settings-theme-page'
 import { ProjectSettingsGeneralPage } from './pages/project-settings/project-settings-general-page'
 import { ProjectSettingsMemebersPage } from './pages/project-settings/project-settings-members-page'
 import { CreateNewMemberPage } from './pages/project-settings/project-settings-new-member-page'
@@ -401,7 +401,7 @@ export default function App() {
                 },
                 {
                   path: 'theme',
-                  element: <SettingsProfileThemePage />
+                  element: <SettingsAccountThemePage />
                 }
               ]
             }
