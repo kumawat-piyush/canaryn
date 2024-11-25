@@ -331,7 +331,7 @@
     --tag-background-red-02: var(--red) / 0.15; /* red/15 */
   }
 
-  .light-std-standard {
+  .light-std-std {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -379,7 +379,7 @@
     --diff-empty-content--: var(--background);
     --diff-hunk-content-color--: hsl(0, 0%, 100%);
   }
-  .dark-std-standard {
+  .dark-std-std {
     --background: var(--grey-6);
     --foreground: var(--grey-94);
     --card: var(--grey-10);
@@ -420,7 +420,7 @@
     --ai-button-stop-4: 188 97% 89%;
   }
 
-  .light-tri-standard {
+  .light-tri-std {
     --background: 0 0% 100%;
     --foreground: 20 14.3% 4.1%;
     --card: 0 0% 100%;
@@ -468,7 +468,7 @@
     --diff-empty-content--: var(--background);
     --diff-hunk-content-color--: hsl(0, 0%, 100%);
   }
-  .dark-tri-standard {
+  .dark-tri-std {
     --background: var(--grey-6);
     --foreground: var(--grey-94);
     --card: var(--grey-10);
@@ -509,7 +509,7 @@
     --ai-button-stop-4: 188 97% 89%;
   }
 
-  .light-pnd-standard {
+  .light-pnd-std {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -557,7 +557,7 @@
     --diff-empty-content--: var(--background);
     --diff-hunk-content-color--: hsl(0, 0%, 100%);
   }
-  .dark-pnd-standard {
+  .dark-pnd-std {
     --background: var(--grey-6);
     --foreground: var(--grey-94);
     --card: var(--grey-10);

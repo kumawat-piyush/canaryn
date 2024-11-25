@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { useThemeStore } from './hooks/use-theme-store'
-import { FullTheme, ModeType } from './types'
+import { ColorType, ContrastType, FullTheme, ModeType } from './types'
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const { theme, setTheme } = useThemeStore(state => ({
@@ -13,18 +13,18 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const root = window.document.documentElement
 
     const getMediaQuery = () => window.matchMedia('(prefers-color-scheme: dark)')
-    const [base, color, contrast] = theme.split('-') as [ModeType, string, string]
+    const [base, color, contrast] = theme.split('-') as [ModeType, ColorType, ContrastType]
 
     // Compute the effective theme based on system preference if set to "system"
-    const effectiveBase = base === 'system' ? (getMediaQuery().matches ? 'dark' : 'light') : base
-    const effectiveTheme = `${effectiveBase}-${color}-${contrast}`
+    const effectiveBase = base === ModeType.System ? (getMediaQuery().matches ? ModeType.Dark : ModeType.Light) : base
+    const effectiveTheme: FullTheme = `${effectiveBase}-${color}-${contrast}`
 
     root.className = '' // Clear existing classes
     root.classList.add(effectiveTheme) // Apply the computed theme class
 
     const updateSystemTheme = () => {
-      if (theme.startsWith('system')) {
-        setTheme(`${getMediaQuery().matches ? 'dark' : 'light'}-${color}-${contrast}` as FullTheme)
+      if (theme.startsWith(ModeType.System)) {
+        setTheme(`${getMediaQuery().matches ? ModeType.Dark : ModeType.Light}-${color}-${contrast}` as FullTheme)
       }
     }
 

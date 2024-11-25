@@ -6,7 +6,7 @@ import { FullTheme, ThemeState } from '../types'
 export const useThemeStore = create<ThemeState>()(
   persist(
     set => ({
-      theme: 'system-std-standard', // Default theme
+      theme: 'system-std-standard' as FullTheme, // Default theme
       setTheme: (newTheme: FullTheme) => set({ theme: newTheme })
     }),
     {
