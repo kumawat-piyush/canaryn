@@ -35,7 +35,7 @@ export function ColorSelect({
         <SelectTrigger>
           <SelectValue placeholder="Select a color theme" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent defaultValue={color}>
           <SelectItem value={ColorType.Standard}>Standard</SelectItem>
           <SelectSeparator />
           <SelectGroup>

@@ -25,7 +25,7 @@ export function ModeSelect({
         <SelectTrigger>
           <SelectValue placeholder="Select a theme mode" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent defaultValue={mode}>
           <SelectItem value={ModeType.Light}>Light</SelectItem>
           <SelectItem value={ModeType.Dark}>Dark</SelectItem>
           <SelectItem value={ModeType.System}>System</SelectItem>

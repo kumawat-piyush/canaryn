@@ -25,7 +25,7 @@ export function ContrastSelect({
         <SelectTrigger>
           <SelectValue placeholder="Select a theme contrast" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent defaultValue={contrast}>
           <SelectItem value={ContrastType.Standard}>Standard</SelectItem>
           <SelectItem value={ContrastType.Low}>Low</SelectItem>
           <SelectItem value={ContrastType.High}>High</SelectItem>
