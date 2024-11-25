@@ -1,8 +1,7 @@
 import { useThemeStore } from './use-theme-store'
 
 export const useTheme = () => {
-  const theme = useThemeStore(state => state.theme)
-  const setTheme = useThemeStore(state => state.setTheme)
+  const { theme, setTheme } = useThemeStore(state => ({ theme: state.theme, setTheme: state.setTheme }))
 
   return { theme, setTheme }
 }
