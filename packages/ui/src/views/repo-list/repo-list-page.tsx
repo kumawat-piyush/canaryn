@@ -103,9 +103,12 @@ const SORT_DIRECTIONS: SortDirection[] = [
   { label: 'Descending', value: 'desc' }
 ]
 
-const SandboxRepoListPage: React.FC<RepoListProps> = ({ repositories, totalPages, currentPage, setPage }) => {
+const SandboxRepoListPage: React.FC<RepoListProps> = ({
+  /*repositories, totalPages, currentPage, setPage*/ useRepoStore
+}) => {
   // State for storing saved filters and sorts
   // null means no saved state exists
+  const { repositories, totalPages, currentPage, setPage } = useRepoStore()
   const [savedState, setSavedState] = useState<{
     filters: FilterValue[]
     sorts: SortValue[]

@@ -1,3 +1,4 @@
+import { useQueryState } from 'nuqs'
 import { create } from 'zustand'
 
 import { ListReposOkResponse } from '@harnessio/code-service-client'
@@ -10,12 +11,16 @@ interface RepoStore {
   repositories: RepositoryType[] | null
   totalPages: number
   setRepositories: (data: ListReposOkResponse, headers: Headers | undefined) => void
+  page: number
+  setPage: (page: number) => void
 }
 
 export const useRepoStore = create<RepoStore>(set => ({
   repositories: null,
   totalPages: 0,
   isRepoStillImporting: false,
+  page: 1,
+  setPage: page => set({ page }),
 
   setRepositories: (data, headers) => {
     const transformedRepos = data.map(repo => ({
