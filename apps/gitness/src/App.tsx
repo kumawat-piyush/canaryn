@@ -13,8 +13,7 @@ import {
   RepoSettingsPlaceholderPage,
   SandboxSettings,
   SettingsAccountPage,
-  SettingsProjectNav,
-  ThemeProvider
+  SettingsProjectNav
 } from '@harnessio/views'
 
 import { FileEditor } from './components/FileEditor'
@@ -66,6 +65,7 @@ import { CreateNewUserContainer } from './pages/user-management/create-new-user-
 import { UserManagementPageContainer } from './pages/user-management/user-management-container'
 import { CreateWebhookContainer } from './pages/webhooks/create-webhook-container'
 import RepoWebhooksListPage from './pages/webhooks/repo-webhook-list'
+import { ThemeProvider } from '@harnessio/ui/views'
 
 const BASE_URL_PREFIX = `${window.apiUrl || ''}/api/v1`
 
@@ -110,6 +110,10 @@ export default function App() {
         {
           path: ':spaceId/repos',
           element: <ReposListPage />
+        },
+        {
+          path: 'theme',
+          element: <SettingsAccountThemePage />
         }
       ]
     },

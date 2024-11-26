@@ -1,5 +1,5 @@
-import { Spacer, Text } from '@harnessio/canary'
-import { SandboxLayout, ThemeSelector } from '@harnessio/views'
+import { Spacer, Text } from '@harnessio/ui/components'
+import { SandboxLayout, ThemeSelector } from '@harnessio/ui/views'
 
 const SettingsAccountThemePage: React.FC = () => {
   return (
