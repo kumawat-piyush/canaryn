@@ -125,7 +125,7 @@ interface ContentProps {
 function Content({ children, maxWidth, className }: ContentProps) {
   const widthClass = maxWidth ? `max-w-${maxWidth} mx-auto` : ''
 
-  return <div className={cn('px-8 py-5 pb-24', 'bg-background', widthClass, className)}>{children}</div>
+  return <div className={cn('px-8 py-5 pb-24', widthClass, className)}>{children}</div>
 }
 
 function Columns({ children, className, columnWidths = 'repeat(2, 1fr)' }: ColumnsProps) {
