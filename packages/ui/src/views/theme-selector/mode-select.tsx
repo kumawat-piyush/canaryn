@@ -1,5 +1,4 @@
 import { Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components'
-
 import { ColorType, ContrastType, FullTheme, ModeType } from '../theme-provider/types'
 
 export function ModeSelect({
@@ -20,7 +19,8 @@ export function ModeSelect({
         value={mode}
         onValueChange={(mode: ModeType) => {
           setTheme(`${mode}-${color}-${contrast}`)
-        }}>
+        }}
+      >
         <SelectTrigger>
           <SelectValue placeholder="Select a theme mode" />
         </SelectTrigger>

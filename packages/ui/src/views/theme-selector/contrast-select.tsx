@@ -1,5 +1,4 @@
 import { Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components'
-
 import { ColorType, ContrastType, FullTheme, ModeType } from '../theme-provider/types'
 
 export function ContrastSelect({
@@ -20,7 +19,8 @@ export function ContrastSelect({
         value={contrast}
         onValueChange={(contrast: ContrastType) => {
           setTheme(`${mode}-${color}-${contrast}`)
-        }}>
+        }}
+      >
         <SelectTrigger>
           <SelectValue placeholder="Select a theme contrast" />
         </SelectTrigger>
