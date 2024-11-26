@@ -8,7 +8,7 @@ import { getModeColorContrastFromFullTheme } from './utils'
 
 export function ThemeSelector() {
   const { theme, setTheme } = useTheme()
-  // theme will be structured like light-std-standard which represents mode-color-contrast
+  // theme will be structured like light-std-std which represents mode-color-contrast
 
   const { mode, color, contrast } = useMemo(() => getModeColorContrastFromFullTheme(theme), [theme])
 

@@ -24,7 +24,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     const updateSystemTheme = () => {
       if (theme.startsWith(ModeType.System)) {
-        setTheme(`${effectiveMode}-${color}-${contrast}` as FullTheme)
+        setTheme(`${getMediaQuery().matches ? ModeType.Dark : ModeType.Light}-${color}-${contrast}` as FullTheme)
       }
     }
 
